@@ -1,0 +1,961 @@
+Imports Microsoft.VisualBasic
+Imports System.Collections.Generic
+Imports System.data
+Imports System.Data.OleDb
+
+Namespace HydroServer
+
+    '5%
+    Public Interface clsDatabaseRecord
+        ReadOnly Property IsInDatabase() As Boolean
+        ReadOnly Property IsValid() As Boolean
+        ReadOnly Property IsChanged() As Boolean
+        Function CommitChanges() As Boolean
+    End Interface
+
+    '5%
+    Public Class clsHydroServer
+
+#Region " HydroServer Specifications "
+
+        Public Const db_tbl_Regions As String = "Regions"
+        Public Const db_fld_Re_ID As String = "RegionID"    'Primary Key
+        Public Const db_fld_Re_DisplayName As String = "DisplayName"
+        Public Const db_fld_Re_Title As String = "Title"
+        Public Const db_fld_Re_BaseMapName As String = "BaseMapName"
+        Public Const db_fld_Re_RegionWebsiteUrl As String = "RegionWebsiteUrl"
+        Public Const db_fld_Re_CSSUrl As String = "CSSUrl"
+        Public Const db_fld_Re_LogoUrl As String = "LogoUrl"
+
+        Public Const db_tbl_RegionDatabases As String = "RegionDatabases"
+        Public Const db_fld_RD_RegionID As String = "RegionID"
+        Public Const db_fld_RD_DatabaseID As String = "DatabaseID"
+        Public Const db_fld_RD_DisplayOrder As String = "DisplayOrder"
+        Public Const db_fld_RD_DisplayName As String = "DisplayName"
+
+        Public Const db_tbl_RegionMaps As String = "RegionMaps"
+        Public Const db_fld_RM_RegionID As String = "RegionID"
+        Public Const db_fld_RM_MapID As String = "MapID"
+        Public Const db_fld_RM_DisplayOrder As String = "DisplayOrder"
+        Public Const db_fld_RM_DisplayName As String = "DisplayName"
+        Public Const db_fld_RM_TransparencyPercent As String = "TransparencyPercent"
+        Public Const db_fld_RM_IsVisible As String = "IsVisible"
+        Public Const db_fld_RM_IsTOC As String = "IsTOC"
+
+        Public Const db_tbl_Databases As String = "ODMDatabases"
+        Public Const db_fld_Db_ID As String = "DatabaseID"  'Primary Key
+        Public Const db_fld_Db_Title As String = "Title"
+        Public Const db_fld_Db_ServerAddress As String = "ServerAddress"
+        Public Const db_fld_Db_DatabaseName As String = "DatabaseName"
+        Public Const db_fld_Db_User As String = "ODMUser"
+        Public Const db_fld_Db_Password As String = "ODMPassword"
+        Public Const db_fld_Db_Marker As String = "MarkerUrl"
+        Public Const db_fld_Db_ReferenceDate As String = "ReferenceDate"
+        Public Const db_fld_Db_NorthExtent As String = "NorthExtent"
+        Public Const db_fld_Db_EastExtent As String = "EastExtent"
+        Public Const db_fld_Db_SouthExtent As String = "SouthExtent"
+        Public Const db_fld_Db_WestExtent As String = "WestExtent"
+        Public Const db_fld_Db_Language As String = "Language"
+        Public Const db_fld_Db_TopicCategory As String = "TopicCategory"
+        Public Const db_fld_Db_Abstract As String = "Abstract"
+        Public Const db_fld_Db_MetadataContactID As String = "MetadataContactID"
+        Public Const db_fld_Db_DatasetContactID As String = "DatasetContactID"
+        Public Const db_fld_Db_SpatialResolution As String = "SpatialResolution"
+        Public Const db_fld_Db_DistributionFormat As String = "DistributionFormat"
+        Public Const db_fld_Db_SpaitalRepresentationType As String = "SpatialRepresentationType"
+        Public Const db_fld_Db_ReferenceSystem As String = "ReferenceSystem"
+        Public Const db_fld_Db_LineageStatement As String = "LineageStatement"
+        Public Const db_fld_Db_OnlineResource As String = "OnlineResource"
+        Public Const db_fld_Db_WSDL As String = "WOFWSDL"
+
+        Public Const db_tbl_Maps As String = "Maps"
+        Public Const db_fld_Mp_ID As String = "MapID"  'Primary Key
+        Public Const db_fld_Mp_Title As String = "Title"
+        Public Const db_fld_Mp_MapConnection As String = "MapConnection"
+        Public Const db_fld_Mp_ServerID As String = "ServerID"
+        Public Const db_fld_Mp_ReferenceDate As String = "ReferenceDate"
+        Public Const db_fld_Mp_NorthExtent As String = "NorthExtent"
+        Public Const db_fld_Mp_EastExtent As String = "EastExtent"
+        Public Const db_fld_Mp_SouthExtent As String = "SouthExtent"
+        Public Const db_fld_Mp_WestExtent As String = "WestExtent"
+        Public Const db_fld_Mp_TopicCategory As String = "TopicCategory"
+        Public Const db_fld_Mp_Abstract As String = "Abstract"
+        Public Const db_fld_Mp_MetadataContactID As String = "MetadataContactID"
+        Public Const db_fld_Mp_DatasetContactID As String = "DatasetContactID"
+        Public Const db_fld_Mp_SpatialResolution As String = "SpatialResolution"
+        Public Const db_fld_Mp_DistributionFormat As String = "DistributionFormat"
+        Public Const db_fld_Mp_SpatialRepresentationType As String = "SpatialRepresentationType"
+        Public Const db_fld_Mp_ReferenceSystem As String = "ReferenceSystem"
+        Public Const db_fld_Mp_LineageStatement As String = "LineageStatement"
+        Public Const db_fld_Mp_OnlineResource As String = "OnlineResource"
+
+        Public Const db_tbl_Servers As String = "MapServers"
+        Public Const db_fld_Se_ID As String = "ServerID"    'Primary Key
+        Public Const db_fld_Se_ServerName As String = "ServerName"
+        Public Const db_fld_Se_ConnectionUrl As String = "ConnectionUrl"
+        Public Const db_fld_Se_Type As String = "Type"
+        Public Const db_fld_Se_Username As String = "Username"
+        Public Const db_fld_Se_Domain As String = "Domain"
+        Public Const db_fld_Se_Password As String = "Password"
+
+        Public Const db_tbl_MapServerTypes As String = "MapServerTypeCV"
+        Public Const db_fld_MST_Type As String = "Type"
+        Public Const db_fld_MST_Desc As String = "Description"
+
+        Public Const db_tbl_Contacts As String = "Contacts"
+        Public Const db_fld_Co_FirstName As String = "FirstName"
+        Public Const db_fld_Co_LastName As String = "LastName"
+        Public Const db_fld_Co_OrganizationName As String = "OrganizationName"
+        Public Const db_fld_Co_MailingAddress As String = "MailingAddress"
+        Public Const db_fld_Co_City As String = "City"
+        Public Const db_fld_Co_Area As String = "Area"
+        Public Const db_fld_Co_Country As String = "Country"
+        Public Const db_fld_Co_PostalCode As String = "PostalCode"
+        Public Const db_fld_Co_FaxNumber As String = "FaxNumber"
+        Public Const db_fld_Co_PhoneNumber As String = "PhoneNumber"
+        Public Const db_fld_Co_EmailAddress As String = "EmailAddress"
+
+        Public Const db_tbl_RegionMetadata As String = "RegionMetadata"
+        Public Const db_tbl_DatabaseMetadata As String = "ODMDatabaseMetadata"
+        Public Const db_tbl_MapMetadata As String = "MapMetadata"
+        Public Const db_tbl_MapServerMetadata As String = "MapServerMetadata"
+        Public Const db_fld_Meta_RegionID As String = "RegionID"
+        Public Const db_fld_Meta_DatabaseID As String = "DatabaseID"
+        Public Const db_fld_Meta_MapID As String = "MapID"
+        Public Const db_fld_Meta_ServerID As String = "ServerID"
+        Public Const db_fld_Meta_Title As String = "MetadataTitle"
+        Public Const db_fld_Meta_Content As String = "MetadataContent"
+        Public Const db_fld_Meta_DisplayOrder As String = "DisplayOrder"
+
+#End Region
+
+#Region " Constants "
+
+        Public Const NullString As String = ""
+        Public Const NullInteger As Integer = Integer.MaxValue
+        Public Const NullDouble As Double = Double.NaN
+
+#End Region
+
+#Region " Properties "
+
+        Public Function getRegions() As List(Of clsRegion)
+            Dim Regions As New List(Of clsRegion)
+            'TODO: FINISH IcewaterDatabase.getRegions
+            Return Regions
+        End Function
+        Public Function getDatabases() As List(Of clsDatabase)
+            Dim Databases As New List(Of clsDatabase)
+            'TODO: FINISH IcewaterDatabse.getDatabases
+            Return Databases
+        End Function
+        Public Function getMaps() As List(Of clsMap)
+            Dim Maps As New List(Of clsMap)
+            'TODO: FINISH IcewaterDatabase.getMaps
+            Return Maps
+        End Function
+        Public Function getMapServers() As List(Of clsMapServer)
+            Dim MapServers As New List(Of clsMapServer)
+            'TODO: FINISH IcewaterDatabase.getMapServers
+            Return MapServers
+        End Function
+        Public Function getContacts() As List(Of clsContact)
+            Dim Contacts As New List(Of clsContact)
+            'TODO: FINISH IcewaterDatabase.getContacts()
+            Return Contacts
+        End Function
+
+#End Region
+
+    End Class
+
+    '75%
+    Public Class clsRegion
+
+#Region " Member Variables "
+
+        Private m_Connection As String
+        Private m_RegionID As Integer
+        Private m_DisplayName As String
+        Private m_Title As String
+        Private m_BaseMapName As String
+        Private m_RegionWebsiteUrl As String
+        Private m_CssUrl As String
+        Private m_LogoUrl As String
+
+#End Region
+
+#Region " Properties "
+
+        Public ReadOnly Property RegionName() As String
+            Get
+                Return m_RegionName
+            End Get
+        End Property
+        Public ReadOnly Property PageTitle() As String
+            Get
+                Return m_PageTitle
+            End Get
+        End Property
+        Public ReadOnly Property BaseMapName() As String
+            Get
+                Return m_BaseMapName
+            End Get
+        End Property
+        Public ReadOnly Property RegionWebsiteUrl() As String
+            Get
+                Return m_RegionWebsiteUrl
+            End Get
+        End Property
+        Public ReadOnly Property CssUrl() As String
+            Get
+                Return m_CssUrl
+            End Get
+        End Property
+        Public ReadOnly Property LogoUrl() As String
+            Get
+                Return m_LogoUrl
+            End Get
+        End Property
+
+#End Region
+
+        Public Sub New(ByVal OLEDBConnection As String, ByVal ID As Integer)
+            m_Connection = OLEDBConnection
+            Dim loader As New OleDbDataAdapter("SELECT * FROM " & clsIcewater.db_tbl_Regions & " WHERE " & clsIcewater.db_fld_Re_ID & " = '" & ID & "'", m_Connection)
+            Dim values As New DataTable
+            loader.Fill(values)
+
+            If (values.Rows.Count = 1) Then
+                m_RegionID = values.Rows(0).Item(clsIcewater.db_fld_Re_ID)
+                m_DisplayName = values.Rows(0).Item(clsIcewater.db_fld_Re_DisplayName)
+                m_Title = values.Rows(0).Item(clsIcewater.db_fld_Re_Title)
+                m_BaseMapName = values.Rows(0).Item(clsIcewater.db_fld_Re_BaseMapName)
+                m_RegionWebsiteUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+                m_CssUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_CSSUrl)
+                m_LogoUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_LogoUrl)
+            Else
+                Throw New Exception("Error Getting Region Object By ID = " & ID)
+            End If
+        End Sub
+
+        Public Sub New(ByVal OLEDBConnection As String, ByVal DisplayName As String)
+            m_Connection = OLEDBConnection
+            Dim loader As New OleDbDataAdapter("SELECT * FROM " & clsIcewater.db_tbl_Regions & " WHERE " & clsIcewater.db_fld_Re_DisplayName & " = '" & DisplayName & "'", m_Connection)
+            Dim values As New DataTable
+            loader.Fill(values)
+
+            If (values.Rows.Count = 1) Then
+                m_RegionID = values.Rows(0).Item(clsIcewater.db_fld_Re_ID)
+                m_DisplayName = values.Rows(0).Item(clsIcewater.db_fld_Re_DisplayName)
+                m_Title = values.Rows(0).Item(clsIcewater.db_fld_Re_Title)
+                m_BaseMapName = values.Rows(0).Item(clsIcewater.db_fld_Re_BaseMapName)
+                m_RegionWebsiteUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+                m_CssUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_CSSUrl)
+                m_LogoUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_LogoUrl)
+            Else
+                Throw New Exception("Error Getting Region Object By DisplayName = " & DisplayName)
+            End If
+        End Sub
+
+        Public Sub New(ByVal OLEDBConnection As String, ByVal DisplayName As String, ByVal Title As String, ByVal BaseMapName As String, ByVal RegionWebsiteUrl As String, ByVal CssUrl As String, ByVal LogoUrl As String)
+            m_Connection = OLEDBConnection
+            Dim loader As New OleDbDataAdapter("SELECT * FROM " & clsIcewater.db_tbl_Regions & " WHERE " & _
+                clsIcewater.db_fld_Re_DisplayName & " = '" & DisplayName & "' AND " & _
+                clsIcewater.db_fld_Re_Title & " = '" & Title & "' AND " & _
+                clsIcewater.db_fld_Re_BaseMapName & " = '" & BaseMapName & "' AND " & _
+                clsIcewater.db_fld_Re_RegionWebsiteUrl & " = '" & RegionWebsiteUrl & "' AND " & _
+                clsIcewater.db_fld_Re_CSSUrl & " = '" & CssUrl & "' AND " & _
+                clsIcewater.db_fld_Re_LogoUrl & " = '" & LogoUrl & "'", m_Connection)
+            Dim values As New DataTable
+            loader.Fill(values)
+
+            If (values.Rows.Count = 1) Then
+                m_RegionID = values.Rows(0).Item(clsIcewater.db_fld_Re_ID)
+                m_DisplayName = values.Rows(0).Item(clsIcewater.db_fld_Re_DisplayName)
+                m_Title = values.Rows(0).Item(clsIcewater.db_fld_Re_Title)
+                m_BaseMapName = values.Rows(0).Item(clsIcewater.db_fld_Re_BaseMapName)
+                m_RegionWebsiteUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+                m_CssUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_CSSUrl)
+                m_LogoUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_LogoUrl)
+            Else
+                m_RegionID = -1
+                m_DisplayName = values.Rows(0).Item(clsIcewater.db_fld_Re_DisplayName)
+                m_Title = values.Rows(0).Item(clsIcewater.db_fld_Re_Title)
+                m_BaseMapName = values.Rows(0).Item(clsIcewater.db_fld_Re_BaseMapName)
+                m_RegionWebsiteUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+                m_CssUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_CSSUrl)
+                m_LogoUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_LogoUrl)
+            End If
+        End Sub
+
+        Public Sub New(ByVal OLEDBConnection As String, ByVal row As DataRow)
+            m_Connection = OLEDBConnection
+            m_RegionID = row.Item(clsIcewater.db_fld_Re_ID)
+            m_DisplayName = row.Item(clsIcewater.db_fld_Re_DisplayName)
+            m_Title = row.Item(clsIcewater.db_fld_Re_Title)
+            m_BaseMapName = row.Item(clsIcewater.db_fld_Re_BaseMapName)
+            m_RegionWebsiteUrl = row.Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+            m_CssUrl = row.Item(clsIcewater.db_fld_Re_CSSUrl)
+            m_LogoUrl = row.Item(clsIcewater.db_fld_Re_LogoUrl)
+        End Sub
+
+#Region " Functions "
+
+        Public Function getRegionMaps() As List(Of clsRegionMap)
+            Dim maps As New List(Of clsRegionMap)
+            'TODO: FINISH clsRegion.getRegionMaps()
+            maps.Sort()
+            Return maps
+        End Function
+        Public Function getRegionMap() As clsMap
+            'TODO: FINISH clsRegion.getRegionMap()
+        End Function
+        Public Function getRegionDatabases() As List(Of clsRegionDatabase)
+            Dim databases As New List(Of clsRegionDatabase)
+            'TODO: FINISH clsRegion.getRegionDatabases()
+            databases.Sort()
+            Return databases
+        End Function
+        Public Function getRegionDatabase() As clsDatabase
+            'TODO: FINISH clsRegion.getRegionDatabase()
+        End Function
+
+#End Region
+
+    End Class
+
+    '50%
+    Public Class clsRegionDatabase
+        Inherits clsDatabase
+        Implements IComparable(Of clsRegionDatabase)
+
+#Region " Member Variables "
+
+        Protected m_RegionID As Integer
+        Protected m_DisplayOrder As Integer
+        Protected m_DisplayName As String
+
+#End Region
+
+#Region " Properties "
+
+        Public ReadOnly Property DisplayName() As String
+            Get
+                Return m_DisplayName
+            End Get
+        End Property
+        Public ReadOnly Property DisplayOrder() As Integer
+            Get
+                Return m_DisplayOrder
+            End Get
+        End Property
+
+#End Region
+
+#Region " Functions "
+
+        Public Function getRegion() As clsRegion
+            'TODO: FINISH clsRegionMap.getRegion
+        End Function
+
+#Region " IComparable Functions "
+
+        Public Function CompareTo(ByVal other As clsRegionDatabase) As Integer Implements System.IComparable(Of clsRegionDatabase).CompareTo
+            Dim comparison As Integer = Me.m_DisplayOrder.CompareTo(other.m_DisplayOrder)
+            If comparison = 0 Then
+                If Me.m_DisplayName = IcewaterDatabase.NullString Then
+                    If other.m_DisplayName = IcewaterDatabase.NullString Then
+                        Return Me.m_DatabaseID.CompareTo(other.m_DatabaseID)
+                    Else
+                        Return 1
+                    End If
+                Else
+                    If other.m_DisplayName = IcewaterDatabase.NullString Then
+                        Return -1
+                    Else
+                        Return Me.m_DisplayName.CompareTo(other.m_DisplayName)
+                    End If
+                End If
+            Else
+                Return comparison
+            End If
+        End Function
+
+#End Region
+
+#End Region
+
+    End Class
+
+    '50%
+    Public Class clsDatabase
+
+#Region " Member Variables "
+
+        Protected m_DatabaseID As Integer
+        Protected m_Title As String
+        Protected m_ServerAddress As String
+        Protected m_DatabaseName As String
+        Protected m_User As String
+        Protected m_Password As String
+        Protected m_MarkerUrl As String
+        Protected m_ReferenceDate As Date
+        Protected m_NorthExtent As Double
+        Protected m_EastExtent As Double
+        Protected m_SouthExtent As Double
+        Protected m_WestExtent As Double
+        Protected m_TopicCategory As String
+        Protected m_Abstract As String
+        Protected m_MetadataContactID As Integer
+        Protected m_DatasetContactID As Integer
+        Protected m_SpatialResoluion As String
+        Protected m_DistributionFormat As String
+        Protected m_SpatialRepresentationType As String
+        Protected m_ReferenceSystem As String
+        Protected m_LineageStatement As String
+        Protected m_OnlineResource As String
+
+#End Region
+
+#Region " Properties "
+
+        Public ReadOnly Property Title() As String
+            Get
+                Return m_Title
+            End Get
+        End Property
+        Public ReadOnly Property ServerAddress() As String
+            Get
+                Return m_ServerAddress
+            End Get
+        End Property
+        Public ReadOnly Property DatabaseName() As String
+            Get
+                Return m_DatabaseName
+            End Get
+        End Property
+        Public ReadOnly Property User() As String
+            Get
+                Return m_User
+            End Get
+        End Property
+        Public ReadOnly Property Password() As String
+            Get
+                Return m_Password
+            End Get
+        End Property
+        Public ReadOnly Property MarkerUrl() As String
+            Get
+                Return m_MarkerUrl
+            End Get
+        End Property
+        Public ReadOnly Property ReferenceDate() As Date
+            Get
+                Return m_ReferenceDate
+            End Get
+        End Property
+        Public ReadOnly Property NorthExtent() As Double
+            Get
+                Return m_NorthExtent
+            End Get
+        End Property
+        Public ReadOnly Property EastExtent() As Double
+            Get
+                Return m_EastExtent
+            End Get
+        End Property
+        Public ReadOnly Property SouthExtent() As Double
+            Get
+                Return m_SouthExtent
+            End Get
+        End Property
+        Public ReadOnly Property WestExtent() As Double
+            Get
+                Return m_WestExtent
+            End Get
+        End Property
+        Public ReadOnly Property TopicCategory() As String
+            Get
+                Return m_TopicCategory
+            End Get
+        End Property
+        Public ReadOnly Property Abstract() As String
+            Get
+                Return m_Abstract
+            End Get
+        End Property
+        Public ReadOnly Property SpatialResoluion() As String
+            Get
+                Return m_SpatialResoluion
+            End Get
+        End Property
+        Public ReadOnly Property DistributionFormat() As String
+            Get
+                Return m_DistributionFormat
+            End Get
+        End Property
+        Public ReadOnly Property SpatialRepresentationType() As String
+            Get
+                Return m_SpatialRepresentationType
+            End Get
+        End Property
+        Public ReadOnly Property ReferenceSystem() As String
+            Get
+                Return m_ReferenceSystem
+            End Get
+        End Property
+        Public ReadOnly Property LineageStatement() As String
+            Get
+                Return m_LineageStatement
+            End Get
+        End Property
+        Public ReadOnly Property OnlineResource() As String
+            Get
+                Return m_OnlineResource
+            End Get
+        End Property
+
+#End Region
+
+        Public Sub New(ByVal OLEDBConnection As String, ByVal ID As Integer)
+            m_Connection = OLEDBConnection
+            Dim loader As New OleDbDataAdapter("SELECT * FROM " & clsIcewater.db_tbl_Regions & " WHERE " & clsIcewater.db_fld_Re_ID & " = '" & ID & "'", m_Connection)
+            Dim values As New DataTable
+            loader.Fill(values)
+
+            If (values.Rows.Count = 1) Then
+                m_RegionID = values.Rows(0).Item(clsIcewater.db_fld_Re_ID)
+                m_DisplayName = values.Rows(0).Item(clsIcewater.db_fld_Re_DisplayName)
+                m_Title = values.Rows(0).Item(clsIcewater.db_fld_Re_Title)
+                m_BaseMapName = values.Rows(0).Item(clsIcewater.db_fld_Re_BaseMapName)
+                m_RegionWebsiteUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+                m_CssUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_CSSUrl)
+                m_LogoUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_LogoUrl)
+            Else
+                Throw New Exception("Error Getting Region Object By ID = " & ID)
+            End If
+        End Sub
+
+        Public Sub New(ByVal OLEDBConnection As String, ByVal DisplayName As String)
+            m_Connection = OLEDBConnection
+            Dim loader As New OleDbDataAdapter("SELECT * FROM " & clsIcewater.db_tbl_Regions & " WHERE " & clsIcewater.db_fld_Re_DisplayName & " = '" & DisplayName & "'", m_Connection)
+            Dim values As New DataTable
+            loader.Fill(values)
+
+            If (values.Rows.Count = 1) Then
+                m_RegionID = values.Rows(0).Item(clsIcewater.db_fld_Re_ID)
+                m_DisplayName = values.Rows(0).Item(clsIcewater.db_fld_Re_DisplayName)
+                m_Title = values.Rows(0).Item(clsIcewater.db_fld_Re_Title)
+                m_BaseMapName = values.Rows(0).Item(clsIcewater.db_fld_Re_BaseMapName)
+                m_RegionWebsiteUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+                m_CssUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_CSSUrl)
+                m_LogoUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_LogoUrl)
+            Else
+                Throw New Exception("Error Getting Region Object By DisplayName = " & DisplayName)
+            End If
+        End Sub
+
+        Public Sub New(ByVal OLEDBConnection As String, ByVal DisplayName As String, ByVal Title As String, ByVal BaseMapName As String, ByVal RegionWebsiteUrl As String, ByVal CssUrl As String, ByVal LogoUrl As String)
+            m_Connection = OLEDBConnection
+            Dim loader As New OleDbDataAdapter("SELECT * FROM " & clsIcewater.db_tbl_Regions & " WHERE " & _
+                clsIcewater.db_fld_Re_DisplayName & " = '" & DisplayName & "' AND " & _
+                clsIcewater.db_fld_Re_Title & " = '" & Title & "' AND " & _
+                clsIcewater.db_fld_Re_BaseMapName & " = '" & BaseMapName & "' AND " & _
+                clsIcewater.db_fld_Re_RegionWebsiteUrl & " = '" & RegionWebsiteUrl & "' AND " & _
+                clsIcewater.db_fld_Re_CSSUrl & " = '" & CssUrl & "' AND " & _
+                clsIcewater.db_fld_Re_LogoUrl & " = '" & LogoUrl & "'", m_Connection)
+            Dim values As New DataTable
+            loader.Fill(values)
+
+            If (values.Rows.Count = 1) Then
+                m_RegionID = values.Rows(0).Item(clsIcewater.db_fld_Re_ID)
+                m_DisplayName = values.Rows(0).Item(clsIcewater.db_fld_Re_DisplayName)
+                m_Title = values.Rows(0).Item(clsIcewater.db_fld_Re_Title)
+                m_BaseMapName = values.Rows(0).Item(clsIcewater.db_fld_Re_BaseMapName)
+                m_RegionWebsiteUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+                m_CssUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_CSSUrl)
+                m_LogoUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_LogoUrl)
+            Else
+                m_RegionID = -1
+                m_DisplayName = values.Rows(0).Item(clsIcewater.db_fld_Re_DisplayName)
+                m_Title = values.Rows(0).Item(clsIcewater.db_fld_Re_Title)
+                m_BaseMapName = values.Rows(0).Item(clsIcewater.db_fld_Re_BaseMapName)
+                m_RegionWebsiteUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+                m_CssUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_CSSUrl)
+                m_LogoUrl = values.Rows(0).Item(clsIcewater.db_fld_Re_LogoUrl)
+            End If
+        End Sub
+
+        Public Sub New(ByVal OLEDBConnection As String, ByVal row As DataRow)
+            m_Connection = OLEDBConnection
+            m_RegionID = row.Item(clsIcewater.db_fld_Re_ID)
+            m_DisplayName = row.Item(clsIcewater.db_fld_Re_DisplayName)
+            m_Title = row.Item(clsIcewater.db_fld_Re_Title)
+            m_BaseMapName = row.Item(clsIcewater.db_fld_Re_BaseMapName)
+            m_RegionWebsiteUrl = row.Item(clsIcewater.db_fld_Re_RegionWebsiteUrl)
+            m_CssUrl = row.Item(clsIcewater.db_fld_Re_CSSUrl)
+            m_LogoUrl = row.Item(clsIcewater.db_fld_Re_LogoUrl)
+        End Sub
+
+#Region " Functions "
+
+        Public Function getRegions() As List(Of clsRegion)
+            'TODO: FINISH clsMap.getRegions
+        End Function
+
+#End Region
+
+    End Class
+
+    '50%
+    Public Class clsRegionMap
+        Inherits clsMap
+        Implements IComparable(Of clsRegionMap)
+
+#Region " Member Variables "
+
+        Protected m_RegionID As Integer
+        Protected m_DisplayName As String
+        Protected m_DisplayOrder As Integer
+        Protected m_TransparencyPercent As Integer
+        Protected m_isVisible As Boolean
+        Protected m_isTOC As Boolean
+
+#End Region
+
+#Region " Properties "
+
+        Public ReadOnly Property DisplayName() As String
+            Get
+                Return m_DisplayName
+            End Get
+        End Property
+        Public ReadOnly Property DisplayOrder() As Integer
+            Get
+                Return m_DisplayOrder
+            End Get
+        End Property
+        Public ReadOnly Property TransparencyPercent() As Integer
+            Get
+                If (m_TransparencyPercent < 0) Then
+                    Return 0
+                ElseIf (m_TransparencyPercent > 100) Then
+                    Return 100
+                Else
+                    Return m_TransparencyPercent
+                End If
+            End Get
+        End Property
+        Public ReadOnly Property isVisible() As Boolean
+            Get
+                Return m_isVisible
+            End Get
+        End Property
+        Public ReadOnly Property isTOC() As Boolean
+            Get
+                Return m_isTOC
+            End Get
+        End Property
+
+#End Region
+
+#Region " Functions "
+
+        Public Function getRegion() As clsRegion
+            'TODO: FINISH clsRegionMap.getRegion
+        End Function
+
+#Region " IComparable Functions "
+
+        Public Function CompareTo(ByVal other As clsRegionMap) As Integer Implements System.IComparable(Of clsRegionMap).CompareTo
+            Dim comparison As Integer = Me.m_DisplayOrder.CompareTo(other.m_DisplayOrder)
+            If comparison = 0 Then
+                If Me.m_DisplayName = IcewaterDatabase.NullString Then
+                    If other.m_DisplayName = IcewaterDatabase.NullString Then
+                        Return Me.m_MapID.CompareTo(other.m_MapID)
+                    Else
+                        Return 1
+                    End If
+                Else
+                    If other.m_DisplayName = IcewaterDatabase.NullString Then
+                        Return -1
+                    Else
+                        Return Me.m_DisplayName.CompareTo(other.m_DisplayName)
+                    End If
+                End If
+            Else
+                Return comparison
+            End If
+        End Function
+
+#End Region
+
+#End Region
+
+    End Class
+
+    '50%
+    Public Class clsMap
+
+#Region " Member Variables "
+
+        Protected m_MapID As Integer
+        Protected m_Title As String
+        Protected m_MapConnection As String
+        Protected m_ServerID As Integer
+        Protected m_ReferenceDate As Date
+        Protected m_NorthExtent As Double
+        Protected m_EastExtent As Double
+        Protected m_SouthExtent As Double
+        Protected m_WestExtent As Double
+        Protected m_TopicCategory As String
+        Protected m_Abstract As String
+        Protected m_MetadataContactID As Integer
+        Protected m_DatasetContactID As Integer
+        Protected m_SpatialResoluion As String
+        Protected m_DistributionFormat As String
+        Protected m_SpatialRepresentationType As String
+        Protected m_ReferenceSystem As String
+        Protected m_LineageStatement As String
+        Protected m_OnlineResource As String
+
+#End Region
+
+#Region " Properties "
+
+        Public ReadOnly Property Title() As String
+            Get
+                Return m_Title
+            End Get
+        End Property
+        Public ReadOnly Property MapConnection() As String
+            Get
+                Return m_MapConnection
+            End Get
+        End Property
+        Public ReadOnly Property ReferenceDate() As Date
+            Get
+                Return m_ReferenceDate
+            End Get
+        End Property
+        Public ReadOnly Property NorthExtent() As Double
+            Get
+                Return m_NorthExtent
+            End Get
+        End Property
+        Public ReadOnly Property EastExtent() As Double
+            Get
+                Return m_EastExtent
+            End Get
+        End Property
+        Public ReadOnly Property SouthExtent() As Double
+            Get
+                Return m_SouthExtent
+            End Get
+        End Property
+        Public ReadOnly Property WestExtent() As Double
+            Get
+                Return m_WestExtent
+            End Get
+        End Property
+        Public ReadOnly Property TopicCategory() As String
+            Get
+                Return m_TopicCategory
+            End Get
+        End Property
+        Public ReadOnly Property Abstract() As String
+            Get
+                Return m_Abstract
+            End Get
+        End Property
+        Public ReadOnly Property SpatialResoluion() As String
+            Get
+                Return m_SpatialResoluion
+            End Get
+        End Property
+        Public ReadOnly Property DistributionFormat() As String
+            Get
+                Return m_DistributionFormat
+            End Get
+        End Property
+        Public ReadOnly Property SpatialRepresentationType() As String
+            Get
+                Return m_SpatialRepresentationType
+            End Get
+        End Property
+        Public ReadOnly Property ReferenceSystem() As String
+            Get
+                Return m_ReferenceSystem
+            End Get
+        End Property
+        Public ReadOnly Property LineageStatement() As String
+            Get
+                Return m_LineageStatement
+            End Get
+        End Property
+        Public ReadOnly Property OnlineResource() As String
+            Get
+                Return m_OnlineResource
+            End Get
+        End Property
+
+#End Region
+
+#Region " Functions "
+
+        Public Function getRegions() As List(Of clsRegion)
+            'TODO: FINISH clsMap.getRegions
+        End Function
+
+        Public Function getMapServer() As clsMapServer
+            'TODO: FINISH clsMap.getMapServer
+        End Function
+
+#End Region
+
+    End Class
+
+    '40%
+    Public Class clsMapServer
+
+#Region " Member Variables "
+
+        Protected m_ServerID As Integer
+        Protected m_ServerName As String
+        Protected m_ConnectionUrl As String
+        Protected m_Type As String
+        Protected m_Username As String
+        Protected m_Domain As String
+        Protected m_Password As String
+
+#End Region
+
+#Region " Properties "
+
+        Public ReadOnly Property ServerName() As String
+            Get
+                Return m_ServerName
+            End Get
+        End Property
+        Public ReadOnly Property ConnectionUrl() As String
+            Get
+                Return m_ConnectionUrl
+            End Get
+        End Property
+        Public ReadOnly Property Type() As String
+            Get
+                Return m_Type
+            End Get
+        End Property
+        Public ReadOnly Property Username() As String
+            Get
+                Return m_Username
+            End Get
+        End Property
+        Public ReadOnly Property Domain() As String
+            Get
+                Return m_Domain
+            End Get
+        End Property
+        Public ReadOnly Property Password() As String
+            Get
+                Return m_Password
+            End Get
+        End Property
+
+#End Region
+
+#Region " Functions "
+
+#End Region
+
+    End Class
+
+    '40%
+    Public Class clsContact
+
+#Region " Member Variables "
+
+        Protected m_ContactID As Integer
+        Protected m_FirstName As String
+        Protected m_LastName As String
+        Protected m_OrganizationName As String
+        Protected m_MailingAddress As String
+        Protected m_City As String
+        Protected m_Area As String
+        Protected m_Country As String
+        Protected m_PostalCode As String
+        Protected m_FaxNumber As String
+        Protected m_PhoneNumber As String
+        Protected m_EmailAddress As String
+
+#End Region
+
+#Region " Properties "
+
+        Public ReadOnly Property FirstName() As String
+            Get
+                Return m_FirstName
+            End Get
+        End Property
+        Public ReadOnly Property LastName() As String
+            Get
+                Return m_LastName
+            End Get
+        End Property
+        Public ReadOnly Property OrganizationName() As String
+            Get
+                Return m_OrganizationName
+            End Get
+        End Property
+        Public ReadOnly Property MailingAddress() As String
+            Get
+                Return m_MailingAddress
+            End Get
+        End Property
+        Public ReadOnly Property City() As String
+            Get
+                Return m_City
+            End Get
+        End Property
+        Public ReadOnly Property Area() As String
+            Get
+                Return m_Area
+            End Get
+        End Property
+        Public ReadOnly Property Country() As String
+            Get
+                Return m_Country
+            End Get
+        End Property
+        Public ReadOnly Property PostalCode() As String
+            Get
+                Return m_PostalCode
+            End Get
+        End Property
+        Public ReadOnly Property FaxNumber() As String
+            Get
+                Return m_FaxNumber
+            End Get
+        End Property
+        Public ReadOnly Property PhoneNumber() As String
+            Get
+                Return m_PhoneNumber
+            End Get
+        End Property
+        Public ReadOnly Property EmailAddress() As String
+            Get
+                Return m_EmailAddress
+            End Get
+        End Property
+
+#End Region
+
+#Region " Functions "
+
+#End Region
+
+    End Class
+
+End Namespace
