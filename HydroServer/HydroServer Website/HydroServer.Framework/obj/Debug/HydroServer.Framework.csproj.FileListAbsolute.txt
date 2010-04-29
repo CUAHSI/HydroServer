@@ -1,0 +1,15 @@
+C:\Dev\HISServer.Framework\HISServer.Framework\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\HISServer.Framework\HISServer.Framework\bin\HydroServer.Framework.dll
+C:\Dev\HISServer.Framework\HISServer.Framework\bin\HydroServer.Framework.pdb
+C:\Dev\HISServer.Framework\HISServer.Framework\obj\Debug\HydroServer.Framework.dll
+C:\Dev\HISServer.Framework\HISServer.Framework\obj\Debug\HydroServer.Framework.pdb
+C:\Dev\HydroServer.Framework\HydroServer.Framework\bin\HydroServer.Framework.dll
+C:\Dev\HydroServer.Framework\HydroServer.Framework\bin\HydroServer.Framework.pdb
+C:\Dev\HydroServer.Framework\HydroServer.Framework\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\HydroServer.Framework\HydroServer.Framework\obj\Debug\HydroServer.Framework.dll
+C:\Dev\HydroServer.Framework\HydroServer.Framework\obj\Debug\HydroServer.Framework.pdb
+C:\Dev\Projects\HydroServer.Framework\HydroServer.Framework\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Projects\HydroServer.Framework\HydroServer.Framework\obj\Debug\HydroServer.Framework.dll
+C:\Dev\Projects\HydroServer.Framework\HydroServer.Framework\obj\Debug\HydroServer.Framework.pdb
+C:\Dev\Projects\HydroServer.Framework\HydroServer.Framework\bin\HydroServer.Framework.dll
+C:\Dev\Projects\HydroServer.Framework\HydroServer.Framework\bin\HydroServer.Framework.pdb

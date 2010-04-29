@@ -1,0 +1,5 @@
+C:\Dev\Icewater.Framework\Icewater.Framework\bin\Icewater.Framework.dll
+C:\Dev\Icewater.Framework\Icewater.Framework\bin\Icewater.Framework.pdb
+C:\Dev\Icewater.Framework\Icewater.Framework\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Icewater.Framework\Icewater.Framework\obj\Debug\Icewater.Framework.dll
+C:\Dev\Icewater.Framework\Icewater.Framework\obj\Debug\Icewater.Framework.pdb
