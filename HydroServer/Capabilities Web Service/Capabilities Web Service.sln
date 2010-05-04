@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Capabilities Web Service", "..\..\..\..\..\..\Dev\HydroServer\Capabilities Web Service", "{132B7F6F-74F4-40AF-830F-985E21092B90}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/Capabilities Web Service"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Dev\HydroServer\Capabilities Web Service\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Capabilities Web Service\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Capabilities Web Service"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Dev\HydroServer\Capabilities Web Service\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Capabilities Web Service\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49623"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{132B7F6F-74F4-40AF-830F-985E21092B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{132B7F6F-74F4-40AF-830F-985E21092B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
