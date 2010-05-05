@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <File ID = '1'>
+    <Type>Type1</Type>
+    <Location>Location1</Location>
+    <SchedulePeriod>Period1</SchedulePeriod>
+    <ScheduleOffset>Offset1</ScheduleOffset>
+    <TableMapping ID = '1'>
+      <DateTime></DateTime>
+      <UTCDateTime></UTCDateTime>
+      <UTCOffset></UTCOffset>
+      <Value></Value>
+      <OffsetValue></OffsetValue>
+      <CensorCode></CensorCode>
+      <Qualifier></Qualifier>
+      <SiteID></SiteID>
+      <VariableID></VariableID>
+      <OffsetTypeID></OffsetTypeID>
+      <MethodID></MethodID>
+      <SourceID></SourceID>
+      <QualityControlLevelID></QualityControlLevelID>
+      
+      <FileStartOfInterval></FileStartOfInterval>
+      <DatabaseStartOfInterval></DatabaseStartOfInterval>
+      <IntervalLength></IntervalLength>
+    </TableMapping>
+  </File>
+</Config>

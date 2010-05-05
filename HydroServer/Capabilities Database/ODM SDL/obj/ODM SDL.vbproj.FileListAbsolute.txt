@@ -1,0 +1,10 @@
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL Wizard\bin\Debug\ODMSDL.exe
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL Wizard\bin\Debug\ODMSDL.pdb
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL Wizard\bin\Debug\ODMSDL.xml
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL\obj\Debug\ODMSDL.frmODMSDL.resources
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL\obj\Debug\ODMSDL.Resources.resources
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL\obj\Debug\ODM SDL.vbproj.GenerateResource.Cache
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL\obj\Debug\ODMSDL.exe
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL\obj\Debug\ODMSDL.xml
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL\obj\Debug\ODMSDL.pdb
