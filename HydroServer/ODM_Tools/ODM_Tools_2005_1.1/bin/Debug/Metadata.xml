@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Metadata>
+    <DataSeriesList Total="1">
+        <DataSeries ID="285">
+            <GeneralInformation>
+                <TopicCategory>Unknown</TopicCategory>
+                <Title>Unknown</Title>
+                <Abstract>Unknown</Abstract>
+                <ProfileVersion>Unknown</ProfileVersion>
+                <MetadataLink />
+                <MetadataCreationDate>3/17/2010 4:39:20 PM</MetadataCreationDate>
+            </GeneralInformation>
+            <SiteInformation>
+                <SiteCode>10105900</SiteCode>
+                <SiteName>Little Bear River at Paradise, Utah</SiteName>
+                <GeographicCoordinates>
+                    <Latitude>41.5756</Latitude>
+                    <Longitude>-111.8544</Longitude>
+                    <SRSID>4269</SRSID>
+                    <SRSName>NAD83</SRSName>
+                    <IsGeographic>True</IsGeographic>
+                    <Notes />
+                </GeographicCoordinates>
+                <LocalCoordinates>
+                    <LocalX />
+                    <LocalY />
+                    <SRSID />
+                    <SRSName />
+                    <IsGeographic />
+                    <Notes />
+                    <Elevation_m>1445</Elevation_m>
+                    <VerticalDatum>Unknown</VerticalDatum>
+                </LocalCoordinates>
+                <PosAccuracy_m />
+                <State>Utah</State>
+                <County>Cache</County>
+                <Comments>This is a real time USGS streamflow gage.</Comments>
+            </SiteInformation>
+            <VariableInformation>
+                <VariableCode>USU8</VariableCode>
+                <VariableName>Turbidity</VariableName>
+                <Speciation>Not Applicable</Speciation>
+                <VariableUnits>
+                    <UnitsName>nephelometric turbidity units</UnitsName>
+                    <UnitsType>Turbidity</UnitsType>
+                    <UnitsAbbreviation>NTU</UnitsAbbreviation>
+                </VariableUnits>
+                <SampleMedium>Surface Water</SampleMedium>
+                <ValueType>Field Observation</ValueType>
+                <IsRegular>True</IsRegular>
+                <TimeSupport>5</TimeSupport>
+                <TimeSupportUnits>
+                    <UnitsName>second</UnitsName>
+                    <UnitsType>Time</UnitsType>
+                    <UnitsAbbreviation>s</UnitsAbbreviation>
+                </TimeSupportUnits>
+                <DataType>Minimum</DataType>
+                <GeneralCategory>Water Quality</GeneralCategory>
+                <NoDataValue>-9999</NoDataValue>
+                <PeriodOfRecord>
+                    <BeginDateTime>10/6/2009 6:25:45 PM</BeginDateTime>
+                    <EndDateTime>10/6/2009 6:26:00 PM</EndDateTime>
+                    <BeginDateTimeUTC>10/6/2009 10:25:45 PM</BeginDateTimeUTC>
+                    <EndDateTimeUTC>10/6/2009 10:26:00 PM</EndDateTimeUTC>
+                    <ValueCount>4</ValueCount>
+                </PeriodOfRecord>
+            </VariableInformation>
+            <MethodInformation>
+                <MethodDescription>Solar radiation measured using an Apogee PYR-P pyranometer.</MethodDescription>
+                <MethodLink>http://www.campbellsci.com/cs300-pyranometer</MethodLink>
+            </MethodInformation>
+            <SourceInformation>
+                <Organization>Utah State University Utah Water Research Laboratory</Organization>
+                <SourceDescription>Water chemistry monitoring data collected by Utah State University as part of a National Science Foundation funded test bed project.</SourceDescription>
+                <SourceLink>http://water.usu.edu/littlebearriver</SourceLink>
+                <Contact>
+                    <ContactName>Amber Spackman</ContactName>
+                    <Phone>1-435-797-0045</Phone>
+                    <Email>amber.s@aggiemail.usu.edu</Email>
+                    <Address>8200 Old Main Hill</Address>
+                    <City>Logan</City>
+                    <State>Utah</State>
+                    <ZipCode>84322-8200</ZipCode>
+                </Contact>
+                <Citation>Water chemistry monitoring data collected by Jeff Horsburgh, David Stevens, David Tarboton, Nancy Mesner, Amber Spackman, and Sandra Gurrero at Utah State University as part of a National Science Foundation funded WATERS Network Test Bed project.</Citation>
+            </SourceInformation>
+            <QualityControlLevelInformation>
+                <QualityControlLevelCode>1</QualityControlLevelCode>
+                <Definition>Quality controlled data</Definition>
+                <Explanation>Quality controlled data that have passed quality assurance procedures such as routine estimation of timing and sensor calibration or visual inspection and removal of obvious errors. An example is USGS published streamflow records following parsing through USGS quality control procedures.</Explanation>
+            </QualityControlLevelInformation>
+            <OffsetInformation>
+                <Offset ID="">
+                    <OffsetDescription />
+                    <OffsetUnits>
+                        <UnitsName />
+                        <UnitsType />
+                        <UnitsAbbreviation />
+                    </OffsetUnits>
+                </Offset>
+            </OffsetInformation>
+            <QualifierInformation>
+                <Qualifier ID="">
+                    <QualifierCode />
+                    <QualifierDescription />
+                </Qualifier>
+            </QualifierInformation>
+            <SampleInformation>
+                <Sample ID="">
+                    <SampleType />
+                    <LabSampleCode />
+                    <LabMethodID />
+                </Sample>
+            </SampleInformation>
+            <LabMethodInformation>
+                <LabMethod ID="">
+                    <LabName />
+                    <LabOrganization />
+                    <LabMethodName />
+                    <LabMethodDescription />
+                    <LabMethodLink />
+                </LabMethod>
+            </LabMethodInformation>
+        </DataSeries>
+    </DataSeriesList>
+</Metadata>

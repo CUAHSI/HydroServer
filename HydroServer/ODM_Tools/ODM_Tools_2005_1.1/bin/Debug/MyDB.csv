@@ -1,0 +1,5 @@
+SeriesID,ValueID,DataValue,ValueAccuracy,LocalDateTime,DateTimeUTC,UTCOffset,SiteCode,VariableCode,OffsetValue,OffsetTypeID,CensorCode,QualifierID,SampleID
+285,330,18.71,,10/6/2009 6:25:50 PM,10/6/2009 10:25:50 PM,-4,"10105900","USU8",,,nc,,
+285,339,18.72,,10/6/2009 6:25:55 PM,10/6/2009 10:25:55 PM,-4,"10105900","USU8",,,nc,,
+285,340,18.72,,10/6/2009 6:26:00 PM,10/6/2009 10:26:00 PM,-4,"10105900","USU8",,,nc,,
+285,329,18.73,,10/6/2009 6:25:45 PM,10/6/2009 10:25:45 PM,-4,"10105900","USU8",,,nc,,
