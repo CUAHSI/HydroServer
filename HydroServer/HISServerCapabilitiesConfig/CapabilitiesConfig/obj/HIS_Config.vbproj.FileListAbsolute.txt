@@ -1,0 +1,142 @@
+D:\Dev\Justin\WSDL Test\bin\Debug\HIS_Config.exe.config
+D:\Dev\Justin\WSDL Test\bin\Debug\HIS_Config.exe
+D:\Dev\Justin\WSDL Test\bin\Debug\HIS_Config.pdb
+D:\Dev\Justin\WSDL Test\bin\Debug\HIS_Config.xml
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.Smo.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.SmoEnum.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\ZedGraph.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.Replication.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.BatchParser.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\de\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\es\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\fr\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\it\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\ja\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\pt\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\sv\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\obj\Debug\ResolveAssemblyReference.cache
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.AddContact.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.AddDatabase.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.AddMap.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.AddMapServer.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.AddMetadata.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.AddRegionMap.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.AddMap_Full.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.Form1.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.MapPreview.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.Resources.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.SelectDatabaseServer.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.SelectMapServer.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.SelectRegion.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.vbproj.GenerateResource.Cache
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.exe
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.xml
+D:\Dev\Justin\WSDL Test\obj\Debug\HIS_Config.pdb
+D:\Dev\Justin\WSDL Test\bin\Release\HIS_Config.exe.config
+D:\Dev\Justin\WSDL Test\bin\Release\HIS_Config.exe
+D:\Dev\Justin\WSDL Test\bin\Release\HIS_Config.XmlSerializers.dll
+D:\Dev\Justin\WSDL Test\bin\Release\HIS_Config.pdb
+D:\Dev\Justin\WSDL Test\bin\Release\HIS_Config.xml
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.ConnectionInfo.dll
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.Smo.dll
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.SmoEnum.dll
+D:\Dev\Justin\WSDL Test\bin\Release\ZedGraph.dll
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.Replication.dll
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.BatchParser.dll
+D:\Dev\Justin\WSDL Test\bin\Release\de\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\es\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\fr\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\it\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\ja\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\pt\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\sv\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\obj\Release\ResolveAssemblyReference.cache
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.AddContact.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.AddDatabase.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.AddMap.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.AddMapServer.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.AddMetadata.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.AddRegionMap.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.AddMap_Full.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.Form1.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.MapPreview.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.Resources.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.SelectDatabaseServer.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.SelectMapServer.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.SelectRegion.resources
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.vbproj.GenerateResource.Cache
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.exe
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.xml
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.pdb
+D:\Dev\Justin\WSDL Test\obj\Release\HIS_Config.XmlSerializers.dll
+C:\StephanieDev\WSDL Test\bin\Release\HIS_Config.exe.config
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.exe
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.xml
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.pdb
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.XmlSerializers.dll
+C:\StephanieDev\WSDL Test\bin\Release\HIS_Config.exe
+C:\StephanieDev\WSDL Test\bin\Release\HIS_Config.XmlSerializers.dll
+C:\StephanieDev\WSDL Test\bin\Release\HIS_Config.pdb
+C:\StephanieDev\WSDL Test\bin\Release\HIS_Config.xml
+C:\StephanieDev\WSDL Test\bin\Release\Microsoft.SqlServer.ConnectionInfo.dll
+C:\StephanieDev\WSDL Test\bin\Release\Microsoft.SqlServer.Smo.dll
+C:\StephanieDev\WSDL Test\bin\Release\Microsoft.SqlServer.SmoEnum.dll
+C:\StephanieDev\WSDL Test\bin\Release\Microsoft.SqlServer.Replication.dll
+C:\StephanieDev\WSDL Test\bin\Release\Microsoft.SqlServer.BatchParser.dll
+C:\StephanieDev\WSDL Test\bin\Release\de\ZedGraph.resources.dll
+C:\StephanieDev\WSDL Test\bin\Release\es\ZedGraph.resources.dll
+C:\StephanieDev\WSDL Test\bin\Release\fr\ZedGraph.resources.dll
+C:\StephanieDev\WSDL Test\bin\Release\it\ZedGraph.resources.dll
+C:\StephanieDev\WSDL Test\bin\Release\ja\ZedGraph.resources.dll
+C:\StephanieDev\WSDL Test\bin\Release\pt\ZedGraph.resources.dll
+C:\StephanieDev\WSDL Test\bin\Release\sv\ZedGraph.resources.dll
+C:\StephanieDev\WSDL Test\obj\Release\ResolveAssemblyReference.cache
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.AddContact.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.AddDatabase.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.AddMap.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.AddMapServer.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.AddMetadata.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.AddRegionMap.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.AddMap_Full.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.Form1.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.MapPreview.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.Resources.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.SelectDatabaseServer.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.SelectMapServer.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.SelectRegion.resources
+C:\StephanieDev\WSDL Test\obj\Release\HIS_Config.vbproj.GenerateResource.Cache
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\Microsoft.SqlServer.ConnectionInfo.dll
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\Microsoft.SqlServer.Smo.dll
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\Microsoft.SqlServer.SmoEnum.dll
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\Microsoft.SqlServer.Replication.dll
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\Microsoft.SqlServer.BatchParser.dll
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\ResolveAssemblyReference.cache
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.AddContact.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.AddDatabase.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.AddMap.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.AddMapServer.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.AddMetadata.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.AddRegionMap.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.AddMap_Full.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.Form1.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.MapPreview.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.Resources.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.SelectDatabaseServer.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.SelectMapServer.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.SelectRegion.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.vbproj.GenerateResource.Cache
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS_Config.AccessDB.resources
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\HIS Server Capabilities Database.exe.config
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\HIS Server Capabilities Database.exe.manifest
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\HIS Server Capabilities Database.application
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\HIS Server Capabilities Database.exe
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\HIS Server Capabilities Database.XmlSerializers.dll
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\HIS Server Capabilities Database.pdb
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\bin\Release\HIS Server Capabilities Database.xml
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS Server Capabilities Database.exe.manifest
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS Server Capabilities Database.application
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS Server Capabilities Database.exe
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS Server Capabilities Database.xml
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS Server Capabilities Database.pdb
+C:\StephanieDev\HISServerCapabilitiesConfig\WSDL Test\obj\Release\HIS Server Capabilities Database.XmlSerializers.dll

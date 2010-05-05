@@ -1,0 +1,10 @@
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\bin\Release\OGC_WMS_Maps.exe
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\bin\Release\OGC_WMS_Maps.pdb
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\bin\Release\OGC_WMS_Maps.xml
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\obj\Release\OGC.WMS.MapTest.resources
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\obj\Release\OGC.WMS.Resources.resources
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\obj\Release\OGC_WMS_API.vbproj.GenerateResource.Cache
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\obj\Release\OGC_WMS_Maps.exe
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\obj\Release\OGC_WMS_Maps.xml
+C:\Users\Stephanie\Documents\StephanieDev\HISServerCapabilitiesConfig\OGC_WMS_Maps\obj\Release\OGC_WMS_Maps.pdb
