@@ -1,0 +1,4 @@
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL Wizard\bin\Debug\Configuration Wizard.exe.config
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL Wizard\obj\Debug\Configuration Wizard.exe
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL Wizard\obj\Debug\Configuration Wizard.xml
+C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_SDL\ODM SDL Wizard\obj\Debug\Configuration Wizard.pdb
