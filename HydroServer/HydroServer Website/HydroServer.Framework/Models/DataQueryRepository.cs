@@ -163,7 +163,7 @@ namespace HydroServer.Framework.Models
 
                 }
 
-
+                int lines = 0;
                 foreach (var data in dataList)
                 {
                     var varDictionary = new Dictionary<string, string>()
@@ -188,11 +188,20 @@ namespace HydroServer.Framework.Models
                         }
                     }
 
-                    HttpContext.Current.Response.Write(Environment.NewLine + newLine);
-                    HttpContext.Current.Response.Flush();
+                    WriteResponseLine(newLine);
+                    lines ++;
+                    if (lines > 99) {
+                        HttpContext.Current.Response.Flush();
+                        lines = 0;
+                    }                    
                 }
 
             }
+        }
+
+        public static void WriteResponseLine (string newLine)
+        {
+            HttpContext.Current.Response.Write(Environment.NewLine + newLine);            
         }
 
         /// <summary>
