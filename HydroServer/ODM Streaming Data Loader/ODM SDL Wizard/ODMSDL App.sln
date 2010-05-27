@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ODM SDL", "..\ODM SDL\ODM SDL.vbproj", "{89EE560F-714E-4064-92F8-B358D4BE979F}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ODM SDL Wizard", "ODM SDL Wizard.vbproj", "{F276D70C-74C2-4B46-A3A8-278D764739BA}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{89EE560F-714E-4064-92F8-B358D4BE979F} = {89EE560F-714E-4064-92F8-B358D4BE979F}
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "..\Installer\Installer.vdproj", "{34500333-D5EC-4F16-A691-E9373BA93CFD}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 4
+		SccProjectName0 = \u0022$/ODM/ODM\u0020SDL/ODM\u0020SDL\u00201.1.1/ODMSDL\u0020App.root/ODMSDL\u0020App\u0022,\u0020XJRBAAAA
+		SccLocalPath0 = ..
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		SccProjectFilePathRelativizedFromConnection0 = ODM\u0020SDL\u0020Wizard\\
+		SccProjectUniqueName1 = ..\\Installer\\Installer.vdproj
+		SccLocalPath1 = ..
+		SccProjectFilePathRelativizedFromConnection1 = Installer\\
+		SccProjectUniqueName2 = ODM\u0020SDL\u0020Wizard.vbproj
+		SccLocalPath2 = ..
+		SccProjectFilePathRelativizedFromConnection2 = ODM\u0020SDL\u0020Wizard\\
+		SccProjectUniqueName3 = ..\\ODM\u0020SDL\\ODM\u0020SDL.vbproj
+		SccLocalPath3 = ..
+		SccProjectFilePathRelativizedFromConnection3 = ODM\u0020SDL\\
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89EE560F-714E-4064-92F8-B358D4BE979F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EE560F-714E-4064-92F8-B358D4BE979F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EE560F-714E-4064-92F8-B358D4BE979F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EE560F-714E-4064-92F8-B358D4BE979F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F276D70C-74C2-4B46-A3A8-278D764739BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F276D70C-74C2-4B46-A3A8-278D764739BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F276D70C-74C2-4B46-A3A8-278D764739BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F276D70C-74C2-4B46-A3A8-278D764739BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34500333-D5EC-4F16-A691-E9373BA93CFD}.Debug|Any CPU.ActiveCfg = Debug
+		{34500333-D5EC-4F16-A691-E9373BA93CFD}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
