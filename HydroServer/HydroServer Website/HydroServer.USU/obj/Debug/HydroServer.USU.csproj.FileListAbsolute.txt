@@ -31,3 +31,14 @@ C:\Dev\Projects\HydroServer.Framework\HydroServer.USU\bin\HydroServer.Framework.
 C:\Dev\Projects\HydroServer.Framework\HydroServer.USU\obj\Debug\ResolveAssemblyReference.cache
 C:\Dev\Projects\HydroServer.Framework\HydroServer.USU\obj\Debug\HydroServer.USU.dll
 C:\Dev\Projects\HydroServer.Framework\HydroServer.USU\obj\Debug\HydroServer.USU.pdb
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.USU.dll
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.USU.pdb
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.Framework.dll
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\bin\System.Web.Abstractions.dll
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\bin\System.Web.Mvc.dll
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\bin\System.Web.Routing.dll
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\bin\System.Web.Mvc.xml
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.Framework.pdb
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.dll
+C:\Dev\Codeplex\HydroServer\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.pdb

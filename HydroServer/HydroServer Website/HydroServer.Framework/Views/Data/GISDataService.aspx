@@ -15,7 +15,7 @@
         var xmax = <%=Model.MapService.EastExtent %>;
         var ymin = <%=Model.MapService.SouthExtent %>;
         var ymax = <%=Model.MapService.NorthExtent %>;                
-        var mapServiceURL = "<%=Model.MapService.MapConnection.Replace("Layers@", Model.MapService.MapServer.ConnectionURL + "/") %>/MapServer";
+        var mapServiceURL = "<%=Model.MapService.MapServer.ConnectionURL + "/" + Model.MapService.MapConnection.Substring(7, Model.MapService.MapConnection.Length - 7) %>/MapServer";
         
         
         var customExtentAndSR =
