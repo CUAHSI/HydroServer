@@ -106,7 +106,7 @@
             East: <%=m.EastExtent%><br />
             West: <%=m.WestExtent%>
         </p>
-        <p><strong>Contact: </strong><%=HydroServer.Framework.Models.DataServiceModel.ContactSummary(m.Contact)%></p>    
+        <p><strong>Contact: </strong><%=HydroServer.Framework.Models.DataServiceModel.ContactSummary(m.Contact1)%></p>    
         
         <% if (Model.MetadataContact != null) { %>
         <p><strong>Metadata Contact: </strong><%=HydroServer.Framework.Models.DataServiceModel.ContactSummary(Model.MetadataContact)%></p>    
