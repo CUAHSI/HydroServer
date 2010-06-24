@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="USUICEWATERNode" Class="LINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=&quot;C:\Dev\Projects\HydroServer\HydroServer Website\HydroServer.USU\App_Data\USUICEWATERNode.mdf&quot;;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="HydroServer.Proxy.Properties.Settings" SettingsPropertyName="USUICEWATERNodeConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Contacts" Member="Contacts">
+    <Type Name="Contact">
+      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="OrganizationName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MailingAddress" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Area" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FaxNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EmailAddress" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Contact_MapService" Member="MapServices" ThisKey="ContactID" OtherKey="MetadataContactID" Type="MapService" />
+      <Association Name="Contact_MapService1" Member="MapServices1" ThisKey="ContactID" OtherKey="DatasetContactID" Type="MapService" />
+      <Association Name="Contact_ODMDatabase" Member="ODMDatabases" ThisKey="ContactID" OtherKey="MetadataContactID" Type="ODMDatabase" />
+      <Association Name="Contact_ODMDatabase1" Member="ODMDatabases1" ThisKey="ContactID" OtherKey="DatasetContactID" Type="ODMDatabase" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Regions" Member="Regions">
+    <Type Name="Region">
+      <Column Name="RegionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RegionName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="RegionTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="NorthExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="EastExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SouthExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="WestExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="RegionDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RegionMapCSSURL" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Region_RegionDatabase" Member="RegionDatabases" ThisKey="RegionID" OtherKey="RegionID" Type="RegionDatabase" />
+      <Association Name="Region_RegionMapService" Member="RegionMapServices" ThisKey="RegionID" OtherKey="RegionID" Type="RegionMapService" />
+      <Association Name="Region_RegionMetadata" Member="RegionMetadatas" ThisKey="RegionID" OtherKey="RegionID" Type="RegionMetadata" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapServerMetadata" Member="MapServerMetadatas">
+    <Type Name="MapServerMetadata">
+      <Column Name="MapServerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataContent" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MapServer_MapServerMetadata" Member="MapServer" ThisKey="MapServerID" OtherKey="MapServerID" Type="MapServer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapServers" Member="MapServers">
+    <Type Name="MapServer">
+      <Column Name="MapServerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MapServerName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ConnectionURL" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="MapServerType" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Domain" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="MapServer_MapServerMetadata" Member="MapServerMetadatas" ThisKey="MapServerID" OtherKey="MapServerID" Type="MapServerMetadata" />
+      <Association Name="MapServer_MapService" Member="MapServices" ThisKey="MapServerID" OtherKey="MapServerID" Type="MapService" />
+      <Association Name="MapServerTypeCV_MapServer" Member="MapServerTypeCV" ThisKey="MapServerType" OtherKey="MapServerType" Type="MapServerTypeCV" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapServerTypeCV" Member="MapServerTypeCVs">
+    <Type Name="MapServerTypeCV">
+      <Column Name="MapServerType" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SampleServerConnectionUrl" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="SampleMapConnection" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="HasDomain" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="HasUsername" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MapServerTypeCV_MapServer" Member="MapServers" ThisKey="MapServerType" OtherKey="MapServerType" Type="MapServer" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapServiceMetadata" Member="MapServiceMetadatas">
+    <Type Name="MapServiceMetadata">
+      <Column Name="MapServiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataContent" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MapService_MapServiceMetadata" Member="MapService" ThisKey="MapServiceID" OtherKey="MapServiceID" Type="MapService" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapServices" Member="MapServices">
+    <Type Name="MapService">
+      <Column Name="MapServiceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MapConnection" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="MapServerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReferenceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NorthExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="EastExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SouthExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="WestExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="TopicCategory" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Abstract" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DatasetContactID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SpatialResolution" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DistributionFormat" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SpatialRepresentationType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SpatialReferenceSystem" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LineageStatement" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="OnlineResource" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="MapService_MapServiceMetadata" Member="MapServiceMetadatas" ThisKey="MapServiceID" OtherKey="MapServiceID" Type="MapServiceMetadata" />
+      <Association Name="MapService_RegionMapService" Member="RegionMapServices" ThisKey="MapServiceID" OtherKey="MapServiceID" Type="RegionMapService" />
+      <Association Name="Contact_MapService" Member="Contact" ThisKey="MetadataContactID" OtherKey="ContactID" Type="Contact" IsForeignKey="true" />
+      <Association Name="Contact_MapService1" Member="Contact1" ThisKey="DatasetContactID" OtherKey="ContactID" Type="Contact" IsForeignKey="true" />
+      <Association Name="MapServer_MapService" Member="MapServer" ThisKey="MapServerID" OtherKey="MapServerID" Type="MapServer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ODMDatabaseMetadata" Member="ODMDatabaseMetadatas">
+    <Type Name="ODMDatabaseMetadata">
+      <Column Name="DatabaseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataContent" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ODMDatabase_ODMDatabaseMetadata" Member="ODMDatabase" ThisKey="DatabaseID" OtherKey="DatabaseID" Type="ODMDatabase" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ODMDatabases" Member="ODMDatabases">
+    <Type Name="ODMDatabase">
+      <Column Name="DatabaseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ServerAddress" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="DatabaseName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ODMUser" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ODMPassword" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MapMarkerURL" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ReferenceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NorthExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="EastExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SouthExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="WestExtent" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SpatialReferenceSystem" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TopicCategory" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Abstract" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Citation" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DatasetContactID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LineageStatement" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="WaterOneFlowWSDL" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="ODMDatabase_ODMDatabaseMetadata" Member="ODMDatabaseMetadatas" ThisKey="DatabaseID" OtherKey="DatabaseID" Type="ODMDatabaseMetadata" />
+      <Association Name="ODMDatabase_RegionDatabase" Member="RegionDatabases" ThisKey="DatabaseID" OtherKey="DatabaseID" Type="RegionDatabase" />
+      <Association Name="Contact_ODMDatabase" Member="Contact" ThisKey="MetadataContactID" OtherKey="ContactID" Type="Contact" IsForeignKey="true" />
+      <Association Name="Contact_ODMDatabase1" Member="Contact1" ThisKey="DatasetContactID" OtherKey="ContactID" Type="Contact" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RegionDatabases" Member="RegionDatabases">
+    <Type Name="RegionDatabase">
+      <Column Name="RegionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DatabaseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="ODMDatabase_RegionDatabase" Member="ODMDatabase" ThisKey="DatabaseID" OtherKey="DatabaseID" Type="ODMDatabase" IsForeignKey="true" />
+      <Association Name="Region_RegionDatabase" Member="Region" ThisKey="RegionID" OtherKey="RegionID" Type="Region" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RegionMapServices" Member="RegionMapServices">
+    <Type Name="RegionMapService">
+      <Column Name="RegionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MapServiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TransparencyPercent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsVisible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsTOC" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsBaseMapService" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MapService_RegionMapService" Member="MapService" ThisKey="MapServiceID" OtherKey="MapServiceID" Type="MapService" IsForeignKey="true" />
+      <Association Name="Region_RegionMapService" Member="Region" ThisKey="RegionID" OtherKey="RegionID" Type="Region" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RegionMetadata" Member="RegionMetadatas">
+    <Type Name="RegionMetadata">
+      <Column Name="RegionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MetadataContent" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Region_RegionMetadata" Member="Region" ThisKey="RegionID" OtherKey="RegionID" Type="Region" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

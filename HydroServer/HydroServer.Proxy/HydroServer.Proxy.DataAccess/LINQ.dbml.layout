@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 22.125" name="LINQ">
+  <DataContextMoniker Name="/LINQDataContext" />
+  <nestedChildShapes>
+    <classShape Id="e023d761-c3f4-4c02-bfca-1a7625523551" absoluteBounds="0.75, 6.5, 2, 3.1170068359375005">
+      <DataClassMoniker Name="/LINQDataContext/Contact" />
+      <nestedChildShapes>
+        <elementListCompartment Id="136442e8-6ed7-4340-8ae1-ee94b26145d3" absoluteBounds="0.765, 6.96, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b4e0b3d2-62ff-4aab-b9ee-3946a414293e" absoluteBounds="3.5, 0.75, 2, 2.5401025390625">
+      <DataClassMoniker Name="/LINQDataContext/Region" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7ec1ea57-1358-49fe-969f-150b2a2d4599" absoluteBounds="3.515, 1.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="81609e34-8e69-411d-ba86-34d9ffaf8675" absoluteBounds="3.5, 20.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/LINQDataContext/MapServerMetadata" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d477a0ab-4cab-462e-9947-f15ddf890302" absoluteBounds="3.515, 20.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dfba2732-bb29-48bc-b542-4834cd208a05" absoluteBounds="0.75, 3, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/LINQDataContext/MapServer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d003c80c-6378-48b2-b251-4f8c2c25e9a9" absoluteBounds="0.765, 3.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e0aacc95-30de-48f2-96a9-341d7caf6da4" absoluteBounds="1.5, 17, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/LINQDataContext/MapServerTypeCV" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8e460982-a528-417d-a021-f3040b540c1e" absoluteBounds="1.5150000000000001, 17.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6f5fb504-6d4d-4694-82fd-ff9c9f037e8e" absoluteBounds="6.25, 6.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/LINQDataContext/MapServiceMetadata" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b2a76689-e0d7-46aa-b5e9-05497db74ebc" absoluteBounds="6.265, 6.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e38c5845-9aff-48f5-832d-40ab73f78117" absoluteBounds="3.5, 4.75, 2, 4.4631168619791657">
+      <DataClassMoniker Name="/LINQDataContext/MapService" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c9ae93a6-edd1-428d-ac8e-c0ada00b5072" absoluteBounds="3.515, 5.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1a5e9412-74bb-4a03-a472-627bbf70620e" absoluteBounds="6.25, 12.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/LINQDataContext/ODMDatabaseMetadata" />
+      <nestedChildShapes>
+        <elementListCompartment Id="68c18a0a-a2f2-4013-bc64-af628ffe4be4" absoluteBounds="6.265, 12.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="468d0c4c-4294-4c5f-8dbd-523a42cda048" absoluteBounds="3.5, 10.875, 2, 4.6554182942708309">
+      <DataClassMoniker Name="/LINQDataContext/ODMDatabase" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6fd1a9b6-544d-4673-ba5f-139f535d317a" absoluteBounds="3.515, 11.335, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dce62a79-6cf2-498e-ae84-4fd9ffda53f2" absoluteBounds="6.25, 9.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/LINQDataContext/RegionDatabase" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4409f1d5-8dd0-47c2-b2eb-bab6aea61e08" absoluteBounds="6.265, 9.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2d59d3fe-7f1f-4604-98ea-6dc79cc3e01b" absoluteBounds="6.25, 2.875, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/LINQDataContext/RegionMapService" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0a6498d6-c118-474c-affb-c4875ecb4ef4" absoluteBounds="6.265, 3.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ea405052-bd27-4994-87d5-8cd5cf81d696" absoluteBounds="6.25, 15.375, 2, 1.5785953776041684">
+      <DataClassMoniker Name="/LINQDataContext/RegionMetadata" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c189bc30-c7e1-43a9-a662-d0d53172f8d7" absoluteBounds="6.265, 15.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.07774983723958); (3.25 : 4.07774983723958); (3.25 : 16.75); (4.5 : 16.75); (4.5 : 20.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/MapServer/MapServer_MapServerMetadata" />
+      <nodes>
+        <classShapeMoniker Id="dfba2732-bb29-48bc-b542-4834cd208a05" />
+        <classShapeMoniker Id="81609e34-8e69-411d-ba86-34d9ffaf8675" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.0312525 : 17); (3.0312525 : 4.64787725585937); (2.75 : 4.64787725585937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/MapServerTypeCV/MapServerTypeCV_MapServer" />
+      <nodes>
+        <classShapeMoniker Id="e0aacc95-30de-48f2-96a9-341d7caf6da4" />
+        <classShapeMoniker Id="dfba2732-bb29-48bc-b542-4834cd208a05" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 7.03929768880208); (5.79166666666667 : 7.03929768880208 : JumpStart); (5.95833333333333 : 7.03929768880208 : JumpEnd); (5.97916666666667 : 7.03929768880208 : JumpStart); (6.14583333333333 : 7.03929768880208 : JumpEnd); (6.25 : 7.03929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/MapService/MapService_MapServiceMetadata" />
+      <nodes>
+        <classShapeMoniker Id="e38c5845-9aff-48f5-832d-40ab73f78117" />
+        <classShapeMoniker Id="6f5fb504-6d4d-4694-82fd-ff9c9f037e8e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.85655843098958); (2.94791916666667 : 7.85655843098958 : JumpStart); (3.11458583333333 : 7.85655843098958 : JumpEnd); (3.16666666666667 : 7.85655843098958 : JumpStart); (3.33333333333333 : 7.85655843098958 : JumpEnd); (3.5 : 7.85655843098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/Contact/Contact_MapService" />
+      <nodes>
+        <classShapeMoniker Id="e023d761-c3f4-4c02-bfca-1a7625523551" />
+        <classShapeMoniker Id="e38c5845-9aff-48f5-832d-40ab73f78117" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.11577921549479); (2.94791916666667 : 7.11577921549479 : JumpStart); (3.11458583333333 : 7.11577921549479 : JumpEnd); (3.16666666666667 : 7.11577921549479 : JumpStart); (3.33333333333333 : 7.11577921549479 : JumpEnd); (3.5 : 7.11577921549479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/Contact/Contact_MapService1" />
+      <nodes>
+        <classShapeMoniker Id="e023d761-c3f4-4c02-bfca-1a7625523551" />
+        <classShapeMoniker Id="e38c5845-9aff-48f5-832d-40ab73f78117" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.95274983723958); (2.94791916666667 : 4.95274983723958 : JumpStart); (3.11458583333333 : 4.95274983723958 : JumpEnd); (3.16666666666667 : 4.95274983723958 : JumpStart); (3.33333333333333 : 4.95274983723958 : JumpEnd); (3.5 : 4.95274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/MapServer/MapServer_MapService" />
+      <nodes>
+        <classShapeMoniker Id="dfba2732-bb29-48bc-b542-4834cd208a05" />
+        <classShapeMoniker Id="e38c5845-9aff-48f5-832d-40ab73f78117" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 13.2892976888021); (5.79166666666667 : 13.2892976888021 : JumpStart); (5.95833333333333 : 13.2892976888021 : JumpEnd); (6.25 : 13.2892976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/ODMDatabase/ODMDatabase_ODMDatabaseMetadata" />
+      <nodes>
+        <classShapeMoniker Id="468d0c4c-4294-4c5f-8dbd-523a42cda048" />
+        <classShapeMoniker Id="1a5e9412-74bb-4a03-a472-627bbf70620e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 9.6170068359375); (1.75 : 13.2027091471354); (2.94791916666667 : 13.2027091471354 : JumpStart); (3.11458583333333 : 13.2027091471354 : JumpEnd); (3.16666666666667 : 13.2027091471354 : JumpStart); (3.33333333333333 : 13.2027091471354 : JumpEnd); (3.5 : 13.2027091471354)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/Contact/Contact_ODMDatabase" />
+      <nodes>
+        <classShapeMoniker Id="e023d761-c3f4-4c02-bfca-1a7625523551" />
+        <classShapeMoniker Id="468d0c4c-4294-4c5f-8dbd-523a42cda048" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 9.6170068359375); (2.2812525 : 12.0076020735677); (2.94791916666667 : 12.0076020735677 : JumpStart); (3.11458583333333 : 12.0076020735677 : JumpEnd); (3.16666666666667 : 12.0076020735677 : JumpStart); (3.33333333333333 : 12.0076020735677 : JumpEnd); (3.5 : 12.0076020735677)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/Contact/Contact_ODMDatabase1" />
+      <nodes>
+        <classShapeMoniker Id="e023d761-c3f4-4c02-bfca-1a7625523551" />
+        <classShapeMoniker Id="468d0c4c-4294-4c5f-8dbd-523a42cda048" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 10.875); (4.5 : 10.1874995); (5.79166666666667 : 10.1874995 : JumpStart); (5.95833333333333 : 10.1874995 : JumpEnd); (5.97916666666667 : 10.1874995 : JumpStart); (6.14583333333333 : 10.1874995 : JumpEnd); (6.25 : 10.1874995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/ODMDatabase/ODMDatabase_RegionDatabase" />
+      <nodes>
+        <classShapeMoniker Id="468d0c4c-4294-4c5f-8dbd-523a42cda048" />
+        <classShapeMoniker Id="dce62a79-6cf2-498e-ae84-4fd9ffda53f2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 3.19317846213942); (6.0625 : 3.75567846213942); (6.0625 : 10.6642994388021); (6.25 : 10.6642994388021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/Region/Region_RegionDatabase" />
+      <nodes>
+        <classShapeMoniker Id="b4e0b3d2-62ff-4aab-b9ee-3946a414293e" />
+        <classShapeMoniker Id="dce62a79-6cf2-498e-ae84-4fd9ffda53f2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.98640055338542); (5.79166666666667 : 4.98640055338542 : JumpStart); (5.95833333333333 : 4.98640055338542 : JumpEnd); (5.97916666666667 : 4.98640055338542 : JumpStart); (6.14583333333333 : 4.98640055338542 : JumpEnd); (6.25 : 4.98640055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/MapService/MapService_RegionMapService" />
+      <nodes>
+        <classShapeMoniker Id="e38c5845-9aff-48f5-832d-40ab73f78117" />
+        <classShapeMoniker Id="2d59d3fe-7f1f-4604-98ea-6dc79cc3e01b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 3.05052903876202); (6.25 : 3.05052903876202)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/Region/Region_RegionMapService" />
+      <nodes>
+        <classShapeMoniker Id="b4e0b3d2-62ff-4aab-b9ee-3946a414293e" />
+        <classShapeMoniker Id="2d59d3fe-7f1f-4604-98ea-6dc79cc3e01b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.46769230769231 : 3.2901025390625); (5.875 : 3.69741023137019); (5.875 : 16.1642976888021); (6.25 : 16.1642976888021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LINQDataContext/Region/Region_RegionMetadata" />
+      <nodes>
+        <classShapeMoniker Id="b4e0b3d2-62ff-4aab-b9ee-3946a414293e" />
+        <classShapeMoniker Id="ea405052-bd27-4994-87d5-8cd5cf81d696" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

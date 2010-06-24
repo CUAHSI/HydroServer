@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HydroServer.Proxy.Interface", "HydroServer.Proxy.Interface\HydroServer.Proxy.Interface.csproj", "{0B839537-299E-4FAC-B9E8-5AE04394A2F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HydroServer.Proxy.DataAccess", "HydroServer.Proxy.DataAccess\HydroServer.Proxy.DataAccess.csproj", "{2210D820-0838-4C24-82B3-EFC226E5AA51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{8EB0FDC5-02EA-4CDB-8861-6F38045689F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B839537-299E-4FAC-B9E8-5AE04394A2F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B839537-299E-4FAC-B9E8-5AE04394A2F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B839537-299E-4FAC-B9E8-5AE04394A2F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B839537-299E-4FAC-B9E8-5AE04394A2F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2210D820-0838-4C24-82B3-EFC226E5AA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2210D820-0838-4C24-82B3-EFC226E5AA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2210D820-0838-4C24-82B3-EFC226E5AA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2210D820-0838-4C24-82B3-EFC226E5AA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EB0FDC5-02EA-4CDB-8861-6F38045689F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EB0FDC5-02EA-4CDB-8861-6F38045689F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EB0FDC5-02EA-4CDB-8861-6F38045689F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EB0FDC5-02EA-4CDB-8861-6F38045689F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

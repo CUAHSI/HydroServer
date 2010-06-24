@@ -1,0 +1,7 @@
+C:\Dev\Projects\HydroServer.Proxy\HydroServer.Proxy.Interface\bin\Debug\HydroServer.Proxy.Interface.dll
+C:\Dev\Projects\HydroServer.Proxy\HydroServer.Proxy.Interface\bin\Debug\HydroServer.Proxy.Interface.pdb
+C:\Dev\Projects\HydroServer.Proxy\HydroServer.Proxy.Interface\bin\Debug\HydroServer.Proxy.DataAccess.dll
+C:\Dev\Projects\HydroServer.Proxy\HydroServer.Proxy.Interface\bin\Debug\HydroServer.Proxy.DataAccess.pdb
+C:\Dev\Projects\HydroServer.Proxy\HydroServer.Proxy.Interface\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Projects\HydroServer.Proxy\HydroServer.Proxy.Interface\obj\Debug\HydroServer.Proxy.Interface.dll
+C:\Dev\Projects\HydroServer.Proxy\HydroServer.Proxy.Interface\obj\Debug\HydroServer.Proxy.Interface.pdb

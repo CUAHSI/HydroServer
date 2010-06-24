@@ -1,0 +1,12 @@
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\bin\Debug\HydroServer.Proxy.DataAccess.dll
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\bin\Debug\HydroServer.Proxy.Interface.dll
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\bin\Debug\HydroServer.Proxy.Interface.pdb
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\bin\Debug\HydroServer.Proxy.DataAccess.pdb
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Dev\Projects\HydroServer.Proxy\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
