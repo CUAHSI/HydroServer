@@ -11,14 +11,14 @@
     <deploymentProvider codebase="file:///C:/StephanieDev/HISServerCapabilitiesConfig/HIS%20Server%20Capabilities%20Database.application" />
   </deployment>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="HIS Server Capabilities Database.exe.manifest" size="11914">
+    <dependentAssembly dependencyType="install" codebase="HIS Server Capabilities Database.exe.manifest" size="16611">
       <assemblyIdentity name="HIS Server Capabilities Database.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>qrXLpXoZLJKIAr1MNvDaxInM8Gg=</dsig:DigestValue>
+        <dsig:DigestValue>0oR1AFnCcuJgVzO/JhlgVtE9esg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
