@@ -27,16 +27,25 @@ Partial Class Form1
         Me.pnlMaps = New System.Windows.Forms.Panel
         Me.dgvMaps = New System.Windows.Forms.DataGridView
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel
+        Me.btnRemoveMap = New System.Windows.Forms.Button
+        Me.btnEditMap = New System.Windows.Forms.Button
+        Me.btnAddMap = New System.Windows.Forms.Button
         Me.Panel5 = New System.Windows.Forms.Panel
         Me.Label4 = New System.Windows.Forms.Label
         Me.pnlDatabases = New System.Windows.Forms.Panel
         Me.dgvDatabases = New System.Windows.Forms.DataGridView
         Me.FlowLayoutPanel3 = New System.Windows.Forms.FlowLayoutPanel
+        Me.btnRemoveDatabase = New System.Windows.Forms.Button
+        Me.btnEditDatabase = New System.Windows.Forms.Button
+        Me.btnAddDatabase = New System.Windows.Forms.Button
         Me.Panel6 = New System.Windows.Forms.Panel
         Me.Label5 = New System.Windows.Forms.Label
         Me.pnlRegions = New System.Windows.Forms.Panel
         Me.dgvRegions = New System.Windows.Forms.DataGridView
         Me.FlowLayoutPanel4 = New System.Windows.Forms.FlowLayoutPanel
+        Me.btnRemoveRegion = New System.Windows.Forms.Button
+        Me.btnEditRegion = New System.Windows.Forms.Button
+        Me.btnAddRegion = New System.Windows.Forms.Button
         Me.Panel7 = New System.Windows.Forms.Panel
         Me.Label6 = New System.Windows.Forms.Label
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel
@@ -45,11 +54,17 @@ Partial Class Form1
         Me.pnlMapServers = New System.Windows.Forms.Panel
         Me.dgvMapServers = New System.Windows.Forms.DataGridView
         Me.FlowLayoutPanel5 = New System.Windows.Forms.FlowLayoutPanel
+        Me.DeleteMapServer = New System.Windows.Forms.Button
+        Me.EditMapServer = New System.Windows.Forms.Button
+        Me.AddMapServer = New System.Windows.Forms.Button
         Me.Panel4 = New System.Windows.Forms.Panel
         Me.Label13 = New System.Windows.Forms.Label
         Me.pnlContacts = New System.Windows.Forms.Panel
         Me.dgvContacts = New System.Windows.Forms.DataGridView
         Me.FlowLayoutPanel6 = New System.Windows.Forms.FlowLayoutPanel
+        Me.DeletContact = New System.Windows.Forms.Button
+        Me.EditContact = New System.Windows.Forms.Button
+        Me.AddContact = New System.Windows.Forms.Button
         Me.Panel9 = New System.Windows.Forms.Panel
         Me.Label14 = New System.Windows.Forms.Label
         Me.pnlChoices = New System.Windows.Forms.Panel
@@ -79,21 +94,6 @@ Partial Class Form1
         Me.EditDbConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.DeletContact = New System.Windows.Forms.Button
-        Me.EditContact = New System.Windows.Forms.Button
-        Me.AddContact = New System.Windows.Forms.Button
-        Me.DeleteMapServer = New System.Windows.Forms.Button
-        Me.EditMapServer = New System.Windows.Forms.Button
-        Me.AddMapServer = New System.Windows.Forms.Button
-        Me.btnRemoveMap = New System.Windows.Forms.Button
-        Me.btnEditMap = New System.Windows.Forms.Button
-        Me.btnAddMap = New System.Windows.Forms.Button
-        Me.btnRemoveDatabase = New System.Windows.Forms.Button
-        Me.btnEditDatabase = New System.Windows.Forms.Button
-        Me.btnAddDatabase = New System.Windows.Forms.Button
-        Me.btnRemoveRegion = New System.Windows.Forms.Button
-        Me.btnEditRegion = New System.Windows.Forms.Button
-        Me.btnAddRegion = New System.Windows.Forms.Button
         Me.pnlMaps.SuspendLayout()
         CType(Me.dgvMaps, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FlowLayoutPanel2.SuspendLayout()
@@ -168,6 +168,33 @@ Partial Class Form1
         Me.FlowLayoutPanel2.Size = New System.Drawing.Size(526, 29)
         Me.FlowLayoutPanel2.TabIndex = 1
         '
+        'btnRemoveMap
+        '
+        Me.btnRemoveMap.Image = CType(resources.GetObject("btnRemoveMap.Image"), System.Drawing.Image)
+        Me.btnRemoveMap.Location = New System.Drawing.Point(500, 3)
+        Me.btnRemoveMap.Name = "btnRemoveMap"
+        Me.btnRemoveMap.Size = New System.Drawing.Size(23, 23)
+        Me.btnRemoveMap.TabIndex = 2
+        Me.btnRemoveMap.UseVisualStyleBackColor = True
+        '
+        'btnEditMap
+        '
+        Me.btnEditMap.Image = CType(resources.GetObject("btnEditMap.Image"), System.Drawing.Image)
+        Me.btnEditMap.Location = New System.Drawing.Point(471, 3)
+        Me.btnEditMap.Name = "btnEditMap"
+        Me.btnEditMap.Size = New System.Drawing.Size(23, 23)
+        Me.btnEditMap.TabIndex = 1
+        Me.btnEditMap.UseVisualStyleBackColor = True
+        '
+        'btnAddMap
+        '
+        Me.btnAddMap.Image = CType(resources.GetObject("btnAddMap.Image"), System.Drawing.Image)
+        Me.btnAddMap.Location = New System.Drawing.Point(442, 3)
+        Me.btnAddMap.Name = "btnAddMap"
+        Me.btnAddMap.Size = New System.Drawing.Size(23, 23)
+        Me.btnAddMap.TabIndex = 0
+        Me.btnAddMap.UseVisualStyleBackColor = True
+        '
         'Panel5
         '
         Me.Panel5.AutoSize = True
@@ -229,6 +256,33 @@ Partial Class Form1
         Me.FlowLayoutPanel3.Size = New System.Drawing.Size(526, 29)
         Me.FlowLayoutPanel3.TabIndex = 2
         '
+        'btnRemoveDatabase
+        '
+        Me.btnRemoveDatabase.Image = CType(resources.GetObject("btnRemoveDatabase.Image"), System.Drawing.Image)
+        Me.btnRemoveDatabase.Location = New System.Drawing.Point(500, 3)
+        Me.btnRemoveDatabase.Name = "btnRemoveDatabase"
+        Me.btnRemoveDatabase.Size = New System.Drawing.Size(23, 23)
+        Me.btnRemoveDatabase.TabIndex = 2
+        Me.btnRemoveDatabase.UseVisualStyleBackColor = True
+        '
+        'btnEditDatabase
+        '
+        Me.btnEditDatabase.Image = CType(resources.GetObject("btnEditDatabase.Image"), System.Drawing.Image)
+        Me.btnEditDatabase.Location = New System.Drawing.Point(471, 3)
+        Me.btnEditDatabase.Name = "btnEditDatabase"
+        Me.btnEditDatabase.Size = New System.Drawing.Size(23, 23)
+        Me.btnEditDatabase.TabIndex = 1
+        Me.btnEditDatabase.UseVisualStyleBackColor = True
+        '
+        'btnAddDatabase
+        '
+        Me.btnAddDatabase.Image = CType(resources.GetObject("btnAddDatabase.Image"), System.Drawing.Image)
+        Me.btnAddDatabase.Location = New System.Drawing.Point(442, 3)
+        Me.btnAddDatabase.Name = "btnAddDatabase"
+        Me.btnAddDatabase.Size = New System.Drawing.Size(23, 23)
+        Me.btnAddDatabase.TabIndex = 0
+        Me.btnAddDatabase.UseVisualStyleBackColor = True
+        '
         'Panel6
         '
         Me.Panel6.AutoSize = True
@@ -289,6 +343,33 @@ Partial Class Form1
         Me.FlowLayoutPanel4.Name = "FlowLayoutPanel4"
         Me.FlowLayoutPanel4.Size = New System.Drawing.Size(526, 29)
         Me.FlowLayoutPanel4.TabIndex = 12
+        '
+        'btnRemoveRegion
+        '
+        Me.btnRemoveRegion.Image = CType(resources.GetObject("btnRemoveRegion.Image"), System.Drawing.Image)
+        Me.btnRemoveRegion.Location = New System.Drawing.Point(500, 3)
+        Me.btnRemoveRegion.Name = "btnRemoveRegion"
+        Me.btnRemoveRegion.Size = New System.Drawing.Size(23, 23)
+        Me.btnRemoveRegion.TabIndex = 3
+        Me.btnRemoveRegion.UseVisualStyleBackColor = True
+        '
+        'btnEditRegion
+        '
+        Me.btnEditRegion.Image = CType(resources.GetObject("btnEditRegion.Image"), System.Drawing.Image)
+        Me.btnEditRegion.Location = New System.Drawing.Point(471, 3)
+        Me.btnEditRegion.Name = "btnEditRegion"
+        Me.btnEditRegion.Size = New System.Drawing.Size(23, 23)
+        Me.btnEditRegion.TabIndex = 4
+        Me.btnEditRegion.UseVisualStyleBackColor = True
+        '
+        'btnAddRegion
+        '
+        Me.btnAddRegion.Image = CType(resources.GetObject("btnAddRegion.Image"), System.Drawing.Image)
+        Me.btnAddRegion.Location = New System.Drawing.Point(442, 3)
+        Me.btnAddRegion.Name = "btnAddRegion"
+        Me.btnAddRegion.Size = New System.Drawing.Size(23, 23)
+        Me.btnAddRegion.TabIndex = 5
+        Me.btnAddRegion.UseVisualStyleBackColor = True
         '
         'Panel7
         '
@@ -384,6 +465,33 @@ Partial Class Form1
         Me.FlowLayoutPanel5.Size = New System.Drawing.Size(526, 29)
         Me.FlowLayoutPanel5.TabIndex = 1
         '
+        'DeleteMapServer
+        '
+        Me.DeleteMapServer.Image = CType(resources.GetObject("DeleteMapServer.Image"), System.Drawing.Image)
+        Me.DeleteMapServer.Location = New System.Drawing.Point(500, 3)
+        Me.DeleteMapServer.Name = "DeleteMapServer"
+        Me.DeleteMapServer.Size = New System.Drawing.Size(23, 23)
+        Me.DeleteMapServer.TabIndex = 2
+        Me.DeleteMapServer.UseVisualStyleBackColor = True
+        '
+        'EditMapServer
+        '
+        Me.EditMapServer.Image = CType(resources.GetObject("EditMapServer.Image"), System.Drawing.Image)
+        Me.EditMapServer.Location = New System.Drawing.Point(471, 3)
+        Me.EditMapServer.Name = "EditMapServer"
+        Me.EditMapServer.Size = New System.Drawing.Size(23, 23)
+        Me.EditMapServer.TabIndex = 1
+        Me.EditMapServer.UseVisualStyleBackColor = True
+        '
+        'AddMapServer
+        '
+        Me.AddMapServer.Image = CType(resources.GetObject("AddMapServer.Image"), System.Drawing.Image)
+        Me.AddMapServer.Location = New System.Drawing.Point(442, 3)
+        Me.AddMapServer.Name = "AddMapServer"
+        Me.AddMapServer.Size = New System.Drawing.Size(23, 23)
+        Me.AddMapServer.TabIndex = 0
+        Me.AddMapServer.UseVisualStyleBackColor = True
+        '
         'Panel4
         '
         Me.Panel4.AutoSize = True
@@ -444,6 +552,33 @@ Partial Class Form1
         Me.FlowLayoutPanel6.Name = "FlowLayoutPanel6"
         Me.FlowLayoutPanel6.Size = New System.Drawing.Size(526, 29)
         Me.FlowLayoutPanel6.TabIndex = 1
+        '
+        'DeletContact
+        '
+        Me.DeletContact.Image = CType(resources.GetObject("DeletContact.Image"), System.Drawing.Image)
+        Me.DeletContact.Location = New System.Drawing.Point(500, 3)
+        Me.DeletContact.Name = "DeletContact"
+        Me.DeletContact.Size = New System.Drawing.Size(23, 23)
+        Me.DeletContact.TabIndex = 2
+        Me.DeletContact.UseVisualStyleBackColor = True
+        '
+        'EditContact
+        '
+        Me.EditContact.Image = CType(resources.GetObject("EditContact.Image"), System.Drawing.Image)
+        Me.EditContact.Location = New System.Drawing.Point(471, 3)
+        Me.EditContact.Name = "EditContact"
+        Me.EditContact.Size = New System.Drawing.Size(23, 23)
+        Me.EditContact.TabIndex = 1
+        Me.EditContact.UseVisualStyleBackColor = True
+        '
+        'AddContact
+        '
+        Me.AddContact.Image = CType(resources.GetObject("AddContact.Image"), System.Drawing.Image)
+        Me.AddContact.Location = New System.Drawing.Point(442, 3)
+        Me.AddContact.Name = "AddContact"
+        Me.AddContact.Size = New System.Drawing.Size(23, 23)
+        Me.AddContact.TabIndex = 0
+        Me.AddContact.UseVisualStyleBackColor = True
         '
         'Panel9
         '
@@ -722,143 +857,8 @@ Partial Class Form1
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.AboutToolStripMenuItem.Text = "About"
-        '
-        'DeletContact
-        '
-        Me.DeletContact.Image = CType(resources.GetObject("DeletContact.Image"), System.Drawing.Image)
-        Me.DeletContact.Location = New System.Drawing.Point(500, 3)
-        Me.DeletContact.Name = "DeletContact"
-        Me.DeletContact.Size = New System.Drawing.Size(23, 23)
-        Me.DeletContact.TabIndex = 2
-        Me.DeletContact.UseVisualStyleBackColor = True
-        '
-        'EditContact
-        '
-        Me.EditContact.Image = CType(resources.GetObject("EditContact.Image"), System.Drawing.Image)
-        Me.EditContact.Location = New System.Drawing.Point(471, 3)
-        Me.EditContact.Name = "EditContact"
-        Me.EditContact.Size = New System.Drawing.Size(23, 23)
-        Me.EditContact.TabIndex = 1
-        Me.EditContact.UseVisualStyleBackColor = True
-        '
-        'AddContact
-        '
-        Me.AddContact.Image = CType(resources.GetObject("AddContact.Image"), System.Drawing.Image)
-        Me.AddContact.Location = New System.Drawing.Point(442, 3)
-        Me.AddContact.Name = "AddContact"
-        Me.AddContact.Size = New System.Drawing.Size(23, 23)
-        Me.AddContact.TabIndex = 0
-        Me.AddContact.UseVisualStyleBackColor = True
-        '
-        'DeleteMapServer
-        '
-        Me.DeleteMapServer.Image = CType(resources.GetObject("DeleteMapServer.Image"), System.Drawing.Image)
-        Me.DeleteMapServer.Location = New System.Drawing.Point(500, 3)
-        Me.DeleteMapServer.Name = "DeleteMapServer"
-        Me.DeleteMapServer.Size = New System.Drawing.Size(23, 23)
-        Me.DeleteMapServer.TabIndex = 2
-        Me.DeleteMapServer.UseVisualStyleBackColor = True
-        '
-        'EditMapServer
-        '
-        Me.EditMapServer.Image = CType(resources.GetObject("EditMapServer.Image"), System.Drawing.Image)
-        Me.EditMapServer.Location = New System.Drawing.Point(471, 3)
-        Me.EditMapServer.Name = "EditMapServer"
-        Me.EditMapServer.Size = New System.Drawing.Size(23, 23)
-        Me.EditMapServer.TabIndex = 1
-        Me.EditMapServer.UseVisualStyleBackColor = True
-        '
-        'AddMapServer
-        '
-        Me.AddMapServer.Image = CType(resources.GetObject("AddMapServer.Image"), System.Drawing.Image)
-        Me.AddMapServer.Location = New System.Drawing.Point(442, 3)
-        Me.AddMapServer.Name = "AddMapServer"
-        Me.AddMapServer.Size = New System.Drawing.Size(23, 23)
-        Me.AddMapServer.TabIndex = 0
-        Me.AddMapServer.UseVisualStyleBackColor = True
-        '
-        'btnRemoveMap
-        '
-        Me.btnRemoveMap.Image = CType(resources.GetObject("btnRemoveMap.Image"), System.Drawing.Image)
-        Me.btnRemoveMap.Location = New System.Drawing.Point(500, 3)
-        Me.btnRemoveMap.Name = "btnRemoveMap"
-        Me.btnRemoveMap.Size = New System.Drawing.Size(23, 23)
-        Me.btnRemoveMap.TabIndex = 2
-        Me.btnRemoveMap.UseVisualStyleBackColor = True
-        '
-        'btnEditMap
-        '
-        Me.btnEditMap.Image = CType(resources.GetObject("btnEditMap.Image"), System.Drawing.Image)
-        Me.btnEditMap.Location = New System.Drawing.Point(471, 3)
-        Me.btnEditMap.Name = "btnEditMap"
-        Me.btnEditMap.Size = New System.Drawing.Size(23, 23)
-        Me.btnEditMap.TabIndex = 1
-        Me.btnEditMap.UseVisualStyleBackColor = True
-        '
-        'btnAddMap
-        '
-        Me.btnAddMap.Image = CType(resources.GetObject("btnAddMap.Image"), System.Drawing.Image)
-        Me.btnAddMap.Location = New System.Drawing.Point(442, 3)
-        Me.btnAddMap.Name = "btnAddMap"
-        Me.btnAddMap.Size = New System.Drawing.Size(23, 23)
-        Me.btnAddMap.TabIndex = 0
-        Me.btnAddMap.UseVisualStyleBackColor = True
-        '
-        'btnRemoveDatabase
-        '
-        Me.btnRemoveDatabase.Image = CType(resources.GetObject("btnRemoveDatabase.Image"), System.Drawing.Image)
-        Me.btnRemoveDatabase.Location = New System.Drawing.Point(500, 3)
-        Me.btnRemoveDatabase.Name = "btnRemoveDatabase"
-        Me.btnRemoveDatabase.Size = New System.Drawing.Size(23, 23)
-        Me.btnRemoveDatabase.TabIndex = 2
-        Me.btnRemoveDatabase.UseVisualStyleBackColor = True
-        '
-        'btnEditDatabase
-        '
-        Me.btnEditDatabase.Image = CType(resources.GetObject("btnEditDatabase.Image"), System.Drawing.Image)
-        Me.btnEditDatabase.Location = New System.Drawing.Point(471, 3)
-        Me.btnEditDatabase.Name = "btnEditDatabase"
-        Me.btnEditDatabase.Size = New System.Drawing.Size(23, 23)
-        Me.btnEditDatabase.TabIndex = 1
-        Me.btnEditDatabase.UseVisualStyleBackColor = True
-        '
-        'btnAddDatabase
-        '
-        Me.btnAddDatabase.Image = CType(resources.GetObject("btnAddDatabase.Image"), System.Drawing.Image)
-        Me.btnAddDatabase.Location = New System.Drawing.Point(442, 3)
-        Me.btnAddDatabase.Name = "btnAddDatabase"
-        Me.btnAddDatabase.Size = New System.Drawing.Size(23, 23)
-        Me.btnAddDatabase.TabIndex = 0
-        Me.btnAddDatabase.UseVisualStyleBackColor = True
-        '
-        'btnRemoveRegion
-        '
-        Me.btnRemoveRegion.Image = CType(resources.GetObject("btnRemoveRegion.Image"), System.Drawing.Image)
-        Me.btnRemoveRegion.Location = New System.Drawing.Point(500, 3)
-        Me.btnRemoveRegion.Name = "btnRemoveRegion"
-        Me.btnRemoveRegion.Size = New System.Drawing.Size(23, 23)
-        Me.btnRemoveRegion.TabIndex = 3
-        Me.btnRemoveRegion.UseVisualStyleBackColor = True
-        '
-        'btnEditRegion
-        '
-        Me.btnEditRegion.Image = CType(resources.GetObject("btnEditRegion.Image"), System.Drawing.Image)
-        Me.btnEditRegion.Location = New System.Drawing.Point(471, 3)
-        Me.btnEditRegion.Name = "btnEditRegion"
-        Me.btnEditRegion.Size = New System.Drawing.Size(23, 23)
-        Me.btnEditRegion.TabIndex = 4
-        Me.btnEditRegion.UseVisualStyleBackColor = True
-        '
-        'btnAddRegion
-        '
-        Me.btnAddRegion.Image = CType(resources.GetObject("btnAddRegion.Image"), System.Drawing.Image)
-        Me.btnAddRegion.Location = New System.Drawing.Point(442, 3)
-        Me.btnAddRegion.Name = "btnAddRegion"
-        Me.btnAddRegion.Size = New System.Drawing.Size(23, 23)
-        Me.btnAddRegion.TabIndex = 5
-        Me.btnAddRegion.UseVisualStyleBackColor = True
         '
         'Form1
         '
