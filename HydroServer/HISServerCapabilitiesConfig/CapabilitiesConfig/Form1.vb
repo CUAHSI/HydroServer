@@ -355,6 +355,10 @@ Public Class Form1
     End Sub
 
     Private Sub EditDbConnectionToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditDbConnectionToolStripMenuItem.Click
-        AccessDB.Show()
+        AccessDB.Show(Me)
+    End Sub
+
+    Private Sub AboutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
+        frmAbout.Show(Me)
     End Sub
 End Class

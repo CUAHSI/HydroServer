@@ -81,6 +81,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3C6E92D96AC60B6284C824024A7281C3"
+        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_45B25F3181E206770BD9F8DA21EE19B2"
         "OwnerKey" = "8:_BAE01B9CA759B36DFD1E47FD0B2AEB49"
         "MsmSig" = "8:_UNDEFINED"
@@ -207,12 +213,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B71A7DBBD803E0E76230D72BFC043D07"
-        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_BAE01B9CA759B36DFD1E47FD0B2AEB49"
         "OwnerKey" = "8:_6A0D8F4F556E1AA5A75A2555FD699F57"
         "MsmSig" = "8:_UNDEFINED"
@@ -310,7 +310,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B71A7DBBD803E0E76230D72BFC043D07"
+        "OwnerKey" = "8:_3C6E92D96AC60B6284C824024A7281C3"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -474,6 +474,37 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.SqlServer.RegSvrEnum.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_3318F57A22B64C569F49006790ED1C30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3C6E92D96AC60B6284C824024A7281C3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.0.2.16769, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3C6E92D96AC60B6284C824024A7281C3"
+                    {
+                    "Name" = "8:ZedGraph.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ZedGraph.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_3318F57A22B64C569F49006790ED1C30"
@@ -706,37 +737,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B71A7DBBD803E0E76230D72BFC043D07"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.0.2.16769, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_B71A7DBBD803E0E76230D72BFC043D07"
-                    {
-                    "Name" = "8:ZedGraph.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ZedGraph.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_3318F57A22B64C569F49006790ED1C30"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BAE01B9CA759B36DFD1E47FD0B2AEB49"
             {
             "AssemblyRegister" = "3:1"
@@ -886,18 +886,18 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:HydroServer Capabilities Database Configuration Tool"
-        "ProductCode" = "8:{6B120197-C603-4651-B2A6-CCCE0053F613}"
-        "PackageCode" = "8:{11052123-C96D-43C0-ADC8-AC668A726010}"
+        "ProductCode" = "8:{6F0DC0CA-218A-4550-844D-658CB1DA291E}"
+        "PackageCode" = "8:{FAA664B6-F0F2-4312-B0BE-380263BFA94B}"
         "UpgradeCode" = "8:{4BD977C5-4A98-4972-AD0D-5A9A4196287D}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.1.1"
         "Manufacturer" = "8:Cuahsi His"
         "ARPHELPTELEPHONE" = "8:(435) 797-2946"
         "ARPHELPLINK" = "8:http://his.cuahsi.org/"
-        "Title" = "8:HIS Database Configuration Tool"
+        "Title" = "8:HydroServer Database Configuration Tool"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Utah Water Research Laboratory"
         "Keywords" = "8:"
