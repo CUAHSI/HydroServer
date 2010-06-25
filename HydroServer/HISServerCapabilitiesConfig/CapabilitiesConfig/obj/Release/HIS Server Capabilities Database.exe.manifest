@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Show.ICO" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="HIS Server Capabilities Database" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="HIS Server Capabilities Database" version="1.1.1.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="HIS Server Capabilities Database.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -68,26 +68,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HIS Server Capabilities Database.exe" size="519680">
-      <assemblyIdentity name="HIS Server Capabilities Database" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HIS Server Capabilities Database.exe" size="538112">
+      <assemblyIdentity name="HIS Server Capabilities Database" version="1.1.1.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>7xBZT5Fls291GHzbhJBQQ2aolwc=</dsig:DigestValue>
+        <dsig:DigestValue>AxwHUbfk81gVVraMuJ1L1e08tB0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HIS Server Capabilities Database.XmlSerializers.dll" size="454656">
-      <assemblyIdentity name="HIS Server Capabilities Database.XmlSerializers" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="HIS Server Capabilities Database.XmlSerializers" version="1.1.1.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>o566chljZwt9MD2sRpRL9CO9MxI=</dsig:DigestValue>
+        <dsig:DigestValue>/5gi5zKBYux7y3L4RAAaKVZIpzQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

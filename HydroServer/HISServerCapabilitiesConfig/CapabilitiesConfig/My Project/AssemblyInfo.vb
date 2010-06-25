@@ -8,11 +8,23 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("WSDL Test")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("WSDL Test")> 
-<Assembly: AssemblyCopyright("Copyright ©  2009")> 
+<Assembly: AssemblyTitle("HydroServer Capabilities Database Configuration Tool")> 
+<Assembly: AssemblyDescription("The team of engineers and software developers that developed the HydroServer Capabilities Database Configuration Tool includes:" & vbCrLf & _
+vbCrLf & _
+"Jeffery S. Horsburgh, Research Engineer, Environmental Management Research Group, Utah Water Research Laboratory, Utah State University, Logan, UT." & vbCrLf & _
+vbCrLf & _
+"Justin Berger, Programmer, Environmental Management Research Group, Utah Water Research Laboratory, Utah State University, Logan, UT" & vbCrLf & _
+vbCrLf & _
+"Stephanie Reeder, Programmer, Environmental Management Research Group, Utah Water Research Laboratory, Utah State University, Logan, UT" & vbCrLf & _
+vbCrLf & _
+"David G. Tarboton, Professor, Utah Water Research Laboratory, Department of Civil and Environmental Engineering, Utah State University, Logan, UT" & vbCrLf & _
+vbCrLf & _
+"Kim Screuders, System Administrator, Utah Water Research Laboratory, Utah State University, Logan, UT" & vbCrLf & _
+vbCrLf & _
+"The HydroServer Capabilities Database Configuration Tool and its software manual are based upon work supported by the National Science Foundation under Grants No. 03-26064, and 06-10075.  Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation. ")> 
+<Assembly: AssemblyCompany("Utah State University")> 
+<Assembly: AssemblyProduct("HydroServer Capabilities Database Configuration Tool 1.1.1")> 
+<Assembly: AssemblyCopyright("Copyright ©  2010")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +43,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("1.1.1.0")> 
+<Assembly: AssemblyFileVersion("1.1.1.0")> 
+
