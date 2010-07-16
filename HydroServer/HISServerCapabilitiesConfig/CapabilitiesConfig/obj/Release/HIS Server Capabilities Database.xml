@@ -6,7 +6,20 @@ HISServerCapabilitiesDatabase
 </name>
 </assembly>
 <members>
-<member name="M:HIS_Config.arcgis_Map.administrative_mapserver.#ctor">
+<member name="P:HIS_Config.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:HIS_Config.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:HIS_Config.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:HIS_Config.arcgis_Map.administrative_mapserver.#ctor">
 	<remarks/>
 </member><member name="E:HIS_Config.arcgis_Map.administrative_mapserver.GetDocumentInfoCompleted">
 	<remarks/>
@@ -2610,19 +2623,6 @@ HISServerCapabilitiesDatabase
 	<remarks/>
 </member><member name="T:HIS_Config.arcgis_Server.GetServiceDescriptionsExCompletedEventArgs">
 	<remarks/>
-</member><member name="P:HIS_Config.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:HIS_Config.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:HIS_Config.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
 </member>
 </members>
 </doc>
