@@ -194,10 +194,11 @@ Partial Class AddMapServer
         '
         Me.lblSampleConnection.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblSampleConnection.Location = New System.Drawing.Point(109, 79)
+        Me.lblSampleConnection.Location = New System.Drawing.Point(6, 79)
         Me.lblSampleConnection.Name = "lblSampleConnection"
-        Me.lblSampleConnection.Size = New System.Drawing.Size(216, 33)
+        Me.lblSampleConnection.Size = New System.Drawing.Size(319, 33)
         Me.lblSampleConnection.TabIndex = 6
+        Me.lblSampleConnection.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label5
         '
