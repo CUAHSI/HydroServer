@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- from the
+http://msdn2.microsoft.com/en-us/library/x6c1kb0s.aspx
+
+use 
+xsd /p:GenerateTimeSeriesClass.xml cuahsiTimeSeries.xsd
+-->
+<xsd xmlns='http://microsoft.com/dotnet/tools/xsd/' output='generatedClasses' >
+  
+ <!-- <generateClasses language='CS' namespace='WaterOneFlow.Schema.v1'/> -->
+  <generateClasses language='CS' namespace='WaterOneFlow.Schema.v1'>
+    <element>variables</element>
+   </generateClasses>
+</xsd>

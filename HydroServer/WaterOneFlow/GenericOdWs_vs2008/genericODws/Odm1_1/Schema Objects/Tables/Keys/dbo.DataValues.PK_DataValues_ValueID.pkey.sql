@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[DataValues] ADD CONSTRAINT [PK_DataValues_ValueID] PRIMARY KEY CLUSTERED  ([ValueID]) ON [PRIMARY]
+
+

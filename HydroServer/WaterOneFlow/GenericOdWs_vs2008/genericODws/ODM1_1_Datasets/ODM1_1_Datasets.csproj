@@ -1,0 +1,184 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5EEAEAA9-A624-4C68-A6B9-250AF448DE4B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WaterOneFlow.odm.v1_1</RootNamespace>
+    <AssemblyName>ODM1_1_Datasets</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlledVocabularyDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlledVocabularyDataset.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="seriesCatalogDataSet_v1_1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>seriesCatalogDataSet_v1_1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="siteInfoDataSet_v1_1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>siteInfoDataSet_v1_1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="unitsDataset_v1_1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>unitsDataset_v1_1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ValuesDataSet_v1_1.cs">
+      <DependentUpon>ValuesDataSet_v1_1.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ValuesDataSet_v1_1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValuesDataSet_v1_1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="VariablesDataset_v1_1.cs">
+      <DependentUpon>VariablesDataset_v1_1.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VariablesDataset_v1_1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VariablesDataset_v1_1.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ControlledVocabularyDataset.xsc">
+      <DependentUpon>ControlledVocabularyDataset.xsd</DependentUpon>
+    </None>
+    <None Include="ControlledVocabularyDataset.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ControlledVocabularyDataset.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ControlledVocabularyDataset.xss">
+      <DependentUpon>ControlledVocabularyDataset.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="seriesCatalogDataSet_v1_1.xsc">
+      <DependentUpon>seriesCatalogDataSet_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="seriesCatalogDataSet_v1_1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>seriesCatalogDataSet_v1_1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="seriesCatalogDataSet_v1_1.xss">
+      <DependentUpon>seriesCatalogDataSet_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="seriesCatalogDataSet_v1_1.xsx">
+      <DependentUpon>seriesCatalogDataSet_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="siteInfoDataSet_v1_1.xsc">
+      <DependentUpon>siteInfoDataSet_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="siteInfoDataSet_v1_1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>siteInfoDataSet_v1_1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="siteInfoDataSet_v1_1.xss">
+      <DependentUpon>siteInfoDataSet_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="unitsDataset_v1_1.xsc">
+      <DependentUpon>unitsDataset_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="unitsDataset_v1_1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>unitsDataset_v1_1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="unitsDataset_v1_1.xss">
+      <DependentUpon>unitsDataset_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="ValuesDataSet_v1_1.xsc">
+      <DependentUpon>ValuesDataSet_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="ValuesDataSet_v1_1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ValuesDataSet_v1_1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ValuesDataSet_v1_1.xss">
+      <DependentUpon>ValuesDataSet_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="ValuesDataSet_v1_1.xsx">
+      <DependentUpon>ValuesDataSet_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="VariablesDataset_v1_1.xsc">
+      <DependentUpon>VariablesDataset_v1_1.xsd</DependentUpon>
+    </None>
+    <None Include="VariablesDataset_v1_1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VariablesDataset_v1_1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="VariablesDataset_v1_1.xss">
+      <DependentUpon>VariablesDataset_v1_1.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

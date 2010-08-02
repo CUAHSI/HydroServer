@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Install">
+
+<!--  <Import Project="C:\Program Files\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+-->
+<Import Project="MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+
+  <PropertyGroup>
+    <OutputFolder>D:\dev2005\waterOneFlow\genericODws\genericODws_deploy\Release</OutputFolder>
+    <CompilationDebug />
+    <CustomErrorsMode />
+    <ContentEditorsEmail />
+    <AdministratorsEmail />
+    <Environment>Default</Environment>
+    <!-- these make the properties global, so they can be shared across tasks -->
+    <VirtualDirectory/>
+    <network/>
+    <vocabulary/>
+  </PropertyGroup>
+  
+ <!-- <PropertyGroup>
+    <CompilationDebugXPath>configuration/system.web/compilation/@debug</CompilationDebugXPath>
+    <CustomErrorsModeXPath>configuration/system.web/customErrors/@mode</CustomErrorsModeXPath>
+    <AdministratorsEmailXPath>configuration/appSettings/add[@key='contactEmail']/@value</AdministratorsEmailXPath>
+  </PropertyGroup>
+  -->
+  <!-- read from Environment.config -->
+  <PropertyGroup>
+    <CompilationDebugXPath>configuration/system.web/compilation/@debug</CompilationDebugXPath>
+    <CustomErrorsModeXPath>configuration/system.web/customErrors/@mode</CustomErrorsModeXPath>
+    <networkXPath>configuration/appSettings/add[@key='network']/@value</networkXPath>
+     <vocabularyXPath>configuration/appSettings/add[@key='vocabulary']/@value</vocabularyXPath>
+    <AdministratorsEmailXPath>configuration/appSettings/add[@key='contactEmail']/@value</AdministratorsEmailXPath>
+ 
+<!-- Install properties -->  
+    <VirtualDirectoryXPath>configuration/Install/VirtualDirectory</VirtualDirectoryXPath>
+      <OutputFolderXPath>configuration/Install/OutputFolder</OutputFolderXPath>
+    <DeploymentFolderXPath>configuration/Install/DeploymentFolder</DeploymentFolderXPath>
+ 
+ </PropertyGroup>
+
+<!-- location to write to in appsettings.config  -->
+    <PropertyGroup>
+      <networkXPathWrite>appSettings/add[@key='network']/@value</networkXPathWrite>
+      <vocabularyXPathWrite>appSettings/add[@key='vocabulary']/@value</vocabularyXPathWrite>
+      <AdministratorsEmailXPathWrite>appSettings/add[@key='contactEmail']/@value</AdministratorsEmailXPathWrite>
+    </PropertyGroup>
+    
+     <ItemGroup>
+        <DeploymentFiles Include="$(OutputFolder)\**\*.*" />
+    </ItemGroup>
+
+  <Target Name="SetWebConfig" DependsOnTargets="GetConfig">
+    <XmlUpdate XPath="$(CompilationDebugXPath)"
+               XmlFileName="$(OutputFolder)\web.config"
+               Value="$(CompilationDebug)" />
+    <XmlUpdate XPath="$(CustomErrorsModeXPath)"
+               XmlFileName="$(OutputFolder)\web.config"
+               Value="$(CustomErrorsMode)" />
+    
+  </Target>
+  
+  <Target Name="SetAppConfig" DependsOnTargets="GetConfig">
+    <XmlUpdate XPath="$(AdministratorsEmailXPathWrite)"
+               XmlFileName="$(OutputFolder)\appsettings.config"
+               Value="$(AdministratorsEmail)" />
+    <XmlUpdate XPath="$(networkXPathWrite)"
+	                      XmlFileName="$(OutputFolder)\appsettings.config"
+               Value="$(network)" />
+    <XmlUpdate XPath="$(vocabularyXPathWrite)"
+	       	                      XmlFileName="$(OutputFolder)\appsettings.config"
+               Value="$(vocabulary)" />
+  </Target>
+
+  
+  <Target Name="GetConfig">
+    <XmlRead XPath="$(CompilationDebugXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="CompilationDebug" />
+    </XmlRead>
+    <XmlRead XPath="$(CustomErrorsModeXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="CustomErrorsMode" />
+    </XmlRead>
+    <XmlRead XPath="$(AdministratorsEmailXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="AdministratorsEmail" />
+    </XmlRead>
+       <XmlRead XPath="$(networkXPath)" XmlFileName="$(Environment).config">
+          <Output TaskParameter="Value" PropertyName="network" />
+    </XmlRead>
+       <XmlRead XPath="$(vocabularyXPath)" XmlFileName="$(Environment).config">
+          <Output TaskParameter="Value" PropertyName="vocabulary" />
+    </XmlRead>
+    
+    <!-- install parameters -->
+      <XmlRead XPath="$(VirtualDirectoryXPath)" XmlFileName="$(Environment).config">
+              <Output TaskParameter="Value" PropertyName="VirtualDirectory" />
+       </XmlRead>
+       <XmlRead XPath="$(OutputFolderXPath)" XmlFileName="$(Environment).config">
+              <Output TaskParameter="Value" PropertyName="OutputFolder" />    
+        </XmlRead>
+        <XmlRead XPath="$(DeploymentFolderXPath)" XmlFileName="$(Environment).config">
+              <Output TaskParameter="Value" PropertyName="DeploymentFolder" /> 
+  </XmlRead>
+ 
+  </Target>
+  
+  
+  <Target Name="Install">
+   <!-- 
+   <CallTarget Targets="Compile" />
+    <CallTarget Targets="Publish" />
+    -->
+   <CallTarget Targets="SetWebConfig" />
+    <CallTarget Targets="SetAppConfig" />
+    <CallTarget Targets="Deploy" />
+  </Target>
+
+  <Target Name="Deploy" DependsOnTargets="GetConfig;UnDeploy">
+  <!--  <RemoveDir Directories="$(DeploymentFolder)"
+               ContinueOnError="true" />
+               -->
+    <Copy SourceFiles="@(DeploymentFiles)"
+          DestinationFolder="$(DeploymentFolder)\%(RecursiveDir)" />
+ <!--   <WebDirectoryDelete VirtualDirectoryName="$(VirtualDirectory)"
+                        ContinueOnError="true" />
+                        -->
+    <WebDirectoryCreate VirtualDirectoryName="$(VirtualDirectory)"
+                        VirtualDirectoryPhysicalPath="$(DeploymentFolder)" />
+  </Target>
+  
+  <Target Name="UnDeploy" DependsOnTargets="GetConfig">
+         <WebDirectoryDelete VirtualDirectoryName="$(VirtualDirectory)"
+                          ContinueOnError="true" />
+          <RemoveDir Directories="$(DeploymentFolder)"
+                 ContinueOnError="true" />
+ 
+  </Target>
+</Project>

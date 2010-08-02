@@ -1,0 +1,18 @@
+CIMS Example
+
+# Attached database provided by dataprovider
+# Created CIMSODSiteCatalog Database
+# Restored From ODSiteCatalogMinimal
+# Copied Data from CIMSDatabase to CIMSODSiteCatalog
+
+Provided DB Description:
+DB inclues two time periods, and two tables
+
+THOUGHTS/PLANS:
+- We will create views that UNION the two time period.
+- indexes.
+
+
+VARIABLES:
+Variables are the easiest method, and the simplest to get started with.
+# created indexes on the

@@ -1,0 +1,1687 @@
+<?xml version="1.0"?>
+<MappingSchema Language="CS2005" CollectionMapping="Original" NamespacePrefix="waterOneFlow.Schema.v1.LiquidXml">
+  <Class Name="ContactInformationType" LongName="ContactInformationType" MappedClassColName="ContactInformationTypeCol" MappedClassName="ContactInformationType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="ContactName" DefaultValue="" MappedIsValidMember="m_IsValidContactName" MappedSetValidName="SetValidContactName" MappedIsValidName="IsValidContactName" MappedMemberName="m_ContactName" MappedDisplayName="ContactName" MappedSetterName="ContactName" MappedGetterName="ContactName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="TypeOfContact" DefaultValue="" MappedIsValidMember="m_IsValidTypeOfContact" MappedSetValidName="SetValidTypeOfContact" MappedIsValidName="IsValidTypeOfContact" MappedMemberName="m_TypeOfContact" MappedDisplayName="TypeOfContact" MappedSetterName="TypeOfContact" MappedGetterName="TypeOfContact" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Phone" DefaultValue="" MappedIsValidMember="m_IsValidPhone" MappedSetValidName="SetValidPhone" MappedIsValidName="IsValidPhone" MappedMemberName="m_Phone" MappedDisplayName="Phone" MappedSetterName="Phone" MappedGetterName="Phone" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Email" DefaultValue="" MappedIsValidMember="m_IsValidEmail" MappedSetValidName="SetValidEmail" MappedIsValidName="IsValidEmail" MappedMemberName="m_Email" MappedDisplayName="Email" MappedSetterName="Email" MappedGetterName="Email" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Address" DefaultValue="" MappedIsValidMember="m_IsValidAddress" MappedSetValidName="SetValidAddress" MappedIsValidName="IsValidAddress" MappedMemberName="m_Address" MappedDisplayName="Address" MappedSetterName="Address" MappedGetterName="Address">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="criteria" LongName="criteria" MappedClassColName="CriteriaCol" MappedClassName="Criteria">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="locationParam" DefaultValue="" MappedIsValidMember="m_IsValidLocationParam" MappedSetValidName="SetValidLocationParam" MappedIsValidName="IsValidLocationParam" MappedMemberName="m_LocationParam" MappedDisplayName="locationParam" MappedSetterName="LocationParam" MappedGetterName="LocationParam" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variableParam" DefaultValue="" MappedIsValidMember="m_IsValidVariableParam" MappedSetValidName="SetValidVariableParam" MappedIsValidName="IsValidVariableParam" MappedMemberName="m_VariableParam" MappedDisplayName="variableParam" MappedSetterName="VariableParam" MappedGetterName="VariableParam" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="timeParam" DefaultValue="" MappedIsValidMember="m_IsValidTimeParam" MappedSetValidName="SetValidTimeParam" MappedIsValidName="IsValidTimeParam" MappedMemberName="m_TimeParam" MappedDisplayName="timeParam" MappedSetterName="TimeParam" MappedGetterName="TimeParam">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="DataSetInfoType" LongName="DataSetInfoType" MappedClassColName="DataSetInfoTypeCol" MappedClassName="DataSetInfoType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="dataSetIdentifier" DefaultValue="" MappedIsValidMember="m_IsValidDataSetIdentifier" MappedSetValidName="SetValidDataSetIdentifier" MappedIsValidName="IsValidDataSetIdentifier" MappedMemberName="m_DataSetIdentifier" MappedDisplayName="dataSetIdentifier" MappedSetterName="DataSetIdentifier" MappedGetterName="DataSetIdentifier" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="timeZoneInfo" DefaultValue="" MappedIsValidMember="m_IsValidTimeZoneInfo" MappedSetValidName="SetValidTimeZoneInfo" MappedIsValidName="IsValidTimeZoneInfo" MappedMemberName="m_TimeZoneInfo" MappedDisplayName="timeZoneInfo" MappedSetterName="TimeZoneInfo" MappedGetterName="TimeZoneInfo">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="dataSetDescription" DefaultValue="" MappedIsValidMember="m_IsValidDataSetDescription" MappedSetValidName="SetValidDataSetDescription" MappedIsValidName="IsValidDataSetDescription" MappedMemberName="m_DataSetDescription" MappedDisplayName="dataSetDescription" MappedSetterName="DataSetDescription" MappedGetterName="DataSetDescription" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="note" DefaultValue="" MappedIsValidMember="m_IsValidNote" MappedSetValidName="SetValidNote" MappedIsValidName="IsValidNote" MappedMemberName="m_Note" MappedDisplayName="note" MappedSetterName="Note" MappedGetterName="Note">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="dataSetLocation" DefaultValue="" MappedIsValidMember="m_IsValidDataSetLocation" MappedSetValidName="SetValidDataSetLocation" MappedIsValidName="IsValidDataSetLocation" MappedMemberName="m_DataSetLocation" MappedDisplayName="dataSetLocation" MappedSetterName="DataSetLocation" MappedGetterName="DataSetLocation">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="extension" DefaultValue="" MappedIsValidMember="m_IsValidExtension" MappedSetValidName="SetValidExtension" MappedIsValidName="IsValidExtension" MappedMemberName="m_Extension" MappedDisplayName="extension" MappedSetterName="Extension" MappedGetterName="Extension">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="daylightSavingsTimeZone" LongName="daylightSavingsTimeZone" MappedClassColName="DaylightSavingsTimeZoneCol" MappedClassName="DaylightSavingsTimeZone">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="ZoneAbbreviation" DefaultValue="" MappedIsValidMember="m_IsValidZoneAbbreviation" MappedSetValidName="SetValidZoneAbbreviation" MappedIsValidName="IsValidZoneAbbreviation" MappedMemberName="m_ZoneAbbreviation" MappedDisplayName="ZoneAbbreviation" MappedSetterName="ZoneAbbreviation" MappedGetterName="ZoneAbbreviation" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="ZoneOffset" DefaultValue="" MappedIsValidMember="m_IsValidZoneOffset" MappedSetValidName="SetValidZoneOffset" MappedIsValidName="IsValidZoneOffset" MappedMemberName="m_ZoneOffset" MappedDisplayName="ZoneOffset" MappedSetterName="ZoneOffset" MappedGetterName="ZoneOffset" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="defaultTimeZone" LongName="defaultTimeZone" MappedClassColName="DefaultTimeZoneCol" MappedClassName="DefaultTimeZone">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="ZoneAbbreviation" DefaultValue="" MappedIsValidMember="m_IsValidZoneAbbreviation" MappedSetValidName="SetValidZoneAbbreviation" MappedIsValidName="IsValidZoneAbbreviation" MappedMemberName="m_ZoneAbbreviation" MappedDisplayName="ZoneAbbreviation" MappedSetterName="ZoneAbbreviation" MappedGetterName="ZoneAbbreviation" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="ZoneOffset" DefaultValue="" MappedIsValidMember="m_IsValidZoneOffset" MappedSetValidName="SetValidZoneOffset" MappedIsValidName="IsValidZoneOffset" MappedMemberName="m_ZoneOffset" MappedDisplayName="ZoneOffset" MappedSetterName="ZoneOffset" MappedGetterName="ZoneOffset" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="GeogLocationType" LongName="GeogLocationType" MappedClassColName="GeogLocationTypeCol" MappedClassName="GeogLocationType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="srs" DefaultValue="EPSG:4326" MappedIsValidMember="m_IsValidSrs" MappedSetValidName="SetValidSrs" MappedIsValidName="IsValidSrs" MappedMemberName="m_Srs" MappedDisplayName="srs" MappedSetterName="Srs" MappedGetterName="Srs" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="geoLocation" LongName="geoLocation" MappedClassColName="GeoLocationCol" MappedClassName="GeoLocation">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="geogLocation" DefaultValue="" MappedIsValidMember="m_IsValidGeogLocation" MappedSetValidName="SetValidGeogLocation" MappedIsValidName="IsValidGeogLocation" MappedMemberName="m_GeogLocation" MappedDisplayName="geogLocation" MappedSetterName="GeogLocation" MappedGetterName="GeogLocation">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="localSiteXY" DefaultValue="" MappedIsValidMember="m_IsValidLocalSiteXY" MappedSetValidName="SetValidLocalSiteXY" MappedIsValidName="IsValidLocalSiteXY" MappedMemberName="m_LocalSiteXY" MappedDisplayName="localSiteXY" MappedSetterName="LocalSiteXY" MappedGetterName="LocalSiteXY">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="IGeogLocationType" LongName="IGeogLocationType" MappedClassColName="IGeogLocationTypeCol" MappedClassName="IGeogLocationType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="srs" DefaultValue="EPSG:4326" MappedIsValidMember="m_IsValidSrs" MappedSetValidName="SetValidSrs" MappedIsValidName="IsValidSrs" MappedMemberName="m_Srs" MappedDisplayName="srs" MappedSetterName="Srs" MappedGetterName="Srs" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="ISourceInfoType" LongName="ISourceInfoType" MappedClassColName="ISourceInfoTypeCol" MappedClassName="ISourceInfoType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+  </Class>
+  <Class Name="ITimePeriodType" LongName="ITimePeriodType" MappedClassColName="ITimePeriodTypeCol" MappedClassName="ITimePeriodType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+  </Class>
+  <Class Name="LatLonBoxType" LongName="LatLonBoxType" MappedClassColName="LatLonBoxTypeCol" MappedClassName="LatLonBoxType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="srs" DefaultValue="EPSG:4326" MappedIsValidMember="m_IsValidSrs" MappedSetValidName="SetValidSrs" MappedIsValidName="IsValidSrs" MappedMemberName="m_Srs" MappedDisplayName="srs" MappedSetterName="Srs" MappedGetterName="Srs" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="south" DefaultValue="" MappedIsValidMember="m_IsValidSouth" MappedSetValidName="SetValidSouth" MappedIsValidName="IsValidSouth" MappedMemberName="m_South" MappedDisplayName="south" MappedSetterName="South" MappedGetterName="South" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="west" DefaultValue="" MappedIsValidMember="m_IsValidWest" MappedSetValidName="SetValidWest" MappedIsValidName="IsValidWest" MappedMemberName="m_West" MappedDisplayName="west" MappedSetterName="West" MappedGetterName="West" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="north" DefaultValue="" MappedIsValidMember="m_IsValidNorth" MappedSetValidName="SetValidNorth" MappedIsValidName="IsValidNorth" MappedMemberName="m_North" MappedDisplayName="north" MappedSetterName="North" MappedGetterName="North" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="east" DefaultValue="" MappedIsValidMember="m_IsValidEast" MappedSetValidName="SetValidEast" MappedIsValidName="IsValidEast" MappedMemberName="m_East" MappedDisplayName="east" MappedSetterName="East" MappedGetterName="East" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="LatLonPointType" LongName="LatLonPointType" MappedClassColName="LatLonPointTypeCol" MappedClassName="LatLonPointType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="srs" DefaultValue="EPSG:4326" MappedIsValidMember="m_IsValidSrs" MappedSetValidName="SetValidSrs" MappedIsValidName="IsValidSrs" MappedMemberName="m_Srs" MappedDisplayName="srs" MappedSetterName="Srs" MappedGetterName="Srs" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="latitude" DefaultValue="" MappedIsValidMember="m_IsValidLatitude" MappedSetValidName="SetValidLatitude" MappedIsValidName="IsValidLatitude" MappedMemberName="m_Latitude" MappedDisplayName="latitude" MappedSetterName="Latitude" MappedGetterName="Latitude" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="longitude" DefaultValue="" MappedIsValidMember="m_IsValidLongitude" MappedSetValidName="SetValidLongitude" MappedIsValidName="IsValidLongitude" MappedMemberName="m_Longitude" MappedDisplayName="longitude" MappedSetterName="Longitude" MappedGetterName="Longitude" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="localSiteXY" LongName="localSiteXY" MappedClassColName="LocalSiteXYCol" MappedClassName="LocalSiteXY">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="projectionInformation" DefaultValue="" MappedIsValidMember="m_IsValidProjectionInformation" MappedSetValidName="SetValidProjectionInformation" MappedIsValidName="IsValidProjectionInformation" MappedMemberName="m_ProjectionInformation" MappedDisplayName="projectionInformation" MappedSetterName="ProjectionInformation" MappedGetterName="ProjectionInformation" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="X" DefaultValue="" MappedIsValidMember="m_IsValidX" MappedSetValidName="SetValidX" MappedIsValidName="IsValidX" MappedMemberName="m_X" MappedDisplayName="X" MappedSetterName="X" MappedGetterName="X" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Y" DefaultValue="" MappedIsValidMember="m_IsValidY" MappedSetValidName="SetValidY" MappedIsValidName="IsValidY" MappedMemberName="m_Y" MappedDisplayName="Y" MappedSetterName="Y" MappedGetterName="Y" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Z" DefaultValue="" MappedIsValidMember="m_IsValidZ" MappedSetValidName="SetValidZ" MappedIsValidName="IsValidZ" MappedMemberName="m_Z" MappedDisplayName="Z" MappedSetterName="Z" MappedGetterName="Z" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="note" DefaultValue="" MappedIsValidMember="m_IsValidNote" MappedSetValidName="SetValidNote" MappedIsValidName="IsValidNote" MappedMemberName="m_Note" MappedDisplayName="note" MappedSetterName="Note" MappedGetterName="Note">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="MetaDataType" LongName="MetaDataType" MappedClassColName="MetaDataTypeCol" MappedClassName="MetaDataType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="TopicCategory" DefaultValue="" MappedIsValidMember="m_IsValidTopicCategory" MappedSetValidName="SetValidTopicCategory" MappedIsValidName="IsValidTopicCategory" MappedMemberName="m_TopicCategory" MappedDisplayName="TopicCategory" MappedSetterName="TopicCategory" MappedGetterName="TopicCategory" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Title" DefaultValue="" MappedIsValidMember="m_IsValidTitle" MappedSetValidName="SetValidTitle" MappedIsValidName="IsValidTitle" MappedMemberName="m_Title" MappedDisplayName="Title" MappedSetterName="Title" MappedGetterName="Title" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Abstract" DefaultValue="" MappedIsValidMember="m_IsValidAbstract" MappedSetValidName="SetValidAbstract" MappedIsValidName="IsValidAbstract" MappedMemberName="m_Abstract" MappedDisplayName="abstract_" MappedSetterName="abstract_" MappedGetterName="abstract_" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="ProfileVersion" DefaultValue="" MappedIsValidMember="m_IsValidProfileVersion" MappedSetValidName="SetValidProfileVersion" MappedIsValidName="IsValidProfileVersion" MappedMemberName="m_ProfileVersion" MappedDisplayName="ProfileVersion" MappedSetterName="ProfileVersion" MappedGetterName="ProfileVersion" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="MetadataLink" DefaultValue="" MappedIsValidMember="m_IsValidMetadataLink" MappedSetValidName="SetValidMetadataLink" MappedIsValidName="IsValidMetadataLink" MappedMemberName="m_MetadataLink" MappedDisplayName="MetadataLink" MappedSetterName="MetadataLink" MappedGetterName="MetadataLink" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="MethodType" LongName="MethodType" MappedClassColName="MethodTypeCol" MappedClassName="MethodType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="methodID" DefaultValue="" MappedIsValidMember="m_IsValidMethodID" MappedSetValidName="SetValidMethodID" MappedIsValidName="IsValidMethodID" MappedMemberName="m_MethodID" MappedDisplayName="methodID" MappedSetterName="MethodID" MappedGetterName="MethodID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="MethodDescription" DefaultValue="" MappedIsValidMember="m_IsValidMethodDescription" MappedSetValidName="SetValidMethodDescription" MappedIsValidName="IsValidMethodDescription" MappedMemberName="m_MethodDescription" MappedDisplayName="MethodDescription" MappedSetterName="MethodDescription" MappedGetterName="MethodDescription" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="MethodLink" DefaultValue="" MappedIsValidMember="m_IsValidMethodLink" MappedSetValidName="SetValidMethodLink" MappedIsValidName="IsValidMethodLink" MappedMemberName="m_MethodLink" MappedDisplayName="MethodLink" MappedSetterName="MethodLink" MappedGetterName="MethodLink" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="NoteType" LongName="NoteType" MappedClassColName="NoteTypeCol" MappedClassName="NoteType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="type" DefaultValue="" MappedIsValidMember="m_IsValidType" MappedSetValidName="SetValidType" MappedIsValidName="IsValidType" MappedMemberName="m_Type" MappedDisplayName="type" MappedSetterName="Type" MappedGetterName="Type" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="href" DefaultValue="" MappedIsValidMember="m_IsValidHref" MappedSetValidName="SetValidHref" MappedIsValidName="IsValidHref" MappedMemberName="m_Href" MappedDisplayName="href" MappedSetterName="Href" MappedGetterName="Href" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="title" DefaultValue="" MappedIsValidMember="m_IsValidTitle" MappedSetValidName="SetValidTitle" MappedIsValidName="IsValidTitle" MappedMemberName="m_Title" MappedDisplayName="title" MappedSetterName="Title" MappedGetterName="Title" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="show" DefaultValue="" MappedIsValidMember="m_IsValidShow" MappedSetValidName="SetValidShow" MappedIsValidName="IsValidShow" MappedMemberName="m_Show" MappedDisplayName="show" MappedSetterName="Show" MappedGetterName="Show" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="OffsetType" LongName="OffsetType" MappedClassColName="OffsetTypeCol" MappedClassName="OffsetType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="offsetTypeID" DefaultValue="" MappedIsValidMember="m_IsValidOffsetTypeID" MappedSetValidName="SetValidOffsetTypeID" MappedIsValidName="IsValidOffsetTypeID" MappedMemberName="m_OffsetTypeID" MappedDisplayName="offsetTypeID" MappedSetterName="OffsetTypeID" MappedGetterName="OffsetTypeID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetValue" DefaultValue="" MappedIsValidMember="m_IsValidOffsetValue" MappedSetValidName="SetValidOffsetValue" MappedIsValidName="IsValidOffsetValue" MappedMemberName="m_OffsetValue" MappedDisplayName="offsetValue" MappedSetterName="OffsetValue" MappedGetterName="OffsetValue" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetDescription" DefaultValue="" MappedIsValidMember="m_IsValidOffsetDescription" MappedSetValidName="SetValidOffsetDescription" MappedIsValidName="IsValidOffsetDescription" MappedMemberName="m_OffsetDescription" MappedDisplayName="offsetDescription" MappedSetterName="OffsetDescription" MappedGetterName="OffsetDescription" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="units" DefaultValue="" MappedIsValidMember="m_IsValidUnits" MappedSetValidName="SetValidUnits" MappedIsValidName="IsValidUnits" MappedMemberName="m_Units" MappedDisplayName="units" MappedSetterName="Units" MappedGetterName="Units">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetIsVertical" DefaultValue="true" MappedIsValidMember="m_IsValidOffsetIsVertical" MappedSetValidName="SetValidOffsetIsVertical" MappedIsValidName="IsValidOffsetIsVertical" MappedMemberName="m_OffsetIsVertical" MappedDisplayName="offsetIsVertical" MappedSetterName="OffsetIsVertical" MappedGetterName="OffsetIsVertical" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetHorizDirectionDegrees" DefaultValue="" MappedIsValidMember="m_IsValidOffsetHorizDirectionDegrees" MappedSetValidName="SetValidOffsetHorizDirectionDegrees" MappedIsValidName="IsValidOffsetHorizDirectionDegrees" MappedMemberName="m_OffsetHorizDirectionDegrees" MappedDisplayName="offsetHorizDirectionDegrees" MappedSetterName="OffsetHorizDirectionDegrees" MappedGetterName="OffsetHorizDirectionDegrees" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="option" LongName="option" MappedClassColName="OptionCol" MappedClassName="Option">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="name" DefaultValue="" MappedIsValidMember="m_IsValidName" MappedSetValidName="SetValidName" MappedIsValidName="IsValidName" MappedMemberName="m_Name" MappedDisplayName="name" MappedSetterName="Name" MappedGetterName="Name" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="optionID" DefaultValue="" MappedIsValidMember="m_IsValidOptionID" MappedSetValidName="SetValidOptionID" MappedIsValidName="IsValidOptionID" MappedMemberName="m_OptionID" MappedDisplayName="optionID" MappedSetterName="OptionID" MappedGetterName="OptionID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="optionCode" DefaultValue="" MappedIsValidMember="m_IsValidOptionCode" MappedSetValidName="SetValidOptionCode" MappedIsValidName="IsValidOptionCode" MappedMemberName="m_OptionCode" MappedDisplayName="optionCode" MappedSetterName="OptionCode" MappedGetterName="OptionCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="options" LongName="options" MappedClassColName="OptionsCol" MappedClassName="Options">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="option" DefaultValue="" MappedIsValidMember="m_IsValidOption" MappedSetValidName="SetValidOption" MappedIsValidName="IsValidOption" MappedMemberName="m_Option" MappedDisplayName="option" MappedSetterName="Option" MappedGetterName="Option">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="parentID" LongName="parentID" MappedClassColName="ParentIDCol" MappedClassName="ParentID">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="network" DefaultValue="" MappedIsValidMember="m_IsValidNetwork" MappedSetValidName="SetValidNetwork" MappedIsValidName="IsValidNetwork" MappedMemberName="m_Network" MappedDisplayName="network" MappedSetterName="Network" MappedGetterName="Network" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="vocabulary" DefaultValue="" MappedIsValidMember="m_IsValidVocabulary" MappedSetValidName="SetValidVocabulary" MappedIsValidName="IsValidVocabulary" MappedMemberName="m_Vocabulary" MappedDisplayName="vocabulary" MappedSetterName="Vocabulary" MappedGetterName="Vocabulary" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="default" DefaultValue="" MappedIsValidMember="m_IsValidDefault" MappedSetValidName="SetValidDefault" MappedIsValidName="IsValidDefault" MappedMemberName="m_Default" MappedDisplayName="default_" MappedSetterName="default_" MappedGetterName="default_" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="qualifier" LongName="qualifier" MappedClassColName="QualifierCol" MappedClassName="Qualifier">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="qualifierCode" DefaultValue="" MappedIsValidMember="m_IsValidQualifierCode" MappedSetValidName="SetValidQualifierCode" MappedIsValidName="IsValidQualifierCode" MappedMemberName="m_QualifierCode" MappedDisplayName="qualifierCode" MappedSetterName="QualifierCode" MappedGetterName="QualifierCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="qualifierID" DefaultValue="" MappedIsValidMember="m_IsValidQualifierID" MappedSetValidName="SetValidQualifierID" MappedIsValidName="IsValidQualifierID" MappedMemberName="m_QualifierID" MappedDisplayName="qualifierID" MappedSetterName="QualifierID" MappedGetterName="QualifierID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="oid" DefaultValue="" MappedIsValidMember="m_IsValidOid" MappedSetValidName="SetValidOid" MappedIsValidName="IsValidOid" MappedMemberName="m_Oid" MappedDisplayName="oid" MappedSetterName="Oid" MappedGetterName="Oid" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="metadataDateTime" DefaultValue="" MappedIsValidMember="m_IsValidMetadataDateTime" MappedSetValidName="SetValidMetadataDateTime" MappedIsValidName="IsValidMetadataDateTime" MappedMemberName="m_MetadataDateTime" MappedDisplayName="metadataDateTime" MappedSetterName="MetadataDateTime" MappedGetterName="MetadataDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="network" DefaultValue="" MappedIsValidMember="m_IsValidNetwork" MappedSetValidName="SetValidNetwork" MappedIsValidName="IsValidNetwork" MappedMemberName="m_Network" MappedDisplayName="network" MappedSetterName="Network" MappedGetterName="Network" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="vocabulary" DefaultValue="" MappedIsValidMember="m_IsValidVocabulary" MappedSetValidName="SetValidVocabulary" MappedIsValidName="IsValidVocabulary" MappedMemberName="m_Vocabulary" MappedDisplayName="vocabulary" MappedSetterName="Vocabulary" MappedGetterName="Vocabulary" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="default" DefaultValue="" MappedIsValidMember="m_IsValidDefault" MappedSetValidName="SetValidDefault" MappedIsValidName="IsValidDefault" MappedMemberName="m_Default" MappedDisplayName="default_" MappedSetterName="default_" MappedGetterName="default_" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="qualityControlLevel" LongName="qualityControlLevel" MappedClassColName="QualityControlLevelCol" MappedClassName="QualityControlLevel">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="qualityControlLevelCode" DefaultValue="" MappedIsValidMember="m_IsValidQualityControlLevelCode" MappedSetValidName="SetValidQualityControlLevelCode" MappedIsValidName="IsValidQualityControlLevelCode" MappedMemberName="m_QualityControlLevelCode" MappedDisplayName="qualityControlLevelCode" MappedSetterName="QualityControlLevelCode" MappedGetterName="QualityControlLevelCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="oid" DefaultValue="" MappedIsValidMember="m_IsValidOid" MappedSetValidName="SetValidOid" MappedIsValidName="IsValidOid" MappedMemberName="m_Oid" MappedDisplayName="oid" MappedSetterName="Oid" MappedGetterName="Oid" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="metadataDateTime" DefaultValue="" MappedIsValidMember="m_IsValidMetadataDateTime" MappedSetValidName="SetValidMetadataDateTime" MappedIsValidName="IsValidMetadataDateTime" MappedMemberName="m_MetadataDateTime" MappedDisplayName="metadataDateTime" MappedSetterName="MetadataDateTime" MappedGetterName="MetadataDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="network" DefaultValue="" MappedIsValidMember="m_IsValidNetwork" MappedSetValidName="SetValidNetwork" MappedIsValidName="IsValidNetwork" MappedMemberName="m_Network" MappedDisplayName="network" MappedSetterName="Network" MappedGetterName="Network" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="vocabulary" DefaultValue="" MappedIsValidMember="m_IsValidVocabulary" MappedSetValidName="SetValidVocabulary" MappedIsValidName="IsValidVocabulary" MappedMemberName="m_Vocabulary" MappedDisplayName="vocabulary" MappedSetterName="Vocabulary" MappedGetterName="Vocabulary" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="default" DefaultValue="" MappedIsValidMember="m_IsValidDefault" MappedSetValidName="SetValidDefault" MappedIsValidName="IsValidDefault" MappedMemberName="m_Default" MappedDisplayName="default_" MappedSetterName="default_" MappedGetterName="default_" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="qualityControlLevelID" DefaultValue="" MappedIsValidMember="m_IsValidQualityControlLevelID" MappedSetValidName="SetValidQualityControlLevelID" MappedIsValidName="IsValidQualityControlLevelID" MappedMemberName="m_QualityControlLevelID" MappedDisplayName="qualityControlLevelID" MappedSetterName="QualityControlLevelID" MappedGetterName="QualityControlLevelID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="QualityControlLevelType" LongName="QualityControlLevelType" MappedClassColName="QualityControlLevelTypeCol" MappedClassName="QualityControlLevelType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="QualityControlLevelID" DefaultValue="" MappedIsValidMember="m_IsValidQualityControlLevelID" MappedSetValidName="SetValidQualityControlLevelID" MappedIsValidName="IsValidQualityControlLevelID" MappedMemberName="m_QualityControlLevelID" MappedDisplayName="QualityControlLevelID" MappedSetterName="QualityControlLevelID" MappedGetterName="QualityControlLevelID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="QueryInfoType" LongName="QueryInfoType" MappedClassColName="QueryInfoTypeCol" MappedClassName="QueryInfoType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="creationTime" DefaultValue="" MappedIsValidMember="m_IsValidCreationTime" MappedSetValidName="SetValidCreationTime" MappedIsValidName="IsValidCreationTime" MappedMemberName="m_CreationTime" MappedDisplayName="creationTime" MappedSetterName="CreationTime" MappedGetterName="CreationTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="queryURL" DefaultValue="" MappedIsValidMember="m_IsValidQueryURL" MappedSetValidName="SetValidQueryURL" MappedIsValidName="IsValidQueryURL" MappedMemberName="m_QueryURL" MappedDisplayName="queryURL" MappedSetterName="QueryURL" MappedGetterName="QueryURL" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="querySQL" DefaultValue="" MappedIsValidMember="m_IsValidQuerySQL" MappedSetValidName="SetValidQuerySQL" MappedIsValidName="IsValidQuerySQL" MappedMemberName="m_QuerySQL" MappedDisplayName="querySQL" MappedSetterName="QuerySQL" MappedGetterName="QuerySQL" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="criteria" DefaultValue="" MappedIsValidMember="m_IsValidCriteria" MappedSetValidName="SetValidCriteria" MappedIsValidName="IsValidCriteria" MappedMemberName="m_Criteria" MappedDisplayName="criteria" MappedSetterName="Criteria" MappedGetterName="Criteria">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="note" DefaultValue="" MappedIsValidMember="m_IsValidNote" MappedSetValidName="SetValidNote" MappedIsValidName="IsValidNote" MappedMemberName="m_Note" MappedDisplayName="note" MappedSetterName="Note" MappedGetterName="Note">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="extension" DefaultValue="" MappedIsValidMember="m_IsValidExtension" MappedSetValidName="SetValidExtension" MappedIsValidName="IsValidExtension" MappedMemberName="m_Extension" MappedDisplayName="extension" MappedSetterName="Extension" MappedGetterName="Extension">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="related" LongName="related" MappedClassColName="RelatedCol" MappedClassName="Related">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="VariableInfoType_Seq_related_Group" DefaultValue="" MappedIsValidMember="m_IsValidVariableInfoType_Seq_related_Group" MappedSetValidName="SetValidVariableInfoType_Seq_related_Group" MappedIsValidName="IsValidVariableInfoType_Seq_related_Group" MappedMemberName="m_VariableInfoType_Seq_related_Group" MappedDisplayName="VariableInfoType_Seq_related_Group" MappedSetterName="VariableInfoType_Seq_related_Group" MappedGetterName="VariableInfoType_Seq_related_Group">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="relatedID" LongName="relatedID" MappedClassColName="RelatedIDCol" MappedClassName="RelatedID">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="network" DefaultValue="" MappedIsValidMember="m_IsValidNetwork" MappedSetValidName="SetValidNetwork" MappedIsValidName="IsValidNetwork" MappedMemberName="m_Network" MappedDisplayName="network" MappedSetterName="Network" MappedGetterName="Network" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="vocabulary" DefaultValue="" MappedIsValidMember="m_IsValidVocabulary" MappedSetValidName="SetValidVocabulary" MappedIsValidName="IsValidVocabulary" MappedMemberName="m_Vocabulary" MappedDisplayName="vocabulary" MappedSetterName="Vocabulary" MappedGetterName="Vocabulary" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="default" DefaultValue="" MappedIsValidMember="m_IsValidDefault" MappedSetValidName="SetValidDefault" MappedIsValidName="IsValidDefault" MappedMemberName="m_Default" MappedDisplayName="default_" MappedSetterName="default_" MappedGetterName="default_" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="series" LongName="series" MappedClassColName="SeriesCol" MappedClassName="Series">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="dataType" DefaultValue="" MappedIsValidMember="m_IsValidDataType" MappedSetValidName="SetValidDataType" MappedIsValidName="IsValidDataType" MappedMemberName="m_DataType" MappedDisplayName="dataType" MappedSetterName="DataType" MappedGetterName="DataType">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variable" DefaultValue="" MappedIsValidMember="m_IsValidVariable" MappedSetValidName="SetValidVariable" MappedIsValidName="IsValidVariable" MappedMemberName="m_Variable" MappedDisplayName="variable" MappedSetterName="Variable" MappedGetterName="Variable">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="valueCount" DefaultValue="" MappedIsValidMember="m_IsValidValueCount" MappedSetValidName="SetValidValueCount" MappedIsValidName="IsValidValueCount" MappedMemberName="m_ValueCount" MappedDisplayName="valueCount" MappedSetterName="ValueCount" MappedGetterName="ValueCount">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variableTimeInterval" DefaultValue="" MappedIsValidMember="m_IsValidVariableTimeInterval" MappedSetValidName="SetValidVariableTimeInterval" MappedIsValidName="IsValidVariableTimeInterval" MappedMemberName="m_VariableTimeInterval" MappedDisplayName="variableTimeInterval" MappedSetterName="VariableTimeInterval" MappedGetterName="VariableTimeInterval">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="valueType" DefaultValue="" MappedIsValidMember="m_IsValidValueType" MappedSetValidName="SetValidValueType" MappedIsValidName="IsValidValueType" MappedMemberName="m_ValueType" MappedDisplayName="valueType" MappedSetterName="ValueType" MappedGetterName="ValueType">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="generalCategory" DefaultValue="" MappedIsValidMember="m_IsValidGeneralCategory" MappedSetValidName="SetValidGeneralCategory" MappedIsValidName="IsValidGeneralCategory" MappedMemberName="m_GeneralCategory" MappedDisplayName="generalCategory" MappedSetterName="GeneralCategory" MappedGetterName="GeneralCategory">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="sampleMedium" DefaultValue="" MappedIsValidMember="m_IsValidSampleMedium" MappedSetValidName="SetValidSampleMedium" MappedIsValidName="IsValidSampleMedium" MappedMemberName="m_SampleMedium" MappedDisplayName="sampleMedium" MappedSetterName="SampleMedium" MappedGetterName="SampleMedium">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Method" DefaultValue="" MappedIsValidMember="m_IsValidMethod" MappedSetValidName="SetValidMethod" MappedIsValidName="IsValidMethod" MappedMemberName="m_Method" MappedDisplayName="Method" MappedSetterName="Method" MappedGetterName="Method">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Source" DefaultValue="" MappedIsValidMember="m_IsValidSource" MappedSetValidName="SetValidSource" MappedIsValidName="IsValidSource" MappedMemberName="m_Source" MappedDisplayName="Source" MappedSetterName="Source" MappedGetterName="Source">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="QualityControlLevel" DefaultValue="" MappedIsValidMember="m_IsValidQualityControlLevel" MappedSetValidName="SetValidQualityControlLevel" MappedIsValidName="IsValidQualityControlLevel" MappedMemberName="m_QualityControlLevel" MappedDisplayName="QualityControlLevel" MappedSetterName="QualityControlLevel" MappedGetterName="QualityControlLevel">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="seriesCatalogType" LongName="seriesCatalogType" MappedClassColName="SeriesCatalogTypeCol" MappedClassName="SeriesCatalogType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="menuGroupName" DefaultValue="" MappedIsValidMember="m_IsValidMenuGroupName" MappedSetValidName="SetValidMenuGroupName" MappedIsValidName="IsValidMenuGroupName" MappedMemberName="m_MenuGroupName" MappedDisplayName="menuGroupName" MappedSetterName="MenuGroupName" MappedGetterName="MenuGroupName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="serviceWsdl" DefaultValue="" MappedIsValidMember="m_IsValidServiceWsdl" MappedSetValidName="SetValidServiceWsdl" MappedIsValidName="IsValidServiceWsdl" MappedMemberName="m_ServiceWsdl" MappedDisplayName="serviceWsdl" MappedSetterName="ServiceWsdl" MappedGetterName="ServiceWsdl" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="note" DefaultValue="" MappedIsValidMember="m_IsValidNote" MappedSetValidName="SetValidNote" MappedIsValidName="IsValidNote" MappedMemberName="m_Note" MappedDisplayName="note" MappedSetterName="Note" MappedGetterName="Note">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="series" DefaultValue="" MappedIsValidMember="m_IsValidSeries" MappedSetValidName="SetValidSeries" MappedIsValidName="IsValidSeries" MappedMemberName="m_Series" MappedDisplayName="series" MappedSetterName="Series" MappedGetterName="Series">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="site" LongName="site" MappedClassColName="SiteCol" MappedClassName="Site">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="siteInfo" DefaultValue="" MappedIsValidMember="m_IsValidSiteInfo" MappedSetValidName="SetValidSiteInfo" MappedIsValidName="IsValidSiteInfo" MappedMemberName="m_SiteInfo" MappedDisplayName="siteInfo" MappedSetterName="SiteInfo" MappedGetterName="SiteInfo">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="seriesCatalog" DefaultValue="" MappedIsValidMember="m_IsValidSeriesCatalog" MappedSetValidName="SetValidSeriesCatalog" MappedIsValidName="IsValidSeriesCatalog" MappedMemberName="m_SeriesCatalog" MappedDisplayName="seriesCatalog" MappedSetterName="SeriesCatalog" MappedGetterName="SeriesCatalog">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="extension" DefaultValue="" MappedIsValidMember="m_IsValidExtension" MappedSetValidName="SetValidExtension" MappedIsValidName="IsValidExtension" MappedMemberName="m_Extension" MappedDisplayName="extension" MappedSetterName="Extension" MappedGetterName="Extension">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="siteCode" LongName="siteCode" MappedClassColName="SiteCodeCol" MappedClassName="SiteCode">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="defaultId" DefaultValue="" MappedIsValidMember="m_IsValidDefaultId" MappedSetValidName="SetValidDefaultId" MappedIsValidName="IsValidDefaultId" MappedMemberName="m_DefaultId" MappedDisplayName="defaultId" MappedSetterName="DefaultId" MappedGetterName="DefaultId" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="network" DefaultValue="" MappedIsValidMember="m_IsValidNetwork" MappedSetValidName="SetValidNetwork" MappedIsValidName="IsValidNetwork" MappedMemberName="m_Network" MappedDisplayName="network" MappedSetterName="Network" MappedGetterName="Network" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="siteID" DefaultValue="" MappedIsValidMember="m_IsValidSiteID" MappedSetValidName="SetValidSiteID" MappedIsValidName="IsValidSiteID" MappedMemberName="m_SiteID" MappedDisplayName="siteID" MappedSetterName="SiteID" MappedGetterName="SiteID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="agencyCode" DefaultValue="" MappedIsValidMember="m_IsValidAgencyCode" MappedSetValidName="SetValidAgencyCode" MappedIsValidName="IsValidAgencyCode" MappedMemberName="m_AgencyCode" MappedDisplayName="agencyCode" MappedSetterName="AgencyCode" MappedGetterName="AgencyCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="agencyName" DefaultValue="" MappedIsValidMember="m_IsValidAgencyName" MappedSetValidName="SetValidAgencyName" MappedIsValidName="IsValidAgencyName" MappedMemberName="m_AgencyName" MappedDisplayName="agencyName" MappedSetterName="AgencyName" MappedGetterName="AgencyName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="SiteInfoType" LongName="SiteInfoType" MappedClassColName="SiteInfoTypeCol" MappedClassName="SiteInfoType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="oid" DefaultValue="" MappedIsValidMember="m_IsValidOid" MappedSetValidName="SetValidOid" MappedIsValidName="IsValidOid" MappedMemberName="m_Oid" MappedDisplayName="oid" MappedSetterName="Oid" MappedGetterName="Oid" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="metadataDateTime" DefaultValue="" MappedIsValidMember="m_IsValidMetadataDateTime" MappedSetValidName="SetValidMetadataDateTime" MappedIsValidName="IsValidMetadataDateTime" MappedMemberName="m_MetadataDateTime" MappedDisplayName="metadataDateTime" MappedSetterName="MetadataDateTime" MappedGetterName="MetadataDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="siteName" DefaultValue="" MappedIsValidMember="m_IsValidSiteName" MappedSetValidName="SetValidSiteName" MappedIsValidName="IsValidSiteName" MappedMemberName="m_SiteName" MappedDisplayName="siteName" MappedSetterName="SiteName" MappedGetterName="SiteName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="siteCode" DefaultValue="" MappedIsValidMember="m_IsValidSiteCode" MappedSetValidName="SetValidSiteCode" MappedIsValidName="IsValidSiteCode" MappedMemberName="m_SiteCode" MappedDisplayName="siteCode" MappedSetterName="SiteCode" MappedGetterName="SiteCode">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="timeZoneInfo" DefaultValue="" MappedIsValidMember="m_IsValidTimeZoneInfo" MappedSetValidName="SetValidTimeZoneInfo" MappedIsValidName="IsValidTimeZoneInfo" MappedMemberName="m_TimeZoneInfo" MappedDisplayName="timeZoneInfo" MappedSetterName="TimeZoneInfo" MappedGetterName="TimeZoneInfo">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="geoLocation" DefaultValue="" MappedIsValidMember="m_IsValidGeoLocation" MappedSetValidName="SetValidGeoLocation" MappedIsValidName="IsValidGeoLocation" MappedMemberName="m_GeoLocation" MappedDisplayName="geoLocation" MappedSetterName="GeoLocation" MappedGetterName="GeoLocation">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="elevation_m" DefaultValue="" MappedIsValidMember="m_IsValidElevation_m" MappedSetValidName="SetValidElevation_m" MappedIsValidName="IsValidElevation_m" MappedMemberName="m_Elevation_m" MappedDisplayName="elevation_m" MappedSetterName="Elevation_m" MappedGetterName="Elevation_m" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="verticalDatum" DefaultValue="" MappedIsValidMember="m_IsValidVerticalDatum" MappedSetValidName="SetValidVerticalDatum" MappedIsValidName="IsValidVerticalDatum" MappedMemberName="m_VerticalDatum" MappedDisplayName="verticalDatum" MappedSetterName="VerticalDatum" MappedGetterName="VerticalDatum" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="note" DefaultValue="" MappedIsValidMember="m_IsValidNote" MappedSetValidName="SetValidNote" MappedIsValidName="IsValidNote" MappedMemberName="m_Note" MappedDisplayName="note" MappedSetterName="Note" MappedGetterName="Note">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="extension" DefaultValue="" MappedIsValidMember="m_IsValidExtension" MappedSetValidName="SetValidExtension" MappedIsValidName="IsValidExtension" MappedMemberName="m_Extension" MappedDisplayName="extension" MappedSetterName="Extension" MappedGetterName="Extension">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="altname" DefaultValue="" MappedIsValidMember="m_IsValidAltname" MappedSetValidName="SetValidAltname" MappedIsValidName="IsValidAltname" MappedMemberName="m_Altname" MappedDisplayName="altname" MappedSetterName="Altname" MappedGetterName="Altname" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="sitesResponse" LongName="sitesResponse" MappedClassColName="SitesResponseCol" MappedClassName="SitesResponse">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="queryInfo" DefaultValue="" MappedIsValidMember="m_IsValidQueryInfo" MappedSetValidName="SetValidQueryInfo" MappedIsValidName="IsValidQueryInfo" MappedMemberName="m_QueryInfo" MappedDisplayName="queryInfo" MappedSetterName="QueryInfo" MappedGetterName="QueryInfo">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="site" DefaultValue="" MappedIsValidMember="m_IsValidSite" MappedSetValidName="SetValidSite" MappedIsValidName="IsValidSite" MappedMemberName="m_Site" MappedDisplayName="site" MappedSetterName="Site" MappedGetterName="Site">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="SourceInfoType" LongName="SourceInfoType" MappedClassColName="SourceInfoTypeCol" MappedClassName="SourceInfoType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+  </Class>
+  <Class Name="SourceType" LongName="SourceType" MappedClassColName="SourceTypeCol" MappedClassName="SourceType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="sourceID" DefaultValue="" MappedIsValidMember="m_IsValidSourceID" MappedSetValidName="SetValidSourceID" MappedIsValidName="IsValidSourceID" MappedMemberName="m_SourceID" MappedDisplayName="sourceID" MappedSetterName="SourceID" MappedGetterName="SourceID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Organization" DefaultValue="" MappedIsValidMember="m_IsValidOrganization" MappedSetValidName="SetValidOrganization" MappedIsValidName="IsValidOrganization" MappedMemberName="m_Organization" MappedDisplayName="Organization" MappedSetterName="Organization" MappedGetterName="Organization" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SourceDescription" DefaultValue="" MappedIsValidMember="m_IsValidSourceDescription" MappedSetValidName="SetValidSourceDescription" MappedIsValidName="IsValidSourceDescription" MappedMemberName="m_SourceDescription" MappedDisplayName="SourceDescription" MappedSetterName="SourceDescription" MappedGetterName="SourceDescription" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Metadata" DefaultValue="" MappedIsValidMember="m_IsValidMetadata" MappedSetValidName="SetValidMetadata" MappedIsValidName="IsValidMetadata" MappedMemberName="m_Metadata" MappedDisplayName="Metadata" MappedSetterName="Metadata" MappedGetterName="Metadata">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="ContactInformation" DefaultValue="" MappedIsValidMember="m_IsValidContactInformation" MappedSetValidName="SetValidContactInformation" MappedIsValidName="IsValidContactInformation" MappedMemberName="m_ContactInformation" MappedDisplayName="ContactInformation" MappedSetterName="ContactInformation" MappedGetterName="ContactInformation">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SourceLink" DefaultValue="" MappedIsValidMember="m_IsValidSourceLink" MappedSetValidName="SetValidSourceLink" MappedIsValidName="IsValidSourceLink" MappedMemberName="m_SourceLink" MappedDisplayName="SourceLink" MappedSetterName="SourceLink" MappedGetterName="SourceLink" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="TimeIntervalType" LongName="TimeIntervalType" MappedClassColName="TimeIntervalTypeCol" MappedClassName="TimeIntervalType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="beginDateTime" DefaultValue="" MappedIsValidMember="m_IsValidBeginDateTime" MappedSetValidName="SetValidBeginDateTime" MappedIsValidName="IsValidBeginDateTime" MappedMemberName="m_BeginDateTime" MappedDisplayName="beginDateTime" MappedSetterName="BeginDateTime" MappedGetterName="BeginDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="endDateTime" DefaultValue="" MappedIsValidMember="m_IsValidEndDateTime" MappedSetValidName="SetValidEndDateTime" MappedIsValidName="IsValidEndDateTime" MappedMemberName="m_EndDateTime" MappedDisplayName="endDateTime" MappedSetterName="EndDateTime" MappedGetterName="EndDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="timeParam" LongName="timeParam" MappedClassColName="TimeParamCol" MappedClassName="TimeParam">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="beginDateTime" DefaultValue="" MappedIsValidMember="m_IsValidBeginDateTime" MappedSetValidName="SetValidBeginDateTime" MappedIsValidName="IsValidBeginDateTime" MappedMemberName="m_BeginDateTime" MappedDisplayName="beginDateTime" MappedSetterName="BeginDateTime" MappedGetterName="BeginDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="endDateTime" DefaultValue="" MappedIsValidMember="m_IsValidEndDateTime" MappedSetValidName="SetValidEndDateTime" MappedIsValidName="IsValidEndDateTime" MappedMemberName="m_EndDateTime" MappedDisplayName="endDateTime" MappedSetterName="EndDateTime" MappedGetterName="EndDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="TimePeriodRealTimeType" LongName="TimePeriodRealTimeType" MappedClassColName="TimePeriodRealTimeTypeCol" MappedClassName="TimePeriodRealTimeType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="realTimeDataPeriod" DefaultValue="" MappedIsValidMember="m_IsValidRealTimeDataPeriod" MappedSetValidName="SetValidRealTimeDataPeriod" MappedIsValidName="IsValidRealTimeDataPeriod" MappedMemberName="m_RealTimeDataPeriod" MappedDisplayName="realTimeDataPeriod" MappedSetterName="RealTimeDataPeriod" MappedGetterName="RealTimeDataPeriod" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="beginDateTime" DefaultValue="" MappedIsValidMember="m_IsValidBeginDateTime" MappedSetValidName="SetValidBeginDateTime" MappedIsValidName="IsValidBeginDateTime" MappedMemberName="m_BeginDateTime" MappedDisplayName="beginDateTime" MappedSetterName="BeginDateTime" MappedGetterName="BeginDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="endDateTime" DefaultValue="" MappedIsValidMember="m_IsValidEndDateTime" MappedSetValidName="SetValidEndDateTime" MappedIsValidName="IsValidEndDateTime" MappedMemberName="m_EndDateTime" MappedDisplayName="endDateTime" MappedSetterName="EndDateTime" MappedGetterName="EndDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="TimePeriodType" LongName="TimePeriodType" MappedClassColName="TimePeriodTypeCol" MappedClassName="TimePeriodType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+  </Class>
+  <Class Name="timeSeriesResponse" LongName="timeSeriesResponse" MappedClassColName="TimeSeriesResponseCol" MappedClassName="TimeSeriesResponse">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="queryInfo" DefaultValue="" MappedIsValidMember="m_IsValidQueryInfo" MappedSetValidName="SetValidQueryInfo" MappedIsValidName="IsValidQueryInfo" MappedMemberName="m_QueryInfo" MappedDisplayName="queryInfo" MappedSetterName="QueryInfo" MappedGetterName="QueryInfo">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="timeSeries" DefaultValue="" MappedIsValidMember="m_IsValidTimeSeries" MappedSetValidName="SetValidTimeSeries" MappedIsValidName="IsValidTimeSeries" MappedMemberName="m_TimeSeries" MappedDisplayName="timeSeries" MappedSetterName="TimeSeries" MappedGetterName="TimeSeries">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="TimeSeriesType" LongName="TimeSeriesType" MappedClassColName="TimeSeriesTypeCol" MappedClassName="TimeSeriesType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="name" DefaultValue="" MappedIsValidMember="m_IsValidName" MappedSetValidName="SetValidName" MappedIsValidName="IsValidName" MappedMemberName="m_Name" MappedDisplayName="name" MappedSetterName="Name" MappedGetterName="Name" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="sourceInfo" DefaultValue="" MappedIsValidMember="m_IsValidSourceInfo" MappedSetValidName="SetValidSourceInfo" MappedIsValidName="IsValidSourceInfo" MappedMemberName="m_SourceInfo" MappedDisplayName="sourceInfo" MappedSetterName="SourceInfo" MappedGetterName="SourceInfo">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variable" DefaultValue="" MappedIsValidMember="m_IsValidVariable" MappedSetValidName="SetValidVariable" MappedIsValidName="IsValidVariable" MappedMemberName="m_Variable" MappedDisplayName="variable" MappedSetterName="Variable" MappedGetterName="Variable">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="values" DefaultValue="" MappedIsValidMember="m_IsValidValues" MappedSetValidName="SetValidValues" MappedIsValidName="IsValidValues" MappedMemberName="m_Values" MappedDisplayName="values" MappedSetterName="Values" MappedGetterName="Values">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="TimeSingleType" LongName="TimeSingleType" MappedClassColName="TimeSingleTypeCol" MappedClassName="TimeSingleType">
+    <Description>
+    </Description>
+    <Remarks>This class exists to provide a base into which other interfaces can be placed, this is nessarsy because each class is either a sequence, choice or all. Without this class classes deriving from this, may contain elements that are part of a sequence and a choice, this would break the library.</Remarks>
+    <Attribute Name="timeSingle" DefaultValue="" MappedIsValidMember="m_IsValidTimeSingle" MappedSetValidName="SetValidTimeSingle" MappedIsValidName="IsValidTimeSingle" MappedMemberName="m_TimeSingle" MappedDisplayName="timeSingle" MappedSetterName="TimeSingle" MappedGetterName="TimeSingle" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="beginDateTime" DefaultValue="" MappedIsValidMember="m_IsValidBeginDateTime" MappedSetValidName="SetValidBeginDateTime" MappedIsValidName="IsValidBeginDateTime" MappedMemberName="m_BeginDateTime" MappedDisplayName="beginDateTime" MappedSetterName="BeginDateTime" MappedGetterName="BeginDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="endDateTime" DefaultValue="" MappedIsValidMember="m_IsValidEndDateTime" MappedSetValidName="SetValidEndDateTime" MappedIsValidName="IsValidEndDateTime" MappedMemberName="m_EndDateTime" MappedDisplayName="endDateTime" MappedSetterName="EndDateTime" MappedGetterName="EndDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="timeSupport" LongName="timeSupport" MappedClassColName="TimeSupportCol" MappedClassName="TimeSupport">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="isRegular" DefaultValue="" MappedIsValidMember="m_IsValidIsRegular" MappedSetValidName="SetValidIsRegular" MappedIsValidName="IsValidIsRegular" MappedMemberName="m_IsRegular" MappedDisplayName="isRegular" MappedSetterName="IsRegular" MappedGetterName="IsRegular" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="unit" DefaultValue="" MappedIsValidMember="m_IsValidUnit" MappedSetValidName="SetValidUnit" MappedIsValidName="IsValidUnit" MappedMemberName="m_Unit" MappedDisplayName="unit" MappedSetterName="Unit" MappedGetterName="Unit">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="timeInterval" DefaultValue="" MappedIsValidMember="m_IsValidTimeInterval" MappedSetValidName="SetValidTimeInterval" MappedIsValidName="IsValidTimeInterval" MappedMemberName="m_TimeInterval" MappedDisplayName="timeInterval" MappedSetterName="TimeInterval" MappedGetterName="TimeInterval" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="timeZoneInfo" LongName="timeZoneInfo" MappedClassColName="TimeZoneInfoCol" MappedClassName="TimeZoneInfo">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="defaultTimeZone" DefaultValue="" MappedIsValidMember="m_IsValidDefaultTimeZone" MappedSetValidName="SetValidDefaultTimeZone" MappedIsValidName="IsValidDefaultTimeZone" MappedMemberName="m_DefaultTimeZone" MappedDisplayName="defaultTimeZone" MappedSetterName="DefaultTimeZone" MappedGetterName="DefaultTimeZone">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="daylightSavingsTimeZone" DefaultValue="" MappedIsValidMember="m_IsValidDaylightSavingsTimeZone" MappedSetValidName="SetValidDaylightSavingsTimeZone" MappedIsValidName="IsValidDaylightSavingsTimeZone" MappedMemberName="m_DaylightSavingsTimeZone" MappedDisplayName="daylightSavingsTimeZone" MappedSetterName="DaylightSavingsTimeZone" MappedGetterName="DaylightSavingsTimeZone">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="TsValuesSingleVariableType" LongName="TsValuesSingleVariableType" MappedClassColName="TsValuesSingleVariableTypeCol" MappedClassName="TsValuesSingleVariableType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="timeZoneShiftApplied" DefaultValue="" MappedIsValidMember="m_IsValidTimeZoneShiftApplied" MappedSetValidName="SetValidTimeZoneShiftApplied" MappedIsValidName="IsValidTimeZoneShiftApplied" MappedMemberName="m_TimeZoneShiftApplied" MappedDisplayName="timeZoneShiftApplied" MappedSetterName="TimeZoneShiftApplied" MappedGetterName="TimeZoneShiftApplied" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="unitsAbbreviation" DefaultValue="" MappedIsValidMember="m_IsValidUnitsAbbreviation" MappedSetValidName="SetValidUnitsAbbreviation" MappedIsValidName="IsValidUnitsAbbreviation" MappedMemberName="m_UnitsAbbreviation" MappedDisplayName="unitsAbbreviation" MappedSetterName="UnitsAbbreviation" MappedGetterName="UnitsAbbreviation" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="unitsCode" DefaultValue="" MappedIsValidMember="m_IsValidUnitsCode" MappedSetValidName="SetValidUnitsCode" MappedIsValidName="IsValidUnitsCode" MappedMemberName="m_UnitsCode" MappedDisplayName="unitsCode" MappedSetterName="UnitsCode" MappedGetterName="UnitsCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="unitsType" DefaultValue="" MappedIsValidMember="m_IsValidUnitsType" MappedSetValidName="SetValidUnitsType" MappedIsValidName="IsValidUnitsType" MappedMemberName="m_UnitsType" MappedDisplayName="unitsType" MappedSetterName="UnitsType" MappedGetterName="UnitsType">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="count" DefaultValue="" MappedIsValidMember="m_IsValidCount" MappedSetValidName="SetValidCount" MappedIsValidName="IsValidCount" MappedMemberName="m_Count" MappedDisplayName="count" MappedSetterName="Count" MappedGetterName="Count" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="unitsAreConverted" DefaultValue="false" MappedIsValidMember="m_IsValidUnitsAreConverted" MappedSetValidName="SetValidUnitsAreConverted" MappedIsValidName="IsValidUnitsAreConverted" MappedMemberName="m_UnitsAreConverted" MappedDisplayName="unitsAreConverted" MappedSetterName="UnitsAreConverted" MappedGetterName="UnitsAreConverted" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="value" DefaultValue="" MappedIsValidMember="m_IsValidValue" MappedSetValidName="SetValidValue" MappedIsValidName="IsValidValue" MappedMemberName="m_Value" MappedDisplayName="value" MappedSetterName="Value" MappedGetterName="Value">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="qualifier" DefaultValue="" MappedIsValidMember="m_IsValidQualifier" MappedSetValidName="SetValidQualifier" MappedIsValidName="IsValidQualifier" MappedMemberName="m_Qualifier" MappedDisplayName="qualifier" MappedSetterName="Qualifier" MappedGetterName="Qualifier">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="qualityControlLevel" DefaultValue="" MappedIsValidMember="m_IsValidQualityControlLevel" MappedSetValidName="SetValidQualityControlLevel" MappedIsValidName="IsValidQualityControlLevel" MappedMemberName="m_QualityControlLevel" MappedDisplayName="qualityControlLevel" MappedSetterName="QualityControlLevel" MappedGetterName="QualityControlLevel">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="method" DefaultValue="" MappedIsValidMember="m_IsValidMethod" MappedSetValidName="SetValidMethod" MappedIsValidName="IsValidMethod" MappedMemberName="m_Method" MappedDisplayName="method" MappedSetterName="Method" MappedGetterName="Method">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="source" DefaultValue="" MappedIsValidMember="m_IsValidSource" MappedSetValidName="SetValidSource" MappedIsValidName="IsValidSource" MappedMemberName="m_Source" MappedDisplayName="source" MappedSetterName="Source" MappedGetterName="Source">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offset" DefaultValue="" MappedIsValidMember="m_IsValidOffset" MappedSetValidName="SetValidOffset" MappedIsValidName="IsValidOffset" MappedMemberName="m_Offset" MappedDisplayName="offset" MappedSetterName="Offset" MappedGetterName="Offset">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="units" LongName="units" MappedClassColName="UnitsCol" MappedClassName="Units">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="unitsAbbreviation" DefaultValue="" MappedIsValidMember="m_IsValidUnitsAbbreviation" MappedSetValidName="SetValidUnitsAbbreviation" MappedIsValidName="IsValidUnitsAbbreviation" MappedMemberName="m_UnitsAbbreviation" MappedDisplayName="unitsAbbreviation" MappedSetterName="UnitsAbbreviation" MappedGetterName="UnitsAbbreviation" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="unitsCode" DefaultValue="" MappedIsValidMember="m_IsValidUnitsCode" MappedSetValidName="SetValidUnitsCode" MappedIsValidName="IsValidUnitsCode" MappedMemberName="m_UnitsCode" MappedDisplayName="unitsCode" MappedSetterName="UnitsCode" MappedGetterName="UnitsCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="unitsType" DefaultValue="" MappedIsValidMember="m_IsValidUnitsType" MappedSetValidName="SetValidUnitsType" MappedIsValidName="IsValidUnitsType" MappedMemberName="m_UnitsType" MappedDisplayName="unitsType" MappedSetterName="UnitsType" MappedGetterName="UnitsType">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="UnitsType" LongName="UnitsType" MappedClassColName="UnitsTypeCol" MappedClassName="UnitsType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="UnitID" DefaultValue="" MappedIsValidMember="m_IsValidUnitID" MappedSetValidName="SetValidUnitID" MappedIsValidName="IsValidUnitID" MappedMemberName="m_UnitID" MappedDisplayName="UnitID" MappedSetterName="UnitID" MappedGetterName="UnitID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="UnitName" DefaultValue="" MappedIsValidMember="m_IsValidUnitName" MappedSetValidName="SetValidUnitName" MappedIsValidName="IsValidUnitName" MappedMemberName="m_UnitName" MappedDisplayName="UnitName" MappedSetterName="UnitName" MappedGetterName="UnitName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="UnitDescription" DefaultValue="" MappedIsValidMember="m_IsValidUnitDescription" MappedSetValidName="SetValidUnitDescription" MappedIsValidName="IsValidUnitDescription" MappedMemberName="m_UnitDescription" MappedDisplayName="UnitDescription" MappedSetterName="UnitDescription" MappedGetterName="UnitDescription" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="UnitType" DefaultValue="" MappedIsValidMember="m_IsValidUnitType" MappedSetValidName="SetValidUnitType" MappedIsValidName="IsValidUnitType" MappedMemberName="m_UnitType" MappedDisplayName="UnitType" MappedSetterName="UnitType" MappedGetterName="UnitType">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="UnitAbbreviation" DefaultValue="" MappedIsValidMember="m_IsValidUnitAbbreviation" MappedSetValidName="SetValidUnitAbbreviation" MappedIsValidName="IsValidUnitAbbreviation" MappedMemberName="m_UnitAbbreviation" MappedDisplayName="UnitAbbreviation" MappedSetterName="UnitAbbreviation" MappedGetterName="UnitAbbreviation" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="valueCount" LongName="valueCount" MappedClassColName="ValueCountCol" MappedClassName="ValueCount">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="countIsEstimated" DefaultValue="" MappedIsValidMember="m_IsValidCountIsEstimated" MappedSetValidName="SetValidCountIsEstimated" MappedIsValidName="IsValidCountIsEstimated" MappedMemberName="m_CountIsEstimated" MappedDisplayName="countIsEstimated" MappedSetterName="CountIsEstimated" MappedGetterName="CountIsEstimated" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="ValueSingleVariable" LongName="ValueSingleVariable" MappedClassColName="ValueSingleVariableCol" MappedClassName="ValueSingleVariable">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="qualifiers" DefaultValue="" MappedIsValidMember="m_IsValidQualifiers" MappedSetValidName="SetValidQualifiers" MappedIsValidName="IsValidQualifiers" MappedMemberName="m_Qualifiers" MappedDisplayName="qualifiers" MappedSetterName="Qualifiers" MappedGetterName="Qualifiers" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="censorCode" DefaultValue="" MappedIsValidMember="m_IsValidCensorCode" MappedSetValidName="SetValidCensorCode" MappedIsValidName="IsValidCensorCode" MappedMemberName="m_CensorCode" MappedDisplayName="censorCode" MappedSetterName="CensorCode" MappedGetterName="CensorCode">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="dateTime" DefaultValue="" MappedIsValidMember="m_IsValidDateTime" MappedSetValidName="SetValidDateTime" MappedIsValidName="IsValidDateTime" MappedMemberName="m_DateTime" MappedDisplayName="dateTime" MappedSetterName="DateTime" MappedGetterName="DateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="qualityControlLevel" DefaultValue="" MappedIsValidMember="m_IsValidQualityControlLevel" MappedSetValidName="SetValidQualityControlLevel" MappedIsValidName="IsValidQualityControlLevel" MappedMemberName="m_QualityControlLevel" MappedDisplayName="qualityControlLevel" MappedSetterName="QualityControlLevel" MappedGetterName="QualityControlLevel">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="methodID" DefaultValue="" MappedIsValidMember="m_IsValidMethodID" MappedSetValidName="SetValidMethodID" MappedIsValidName="IsValidMethodID" MappedMemberName="m_MethodID" MappedDisplayName="methodID" MappedSetterName="MethodID" MappedGetterName="MethodID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="sourceID" DefaultValue="" MappedIsValidMember="m_IsValidSourceID" MappedSetValidName="SetValidSourceID" MappedIsValidName="IsValidSourceID" MappedMemberName="m_SourceID" MappedDisplayName="sourceID" MappedSetterName="SourceID" MappedGetterName="SourceID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="accuracyStdDev" DefaultValue="" MappedIsValidMember="m_IsValidAccuracyStdDev" MappedSetValidName="SetValidAccuracyStdDev" MappedIsValidName="IsValidAccuracyStdDev" MappedMemberName="m_AccuracyStdDev" MappedDisplayName="accuracyStdDev" MappedSetterName="AccuracyStdDev" MappedGetterName="AccuracyStdDev" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="codedVocabulary" DefaultValue="" MappedIsValidMember="m_IsValidCodedVocabulary" MappedSetValidName="SetValidCodedVocabulary" MappedIsValidName="IsValidCodedVocabulary" MappedMemberName="m_CodedVocabulary" MappedDisplayName="codedVocabulary" MappedSetterName="CodedVocabulary" MappedGetterName="CodedVocabulary" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="codedVocabularyTerm" DefaultValue="" MappedIsValidMember="m_IsValidCodedVocabularyTerm" MappedSetValidName="SetValidCodedVocabularyTerm" MappedIsValidName="IsValidCodedVocabularyTerm" MappedMemberName="m_CodedVocabularyTerm" MappedDisplayName="codedVocabularyTerm" MappedSetterName="CodedVocabularyTerm" MappedGetterName="CodedVocabularyTerm" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="sampleID" DefaultValue="" MappedIsValidMember="m_IsValidSampleID" MappedSetValidName="SetValidSampleID" MappedIsValidName="IsValidSampleID" MappedMemberName="m_SampleID" MappedDisplayName="sampleID" MappedSetterName="SampleID" MappedGetterName="SampleID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetValue" DefaultValue="" MappedIsValidMember="m_IsValidOffsetValue" MappedSetValidName="SetValidOffsetValue" MappedIsValidName="IsValidOffsetValue" MappedMemberName="m_OffsetValue" MappedDisplayName="offsetValue" MappedSetterName="OffsetValue" MappedGetterName="OffsetValue" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetTypeID" DefaultValue="" MappedIsValidMember="m_IsValidOffsetTypeID" MappedSetValidName="SetValidOffsetTypeID" MappedIsValidName="IsValidOffsetTypeID" MappedMemberName="m_OffsetTypeID" MappedDisplayName="offsetTypeID" MappedSetterName="OffsetTypeID" MappedGetterName="OffsetTypeID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetDescription" DefaultValue="" MappedIsValidMember="m_IsValidOffsetDescription" MappedSetValidName="SetValidOffsetDescription" MappedIsValidName="IsValidOffsetDescription" MappedMemberName="m_OffsetDescription" MappedDisplayName="offsetDescription" MappedSetterName="OffsetDescription" MappedGetterName="OffsetDescription" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetUnitsAbbreviation" DefaultValue="" MappedIsValidMember="m_IsValidOffsetUnitsAbbreviation" MappedSetValidName="SetValidOffsetUnitsAbbreviation" MappedIsValidName="IsValidOffsetUnitsAbbreviation" MappedMemberName="m_OffsetUnitsAbbreviation" MappedDisplayName="offsetUnitsAbbreviation" MappedSetterName="OffsetUnitsAbbreviation" MappedGetterName="OffsetUnitsAbbreviation" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="offsetUnitsCode" DefaultValue="" MappedIsValidMember="m_IsValidOffsetUnitsCode" MappedSetValidName="SetValidOffsetUnitsCode" MappedIsValidName="IsValidOffsetUnitsCode" MappedMemberName="m_OffsetUnitsCode" MappedDisplayName="offsetUnitsCode" MappedSetterName="OffsetUnitsCode" MappedGetterName="OffsetUnitsCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="oid" DefaultValue="" MappedIsValidMember="m_IsValidOid" MappedSetValidName="SetValidOid" MappedIsValidName="IsValidOid" MappedMemberName="m_Oid" MappedDisplayName="oid" MappedSetterName="Oid" MappedGetterName="Oid" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="metadataDateTime" DefaultValue="" MappedIsValidMember="m_IsValidMetadataDateTime" MappedSetValidName="SetValidMetadataDateTime" MappedIsValidName="IsValidMetadataDateTime" MappedMemberName="m_MetadataDateTime" MappedDisplayName="metadataDateTime" MappedSetterName="MetadataDateTime" MappedGetterName="MetadataDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="variableCode" LongName="variableCode" MappedClassColName="VariableCodeCol" MappedClassName="VariableCode">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="network" DefaultValue="" MappedIsValidMember="m_IsValidNetwork" MappedSetValidName="SetValidNetwork" MappedIsValidName="IsValidNetwork" MappedMemberName="m_Network" MappedDisplayName="network" MappedSetterName="Network" MappedGetterName="Network" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="vocabulary" DefaultValue="" MappedIsValidMember="m_IsValidVocabulary" MappedSetValidName="SetValidVocabulary" MappedIsValidName="IsValidVocabulary" MappedMemberName="m_Vocabulary" MappedDisplayName="vocabulary" MappedSetterName="Vocabulary" MappedGetterName="Vocabulary" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="default" DefaultValue="" MappedIsValidMember="m_IsValidDefault" MappedSetValidName="SetValidDefault" MappedIsValidName="IsValidDefault" MappedMemberName="m_Default" MappedDisplayName="default_" MappedSetterName="default_" MappedGetterName="default_" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variableID" DefaultValue="" MappedIsValidMember="m_IsValidVariableID" MappedSetValidName="SetValidVariableID" MappedIsValidName="IsValidVariableID" MappedMemberName="m_VariableID" MappedDisplayName="variableID" MappedSetterName="VariableID" MappedGetterName="VariableID" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="VariableInfoType" LongName="VariableInfoType" MappedClassColName="VariableInfoTypeCol" MappedClassName="VariableInfoType">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="oid" DefaultValue="" MappedIsValidMember="m_IsValidOid" MappedSetValidName="SetValidOid" MappedIsValidName="IsValidOid" MappedMemberName="m_Oid" MappedDisplayName="oid" MappedSetterName="Oid" MappedGetterName="Oid" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="metadataDateTime" DefaultValue="" MappedIsValidMember="m_IsValidMetadataDateTime" MappedSetValidName="SetValidMetadataDateTime" MappedIsValidName="IsValidMetadataDateTime" MappedMemberName="m_MetadataDateTime" MappedDisplayName="metadataDateTime" MappedSetterName="MetadataDateTime" MappedGetterName="MetadataDateTime" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variableCode" DefaultValue="" MappedIsValidMember="m_IsValidVariableCode" MappedSetValidName="SetValidVariableCode" MappedIsValidName="IsValidVariableCode" MappedMemberName="m_VariableCode" MappedDisplayName="variableCode" MappedSetterName="VariableCode" MappedGetterName="VariableCode">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variableName" DefaultValue="" MappedIsValidMember="m_IsValidVariableName" MappedSetValidName="SetValidVariableName" MappedIsValidName="IsValidVariableName" MappedMemberName="m_VariableName" MappedDisplayName="variableName" MappedSetterName="VariableName" MappedGetterName="VariableName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variableDescription" DefaultValue="" MappedIsValidMember="m_IsValidVariableDescription" MappedSetValidName="SetValidVariableDescription" MappedIsValidName="IsValidVariableDescription" MappedMemberName="m_VariableDescription" MappedDisplayName="variableDescription" MappedSetterName="VariableDescription" MappedGetterName="VariableDescription" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="valueType" DefaultValue="" MappedIsValidMember="m_IsValidValueType" MappedSetValidName="SetValidValueType" MappedIsValidName="IsValidValueType" MappedMemberName="m_ValueType" MappedDisplayName="valueType" MappedSetterName="ValueType" MappedGetterName="ValueType">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="dataType" DefaultValue="" MappedIsValidMember="m_IsValidDataType" MappedSetValidName="SetValidDataType" MappedIsValidName="IsValidDataType" MappedMemberName="m_DataType" MappedDisplayName="dataType" MappedSetterName="DataType" MappedGetterName="DataType">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="generalCategory" DefaultValue="" MappedIsValidMember="m_IsValidGeneralCategory" MappedSetValidName="SetValidGeneralCategory" MappedIsValidName="IsValidGeneralCategory" MappedMemberName="m_GeneralCategory" MappedDisplayName="generalCategory" MappedSetterName="GeneralCategory" MappedGetterName="GeneralCategory">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="sampleMedium" DefaultValue="" MappedIsValidMember="m_IsValidSampleMedium" MappedSetValidName="SetValidSampleMedium" MappedIsValidName="IsValidSampleMedium" MappedMemberName="m_SampleMedium" MappedDisplayName="sampleMedium" MappedSetterName="SampleMedium" MappedGetterName="SampleMedium">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="units" DefaultValue="" MappedIsValidMember="m_IsValidUnits" MappedSetValidName="SetValidUnits" MappedIsValidName="IsValidUnits" MappedMemberName="m_Units" MappedDisplayName="units" MappedSetterName="Units" MappedGetterName="Units">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="options" DefaultValue="" MappedIsValidMember="m_IsValidOptions" MappedSetValidName="SetValidOptions" MappedIsValidName="IsValidOptions" MappedMemberName="m_Options" MappedDisplayName="options" MappedSetterName="Options" MappedGetterName="Options">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="note" DefaultValue="" MappedIsValidMember="m_IsValidNote" MappedSetValidName="SetValidNote" MappedIsValidName="IsValidNote" MappedMemberName="m_Note" MappedDisplayName="note" MappedSetterName="Note" MappedGetterName="Note">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="related" DefaultValue="" MappedIsValidMember="m_IsValidRelated" MappedSetValidName="SetValidRelated" MappedIsValidName="IsValidRelated" MappedMemberName="m_Related" MappedDisplayName="related" MappedSetterName="Related" MappedGetterName="Related">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="extension" DefaultValue="" MappedIsValidMember="m_IsValidExtension" MappedSetValidName="SetValidExtension" MappedIsValidName="IsValidExtension" MappedMemberName="m_Extension" MappedDisplayName="extension" MappedSetterName="Extension" MappedGetterName="Extension">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="NoDataValue" DefaultValue="" MappedIsValidMember="m_IsValidNoDataValue" MappedSetValidName="SetValidNoDataValue" MappedIsValidName="IsValidNoDataValue" MappedMemberName="m_NoDataValue" MappedDisplayName="NoDataValue" MappedSetterName="NoDataValue" MappedGetterName="NoDataValue" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="timeSupport" DefaultValue="" MappedIsValidMember="m_IsValidTimeSupport" MappedSetValidName="SetValidTimeSupport" MappedIsValidName="IsValidTimeSupport" MappedMemberName="m_TimeSupport" MappedDisplayName="timeSupport" MappedSetterName="TimeSupport" MappedGetterName="TimeSupport">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="VariableInfoType_Seq_related_Group" LongName="VariableInfoType_Seq_related_Group" MappedClassColName="VariableInfoType_Seq_related_GroupCol" MappedClassName="VariableInfoType_Seq_related_Group">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="parentID" DefaultValue="" MappedIsValidMember="m_IsValidParentID" MappedSetValidName="SetValidParentID" MappedIsValidName="IsValidParentID" MappedMemberName="m_ParentID" MappedDisplayName="parentID" MappedSetterName="ParentID" MappedGetterName="ParentID">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="relatedID" DefaultValue="" MappedIsValidMember="m_IsValidRelatedID" MappedSetValidName="SetValidRelatedID" MappedIsValidName="IsValidRelatedID" MappedMemberName="m_RelatedID" MappedDisplayName="relatedID" MappedSetterName="RelatedID" MappedGetterName="RelatedID">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="variables" LongName="variables" MappedClassColName="VariablesCol" MappedClassName="Variables">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="variable" DefaultValue="" MappedIsValidMember="m_IsValidVariable" MappedSetValidName="SetValidVariable" MappedIsValidName="IsValidVariable" MappedMemberName="m_Variable" MappedDisplayName="variable" MappedSetterName="Variable" MappedGetterName="Variable">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="variablesResponse" LongName="variablesResponse" MappedClassColName="VariablesResponseCol" MappedClassName="VariablesResponse">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="queryInfo" DefaultValue="" MappedIsValidMember="m_IsValidQueryInfo" MappedSetValidName="SetValidQueryInfo" MappedIsValidName="IsValidQueryInfo" MappedMemberName="m_QueryInfo" MappedDisplayName="queryInfo" MappedSetterName="QueryInfo" MappedGetterName="QueryInfo">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="variables" DefaultValue="" MappedIsValidMember="m_IsValidVariables" MappedSetValidName="SetValidVariables" MappedIsValidName="IsValidVariables" MappedMemberName="m_Variables" MappedDisplayName="variables" MappedSetterName="Variables" MappedGetterName="Variables">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Enum Name="generalCategoryEnum" MappedEnumColName="GeneralCategoryEnumCol" MappedEnumName="GeneralCategoryEnum">
+    <Value Value="Water Quality" MappedValue="WaterSpaceQuality" />
+    <Value Value="Climate" MappedValue="Climate" />
+    <Value Value="Hydrology" MappedValue="Hydrology" />
+    <Value Value="Geology" MappedValue="Geology" />
+    <Value Value="Biota" MappedValue="Biota" />
+    <Value Value="Unknown" MappedValue="Unknown" />
+    <Value Value="Instrumentation" MappedValue="Instrumentation" />
+  </Enum>
+  <Enum Name="dataTypeEnum" MappedEnumColName="DataTypeEnumCol" MappedEnumName="DataTypeEnum">
+    <Value Value="Continuous" MappedValue="Continuous" />
+    <Value Value="Instantaneous" MappedValue="Instantaneous" />
+    <Value Value="Cumulative" MappedValue="Cumulative" />
+    <Value Value="Incremental" MappedValue="Incremental" />
+    <Value Value="Average" MappedValue="Average" />
+    <Value Value="Maximum" MappedValue="Maximum" />
+    <Value Value="Minimum" MappedValue="Minimum" />
+    <Value Value="Constant Over Interval" MappedValue="ConstantSpaceOverSpaceInterval" />
+    <Value Value="Categorical" MappedValue="Categorical" />
+    <Value Value="Best Easy Systematic Estimator " MappedValue="BestSpaceEasySpaceSystematicSpaceEstimatorSpace" />
+    <Value Value="Unknown" MappedValue="Unknown" />
+    <Value Value="Variance" MappedValue="Variance" />
+    <Value Value="Median" MappedValue="Median" />
+    <Value Value="Mode" MappedValue="Mode" />
+    <Value Value="Best Easy Systematic Estimator" MappedValue="BestSpaceEasySpaceSystematicSpaceEstimator" />
+    <Value Value="Standard Deviation" MappedValue="StandardSpaceDeviation" />
+    <Value Value="Skewness" MappedValue="Skewness" />
+    <Value Value="Equivalent Mean" MappedValue="EquivalentSpaceMean" />
+    <Value Value="Sporadic" MappedValue="Sporadic" />
+  </Enum>
+  <Enum Name="valueTypeEnum" MappedEnumColName="ValueTypeEnumCol" MappedEnumName="ValueTypeEnum">
+    <Value Value="Field Observation" MappedValue="FieldSpaceObservation" />
+    <Value Value="Sample" MappedValue="Sample" />
+    <Value Value="Model Simulation Result" MappedValue="ModelSpaceSimulationSpaceResult" />
+    <Value Value="Derived Value" MappedValue="DerivedSpaceValue" />
+    <Value Value="Unknown" MappedValue="Unknown" />
+  </Enum>
+  <Enum Name="QualityControlLevelEnum" MappedEnumColName="QualityControlLevelEnumCol" MappedEnumName="QualityControlLevelEnum">
+    <Value Value="Raw data" MappedValue="RawSpacedata" />
+    <Value Value="Quality controlled data" MappedValue="QualitySpacecontrolledSpacedata" />
+    <Value Value="Derived products" MappedValue="DerivedSpaceproducts" />
+    <Value Value="Interpreted products" MappedValue="InterpretedSpaceproducts" />
+    <Value Value="Knowledge products" MappedValue="KnowledgeSpaceproducts" />
+    <Value Value="Unknown" MappedValue="Unknown" />
+  </Enum>
+  <Enum Name="UnitsTypeEnum" MappedEnumColName="UnitsTypeEnumCol" MappedEnumName="UnitsTypeEnum">
+    <Value Value="Angle" MappedValue="Angle" />
+    <Value Value="Area" MappedValue="Area" />
+    <Value Value="Dimensionless" MappedValue="Dimensionless" />
+    <Value Value="Energy" MappedValue="Energy" />
+    <Value Value="Energy Flux" MappedValue="EnergySpaceFlux" />
+    <Value Value="Flow" MappedValue="Flow" />
+    <Value Value="Force" MappedValue="Force" />
+    <Value Value="Frequency" MappedValue="Frequency" />
+    <Value Value="Length" MappedValue="Length" />
+    <Value Value="Light" MappedValue="Light" />
+    <Value Value="Mass" MappedValue="Mass" />
+    <Value Value="Permeability" MappedValue="Permeability" />
+    <Value Value="Power" MappedValue="Power" />
+    <Value Value="Pressure/Stress" MappedValue="PressureSlashStress" />
+    <Value Value="Resolution" MappedValue="Resolution" />
+    <Value Value="Scale" MappedValue="Scale" />
+    <Value Value="Temperature" MappedValue="Temperature" />
+    <Value Value="Time" MappedValue="Time" />
+    <Value Value="Velocity" MappedValue="Velocity" />
+    <Value Value="Volume" MappedValue="Volume" />
+  </Enum>
+  <Enum Name="CensorCodeEnum" MappedEnumColName="CensorCodeEnumCol" MappedEnumName="CensorCodeEnum">
+    <Value Value="lt" MappedValue="Lt" />
+    <Value Value="gt" MappedValue="Gt" />
+    <Value Value="nc" MappedValue="Nc" />
+    <Value Value="nd" MappedValue="Nd" />
+    <Value Value="pnq" MappedValue="Pnq" />
+  </Enum>
+  <Enum Name="SampleMediumEnum" MappedEnumColName="SampleMediumEnumCol" MappedEnumName="SampleMediumEnum">
+    <Value Value="Surface Water" MappedValue="SurfaceSpaceWater" />
+    <Value Value="Ground Water" MappedValue="GroundSpaceWater" />
+    <Value Value="Sediment" MappedValue="Sediment" />
+    <Value Value="Soil" MappedValue="Soil" />
+    <Value Value="Air" MappedValue="Air" />
+    <Value Value="Tissue" MappedValue="Tissue" />
+    <Value Value="Precipitation" MappedValue="Precipitation" />
+    <Value Value="Unknown" MappedValue="Unknown" />
+    <Value Value="Other" MappedValue="Other" />
+    <Value Value="Snow" MappedValue="Snow" />
+    <Value Value="Not Relevant" MappedValue="NotSpaceRelevant" />
+  </Enum>
+  <Enum Name="sampleTypeEnum" MappedEnumColName="SampleTypeEnumCol" MappedEnumName="SampleTypeEnum">
+    <Value Value="FD" MappedValue="FD" />
+    <Value Value="FF" MappedValue="FF" />
+    <Value Value="FL" MappedValue="FL" />
+    <Value Value="LF" MappedValue="LF" />
+    <Value Value="GW" MappedValue="GW" />
+    <Value Value="PB" MappedValue="PB" />
+    <Value Value="PD" MappedValue="PD" />
+    <Value Value="PE" MappedValue="PE" />
+    <Value Value="PI" MappedValue="PI" />
+    <Value Value="PW" MappedValue="PW" />
+    <Value Value="RE" MappedValue="RE" />
+    <Value Value="SE" MappedValue="SE" />
+    <Value Value="SR" MappedValue="SR" />
+    <Value Value="SS" MappedValue="SS" />
+    <Value Value="SW" MappedValue="SW" />
+    <Value Value="TE" MappedValue="TE" />
+    <Value Value="TI" MappedValue="TI" />
+    <Value Value="TW" MappedValue="TW" />
+    <Value Value="VE" MappedValue="VE" />
+    <Value Value="VI" MappedValue="VI" />
+    <Value Value="VW" MappedValue="VW" />
+    <Value Value="Grab" MappedValue="Grab" />
+    <Value Value="Unknown" MappedValue="Unknown" />
+    <Value Value="No Sample" MappedValue="NoSpaceSample" />
+  </Enum>
+  <Namespace SchemaNamespace="" SchemaAlias="" ClassNamespace="waterOneFlow.Schema.v1.LiquidXml.cuahsiTimeSeriesLib" />
+  <Namespace SchemaNamespace="urn:schemas-microsoft-com:xml-msdata" SchemaAlias="msdata" ClassNamespace="waterOneFlow.Schema.v1.LiquidXml.msdata" />
+  <Namespace SchemaNamespace="http://www.opengis.net/gml" SchemaAlias="gml" ClassNamespace="waterOneFlow.Schema.v1.LiquidXml.gml" />
+  <Namespace SchemaNamespace="http://www.w3.org/1999/xlink" SchemaAlias="xlink" ClassNamespace="waterOneFlow.Schema.v1.LiquidXml.xlink" />
+  <Namespace SchemaNamespace="urn:schemas-microsoft-com:mapping-schema" SchemaAlias="sql" ClassNamespace="waterOneFlow.Schema.v1.LiquidXml.sql" />
+  <Namespace SchemaNamespace="http://www.cuahsi.org/waterML/1.0/" SchemaAlias="" ClassNamespace="waterOneFlow.Schema.v1.LiquidXml.tns" />
+</MappingSchema>

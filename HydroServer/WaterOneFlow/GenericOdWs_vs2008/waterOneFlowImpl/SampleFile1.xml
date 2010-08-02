@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio - Education Edition 7.0.5.906 (http://www.liquid-technologies.com) -->
+<tns:variablesResponse xmlns:tns="http://www.cuahsi.org/waterML/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cuahsi.org/waterML/1.1/ D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd">
+  <tns:queryInfo>
+    <tns:creationTime>2010-11-11T00:26:20.81</tns:creationTime>
+    <tns:querySQL>string</tns:querySQL>
+    <tns:extension>
+      <a:AnyElementYouLike xmlns:a="AnyNamespace">Some Data Or Other Elements</a:AnyElementYouLike>
+    </tns:extension>
+  </tns:queryInfo>
+  <tns:variables>
+    <tns:variable tns:oid="string" tns:metadataTime="1987-08-21T09:13:00.17">
+      <tns:variableCode vocabulary="string">string</tns:variableCode>
+      <tns:variableCode vocabulary="string" variableID="1787597600">string</tns:variableCode>
+      <tns:variableDescription>string</tns:variableDescription>
+      <tns:valueType>string</tns:valueType>
+      <tns:dataType>Skewness</tns:dataType>
+      <tns:generalCategory>Geology</tns:generalCategory>
+      <tns:sampleMedium>Ground Water</tns:sampleMedium>
+      <tns:units>
+        <tns:unitsCode>string</tns:unitsCode>
+      </tns:units>
+      <tns:note title="string" show="string">string</tns:note>
+      <tns:related>
+        <tns:parentCode network="string" vocabulary="string" default="1">string</tns:parentCode>
+        <tns:relatedCode network="string">string</tns:relatedCode>
+        <tns:parentCode vocabulary="string">string</tns:parentCode>
+        <tns:relatedCode network="string" vocabulary="string" default="false">string</tns:relatedCode>
+        <tns:parentCode network="string" default="1">string</tns:parentCode>
+        <tns:relatedCode network="string" vocabulary="string">string</tns:relatedCode>
+        <tns:parentCode network="string" vocabulary="string" default="1">string</tns:parentCode>
+        <tns:relatedCode network="string" vocabulary="string">string</tns:relatedCode>
+        <tns:parentCode network="string" default="1">string</tns:parentCode>
+        <tns:relatedCode network="string" default="false">string</tns:relatedCode>
+      </tns:related>
+      <tns:speciation>string</tns:speciation>
+    </tns:variable>
+  </tns:variables>
+</tns:variablesResponse>

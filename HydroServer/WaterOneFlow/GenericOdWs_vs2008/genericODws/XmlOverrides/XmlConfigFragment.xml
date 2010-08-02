@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <system.xml.serialization>
+    <schemaImporterExtensions>
+      <add name="w3ctime" 
+           type="Cuahsi.XmlOverrides.ImportW3CTime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5dd5484e7c4c59bd, processorArchitecture=MSIL" /> 
+ 		</schemaImporterExtensions>
+	</system.xml.serialization>
+</configuration>

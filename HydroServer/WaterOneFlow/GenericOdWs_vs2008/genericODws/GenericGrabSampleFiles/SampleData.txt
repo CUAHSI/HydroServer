@@ -1,0 +1,4 @@
+#Name,Network,SiteCode,VariableCode,BeginDate,EndDate,Auth
+Test1,LBR_TEST,USU-LBR-Mendon,USU3,2005-08-05,2005-08-06,a
+MultiQC,LBR_TEST,USU-LBR-Wellsville,USU41,2007-10-04,2007-12-31,a
+SingleQC,LBR_TEST,USU-LBR-Wellsville,LBR:USU41/QualityControlLevelID=2<,2007-10-04,2007-12-31,a

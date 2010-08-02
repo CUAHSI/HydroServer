@@ -1,0 +1,180 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WaterOneFlowImpl</RootNamespace>
+    <AssemblyName>waterOneFlowImpl</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1303;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305</CodeAnalysisRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'WaterDev|AnyCPU' ">
+    <OutputPath>bin\WaterDev\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="basicGeometry.cs" />
+    <Compile Include="box.cs" />
+    <Compile Include="CuahsiBuilder_1_1.cs" />
+    <Compile Include="cuahsiTimeSeries_v1_0.cs">
+      <DependentUpon>cuahsiTimeSeries_v1_0.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="cuahsiTimeSeries_v1_1.cs">
+      <DependentUpon>cuahsiTimeSeries_v1_1.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="DataSetHelper.cs" />
+    <Compile Include="WaterOneFlowServerException.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="CuahsiBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="locationParam.cs" />
+    <Compile Include="LogQuery.cs" />
+    <Compile Include="NetworkResponse.cs">
+      <DependentUpon>NetworkResponse.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="point.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="SoapExceptionGenerator.cs" />
+    <Compile Include="StandardServices.cs" />
+    <Compile Include="variableParameter.cs" />
+    <Compile Include="w3cDateTime.cs" />
+    <Compile Include="WaterOneFlowException.cs" />
+    <Compile Include="WaterOneFlowSourceException.cs" />
+    <Compile Include="wsDescriptions.cs" />
+    <Compile Include="WSUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="cuahsiTimeSeries.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="cuahsiTimeSeries.xsx">
+      <DependentUpon>cuahsiTimeSeries.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="cuahsiTimeSeries_v1_1.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="cuahsiTimeSeries_v1_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="cuahsiTimeSeries_v1_0.xsx">
+      <DependentUpon>cuahsiTimeSeries_v1_0.xsd</DependentUpon>
+    </None>
+    <None Include="cuahsiTimeSeries_v1_1.xsx">
+      <DependentUpon>cuahsiTimeSeries_v1_1.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="genSchema.bat" />
+    <None Include="NetworkResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NetworkResponse.xsx">
+      <DependentUpon>NetworkResponse.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GenerateTimeSeriesSchemaClass.xml" />
+    <Content Include="License.txt" />
+    <Content Include="log4net.dll" />
+    <Content Include="log4net.xml" />
+    <Content Include="ParameterInfo.xml" />
+    <Content Include="SiteFile.xml" />
+    <Content Include="NetworkResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\genericODws\CodeRewriter\CodeRewriter.csproj">
+      <Project>{79C351EE-392B-474E-B182-E75D558A4EB7}</Project>
+      <Name>CodeRewriter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="generatedClasses\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>CALL "$(DevEnvDir)\..\Tools\vsvars32.bat"
+cd $(ProjectDir)
+genschema.bat
+
+
+</PreBuildEvent>
+  </PropertyGroup>
+</Project>

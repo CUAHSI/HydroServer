@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="VariablesDataset" targetNamespace="http://www.cuahsi.org/schema/VariablesDataset.xsd" xmlns:mstns="http://www.cuahsi.org/schema/VariablesDataset.xsd" xmlns="http://www.cuahsi.org/schema/VariablesDataset.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ODDB" IsAppSettingsProperty="True" Modifier="Assembly" Name="ODDB (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ODDB.ConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="od_1_0ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="True" Modifier="Public" Name="od_1_0ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.WaterOneFlow.odm.v1_0.Properties.Settings.GlobalReference.Default.od_1_0ConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VariablesTableAdapter" GeneratorDataComponentClassName="VariablesTableAdapter" Name="Variables" UserDataComponentName="VariablesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="od_1_0ConnectionString (Settings)" DbObjectName="LittleBearRiver.dbo.Variables" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="False" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="False" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     VariableID, SampleMedium, ValueType, IsRegular, TimeSupport, TimeUnitsID, DataType, GeneralCategory, NoDataValue, VariableCode, VariableName, 
+                      VariableUnitsID
+FROM         Variables</CommandText>
+                    <Parameters>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="VariableID" DataSetColumn="VariableID" />
+              <Mapping SourceColumn="SampleMedium" DataSetColumn="SampleMedium" />
+              <Mapping SourceColumn="ValueType" DataSetColumn="ValueType" />
+              <Mapping SourceColumn="IsRegular" DataSetColumn="IsRegular" />
+              <Mapping SourceColumn="TimeSupport" DataSetColumn="TimeSupport" />
+              <Mapping SourceColumn="DataType" DataSetColumn="DataType" />
+              <Mapping SourceColumn="NoDataValue" DataSetColumn="NoDataValue" />
+              <Mapping SourceColumn="VariableCode" DataSetColumn="VariableCode" />
+              <Mapping SourceColumn="VariableName" DataSetColumn="VariableName" />
+              <Mapping SourceColumn="TimeUnitsID" DataSetColumn="TimeUnitsID" />
+              <Mapping SourceColumn="GeneralCategory" DataSetColumn="GeneralCategory" />
+              <Mapping SourceColumn="VariableUnitsID" DataSetColumn="VariableUnitsID" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="od_1_0ConnectionString (Settings)" DbObjectName="LittleBearRiver.dbo.Variables" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByVariableCode" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetDataByVariableCode" GeneratorSourceName="FillByVariableCode" GetMethodModifier="Public" GetMethodName="GetDataByVariableCode" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetDataByVariableCode" UserSourceName="FillByVariableCode">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT DataType, GeneralCategory, IsRegular, NoDataValue, SampleMedium, TimeSupport, TimeUnitsID, ValueType, VariableCode, VariableID, VariableName, VariableUnitsID FROM Variables WHERE (VariableCode = @variableCode)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="True" AutogeneratedName="variableCode" ColumnName="VariableCode" DataSourceName="OD.dbo.Variables" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@variableCode" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="VariableCode" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="od_1_0ConnectionString (Settings)" DbObjectName="LittleBearRiver.dbo.Variables" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByVariableID" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetDataByVariableID" GeneratorSourceName="FillByVariableID" GetMethodModifier="Public" GetMethodName="GetDataByVariableID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetDataByVariableID" UserSourceName="FillByVariableID">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     DataType, GeneralCategory, IsRegular, NoDataValue, SampleMedium, TimeSupport, TimeUnitsID, ValueType, VariableCode, VariableID, VariableName, 
+                      VariableUnitsID
+FROM         Variables
+WHERE     (VariableID = @variableID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="False" AutogeneratedName="variableID" ColumnName="VariableID" DataSourceName="OD.dbo.Variables" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@variableID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="VariableID" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="UnitsTableAdapter" GeneratorDataComponentClassName="UnitsTableAdapter" Name="Units" UserDataComponentName="UnitsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="od_1_0ConnectionString (Settings)" DbObjectName="LittleBearRiver.dbo.Units" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="False" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="False" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     UnitsID, UnitsName, UnitsType, UnitsAbbreviation
+FROM         Units</CommandText>
+                    <Parameters>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="UnitsID" DataSetColumn="UnitsID" />
+              <Mapping SourceColumn="UnitsType" DataSetColumn="UnitsType" />
+              <Mapping SourceColumn="UnitsAbbreviation" DataSetColumn="UnitsAbbreviation" />
+              <Mapping SourceColumn="UnitsName" DataSetColumn="UnitsName" />
+            </Mappings>
+            <Sources>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CategoriesTableAdapter" GeneratorDataComponentClassName="CategoriesTableAdapter" Name="Categories" UserDataComponentName="CategoriesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="od_1_0ConnectionString (Settings)" DbObjectName="LittleBearRiver.dbo.Categories" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetData" UserSourceName="Fill">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="False">
+                    <CommandText>INSERT INTO [Categories] ([VariableID], [DataValue], [CategoryDescription]) VALUES (@VariableID, @DataValue, @CategoryDescription)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="False" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@VariableID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VariableID" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="False" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="@DataValue" Precision="0" ProviderType="Float" Scale="0" Size="0" SourceColumn="DataValue" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CategoryDescription" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CategoryDescription" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     VariableID, DataValue, CategoryDescription
+FROM         Categories</CommandText>
+                    <Parameters>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="VariableID" DataSetColumn="VariableID" />
+              <Mapping SourceColumn="DataValue" DataSetColumn="DataValue" />
+              <Mapping SourceColumn="CategoryDescription" DataSetColumn="CategoryDescription" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="od_1_0ConnectionString (Settings)" DbObjectName="LittleBearRiver.dbo.Categories" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByVariableId" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetDataByVariableId" GeneratorSourceName="FillByVariableId" GetMethodModifier="Public" GetMethodName="GetDataByVariableId" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetDataByVariableId" UserSourceName="FillByVariableId">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     VariableID, DataValue, CategoryDescription
+FROM         Categories
+WHERE     (VariableID = @VariableID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="False" AutogeneratedName="VariableID" ColumnName="VariableID" DataSourceName="LittleBearRiver.dbo.Categories" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@VariableID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="VariableID" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Variables" msprop:Generator_UserTableName="Variables" msprop:Generator_RowDeletedName="VariablesRowDeleted" msprop:Generator_RowChangedName="VariablesRowChanged" msprop:Generator_RowClassName="VariablesRow" msprop:Generator_RowChangingName="VariablesRowChanging" msprop:Generator_RowEvArgName="VariablesRowChangeEvent" msprop:Generator_RowEvHandlerName="VariablesRowChangeEventHandler" msprop:Generator_TableClassName="VariablesDataTable" msprop:Generator_TableVarName="tableVariables" msprop:Generator_RowDeletingName="VariablesRowDeleting" msprop:Generator_TablePropName="Variables">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="VariableID" msprop:Generator_UserColumnName="VariableID" msprop:Generator_ColumnVarNameInTable="columnVariableID" msprop:Generator_ColumnPropNameInRow="VariableID" msprop:Generator_ColumnPropNameInTable="VariableIDColumn" type="xs:int" />
+        <xs:element name="SampleMedium" msprop:Generator_UserColumnName="SampleMedium" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnSampleMedium" msprop:Generator_ColumnPropNameInTable="SampleMediumColumn" msprop:Generator_ColumnPropNameInRow="SampleMedium" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ValueType" msprop:Generator_UserColumnName="ValueType" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnValueType" msprop:Generator_ColumnPropNameInTable="ValueTypeColumn" msprop:Generator_ColumnPropNameInRow="ValueType" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="IsRegular" msprop:Generator_UserColumnName="IsRegular" msprop:Generator_ColumnVarNameInTable="columnIsRegular" msprop:Generator_ColumnPropNameInRow="IsRegular" msprop:Generator_ColumnPropNameInTable="IsRegularColumn" type="xs:boolean" />
+        <xs:element name="TimeSupport" msprop:Generator_UserColumnName="TimeSupport" msprop:Generator_ColumnVarNameInTable="columnTimeSupport" msprop:Generator_ColumnPropNameInRow="TimeSupport" msprop:Generator_ColumnPropNameInTable="TimeSupportColumn" type="xs:int" minOccurs="0" />
+        <xs:element name="DataType" msprop:Generator_UserColumnName="DataType" msprop:Generator_ColumnVarNameInTable="columnDataType" msprop:Generator_ColumnPropNameInRow="DataType" msprop:Generator_ColumnPropNameInTable="DataTypeColumn" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="100" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="NoDataValue" msprop:Generator_UserColumnName="NoDataValue" msprop:Generator_ColumnVarNameInTable="columnNoDataValue" msprop:Generator_ColumnPropNameInRow="NoDataValue" msprop:Generator_ColumnPropNameInTable="NoDataValueColumn" type="xs:double" minOccurs="0" />
+        <xs:element name="VariableCode" msprop:Generator_UserColumnName="VariableCode" msprop:Generator_ColumnVarNameInTable="columnVariableCode" msprop:Generator_ColumnPropNameInRow="VariableCode" msprop:Generator_ColumnPropNameInTable="VariableCodeColumn" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="VariableName" msprop:Generator_UserColumnName="VariableName" msprop:Generator_ColumnVarNameInTable="columnVariableName" msprop:Generator_ColumnPropNameInRow="VariableName" msprop:Generator_ColumnPropNameInTable="VariableNameColumn" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="200" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="TimeUnitsID" msprop:Generator_UserColumnName="TimeUnitsID" msprop:Generator_ColumnVarNameInTable="columnTimeUnitsID" msprop:Generator_ColumnPropNameInRow="TimeUnitsID" msprop:Generator_ColumnPropNameInTable="TimeUnitsIDColumn" type="xs:int" minOccurs="0" />
+        <xs:element name="GeneralCategory" msprop:Generator_UserColumnName="GeneralCategory" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="GeneralCategory" msprop:Generator_ColumnPropNameInTable="GeneralCategoryColumn" msprop:Generator_ColumnVarNameInTable="columnGeneralCategory" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="VariableUnitsID" msprop:Generator_UserColumnName="VariableUnitsID" msprop:Generator_ColumnPropNameInRow="VariableUnitsID" msprop:Generator_ColumnVarNameInTable="columnVariableUnitsID" msprop:Generator_ColumnPropNameInTable="VariableUnitsIDColumn" type="xs:int" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Units" msprop:Generator_UserTableName="Units" msprop:Generator_RowDeletedName="UnitsRowDeleted" msprop:Generator_RowChangedName="UnitsRowChanged" msprop:Generator_RowClassName="UnitsRow" msprop:Generator_RowChangingName="UnitsRowChanging" msprop:Generator_RowEvArgName="UnitsRowChangeEvent" msprop:Generator_RowEvHandlerName="UnitsRowChangeEventHandler" msprop:Generator_TableClassName="UnitsDataTable" msprop:Generator_TableVarName="tableUnits" msprop:Generator_RowDeletingName="UnitsRowDeleting" msprop:Generator_TablePropName="Units">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="UnitsID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="UnitsID" msprop:Generator_ColumnVarNameInTable="columnUnitsID" msprop:Generator_ColumnPropNameInRow="UnitsID" msprop:Generator_ColumnPropNameInTable="UnitsIDColumn" type="xs:int" />
+        <xs:element name="UnitsType" msprop:Generator_UserColumnName="UnitsType" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="UnitsType" msprop:Generator_ColumnPropNameInTable="UnitsTypeColumn" msprop:Generator_ColumnVarNameInTable="columnUnitsType" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="UnitsAbbreviation" msprop:Generator_UserColumnName="UnitsAbbreviation" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="UnitsAbbreviation" msprop:Generator_ColumnPropNameInTable="UnitsAbbreviationColumn" msprop:Generator_ColumnVarNameInTable="columnUnitsAbbreviation" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="UnitsName" msprop:Generator_UserColumnName="UnitsName" msprop:nullValue="_null" msprop:Generator_ColumnVarNameInTable="columnUnitsName" msprop:Generator_ColumnPropNameInTable="UnitsNameColumn" msprop:Generator_ColumnPropNameInRow="UnitsName" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VariablesDataset" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False" msdata:Prefix="WaterOneFlow.odws.v1_0" msprop:Generator_UserDSName="VariablesDataset" msprop:Generator_DataSetName="VariablesDataset">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="Variables" />
+        <xs:element ref="Units" />
+        <xs:element name="Categories" msprop:Generator_UserTableName="Categories" msprop:Generator_RowDeletedName="CategoriesRowDeleted" msprop:Generator_TableClassName="CategoriesDataTable" msprop:Generator_RowChangedName="CategoriesRowChanged" msprop:Generator_RowClassName="CategoriesRow" msprop:Generator_RowChangingName="CategoriesRowChanging" msprop:Generator_RowEvArgName="CategoriesRowChangeEvent" msprop:Generator_RowEvHandlerName="CategoriesRowChangeEventHandler" msprop:Generator_TablePropName="Categories" msprop:Generator_TableVarName="tableCategories" msprop:Generator_RowDeletingName="CategoriesRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VariableID" msprop:Generator_UserColumnName="VariableID" msprop:Generator_ColumnPropNameInRow="VariableID" msprop:Generator_ColumnVarNameInTable="columnVariableID" msprop:Generator_ColumnPropNameInTable="VariableIDColumn" type="xs:int" />
+              <xs:element name="DataValue" msprop:Generator_UserColumnName="DataValue" msprop:Generator_ColumnPropNameInRow="DataValue" msprop:Generator_ColumnVarNameInTable="columnDataValue" msprop:Generator_ColumnPropNameInTable="DataValueColumn" type="xs:double" />
+              <xs:element name="CategoryDescription" msprop:Generator_UserColumnName="CategoryDescription" msprop:Generator_ColumnPropNameInRow="CategoryDescription" msprop:Generator_ColumnVarNameInTable="columnCategoryDescription" msprop:Generator_ColumnPropNameInTable="CategoryDescriptionColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Variables" />
+      <xs:field xpath="mstns:VariableID" />
+    </xs:unique>
+    <xs:unique name="Units_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Units" />
+      <xs:field xpath="mstns:UnitsID" />
+    </xs:unique>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="Variables_FK01" msdata:parent="Units" msdata:child="Variables" msdata:parentkey="UnitsID" msdata:childkey="TimeUnitsID" msprop:Generator_UserRelationName="Variables_FK01" msprop:Generator_RelationVarName="relationVariables_FK01" msprop:Generator_UserChildTable="Variables" msprop:Generator_UserParentTable="Units" msprop:Generator_ParentPropName="UnitsRowByVariables_FK01" msprop:Generator_ChildPropName="GetVariablesRowsByVariables_FK01" />
+      <msdata:Relationship name="Variables_FK00" msdata:parent="Units" msdata:child="Variables" msdata:parentkey="UnitsID" msdata:childkey="VariableUnitsID" msprop:Generator_UserRelationName="Variables_FK00" msprop:Generator_RelationVarName="relationVariables_FK00" msprop:Generator_UserChildTable="Variables" msprop:Generator_UserParentTable="Units" msprop:Generator_ParentPropName="UnitsRowByVariables_FK00" msprop:Generator_ChildPropName="GetVariablesRowsByVariables_FK00" />
+      <msdata:Relationship name="FK_CategoryDefinitions_ObservationTypes" msdata:parent="Variables" msdata:child="Categories" msdata:parentkey="VariableID" msdata:childkey="VariableID" msprop:Generator_UserRelationName="FK_CategoryDefinitions_ObservationTypes" msprop:Generator_RelationVarName="relationFK_CategoryDefinitions_ObservationTypes" msprop:Generator_UserChildTable="Categories" msprop:Generator_UserParentTable="Variables" msprop:Generator_ParentPropName="VariablesRow" msprop:Generator_ChildPropName="GetCategoriesRows" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

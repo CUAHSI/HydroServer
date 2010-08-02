@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="unitsDataset" targetNamespace="http://tempuri.org/unitsDataset.xsd" xmlns:mstns="http://tempuri.org/unitsDataset.xsd" xmlns="http://tempuri.org/unitsDataset.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ODDB" IsAppSettingsProperty="True" Modifier="Assembly" Name="ODDB (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ODDB.ConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="od_1_0ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="True" Modifier="Public" Name="od_1_0ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.WaterOneFlow.odm.v1_0.Properties.Settings.GlobalReference.Default.od_1_0ConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="UnitsTableAdapter" GeneratorDataComponentClassName="UnitsTableAdapter" Name="Units" UserDataComponentName="UnitsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="od_1_0ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="False" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="False" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT UnitsID, UnitsName, UnitsType, UnitsAbbreviation FROM Units</CommandText>
+                    <Parameters>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="UnitsID" DataSetColumn="UnitsID" />
+              <Mapping SourceColumn="UnitsName" DataSetColumn="UnitsName" />
+              <Mapping SourceColumn="UnitsType" DataSetColumn="UnitsType" />
+              <Mapping SourceColumn="UnitsAbbreviation" DataSetColumn="UnitsAbbreviation" />
+            </Mappings>
+            <Sources>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="unitsDataset" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False" msdata:Prefix="WaterOneFlow.odws.v1_0" msprop:Generator_UserDSName="unitsDataset" msprop:Generator_DataSetName="unitsDataset">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Units" msprop:Generator_UserTableName="Units" msprop:Generator_RowDeletedName="UnitsRowDeleted" msprop:Generator_RowChangedName="UnitsRowChanged" msprop:Generator_RowClassName="UnitsRow" msprop:Generator_RowChangingName="UnitsRowChanging" msprop:Generator_RowEvArgName="UnitsRowChangeEvent" msprop:Generator_RowEvHandlerName="UnitsRowChangeEventHandler" msprop:Generator_TableClassName="UnitsDataTable" msprop:Generator_TableVarName="tableUnits" msprop:Generator_RowDeletingName="UnitsRowDeleting" msprop:Generator_TablePropName="Units">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UnitsID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="UnitsID" msprop:Generator_ColumnVarNameInTable="columnUnitsID" msprop:Generator_ColumnPropNameInRow="UnitsID" msprop:Generator_ColumnPropNameInTable="UnitsIDColumn" type="xs:int" />
+              <xs:element name="UnitsName" msprop:Generator_UserColumnName="UnitsName" msprop:Generator_ColumnVarNameInTable="columnUnitsName" msprop:Generator_ColumnPropNameInRow="UnitsName" msprop:Generator_ColumnPropNameInTable="UnitsNameColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UnitsType" msprop:Generator_UserColumnName="UnitsType" msprop:Generator_ColumnVarNameInTable="columnUnitsType" msprop:Generator_ColumnPropNameInRow="UnitsType" msprop:Generator_ColumnPropNameInTable="UnitsTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UnitsAbbreviation" msprop:Generator_UserColumnName="UnitsAbbreviation" msprop:Generator_ColumnVarNameInTable="columnUnitsAbbreviation" msprop:Generator_ColumnPropNameInRow="UnitsAbbreviation" msprop:Generator_ColumnPropNameInTable="UnitsAbbreviationColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint2">
+      <xs:selector xpath=".//mstns:Units" />
+      <xs:field xpath="mstns:UnitsID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

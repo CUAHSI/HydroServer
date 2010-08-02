@@ -1,0 +1,93 @@
+
+Often users have thier own databases with sites and values.
+In order to use the OD web services, data providers will need to create a database with additional views.
+Views allow for data providers to manage thier data using present methods, and use the CUAHSI web services codebase to provide web servcies.
+
+Note: Indexes are an important
+while MS SQL Server can create indexes. It requires a a bit of time
+
+SITE CATALOG ONLY:
+The minimal system just provides a site catalog, and a reference is
+Tables needed for just a 'Site Catalog' Database. 
+
+- Units
+- SpatialReferences
+
+Views needed:
+- Sites
+- SeriesCatalog
+- Variables
+
+The above are the minimal tables needed for any system.
+Thes database is in ODSiteCatalog.zip
+
+
+DATASOURCE WITH VALUES
+If a dataset has values, then full set of tables is needed to use the OD WebServices.
+Only the Units and SpatialReferences Tables need to be populated (and those are provided vocabularies). 
+The tables listed in "Tables or Views"  need to be present, so that the dataset functionality works. 
+But these tables can also be views over a dataset. 
+
+Tables Needed:
+- Units
+- SpatialReferences
+
+Tables or Views:
+- QualityControlLevel*
+- Sources*
+- Methods*
+- OffsetTypes*
+- Samples*
+- Qualifiers*
+
+Views:
+- Sites
+- SeriesCatalog
+- Variables
+- Values
+
+This database
+
+Many tables are controled vocabularies. It might be good
+Tables with CUASHI Controlled Vocabularies:
+- Need list
+
+Using views to Map datasource CV to  CUASHI CV
+{Need section on how to do this}
+
+
+Tasks:
+- attach or restore database
+-- Attach
+--- unzip database file
+--- open SQL Server Management studio
+--- right click on databases- select attach
+--- select .mdf file
+--- refresh, and file should show up on the list.
+-- Restore Database
+--- While you can just copy MS Database file, you can only have one DB with the same name. 
+    this proceedure helps insure that multiple DB's can be started on the same database. 
+--- unzip database file
+--- open SQL Server Management studio
+--- create new database with name
+---- suggest that you create the datbase in a location other than the default "program files MSsql server ..."
+----- we usually create it in a folder at the root level of a drive, and put both files in the same directory d:\databases\mydatabase
+----- note: if you expect this to grow large, then for performance reasons, you may want to split the DB to different drives. 
+--- right click on database you created, select tasks-restore-database
+---- select either "ODWebServicesBaseMinimal.bak" or "ODSiteCatalogMimimal.bak"
+
+- load data
+-- copy files to  your existing database or load data from your database to the created.
+--- NEED DETAILS.
+
+
+
+
+
+
+
+Now, configure backups....
+
+
+
+

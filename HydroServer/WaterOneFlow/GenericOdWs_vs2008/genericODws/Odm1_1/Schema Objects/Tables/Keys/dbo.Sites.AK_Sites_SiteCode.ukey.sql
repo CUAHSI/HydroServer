@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[Sites] ADD CONSTRAINT [AK_Sites_SiteCode] UNIQUE NONCLUSTERED  ([SiteCode]) ON [PRIMARY]
+
+

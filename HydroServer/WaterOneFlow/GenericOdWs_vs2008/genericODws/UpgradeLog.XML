@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="genericODws">
+</Property><Property Name="Solution File" Value="C:\dev_2008\GenericOdWs_vs2008\genericODws\genericODws.sln">
+</Property><Property Name="Date" Value="Monday, August 02, 2010">
+</Property><Property Name="Time" Value="9:21 AM">
+</Property></Properties><Event ErrorLevel="0" Project="waterOneFlowImpl" Source="..\waterOneFlowImpl\waterOneFlowImpl.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="waterOneFlowImpl" Source="..\waterOneFlowImpl\waterOneFlowImpl.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CustomInstallAction" Source="CustomInstallAction\CustomInstallAction.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CustomInstallAction" Source="CustomInstallAction\CustomInstallAction.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CodeRewriter" Source="CodeRewriter\CodeRewriter.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CodeRewriter" Source="CodeRewriter\CodeRewriter.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CodeRewriterTest" Source="CodeRewriterTest\CodeRewriterTest.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CodeRewriterTest" Source="CodeRewriterTest\CodeRewriterTest.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Beginning Upgrade">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1_2010-08-02T09_22_00.dbproj.old saved.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="This project will be upgraded through these steps:">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Setting the new project file version">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrade project file to include a new targets file.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Removing the OutputPath property from the .user file">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrade the ToolsVersion property.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Creating database schema provider entry">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading various properties that have had their names or values changed">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Create the Properties folder and various properties files.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Create SQLCMD variables and deployment configuration file(s).">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading project references. &quot;.dbmeta&quot; file references will be converted to &quot;.dbschema&quot; references.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading filegroups to scripts">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading pre- and post-deployment scripts to extract supported objects">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Beginning upgrade...">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading the project version">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="ProjectVersion was upgraded from 1.0 to 3.5.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading project version.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading to a new targets file">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading to new targets file.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading to remove the output path from the .user file">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished removing output path from .user file.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading to a new tools version">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading to new tools version.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading project to include the correct database schema provider">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgraded database schema provider to Microsoft.Data.Schema.Sql.SqlDsp.Sql90DatabaseSchemaProvider.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading project to include the correct database schema provider.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading various project properties">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="The EnableServiceBroker property was updated.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="The property DeploymentCollationPreference has been upgraded.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading various project properties.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Creating Properties folder and contents">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Saving the Catalog property file">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Adding the Properties folder to the project">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="The property file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Properties\Database.sqlsettings' was added to the project.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="The property file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Properties\Database.sqldeployment' was added to the project.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="The property file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Properties\Database.sqlcmdvars' was added to the project.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished creating Properties folder and contents.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading SQLCMD variables to move them to property file(s)">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Removing the SetVariables property from the project file">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="The property file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Properties\Database.sqldeployment' was added to the project.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Saving the Deployment Configuration file C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Properties\Database.sqldeployment">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading SQLCMD variables to their property file(s).">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading references">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Removing deprecated elements from project and artifact references">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading references.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading filegroups">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="No filegroup upgrade is necessary.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading filegroups.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading pre- and post-deployment scripts">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Extracting vital properties from the project file and 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Properties\Database.sqlsettings'.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Looking for included SQL scripts in 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Pre-Deployment\Script.PreDeployment.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Gathering include files">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Pre-Deployment\Script.PreDeployment.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Pre-Deployment\.\Logins.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Pre-Deployment\.\LinkedServers.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Pre-Deployment\.\CustomErrors.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Pre-Deployment\.\EncryptionKeysAndCertificates.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Looking for included SQL scripts in 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Post-Deployment\Script.PostDeployment.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Gathering include files">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Post-Deployment\Script.PostDeployment.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Post-Deployment\.\Storage.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Post-Deployment\.\Permissions.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Post-Deployment\.\RoleMemberships.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Post-Deployment\.\RulesAndDefaults.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Post-Deployment\.\DatabaseObjectOptions.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Processing file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Scripts\Post-Deployment\.\Signatures.sql'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Upgrading pre- and post-deployment scripts to 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Upgraded'">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Creating .dbschema file with all server level objects">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Successfully created a reference to 'C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Upgraded\UpgradedServerObjects.dbschema'.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Finished upgrading pre- and post-deployment scripts.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Saving upgraded files">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj saved.">
+</Event><Event ErrorLevel="0" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Modified project file to remove absolute file reference paths.">
+</Event><Event ErrorLevel="3" Project="C:\dev_2008\GenericOdWs_vs2008\genericODws\Odm1_1\Odm1_1.dbproj" Source="Odm1_1\Odm1_1.dbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ODM1_1_Datasets" Source="ODM1_1_Datasets\ODM1_1_Datasets.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ODM1_1_Datasets" Source="ODM1_1_Datasets\ODM1_1_Datasets.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ODM1_0_Datasets" Source="ODM1_0_Datasets\ODM1_0_Datasets.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ODM1_0_Datasets" Source="ODM1_0_Datasets\ODM1_0_Datasets.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WofAuthentication" Source="WofAuthentication\WofAuthentication.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="WofAuthentication" Source="WofAuthentication\WofAuthentication.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="GenericGrabSampleFiles" Source="GenericGrabSampleFiles\GenericGrabSampleFiles.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="GenericGrabSampleFiles" Source="GenericGrabSampleFiles\GenericGrabSampleFiles.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="EncryptConnectionStrings" Source="EncryptConnectionStrings\EncryptConnectionStrings.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="EncryptConnectionStrings" Source="EncryptConnectionStrings\EncryptConnectionStrings.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="genericODws.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="genericODws.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="waterOneFlowImpl" Source="..\waterOneFlowImpl\waterOneFlowImpl.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="CustomInstallAction" Source="CustomInstallAction\CustomInstallAction.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="CodeRewriter" Source="CodeRewriter\CodeRewriter.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="2" Project="" Source="genericODws.vsmdi" Description="Failed to convert the file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\genericODws.vsmdi' to the current format: Access to the path 'C:\dev_2008\GenericOdWs_vs2008\genericODws\genericODws.vsmdi' is denied.">
+</Event><Event ErrorLevel="2" Project="" Source="localtestrun.testrunconfig" Description="Failed to convert the file 'C:\dev_2008\GenericOdWs_vs2008\genericODws\localtestrun.testrunconfig' to the current format: Access to the path 'C:\dev_2008\GenericOdWs_vs2008\genericODws\localtestrun.testrunconfig' is denied.">
+</Event><Event ErrorLevel="0" Project="CodeRewriterTest" Source="CodeRewriterTest\CodeRewriterTest.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="ODM1_1_Datasets" Source="ODM1_1_Datasets\ODM1_1_Datasets.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="ODM1_0_Datasets" Source="ODM1_0_Datasets\ODM1_0_Datasets.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="WofAuthentication" Source="WofAuthentication\WofAuthentication.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="GenericGrabSampleFiles" Source="GenericGrabSampleFiles\GenericGrabSampleFiles.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="EncryptConnectionStrings" Source="EncryptConnectionStrings\EncryptConnectionStrings.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

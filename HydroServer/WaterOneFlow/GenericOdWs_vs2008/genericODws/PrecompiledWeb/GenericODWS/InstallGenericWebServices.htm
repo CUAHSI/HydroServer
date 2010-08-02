@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>How to Install</title>
+</head>
+<body>
+<h2>
+    Installing Generic OD Web Service</h2>
+    <h2>
+        Requirements</h2>
+    <ul>
+        <li>Micosoft Windows XP or 2003</li>
+        <li>IIS Installed with ASP.Net </li>
+        <li>.Net 2.0 Framework</li>
+        <li>SqlServer Express, or SQL Server Database that service can connect to.</li>
+        <li>OD Database</li>
+    </ul>
+    <h2>
+        Tasks</h2>
+<ul>
+<li>unzip GenericODws.zip</li>
+    <li>set permissions on
+    <ul><li>genericODws: Everyone - Read</li>
+    <li>genericODws: ASP.Net - Full Control </li>
+        <li>genericODws/App_Data: Network_Service - Full Control </li>
+    </ul>
+    </li>
+    <li>Install registry keys)</li>
+    <ul>
+    <li>open genericODws\bin</li>
+    <li>right click on EventLogRegistryKey.reg </li>
+    <li>select merge</li>
+    </ul>
+    <li>edit GenericODws\web.config
+    <ul><li>edit key="network"</li>
+    <li>edit key="vocabulary"</li>
+    </ul>
+    </li>
+    <li>Decide on Database location and setup database connection.
+    <ul>
+    <li>Edit GenericODws\web.config</li>
+        <li>For the connection string</li>
+        <li>If database is inside the App_data connection string:<br /> "Data Source=.\SQLEXPRESS;Integrated Security=true;User Instance=true;AttachDbFilename=|DataDirectory|[FILENAME];Database=[DATABSE_NAME]"
+        </li>
+    <li>If database is local file connection string: <br /> "Data Source=.\SQLEXPRESS;Integrated Security=true;User Instance=true;AttachDbFilename=[PATH_TO_FILE][FILENAME];Database=[DATABSE_NAME]" </li>
+    <li>If database is local database connection string: <br />"Data Source=.\SQLEXPRESS;Integrated Security=true;Database=[DATABSE_NAME]"</li>
+    <li>If database is remote connection string:<br /> "Data Source=[HOSTNAME];Integrated Security=true;Database=[DATABSE_NAME]"</li>
+    <li>In connection strings, replace [HOSTNAME],[DATABSE_NAME],[PATH_TO_FILE][FILENAME], as needed.&nbsp; Remove Brackets.</li>
+    </ul>
+    </li>
+    <li>Edit Page &nbsp;"GenericODws\BasicData.htm" 
+    <ul><li>Add a Description</li>
+    <li>Add sample sites, variables and time ranges</li>
+    <li>Add any notes.</li>
+    </ul> </li>
+    <li>rename GenericODws directory to a service name: eg DemoOD. </li>
+    <li>move to IIS directory (eg C:\Inetpub\wwwroot)</li>
+    <li>configure Web Application in IIS Manager 
+    
+    <ul>
+    <li>Open "Start>All Programs>Adminsstrative Tools>Internet Information Services Manager"</li>
+    <li>Open "HOSTNAME>Websites>Default WebSite"</li>
+    <li>Select Directory, right click properties</li>
+    <li>In Directory Tab, Under Application Settings, Click Create, Set Application Pool to "ASP.NET V2.0", Click OK</li>
+        <li>Go over to ASP.NET tab</li>
+        <li></li>
+    </ul>
+    </li>
+   
+    <li>Go to http://localhost/[DIRECTORY]/ where [DIRECTORY] is the name of the directory</li>
+    <li>You should see a page with a set of data </li>
+ </ul>   
+    <h3>
+        Dataset Prep For HIS</h3>
+    <br />
+    <ul>
+        <li>Need to generate a set of a shape files for the OD. </li>
+        <li>Present steps involve opening ArcGIS, generating an XY event view<br />
+            <br />
+        </li>
+    </ul>
+    <h3>
+    Notes:
+    </h3>
+    <ul>
+        <li>You may need to delete the [DATABASE]_log.ldf file from App_data</li>
+        <li>If there is a problem, it is probably with the database connection. </li>
+        <li>A new admin page will be created assist in the setting of network, vocabulary, and
+            connection string.</li>
+    </ul>
+    <p>
+        :</p>
+    <p>
+        &nbsp;</p>
+
+
+    <h2>
+        Details:</h2>
+    <p>
+        See How to Setup OD Web Service.DOC</p>
+    <p>
+        &nbsp;</p>
+    <h3>
+        Net 2.0</h3>
+    <ul>
+        <li>Optional Component in Windows Update. Go to windows update, and select optional.
+            Select .net Framework 2.0</li>
+    </ul>
+    <h3>
+        ASP.NET</h3>
+    <ul>
+        <li>Windows 2003</li>
+        <li>ASP.Net is not installed by default in Windows 2003. You will need to add it via
+            the add/remove programs control panel. Add Windows Components (need screenshot)</li>
+    </ul>
+    <h3>
+        SQLServer Express</h3>
+    <ul>
+        <li></li>
+    </ul>
+</body>
+</html>

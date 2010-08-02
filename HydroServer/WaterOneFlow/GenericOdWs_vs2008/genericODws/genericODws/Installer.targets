@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Install">
+
+  <!--  <Import Project="C:\Program Files\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+-->
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\MSBuildCommunityTasks\</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <Import Project=".\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+
+  <PropertyGroup>
+    <OutputFolder>.\WebApp\</OutputFolder>
+    <CompilationDebug />
+    <CustomErrorsMode />
+    <ContentEditorsEmail />
+    <AdministratorsEmail />
+    <Environment>Default</Environment>
+    <!-- these make the properties global, so they can be shared across tasks -->
+    <VirtualDirectory/>
+    <network/>
+    <vocabulary/>
+    <oddb/>
+    <ServiceDescriptionPage/>
+    <returnUndefinedUTCorLocal/>
+    <DeploymentFolder/>
+  </PropertyGroup>
+
+  <!-- <PropertyGroup>
+    <CompilationDebugXPath>configuration/system.web/compilation/@debug</CompilationDebugXPath>
+    <CustomErrorsModeXPath>configuration/system.web/customErrors/@mode</CustomErrorsModeXPath>
+    <AdministratorsEmailXPath>configuration/appSettings/add[@key='contactEmail']/@value</AdministratorsEmailXPath>
+  </PropertyGroup>
+  -->
+  <!-- read from Environment.config -->
+  <PropertyGroup>
+    <CompilationDebugXPath>configuration/system.web/compilation/@debug</CompilationDebugXPath>
+    <CustomErrorsModeXPath>configuration/system.web/customErrors/@mode</CustomErrorsModeXPath>
+    <networkXPath>configuration/appSettings/add[@key='network']/@value</networkXPath>
+    <vocabularyXPath>configuration/appSettings/add[@key='vocabulary']/@value</vocabularyXPath>
+    <AdministratorsEmailXPath>configuration/appSettings/add[@key='contactEmail']/@value</AdministratorsEmailXPath>
+
+    <SeriesNameXPath>configuration/appSettings/add[@key='SeriesName']/@value</SeriesNameXPath>
+    <ServiceDescriptionPageXPath>configuration/appSettings/add[@key='ServiceDescriptionPage']/@value</ServiceDescriptionPageXPath>
+    <returnUndefinedUTCorLocalXPath>configuration/appSettings/add[@key='returnUndefinedUTCorLocal']/@value</returnUndefinedUTCorLocalXPath>
+
+    <!-- connection string... different that generic appSettings key -->
+    <odbbXpath>configuration/connectionStrings/add[@name='ODDB']/@connectionString</odbbXpath>
+    <!-- Install properties -->
+    <VirtualDirectoryXPath>configuration/Install/VirtualDirectory</VirtualDirectoryXPath>
+    <OutputFolderXPath>configuration/Install/OutputFolder</OutputFolderXPath>
+    <DeploymentFolderXPath>configuration/Install/DeploymentFolder</DeploymentFolderXPath>
+    <HostNameXPath>configuration/Install/HostName</HostNameXPath>
+
+    <authUserXPath>configuration/system.web/authentication/forms/credentials/user/@name</authUserXPath>
+    <authPassXPath>configuration/system.web/authentication/forms/credentials/user/@password</authPassXPath>
+    <authUserXPathWrite>/tns:configuration/tns:system.web/tns:authentication/tns:forms[@name=".ASPXFORMSAUTH"]/tns:credentials/tns:user[1]/@name</authUserXPathWrite>
+    <authPassXPathWrite>/tns:configuration/tns:system.web/tns:authentication/tns:forms[@name=".ASPXFORMSAUTH"]/tns:credentials/tns:user[1]/@password</authPassXPathWrite>
+
+  </PropertyGroup>
+
+  <!-- location to write to in appsettings.config  -->
+  <PropertyGroup>
+    <networkXPathWrite>appSettings/add[@key='network']/@value</networkXPathWrite>
+    <vocabularyXPathWrite>appSettings/add[@key='vocabulary']/@value</vocabularyXPathWrite>
+    <AdministratorsEmailXPathWrite>appSettings/add[@key='contactEmail']/@value</AdministratorsEmailXPathWrite>
+
+    <SeriesNameXPathWrite>appSettings/add[@key='GetValuesName']/@value</SeriesNameXPathWrite>
+    <ServiceDescriptionPageXPathWrite>appSettings/add[@key='serviceDescriptionPage']/@value</ServiceDescriptionPageXPathWrite>
+    <returnUndefinedUTCorLocalXPathWrite>appSettings/add[@key='returnUndefinedUTCorLocal']/@value</returnUndefinedUTCorLocalXPathWrite>
+  </PropertyGroup>
+  <!-- location to write to in appsettings.config  -->
+  <PropertyGroup>
+    <odbbXPathWrite>connectionStrings/add[@name='ODDB']/@connectionString</odbbXPathWrite>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <logQueryFileXPath>log4net/appender[@name='QueryLogFileAppender']/file/@value</logQueryFileXPath>
+    <logFullFileXPath>log4net/appender[@name='RollingLogFileAppender']/file/@value</logFullFileXPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <DeploymentFiles Include="$(OutputFolder)\**\*.*" />
+  </ItemGroup>
+
+  <Target Name="SetWebConfig" DependsOnTargets="GetConfig">
+    <XmlUpdate XPath="$(CompilationDebugXPath)"
+               XmlFileName="$(OutputFolder)\web.config"
+               Value="$(CompilationDebug)" />
+    <XmlUpdate XPath="$(CustomErrorsModeXPath)"
+               XmlFileName="$(OutputFolder)\web.config"
+               Value="$(CustomErrorsMode)" />
+    <XmlUpdate XPath="$(authUserXPathWrite)"
+    Prefix="tns"
+Namespace="http://schemas.microsoft.com/.NetConfiguration/v2.0"
+           XmlFileName="$(OutputFolder)\web.config"
+           Value="$(authUser)" />
+    <XmlUpdate XPath="$(authPassXPathWrite)"
+         Prefix="tns"
+         Namespace="http://schemas.microsoft.com/.NetConfiguration/v2.0"
+               XmlFileName="$(OutputFolder)\web.config"
+          Value="$(authPass)" />
+  </Target>
+
+  <Target Name="SetAppConfig" DependsOnTargets="GetConfig">
+    <XmlUpdate XPath="$(AdministratorsEmailXPathWrite)"
+                XmlFileName="$(OutputFolder)\appsettings.config"
+                Value="$(AdministratorsEmail)" />
+    <XmlUpdate XPath="$(networkXPathWrite)"
+	                      XmlFileName="$(OutputFolder)\appsettings.config"
+               Value="$(network)" />
+    <XmlUpdate XPath="$(vocabularyXPathWrite)"
+	       	                      XmlFileName="$(OutputFolder)\appsettings.config"
+               Value="$(vocabulary)" />
+
+    <XmlUpdate XPath="$(SeriesNameXPathWrite)"
+                             XmlFileName="$(OutputFolder)\appsettings.config"
+            Value="$(SeriesName)" />
+    <XmlUpdate XPath="$(ServiceDescriptionPageXPathWrite)"
+                             XmlFileName="$(OutputFolder)\appsettings.config"
+            Value="$(ServiceDescriptionPage)" />
+    <XmlUpdate XPath="$(returnUndefinedUTCorLocalXPathWrite)"
+                             XmlFileName="$(OutputFolder)\appsettings.config"
+            Value="$(returnUndefinedUTCorLocal)" />
+  </Target>
+
+  <Target Name="SetConnectionStringConfig" DependsOnTargets="GetConfig">
+    <XmlUpdate XPath="$(odbbXpathWrite)"
+                XmlFileName="$(OutputFolder)\connectionstrings.config"
+                Value="$(oddb)" />
+  </Target>
+
+  <Target Name="SetLogFileConfig" DependsOnTargets="GetConfig">
+    <XmlUpdate XPath="$(logQueryFileXPath)"
+                   XmlFileName="$(OutputFolder)\wateroneflow.logging.log4net"
+                 Value="..\log-data\query-log_$(VirtualDirectory).txt" />
+    <XmlUpdate XPath="$(logFullFileXPath)"
+                  XmlFileName="$(OutputFolder)\wateroneflow.logging.log4net"
+                Value="..\log-data\full-log_$(VirtualDirectory).txt" />
+  </Target>
+
+  <Target Name="GetConfig" >
+    <XmlRead XPath="$(CompilationDebugXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="CompilationDebug" />
+    </XmlRead>
+    <XmlRead XPath="$(CustomErrorsModeXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="CustomErrorsMode" />
+    </XmlRead>
+    <XmlRead XPath="$(AdministratorsEmailXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="AdministratorsEmail" />
+    </XmlRead>
+    <XmlRead XPath="$(networkXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="network" />
+    </XmlRead>
+    <XmlRead XPath="$(vocabularyXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="vocabulary" />
+    </XmlRead>
+
+    <XmlRead XPath="$(SeriesNameXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="SeriesName" />
+    </XmlRead>
+    <XmlRead XPath="$(ServiceDescriptionPageXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="ServiceDescriptionPage" />
+    </XmlRead>
+    <XmlRead XPath="$(returnUndefinedUTCorLocalXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="returnUndefinedUTCorLocal" />
+    </XmlRead>
+
+    <XmlRead XPath="$(odbbXpath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="oddb" />
+    </XmlRead>
+
+    <!-- optional app settings-->
+
+    <!-- Webapp.config  settings-->
+    <XmlRead XPath="$(authUserXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="authUser" />
+    </XmlRead>
+    <XmlRead XPath="$(authPassXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="authPass" />
+    </XmlRead>
+
+    <!-- install parameters -->
+    <XmlRead XPath="$(VirtualDirectoryXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="VirtualDirectory" />
+    </XmlRead>
+    <XmlRead XPath="$(DeploymentFolderXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="DeploymentFolder" />
+    </XmlRead>
+
+    <!-- add host headers -->
+    <XmlRead XPath="$(HostNameXPath)" XmlFileName="$(Environment).config">
+      <Output TaskParameter="Value" PropertyName="HostHeaderName" />
+    </XmlRead>
+  </Target>
+
+
+  <Target Name="Install">
+    <!-- 
+   <CallTarget Targets="Compile" />
+    <CallTarget Targets="Publish" />
+    -->
+    <CallTarget Targets="SetWebConfig;SetAppConfig;SetConnectionStringConfig;SetLogFileConfig" />
+    <CallTarget Targets="Deploy" />
+  </Target>
+
+  <Target Name="Deploy" DependsOnTargets="GetConfig;UnDeploy">
+    <!--  <RemoveDir Directories="$(DeploymentFolder)"
+               ContinueOnError="true" />
+               -->
+    <Copy SourceFiles="@(DeploymentFiles)"
+          DestinationFolder="$(DeploymentFolder)\$(VirtualDirectory)\%(RecursiveDir)" />
+
+
+    <!--  <ConvertToAbsolutePath Paths="$(DeploymentFolder)">
+      <Output TaskParameter="AbsolutePaths" ItemName="DeploymentPath" />
+    </ConvertToAbsolutePath>
+    -->
+    <!-- ConvertToAbsolutePath is a 3.5 task...
+    but the create item combined with item.FullPath below are equivalent... 
+    after a long learning process-->
+
+    <CreateItem
+                Include="$(DeploymentFolder)">
+      <Output
+          TaskParameter="Include"
+          ItemName="VirtualDirectoryPhysicalPath"/>
+    </CreateItem>
+    <Message Text="Deploying  $(VirtualDirectory) "/>
+    <Message Text="to path = %(VirtualDirectoryPhysicalPath.FullPath)"/>
+
+    <WebDirectoryCreate VirtualDirectoryName="$(VirtualDirectory)"
+                         VirtualDirectoryPhysicalPath="%(VirtualDirectoryPhysicalPath.FullPath)\$(VirtualDirectory)"
+                                       DefaultDoc="Default.aspx"
+                        EnableDefaultDoc="true"
+                        EnableDirBrowsing="true"
+                        HostHeaderName="$(HostHeaderName)"
+                        />
+    <Exec Command='setacl -on  "%(VirtualDirectoryPhysicalPath.FullPath)\$(VirtualDirectory)" -ot file -actn ace -ace "n:everyone;p:read"  -ace "n:ASPNET;p:full"   -ace "n:administrators;p:full" '
+    />
+    <!--    <Exec Command='setacl -on  "%(VirtualDirectoryPhysicalPath.FullPath)\$(VirtualDirectory)\app_data" -ot file -actn ace -ace "n:ASPNET;p:full" '
+    />
+    -->
+  </Target>
+
+  <Target Name="UnDeploy" DependsOnTargets="GetConfig">
+    <WebDirectoryDelete VirtualDirectoryName="$(VirtualDirectory)"
+                         ContinueOnError="true"
+                         HostHeaderName="$(HostHeaderName)"/>
+    <RemoveDir Directories="$(DeploymentFolder)\$(VirtualDirectory)"
+               ContinueOnError="true" />
+
+  </Target>
+</Project>

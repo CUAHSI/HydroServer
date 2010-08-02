@@ -1,0 +1,11 @@
+You need to install:
+Microsoft.Web.Services3: 
+http://www.microsoft.com/downloads/details.aspx?familyid=018a09fd-3a74-43c5-8ec1-8d789091255d&displaylang=en
+
+2008 Web Deployment projects
+http://www.microsoft.com/downloads/details.aspx?FamilyId=0AA30AE8-C73B-4BDD-BB1B-FE697256C459&displaylang=en
+http://blogs.msdn.com/b/webdevtools/archive/2008/01/25/announcing-rtw-of-visual-studio-2008-web-deployment-projects-wdp.aspx
+
+
+Visual Studio Team System 2008 Database Edition (x86) :
+http://www.microsoft.com/downloads/details.aspx?displaylang=en&FamilyID=bb3ad767-5f69-4db9-b1c9-8f55759846ed
