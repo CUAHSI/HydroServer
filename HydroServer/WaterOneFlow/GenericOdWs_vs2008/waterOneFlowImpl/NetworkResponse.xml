@@ -1,0 +1,10 @@
+﻿<Networks xmlns="http://www.cuahsi.org/waterML/">
+  <Network NetworkID="1" Organization="cuahsi" NetworkName="cuahsi" LongNetworkName="Consortium of Universities for the Advancement of Hydrologic Science" URL="http://www.cuahsi.org" StationNumber="0" ObsStartDate="2006-09-07T00:00:00" ObsEndDate="2006-09-08T00:00:00" LastUpdate="2006-09-08T00:00:00" Contact="Ilya Zavlosky"/>
+  <Network NetworkID="2" Organization="USGS" NetworkName="NWIS" LongNetworkName="National Water Information System" URL="http://water.usgs.gov/"/>
+  <Network NetworkID="3" Organization="ORNL" NetworkName="Ameriflux" LongNetworkName="Ameriflux" URL="http://public.ornl.gov/ameriflux/"/>
+  <Network NetworkID="4" Organization="NASA" NetworkName="MODIS" LongNetworkName="Moderate Resolution Imaging Spectroradiometer" URL="http://modis.gsfc.nasa.gov/gallery/showall.php"/>
+  <Network NetworkID="5" Organization="UoM-NTSG" NetworkName="DAYMET" LongNetworkName="Daily Surface Weather Data and Climatological Summaries " URL="http://www.daymet.org/"/>
+  <Network NetworkID="6" Organization="UCAR" NetworkName="NAM" LongNetworkName="North American Mesoscale Weather Research &amp; Forecasting Model" URL="http://www.meted.ucar.edu/"/>
+  <Network NetworkID="7" Organization="USGS" NetworkName="NAWQA" LongNetworkName="National Water Quality Assessment " URL="http://infotrek.er.usgs.gov/traverse/f?p=NAWQA:HOME:17723091541213114058"/>
+  <Network NetworkID="8" Organization="EPA" NetworkName="EPA" LongNetworkName="Enviromental Protection Agency" URL="http://www.epa.gov/"/>
+</Networks>

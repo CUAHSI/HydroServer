@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- WaterOneFlow Capabilities-->
+<CUAHSI_Capabilties>
+  <ServiceIdentification>
+    <Title xml:lang="en">CUAHSI Generic WaterWebServices</Title>
+    <Abstract>
+     
+    </Abstract>
+    <Keywords>
+      <Keyword>hydrology</Keyword>
+    </Keywords>
+    <ServiceType>CUAHSI:WaterOneFlow</ServiceType>
+    <ServiceTypeVersion>1.0.0</ServiceTypeVersion>
+    <ServiceTypeVersion>1.1.0</ServiceTypeVersion>
+    <Fees>NONE</Fees>
+    <AccessConstraints>NONE</AccessConstraints>
+  </ServiceIdentification>
+  <ServiceProvider>
+    <!-- this will need to be edited-->
+    <ProviderName>CUAHSI Data Provider</ProviderName>
+    <ProviderSite href="http://hostname/"/>
+    <ServiceContact>
+      <IndividualName>Smith, Server Administrator</IndividualName>
+      <PositionName>Researcher</PositionName>
+      <ContactInfo>
+        <Phone>
+          <Voice>+1 301 555-1212</Voice>
+          <Facsimile>+1 301 555-1212</Facsimile>
+        </Phone>
+        <Address>
+          <DeliveryPoint>Supercomputer Center, UCSD</DeliveryPoint>
+          <City>La Jolla</City>
+          <AdministrativeArea>CA</AdministrativeArea>
+          <PostalCode>92093-0505</PostalCode>
+          <Country>USA</Country>
+          <ElectronicMailAddress>CUAHSIAdmin@example.com</ElectronicMailAddress>
+        </Address>
+      </ContactInfo>
+    </ServiceContact>
+  </ServiceProvider>
+
+  <Services>
+    <WaterWebService version="1.0">
+      <type>SOAP</type>
+      <WsdlPath>cuahsi_1_0.asmx?WSDL</WsdlPath>
+      <EnforcesNetworkCode>false</EnforcesNetworkCode>
+      <Authentication>
+        <Required>false</Required>
+        <AuthenticationDescription>
+          None Required
+        </AuthenticationDescription>
+     </Authentication>
+      <Operations>
+        <Request>
+          <GetSites>
+            <parameter name="site">
+              <Supports>
+                <SiteCode>true</SiteCode>
+                <GeometryBox>true</GeometryBox>
+              </Supports>
+            </parameter>
+            <ResultLimit>20000</ResultLimit>
+          </GetSites>
+          <GetSiteInfo>
+            <parameter name="site">
+              <Supports>
+                <NullOrEmptyReuturnsAll>true</NullOrEmptyReuturnsAll>
+                <SiteCode>true</SiteCode>
+                <ByID>true</ByID>
+                <!-- BYID is a way to retrieve by Identifier, eg GetSiteInfo('BYID:12')-->
+              </Supports>
+            </parameter>
+          </GetSiteInfo>
+          <GetVariable>
+            <parameter name="variable">
+              <Supports>
+                <NullOrEmptyReuturnsAll>true</NullOrEmptyReuturnsAll>
+                <VariableCode>true</VariableCode>
+                <ByID>true</ByID>
+                <!-- BYID is a way to retrieve by Identifier, eg GetVariable('BYID:12')-->
+                <Constraints>
+                  <!-- Constraints are key value information added to the end fo a varibable
+                  GetVariable('ODM:USU00001/SampleMedium=Water')
+                  GetVariable('ODM:USU00001/ValueType=Average')
+                  -->
+                  <SampleMedium>true</SampleMedium>
+                  <DataType>true</DataType>
+                  <ValueType>true</ValueType>
+                  </Constraints>
+                </Supports>
+            </parameter>
+          </GetVariable>
+          <GetValues>
+            <parameter name="location">
+              <NullOrEmptyReuturnsAll>false</NullOrEmptyReuturnsAll>
+              <SiteCode>true</SiteCode>
+            </parameter>
+            <parameter name="variable">
+              <Supports>
+                <NullOrEmptyReuturnsAll>false</NullOrEmptyReuturnsAll>
+                <VariableCode>true</VariableCode>
+                <Constraints>
+                  <SampleMedium>true</SampleMedium>
+                  <DataType>true</DataType>
+                  <ValueType>true</ValueType>
+                  <MethodID>true</MethodID>
+                  <SourceID>true</SourceID>
+                  <QualityControlLevelID>true</QualityControlLevelID>
+                </Constraints>
+              </Supports>
+            </parameter>
+          </GetValues>
+        </Request>
+      </Operations>
+    </WaterWebService>
+    <WaterWebService version="1.1">
+      <WsdlPath>cuahsi_1_1.asmx?WSDL</WsdlPath>
+      <EnforcesNetworkCode>false</EnforcesNetworkCode>
+      <Operations>
+        <Request>
+          <GetSites>
+            <parameter name="sites">
+              <Supports>
+                <NullOrEmptyReuturnsAll>true</NullOrEmptyReuturnsAll>
+                <SiteCode>true</SiteCode>
+                <GeometryBox>true</GeometryBox>
+                <ByID>true</ByID>
+              </Supports>
+            </parameter>
+            <ResultLimit>20000</ResultLimit>
+          </GetSites>
+          <GetSiteInfo>
+            <parameter name="site">
+              <Supports>
+                <NullOrEmptyReuturnsAll>true</NullOrEmptyReuturnsAll>
+                <SiteCode>true</SiteCode>
+                <ByID>true</ByID>
+              </Supports>
+            </parameter>
+          </GetSiteInfo>
+          <GetVariable>
+            <parameter name="variable">
+              <Supports>
+                <NullOrEmptyReuturnsAll>true</NullOrEmptyReuturnsAll>
+                <VariableCode>true</VariableCode>
+                <ByID>true</ByID>
+                <Constraints>
+                  <SampleMedium>true</SampleMedium>
+                  <DataType>true</DataType>
+                  <ValueType>true</ValueType>
+                </Constraints>
+              </Supports>
+          </parameter>
+        </GetVariable>
+        <GetValues>
+          <parameter name="location">
+            <NullOrEmptyReuturnsAll>false</NullOrEmptyReuturnsAll>
+            <SiteCode>true</SiteCode>
+          </parameter>
+          <parameter name="variable">
+            <Supports>
+              <NullOrEmptyReuturnsAll>false</NullOrEmptyReuturnsAll>
+              <VariableCode>true</VariableCode>
+              <Constraints>
+                <SampleMedium>true</SampleMedium>
+                <DataType>true</DataType>
+                <ValueType>true</ValueType>
+                <MethodID>true</MethodID>
+                <SourceID>true</SourceID>
+                <QualityControlLevelID>true</QualityControlLevelID>
+              </Constraints>
+              </Supports>
+            </parameter>
+          </GetValues>
+        </Request>
+      </Operations>
+    </WaterWebService>
+  </Services>
+  <Contents>
+     <DatasetDescriptionSummary>
+     <NetworkCode></NetworkCode>
+    <VocabularyCode></VocabularyCode>
+     <Title></Title>
+      <Abstract></Abstract>
+      <Keywords>
+        <Keyword></Keyword>
+      </Keywords>
+      <WGS84BoundingBox>
+        <LowerCorner>999 999</LowerCorner>
+        <UpperCorner>999 999</UpperCorner>
+      </WGS84BoundingBox>
+      <Identifier></Identifier>
+      <BoundingBox>
+        <LowerCorner>999 999</LowerCorner>
+        <UpperCorner>999 999</UpperCorner>
+      </BoundingBox>
+      <Metadata></Metadata>
+    </DatasetDescriptionSummary>
+  </Contents>
+</CUAHSI_Capabilties>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio - Education Edition 7.0.5.906 (http://www.liquid-technologies.com) -->
+<tns:variablesResponse xmlns:tns="http://www.cuahsi.org/waterML/1.1/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.cuahsi.org/waterML/1.1/ D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd">
+  <tns:queryInfo>
+    <tns:note title="string" show="string">string</tns:note>
+  </tns:queryInfo>
+  <tns:variables />
+</tns:variablesResponse>

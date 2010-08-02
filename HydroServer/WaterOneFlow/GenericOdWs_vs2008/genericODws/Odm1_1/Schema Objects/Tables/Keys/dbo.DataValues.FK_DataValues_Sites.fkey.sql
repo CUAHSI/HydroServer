@@ -1,0 +1,4 @@
+﻿ALTER TABLE [dbo].[DataValues] WITH NOCHECK ADD
+CONSTRAINT [FK_DataValues_Sites] FOREIGN KEY ([SiteID]) REFERENCES [dbo].[Sites] ([SiteID]) ON UPDATE CASCADE
+
+

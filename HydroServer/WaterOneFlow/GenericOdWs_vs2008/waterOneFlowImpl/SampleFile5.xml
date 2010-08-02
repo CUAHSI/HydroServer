@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio - Education Edition 7.1.1.1206 (http://www.liquid-technologies.com) -->
+<tns:timeSeriesResponse xmlns:tns="http://www.cuahsi.org/waterML/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cuahsi.org/waterML/1.1/ D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd">
+  <tns:queryInfo>
+    <tns:queryURL>string</tns:queryURL>
+    <tns:criteria MethodCalled="string" />
+    <tns:note type="string" href="string">string</tns:note>
+    <tns:extension />
+  </tns:queryInfo>
+  <tns:timeSeries name="string">
+    <tns:sourceInfo xsi:type="tns:SiteInfoType">
+      <tns:siteName>string</tns:siteName>
+      <tns:siteCode network="string" agencyName="string">string</tns:siteCode>
+      <tns:siteCode network="string" siteID="1451576539" agencyCode="string">string</tns:siteCode>
+      <tns:siteCode default="1" network="string" siteID="544672720">string</tns:siteCode>
+      <tns:timeZoneInfo />
+      <tns:geoLocation>
+        <tns:geogLocation xsi:type="tns:latLonLineString" zDirection="string">
+          <tns:coordLatLong>
+            <tns:latitude>-62.4378541961</tns:latitude>
+            <tns:longitude>99.7381858039</tns:longitude>
+          </tns:coordLatLong>
+          <tns:coordLatLong>
+            <tns:latitude>78.6211258039</tns:latitude>
+            <tns:longitude>18.8278258039</tns:longitude>
+          </tns:coordLatLong>
+        </tns:geogLocation>
+      </tns:geoLocation>
+      <tns:elevation_m>1729.4349058039</tns:elevation_m>
+      <tns:verticalDatum>string</tns:verticalDatum>
+      <tns:note type="string" href="string">string</tns:note>
+      <tns:note>string</tns:note>
+      <tns:extension />
+      <tns:altname>string</tns:altname>
+      <tns:siteProperty name="string">string</tns:siteProperty>
+      <tns:siteProperty type="string" name="string" uri="http://www.liquid-technologies.com">string</tns:siteProperty>
+      <tns:siteProperty type="string" name="string" uri="http://www.liquid-technologies.com">string</tns:siteProperty>
+      <tns:siteProperty type="string" name="string" uri="http://www.liquid-technologies.com">string</tns:siteProperty>
+    </tns:sourceInfo>
+    <tns:variable tns:oid="string">
+      <tns:variableCode network="string" default="1" variableID="1936038112">string</tns:variableCode>
+    </tns:variable>
+    <tns:values />
+    <tns:values />
+    <tns:values />
+    <tns:values />
+  </tns:timeSeries>
+  <tns:timeSeries name="string">
+    <tns:sourceInfo xsi:type="tns:DataSetInfoType">
+      <tns:dataSetIdentifier>string</tns:dataSetIdentifier>
+      <tns:timeZoneInfo siteUsesDaylightSavingsTime="false" />
+      <tns:dataSetDescription>string</tns:dataSetDescription>
+      <tns:note>string</tns:note>
+      <tns:note title="string" show="string">string</tns:note>
+      <tns:note type="string" title="string">string</tns:note>
+      <tns:dataSetLocation xsi:type="tns:LatLonPointType">
+        <tns:latitude>15.0919258039</tns:latitude>
+        <tns:longitude>175.1297458039</tns:longitude>
+      </tns:dataSetLocation>
+      <tns:extension />
+    </tns:sourceInfo>
+    <tns:variable>
+      <tns:variableCode>string</tns:variableCode>
+    </tns:variable>
+    <tns:values />
+    <tns:values />
+    <tns:values />
+  </tns:timeSeries>
+</tns:timeSeriesResponse>

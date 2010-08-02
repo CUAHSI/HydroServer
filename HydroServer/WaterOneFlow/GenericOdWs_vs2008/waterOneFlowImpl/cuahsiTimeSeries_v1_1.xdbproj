@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Created by Liquid XML Data Binding Libraries (www.liquid-technologies.com) for Liquid Technologies Limited-->
+<LXDBWizardProject xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" ProjectVersion="7.1.0.1135" IsValid="true">
+	<Schema FullPathName="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd" SchemaType="XSD" XDRAllowAdditionalAttributes="false" XDRIgnoreSimpleElements="false" CurrentLanguage="CS2008" CollectionMapping="Original">
+		<CPP DefaultClassNamespace="cuahsiTimeSeries_v1_1Lib" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeCPP" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationCPP"/>
+		<CSharp DefaultClassNamespace="cuahsiTimeSeries_v1_1Lib" BaseNamespace="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeCS" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationCS"/>
+		<Java DefaultPackageName="cuahsiTimeSeries_v1_1Lib" BasePackage="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeJava" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationJava"/>
+		<VBNet DefaultClassNamespace="cuahsiTimeSeries_v1_1Lib" BaseNamespace="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeVBNet" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationVBNet"/>
+		<VB6 ComponentName="cuahsiTimeSeries_v1_1Lib" Description="" MajorVersion="1" MinorVersion="0" Revision="0" ProductName="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeVB" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationVB"/>
+		<CSharp2005 DefaultClassNamespace="cuahsiTimeSeries_v1_1Lib" BaseNamespace="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeCS2005" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationCS2005"/>
+		<VBNet2005 DefaultClassNamespace="cuahsiTimeSeries_v1_1Lib" BaseNamespace="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeVBNet2005" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationVBNet2005"/>
+		<CSharp2008 DefaultClassNamespace="cuahsi" BaseNamespace="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeCS2008" DocumentationOutputPath="D:\dev2005\waterOneFlow\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationCS2008"/>
+		<VBNet2008 DefaultClassNamespace="cuahsiTimeSeries_v1_1Lib" BaseNamespace="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeVBNet2008" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationVBNet2008"/>
+		<CSharpSilverlight2008 DefaultClassNamespace="cuahsiTimeSeries_v1_1Lib" BaseNamespace="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeCS2008" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationCS2008"/>
+		<VBNetSilverlight2008 DefaultClassNamespace="cuahsiTimeSeries_v1_1Lib" BaseNamespace="" CollectionMapping="Original" OutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\SourceCodeVBNet2008" DocumentationOutputPath="D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd.Output\DocumentationVBNet2008"/>
+	</Schema>
+	<Output OutputPath="" CreateDocumentation="true" CreateSampleApplication="true" OutputDateInHeaderBlock="false" OutputProjectFiles="true" OutputFastInfosetTables="false" OutputPropertyEvents="false">
+		<SampleXML FilePath="D:\dev2005\waterOneFlow\genericODws\LiquidXmlTests\SiteInfoResponse.xml"/>
+		<SampleXML FilePath="D:\dev2005\waterOneFlow\genericODws\LiquidXmlTests\SitesResponse.xml"/>
+		<SampleXML FilePath="D:\dev2005\waterOneFlow\genericODws\LiquidXmlTests\TimeSeriesResponse.xml"/>
+		<SampleXML FilePath="D:\dev2005\waterOneFlow\genericODws\LiquidXmlTests\VariablesResponse.xml"/>
+		<SelectedElements ElementName="sitesResponse(http://www.cuahsi.org/waterML/1.1/)"/>
+		<SelectedElements ElementName="timeSeriesResponse(http://www.cuahsi.org/waterML/1.1/)"/>
+		<SelectedElements ElementName="variablesResponse(http://www.cuahsi.org/waterML/1.1/)"/>
+	</Output>
+	<PostBuild BuildHelp="false" OpenHelp="false" OpenProject="true"/>
+</LXDBWizardProject>

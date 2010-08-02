@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "D:\...\genericODws\", "..\waterOneFlow\genericODws", "{442B8999-6C1E-4204-9920-D73A0237308D}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		ProjectReferences = "{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}|waterOneFlowImpl.dll;{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}|WaterOneFlowEventLogSourceInstaller.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/genericODws"
+		Debug.AspNetCompiler.PhysicalPath = "..\waterOneFlow\genericODws\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\genericODws\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/genericODws"
+		Release.AspNetCompiler.PhysicalPath = "..\waterOneFlow\genericODws\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\genericODws\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4536"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "waterOneFlowImpl", "..\waterOneFlow\waterOneFlowImpl\waterOneFlowImpl.csproj", "{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterOneFlowEventLogSourceInstaller", "WaterOneFlowEventLogSourceInstaller\WaterOneFlowEventLogSourceInstaller.csproj", "{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://hydro11.sdsc.edu:8080/
+		SccProjectUniqueName0 = ..\\waterOneFlow\\waterOneFlowImpl\\waterOneFlowImpl.csproj
+		SccProjectName0 = ../waterOneFlowImpl
+		SccLocalPath0 = ..\\waterOneFlow\\waterOneFlowImpl
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = WaterOneFlowEventLogSourceInstaller\\WaterOneFlowEventLogSourceInstaller.csproj
+		SccProjectName2 = WaterOneFlowEventLogSourceInstaller
+		SccLocalPath2 = WaterOneFlowEventLogSourceInstaller
+		SccWebProject3 = true
+		SccProjectUniqueName3 = ..\\waterOneFlow\\genericODws
+		SccProjectName3 = ../genericODws_1
+		SccLocalPath3 = ..\\waterOneFlow\\genericODws
+		SccProjectEnlistmentChoice3 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|.NET = Release|.NET
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Debug|.NET.ActiveCfg = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Debug|.NET.Build.0 = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Debug|Any CPU.ActiveCfg = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Debug|Mixed Platforms.ActiveCfg = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Debug|Mixed Platforms.Build.0 = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Release|.NET.ActiveCfg = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Release|.NET.Build.0 = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Release|Any CPU.ActiveCfg = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
+		{442B8999-6C1E-4204-9920-D73A0237308D}.Release|Mixed Platforms.Build.0 = Debug|.NET
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Release|.NET.ActiveCfg = Release|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Release|.NET.ActiveCfg = Release|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B6C49E46-C85F-4C5C-AF36-336A2CF25C8D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

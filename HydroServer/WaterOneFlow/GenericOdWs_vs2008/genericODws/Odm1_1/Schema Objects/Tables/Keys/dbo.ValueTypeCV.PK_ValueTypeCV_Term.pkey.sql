@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[ValueTypeCV] ADD CONSTRAINT [PK_ValueTypeCV_Term] PRIMARY KEY CLUSTERED  ([Term]) ON [PRIMARY]
+
+

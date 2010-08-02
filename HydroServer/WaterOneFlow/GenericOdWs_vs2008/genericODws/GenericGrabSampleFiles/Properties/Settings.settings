@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GenericGrabSampleFiles.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GenericGrabSampleFiles_wof11_WaterOneFlow" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:6278/genericODws/cuahsi_1_1.asmx</Value>
+    </Setting>
+    <Setting Name="GenericGrabSampleFiles_wof10_WaterOneFlow" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:6278/genericODws/cuahsi_1_0.asmx</Value>
+    </Setting>
+    <Setting Name="outputDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">d:\SoftwareReleases\genericodws\lbrsampleResponses</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

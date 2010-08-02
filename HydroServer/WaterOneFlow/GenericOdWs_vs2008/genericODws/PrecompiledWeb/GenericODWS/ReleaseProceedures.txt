@@ -1,0 +1,70 @@
+
+How to do a release of the Generic OD Web Services:
+
+PREPARE FOR PUBLISHING
+Revert web config to standard values:
+- network: ODM
+- vocabulary: ODM
+- Connection String: Data Source=.\SQLEXPRESS;Integrated Security=true;User Instance=true;AttachDbFilename=|DataDirectory|OD.mdf;Database=OD
+- serviceLevel:Developemental
+- serviceExampleHTMLPage: BasicData.htm
+- asmxPage: cuahsi_1_0.asmx
+- UseODForValues: true
+
+Restart VS2005.
+- This is to make sure that publish works. Sometimes the DB files in App_data cannot be copied.
+
+Rebuild web site
+- Build>Rebuild Web Site
+Publish web site
+- Build>Publish Web Site (or right click on genericODws directory)
+go to genericODws\PrecompiledWeb\ (DV's is d:\dev2005\genericODws\
+zip up genericODWS
+
+TEST IN VIRTUAL MACHINE
+Start up a Virtual Machainge with Windows 2003, and a ASP.Net 2.0 installed,
+- Roll back to the state with only ASP.Net 2.0 installed
+
+- Right click on my computer, Map Netowrk Drive
+- Browse -"VM Ware shared Folders"
+-- shared folders may need to add one VMwareWorkstation VM>Properties>Options>Shared Folders
+- copy the zip file to the desktop or disk
+- extract genericODws directory from the zip file
+- open InstallGenericWebServices.htm
+- Follow the instructions
+- set:
+-- vocabulary
+-- network
+-- status
+- edit BasicData.htm
+open the application and see that the information changes on the Default.aspx page
+Change again:
+-- vocabulary
+-- network
+-- status
+
+Run Web Service Tests:
+Assumes the oringal OD test database is configured
+- From Default.aspx page Click
+-- GetVariableInformationObject
+--- click invoke
+--- set variable = "ODM:Mean Velocity"
+--- click invoke
+-- GetSiteInfo
+--- set location = "ODM:1"
+--- click invoke
+-- GetValues
+--- location: ODM:1
+--- variable: ODM:Mean Velocity
+--- beginDateTime: 2003-10-01
+--- endDateTime: 2005-07-01
+--- click invoke
+
+
+COPY TO WATER
+Log onto Water.sdsc.edu
+copy zip file to root IIS directory
+
+double check that that is the version.
+
+

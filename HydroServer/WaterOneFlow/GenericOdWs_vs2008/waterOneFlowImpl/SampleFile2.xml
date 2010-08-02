@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio - Education Edition 7.0.5.906 (http://www.liquid-technologies.com) -->
+<tns:variablesResponse xmlns:tns="http://www.cuahsi.org/waterML/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cuahsi.org/waterML/1.1/ D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd">
+  <tns:queryInfo>
+    <tns:queryURL>string</tns:queryURL>
+    <tns:note>string</tns:note>
+    <tns:note type="string" title="string">string</tns:note>
+  </tns:queryInfo>
+  <tns:variables>
+    <tns:variable tns:metadataTime="1977-03-06T13:30:03.96">
+      <tns:variableCode default="0" variableID="1337521535">string</tns:variableCode>
+    </tns:variable>
+    <tns:variable>
+      <tns:variableCode network="string" vocabulary="string" variableID="124362925">string</tns:variableCode>
+    </tns:variable>
+    <tns:variable tns:oid="string">
+      <tns:variableCode default="0">string</tns:variableCode>
+    </tns:variable>
+    <tns:variable tns:oid="string">
+      <tns:variableCode default="false" variableID="1369456764">string</tns:variableCode>
+    </tns:variable>
+  </tns:variables>
+</tns:variablesResponse>

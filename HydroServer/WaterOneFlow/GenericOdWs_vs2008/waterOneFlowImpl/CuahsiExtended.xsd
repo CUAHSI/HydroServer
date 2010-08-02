@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - Education Edition 7.1.1.1206 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns="http://his.cuahsi.org/schema/extentsions" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://his.cuahsi.org/schema/extentsions" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="variableExtension">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="speciation" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="noDataValueExtended" type="NoDataValueTypes" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="variableProperty" type="PropertyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="NoDataValueTypes">
+    <xs:sequence>
+      <xs:element name="DataValue" type="xs:float" />
+      <xs:element name="brief" type="xs:string" />
+      <xs:element name="detailed" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PropertyType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" use="optional" />
+        <xs:attribute name="name" use="required" />
+        <xs:attribute name="uri" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="seriesExtension">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="seriesProperty" type="PropertyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="siteExtension">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="siteType" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="hucCode" type="xs:token" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="siteProperty" type="PropertyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
