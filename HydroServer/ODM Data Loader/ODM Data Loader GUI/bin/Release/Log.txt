@@ -280,3 +280,15 @@ Log @ Wednesday, April 28, 2010	1:08:42 PM
 The update was completed.
 8 rows committed to the database.
 
+Log @ Tuesday, September 21, 2010	10:17:48 AM
+		Opening C:\Users\Stephanie\Desktop\Book1.xlsb ...
+
+Log @ Tuesday, September 21, 2010	10:18:22 AM
+Finding New DataValues
+
+Log @ Tuesday, September 21, 2010	10:21:37 AM
+		Opening C:\Users\Stephanie\Desktop\Book1.xlsb ...
+
+Log @ Tuesday, September 21, 2010	10:27:14 AM
+Finding New DataValues
+

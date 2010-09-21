@@ -287,6 +287,7 @@ Class clsDataValues
     End Sub
 
     Public Sub New(ByVal m_viewtable As clsFile)
+
         MyBase.new(m_viewtable)
         MyType = "DataValues"
     End Sub

@@ -31,3 +31,25 @@ C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_DL\ODM Data Loader App\Simple 
 C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_DL\ODM Data Loader App\Simple Wizard\obj\Release\Simple Wizard.exe
 C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_DL\ODM Data Loader App\Simple Wizard\obj\Release\Simple Wizard.xml
 C:\Users\Stephanie\Documents\StephanieDev\ODM\ODM_DL\ODM Data Loader App\Simple Wizard\obj\Release\Simple Wizard.pdb
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\ODM Data Loader GUI\bin\Release\Simple Wizard.exe
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\ODM Data Loader GUI\bin\Release\Simple Wizard.pdb
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\ODM Data Loader GUI\bin\Release\Simple Wizard.xml
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Release\ResolveAssemblyReference.cache
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Release\Simple_Wizard.frmWizard.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Release\Simple_Wizard.Resources.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Release\Simple_Wizard.ucDBConnection.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Release\Simple Wizard.vbproj.GenerateResource.Cache
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Release\Simple Wizard.exe
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Release\Simple Wizard.xml
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Release\Simple Wizard.pdb
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\bin\Debug\Simple Wizard.exe
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\bin\Debug\Simple Wizard.pdb
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\bin\Debug\Simple Wizard.xml
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Debug\ResolveAssemblyReference.cache
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Debug\Simple_Wizard.frmWizard.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Debug\Simple_Wizard.Resources.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Debug\Simple_Wizard.ucDBConnection.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Debug\Simple Wizard.vbproj.GenerateResource.Cache
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Debug\Simple Wizard.exe
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Debug\Simple Wizard.xml
+C:\DEV\ODM\hydroserver\HydroServer\ODM Data Loader\Simple Wizard\obj\Debug\Simple Wizard.pdb
