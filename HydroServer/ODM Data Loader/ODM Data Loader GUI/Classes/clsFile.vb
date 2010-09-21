@@ -80,6 +80,7 @@ Class clsFile
         m_Connection = e_Connection
         If Not (m_ViewTable Is Nothing) Then
             m_ViewTable.Clear()
+
         End If
         m_ViewTable = New DataTable(shortName)
         bg.Start()
@@ -383,7 +384,12 @@ Class clsFile
         End If
         Dim table As New DataTable(shortName)
         Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
-        MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.Jet.OLEDB.4.0; data source='" & m_FilePath & "'; " & "Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'")
+        'MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.Jet.OLEDB.4.0; data source='" & m_FilePath & "'; " & "Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'")
+        MyConnection = New System.Data.OleDb.OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; data source='" & m_FilePath & "'; " & "Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'")
+
+
+
+
         Try
             MyConnection.Open()
         Catch ex As Exception
