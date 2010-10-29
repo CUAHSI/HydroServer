@@ -7,7 +7,11 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
 using System.Text;
 using DBLayer;
-using System.IdentityModel.Tokens;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using System.Web.Services.Protocols;
+//using System.IdentityModel.Tokens;
 namespace Hydrosecurity
 {
     /// <summary>
@@ -20,29 +24,49 @@ namespace Hydrosecurity
     // [System.Web.Script.Services.ScriptService]
     public class Service1 : System.Web.Services.WebService
     {
+      
 
         [WebMethod]
-        public bool CreateUser()
+        public string RegisterUser()
         {
-            try
-            {
-                X509Certificate cer = new X509Certificate(Context.Request.ClientCertificate.Certificate);
-                string sub = cer.Subject;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message.ToString());
-            }
-            string machine =       Context.Server.MachineName;
-            X509Certificate2 cer2 = GetCertificate();
-            bool flag = IsValidate(cer2);
-            return true;
+            X509Certificate2 cer = GetCertificate();
+            ResourceConsumer resCon = new ResourceConsumer();
+            bool exist;
+            exist = resCon.UserExist(cer);
+            return "fun";
+        }
+
+        [WebMethod]
+        public XmlDocument GetResourceInfo()
+        {
+            XmlDocument doc = new XmlDocument();
+            Priviledge pr = new Priviledge();
+            pr.Load("read");
+
+            XmlSerializer ser = new XmlSerializer(pr.GetType());
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+            ser.Serialize(writer, pr);
+            doc.LoadXml(sb.ToString());
+
+            return doc;
+          
         }
 
         private static X509Certificate2 GetCertificate()
         {
-            X509Certificate cert = X509Certificate.CreateFromCertFile(@"C:\Documents and Settings\Ketan\Desktop\test3.cer");
-            return new X509Certificate2(cert);
+            X509Certificate2 cert = new X509Certificate2();
+            X509Store store = new X509Store("testCertStore" , StoreLocation.CurrentUser);
+            store.Open(OpenFlags.ReadOnly);
+            X509Certificate2Collection certCol = (X509Certificate2Collection)store.Certificates;
+            foreach (X509Certificate2 x509 in certCol)
+            {
+                if (x509.SerialNumber == "23D91CD7E7114ABE4EEA208FB4868138")
+                {
+                    cert = x509;
+                }
+            }
+            return cert;
         }
 
         public bool IsValidate(X509Certificate2 certificate)
