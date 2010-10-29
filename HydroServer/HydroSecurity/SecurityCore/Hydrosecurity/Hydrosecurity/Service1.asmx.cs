@@ -40,13 +40,15 @@ namespace Hydrosecurity
         public XmlDocument GetResourceInfo()
         {
             XmlDocument doc = new XmlDocument();
-            Priviledge pr = new Priviledge();
-            pr.Load("read");
+            //Priviledge pr = new Priviledge();
+            //pr.Load("read");
+            TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
+            tm.Load();
 
-            XmlSerializer ser = new XmlSerializer(pr.GetType());
+            XmlSerializer ser = new XmlSerializer(tm.GetType());
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             System.IO.StringWriter writer = new System.IO.StringWriter(sb);
-            ser.Serialize(writer, pr);
+            ser.Serialize(writer, tm);
             doc.LoadXml(sb.ToString());
 
             return doc;

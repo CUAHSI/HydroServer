@@ -15,14 +15,14 @@ namespace DBLayer
         /* This method loads entire timeseries records into TimeSeriesResourcesList object from HydroSecurity Database */
         public void Load()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["LocalSqlServer"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
             try
             {
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "select VariableCode as variablecode, SiteCode as sitecode, MethodID as methodid, SourceID as sourceid, QualityControlLevelID as qualitycontrolid from SeriesCatalog;";
+                string queryString = "select TimeSeriesResourcesId as guid,VariableCode as variablecode,SiteCode as sitecode,MethodId as methodid,SourceId as sourceid,QualityControlLevelId as qualitycontrolid from TimeSeriesResources;";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
@@ -30,7 +30,8 @@ namespace DBLayer
                 foreach (DataRow row in dt.Rows)
                 {
                     TimeSeriesResources timeSeriesResources = new TimeSeriesResources();
-
+                    Guid g = new Guid(row["guid"].ToString());
+                    timeSeriesResources.timeSeriesResourceId = g;
                     timeSeriesResources.variableCode = row["variablecode"].ToString();
                     timeSeriesResources.siteCode = row["sitecode"].ToString();
                     timeSeriesResources.methodId = Convert.ToInt16(row["methodid"].ToString());
