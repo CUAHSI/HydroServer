@@ -51,6 +51,7 @@
     <Compile Include="Certificate.cs" />
     <Compile Include="PersonResouces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceConsumer.cs" />
     <Compile Include="Resources.cs" />
     <Compile Include="ResourcesList.cs" />
     <Compile Include="TimeSeriesResources.cs" />

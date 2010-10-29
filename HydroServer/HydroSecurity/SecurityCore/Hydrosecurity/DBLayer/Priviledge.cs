@@ -5,9 +5,11 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Xml.Serialization;
 
 namespace DBLayer
 {
+    [Serializable()]
     public class Priviledge
     {
         public int priviledgeId;
