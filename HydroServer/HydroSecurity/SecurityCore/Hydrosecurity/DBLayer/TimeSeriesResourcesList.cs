@@ -49,6 +49,42 @@ namespace DBLayer
 
         }
 
+        public void load(string variableCode, string siteCode)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "select TimeSeriesResourcesId as guid,VariableCode as variablecode,SiteCode as sitecode,MethodId as methodid,SourceId as sourceid,QualityControlLevelId as qualitycontrolid from TimeSeriesResources";
+                cmd.CommandText = queryString;
+                SqlDataReader reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                foreach (DataRow row in dt.Rows)
+                {
+                    TimeSeriesResources timeSeriesResources = new TimeSeriesResources();
+                    Guid g = new Guid(row["guid"].ToString());
+                    timeSeriesResources.timeSeriesResourceId = g;
+                    timeSeriesResources.variableCode = row["variablecode"].ToString();
+                    timeSeriesResources.siteCode = row["sitecode"].ToString();
+                    timeSeriesResources.methodId = Convert.ToInt16(row["methodid"].ToString());
+                    timeSeriesResources.sourceId = Convert.ToInt16(row["sourceid"].ToString());
+                    timeSeriesResources.qualityControlId = Convert.ToInt16(row["qualitycontrolid"].ToString());
+                    this.timeResourcesLocal.Add(timeSeriesResources);
+                }
+                myConnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+
+        }
+
         /* This method saves entire timeseries records from TimeSeriesResourcesList object into HydroSecurity Database */
         public void save()
         {
