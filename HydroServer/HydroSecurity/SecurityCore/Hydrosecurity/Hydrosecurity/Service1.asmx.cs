@@ -55,6 +55,27 @@ namespace Hydrosecurity
           
         }
 
+        [WebMethod]
+        public XmlDocument GetUserInfo()
+        {
+          XmlDocument doc = new XmlDocument();
+          ResourceConsumerList rs = new ResourceConsumerList();
+          rs.Load();
+          XmlSerializer ser = new XmlSerializer(rs.GetType());
+          System.Text.StringBuilder sb = new System.Text.StringBuilder();
+          System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+          ser.Serialize(writer, rs);
+          doc.LoadXml(sb.ToString());
+          return doc;
+        }
+
+        [WebMethod]
+        public void SetAccess(int userId, string resourceGuid, string accessLevel)
+        {
+            Guid g = new Guid(resourceGuid);
+            Authorization auth = new Authorization();
+            auth.SetAccess(userId, g, 1);
+        }
         private static X509Certificate2 GetCertificate()
         {
             X509Certificate2 cert = new X509Certificate2();

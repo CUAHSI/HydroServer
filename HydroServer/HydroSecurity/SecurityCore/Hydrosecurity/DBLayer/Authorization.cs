@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DBLayer
 {
@@ -9,6 +12,7 @@ namespace DBLayer
     {
         /* Return back the TimeSeriesResourcesList object for which the ResourceConsumer is Authorized*/
         public TimeSeriesResourcesList AuthorizatizedTimeSeriesList(string siteCode, int resourceConsumerId , string accessType)
+
         {
             TimeSeriesResourcesList tr = new TimeSeriesResourcesList();
             List<Guid> entireResourceGuidList = new List<Guid>();
@@ -37,6 +41,30 @@ namespace DBLayer
             string test = "test";
 
             return tr;
+        }
+
+        public void SetAccess(int userId, Guid resourceGuid, int pType)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+           
+                try
+                {
+                    Guid timeSeriesResourceId = System.Guid.NewGuid();
+                    myConnection.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = myConnection;
+                    string queryString = "insert into personresources values('" + resourceGuid + "'," + userId + ",2," + pType + ",'10-10-10','10-10-10')";
+                    cmd.CommandText = queryString;
+                    cmd.ExecuteNonQuery();
+                    myConnection.Close();
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("this is not successful :" + e.Message.ToString());
+                }
+            
         }
     }
 }
