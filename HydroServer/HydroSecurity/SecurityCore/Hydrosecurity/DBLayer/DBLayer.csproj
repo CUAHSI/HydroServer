@@ -51,6 +51,8 @@
     <Compile Include="Certificate.cs" />
     <Compile Include="PersonResouces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestManagement.cs" />
+    <Compile Include="RequestManagementList.cs" />
     <Compile Include="ResourceConsumer.cs" />
     <Compile Include="ResourceConsumerList.cs" />
     <Compile Include="Resources.cs" />

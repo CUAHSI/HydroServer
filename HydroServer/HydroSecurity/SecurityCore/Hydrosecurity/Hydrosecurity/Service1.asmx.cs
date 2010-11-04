@@ -25,6 +25,7 @@ namespace Hydrosecurity
     public class Service1 : System.Web.Services.WebService
     {
       
+        /*webmethod for registering the user*/
 
         [WebMethod]
         public string RegisterUser()
@@ -36,6 +37,7 @@ namespace Hydrosecurity
             return "fun";
         }
 
+        /*give back a xml document containing information of the resources*/
         [WebMethod]
         public XmlDocument GetResourceInfo()
         {
@@ -55,6 +57,7 @@ namespace Hydrosecurity
           
         }
 
+        /*give back a xml document containing information of the users*/
         [WebMethod]
         public XmlDocument GetUserInfo()
         {
@@ -69,6 +72,7 @@ namespace Hydrosecurity
           return doc;
         }
 
+        /*sets priviledge on a resources for a user. generally used by admins*/
         [WebMethod]
         public void SetAccess(int userId, string resourceGuid, string accessLevel)
         {
@@ -76,6 +80,40 @@ namespace Hydrosecurity
             Authorization auth = new Authorization();
             auth.SetAccess(userId, g, 1);
         }
+
+        /*used to queue a authorization request for particular resources by specifiying priviledge type.
+         * This request will be only authorized further by admines*/
+        [WebMethod]
+        public void RequestAuthorization(string operationType, string resourceType, string siteCode)
+        {
+            ResourcesList rs = new ResourcesList();
+            Priviledge pr = new Priviledge();
+            pr.Load(operationType);
+            List<Guid> rsGuids = new List<Guid>();
+            rsGuids = rs.load(siteCode);
+            RequestManagement rm = new RequestManagement();
+            rm.AddRequest(pr.priviledgeId, 2, rsGuids);
+
+        }
+
+        [WebMethod]
+        public XmlDocument GetAuthorizationInfo(string sitecode, bool status)
+        {
+            XmlDocument doc = new XmlDocument();
+            ResourcesList rsList = new ResourcesList();
+            List<Guid> rsGuids = new List<Guid>();
+            rsGuids = rsList.load(sitecode);
+            RequestManagementList rmList = new RequestManagementList();
+            rmList.Load(rsGuids, status);
+
+            XmlSerializer ser = new XmlSerializer(rmList.GetType());
+            System.Text.StringBuilder sb = new StringBuilder();
+            System.IO.StringWriter writer = new StringWriter(sb);
+            ser.Serialize(writer, rmList);
+            doc.LoadXml(sb.ToString());
+            return doc;
+        }
+
         private static X509Certificate2 GetCertificate()
         {
             X509Certificate2 cert = new X509Certificate2();
