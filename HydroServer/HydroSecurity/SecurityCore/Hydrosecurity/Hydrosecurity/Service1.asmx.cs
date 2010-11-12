@@ -24,6 +24,11 @@ namespace Hydrosecurity
     // [System.Web.Script.Services.ScriptService]
     public class Service1 : System.Web.Services.WebService
     {
+        [WebMethod]
+        public bool IsAlive()
+        {
+            return true;
+        }
       
         /*webmethod for registering the user*/
 
@@ -39,11 +44,10 @@ namespace Hydrosecurity
 
         /*give back a xml document containing information of the resources*/
         [WebMethod]
-        public XmlDocument GetResourceInfo()
+        public XmlDocument GetResourceInfo(TimeSeriesResources tmObj)
         {
             XmlDocument doc = new XmlDocument();
-            //Priviledge pr = new Priviledge();
-            //pr.Load("read");
+            string test = tmObj.siteCode.ToString();
             TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
             tm.Load();
 
@@ -61,15 +65,16 @@ namespace Hydrosecurity
         [WebMethod]
         public XmlDocument GetUserInfo()
         {
-          XmlDocument doc = new XmlDocument();
-          ResourceConsumerList rs = new ResourceConsumerList();
-          rs.Load();
-          XmlSerializer ser = new XmlSerializer(rs.GetType());
-          System.Text.StringBuilder sb = new System.Text.StringBuilder();
-          System.IO.StringWriter writer = new System.IO.StringWriter(sb);
-          ser.Serialize(writer, rs);
-          doc.LoadXml(sb.ToString());
-          return doc;
+            XmlDocument doc = new XmlDocument();
+            ResourceConsumerList rs = new ResourceConsumerList();
+            rs.Load();
+            XmlSerializer ser = new XmlSerializer(rs.GetType());
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+            ser.Serialize(writer, rs);
+            doc.LoadXml(sb.ToString());
+          
+            return doc;
         }
 
         /*sets priviledge on a resources for a user. generally used by admins*/
@@ -105,12 +110,13 @@ namespace Hydrosecurity
             rsGuids = rsList.load(sitecode);
             RequestManagementList rmList = new RequestManagementList();
             rmList.Load(rsGuids, status);
-
+            
             XmlSerializer ser = new XmlSerializer(rmList.GetType());
             System.Text.StringBuilder sb = new StringBuilder();
             System.IO.StringWriter writer = new StringWriter(sb);
             ser.Serialize(writer, rmList);
             doc.LoadXml(sb.ToString());
+          
             return doc;
         }
 
