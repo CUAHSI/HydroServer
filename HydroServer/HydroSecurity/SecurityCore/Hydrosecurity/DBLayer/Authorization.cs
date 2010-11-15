@@ -10,6 +10,15 @@ namespace DBLayer
 {
     public class Authorization
     {
+        public int personResourceId;
+        public Guid resourceId;
+        public int personId;
+        public int authorizerId;
+        public int priviledgeId;
+        public DateTime dateCreated;
+        public DateTime dateValidTill;
+        public bool status;
+
         /* Return back the TimeSeriesResourcesList object for which the ResourceConsumer is Authorized*/
         public TimeSeriesResourcesList AuthorizatizedTimeSeriesList(string siteCode, int resourceConsumerId , string accessType)
 
