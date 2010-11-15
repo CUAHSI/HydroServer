@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace DBLayer
 {
-    [Serializable]
-    public class RequestManagementList
+    public class AuthorizationList
     {
-        public List<RequestManagement> resourceManagementLocal = new List<RequestManagement>();
-
+        public List<Authorization> authList = new List<Authorization>();
         public void Load(List<Guid> resourceGuids)
         {
+         
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
             List<Guid> returnResourceList = new List<Guid>();
@@ -25,28 +24,25 @@ namespace DBLayer
                     myConnection.Open();
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = myConnection;
-                    string queryString = "select ResourceId as resourceid,RequesterId as requesterid,DateRequested as daterequested,Priviledge as priviledgetype,IsGranted as status from DataRequest where resourceid='"+g+"' and isgranted =0;";
+                    string queryString = "select PersonResourcesId as personresourceid,ResourcesId as resourceid,PersonId as personid,PrivilegesGivenBy as authorizerid,PrivilegeId as privilegeid, DateCreated as datecreated, DateValidTill as datevalidtill from PersonResources where resourcesid='" + g + "';";
                     cmd.CommandText = queryString;
                     SqlDataReader reader = cmd.ExecuteReader();
                     DataTable dt = new DataTable();
                     dt.Load(reader);
                     foreach (DataRow row in dt.Rows)
                     {
-                        RequestManagement rm = new RequestManagement();
+                        Authorization auth = new Authorization();
                         Guid gd = new Guid(row["resourceid"].ToString());
-                        rm.resourceId = gd;
-                        rm.requesterId = Convert.ToInt16(row["requesterid"].ToString());
-                        rm.dateRequested = Convert.ToDateTime(row["daterequested"].ToString());
-                        if (!Convert.ToBoolean( row["status"].ToString()))
-                        {
-                            rm.status = false;
-                        }
-                        else
-                        {
-                            rm.status = true;
-                        }
+                        auth.personResourceId = Convert.ToInt16(row["personresourceid"].ToString());
+                        auth.resourceId = gd;
+                        auth.personId = Convert.ToInt16(row["personid"].ToString());
+                        auth.authorizerId = Convert.ToInt16(row["authorizerid"].ToString());
+                        auth.priviledgeId = Convert.ToInt16(row["privilegeid"].ToString());
+                        auth.dateCreated = Convert.ToDateTime(row["datecreated"].ToString());
+                        auth.dateValidTill = Convert.ToDateTime(row["datevalidtill"].ToString());
+                        this.authList.Add(auth);
 
-                        this.resourceManagementLocal.Add(rm);
+                        
                     }
                     myConnection.Close();
 
@@ -56,7 +52,6 @@ namespace DBLayer
                     Console.WriteLine("this is not successful :" + e.Message.ToString());
                 }
             }
-
         }
     }
 }

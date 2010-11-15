@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizationList.cs" />
     <Compile Include="Priviledge.cs" />
     <Compile Include="Authorization.cs" />
     <Compile Include="Certificate.cs" />

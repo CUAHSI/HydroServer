@@ -93,31 +93,40 @@ namespace Hydrosecurity
         public void RequestAuthorization(string operationType, string resourceType, string siteCode)
         {
             ResourcesList rs = new ResourcesList();
-            Priviledge pr = new Priviledge();
-            pr.Load(operationType);
             List<Guid> rsGuids = new List<Guid>();
             rsGuids = rs.load(siteCode);
-            RequestManagement rm = new RequestManagement();
-            rm.AddRequest(pr.priviledgeId, 2, rsGuids);
+            HydroSecurityInternal HydroInternal = new HydroSecurityInternal();
+            HydroInternal.QueueAuthorizationRequest(operationType, 2, rsGuids);
 
         }
 
         [WebMethod]
-        public XmlDocument GetAuthorizationInfo(string sitecode, bool status)
+        public XmlDocument GetAuthorizationInfo(string siteCode, bool statusApproved)
         {
             XmlDocument doc = new XmlDocument();
-            ResourcesList rsList = new ResourcesList();
-            List<Guid> rsGuids = new List<Guid>();
-            rsGuids = rsList.load(sitecode);
-            RequestManagementList rmList = new RequestManagementList();
-            rmList.Load(rsGuids, status);
-            
-            XmlSerializer ser = new XmlSerializer(rmList.GetType());
-            System.Text.StringBuilder sb = new StringBuilder();
-            System.IO.StringWriter writer = new StringWriter(sb);
-            ser.Serialize(writer, rmList);
-            doc.LoadXml(sb.ToString());
-          
+            if (statusApproved == false)
+            {
+                RequestManagementList rmList = new RequestManagementList();
+                HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+                rmList = hydroInternal.GetPendingAuthorizationInfo(siteCode);
+                XmlSerializer ser = new XmlSerializer(rmList.GetType());
+                System.Text.StringBuilder sb = new StringBuilder();
+                System.IO.StringWriter writer = new StringWriter(sb);
+                ser.Serialize(writer, rmList);
+                doc.LoadXml(sb.ToString());
+            }
+            else
+            {
+                AuthorizationList authList = new AuthorizationList();
+                HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+                authList = hydroInternal.GetApprovedAuthorizationInfo(siteCode);
+                XmlSerializer ser = new XmlSerializer(authList.GetType());
+                System.Text.StringBuilder sb = new StringBuilder();
+                System.IO.StringWriter writer = new StringWriter(sb);
+                ser.Serialize(writer, authList);
+                doc.LoadXml(sb.ToString());
+
+            }
             return doc;
         }
 
