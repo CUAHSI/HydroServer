@@ -24,6 +24,7 @@ namespace Hydrosecurity
     // [System.Web.Script.Services.ScriptService]
     public class Service1 : System.Web.Services.WebService
     {
+        /*webmethod for checking is Services alive*/
         [WebMethod]
         public bool IsAlive()
         {
