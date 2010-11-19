@@ -43,14 +43,20 @@ namespace Hydrosecurity
             return "fun";
         }
 
+        [WebMethod]
+        public bool GetTimeseriesListObj(TimeSeriesResourcesList tmResList)
+        {
+            return true;
+        }
+
         /*give back a xml document containing information of the resources*/
         [WebMethod]
         public XmlDocument GetResourceInfo(TimeSeriesResources tmObj)
         {
             XmlDocument doc = new XmlDocument();
-            string test = tmObj.siteCode.ToString();
             TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
-            tm.Load();
+            HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+            tm = hydroInternal.ResolveResources(tmObj);
 
             XmlSerializer ser = new XmlSerializer(tm.GetType());
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -62,19 +68,45 @@ namespace Hydrosecurity
           
         }
 
+        /*give back a xml document containing information of the resources when passed a resource guid*/
+        [WebMethod]
+        public XmlDocument GetResourceInfoByGuid(string resGuid)
+        {
+            XmlDocument doc = new XmlDocument();
+            TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
+            HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+            Guid g = new Guid(resGuid);
+            tm = hydroInternal.GetResourceByGuid(g);
+
+            XmlSerializer ser = new XmlSerializer(tm.GetType());
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+            ser.Serialize(writer, tm);
+            doc.LoadXml(sb.ToString());
+
+            return doc;
+        }
+
+        [WebMethod]
+        public XmlDocument GetAllResourceInfo()
+        {
+            XmlDocument doc = new XmlDocument();
+            return doc;
+        }
+
         /*give back a xml document containing information of the users*/
         [WebMethod]
-        public XmlDocument GetUserInfo()
+        public XmlDocument GetUserInfo(List<string> userEmailAddList)
         {
             XmlDocument doc = new XmlDocument();
             ResourceConsumerList rs = new ResourceConsumerList();
-            rs.Load();
+            HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+            rs = hydroInternal.ResolveUserInfo(userEmailAddList);
             XmlSerializer ser = new XmlSerializer(rs.GetType());
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             System.IO.StringWriter writer = new System.IO.StringWriter(sb);
             ser.Serialize(writer, rs);
             doc.LoadXml(sb.ToString());
-          
             return doc;
         }
 
@@ -83,8 +115,8 @@ namespace Hydrosecurity
         public void SetAccess(int userId, string resourceGuid, string accessLevel)
         {
             Guid g = new Guid(resourceGuid);
-            Authorization auth = new Authorization();
-            auth.SetAccess(userId, g, 1);
+            HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+            hydroInternal.SetAccess(userId, g, accessLevel);
         }
 
         /*used to queue a authorization request for particular resources by specifiying priviledge type.

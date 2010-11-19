@@ -10,12 +10,19 @@ namespace DBLayer
 {
     public class TimeSeriesResources
     {
-        public Guid timeSeriesResourceId;
+        public Guid timeSeriesResourceId ;
         public string variableCode;
         public string siteCode;
-        public int methodId;
-        public int sourceId;
-        public int qualityControlId;
+        public int? methodId =null ;
+        public int? sourceId = null ;
+        public int? qualityControlId = null ;
+        
+
+        
+        
+        
+        
+        
 
         /* This method loads a single record into TimeSeriesResources object from HydroSecurity Database when its VariableCode is set*/
         public void Load()
@@ -27,7 +34,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "select VariableCode as variablecode, SiteCode as sitecode, MethodID as methodid, SourceID as sourceid, QualityControlLevelID as qualitycontrolid from SeriesCatalog where variablecode ='"+this.variableCode+"';";
+                string queryString = "select  VariableCode as variablecode, SiteCode as sitecode, MethodID as methodid, SourceID as sourceid, QualityControlLevelID as qualitycontrolid from SeriesCatalog where variablecode ='"+this.variableCode+"';";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
