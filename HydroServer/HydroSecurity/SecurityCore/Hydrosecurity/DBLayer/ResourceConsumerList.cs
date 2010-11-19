@@ -12,36 +12,41 @@ namespace DBLayer
     {
         public List<ResourceConsumer> resourceConsumerLocal = new List<ResourceConsumer>();
 
-        public void Load()
+        public void Load(List<string> userEmailAddList)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
-            try
+            foreach (string userEmailAdd in userEmailAddList)
             {
-                myConnection.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = myConnection;
-                string queryString = "select ResourceConsumerId as resourceconsumerid,ResourceConsumerName as resourceconsumername,ResourceConsumerEmailAdd as resourceconsumeremailadd from ResourceConsumer;";
-                cmd.CommandText = queryString;
-                SqlDataReader reader = cmd.ExecuteReader();
-                DataTable dt = new DataTable();
-                dt.Load(reader);
-                foreach (DataRow row in dt.Rows)
+                try
                 {
-                    ResourceConsumer resourceConsumer = new ResourceConsumer();
+                    myConnection.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = myConnection;
+                    string queryString = "select ResourceConsumerId as resourceconsumerid,ResourceConsumerName as resourceconsumername,ResourceConsumerEmailAdd as resourceconsumeremailadd from ResourceConsumer where resourceconsumeremailadd = '"+userEmailAdd+"';";
+                    cmd.CommandText = queryString;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        ResourceConsumer resourceConsumer = new ResourceConsumer();
 
-                    resourceConsumer.resourceConsumerId = Convert.ToInt16(row["resourceconsumerid"].ToString());
-                    resourceConsumer.resourceConsumerName = row["resourceconsumername"].ToString();
-                    resourceConsumer.resourceConsumerEmail = row["resourceconsumeremailadd"].ToString();
-                    this.resourceConsumerLocal.Add(resourceConsumer);
+                        resourceConsumer.resourceConsumerId = Convert.ToInt16(row["resourceconsumerid"].ToString());
+                        resourceConsumer.resourceConsumerName = row["resourceconsumername"].ToString();
+                        resourceConsumer.resourceConsumerEmail = row["resourceconsumeremailadd"].ToString();
+                        this.resourceConsumerLocal.Add(resourceConsumer);
+                    }
+                    myConnection.Close();
+
                 }
-                myConnection.Close();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("this is not successful :" + e.Message.ToString());
+                catch (Exception e)
+                {
+                    Console.WriteLine("this is not successful :" + e.Message.ToString());
+                }
             }
         }
+
+
     }
 }

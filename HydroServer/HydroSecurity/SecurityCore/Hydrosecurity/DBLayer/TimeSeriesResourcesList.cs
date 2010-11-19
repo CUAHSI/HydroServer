@@ -13,7 +13,7 @@ namespace DBLayer
         public List<TimeSeriesResources> timeResourcesLocal = new List<TimeSeriesResources>();
 
         /* This method loads entire timeseries records into TimeSeriesResourcesList object from HydroSecurity Database */
-        public void Load()
+        public void Load(TimeSeriesResources timeRes)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
@@ -22,7 +22,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "select TimeSeriesResourcesId as guid,VariableCode as variablecode,SiteCode as sitecode,MethodId as methodid,SourceId as sourceid,QualityControlLevelId as qualitycontrolid from TimeSeriesResources;";
+                string queryString = "select TimeSeriesResourcesId as guid,VariableCode as variablecode,SiteCode as sitecode,MethodId as methodid,SourceId as sourceid,QualityControlLevelId as qualitycontrolid from TimeSeriesResources where "+FormulateQuery(timeRes)+";";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
@@ -49,7 +49,7 @@ namespace DBLayer
 
         }
 
-        public void load(string variableCode, string siteCode)
+        public void Load(Guid gn)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
@@ -58,7 +58,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "select TimeSeriesResourcesId as guid,VariableCode as variablecode,SiteCode as sitecode,MethodId as methodid,SourceId as sourceid,QualityControlLevelId as qualitycontrolid from TimeSeriesResources";
+                string queryString = "select TimeSeriesResourcesId as guid,VariableCode as variablecode,SiteCode as sitecode,MethodId as methodid,SourceId as sourceid,QualityControlLevelId as qualitycontrolid from TimeSeriesResources where TimeSeriesResourcesId ='"+gn+"' ;";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
@@ -83,7 +83,9 @@ namespace DBLayer
                 Console.WriteLine("this is not successful :" + e.Message.ToString());
             }
 
+
         }
+
 
         /* This method saves entire timeseries records from TimeSeriesResourcesList object into HydroSecurity Database */
         public void save()
@@ -162,6 +164,25 @@ namespace DBLayer
                 
             }
             return AuthTimeSeries;
+        }
+
+        private string FormulateQuery(TimeSeriesResources timeRes)
+        {
+            string query = "variablecode ='" + timeRes.variableCode + "' and sitecode = '" + timeRes.siteCode + "'";
+            if (timeRes.methodId != null)
+            {
+                query = query + "and methodid=" + timeRes.methodId + "";
+            }
+            if (timeRes.qualityControlId != null)
+            {
+                query = query + "and qualitycontrollevelid=" + timeRes.qualityControlId + "";
+            }
+            if (timeRes.sourceId != null)
+            {
+                query = query + "and sourceid=" + timeRes.sourceId + "";
+            }
+
+            return query;
         }
     }
 }

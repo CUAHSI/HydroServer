@@ -42,23 +42,62 @@ namespace Hydrosecurity
             return flag;
         }
 
-        public ResourcesList ResolveResources()
+        public TimeSeriesResourcesList ResolveResources(TimeSeriesResources tmObj)
         {
-            ResourcesList resList = new ResourcesList();
-            return resList;
+            TimeSeriesResourcesList tmList = new TimeSeriesResourcesList();
+            tmList.Load(tmObj);
+            return tmList;
 
         }
-
-        public bool SetAccess()
+        public TimeSeriesResourcesList GetResourceByGuid(Guid guid)
         {
-            bool flag = false;
-            return flag;
+            TimeSeriesResourcesList tmList = new TimeSeriesResourcesList();
+            tmList.Load(guid);
+            return tmList;
+        }
+
+        
+        public void SetAccess(int userId, Guid resourceGuid, string privilege)
+        {
+            Authorization auth = new Authorization();
+            Priviledge priv = new Priviledge();
+            priv.Load(privilege);
+            auth.SetAccess(userId, resourceGuid, priv.priviledgeId);
+
         }
 
         public bool ValidateCertificate()
         {
             bool flag = false;
             return flag;
+        }
+
+        public bool IsAuthorized(string operationType, string resourceType, string resourceGuid, int userId)
+        {
+            bool flag = false;
+            Guid g = new Guid(resourceGuid);
+            PersonResouces prRes = new PersonResouces();
+            Priviledge priv = new Priviledge();
+            priv.Load(operationType);
+            List<Guid> authorizedGuids = new List<Guid>();
+            authorizedGuids = prRes.PersonAuthorized(userId, priv.priviledgeId);
+            if(authorizedGuids.Contains(g))
+            {
+                flag = true;
+            }
+            else
+            {
+                flag = false;
+            }
+            return flag;
+        }
+
+        public ResourceConsumerList ResolveUserInfo(List<string> userEmailAddList)
+        {
+            ResourceConsumerList resConList = new ResourceConsumerList();
+            resConList.Load(userEmailAddList);
+
+            return resConList;
         }
     }
 }

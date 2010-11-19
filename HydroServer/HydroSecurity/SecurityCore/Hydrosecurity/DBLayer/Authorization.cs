@@ -56,6 +56,8 @@ namespace DBLayer
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
+            dateCreated = System.DateTime.Now;
+            dateValidTill = System.DateTime.Now;
            
                 try
                 {
@@ -63,7 +65,7 @@ namespace DBLayer
                     myConnection.Open();
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = myConnection;
-                    string queryString = "insert into personresources values('" + resourceGuid + "'," + userId + ",2," + pType + ",'10-10-10','10-10-10')";
+                    string queryString = "insert into personresources values('" + resourceGuid + "'," + userId + ",2," + pType + ",'"+dateCreated+"','"+dateValidTill+"')";
                     cmd.CommandText = queryString;
                     cmd.ExecuteNonQuery();
                     myConnection.Close();
