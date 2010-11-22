@@ -34,17 +34,16 @@ namespace DBLayer
                     {
                         RequestManagement rm = new RequestManagement();
                         Guid gd = new Guid(row["resourceid"].ToString());
-                        rm.resourceId = gd;
-                        rm.requesterId = Convert.ToInt16(row["requesterid"].ToString());
+                        TimeSeriesResources timeRes = new TimeSeriesResources();
+                        rm.timeResource = timeRes.GetTimeSeriesObject(gd);
+                        int resConId = Convert.ToInt16(row["requesterid"].ToString());
+                        ResourceConsumer resCon = new ResourceConsumer();
+                        rm.resConsumer = resCon.Load(resConId);
                         rm.dateRequested = Convert.ToDateTime(row["daterequested"].ToString());
-                        if (!Convert.ToBoolean( row["status"].ToString()))
-                        {
-                            rm.status = false;
-                        }
-                        else
-                        {
-                            rm.status = true;
-                        }
+                        rm.status = row["status"].ToString();
+                        Priviledge pv = new Priviledge();
+                        pv.Load(Convert.ToInt16(row["priviledgetype"].ToString()));
+                        rm.privilegeType = pv.priviledgeType;
 
                         this.resourceManagementLocal.Add(rm);
                     }

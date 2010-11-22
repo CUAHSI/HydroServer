@@ -10,11 +10,11 @@ namespace DBLayer
 {
     public class RequestManagement 
     {
-        public Guid resourceId;
-        public int requesterId;
+        public TimeSeriesResources timeResource;
+        public ResourceConsumer resConsumer;
         public DateTime  dateRequested;
         public string privilegeType;
-        public bool status;
+        public string status;
 
 
         public void AddRequest(int pType,int userId,List<Guid> resourceGuids)

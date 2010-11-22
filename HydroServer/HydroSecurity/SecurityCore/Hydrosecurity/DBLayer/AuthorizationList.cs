@@ -34,9 +34,11 @@ namespace DBLayer
                         Authorization auth = new Authorization();
                         Guid gd = new Guid(row["resourceid"].ToString());
                         auth.personResourceId = Convert.ToInt16(row["personresourceid"].ToString());
-                        auth.resourceId = gd;
-                        auth.personId = Convert.ToInt16(row["personid"].ToString());
-                        auth.authorizerId = Convert.ToInt16(row["authorizerid"].ToString());
+                        TimeSeriesResources tm = new TimeSeriesResources();
+                        auth.timeResources = tm.GetTimeSeriesObject(gd);
+                        ResourceConsumer resCon = new ResourceConsumer();
+                        auth.person =   resCon.Load( Convert.ToInt16(row["personid"].ToString()));
+                        auth.authorizer = resCon.Load( Convert.ToInt16(row["authorizerid"].ToString()));
                         auth.priviledgeId = Convert.ToInt16(row["privilegeid"].ToString());
                         auth.dateCreated = Convert.ToDateTime(row["datecreated"].ToString());
                         auth.dateValidTill = Convert.ToDateTime(row["datevalidtill"].ToString());
