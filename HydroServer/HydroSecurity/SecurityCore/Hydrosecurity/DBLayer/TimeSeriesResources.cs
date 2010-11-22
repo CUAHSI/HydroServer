@@ -16,8 +16,43 @@ namespace DBLayer
         public int? methodId =null ;
         public int? sourceId = null ;
         public int? qualityControlId = null ;
-        
 
+        public TimeSeriesResources GetTimeSeriesObject(Guid timeSeriesGuid)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "select TimeSeriesResourcesId as guid,VariableCode as variablecode,SiteCode as sitecode,MethodId as methodid,SourceId as sourceid,QualityControlLevelId as qualitycontrolid from TimeSeriesResources where timeseriesresourcesid ='" + timeSeriesGuid + "';";
+                cmd.CommandText = queryString;
+                SqlDataReader reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                foreach (DataRow row in dt.Rows)
+                {
+                    Guid g = new Guid(row["guid"].ToString());
+                    this.timeSeriesResourceId = g;
+                    this.variableCode = row["variablecode"].ToString();
+                    this.siteCode = row["sitecode"].ToString();
+                    this.methodId = Convert.ToInt16(row["methodid"].ToString());
+                    this.sourceId = Convert.ToInt16(row["sourceid"].ToString());
+                    this.qualityControlId = Convert.ToInt16(row["qualitycontrolid"].ToString());
+
+                }
+                myConnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+
+            return this;
+
+        }
         
         
         
