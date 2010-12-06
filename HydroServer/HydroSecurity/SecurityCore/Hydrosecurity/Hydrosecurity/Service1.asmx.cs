@@ -51,7 +51,7 @@ namespace Hydrosecurity
 
         /*give back a xml document containing information of the resources*/
         [WebMethod]
-        public XmlDocument GetResourceInfo(TimeSeriesResources tmObj)
+        public XmlDocument GetResourceInfo(TimeSeriesResource tmObj)
         {
             XmlDocument doc = new XmlDocument();
             TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
@@ -84,15 +84,30 @@ namespace Hydrosecurity
             ser.Serialize(writer, tm);
             doc.LoadXml(sb.ToString());
 
+            //TimeSeriesResourcesList test = new TimeSeriesResourcesList();
+            //StringReader stringread = new StringReader(doc.InnerXml);
+            //XmlReader read1 = new XmlTextReader(stringread);
+            //test = (TimeSeriesResourcesList)ser.Deserialize(read1);
+
             return doc;
         }
 
         [WebMethod]
-        public XmlDocument GetAllResourceInfo()
+        public XmlDocument GetResourceInfoByDateTime(DateTime startDateTime, DateTime endDateTime)
         {
             XmlDocument doc = new XmlDocument();
+            TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
+            HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+            tm = hydroInternal.GetByDate(startDateTime, endDateTime);
+            XmlSerializer ser = new XmlSerializer(tm.GetType());
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+            ser.Serialize(writer, tm);
+            doc.LoadXml(sb.ToString());
+
             return doc;
         }
+
 
         /*give back a xml document containing information of the users*/
         [WebMethod]

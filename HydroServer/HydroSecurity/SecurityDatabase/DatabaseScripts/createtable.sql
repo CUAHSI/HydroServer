@@ -1,15 +1,47 @@
 use HydroSecure;
 
-create table TimeSeriesResources
+create table TimeSeriesResource
 (
- TimeSeriesResourcesId uniqueidentifier primary key(TimeSeriesResourcesId),
- VariableCode varchar(64),
- SiteCode varchar(64),
- MethodId int,
- SourceId int,
- QualityControlLevelId int,
+TimeSeriesResourceId uniqueidentifier primary key(TimeSeriesResourceId),
+TimeSeriesMetadataId  uniqueidentifier,
+SeriesID int,
+SiteID   int,
+SiteCode varchar(50),
+SiteName varchar(255),
+VariableID int,
+VariableCode varchar(50),
+VariableName varchar(225),
+Speciation   varchar(225),
+VariableUnitsID int,
+VariableUnitsName varchar(225),
+SampleMedium varchar(225),
+ValueType  varchar(225),
+TimeSupport float,
+TimeUnitsID  int,
+TimeUnitsName  varchar(225),
+DataType varchar(225),
+GeneralCategory  varchar(225),
+MethodID  int,
+MethodDescription varchar(max),
+SourceID  int,
+Organization  varchar(225),
+SourceDescription  varchar(max),
+Citation varchar(max),
+QualityControlLevelID int,
+QualityControlLevelCode varchar(50),
+ValueCount int,
+DateCreated datetime not null,
+DatabaseName varchar(255),
+WaterOneFlowWSDL varchar(max),
  
-)
+);
+
+create table ResourceMetaDataMapping
+(
+TimeSeriesDataId uniqueidentifier primary key(TimeSeriesDataId) references TimeSeriesResource(TimeSeriesResourceId),
+TimeSeriesMetaDataId uniqueidentifier,
+);
+
 
 create table ResourceType
 (
@@ -20,7 +52,7 @@ description varchar(32),
 
 create table Resources
 (
-ResourceId uniqueidentifier primary key(ResourceId) references TimeSeriesResources(TimeSeriesResourcesId),
+ResourceId uniqueidentifier primary key(ResourceId) references TimeSeriesResource(TimeSeriesResourceId),
 ResourceType int references ResourceType(ResourceTypeId) not null,
 );
 

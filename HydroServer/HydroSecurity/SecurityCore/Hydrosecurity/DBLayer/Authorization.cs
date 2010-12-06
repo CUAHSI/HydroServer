@@ -11,7 +11,7 @@ namespace DBLayer
     public class Authorization
     {
         public int personResourceId;
-        public TimeSeriesResources timeResources;
+        public TimeSeriesResource timeResources;
         public ResourceConsumer person;
         public ResourceConsumer authorizer;
         public int priviledgeId;
