@@ -34,7 +34,7 @@ namespace DBLayer
                     {
                         RequestManagement rm = new RequestManagement();
                         Guid gd = new Guid(row["resourceid"].ToString());
-                        TimeSeriesResources timeRes = new TimeSeriesResources();
+                        TimeSeriesResource timeRes = new TimeSeriesResource();
                         rm.timeResource = timeRes.GetTimeSeriesObject(gd);
                         int resConId = Convert.ToInt16(row["requesterid"].ToString());
                         ResourceConsumer resCon = new ResourceConsumer();

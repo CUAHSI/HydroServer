@@ -21,7 +21,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "select timeseriesresourcesid as resourceid from timeseriesresources";
+                string queryString = "select timeseriesresourceid as resourceid from timeseriesresource";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
@@ -58,7 +58,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "select timeseriesresourcesid as resourceid from timeseriesresources where sitecode='"+siteCode+"'";
+                string queryString = "select timeseriesresourceid as resourceid from timeseriesresource where sitecode='"+siteCode+"'";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();

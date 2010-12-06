@@ -42,7 +42,7 @@ namespace Hydrosecurity
             return flag;
         }
 
-        public TimeSeriesResourcesList ResolveResources(TimeSeriesResources tmObj)
+        public TimeSeriesResourcesList ResolveResources(TimeSeriesResource tmObj)
         {
             TimeSeriesResourcesList tmList = new TimeSeriesResourcesList();
             tmList.Load(tmObj);
@@ -56,6 +56,28 @@ namespace Hydrosecurity
             return tmList;
         }
 
+        public TimeSeriesResourcesList GetByDate(DateTime startDateTime, DateTime endDateTime)
+        {
+            DateTime nullDateTime = new DateTime();
+            TimeSeriesResourcesList tmList = new TimeSeriesResourcesList();
+            if (startDateTime == nullDateTime && endDateTime == nullDateTime)
+            {
+                tmList.GetEntireByDate();
+            }
+            else
+                if (endDateTime == nullDateTime)
+                {
+                    tmList.GetByStartDate(startDateTime);
+                }
+                else
+                    if (startDateTime == nullDateTime)
+                    {
+                        tmList.GetByEndDate(endDateTime);
+                    }
+                    else
+                        tmList.GetBetweenDates(startDateTime,endDateTime);
+            return tmList;
+        }
         
         public void SetAccess(int userId, Guid resourceGuid, string privilege)
         {

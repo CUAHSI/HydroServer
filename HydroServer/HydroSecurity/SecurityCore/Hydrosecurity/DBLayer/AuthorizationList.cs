@@ -34,7 +34,7 @@ namespace DBLayer
                         Authorization auth = new Authorization();
                         Guid gd = new Guid(row["resourceid"].ToString());
                         auth.personResourceId = Convert.ToInt16(row["personresourceid"].ToString());
-                        TimeSeriesResources tm = new TimeSeriesResources();
+                        TimeSeriesResource tm = new TimeSeriesResource();
                         auth.timeResources = tm.GetTimeSeriesObject(gd);
                         ResourceConsumer resCon = new ResourceConsumer();
                         auth.person =   resCon.Load( Convert.ToInt16(row["personid"].ToString()));

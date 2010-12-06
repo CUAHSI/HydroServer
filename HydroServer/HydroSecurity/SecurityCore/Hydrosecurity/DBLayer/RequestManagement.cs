@@ -10,7 +10,7 @@ namespace DBLayer
 {
     public class RequestManagement 
     {
-        public TimeSeriesResources timeResource;
+        public TimeSeriesResource timeResource;
         public ResourceConsumer resConsumer;
         public DateTime  dateRequested;
         public string privilegeType;
