@@ -70,12 +70,12 @@ namespace Hydrosecurity
 
         /*give back a xml document containing information of the resources when passed a resource guid*/
         [WebMethod]
-        public XmlDocument GetResourceInfoByGuid(string resGuid)
+        public XmlDocument GetResourceInfoById(string resId)
         {
             XmlDocument doc = new XmlDocument();
             TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
             HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
-            Guid g = new Guid(resGuid);
+            Guid g = new Guid(resId);
             tm = hydroInternal.GetResourceByGuid(g);
 
             XmlSerializer ser = new XmlSerializer(tm.GetType());
@@ -93,7 +93,7 @@ namespace Hydrosecurity
         }
 
         [WebMethod]
-        public XmlDocument GetResourceInfoByDateTime(DateTime startDateTime, DateTime endDateTime)
+        public XmlDocument GetResourceInfoByDate(DateTime startDateTime, DateTime endDateTime)
         {
             XmlDocument doc = new XmlDocument();
             TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
