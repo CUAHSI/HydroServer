@@ -8,7 +8,7 @@ using System.Configuration;
 
 namespace DBLayer
 {
-    public class TimeSeriesResource
+    public class TimeSeriesResource 
     {
         public Guid dataGuid;
         public Guid metadataGuid;

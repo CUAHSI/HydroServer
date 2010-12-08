@@ -9,5 +9,7 @@ namespace DBLayer
     {
         public Guid resourceId;
         public int resourceTypeId;
+
+
     }
 }
