@@ -58,7 +58,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "select timeseriesresourceid as resourceid from timeseriesresource where sitecode='"+siteCode+"'";
+                string queryString = "select timeseriesresourceid as resourceid from timeseriesresource where sitecode='" + siteCode + "'";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
@@ -66,7 +66,7 @@ namespace DBLayer
                 foreach (DataRow row in dt.Rows)
                 {
 
-                   
+
                     Guid g = new Guid(row["resourceid"].ToString());
                     returnResourceList.Add(g);
 
@@ -86,7 +86,7 @@ namespace DBLayer
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
-            foreach ( Resources rs in this.resourcesLocal )
+            foreach (Resources rs in this.resourcesLocal)
             {
                 try
                 {

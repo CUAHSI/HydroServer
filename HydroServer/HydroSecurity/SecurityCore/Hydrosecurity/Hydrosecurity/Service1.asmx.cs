@@ -28,6 +28,7 @@ namespace Hydrosecurity
         [WebMethod]
         public bool IsAlive()
         {
+           
             return true;
         }
       
@@ -44,9 +45,40 @@ namespace Hydrosecurity
         }
 
         [WebMethod]
-        public bool GetTimeseriesListObj(TimeSeriesResourcesList tmResList)
+        public bool Test(ResourceTypeList resTypeList)
         {
             return true;
+            
+            
+        }
+
+        [WebMethod]
+        public string GetResourceType()
+        {
+            XmlDocument doc = new XmlDocument();
+            HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+            ResourceTypeList resTypeList = new ResourceTypeList();
+            resTypeList = hydroInternal.GetResourceTypes();
+            XmlSerializer ser = new XmlSerializer(resTypeList.GetType());
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+            ser.Serialize(writer, resTypeList);
+            doc.LoadXml(sb.ToString());
+
+            string xmlString = doc.InnerXml.ToString();
+
+            ResourceTypeList resTypeList1 = new ResourceTypeList();
+            XmlSerializer serializer = new XmlSerializer(resTypeList1.GetType());
+            StringReader stringread = new StringReader(doc.InnerXml);
+            XmlReader read1 = new XmlTextReader(stringread);
+            resTypeList1 = (ResourceTypeList)serializer.Deserialize(read1);
+            //TimeSeriesResourcesList test = new TimeSeriesResourcesList();
+            //StringReader stringread = new StringReader(doc.InnerXml);
+            //XmlReader read1 = new XmlTextReader(stringread);
+            //test = (TimeSeriesResourcesList)ser.Deserialize(read1);
+
+
+            return xmlString;
         }
 
         /*give back a xml document containing information of the resources*/
@@ -93,16 +125,18 @@ namespace Hydrosecurity
         }
 
         [WebMethod]
-        public XmlDocument GetResourceInfoByDate(DateTime startDateTime, DateTime endDateTime)
+        public XmlDocument GetResourceInfoByDate()
         {
+            DateTime startDate = new DateTime();
+            DateTime endDate = new DateTime();
             XmlDocument doc = new XmlDocument();
-            TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
+            ResourceCatalog resCat = new ResourceCatalog();
             HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
-            tm = hydroInternal.GetByDate(startDateTime, endDateTime);
-            XmlSerializer ser = new XmlSerializer(tm.GetType());
+            resCat = hydroInternal.GetByDate(startDate,endDate);
+            XmlSerializer ser = new XmlSerializer(resCat.GetType());
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             System.IO.StringWriter writer = new System.IO.StringWriter(sb);
-            ser.Serialize(writer, tm);
+            ser.Serialize(writer, resCat);
             doc.LoadXml(sb.ToString());
 
             return doc;

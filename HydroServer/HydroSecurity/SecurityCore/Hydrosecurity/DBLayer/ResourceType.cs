@@ -5,9 +5,11 @@ using System.Text;
 
 namespace DBLayer
 {
-    public class Resources
+    [Serializable]
+    public class ResourceType
     {
-        public Guid resourceId;
         public int resourceTypeId;
+        public string resourceType;
+        public string resourceDescription;
     }
 }

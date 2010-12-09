@@ -201,7 +201,7 @@ namespace DBLayer
             }
         }
 
-        /* this method load  records into TimeSeriesResourcesList object from HydroSecurity Database given startDateTime*/
+        /* this method load  records into TimeSeriesResourcesList object from HydroSecurity Database given startDate*/
         public void GetByStartDate(DateTime startDateTime)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;

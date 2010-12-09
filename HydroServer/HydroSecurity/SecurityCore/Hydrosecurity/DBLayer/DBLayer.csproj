@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationList.cs" />
+    <Compile Include="Document.cs" />
     <Compile Include="Priviledge.cs" />
     <Compile Include="Authorization.cs" />
     <Compile Include="Certificate.cs" />
@@ -54,10 +55,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestManagement.cs" />
     <Compile Include="RequestManagementList.cs" />
+    <Compile Include="ResourceCatalog.cs" />
     <Compile Include="ResourceConsumer.cs" />
     <Compile Include="ResourceConsumerList.cs" />
     <Compile Include="Resources.cs" />
     <Compile Include="ResourcesList.cs" />
+    <Compile Include="ResourceType.cs" />
+    <Compile Include="ResourceTypeList.cs" />
     <Compile Include="TimeSeriesResources.cs" />
     <Compile Include="TimeSeriesResourcesList.cs" />
   </ItemGroup>

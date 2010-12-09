@@ -1,8 +1,22 @@
 use HydroSecure;
 
+create table ResourceType
+(
+ResourceTypeId int identity(1,1) primary key(ResourceTypeId),
+Name varchar(10) unique(Name) not null,
+description varchar(32),
+);
+
+create table Resources
+(
+ResourceId uniqueidentifier primary key(ResourceId),
+ResourceType int references ResourceType(ResourceTypeId) not null,
+DateCreated datetime not null,
+);
+
 create table TimeSeriesResource
 (
-TimeSeriesResourceId uniqueidentifier primary key(TimeSeriesResourceId),
+TimeSeriesResourceId uniqueidentifier primary key(TimeSeriesResourceId) references Resources(ResourceId),
 TimeSeriesMetadataId  uniqueidentifier,
 SeriesID int,
 SiteID   int,
@@ -42,19 +56,16 @@ TimeSeriesDataId uniqueidentifier primary key(TimeSeriesDataId) references TimeS
 TimeSeriesMetaDataId uniqueidentifier,
 );
 
-
-create table ResourceType
+Create table Document
 (
-ResourceTypeId int identity(1,1) primary key(ResourceTypeId),
-Name varchar(10) unique(Name) not null,
-description varchar(32),
+DocumentId uniqueidentifier primary key(DocumentId) references Resources(ResourceId),
+Name varchar(128),
+Title varchar(max),
+Location varchar(max),
+DateCreated datetime not null,
 );
 
-create table Resources
-(
-ResourceId uniqueidentifier primary key(ResourceId) references TimeSeriesResource(TimeSeriesResourceId),
-ResourceType int references ResourceType(ResourceTypeId) not null,
-);
+
 
 create table TrustedCA
 (
