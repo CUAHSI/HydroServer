@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
 using DBLayer;
+
 
 namespace Hydrosecurity
 {
@@ -56,27 +58,66 @@ namespace Hydrosecurity
             return tmList;
         }
 
-        public TimeSeriesResourcesList GetByDate(DateTime startDateTime, DateTime endDateTime)
+        public ResourceCatalog  GetByDate(DateTime startDate,DateTime endDate)
         {
-            DateTime nullDateTime = new DateTime();
-            TimeSeriesResourcesList tmList = new TimeSeriesResourcesList();
-            if (startDateTime == nullDateTime && endDateTime == nullDateTime)
+            List<Guid> timeSeriesGuidList = new List<Guid>();
+            List<Guid> documentGuidList = new List<Guid>();
+            ResourceCatalog resCat = new ResourceCatalog();
+            DataTable dt = new DataTable();
+            DateTime nullDate= new DateTime();
+            if (startDate == nullDate && endDate == nullDate)
             {
-                tmList.GetEntireByDate();
+
+                dt = resCat.GetEntireByDate();
             }
             else
-                if (endDateTime == nullDateTime)
+                if (endDate == nullDate)
                 {
-                    tmList.GetByStartDate(startDateTime);
+
+                    dt = resCat.GetByStartDate(startDate);
                 }
                 else
-                    if (startDateTime == nullDateTime)
+                    if (startDate == nullDate)
                     {
-                        tmList.GetByEndDate(endDateTime);
+                        dt = resCat.GetByEndDate(endDate);
                     }
                     else
-                        tmList.GetBetweenDates(startDateTime,endDateTime);
-            return tmList;
+                        dt = resCat.GetBetweenDates(startDate, endDate);
+
+
+
+
+            foreach (DataRow row in dt.Rows)
+            {
+                int resourceTypeId = Convert.ToInt16(row["resourcetype"].ToString());
+                if (resourceTypeId == 1)
+                {
+                    Guid timeGuid = new Guid(row["resourceid"].ToString());
+                    timeSeriesGuidList.Add(timeGuid);
+                }
+                else
+                {
+                    Guid docGuid = new Guid(row["resourceid"].ToString());
+                    documentGuidList.Add(docGuid);
+                }
+            }
+
+            foreach (Guid g in timeSeriesGuidList)
+            {
+                TimeSeriesResource tm = new TimeSeriesResource();
+                tm = tm.GetTimeSeriesObject(g);
+                resCat.timeSeriesCatalog.Add(tm);
+            }
+
+            foreach (Guid g in documentGuidList)
+            {
+                Document doc = new Document();
+                doc = doc.GetDocumentById(g);
+                resCat.documentCatalog.Add(doc);
+            }
+
+
+            return resCat;
         }
         
         public void SetAccess(int userId, Guid resourceGuid, string privilege)
@@ -120,6 +161,13 @@ namespace Hydrosecurity
             resConList.Load(userEmailAddList);
 
             return resConList;
+        }
+
+        public ResourceTypeList GetResourceTypes()
+        {
+            ResourceTypeList resTypeList = new ResourceTypeList();
+            resTypeList = resTypeList.GetResourceType();
+            return resTypeList;
         }
     }
 }

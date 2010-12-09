@@ -29,13 +29,13 @@ namespace DBLayer
         public string timeUnitsName;
         public string dataType;
         public string generalCategory;
-        public int? methodId = null;
+        public int methodId;
         public string methodDescription;
-        public int? sourceId = null;
+        public int sourceId;
         public string organization;
         public string sourceDescription;
         public string citation;
-        public int? qualityControLlevelId = null;
+        public int qualityControLlevelId;
         public string qualityControlLevelCode;
         public int valueCount;
         public DateTime dateCreated;
@@ -52,7 +52,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "SELECT timeseriesresourceid as timeseriesresourceid, timeseriesmetadataid as timeseriesmetadataid, SeriesID as seriesid,SiteID as siteid,SiteCode as sitecode, SiteName as sitename, VariableID as variableid, VariableCode as variablecode, VariableName as variablename, Speciation as speciation, VariableUnitsID as variableunitsid, VariableUnitsName as variableunitsname, SampleMedium as samplemedium, ValueType as valuetype, TimeSupport as timesupport, TimeUnitsID as timeunitsid, TimeUnitsName as timeunitsname, DataType as datatype, GeneralCategory as generalcategory, MethodID as methodid, MethodDescription as methoddescription, SourceID as sourceid, Organization as organization, SourceDescription as sourcedescription,  QualityControlLevelID as qualitycontrollevelid, QualityControlLevelCode as qualitycontrollevelcode, ValueCount as valuecount, DateCreated as datecreated, DatabaseName as databasename, WaterOneFlowWSDL as wateroneflowwsdl FROM TimeSeriesResource where timeseriesresourceid = '" + timeSeriesGuid + "';";
+                string queryString = "SELECT timeseriesresourceid as timeseriesresourceid, timeseriesmetadataid as timeseriesmetadataid, SeriesID as seriesid,SiteID as siteid,SiteCode as sitecode, SiteName as sitename, VariableID as variableid, VariableCode as variablecode, VariableName as variablename, Speciation as speciation, VariableUnitsID as variableunitsid, VariableUnitsName as variableunitsname, SampleMedium as samplemedium, ValueType as valuetype, TimeSupport as timesupport, TimeUnitsID as timeunitsid, TimeUnitsName as timeunitsname, DataType as datatype, GeneralCategory as generalcategory, MethodID as methodid, MethodDescription as methoddescription, SourceID as sourceid, Organization as organization, SourceDescription as sourcedescription,citation as citation,  QualityControlLevelID as qualitycontrollevelid, QualityControlLevelCode as qualitycontrollevelcode, ValueCount as valuecount, DateCreated as datecreated, DatabaseName as databasename, WaterOneFlowWSDL as wateroneflowwsdl FROM TimeSeriesResource where timeseriesresourceid = '" + timeSeriesGuid + "';";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
@@ -121,7 +121,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "SELECT timeseriesresourceid as timeseriesresourceid, timeseriesmetadataid as timeseriesmetadataid, SeriesID as seriesid,SiteID as siteid,SiteCode as sitecode, SiteName as sitename, VariableID as variableid, VariableCode as variablecode, VariableName as variablename, Speciation as speciation, VariableUnitsID as variableunitsid, VariableUnitsName as variableunitsname, SampleMedium as samplemedium, ValueType as valuetype, TimeSupport as timesupport, TimeUnitsID as timeunitsid, TimeUnitsName as timeunitsname, DataType as datatype, GeneralCategory as generalcategory, MethodID as methodid, MethodDescription as methoddescription, SourceID as sourceid, Organization as organization, SourceDescription as sourcedescription,  QualityControlLevelID as qualitycontrollevelid, QualityControlLevelCode as qualitycontrollevelcode, ValueCount as valuecount, DateCreated as datecreated, DatabaseName as databasename, WaterOneFlowWSDL as wateroneflowwsdl FROM TimeSeriesResource where timeseriesresourceid = '" + this.dataGuid + "';";
+                string queryString = "SELECT timeseriesresourceid as timeseriesresourceid, timeseriesmetadataid as timeseriesmetadataid, SeriesID as seriesid,SiteID as siteid,SiteCode as sitecode, SiteName as sitename, VariableID as variableid, VariableCode as variablecode, VariableName as variablename, Speciation as speciation, VariableUnitsID as variableunitsid, VariableUnitsName as variableunitsname, SampleMedium as samplemedium, ValueType as valuetype, TimeSupport as timesupport, TimeUnitsID as timeunitsid, TimeUnitsName as timeunitsname, DataType as datatype, GeneralCategory as generalcategory, MethodID as methodid, MethodDescription as methoddescription, SourceID as sourceid, Organization as organization, SourceDescription as sourcedescription,citation as citation  QualityControlLevelID as qualitycontrollevelid, QualityControlLevelCode as qualitycontrollevelcode, ValueCount as valuecount, DateCreated as datecreated, DatabaseName as databasename, WaterOneFlowWSDL as wateroneflowwsdl FROM TimeSeriesResource where timeseriesresourceid = '" + this.dataGuid + "';";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
