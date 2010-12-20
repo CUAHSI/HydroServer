@@ -9,6 +9,7 @@ using System.Data;
 
 namespace DBLayer
 {
+    [Serializable]
     public class ResourceConsumer
     {
         public int resourceConsumerId;

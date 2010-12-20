@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 
 namespace DBLayer
 {
+    [Serializable]
     public class ResourcesList 
     {
         public List<Resources> resourcesLocal = new List<Resources>();

@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 
 namespace DBLayer
 {
+    [Serializable]
     public class Document
     {
         public Guid documentId;

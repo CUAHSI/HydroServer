@@ -5,6 +5,7 @@ using System.Text;
 
 namespace DBLayer
 {
+    [Serializable]
     public class Resources
     {
         public Guid resourceId;

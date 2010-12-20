@@ -8,8 +8,10 @@ using System.Configuration;
 
 namespace DBLayer
 {
+    [Serializable]
     public class TimeSeriesResource 
     {
+        
         public Guid dataGuid;
         public Guid metadataGuid;
         public int seriesId;
@@ -43,7 +45,7 @@ namespace DBLayer
         public string waterOneflowWSDL;
 
 
-        public TimeSeriesResource GetTimeSeriesObject(Guid timeSeriesGuid)
+        public TimeSeriesResource GetTimeSeriesObjectbyDataGuid(Guid timeSeriesGuid)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
@@ -105,8 +107,7 @@ namespace DBLayer
             return this;
 
         }
-        
-        
+
         
         
         

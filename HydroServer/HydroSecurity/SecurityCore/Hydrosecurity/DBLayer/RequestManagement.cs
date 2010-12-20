@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 
 namespace DBLayer
 {
+    [Serializable]
     public class RequestManagement 
     {
         public TimeSeriesResource timeResource;

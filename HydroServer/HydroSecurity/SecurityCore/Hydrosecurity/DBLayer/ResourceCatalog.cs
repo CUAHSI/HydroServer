@@ -5,12 +5,15 @@ using System.Text;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Xml.Serialization;
 
 
 namespace DBLayer
 {
+    [Serializable]
     public class ResourceCatalog
     {
+        
         public List<TimeSeriesResource> timeSeriesCatalog = new List<TimeSeriesResource>();
         public List<Document> documentCatalog = new List<Document>();
 

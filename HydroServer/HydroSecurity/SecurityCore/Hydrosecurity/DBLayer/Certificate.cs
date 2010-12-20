@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace DBLayer
 {
+    [Serializable]
     public class Certificate
     {
         public string serialNo;

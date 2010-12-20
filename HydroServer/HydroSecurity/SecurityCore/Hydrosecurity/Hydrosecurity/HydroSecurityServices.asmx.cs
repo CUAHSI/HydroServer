@@ -17,12 +17,12 @@ namespace Hydrosecurity
     /// <summary>
     /// Summary description for Service1
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://cuasi/hydrosecurity")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
-    public class Service1 : System.Web.Services.WebService
+    public class HydroSecurity : System.Web.Services.WebService
     {
         /*webmethod for checking is Services alive*/
         [WebMethod]
@@ -35,6 +35,15 @@ namespace Hydrosecurity
         /*webmethod for registering the user*/
 
         [WebMethod]
+        public List<string> GetUserList()
+        {
+            List<string> userEmailList = new List<string>();
+            HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
+            userEmailList = hydroInternal.GetUserList();
+            return userEmailList;
+        }
+
+        [WebMethod]
         public string RegisterUser()
         {
             X509Certificate2 cer = GetCertificate();
@@ -45,15 +54,7 @@ namespace Hydrosecurity
         }
 
         [WebMethod]
-        public bool Test(ResourceTypeList resTypeList)
-        {
-            return true;
-            
-            
-        }
-
-        [WebMethod]
-        public string GetResourceType()
+        public XmlDocument GetResourceTypes()
         {
             XmlDocument doc = new XmlDocument();
             HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
@@ -64,82 +65,61 @@ namespace Hydrosecurity
             System.IO.StringWriter writer = new System.IO.StringWriter(sb);
             ser.Serialize(writer, resTypeList);
             doc.LoadXml(sb.ToString());
-
-            string xmlString = doc.InnerXml.ToString();
-
-            ResourceTypeList resTypeList1 = new ResourceTypeList();
-            XmlSerializer serializer = new XmlSerializer(resTypeList1.GetType());
-            StringReader stringread = new StringReader(doc.InnerXml);
-            XmlReader read1 = new XmlTextReader(stringread);
-            resTypeList1 = (ResourceTypeList)serializer.Deserialize(read1);
-            //TimeSeriesResourcesList test = new TimeSeriesResourcesList();
-            //StringReader stringread = new StringReader(doc.InnerXml);
-            //XmlReader read1 = new XmlTextReader(stringread);
-            //test = (TimeSeriesResourcesList)ser.Deserialize(read1);
-
-
-            return xmlString;
+            return doc;
         }
 
         /*give back a xml document containing information of the resources*/
         [WebMethod]
-        public XmlDocument GetResourceInfo(TimeSeriesResource tmObj)
+        public ResourceCatalog GetResourceInfo(Parameters parameters,string resourceType)
         {
             XmlDocument doc = new XmlDocument();
             TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
             HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
-            tm = hydroInternal.ResolveResources(tmObj);
+            ResourceCatalog resCat = new ResourceCatalog();
+            resCat = hydroInternal.ResolveResources(parameters, resourceType);
+            //XmlSerializer ser = new XmlSerializer(resCat.GetType());
+            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+            //ser.Serialize(writer, resCat);
+            //doc.LoadXml(sb.ToString());
 
-            XmlSerializer ser = new XmlSerializer(tm.GetType());
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            System.IO.StringWriter writer = new System.IO.StringWriter(sb);
-            ser.Serialize(writer, tm);
-            doc.LoadXml(sb.ToString());
-
-            return doc;
+            return resCat;
           
         }
 
         /*give back a xml document containing information of the resources when passed a resource guid*/
         [WebMethod]
-        public XmlDocument GetResourceInfoById(string resId)
+        public TimeSeriesResourcesList GetResourceInfoById(string resId)
         {
             XmlDocument doc = new XmlDocument();
             TimeSeriesResourcesList tm = new TimeSeriesResourcesList();
             HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
             Guid g = new Guid(resId);
             tm = hydroInternal.GetResourceByGuid(g);
-
-            XmlSerializer ser = new XmlSerializer(tm.GetType());
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            System.IO.StringWriter writer = new System.IO.StringWriter(sb);
-            ser.Serialize(writer, tm);
-            doc.LoadXml(sb.ToString());
-
-            //TimeSeriesResourcesList test = new TimeSeriesResourcesList();
-            //StringReader stringread = new StringReader(doc.InnerXml);
-            //XmlReader read1 = new XmlTextReader(stringread);
-            //test = (TimeSeriesResourcesList)ser.Deserialize(read1);
-
-            return doc;
+            //XmlSerializer ser = new XmlSerializer(tm.GetType());
+            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+            //ser.Serialize(writer, tm);
+            //doc.LoadXml(sb.ToString());
+            //return doc; 
+            return tm;
         }
 
         [WebMethod]
-        public XmlDocument GetResourceInfoByDate()
+        public ResourceCatalog GetResourceInfoByDate(DateTime startDate,DateTime endDate)
         {
-            DateTime startDate = new DateTime();
-            DateTime endDate = new DateTime();
             XmlDocument doc = new XmlDocument();
             ResourceCatalog resCat = new ResourceCatalog();
             HydroSecurityInternal hydroInternal = new HydroSecurityInternal();
             resCat = hydroInternal.GetByDate(startDate,endDate);
-            XmlSerializer ser = new XmlSerializer(resCat.GetType());
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            System.IO.StringWriter writer = new System.IO.StringWriter(sb);
-            ser.Serialize(writer, resCat);
-            doc.LoadXml(sb.ToString());
+            //XmlSerializer ser = new XmlSerializer(resCat.GetType());
+            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //System.IO.StringWriter writer = new System.IO.StringWriter(sb);
+            //ser.Serialize(writer, resCat);
+            //doc.LoadXml(sb.ToString());
+            //return doc;
 
-            return doc;
+            return resCat;
         }
 
 

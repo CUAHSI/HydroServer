@@ -35,7 +35,7 @@ namespace DBLayer
                         RequestManagement rm = new RequestManagement();
                         Guid gd = new Guid(row["resourceid"].ToString());
                         TimeSeriesResource timeRes = new TimeSeriesResource();
-                        rm.timeResource = timeRes.GetTimeSeriesObject(gd);
+                        rm.timeResource = timeRes.GetTimeSeriesObjectbyDataGuid(gd);
                         int resConId = Convert.ToInt16(row["requesterid"].ToString());
                         ResourceConsumer resCon = new ResourceConsumer();
                         rm.resConsumer = resCon.Load(resConId);
