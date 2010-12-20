@@ -44,11 +44,20 @@ namespace Hydrosecurity
             return flag;
         }
 
-        public TimeSeriesResourcesList ResolveResources(TimeSeriesResource tmObj)
+        public ResourceCatalog ResolveResources(Parameters parameters,string resourceType)
         {
-            TimeSeriesResourcesList tmList = new TimeSeriesResourcesList();
-            tmList.Load(tmObj);
-            return tmList;
+            ResourceCatalog resCat = new ResourceCatalog();
+            if (resourceType == "timeseries")
+            {
+                TimeSeriesResourcesList tmList = new TimeSeriesResourcesList();
+                tmList.Load(parameters);
+                for (int i = 0; i < tmList.timeResourcesLocal.Count; i++)
+                {
+                    resCat.timeSeriesCatalog.Add(tmList.timeResourcesLocal[i]);
+                }
+            }
+
+            return resCat;
 
         }
         public TimeSeriesResourcesList GetResourceByGuid(Guid guid)
@@ -105,7 +114,7 @@ namespace Hydrosecurity
             foreach (Guid g in timeSeriesGuidList)
             {
                 TimeSeriesResource tm = new TimeSeriesResource();
-                tm = tm.GetTimeSeriesObject(g);
+                tm = tm.GetTimeSeriesObjectbyDataGuid(g);
                 resCat.timeSeriesCatalog.Add(tm);
             }
 
@@ -127,6 +136,14 @@ namespace Hydrosecurity
             priv.Load(privilege);
             auth.SetAccess(userId, resourceGuid, priv.priviledgeId);
 
+        }
+
+        public List<string> GetUserList()
+        {
+            List<string> userEmailList = new List<string>();
+            ResourceConsumerList resConList = new ResourceConsumerList();
+            userEmailList = resConList.GetUserList();
+            return userEmailList;
         }
 
         public bool ValidateCertificate()

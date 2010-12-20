@@ -8,6 +8,7 @@ using System.Configuration;
 
 namespace DBLayer
 {
+    [Serializable]
     public class AuthorizationList
     {
         public List<Authorization> authList = new List<Authorization>();
@@ -35,7 +36,7 @@ namespace DBLayer
                         Guid gd = new Guid(row["resourceid"].ToString());
                         auth.personResourceId = Convert.ToInt16(row["personresourceid"].ToString());
                         TimeSeriesResource tm = new TimeSeriesResource();
-                        auth.timeResources = tm.GetTimeSeriesObject(gd);
+                        auth.timeResources = tm.GetTimeSeriesObjectbyDataGuid(gd);
                         ResourceConsumer resCon = new ResourceConsumer();
                         auth.person =   resCon.Load( Convert.ToInt16(row["personid"].ToString()));
                         auth.authorizer = resCon.Load( Convert.ToInt16(row["authorizerid"].ToString()));

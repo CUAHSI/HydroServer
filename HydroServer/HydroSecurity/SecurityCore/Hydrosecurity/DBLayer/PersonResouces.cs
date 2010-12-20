@@ -8,6 +8,7 @@ using System.Configuration;
 
 namespace DBLayer
 {
+    [Serializable]
     public class PersonResouces
     {
         /* Returns back list of ResourcesGuid for which the person is Authorized with specified priviledge*/

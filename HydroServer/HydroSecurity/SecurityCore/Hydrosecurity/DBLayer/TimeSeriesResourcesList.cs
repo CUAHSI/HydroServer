@@ -8,12 +8,13 @@ using System.Configuration;
 
 namespace DBLayer
 {
+    [Serializable]
     public class TimeSeriesResourcesList
     {
         public List<TimeSeriesResource> timeResourcesLocal = new List<TimeSeriesResource>();
 
         /* This method loads  timeseries records into TimeSeriesResourcesList object from HydroSecurity Database given the required 5 parameters  */
-        public void Load(TimeSeriesResource timeRes)
+        public void Load(Parameters para)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(connectionString);
@@ -22,7 +23,7 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "SELECT timeseriesresourceid as timeseriesresourceid, timeseriesmetadataid as timeseriesmetadataid, SeriesID as seriesid,SiteID as siteid,SiteCode as sitecode, SiteName as sitename, VariableID as variableid, VariableCode as variablecode, VariableName as variablename, Speciation as speciation, VariableUnitsID as variableunitsid, VariableUnitsName as variableunitsname, SampleMedium as samplemedium, ValueType as valuetype, TimeSupport as timesupport, TimeUnitsID as timeunitsid, TimeUnitsName as timeunitsname, DataType as datatype, GeneralCategory as generalcategory, MethodID as methodid, MethodDescription as methoddescription, SourceID as sourceid, Organization as organization, SourceDescription as sourcedescription,citation as citation,  QualityControlLevelID as qualitycontrollevelid, QualityControlLevelCode as qualitycontrollevelcode, ValueCount as valuecount, DateCreated as datecreated, DatabaseName as databasename, WaterOneFlowWSDL as wateroneflowwsdl FROM TimeSeriesResource  where " + FormulateQuery(timeRes) + ";";
+                string queryString = "SELECT timeseriesresourceid as timeseriesresourceid, timeseriesmetadataid as timeseriesmetadataid, SeriesID as seriesid,SiteID as siteid,SiteCode as sitecode, SiteName as sitename, VariableID as variableid, VariableCode as variablecode, VariableName as variablename, Speciation as speciation, VariableUnitsID as variableunitsid, VariableUnitsName as variableunitsname, SampleMedium as samplemedium, ValueType as valuetype, TimeSupport as timesupport, TimeUnitsID as timeunitsid, TimeUnitsName as timeunitsname, DataType as datatype, GeneralCategory as generalcategory, MethodID as methodid, MethodDescription as methoddescription, SourceID as sourceid, Organization as organization, SourceDescription as sourcedescription,citation as citation,  QualityControlLevelID as qualitycontrollevelid, QualityControlLevelCode as qualitycontrollevelcode, ValueCount as valuecount, DateCreated as datecreated, DatabaseName as databasename, WaterOneFlowWSDL as wateroneflowwsdl FROM TimeSeriesResource  where " + FormulateQuery(para) + ";";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
@@ -90,6 +91,16 @@ namespace DBLayer
                 SqlDataReader reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
                 dt.Load(reader);
+                if (dt.Rows.Count == 0)
+                {
+                    myConnection.Close();
+                    myConnection.Open();
+                    cmd.CommandText = "SELECT timeseriesresourceid as timeseriesresourceid, timeseriesmetadataid as timeseriesmetadataid, SeriesID as seriesid,SiteID as siteid,SiteCode as sitecode, SiteName as sitename, VariableID as variableid, VariableCode as variablecode, VariableName as variablename, Speciation as speciation, VariableUnitsID as variableunitsid, VariableUnitsName as variableunitsname, SampleMedium as samplemedium, ValueType as valuetype, TimeSupport as timesupport, TimeUnitsID as timeunitsid, TimeUnitsName as timeunitsname, DataType as datatype, GeneralCategory as generalcategory, MethodID as methodid, MethodDescription as methoddescription, SourceID as sourceid, Organization as organization, SourceDescription as sourcedescription,citation as citation,  QualityControlLevelID as qualitycontrollevelid, QualityControlLevelCode as qualitycontrollevelcode, ValueCount as valuecount, DateCreated as datecreated, DatabaseName as databasename, WaterOneFlowWSDL as wateroneflowwsdl FROM TimeSeriesResource where timeseriesmetadataid ='" + gn + "' ;";
+                    reader = cmd.ExecuteReader();
+                    dt.Clear();
+                    dt.Load(reader);
+                }
+
                 foreach (DataRow row in dt.Rows)
                 {
                     TimeSeriesResource timeSeriesResources = new TimeSeriesResource();
@@ -496,20 +507,23 @@ namespace DBLayer
             return AuthTimeSeries;
         }
 
-        private string FormulateQuery(TimeSeriesResource timeRes)
+        private string FormulateQuery(Parameters para)
         {
-            string query = "variablecode ='" + timeRes.variableCode + "' and sitecode = '" + timeRes.siteCode + "'";
-            if (timeRes.methodId != null)
+           
+
+
+            string query = "variablecode ='" + para.parameter1 + "' and sitecode = '" + para.parameter2 + "'";
+            if (para.parameter3!= null)
             {
-                query = query + "and methodid=" + timeRes.methodId + "";
+                query = query + "and methodid=" + para.parameter3 + "";
             }
-            if (timeRes.qualityControLlevelId != null)
+            if (para.parameter4!= null)
             {
-                query = query + "and qualitycontrollevelid=" + timeRes.qualityControLlevelId + "";
+                query = query + "and qualitycontrollevelid=" + para.parameter4 + "";
             }
-            if (timeRes.sourceId != null)
+            if (para.parameter5 != null)
             {
-                query = query + "and sourceid=" + timeRes.sourceId + "";
+                query = query + "and sourceid=" + para.parameter5 + "";
             }
 
             return query;

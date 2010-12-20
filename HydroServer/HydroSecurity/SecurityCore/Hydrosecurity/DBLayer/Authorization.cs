@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 
 namespace DBLayer
 {
+    [Serializable]
     public class Authorization
     {
         public int personResourceId;

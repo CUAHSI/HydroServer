@@ -71,13 +71,13 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.asmx" />
+    <Content Include="HydroSecurityServices.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HydroSecurityInternal.cs" />
-    <Compile Include="Service1.asmx.cs">
-      <DependentUpon>Service1.asmx</DependentUpon>
+    <Compile Include="HydroSecurityServices.asmx.cs">
+      <DependentUpon>HydroSecurityServices.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AuthorizationList.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="Parameters.cs" />
     <Compile Include="Priviledge.cs" />
     <Compile Include="Authorization.cs" />
     <Compile Include="Certificate.cs" />
