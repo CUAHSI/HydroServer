@@ -1,0 +1,71 @@
+D:\Dev\Justin\WSDL Test\bin\Release\WSDL Test.exe.config
+D:\Dev\Justin\WSDL Test\bin\Release\WSDL Test.exe
+D:\Dev\Justin\WSDL Test\bin\Release\WSDL Test.XmlSerializers.dll
+D:\Dev\Justin\WSDL Test\bin\Release\WSDL Test.pdb
+D:\Dev\Justin\WSDL Test\bin\Release\WSDL Test.xml
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.ConnectionInfo.dll
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.Smo.dll
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.SmoEnum.dll
+D:\Dev\Justin\WSDL Test\bin\Release\ZedGraph.dll
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.Replication.dll
+D:\Dev\Justin\WSDL Test\bin\Release\Microsoft.SqlServer.BatchParser.dll
+D:\Dev\Justin\WSDL Test\bin\Release\de\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\es\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\fr\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\it\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\ja\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\pt\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Release\sv\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\obj\Release\ResolveAssemblyReference.cache
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.AddContact.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.AddDatabase.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.AddMap.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.AddMapServer.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.AddMetadata.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.AddRegionMap.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.Form1.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.MapPreview.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.Resources.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.SelectDatabaseServer.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.SelectMapServer.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.SelectRegion.resources
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL Test.vbproj.GenerateResource.Cache
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL Test.exe
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL Test.xml
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL Test.pdb
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL Test.XmlSerializers.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\WSDL Test.exe.config
+D:\Dev\Justin\WSDL Test\bin\Debug\WSDL Test.exe
+D:\Dev\Justin\WSDL Test\bin\Debug\WSDL Test.pdb
+D:\Dev\Justin\WSDL Test\bin\Debug\WSDL Test.xml
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.Smo.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.SmoEnum.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\ZedGraph.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.Replication.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\Microsoft.SqlServer.BatchParser.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\de\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\es\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\fr\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\it\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\ja\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\pt\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\bin\Debug\sv\ZedGraph.resources.dll
+D:\Dev\Justin\WSDL Test\obj\Debug\ResolveAssemblyReference.cache
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.AddContact.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.AddDatabase.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.AddMap.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.AddMapServer.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.AddMetadata.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.AddRegionMap.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.Form1.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.MapPreview.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.Resources.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.SelectDatabaseServer.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.SelectMapServer.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL_Test.SelectRegion.resources
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL Test.vbproj.GenerateResource.Cache
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL Test.exe
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL Test.xml
+D:\Dev\Justin\WSDL Test\obj\Debug\WSDL Test.pdb
+D:\Dev\Justin\WSDL Test\obj\Release\WSDL_Test.AddMap_Full.resources
