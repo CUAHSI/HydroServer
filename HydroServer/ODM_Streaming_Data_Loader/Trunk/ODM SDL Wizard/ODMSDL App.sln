@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ODM SDL", "..\ODM SDL\ODM SDL.vbproj", "{89EE560F-714E-4064-92F8-B358D4BE979F}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ODM SDL Wizard", "ODM SDL Wizard.vbproj", "{F276D70C-74C2-4B46-A3A8-278D764739BA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{89EE560F-714E-4064-92F8-B358D4BE979F} = {89EE560F-714E-4064-92F8-B358D4BE979F}
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "..\Installer\Installer.vdproj", "{34500333-D5EC-4F16-A691-E9373BA93CFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89EE560F-714E-4064-92F8-B358D4BE979F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EE560F-714E-4064-92F8-B358D4BE979F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EE560F-714E-4064-92F8-B358D4BE979F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EE560F-714E-4064-92F8-B358D4BE979F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F276D70C-74C2-4B46-A3A8-278D764739BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F276D70C-74C2-4B46-A3A8-278D764739BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F276D70C-74C2-4B46-A3A8-278D764739BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F276D70C-74C2-4B46-A3A8-278D764739BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34500333-D5EC-4F16-A691-E9373BA93CFD}.Debug|Any CPU.ActiveCfg = Debug
+		{34500333-D5EC-4F16-A691-E9373BA93CFD}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
