@@ -1,0 +1,75 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ODMLoader
+</name>
+</assembly>
+<members>
+<member name="M:ODM_Data_Loader_GUI.clsCategories.#ctor(ODM_Data_Loader_GUI.clsConnection)">
+	<summary>
+ Create a blank categories file with a connection to the database
+ </summary>
+	<param name="e_Connection">the connection to the database</param>
+	<remarks></remarks>
+</member><member name="M:ODM_Data_Loader_GUI.clsCategories.#ctor(ODM_Data_Loader_GUI.clsConnection,System.String)">
+	<summary>
+ Create a categories file from a local file at the given filepath
+ </summary>
+	<param name="e_Connection">the connection to the database</param>
+	<param name="filePath">the path to the file</param>
+	<remarks></remarks>
+</member><member name="M:ODM_Data_Loader_GUI.clsCategories.#ctor(ODM_Data_Loader_GUI.clsFile)">
+	<summary>
+ Create a categories file from a clsFile
+ </summary>
+	<param name="e_file">The clsFile used to determine the type of file</param>
+	<remarks></remarks>
+</member><member name="M:ODM_Data_Loader_GUI.clsCategories.#ctor(ODM_Data_Loader_GUI.clsConnection,System.Data.DataTable,System.Boolean)">
+	<summary>
+ Create a categories file with a connection to the database
+ </summary>
+	<param name="e_Connection">the connection to the database</param>
+	<param name="m_viewtable"></param>
+	<param name="e_ThrowFileOnError"></param>
+	<remarks></remarks>
+</member><member name="M:ODM_Data_Loader_GUI.clsCategories.ValidateTable(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction)">
+	<summary>
+	</summary>
+	<param name="connect"></param>
+	<param name="trans"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ODM_Data_Loader_GUI.clsCategories.CommitTable">
+	<summary>
+	</summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ODM_Data_Loader_GUI.clsCategories.CommitTable(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction)">
+	<summary>
+	</summary>
+	<param name="connect"></param>
+	<param name="trans"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:ODM_Data_Loader_GUI.clsCategories">
+	<summary>
+ Class to read a Categories file and submit it to a database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODM_Data_Loader_GUI.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:ODM_Data_Loader_GUI.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:ODM_Data_Loader_GUI.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

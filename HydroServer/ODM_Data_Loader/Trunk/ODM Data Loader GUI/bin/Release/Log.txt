@@ -1,0 +1,294 @@
+Log @ Wednesday, April 28, 2010	11:29:51 AM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	11:29:51 AM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	11:29:58 AM
+Finding New DataValues
+
+ERROR @ Wednesday, April 28, 2010	11:30:02 AM
+One (or more) rows in DataValues already exist in the database.
+Log @ Wednesday, April 28, 2010	11:36:59 AM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	11:36:59 AM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	11:37:08 AM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	11:37:11 AM
+8 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	11:37:11 AM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	11:37:58 AM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	11:37:58 AM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	11:38:02 AM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	11:38:06 AM
+8 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	11:38:06 AM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	11:38:28 AM
+8 rows committed to SeriesCatalog
+
+Log @ Wednesday, April 28, 2010	11:38:30 AM
+The update was completed.
+16 rows committed to the database.
+
+Log @ Wednesday, April 28, 2010	12:02:33 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:02:33 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:02:34 PM
+Finding New DataValues
+
+ERROR @ Wednesday, April 28, 2010	12:02:36 PM
+One (or more) rows in DataValues already exist in the database.
+Log @ Wednesday, April 28, 2010	12:09:11 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:09:11 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:09:17 PM
+Finding New DataValues
+
+ERROR @ Wednesday, April 28, 2010	12:09:49 PM
+Error in UpdateTable()Message = Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+The statement has been terminated.
+Error Message: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+The statement has been terminated.
+Log @ Wednesday, April 28, 2010	12:11:14 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:11:14 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:11:15 PM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	12:11:17 PM
+8 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	12:11:17 PM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	12:11:17 PM
+8 rows committed to SeriesCatalog
+
+Log @ Wednesday, April 28, 2010	12:11:17 PM
+The update was completed.
+16 rows committed to the database.
+
+Log @ Wednesday, April 28, 2010	12:31:48 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:31:48 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:31:50 PM
+Finding New DataValues
+
+ERROR @ Wednesday, April 28, 2010	12:31:52 PM
+One (or more) rows in DataValues already exist in the database.
+Log @ Wednesday, April 28, 2010	12:41:23 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:41:23 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:41:25 PM
+Finding New DataValues
+
+ERROR @ Wednesday, April 28, 2010	12:41:57 PM
+Error in UpdateTable()Message = Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+The statement has been terminated.
+Error Message: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+The statement has been terminated.
+Log @ Wednesday, April 28, 2010	12:42:48 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:42:48 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:42:50 PM
+Finding New DataValues
+
+ERROR @ Wednesday, April 28, 2010	12:42:52 PM
+One (or more) rows in DataValues already exist in the database.
+Log @ Wednesday, April 28, 2010	12:51:09 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:51:09 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:51:11 PM
+Finding New DataValues
+
+ERROR @ Wednesday, April 28, 2010	12:51:43 PM
+Error in UpdateTable()Message = Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+The statement has been terminated.
+Error Message: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+The statement has been terminated.
+Log @ Wednesday, April 28, 2010	12:53:16 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:53:16 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:53:23 PM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	12:53:25 PM
+8 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	12:53:25 PM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	12:53:25 PM
+8 rows committed to SeriesCatalog
+
+Log @ Wednesday, April 28, 2010	12:53:25 PM
+The update was completed.
+16 rows committed to the database.
+
+Log @ Wednesday, April 28, 2010	12:55:54 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.xlsx ...
+
+ERROR @ Wednesday, April 28, 2010	12:55:54 PM
+The sheet with the data must have the same name as the file (datavalues trial) or be named sheet1.
+Log @ Wednesday, April 28, 2010	12:57:09 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:57:09 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:57:11 PM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	12:57:14 PM
+8 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	12:57:14 PM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	12:57:14 PM
+8 rows committed to SeriesCatalog
+
+Log @ Wednesday, April 28, 2010	12:57:14 PM
+The update was completed.
+16 rows committed to the database.
+
+Log @ Wednesday, April 28, 2010	12:59:26 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	12:59:26 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	12:59:30 PM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	12:59:32 PM
+8 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	12:59:32 PM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	12:59:32 PM
+8 rows committed to SeriesCatalog
+
+Log @ Wednesday, April 28, 2010	12:59:32 PM
+The update was completed.
+16 rows committed to the database.
+
+Log @ Wednesday, April 28, 2010	1:00:50 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	1:00:50 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	1:00:53 PM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	1:00:55 PM
+8 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	1:00:55 PM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	1:00:55 PM
+8 rows committed to SeriesCatalog
+
+Log @ Wednesday, April 28, 2010	1:00:55 PM
+The update was completed.
+16 rows committed to the database.
+
+Log @ Wednesday, April 28, 2010	1:02:02 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	1:02:02 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	1:02:04 PM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	1:02:07 PM
+8 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	1:02:07 PM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	1:02:07 PM
+8 rows committed to SeriesCatalog
+
+Log @ Wednesday, April 28, 2010	1:02:07 PM
+The update was completed.
+16 rows committed to the database.
+
+Log @ Wednesday, April 28, 2010	1:08:39 PM
+		Opening C:\Users\Stephanie\Desktop\datavalues trial.csv ...
+
+Log @ Wednesday, April 28, 2010	1:08:39 PM
+		C:\Users\Stephanie\Desktop\datavalues trial.csv Opened.
+
+Log @ Wednesday, April 28, 2010	1:08:40 PM
+Finding New DataValues
+
+Log @ Wednesday, April 28, 2010	1:08:42 PM
+4 rows committed to DataValues
+
+Log @ Wednesday, April 28, 2010	1:08:42 PM
+Updating Series Catalog
+
+Log @ Wednesday, April 28, 2010	1:08:42 PM
+4 rows committed to SeriesCatalog
+
+Log @ Wednesday, April 28, 2010	1:08:42 PM
+The update was completed.
+8 rows committed to the database.
+
+Log @ Tuesday, September 21, 2010	10:17:48 AM
+		Opening C:\Users\Stephanie\Desktop\Book1.xlsb ...
+
+Log @ Tuesday, September 21, 2010	10:18:22 AM
+Finding New DataValues
+
+Log @ Tuesday, September 21, 2010	10:21:37 AM
+		Opening C:\Users\Stephanie\Desktop\Book1.xlsb ...
+
+Log @ Tuesday, September 21, 2010	10:27:14 AM
+Finding New DataValues
+
