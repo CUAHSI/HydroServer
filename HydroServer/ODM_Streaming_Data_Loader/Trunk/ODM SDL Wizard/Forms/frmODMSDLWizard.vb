@@ -1,3 +1,5 @@
+Imports System.Configuration
+
 'ODM Streaming Data Loader
 'Created by Utah State University
 'Copyright (C) 2007 Utah State University
@@ -60,7 +62,16 @@ Public Class frmODMSDLWizard
             dgvFiles.Columns.Add(config_File_SchedOffset, "Schedule Begginning")
             dgvFiles.Columns.Add(config_File_Last, "Last Update")
             'g_EXE_Dir = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location)
-            g_EXE_Dir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
+
+            Dim tempdir As String
+            tempdir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
+            Dim section As String()
+            'tempdir = section(0) '& section(1) & "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
+            section = Split(tempdir, "Configuration", , CompareMethod.Text)
+            g_EXE_Dir = section(0) & "StreamingDataLoader\"
+            CreateDir(g_EXE_Dir)
+            'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)
+            'config.SaveAs(g_EXE_Dir)
 
             LoadFileList()
         Catch ex As Exception
@@ -70,6 +81,10 @@ Public Class frmODMSDLWizard
         End Try
     End Sub
 
+    Sub CreateDir(ByVal MyFolder As String)
+        On Error Resume Next
+        MkDir("\MyFolder")
+    End Sub
 #Region " Button Clicks "
 
     ''' <summary>
