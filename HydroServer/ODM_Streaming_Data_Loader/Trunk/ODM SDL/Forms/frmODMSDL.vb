@@ -36,7 +36,19 @@ Public Class frmODMSDL
             Dim ids() As Integer = {}
             'Dim config As String = ConfigurationManager.openEXEConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal)
             'g_EXE_Dir = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location)
-            g_EXE_Dir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
+            Dim tempdir As String
+            tempdir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
+            Dim section As String()
+            'section = tempdir.Split("ODMSDL")
+            'tempdir = section(0) '& section(1) & "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
+            section = Split(tempdir, "ODMSDL", , CompareMethod.Text)
+            g_EXE_Dir = section(0) & "StreamingDataLoader\"
+            CreateDir(g_EXE_Dir)
+            'g_EXE_Dir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
+
+            'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)
+            'config.SaveAs(g_EXE_Dir)
+
 
             If My.Application.CommandLineArgs.Count > 1 Then
                 If LCase(My.Application.CommandLineArgs(0)) = "-s" Then
@@ -63,6 +75,10 @@ Public Class frmODMSDL
         Me.Close()
     End Sub
 
+    Sub CreateDir(ByVal MyFolder As String)
+        On Error Resume Next
+        MkDir("\MyFolder")
+    End Sub
     ''' <summary>
     ''' Loads data based on the pre-defined schedule.
     ''' </summary>
