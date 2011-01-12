@@ -22,13 +22,13 @@
         "Entry"
         {
         "MsmKey" = "8:_1998DDFA5BAB207E85EAABF572D025A9"
-        "OwnerKey" = "8:_8C9DBFDC6D2FA2ADE904FDA38FCD5F66"
+        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_1998DDFA5BAB207E85EAABF572D025A9"
-        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
+        "OwnerKey" = "8:_7A4CBE585DF98F5CE28EB8D8AD1C634C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -81,12 +81,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3C6E92D96AC60B6284C824024A7281C3"
-        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_45B25F3181E206770BD9F8DA21EE19B2"
         "OwnerKey" = "8:_BAE01B9CA759B36DFD1E47FD0B2AEB49"
         "MsmSig" = "8:_UNDEFINED"
@@ -94,13 +88,13 @@
         "Entry"
         {
         "MsmKey" = "8:_45B25F3181E206770BD9F8DA21EE19B2"
-        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
+        "OwnerKey" = "8:_7A4CBE585DF98F5CE28EB8D8AD1C634C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_45B25F3181E206770BD9F8DA21EE19B2"
-        "OwnerKey" = "8:_8C9DBFDC6D2FA2ADE904FDA38FCD5F66"
+        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,25 +130,37 @@
         "Entry"
         {
         "MsmKey" = "8:_6A0D8F4F556E1AA5A75A2555FD699F57"
-        "OwnerKey" = "8:_8C9DBFDC6D2FA2ADE904FDA38FCD5F66"
+        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_6A0D8F4F556E1AA5A75A2555FD699F57"
+        "OwnerKey" = "8:_7A4CBE585DF98F5CE28EB8D8AD1C634C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_735A69EF7D9CC09ECE64A482D13DAE4C"
+        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7A4CBE585DF98F5CE28EB8D8AD1C634C"
         "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8A6DD7368A4406AC79585DD1AC2683C6"
-        "OwnerKey" = "8:_8C9DBFDC6D2FA2ADE904FDA38FCD5F66"
+        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8A6DD7368A4406AC79585DD1AC2683C6"
-        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
+        "OwnerKey" = "8:_7A4CBE585DF98F5CE28EB8D8AD1C634C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -191,12 +197,6 @@
         {
         "MsmKey" = "8:_8A6DD7368A4406AC79585DD1AC2683C6"
         "OwnerKey" = "8:_1998DDFA5BAB207E85EAABF572D025A9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8C9DBFDC6D2FA2ADE904FDA38FCD5F66"
-        "OwnerKey" = "8:_043A0CDA4F5A46E2943C0032CB807332"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -262,12 +262,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8C9DBFDC6D2FA2ADE904FDA38FCD5F66"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_8A6DD7368A4406AC79585DD1AC2683C6"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -310,7 +304,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3C6E92D96AC60B6284C824024A7281C3"
+        "OwnerKey" = "8:_735A69EF7D9CC09ECE64A482D13DAE4C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7A4CBE585DF98F5CE28EB8D8AD1C634C"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -491,37 +491,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3C6E92D96AC60B6284C824024A7281C3"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.0.2.16769, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_3C6E92D96AC60B6284C824024A7281C3"
-                    {
-                    "Name" = "8:ZedGraph.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ZedGraph.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_3318F57A22B64C569F49006790ED1C30"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_45B25F3181E206770BD9F8DA21EE19B2"
             {
             "AssemblyRegister" = "3:1"
@@ -635,20 +604,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8A6DD7368A4406AC79585DD1AC2683C6"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_735A69EF7D9CC09ECE64A482D13DAE4C"
             {
             "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:TRUE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.SqlServer.ConnectionInfo, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.0.2.16769, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_8A6DD7368A4406AC79585DD1AC2683C6"
+                    "_735A69EF7D9CC09ECE64A482D13DAE4C"
                     {
-                    "Name" = "8:Microsoft.SqlServer.ConnectionInfo.dll"
+                    "Name" = "8:ZedGraph.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.SqlServer.ConnectionInfo.dll"
+            "SourcePath" = "8:ZedGraph.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_3318F57A22B64C569F49006790ED1C30"
@@ -666,20 +635,51 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8C9DBFDC6D2FA2ADE904FDA38FCD5F66"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7A4CBE585DF98F5CE28EB8D8AD1C634C"
             {
             "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:TRUE"
+            "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Microsoft.SqlServer.Replication, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_8C9DBFDC6D2FA2ADE904FDA38FCD5F66"
+                    "_7A4CBE585DF98F5CE28EB8D8AD1C634C"
                     {
                     "Name" = "8:Microsoft.SqlServer.Replication.dll"
                     "Attributes" = "3:512"
                     }
                 }
             "SourcePath" = "8:Microsoft.SqlServer.Replication.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_3318F57A22B64C569F49006790ED1C30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8A6DD7368A4406AC79585DD1AC2683C6"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:TRUE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.SqlServer.ConnectionInfo, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_8A6DD7368A4406AC79585DD1AC2683C6"
+                    {
+                    "Name" = "8:Microsoft.SqlServer.ConnectionInfo.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Microsoft.SqlServer.ConnectionInfo.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_3318F57A22B64C569F49006790ED1C30"
@@ -886,14 +886,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:HydroServer Capabilities Database Configuration Tool"
-        "ProductCode" = "8:{6F0DC0CA-218A-4550-844D-658CB1DA291E}"
-        "PackageCode" = "8:{FAA664B6-F0F2-4312-B0BE-380263BFA94B}"
+        "ProductCode" = "8:{14B92C06-F961-4827-84A4-684446D39C02}"
+        "PackageCode" = "8:{13123446-46DC-4AA5-B65D-95226AB9B9D3}"
         "UpgradeCode" = "8:{4BD977C5-4A98-4972-AD0D-5A9A4196287D}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.1"
+        "ProductVersion" = "8:1.1.2"
         "Manufacturer" = "8:Cuahsi His"
         "ARPHELPTELEPHONE" = "8:(435) 797-2946"
         "ARPHELPLINK" = "8:http://his.cuahsi.org/"
@@ -1529,7 +1529,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_043A0CDA4F5A46E2943C0032CB807332"
             {
-            "SourcePath" = "8:..\\obj\\Release\\HIS Server Capabilities Database.exe"
+            "SourcePath" = "8:..\\obj\\Debug\\HIS Server Capabilities Database.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_3318F57A22B64C569F49006790ED1C30"
