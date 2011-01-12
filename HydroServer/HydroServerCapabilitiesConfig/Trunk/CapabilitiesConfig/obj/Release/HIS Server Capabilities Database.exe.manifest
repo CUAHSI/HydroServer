@@ -68,14 +68,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HIS Server Capabilities Database.exe" size="534016">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HIS Server Capabilities Database.exe" size="534528">
       <assemblyIdentity name="HIS Server Capabilities Database" version="1.1.1.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rP9Tqx1GE+vjAnlZIYlYBiSRI14=</dsig:DigestValue>
+        <dsig:DigestValue>KiQynv4aIJceYI4RIF4cbOxm5+c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -87,7 +87,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>tYsqcgQqEs85Jl44AWnmoPP0A/0=</dsig:DigestValue>
+        <dsig:DigestValue>DSAQcBazwLM8zpAzFMoNK4DmBWo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

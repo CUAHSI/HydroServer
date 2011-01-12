@@ -16,37 +16,55 @@ Public Class Form1
     End Sub
 
     Private Sub getContacts()
-        Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM Contacts", IcewaterConnection)
-        Dim table As New DataTable
-        adapt.Fill(table)
-        dgvContacts.DataSource = table
+        Try
+            Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM Contacts", IcewaterConnection)
+            Dim table As New DataTable
+            adapt.Fill(table)
+            dgvContacts.DataSource = table
+        Catch ex As Exception
+            MsgBox("Make sure you are connected to a HydroServer Capabilities Database. " & ex.Message)
+        End Try
     End Sub
     Private Sub getMapServers()
-        Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM MapServers", IcewaterConnection)
-        Dim table As New DataTable
-        adapt.Fill(table)
-        dgvMapServers.DataSource = table
+        Try
+            Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM MapServers", IcewaterConnection)
+            Dim table As New DataTable
+            adapt.Fill(table)
+            dgvMapServers.DataSource = table
+        Catch ex As Exception
+            MsgBox("Make sure you are connected to a HydroServer Capabilities Database. " & ex.Message)
+        End Try
     End Sub
     Private Sub getMaps()
-        Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM MapServices", IcewaterConnection)
-        Dim table As New DataTable
-        adapt.Fill(table)
-        dgvMaps.DataSource = table
+        Try
+            Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM MapServices", IcewaterConnection)
+            Dim table As New DataTable
+            adapt.Fill(table)
+            dgvMaps.DataSource = table
+        Catch ex As Exception
+            MsgBox("Make sure you are connected to a HydroServer Capabilities Database. " & ex.Message)
+        End Try
 
     End Sub
     Private Sub getDatabases()
-        Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM ODMDatabases", IcewaterConnection)
-        Dim table As New DataTable
-        adapt.Fill(table)
-        dgvDatabases.DataSource = table
-
+        Try
+            Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM ODMDatabases", IcewaterConnection)
+            Dim table As New DataTable
+            adapt.Fill(table)
+            dgvDatabases.DataSource = table
+        Catch ex As Exception
+            MsgBox("Make sure you are connected to a HydroServer Capabilities Database. " & ex.Message)
+        End Try
     End Sub
     Private Sub getRegions()
-        Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM Regions", IcewaterConnection)
-        Dim table As New DataTable
-        adapt.Fill(table)
-        dgvRegions.DataSource = table
-
+        Try
+            Dim adapt As New SqlClient.SqlDataAdapter("SELECT * FROM Regions", IcewaterConnection)
+            Dim table As New DataTable
+            adapt.Fill(table)
+            dgvRegions.DataSource = table
+        Catch ex As Exception
+            MsgBox("Make sure you are connected to a HydroServer Capabilities Database. " & ex.Message)
+        End Try
     End Sub
 
     Private Sub btnAddContacts_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AddContact.Click
