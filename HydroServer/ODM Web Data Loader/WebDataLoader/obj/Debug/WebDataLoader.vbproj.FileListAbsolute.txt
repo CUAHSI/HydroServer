@@ -1,0 +1,9 @@
+C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\WebDataLoader.Resources.resources
+C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\WebDataLoader.vbproj.GenerateResource.Cache
+C:\Dev\WebDataLoader\WebDataLoader\bin\WebDataLoader.dll
+C:\Dev\WebDataLoader\WebDataLoader\bin\WebDataLoader.pdb
+C:\Dev\WebDataLoader\WebDataLoader\bin\WebDataLoader.xml
+C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\WebDataLoader.dll
+C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\WebDataLoader.xml
+C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\WebDataLoader.pdb
