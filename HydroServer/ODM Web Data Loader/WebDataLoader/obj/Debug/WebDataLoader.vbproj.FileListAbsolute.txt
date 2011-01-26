@@ -7,3 +7,12 @@ C:\Dev\WebDataLoader\WebDataLoader\bin\WebDataLoader.xml
 C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\WebDataLoader.dll
 C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\WebDataLoader.xml
 C:\Dev\WebDataLoader\WebDataLoader\obj\Debug\WebDataLoader.pdb
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.Resources.resources
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.vbproj.GenerateResource.Cache
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.dll
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.xml
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.pdb
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\bin\WebDataLoader.dll
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\bin\WebDataLoader.pdb
+C:\Dev\HydroServer\HydroServer\ODM Web Data Loader\WebDataLoader\bin\WebDataLoader.xml

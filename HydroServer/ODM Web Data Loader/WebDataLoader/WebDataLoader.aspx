@@ -12,14 +12,18 @@
     
         
 
-<div style="width:500px;">
-<p>
+<div style="width:800px;">
 &nbsp;&nbsp;
+<p>
     <asp:FileUpload ID="fuOpenFilePath" runat="server" Width="257px" />
 
     <asp:Button ID="btnUpload" runat="server" Text="Upload file" />
+
+    
+
         <asp:Button ID="btnCommit" runat="server" Text="Commit File" />
-        </p>
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel Selection" />
+</p>
         <p>
     <asp:Label ID="lblstatus" runat="server" ForeColor="Red"></asp:Label>
 
