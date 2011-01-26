@@ -45,7 +45,8 @@ Partial Public Class WebDataLoader
         Try
             _file = New clsFile(connect, Session("FilePath").ToString)
         Catch
-            btnCommit.Enabled = False
+            btnCommit.Visible = False
+            btnCancel.Visible = False
         End Try
 
     End Sub
@@ -72,7 +73,10 @@ Partial Public Class WebDataLoader
                 dgvData.DataBind()
 
                 btnCommit.Enabled = True
-
+                btnCommit.Visible = True
+                btnCancel.Visible = True
+                btnUpload.Visible = False
+                fuOpenFilePath.Visible = False
             Catch ExEr As ExitError
                 table = New DataTable("ERROR")
                 dgvData.DataSource = table
@@ -81,6 +85,8 @@ Partial Public Class WebDataLoader
                 table = New DataTable("ERROR")
                 dgvData.DataSource = table
             End Try
+
+
         Else
             lblstatus.Text = "Please select a file to upload!"
         End If
@@ -88,7 +94,6 @@ Partial Public Class WebDataLoader
 
     Protected Sub btnCommit_click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCommit.Click
         'btnOpen.Enabled = False
-        btnCommit.Enabled = False
         Try
             Dim commit As String = ""
             lblstatus.Text = "Committing file to database. This may take a while."
@@ -103,7 +108,10 @@ Partial Public Class WebDataLoader
                 MsgBox("There was an error committing this file to the database." & vbCrLf & "Please read the log file to determine where the error occurred." & vbCrLf & "No data was committed to the database.", MsgBoxStyle.Critical, "Error Committing Data")
                 lblstatus.Text = "There was an error committing this file to the database."
             End If
-            btnCommit.Enabled = False
+            btnCommit.Visible = False
+            btnCancel.Visible = False
+            btnUpload.Visible = True
+            fuOpenFilePath.Visible = True
         Catch ex As Exception
             ''LogError("Error Committing " & _file.MyType & " File", ex)
             lblstatus.Text = ex.Message
@@ -116,20 +124,7 @@ Partial Public Class WebDataLoader
     Private Sub FileLoaded()
         Try
             If (CommandLine) Then
-                'Dim tempFile As clsFile = _file
-                '_file = tempFile.GetTableType
-                'tempFile = Nothing
-                ' '''LogUpdate("You are loading """ & _file.MyType & """")
-                'Dim rows As Integer
-                'rows = _file.CommitTable()
 
-                'If (rows > 0) Then
-                '    '''LogUpdate("Committed " & rows & " rows to the database.")
-                'Else
-                '    ''LogError("No Data Commited to the database")
-                'End If
-
-                ''Me.Close()
             Else
                 Dim tempFile As clsFile = _file
                 _file = tempFile.GetTableType
@@ -186,4 +181,16 @@ Partial Public Class WebDataLoader
     '    dgvData.Columns(0).ItemStyle.Width = 500
     '    dgvData.DataBind()
     'End Sub
+
+    Protected Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
+        fuOpenFilePath.Visible = True
+        btnUpload.Visible = True
+        btnCommit.Visible = False
+        btnCancel.Visible = False
+
+        table = New DataTable("NEW")
+        dgvData.DataSource = table
+        DataBind()
+        lblstatus.Text = ""
+    End Sub
 End Class
