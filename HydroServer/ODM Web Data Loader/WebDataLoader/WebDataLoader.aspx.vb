@@ -70,6 +70,7 @@ Partial Public Class WebDataLoader
 
 
                 FileLoaded()
+
                 dgvData.DataBind()
 
                 btnCommit.Enabled = True
@@ -131,11 +132,14 @@ Partial Public Class WebDataLoader
                 tempFile = Nothing
                 lblstatus.Text = "You are loading " & _file.MyType
                 table = _file.ViewTable
+
+                tablemaking()
+
                 dgvData.AutoGenerateColumns = True
                 dgvData.DataSource = table
-                If (table.Rows.Count > 0) Then
-                    btnUpload.Enabled = True
-                End If
+                'If (table.Rows.Count > 0) Then
+                '    btnUpload.Enabled = True
+                'End If
                 AllowClicks(True)
                 fuOpenFilePath.Enabled = True
             End If
@@ -192,5 +196,10 @@ Partial Public Class WebDataLoader
         dgvData.DataSource = table
         DataBind()
         lblstatus.Text = ""
+    End Sub
+
+
+    Private Sub tablemaking()
+
     End Sub
 End Class
