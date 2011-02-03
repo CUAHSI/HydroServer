@@ -1,2 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="mn_service.mn" CodeBehind="~/mn.cs" Factory="Microsoft.ServiceModel.Web.WebServiceHost2Factory"%>
-
