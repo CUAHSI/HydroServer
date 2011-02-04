@@ -84,7 +84,6 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="testing.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebDataLoader.aspx" />
   </ItemGroup>
@@ -140,13 +139,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="testing.aspx.designer.vb">
-      <DependentUpon>testing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="testing.aspx.vb">
-      <DependentUpon>testing.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="WebDataLoader.aspx.designer.vb">
       <DependentUpon>WebDataLoader.aspx</DependentUpon>

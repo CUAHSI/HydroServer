@@ -6,15 +6,7 @@ WebDataLoader
 </name>
 </assembly>
 <members>
-<member name="F:WebDataLoader.testing.form1">
-	<summary>
-form1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection)">
+<member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection)">
 	<summary>
  Create a blank categories file with a connection to the database
  </summary>
@@ -165,6 +157,14 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="F:WebDataLoader.WebDataLoader.dgvData">
 	<summary>
 dgvData control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.tabledata">
+	<summary>
+tabledata control.
 </summary>
 	<remarks>
 Auto-generated field.
