@@ -33,3 +33,7 @@ C:\DEV\ODM\hydroserver\HydroServer\ODM Tools\ODM_Tools\obj\Debug\ODM_Tools.frmCr
 C:\DEV\ODM\hydroserver\HydroServer\ODM Tools\ODM_Tools\obj\Debug\ODM_Tools.frmProgress.resources
 C:\DEV\ODM\hydroserver\HydroServer\ODM Tools\ODM_Tools\obj\Debug\ODM_Tools.Resources.resources
 C:\DEV\ODM\hydroserver\HydroServer\ODM Tools\ODM_Tools\obj\Debug\ODM_Tools1_1.vbproj.GenerateResource.Cache
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Debug\ODM Tools.exe.config
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Debug\ODM Tools.exe
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Debug\ODM Tools.xml
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Debug\ODM Tools.pdb

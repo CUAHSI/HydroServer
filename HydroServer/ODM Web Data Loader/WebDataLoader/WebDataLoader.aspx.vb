@@ -133,7 +133,6 @@ Partial Public Class WebDataLoader
                 lblstatus.Text = "You are loading " & _file.MyType
                 table = _file.ViewTable
 
-                tablemaking()
 
                 dgvData.AutoGenerateColumns = True
                 dgvData.DataSource = table
@@ -199,7 +198,4 @@ Partial Public Class WebDataLoader
     End Sub
 
 
-    Private Sub tablemaking()
-
-    End Sub
 End Class
