@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[SampleTypeCV] ADD CONSTRAINT [PK_SampleTypeCV_Term] PRIMARY KEY CLUSTERED  ([Term]) ON [PRIMARY]
+
+

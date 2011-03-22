@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio - Education Edition 7.1.1.1206 (http://www.liquid-technologies.com) -->
+<tns:sitesResponse xmlns:tns="http://www.cuahsi.org/waterML/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cuahsi.org/waterML/1.1/ D:\dev2005\waterOneFlow\waterOneFlowImpl\cuahsiTimeSeries_v1_1.xsd">
+  <tns:queryInfo>
+    <tns:creationTime>1989-04-08T11:49:26.78</tns:creationTime>
+    <tns:queryURL>string</tns:queryURL>
+    <tns:querySQL>string</tns:querySQL>
+    <tns:note href="string">string</tns:note>
+    <tns:note type="string">string</tns:note>
+    <tns:note type="string" href="string">string</tns:note>
+    <tns:extension />
+  </tns:queryInfo>
+  <tns:site>
+    <tns:siteInfo>
+      <tns:siteName>string</tns:siteName>
+      <tns:siteCode network="string" siteID="1633702479" agencyCode="string">string</tns:siteCode>
+      <tns:siteCode default="1" network="string" siteID="170381353" agencyName="string">string</tns:siteCode>
+      <tns:siteCode network="string" agencyCode="string">string</tns:siteCode>
+      <tns:siteCode default="1" network="string" agencyCode="string">string</tns:siteCode>
+      <tns:timeZoneInfo siteUsesDaylightSavingsTime="0" />
+      <tns:geoLocation>
+        <tns:geogLocation xsi:type="tns:LatLonPointType" srs="EPSG:4326">
+          <tns:latitude>57.9106858039</tns:latitude>
+          <tns:longitude>-155.0870941961</tns:longitude>
+        </tns:geogLocation>
+      </tns:geoLocation>
+      <tns:elevation_m>-1743.8050941961</tns:elevation_m>
+      <tns:siteType>string</tns:siteType>
+      <tns:siteType>string</tns:siteType>
+      <tns:siteProperty type="string" name="string" uri="http://www.liquid-technologies.com">string</tns:siteProperty>
+    </tns:siteInfo>
+    <tns:seriesCatalog menuGroupName="string">
+      <tns:note title="string">string</tns:note>
+      <tns:note type="string" href="string" title="string">string</tns:note>
+      <tns:note href="string" show="string">string</tns:note>
+      <tns:note title="string" show="string">string</tns:note>
+      <tns:series>
+        <tns:variable tns:oid="string">
+          <tns:variableCode>string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimeIntervalType">
+          <tns:beginDateTime>2019-09-27T20:12:51.57</tns:beginDateTime>
+          <tns:endDateTime>1981-09-22T19:33:10.05</tns:endDateTime>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:series>
+        <tns:variable tns:oid="string" tns:metadataTime="1981-06-04T07:34:35.50">
+          <tns:variableCode network="string" vocabulary="string" default="0" variableID="756393133">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimeIntervalType">
+          <tns:beginDateTime>2004-04-08T13:12:25.22</tns:beginDateTime>
+          <tns:endDateTime>1998-07-16T09:05:09.72</tns:endDateTime>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:seriesCatalogProperty type="string" name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty type="string" name="string" uri="http://www.liquid-technologies.com">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty name="string">string</tns:seriesCatalogProperty>
+    </tns:seriesCatalog>
+    <tns:seriesCatalog serviceWsdl="http://www.liquid-technologies.com">
+      <tns:note href="string" show="string">string</tns:note>
+      <tns:note>string</tns:note>
+      <tns:note href="string" title="string">string</tns:note>
+      <tns:note type="string">string</tns:note>
+      <tns:seriesCatalogProperty name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty type="string" name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty type="string" name="string" uri="http://www.liquid-technologies.com">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty name="string" uri="http://www.liquid-technologies.com">string</tns:seriesCatalogProperty>
+    </tns:seriesCatalog>
+    <tns:extension />
+    <tns:extension />
+    <tns:extension>
+      <a:AnyElementYouLike xmlns:a="AnyNamespace">Some Data Or Other Elements</a:AnyElementYouLike>
+      <b:AnyElementYouLike xmlns:b="AnyNamespace">Some Data Or Other Elements</b:AnyElementYouLike>
+    </tns:extension>
+  </tns:site>
+  <tns:site>
+    <tns:siteInfo>
+      <tns:siteName>string</tns:siteName>
+      <tns:siteCode network="string" siteID="725982617" agencyCode="string">string</tns:siteCode>
+      <tns:geoLocation>
+        <tns:geogLocation xsi:type="tns:LatLonBoxType">
+          <tns:south>-86.4658741961</tns:south>
+          <tns:west>-50.3782141961</tns:west>
+          <tns:north>2.8269058039</tns:north>
+          <tns:east>-123.9226141961</tns:east>
+        </tns:geogLocation>
+      </tns:geoLocation>
+      <tns:elevation_m>7548.8749058039</tns:elevation_m>
+      <tns:note type="string">string</tns:note>
+      <tns:note type="string" title="string" show="string">string</tns:note>
+      <tns:note show="string">string</tns:note>
+      <tns:note type="string" href="string" show="string">string</tns:note>
+      <tns:extension />
+      <tns:altname>string</tns:altname>
+    </tns:siteInfo>
+    <tns:seriesCatalog serviceWsdl="http://www.liquid-technologies.com">
+      <tns:note title="string">string</tns:note>
+      <tns:note type="string" href="string">string</tns:note>
+      <tns:note href="string" show="string">string</tns:note>
+      <tns:series>
+        <tns:variable tns:oid="string">
+          <tns:variableCode network="string" default="1" variableID="1686506955">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimeSingleType">
+          <tns:beginDateTime>1977-08-19T18:00:17.23</tns:beginDateTime>
+          <tns:endDateTime>2015-05-28T20:05:38.92</tns:endDateTime>
+          <tns:timeSingle>1997-01-04T09:02:46.54</tns:timeSingle>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:series>
+        <tns:variable tns:metadataTime="2006-04-26T22:20:54.48">
+          <tns:variableCode>string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimePeriodRealTimeType">
+          <tns:beginDateTime>1993-09-25T01:02:05.24</tns:beginDateTime>
+          <tns:endDateTime>2001-05-04T14:19:45.58</tns:endDateTime>
+          <tns:realTimeDataPeriod>P5Y2M23DT13H12M59.97S</tns:realTimeDataPeriod>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:series>
+        <tns:variable>
+          <tns:variableCode network="string" vocabulary="string" default="1" variableID="75758928">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimePeriodRealTimeType">
+          <tns:beginDateTime>1976-09-03T20:55:46.02</tns:beginDateTime>
+          <tns:endDateTime>2000-03-08T05:11:44.86</tns:endDateTime>
+          <tns:realTimeDataPeriod>P7Y7M4DT2H14M29.85S</tns:realTimeDataPeriod>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:seriesCatalogProperty type="string" name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty type="string" name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty type="string" name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty name="string">string</tns:seriesCatalogProperty>
+    </tns:seriesCatalog>
+    <tns:seriesCatalog menuGroupName="string">
+      <tns:series>
+        <tns:variable tns:oid="string">
+          <tns:variableCode>string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval>
+          <tns:beginDateTime>1971-11-15T10:38:48.04</tns:beginDateTime>
+          <tns:endDateTime>1996-08-13T16:40:25.15</tns:endDateTime>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:series>
+        <tns:variable tns:oid="string" tns:metadataTime="1998-02-25T09:47:56.21">
+          <tns:variableCode network="string" vocabulary="string" default="true">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimePeriodRealTimeType">
+          <tns:beginDateTime>1988-09-17T15:11:26.79</tns:beginDateTime>
+          <tns:endDateTime>2014-04-09T05:26:28.35</tns:endDateTime>
+          <tns:realTimeDataPeriod>P1Y3M14DT3H56M21.99S</tns:realTimeDataPeriod>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:series>
+        <tns:variable tns:oid="string">
+          <tns:variableCode vocabulary="string" default="true">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimeIntervalType">
+          <tns:beginDateTime>1973-02-15T17:39:01.95</tns:beginDateTime>
+          <tns:endDateTime>1996-10-23T13:56:02.40</tns:endDateTime>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:seriesCatalogProperty type="string" name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty name="string" uri="http://www.liquid-technologies.com">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty name="string" uri="http://www.liquid-technologies.com">string</tns:seriesCatalogProperty>
+    </tns:seriesCatalog>
+    <tns:seriesCatalog menuGroupName="string" serviceWsdl="http://www.liquid-technologies.com">
+      <tns:note type="string" title="string">string</tns:note>
+      <tns:note type="string" href="string" title="string" show="string">string</tns:note>
+      <tns:series>
+        <tns:variable tns:oid="string">
+          <tns:variableCode network="string" variableID="2068606573">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval>
+          <tns:beginDateTime>1978-12-09T17:38:38.83</tns:beginDateTime>
+          <tns:endDateTime>1974-05-02T11:27:34.97</tns:endDateTime>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:series>
+        <tns:variable tns:oid="string" tns:metadataTime="1984-07-09T01:02:08.48">
+          <tns:variableCode network="string" vocabulary="string" default="0">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimePeriodRealTimeType">
+          <tns:beginDateTime>2016-10-19T23:22:51.02</tns:beginDateTime>
+          <tns:endDateTime>2004-03-19T01:46:18.08</tns:endDateTime>
+          <tns:realTimeDataPeriod>P7Y1M7DT11H43M5.49S</tns:realTimeDataPeriod>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:series>
+        <tns:variable tns:oid="string">
+          <tns:variableCode variableID="567468259">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimeSingleType">
+          <tns:beginDateTime>1993-09-17T15:51:10.56</tns:beginDateTime>
+          <tns:endDateTime>2017-08-14T02:53:34.03</tns:endDateTime>
+          <tns:timeSingle>1986-04-20T08:53:10.47</tns:timeSingle>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:series>
+        <tns:variable tns:oid="string" tns:metadataTime="2001-07-07T04:18:59.88">
+          <tns:variableCode vocabulary="string">string</tns:variableCode>
+        </tns:variable>
+        <tns:variableTimeInterval xsi:type="tns:TimePeriodRealTimeType">
+          <tns:beginDateTime>1977-07-05T14:30:04.64</tns:beginDateTime>
+          <tns:endDateTime>1986-10-13T21:19:48.23</tns:endDateTime>
+          <tns:realTimeDataPeriod>P7Y1M0DT5H22M1.00S</tns:realTimeDataPeriod>
+        </tns:variableTimeInterval>
+      </tns:series>
+      <tns:seriesCatalogProperty name="string">string</tns:seriesCatalogProperty>
+      <tns:seriesCatalogProperty name="string" uri="http://www.liquid-technologies.com">string</tns:seriesCatalogProperty>
+    </tns:seriesCatalog>
+    <tns:extension>
+      <c:AnyElementYouLike xmlns:c="AnyNamespace">Some Data Or Other Elements</c:AnyElementYouLike>
+    </tns:extension>
+  </tns:site>
+</tns:sitesResponse>

@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  Microsoft Visual Studio 2005 Web Deployment Project 
+  http://go.microsoft.com/fwlink/?LinkId=55111
+-->
+<!-- This has been modified with a task to produce a zip file, 
+and copy the zip files to softwareReleaseDir
+
+requires MSBuildTasks from msbuildtasks.org
+
+Enabled: AfterBuild task
+Added global property  zipFileBaseName, softwareReleaseDir
+-->
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.30319</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{76F0008E-04E7-448E-907F-01FF469874DC}</ProjectGuid>
+    <SourceWebPhysicalPath>..\genericODws</SourceWebPhysicalPath>
+    <SourceWebProject>{442B8999-6C1E-4204-9920-D73A0237308D}|C:\dev_hydrocatalog\genericwebservices\trunk</SourceWebProject>
+    <SourceWebVirtualPath>/genericODws</SourceWebVirtualPath>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <!-- base name for zip file-->
+    <zipFileBaseName>GenericODWS-1-1</zipFileBaseName>
+    <softwareReleaseDir>..\..\..\..\softwareReleases\GenericODWebServices\</softwareReleaseDir>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ZipBuildDirectory>.\GenericODWS</ZipBuildDirectory>
+    <ZipWebAppDirectory>WebApp</ZipWebAppDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>.\Debug</OutputPath>
+    <EnableUpdateable>true</EnableUpdateable>
+    <UseMerge>true</UseMerge>
+    <SingleAssemblyName>genericODws_deploy</SingleAssemblyName>
+    <UseWebConfigReplacement>false</UseWebConfigReplacement>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>.\Release</OutputPath>
+    <EnableUpdateable>true</EnableUpdateable>
+    <UseMerge>true</UseMerge>
+    <SingleAssemblyName>genericODws_deploy</SingleAssemblyName>
+    <UseWebConfigReplacement>false</UseWebConfigReplacement>
+    <UseExernalWebConfigReplacementFile>true</UseExernalWebConfigReplacementFile>
+    <DeleteAppDataFolder>true</DeleteAppDataFolder>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'WaterDev|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>.\WaterDev</OutputPath>
+    <EnableUpdateable>true</EnableUpdateable>
+    <UseMerge>true</UseMerge>
+    <SingleAssemblyName>genericODws_deploy</SingleAssemblyName>
+    <UseWebConfigReplacement>true</UseWebConfigReplacement>
+    <UseExernalWebConfigReplacementFile>true</UseExernalWebConfigReplacementFile>
+    <DeleteAppDataFolder>true</DeleteAppDataFolder>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <WebConfigReplacementFiles Include="appSettings.config">
+      <Section>appSettings</Section>
+    </WebConfigReplacementFiles>
+    <WebConfigReplacementFiles Include="ConnectionStrings.config">
+      <Section>connectionStrings</Section>
+    </WebConfigReplacementFiles>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'WaterDev|AnyCPU'">
+    <WebConfigReplacementFiles Include="WaterDev_appSettings.config">
+      <Section>appSettings</Section>
+    </WebConfigReplacementFiles>
+    <WebConfigReplacementFiles Include="WaterDev_ConnectionString.config">
+      <Section>connectionStrings</Section>
+    </WebConfigReplacementFiles>
+    <WebConfigReplacementFiles Include="WaterDev_wateroneflow.authentication.config">
+      <Section>wateroneflowAuthentication</Section>
+    </WebConfigReplacementFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <ExtraConfigFiles Include="$(OutputPath)\**\$(Configuration)_appSettings.config" />
+    <ExtraConfigFiles Include="$(OutputPath)\**\$(Configuration)_ConnectionString.config" />
+    <ExtraConfigFiles Include="$(OutputPath)\**\$(Configuration)_wateroneflow.authentication.config" />
+    <!--<ExtraConfigFiles Include="$(OutputPath)\**\$(Configuration)*.config" >
+      <IsConfiguration>True</IsConfiguration>
+    </ExtraConfigFiles> -->
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <WebConfigReplacementFiles Include="debug_appSettings.config">
+      <Section>appSettings</Section>
+    </WebConfigReplacementFiles>
+    <WebConfigReplacementFiles Include="debug_ConnectionString.config">
+      <Section>connectionStrings</Section>
+    </WebConfigReplacementFiles>
+    <WebConfigReplacementFiles Include="Debug_wateroneflow.authentication.config">
+      <Section>wateroneflowAuthentication</Section>
+    </WebConfigReplacementFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <MyWebConfig Include="$(OutputPath)build_configs\$(Configuration)_appsettings.config" />
+    <MyConnectionString Include="$(OutputPath)build_configs\$(Configuration)_connectionstring.config" />
+    <MyWaterOneFlowAuth Include="$(OutputPath)build_configs\$(Configuration)_wateroneflow.authentication.config" />
+    <MyLog4net Include="$(OutputPath)build_configs\$(Configuration)_wateroneflow.logging.log4net" />
+    <MyOutputFiles Include="$(OutputPath)\**\*.*" />
+  <!--  <MyInstallerFile Include="$(OutputPath)Installer.targets" /> -->
+    <MyInstallerFile Include="$(SourceWebPhysicalPath)\Installer.targets" />
+                     <MyInstallerConfigFile Include="$(OutputPath)\Test.config" />
+    <MyInstallerConfigFile Include="$(OutputPath)\MyWs.config" />
+    <MyInstallerConfigFile Include="$(OutputPath)\MyWs_TWO.config" />
+    <MyCommunityTasks Include="$(OutputPath)MSBuildCommunityTasks\**\*.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\waterOneFlowImpl\waterOneFlowImpl.csproj">
+      <Project>{533D0719-6D5F-4F02-BD8C-B3D829E9DEB2}</Project>
+      <Name>waterOneFlowImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CodeRewriter\CodeRewriter.csproj">
+      <Project>{79C351EE-392B-474E-B182-E75D558A4EB7}</Project>
+      <Name>CodeRewriter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ODM1_0_Datasets\ODM1_0_Datasets.csproj">
+      <Project>{7CC3CBAF-84AA-4C14-95A8-926C92580F3E}</Project>
+      <Name>ODM1_0_Datasets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ODM1_1_Datasets\ODM1_1_Datasets.csproj">
+      <Project>{5EEAEAA9-A624-4C68-A6B9-250AF448DE4B}</Project>
+      <Name>ODM1_1_Datasets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WofAuthentication\WofAuthentication.csproj">
+      <Project>{32144077-B780-491E-B0F4-EA29440B056B}</Project>
+      <Name>WofAuthentication</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WebDeployment\v10.0\Microsoft.WebDeployment.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <!--  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WebDeployment\v8.0\Microsoft.WebDeployment.targets"/>
+ -->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.WebDeployment.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="BeforeMerge">
+  </Target>
+  <Target Name="AfterMerge">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(MyWebConfig)" DestinationFiles="$(OutputPath)appsettings.config" />
+    <Copy SourceFiles="@(MyConnectionString)" DestinationFiles="$(OutputPath)connectionstrings.config" />
+    <Copy SourceFiles="@(MyWaterOneFlowAuth)" DestinationFiles="$(OutputPath)wateroneflow.authentication.config" />
+    <Copy SourceFiles="@(MyLog4net)" DestinationFiles="$(OutputPath)wateroneflow.logging.log4net" />
+    <RemoveDir Directories="$(OutputPath)build_configs\" />
+    <RemoveDir Directories="$(OutputPath)log-data" />
+    <Delete Files="$(OutputPath)logger-debug-log.txt;$(OutputPath)webapp-log.txt;" />
+    <Delete Files="$(OutputPath)vwd.webinfo;" />
+    <MakeDir Directories="$(OutputPath)log-data" />
+    <Touch AlwaysCreate="true" Files="$(OutputPath)log-data\query-log.txt;$(OutputPath)log-data\rolling-log.txt;" />
+    <!-- do we need to remove any files -->
+    <Copy Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'" SourceFiles="@(ExtraConfigFiles)" DestinationFiles="%(ExtraConfigFiles.RelativeDir)%(ExtraConfigFiles.FileName)_example.config" />
+    <!--    <Move SourceFiles="$(OutputPath)\basicData.htm" DestinationFiles="$(OutputPath)\basicData_Example.htm" />
+   -->
+    <!-- now copy to folder for-->
+    <RemoveDir Directories="$(ZipBuildDirectory)" ContinueOnError="true" />
+    <!-- clean it-->
+    <MakeDir Directories="$(ZipBuildDirectory)" />
+    <!--   braind dead MSBuild.
+    <Copy
+            SourceFiles="@(MySourceFiles)"
+            DestinationFiles="@(MySourceFiles->'c:\MyDestinationTree\%(RecursiveDir)%(Filename)%(Extension)')"
+        />
+        -->
+    <Copy SourceFiles="@(MyCommunityTasks)" DestinationFiles="@(MyCommunityTasks->'$(ZipBuildDirectory)\MSBuildCommunityTasks\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(MyInstallerFile)" DestinationFiles="$(ZipBuildDirectory)\Installer.targets" />
+    <Copy SourceFiles="@(MyInstallerConfigFile)" DestinationFolder="$(ZipBuildDirectory)" />
+    <Copy SourceFiles="@(MyOutputFiles)" DestinationFiles="@(MyOutputFiles->'$(ZipBuildDirectory)\$(ZipWebAppDirectory)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(OutputPath)\setacl.exe" DestinationFolder="$(ZipBuildDirectory)" />
+    <Copy SourceFiles="$(OutputPath)\InstallingUsingMSBuild.txt" DestinationFolder="$(ZipBuildDirectory)" />
+    <Copy SourceFiles="$(OutputPath)\RemoveFromIIS.bat" DestinationFolder="$(ZipBuildDirectory)" />
+    <Copy SourceFiles="$(OutputPath)\AddToIIS.bat" DestinationFolder="$(ZipBuildDirectory)" />
+    <Copy SourceFiles="$(OutputPath)\SetACL.bat" DestinationFolder="$(ZipBuildDirectory)" />
+    <RemoveDir Directories="$(ZipBuildDirectory)\$(ZipWebAppDirectory)\MSBuildCommunityTasks" />
+    <CallTarget Targets="ZipWebapp" />
+  </Target>
+  <!-- this item must be after the AfterBuild task or the moved files do not get copied-->
+  <Target Name="ZipWebapp">
+    <Time Format="yyyyMMdd">
+      <Output TaskParameter="FormattedTime" PropertyName="buildDate" />
+    </Time>
+    <!--   <CreateItem Include="$(OutputPath)\**\Debug_connectionstrings.config;$(OutputPath)\**\WaterDev_connectionstrings.config">
+      <Output ItemName="ZipExcludedFiles" TaskParameter="Include" />
+    </CreateItem>
+   -->
+    <CreateItem Include="$(ZipBuildDirectory)\$(ZipWebAppDirectory)\**\*_connectionstring.config;$(ZipBuildDirectory)\$(ZipWebAppDirectory)\**\*_AppSettings.config;$(ZipBuildDirectory)\$(ZipWebAppDirectory)\**\*_wateroneflow.authentication.config">
+      <Output ItemName="ZipExcludedFiles" TaskParameter="Include" />
+    </CreateItem>
+    <CreateItem Include="$(ZipBuildDirectory)\**\*.*" Exclude="@(ZipExcludedFiles)">
+      <Output ItemName="ZipFiles" TaskParameter="Include" />
+    </CreateItem>
+    <!-- <CreateItem Include="$(OutputPath)\**\Release_connectionstring.config;$(OutputPath)\**\Release_AppSettings.config">
+      <Output ItemName="ReleaseConfigFiles" TaskParameter="Include" />
+    </CreateItem>
+    -->
+    <CreateItem Include="$(ZipBuildDirectory)\$(ZipWebAppDirectory)\**\connectionstrings.config;$(ZipBuildDirectory)\$(ZipWebAppDirectory)\**\AppSettings.config">
+      <Output ItemName="ReleaseConfigFiles" TaskParameter="Include" />
+    </CreateItem>
+    <!-- Files="@(ZipFiles);@(ReleaseConfigFiles)"  removed-->
+    <Zip WorkingDirectory="$(ZipBuildDirectory)" Files="@(ZipFiles)" ZipFileName="$(zipFileBaseName)_$(Configuration)_$(buildDate).zip" />
+    <Copy SourceFiles="$(zipFileBaseName)_$(Configuration)_$(buildDate).zip" DestinationFiles="$(softwareReleaseDir)/$(zipFileBaseName)_$(Configuration).zip" />
+    <Copy SourceFiles="$(zipFileBaseName)_$(Configuration)_$(buildDate).zip" DestinationFolder="$(softwareReleaseDir)" />
+  </Target>
+</Project>

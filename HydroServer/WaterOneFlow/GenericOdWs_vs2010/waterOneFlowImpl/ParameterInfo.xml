@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ParameterInfo>
+  <Parameters>
+    <Parameter>
+      <ParameterCode>PREC</ParameterCode>
+      <Name>Precipitation</Name>
+      <LongName>PREC Precipitation (mm)</LongName>
+      <Units>mm</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>RH</ParameterCode>
+      <Name>Relative Humidity</Name>
+      <LongName>RH Relative humidity (%)</LongName>
+      <Units>%</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>Rn</ParameterCode>
+      <Name>Net Radiation</Name>
+      <LongName>Rn Net radiation (W/m2)</LongName>
+      <Units>W/m2</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>TA</ParameterCode>
+      <Name>Air Temperature</Name>
+      <LongName>TA Air temperature (deg C)</LongName>
+      <Units>deg C</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>H</ParameterCode>
+      <Name>Sensible Heat Flux</Name>
+      <LongName>H Sensible heat flux (W/m2)</LongName>
+      <Units>W/m2</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>LE</ParameterCode>
+      <Name>Latent Heat Flux</Name>
+      <LongName>LE Latent heat flux (W/m2)</LongName>
+      <Units>W/m2</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>UST</ParameterCode>
+      <Name>Friction Velocity</Name>
+      <LongName>UST Friction velocity (m/s)</LongName>
+      <Units>m/s</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>FC</ParameterCode>
+      <Name>Carbon Dioxide Flux</Name>
+      <LongName>FC CO2 flux (umol/m2/s)</LongName>
+      <Units>umol/m2/s</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>PRESS</ParameterCode>
+      <Name>Barometric Pressure</Name>
+      <LongName>PRESS Barometric pressure (kPa)</LongName>
+      <Units>kPa</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>WS</ParameterCode>
+      <Name>Wind Speed</Name>
+      <LongName>WS Wind speed (m/s)</LongName>
+      <Units>m/s</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>WD</ParameterCode>
+      <Name>Wind Direction</Name>
+      <LongName>WD Wind direction (deg)</LongName>
+      <Units>deg</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+    <Parameter>
+      <ParameterCode>PAR</ParameterCode>
+      <Name>Incoming Visible Radiation</Name>
+      <LongName>PAR Incoming visible radiation (umol/m2/s)</LongName>
+      <Units>umol/m2/s</Units>
+      <Description>http://public.ornl.gov/ameriflux/standards-core.shtml</Description>
+    </Parameter>
+  </Parameters>
+</ParameterInfo>

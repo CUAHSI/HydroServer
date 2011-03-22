@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[ISOMetadata] ADD CONSTRAINT [PK_ISOMetadata_MetadataID] PRIMARY KEY CLUSTERED  ([MetadataID]) ON [PRIMARY]
+
+

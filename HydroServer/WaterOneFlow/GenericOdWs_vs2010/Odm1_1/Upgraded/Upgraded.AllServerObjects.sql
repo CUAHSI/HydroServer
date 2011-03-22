@@ -1,0 +1,1 @@
+﻿-- The upgraded reference project has CLR integration enabled.

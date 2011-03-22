@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio Developer Edition (Education) 8.1.4.2482 (http://www.liquid-technologies.com)-->
+<xsi:schema xmlns="http://www.cuahsi.org/waterML/1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.cuahsi.org/waterML/1.0/">
+    <xs:complexType name="ValueSingleVariable">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attributeGroup ref="ValueAttr" />
+                <xs:attributeGroup ref="offsetAttr" />
+                <xs:attributeGroup ref="DbIdentifiers" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- Created with Liquid XML Studio Developer Edition (Education) 8.1.4.2482 (http://www.liquid-technologies.com) -->
+    <xs:attributeGroup name="ValueAttr">
+        <xs:annotation>
+            <xs:documentation>valueAttr contains the possible attributes that can be associated with a data value element.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="qualifiers" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>@qualifier contains a qualifier code whose details are described in the values/ qualifier element(s)
+Space delimit multiple qualifier codes.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="censorCode" type="CensorCodeEnum">
+            <xs:annotation>
+                <xs:documentation>indication of whether the data value is censored
+@censorCode codelist is censorCodeEnum.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="dateTime" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>XML date and time at which the data value was observed. This is an ISO specified string, that can contain a time zone offset, if apprpriate. If no time offset is specificed, the data is in the local time zone of the station.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="qualityControlLevel" type="QualityControlLevelEnum">
+            <xs:annotation>
+                <xs:documentation>text string giving the level of quality control that the value has been subjected to.
+Codelist is from qualityControlLevelEnum.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="methodID" type="xs:int">
+            <xs:annotation>
+                <xs:documentation>@qualifier contains a identifier whose details are described in the values/method element(s)
+</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="sourceID" type="xs:int">
+            <xs:annotation>
+                <xs:documentation>@methodID contains an identifier whose details are described in the values/method element(s)
+</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accuracyStdDev" type="xs:double">
+            <xs:annotation>
+                <xs:documentation>Numeric value that describes the measurement accuracy of the data value. If not given, it is interpreted as unknown.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="codedVocabulary" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>If a value is categorical, then @codedVocabulary is set to true, and the categorical term is placed in@codedVocabularyTerm, and a numeric value put in the value.
+
+While not a good practice, allows for categorical and numeric values to be intermixed.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="codedVocabularyTerm" type="xs:string" />
+        <xs:attribute name="sampleID" type="xs:int">
+            <xs:annotation>
+                <xs:documentation>@sampleId contains a n identifier whose details are described in the values/samples element(s) 
+This is required only if the data value resulted from a physical sample processed in a lab.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <!-- Created with Liquid XML Studio Developer Edition (Education) 8.1.4.2482 (http://www.liquid-technologies.com) -->
+    <xs:attributeGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema" name="DbIdentifiers">
+        <xs:annotation>
+            <xs:documentation>this attribute group provides provenance information for when an object is retrieved from a database.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="oid" type="xs:normalizedString">
+            <xs:annotation>
+                <xs:documentation>object identifier, or guid for an object</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="metadataDateTime" type="xs:dateTime">
+            <xs:annotation>
+                <xs:documentation>time object was created in the database.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <!-- Created with Liquid XML Studio Developer Edition (Education) 8.1.4.2482 (http://www.liquid-technologies.com) -->
+    <xs:attributeGroup name="offsetAttr">
+        <xs:attribute name="offsetValue" type="xs:double" />
+        <xs:attribute name="offsetTypeID" type="xs:int" />
+        <xs:attribute name="offsetDescription" type="xs:string" />
+        <xs:attribute name="offsetUnitsAbbreviation" type="xs:string" />
+        <xs:attribute name="offsetUnitsCode" type="xs:string" />
+    </xs:attributeGroup>
+    <!-- Created with Liquid XML Studio Developer Edition (Education) 8.1.4.2482 (http://www.liquid-technologies.com) -->
+    <xs:simpleType name="QualityControlLevelEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Raw data" />
+            <xs:enumeration value="Quality controlled data" />
+            <xs:enumeration value="Derived products" />
+            <xs:enumeration value="Interpreted products" />
+            <xs:enumeration value="Knowledge products" />
+            <xs:enumeration value="Unknown" />
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- Created with Liquid XML Studio Developer Edition (Education) 8.1.4.2482 (http://www.liquid-technologies.com) -->
+    <xs:simpleType name="CensorCodeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="lt" />
+            <xs:enumeration value="gt" />
+            <xs:enumeration value="nc" />
+            <xs:enumeration value="nd" />
+            <xs:enumeration value="pnq" />
+        </xs:restriction>
+    </xs:simpleType>
+</xsi:schema>

@@ -1,0 +1,72 @@
+
+
+Start a visual studio command line or .Net SDK:
+* program files>Visual Studio 2XXX>Visual Studio Tools>Visual Studio 2XXX Command Prompt
+or
+* Prgram Files> Microsoft >NET SDK >SDK Command Prompt
+
+If VS is not installed, then replace msbuild with a the full path:
+%windir%\Microsoft.NET\Framework\v3.5\msbuild
+
+----------
+From the directory where the Installer.targets file is located:
+msbuild Installer.targets /t:Install /p:Environment=[MY_SERVICE_CONFIG]
+
+eg:
+msbuild Installer.targets /t:Install /p:Environment=MyWs
+
+Steps To Uninstall:
+# create a config file
+# Open a Visual Studio, or .Net SDK console
+# cd [Directory where files are located]
+# type command
+#* msbuild Installer.targets /t:Install /p:Environment=MyWs
+
+# Open a Visual Studio, or .Net SDK console
+# cd [Directory where files are located]
+# type command
+#* msbuild Installer.targets /t:undeploy /p:Environment=MyWs
+
+
+MS BUILD TARGETS:
+* Install - install
+* Undeploy - remove a virtual directory
+
+Sample Config files
+MyWs.config   /p:Environment=MyWs
+  Deploys a web service "ODWSv11" to  relative path  "virutualdirectories"
+MyWs_Two.config   /p:Environment=MyWs_Two
+  Deploys a web service "ODWSv11_TWO" to  specific path  "C:\temp\virtualdirectories\"
+  
+Config Parameters:
+ConnectionString["ODDB"]
+   <add name="ODDB" connectionString="Data Source=disrupter.sdsc.edu;Initial Catalog=littleBearRiver;User=webservice;password=webservice"
+      providerName="System.Data.SqlClient" /> 
+
+Application Settings: 
+	ContactEmail:
+		<add key="contactEmail" value="ws@example.com" />
+	Network
+		<add key="network" value="UNDEFINED_NETWORK_TWO" />
+	Vocabulary:
+		<add key="vocabulary" value="UNDEFINED_VOCABULARY_TWO" />
+	SeriesName:
+		<add key="SeriesName" value="My Test WS TWO" />
+	ServiceDescriptionPage HTML page that provides a basic description:
+		<add key="ServiceDescriptionPage" value="BasicData.htm" />
+	returnUndefinedUTCorLocal
+		<add key="returnUndefinedUTCorLocal" value="Undefined" />
+		<!-- Undefined (Default) - Return no offset, even if a UTC Offset is provided
+		   Local - Attempt to shift to Local time of server
+		   UTC - Return UTC Times
+		   -->
+
+ INSTALL PARAMETERS:
+	 VirtualDirectory: Name of web applcation, eg http://localhost/ODWSv11TWO
+	   <VirtualDirectory>ODWSv11TWO</VirtualDirectory>
+	 DeploymentFolder: Location that directory will be deployed to: 
+		 <DeploymentFolder>C:\temp\virtualdirectories\</DeploymentFolder>
+				 <!-- web app will be deployed to  $(DeploymentFolder)\$(VirtualDirectory) 
+				Suggested: .\virtualdirectories\
+				Deploy to Temp: C:\temp\virtualdirectories\ 
+			-->

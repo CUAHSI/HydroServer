@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="waterOneFlowImpl.AmerifluxService">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>AmerifluxService.cs</FileName>
+      <HashCode>QAAQAEAAICAAQEAgIAAACAAAgAAIIBBAgAgAAIAARAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="waterOneFlowImpl.cuashiBuilder" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiBuilder.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAICAgAAAAAACAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="waterOneFlowImpl.DAYMET" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DAYMET.cs</FileName>
+      <HashCode>QAAAAAAAIAAAAAQAAgAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="waterOneFlowImpl.DelimitedTextParser" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DelimitedTextParser.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="waterOneFlowImpl.MODIS" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>MODIS.cs</FileName>
+      <HashCode>QAAAAAAAIAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="waterOneFlowImpl.NAM12kService" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>NAM12kService.cs</FileName>
+      <HashCode>QAAAAAAAIAAAAAAAAgAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="waterOneFlowImpl.NwisService" Collapsed="true">
+    <Position X="11" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>NwisService.cs</FileName>
+      <HashCode>AQgAAAIgMAACQAEgAAAgAAARCCAAAgCAAAIAAEAAAEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="waterOneFlowImpl.WSUtils" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>WSUtils.cs</FileName>
+      <HashCode>EAAAAAEAAAKEAACEAAAAAAAAAAAAAAAAAAAEAAAAQAg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariablesType1" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAEAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariablesTypeVariable" Collapsed="true">
+    <Position X="11" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AMIAADAQgABAABAAQIAACAAEAAAQAAAAAAAgAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariablesTypeVariableTimeInterval" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariableDescriptionType" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AEYCAAAACAAAAAAAIIAACAAAAABEAAAAAAAAAABgAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariableDescriptionTypeVariableID" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAABAAAIgAAAAAAAACAAAABAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariableDescriptionTypeRelated" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAEAACAgAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariableDescriptionTypeRelatedParentID" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAABAAAIgAAAAAAAACAAAABAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariableDescriptionTypeRelatedRelatedID" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAABAAAIgAAAAAAAACAAAABAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dataSetInfoType" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAACAhAAAAAAYAAAAAAAAAAAAAAAAAAAAQACAAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QueryInfoType" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAIAAAABAAAAAAAAAAAAAgAAQAACQAAAJAEAQAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QueryInfoTypeCriteria" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AACAAAAAAAAAAAAQAAAgAAAAAAAAABAAAAIAAAAAQAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QueryInfoTypeCriteriaTimeParam" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AABAAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAAAAACAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSValuesType" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AgAAAAABAAAAAAAAAAAAAAQAAgASMCAAAAgAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSValuesTypeValue" Collapsed="true">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAABABBAAAAAAAACAIgAAAAAAAACAAAAAAAgAAAAQCA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SiteInfoType" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AIIQADgQgABAAACAAAAAIAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SiteInfoTypeSiteID" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AQAAAAAAAAAAAACAAIgAAAAAAAAEAAlABCAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SiteInfoTypeGeoLocation" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAQAAAAAAQAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SiteInfoTypeGeoLocationLatLonPoint" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAEAACAAAABAAAAAAAAAAQAAAiAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SiteInfoTypeGeoLocationLocalSiteXY" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>CAAAAAAAAAAAAAAAIAAAAAAAAAAIAAAAEAAABAAAYAE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="sitesResponse" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAEAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeSeriesType" Collapsed="true">
+    <Position X="7.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAEBAAAAAACAAAAAAAAAAAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeSeriesTypeTimeseries" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAIEAAAAAEAAEACAAIAAAAQAEAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeSeriesTypeTimeseriesSourceInfo" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeZoneInfo" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAgAAAAAEAAAAAAAgAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeZoneInfoDefaultTimeZone" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAEAAAAACAgAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeZoneInfoDaylightSavingsTimeZone" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAEAAAAACAgAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="optionType" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAHAAAAAAAkAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="optionGroup" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="options" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>cuashiTimeSeries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAgIAAAAAAAAAAAAAAAQAACAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="waterOneFlowImpl.Properties.Settings" Collapsed="true">
+    <Position X="9.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAgAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

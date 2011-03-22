@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="siteInfoDataSet" targetNamespace="http://tempuri.org/siteInfoDataSet.xsd" xmlns:mstns="http://tempuri.org/siteInfoDataSet.xsd" xmlns="http://tempuri.org/siteInfoDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="2" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ODDB" IsAppSettingsProperty="True" Modifier="Assembly" Name="ODDB (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ODDB.ConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ODMConnectionString" IsAppSettingsProperty="True" Modifier="Assembly" Name="ODMConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.WaterOneFlow.odm.v1_1.Properties.Settings.GlobalReference.Default.ODMConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ODConnectionString" ConnectionStringObject="" IsAppSettingsProperty="True" Modifier="Public" Name="ODConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.WaterOneFlow.odm.v1_1.Properties.Settings.GlobalReference.Default.ODConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="sitesTableAdapter" GeneratorDataComponentClassName="sitesTableAdapter" Name="sites" UserDataComponentName="sitesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ODConnectionString (Settings)" DbObjectName="dbo.Sites" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="False" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="False" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     SiteID, SiteCode, SiteName, Latitude, Longitude, LatLongDatumID, Elevation_m, VerticalDatum, LocalX, LocalY, LocalProjectionID, PosAccuracy_m, 
+                      State, County, Comments
+FROM         Sites</CommandText>
+                    <Parameters>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SiteID" DataSetColumn="SiteID" />
+              <Mapping SourceColumn="SiteCode" DataSetColumn="SiteCode" />
+              <Mapping SourceColumn="SiteName" DataSetColumn="SiteName" />
+              <Mapping SourceColumn="Latitude" DataSetColumn="Latitude" />
+              <Mapping SourceColumn="Longitude" DataSetColumn="Longitude" />
+              <Mapping SourceColumn="LatLongDatumID" DataSetColumn="LatLongDatumID" />
+              <Mapping SourceColumn="VerticalDatum" DataSetColumn="VerticalDatum" />
+              <Mapping SourceColumn="LocalX" DataSetColumn="LocalX" />
+              <Mapping SourceColumn="LocalY" DataSetColumn="LocalY" />
+              <Mapping SourceColumn="LocalProjectionID" DataSetColumn="LocalProjectionID" />
+              <Mapping SourceColumn="State" DataSetColumn="State" />
+              <Mapping SourceColumn="County" DataSetColumn="County" />
+              <Mapping SourceColumn="Comments" DataSetColumn="Comments" />
+              <Mapping SourceColumn="Elevation_m" DataSetColumn="Elevation_m" />
+              <Mapping SourceColumn="PosAccuracy_m" DataSetColumn="PosAccuracy_m" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ODConnectionString (Settings)" DbObjectName="dbo.Sites" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByBox" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetDataByBox" GeneratorSourceName="FillByBox" GetMethodModifier="Public" GetMethodName="GetDataByBox" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetDataByBox" UserSourceName="FillByBox">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     SiteID, SiteCode, SiteName, Latitude, Longitude, LatLongDatumID, Elevation_m, VerticalDatum, LocalX, LocalY, LocalProjectionID, PosAccuracy_m, 
+                      State, County, Comments
+FROM         Sites
+WHERE     (Latitude BETWEEN @SOUTH AND @NORTH) AND (Longitude BETWEEN @WEST AND @EAST)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="False" AutogeneratedName="SOUTH" ColumnName="Latitude" DataSourceName="[D:\DEV2005\WATERONEFLOW\GENERICODWS\ODM1_1\BLANKDB\OD.MDF].dbo.Sites" DataTypeServer="float" DbType="Double" Direction="Input" ParameterName="@SOUTH" Precision="0" ProviderType="Float" Scale="0" Size="8" SourceColumn="Latitude" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="False" AutogeneratedName="NORTH" ColumnName="Latitude" DataSourceName="[D:\DEV2005\WATERONEFLOW\GENERICODWS\ODM1_1\BLANKDB\OD.MDF].dbo.Sites" DataTypeServer="float" DbType="Double" Direction="Input" ParameterName="@NORTH" Precision="0" ProviderType="Float" Scale="0" Size="8" SourceColumn="Latitude" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="False" AutogeneratedName="WEST" ColumnName="Longitude" DataSourceName="[D:\DEV2005\WATERONEFLOW\GENERICODWS\ODM1_1\BLANKDB\OD.MDF].dbo.Sites" DataTypeServer="float" DbType="Double" Direction="Input" ParameterName="@WEST" Precision="0" ProviderType="Float" Scale="0" Size="8" SourceColumn="Longitude" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="False" AutogeneratedName="EAST" ColumnName="Longitude" DataSourceName="[D:\DEV2005\WATERONEFLOW\GENERICODWS\ODM1_1\BLANKDB\OD.MDF].dbo.Sites" DataTypeServer="float" DbType="Double" Direction="Input" ParameterName="@EAST" Precision="0" ProviderType="Float" Scale="0" Size="8" SourceColumn="Longitude" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ODConnectionString (Settings)" DbObjectName="dbo.Sites" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySiteCode" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetDataBySiteCode" GeneratorSourceName="FillBySiteCode" GetMethodModifier="Public" GetMethodName="GetDataBySiteCode" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetDataBySiteCode" UserSourceName="FillBySiteCode">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT Comments, County, Elevation_m, LatLongDatumID, Latitude, LocalProjectionID, LocalX, LocalY, Longitude, PosAccuracy_m, SiteCode, SiteID, SiteName, State, VerticalDatum FROM Sites WHERE (SiteCode = @SiteCode)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="False" AutogeneratedName="SiteCode" ColumnName="SiteCode" DataSourceName="OD.dbo.Sites" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@SiteCode" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="SiteCode" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ODConnectionString (Settings)" DbObjectName="dbo.Sites" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySiteID" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetDataBySiteID" GeneratorSourceName="FillBySiteID" GetMethodModifier="Public" GetMethodName="GetDataBySiteID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetDataBySiteID" UserSourceName="FillBySiteID">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT Sites.Comments, Sites.County, Sites.Elevation_m, Sites.LatLongDatumID, Sites.Latitude, Sites.LocalProjectionID, Sites.LocalX, Sites.LocalY, Sites.Longitude, Sites.PosAccuracy_m, Sites.SiteCode, Sites.SiteID, Sites.SiteName, Sites.State, Sites.VerticalDatum FROM SpatialReferences RIGHT OUTER JOIN Sites ON SpatialReferences.SpatialReferenceID = Sites.LatLongDatumID WHERE (Sites.SiteID = @siteID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="False" AutogeneratedName="siteID" ColumnName="SiteID" DataSourceName="LittleBearRiver.dbo.Sites" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@siteID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="SiteID" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SpatialReferencesTableAdapter" GeneratorDataComponentClassName="SpatialReferencesTableAdapter" Name="SpatialReferences" UserDataComponentName="SpatialReferencesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ODConnectionString (Settings)" DbObjectName="dbo.SpatialReferences" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="False" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="False" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="False">
+                    <CommandText>DELETE FROM [SpatialReferences] WHERE (([SpatialReferenceID] = @Original_SpatialReferenceID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="False" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_SpatialReferenceID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SpatialReferenceID" SourceColumnNullMapping="False" SourceVersion="Original">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="False">
+                    <CommandText>INSERT INTO [SpatialReferences] ([SRSID], [SRSName], [IsGeographic], [Notes]) VALUES (@SRSID, @SRSName, @IsGeographic, @Notes);
+SELECT SpatialReferenceID, SRSID, SRSName, IsGeographic, Notes FROM SpatialReferences WHERE (SpatialReferenceID = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@SRSID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SRSID" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="False" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@SRSName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SRSName" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsGeographic" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsGeographic" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Notes" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Notes" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="True">
+                    <CommandText>SELECT     SpatialReferences.*
+FROM         SpatialReferences</CommandText>
+                    <Parameters>
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="False">
+                    <CommandText>UPDATE [SpatialReferences] SET [SRSID] = @SRSID, [SRSName] = @SRSName, [IsGeographic] = @IsGeographic, [Notes] = @Notes WHERE (([SpatialReferenceID] = @Original_SpatialReferenceID));
+SELECT SpatialReferenceID, SRSID, SRSName, IsGeographic, Notes FROM SpatialReferences WHERE (SpatialReferenceID = @SpatialReferenceID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@SRSID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SRSID" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="False" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@SRSName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SRSName" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsGeographic" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsGeographic" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Notes" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Notes" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                      <Parameter AllowDbNull="False" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_SpatialReferenceID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SpatialReferenceID" SourceColumnNullMapping="False" SourceVersion="Original">
+                      </Parameter>
+                      <Parameter AllowDbNull="False" AutogeneratedName="SpatialReferenceID" ColumnName="SpatialReferenceID" DataSourceName="[D:\DEV2005\WATERONEFLOW\GENERICODWS\ODM1_1\BLANKDB\OD.MDF].dbo.SpatialReferences" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@SpatialReferenceID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="SpatialReferenceID" SourceColumnNullMapping="False" SourceVersion="Current">
+                      </Parameter>
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SpatialReferenceID" DataSetColumn="SpatialReferenceID" />
+              <Mapping SourceColumn="SRSName" DataSetColumn="SRSName" />
+              <Mapping SourceColumn="IsGeographic" DataSetColumn="IsGeographic" />
+              <Mapping SourceColumn="Notes" DataSetColumn="Notes" />
+              <Mapping SourceColumn="SRSID" DataSetColumn="SRSID" />
+            </Mappings>
+            <Sources>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SpatialReferences" msprop:Generator_UserTableName="SpatialReferences" msprop:Generator_RowDeletedName="SpatialReferencesRowDeleted" msprop:Generator_RowChangedName="SpatialReferencesRowChanged" msprop:Generator_RowClassName="SpatialReferencesRow" msprop:Generator_RowChangingName="SpatialReferencesRowChanging" msprop:Generator_RowEvArgName="SpatialReferencesRowChangeEvent" msprop:Generator_RowEvHandlerName="SpatialReferencesRowChangeEventHandler" msprop:Generator_TableClassName="SpatialReferencesDataTable" msprop:Generator_TableVarName="tableSpatialReferences" msprop:Generator_RowDeletingName="SpatialReferencesRowDeleting" msprop:Generator_TablePropName="SpatialReferences">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="SpatialReferenceID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="SpatialReferenceID" msprop:Generator_ColumnVarNameInTable="columnSpatialReferenceID" msprop:Generator_ColumnPropNameInRow="SpatialReferenceID" msprop:Generator_ColumnPropNameInTable="SpatialReferenceIDColumn" type="xs:int" />
+        <xs:element name="SRSName" msprop:Generator_UserColumnName="SRSName" msprop:Generator_ColumnVarNameInTable="columnSRSName" msprop:Generator_ColumnPropNameInRow="SRSName" msprop:Generator_ColumnPropNameInTable="SRSNameColumn">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="500" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="IsGeographic" msprop:Generator_UserColumnName="IsGeographic" msprop:Generator_ColumnVarNameInTable="columnIsGeographic" msprop:Generator_ColumnPropNameInRow="IsGeographic" msprop:Generator_ColumnPropNameInTable="IsGeographicColumn" type="xs:boolean" minOccurs="0" />
+        <xs:element name="Notes" msprop:Generator_UserColumnName="Notes" msprop:Generator_ColumnVarNameInTable="columnNotes" msprop:Generator_ColumnPropNameInRow="Notes" msprop:Generator_ColumnPropNameInTable="NotesColumn" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="500" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="SRSID" msprop:Generator_UserColumnName="SRSID" msprop:Generator_ColumnVarNameInTable="columnSRSID" msprop:Generator_ColumnPropNameInRow="SRSID" msprop:Generator_ColumnPropNameInTable="SRSIDColumn" type="xs:int" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="siteInfoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False" msprop:Generator_UserDSName="siteInfoDataSet" msprop:Generator_DataSetName="siteInfoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="SpatialReferences" />
+        <xs:element name="sites" msprop:Generator_UserTableName="sites" msprop:Generator_RowDeletedName="sitesRowDeleted" msprop:Generator_RowChangedName="sitesRowChanged" msprop:Generator_RowClassName="sitesRow" msprop:Generator_RowChangingName="sitesRowChanging" msprop:Generator_RowEvArgName="sitesRowChangeEvent" msprop:Generator_RowEvHandlerName="sitesRowChangeEventHandler" msprop:Generator_TableClassName="sitesDataTable" msprop:Generator_TableVarName="tablesites" msprop:Generator_RowDeletingName="sitesRowDeleting" msprop:Generator_TablePropName="sites">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SiteID" msprop:Generator_UserColumnName="SiteID" msprop:Generator_ColumnVarNameInTable="columnSiteID" msprop:Generator_ColumnPropNameInRow="SiteID" msprop:Generator_ColumnPropNameInTable="SiteIDColumn" type="xs:int" />
+              <xs:element name="SiteCode" msprop:Generator_UserColumnName="SiteCode" msprop:Generator_ColumnVarNameInTable="columnSiteCode" msprop:Generator_ColumnPropNameInRow="SiteCode" msprop:Generator_ColumnPropNameInTable="SiteCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SiteName" msprop:Generator_UserColumnName="SiteName" msprop:Generator_ColumnVarNameInTable="columnSiteName" msprop:Generator_ColumnPropNameInRow="SiteName" msprop:Generator_ColumnPropNameInTable="SiteNameColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Latitude" msprop:Generator_UserColumnName="Latitude" msprop:Generator_ColumnVarNameInTable="columnLatitude" msprop:Generator_ColumnPropNameInRow="Latitude" msprop:Generator_ColumnPropNameInTable="LatitudeColumn" type="xs:double" />
+              <xs:element name="Longitude" msprop:Generator_UserColumnName="Longitude" msprop:Generator_ColumnVarNameInTable="columnLongitude" msprop:Generator_ColumnPropNameInRow="Longitude" msprop:Generator_ColumnPropNameInTable="LongitudeColumn" type="xs:double" />
+              <xs:element name="LatLongDatumID" msprop:Generator_UserColumnName="LatLongDatumID" msprop:Generator_ColumnVarNameInTable="columnLatLongDatumID" msprop:Generator_ColumnPropNameInRow="LatLongDatumID" msprop:Generator_ColumnPropNameInTable="LatLongDatumIDColumn" type="xs:int" />
+              <xs:element name="VerticalDatum" msprop:Generator_UserColumnName="VerticalDatum" msprop:Generator_ColumnVarNameInTable="columnVerticalDatum" msprop:Generator_ColumnPropNameInRow="VerticalDatum" msprop:Generator_ColumnPropNameInTable="VerticalDatumColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LocalX" msprop:Generator_UserColumnName="LocalX" msprop:Generator_ColumnVarNameInTable="columnLocalX" msprop:Generator_ColumnPropNameInRow="LocalX" msprop:Generator_ColumnPropNameInTable="LocalXColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="LocalY" msprop:Generator_UserColumnName="LocalY" msprop:Generator_ColumnVarNameInTable="columnLocalY" msprop:Generator_ColumnPropNameInRow="LocalY" msprop:Generator_ColumnPropNameInTable="LocalYColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="LocalProjectionID" msprop:Generator_UserColumnName="LocalProjectionID" msprop:Generator_ColumnVarNameInTable="columnLocalProjectionID" msprop:Generator_ColumnPropNameInRow="LocalProjectionID" msprop:Generator_ColumnPropNameInTable="LocalProjectionIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="State" msprop:Generator_UserColumnName="State" msprop:Generator_ColumnVarNameInTable="columnState" msprop:Generator_ColumnPropNameInRow="State" msprop:Generator_ColumnPropNameInTable="StateColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="County" msprop:Generator_UserColumnName="County" msprop:Generator_ColumnVarNameInTable="columnCounty" msprop:Generator_ColumnPropNameInRow="County" msprop:Generator_ColumnPropNameInTable="CountyColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Comments" msprop:Generator_UserColumnName="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Elevation_m" msprop:Generator_UserColumnName="Elevation_m" msprop:Generator_ColumnVarNameInTable="columnElevation_m" msprop:Generator_ColumnPropNameInRow="Elevation_m" msprop:Generator_ColumnPropNameInTable="Elevation_mColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="PosAccuracy_m" msprop:Generator_UserColumnName="PosAccuracy_m" msprop:Generator_ColumnVarNameInTable="columnPosAccuracy_m" msprop:Generator_ColumnPropNameInRow="PosAccuracy_m" msprop:Generator_ColumnPropNameInTable="PosAccuracy_mColumn" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SpatialReferences" />
+      <xs:field xpath="mstns:SpatialReferenceID" />
+    </xs:unique>
+    <xs:unique name="sites_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:sites" />
+      <xs:field xpath="mstns:SiteID" />
+    </xs:unique>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="Sites_FK01" msdata:parent="SpatialReferences" msdata:child="sites" msdata:parentkey="SpatialReferenceID" msdata:childkey="LocalProjectionID" msprop:Generator_UserRelationName="Sites_FK01" msprop:Generator_RelationVarName="relationSites_FK01" msprop:Generator_UserChildTable="sites" msprop:Generator_UserParentTable="SpatialReferences" msprop:Generator_ParentPropName="SpatialReferencesRowBySites_FK01" msprop:Generator_ChildPropName="GetsitesRowsBySites_FK01" />
+      <msdata:Relationship name="FK_Sites_SpatialReferences" msdata:parent="SpatialReferences" msdata:child="sites" msdata:parentkey="SpatialReferenceID" msdata:childkey="LatLongDatumID" msprop:Generator_UserRelationName="FK_Sites_SpatialReferences" msprop:Generator_RelationVarName="relationFK_Sites_SpatialReferences" msprop:Generator_UserChildTable="sites" msprop:Generator_UserParentTable="SpatialReferences" msprop:Generator_ParentPropName="SpatialReferencesRowByFK_Sites_SpatialReferences" msprop:Generator_ChildPropName="GetsitesRowsByFK_Sites_SpatialReferences" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>
