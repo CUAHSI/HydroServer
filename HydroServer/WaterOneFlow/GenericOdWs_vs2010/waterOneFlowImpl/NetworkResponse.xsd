@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns="http://www.cuahsi.org/waterML/" targetNamespace="http://www.cuahsi.org/waterML/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Networks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="Network">
+          <xs:complexType>
+            <xs:attribute name="NetworkID" type="xs:int" use="required" />
+            <xs:attribute name="Organization" type="xs:string" use="required" />
+            <xs:attribute name="NetworkName" type="xs:string" use="required" />
+            <xs:attribute name="LongNetworkName" type="xs:string" use="required" />
+            <xs:attribute name="URL" type="xs:string" use="required" />
+            <xs:attribute name="StationNumber" type="xs:int" use="optional" />
+            <xs:attribute name="ObsStartDate" type="xs:dateTime" use="optional" />
+            <xs:attribute name="ObsEndDate" type="xs:dateTime" use="optional" />
+            <xs:attribute name="LastUpdate" type="xs:dateTime" use="optional" />
+            <xs:attribute name="Contact" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

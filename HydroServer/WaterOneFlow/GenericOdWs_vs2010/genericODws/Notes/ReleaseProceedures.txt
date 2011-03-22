@@ -1,0 +1,173 @@
+
+How to do a release of the Generic OD Web Services:
+ {{{instructions for david valentines machine. YMMV}}}
+
+********************************
+* BE SURE TO TEST HYDROOBJECTS
+*********************************
+ 
+This application now uses Web Services Deploy, and an MSI installer.
+# set configuration to release
+# build-clean solution
+# build-build solution
+# right click on genericODws_deploy>build
+#* if it's not dv's machine, then build will be in genericODws_deploy/Release
+#**  zip file creation will not function until you edit the project file (and don't commit it back).
+# right click on  GenericWSSetup>build
+
+Wiki:
+
+There are now two versions to test:
+1) zip file
+2) msi install
+
+PREPARE FOR PUBLISHING
+Make usre any changes/additions to web config are copied to the
+XXX_connectionstrings.config and appsettings.config
+
+Data Source=disrupter.sdsc.edu;Initial Catalog=littleBearRiver;User=webservice;password=webservice
+
+RESTART vs2005
+# Select Release as build
+# right click on genericODws_deploy, build. 
+#*  This will create a build in genericODws_deploy/Release
+#*  and move a zip file to d:\softwarereleaseases\genericodws
+
+
+TEST IN VIRTUAL MACHINE
+{{{instructions for david valentines machine. YMMV}}}
+Start up a Virtual Machine with Windows 2003, and a ASP.Net 2.0 installed,
+
+- Roll back to the state with only ASP.Net 2.0 installed
+
+- Right click on my computer, Map Netowrk Drive
+- Browse -"VM Ware shared Folders"
+-- shared folders may need to add one VMwareWorkstation VM>Properties>Options>Shared Folders
+- copy the zip file to the desktop or disk
+- extract genericODws directory from the zip file
+- open InstallGenericWebServices.htm
+- Follow the instructions
+- set:
+-- vocabulary
+-- network
+-- status
+open the application and see that the information changes on the Default.aspx page
+Change again:
+-- vocabulary
+-- network
+-- status
+
+Run Web Service Tests:
+MUST CHECK WITH NUMERIC AND ALPHA NUMERIC CODES
+Assumes the oringal OD test database is configured
+- BearRiver DB: Data Source=disrupter.sdsc.edu;Initial Catalog=BearRiverOD;User=webservice;password=webservice
+- From Default.aspx page Click
+-- GetVariableInformationObject
+--- click invoke
+--- set variable = "ODM:00060"
+--- click invoke
+-- GetVariableInformationObject
+--- click invoke
+--- set variable = "ODM:00060/valueType=Field Observation"
+--- click invoke
+-- GetSiteInfo
+--- set location = "ODM:10108500"
+--- click invoke
+-- GetValues
+--- test year, month
+--- location: ODM:10108500
+--- variable: ODM:00060/valueType=Derived Value
+--- beginDateTime: 1960-10-01
+--- endDateTime: 1961-09
+--- click invoke
+-- GetValues
+--- test missing start
+--- location: ODM:10108500
+--- variable: ODM:00060/valueType=Derived Value
+--- beginDateTime: 
+--- endDateTime: 1961-09
+--- click invoke
+-- GetValues
+--- test missing end, year month
+--- location: ODM:10108500
+--- variable: ODM:00060/valueType=Derived Value
+--- beginDateTime: 1963-10
+--- endDateTime: 
+--- click invoke
+
+- little bear river: Data Source=disrupter.sdsc.edu;Initial Catalog=littleBearRiver;User=webservice;password=webservice
+- From Default.aspx page Click
+-- GetVariableInformationObject
+--- click invoke
+--- set variable = "ODM:999010"
+--- click invoke
+--- set variable = "ODM:999004"
+--- click invoke
+---- should see six items
+--- set variable = "ODM:999004/generAlcategory=Water Quality"
+--- click invoke
+--- set variable = "ODM:999004/DataType=Average"
+--- click invoke
+---- one variable
+--- set variable = ODM:999004/DataType=Best Easy Systematic Estimator 
+--- click invoke
+---- one variable
+-- GetSiteInfo
+--- set location = "MYOD:USU-LBR-Mendon"
+--- click invoke
+-- GetValues
+--- location: MYOD:USU-LBR-Mendon
+--- variable: ODM:999004/DataType=Best Easy Systematic Estimator 
+--- beginDateTime: 2005-09-01
+--- endDateTime: 2005-09-02
+--- click invoke
+-- GetValues
+--- different quality control level
+--- location: MYOD:USU-LBR-Mendon
+--- variable: ODM:999004/DataType=Average 
+--- beginDateTime: 2005-09-01
+--- endDateTime: 2005-09-02
+--- click invoke
+-- GetValues
+--- Checks for Qaulfiiers
+--- location: MYOD:USU-LBR-Mendon
+--- variable: ODM:999011/DataType=Average 
+--- beginDateTime: '2006-04-13 '   (add a space)
+--- endDateTime: 2006-04-15
+--- click invoke
+
+Do ByID checks
+- From Default.aspx page Click
+-- GetVariableInformationObject
+--- click invoke
+--- set variable = "BYID:3"
+--- click invoke
+-- GetSiteInfo
+--- set location = "BYID:1"
+--- click invoke
+-- GetValues
+--- location: BYID:3
+--- variable: BYID:1
+--- beginDateTime: 2003-10-01
+--- endDateTime: 2005-07-01
+--- click invoke
+
+
+Run Checks in Web Service Test Client
+Address for server on daves VMware is:
+http://vmware-w2003/genericodws/cuahsi_1_0.asmx
+
+*******************************
+* BE SURE TO TEST HYDROOBJECTS
+*********************************
+
+Check SoapClient
+- install on a machine visible to the network
+
+COPY TO WATER
+Log onto Water.sdsc.edu
+If you are oncopy zip file to root IIS directory
+
+double check that that is the version.
+
+

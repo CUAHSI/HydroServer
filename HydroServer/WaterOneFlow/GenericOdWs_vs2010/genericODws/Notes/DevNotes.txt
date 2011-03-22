@@ -1,0 +1,32 @@
+
+Concept:
+- WebService interface defintion
+-- WebService Interface Implementation
+--- Independent Method Classes (GetValues, GetSiteInfo,
+---- Database Access for each information object (variables, sites, values)
+
+The method impelementation are separate to keep the service class clean, 
+Each method is separately implemented to allow for easier collaborative development.
+Different developers can work on different "methods".
+This also separate the authentications from the implementation of the method.
+
+The database access is separate because we are rtrieving "information" objects. Each method can cache the information it needs. 
+
+- IService. Standard service interface
+-- Service. Implements IService, web service. Handles the authetication access (if needed)
+--- GetXXXOD classes. Implements the various methods of the Cuahsi API.
+---- OD[Object] connects to database
+
+Database Access Methods
+- Get[Object]Dataset
+-- datasets that are needed by this class
+- Get[Object]
+-- returns appropriate XML, or List of Objects
+
+Datasets:
+- when a data adapter is created in a dataset, the default behavior for null is to throw an exception.
+This can be changed in the properties window for each field.
+
+Event Logs
+http://msdn.microsoft.com/library/default.asp?url=/library/en-us/vbcon/html/vbwlkWalkthroughCreatingEventLogInstallers.asp
+http://support.microsoft.com/default.aspx?scid=kb;en-us;329291

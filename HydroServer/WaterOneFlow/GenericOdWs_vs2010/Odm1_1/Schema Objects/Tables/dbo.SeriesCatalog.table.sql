@@ -1,0 +1,35 @@
+﻿CREATE TABLE [dbo].[SeriesCatalog]
+(
+[SeriesID] [int] NOT NULL IDENTITY(1, 1),
+[SiteID] [int] NULL,
+[SiteCode] [nvarchar] (50) NULL,
+[SiteName] [nvarchar] (255) NULL,
+[VariableID] [int] NULL,
+[VariableCode] [nvarchar] (50) NULL,
+[VariableName] [nvarchar] (255) NULL,
+[Speciation] [nvarchar] (255) NULL,
+[VariableUnitsID] [int] NULL,
+[VariableUnitsName] [nvarchar] (255) NULL,
+[SampleMedium] [nvarchar] (255) NULL,
+[ValueType] [nvarchar] (255) NULL,
+[TimeSupport] [float] NULL,
+[TimeUnitsID] [int] NULL,
+[TimeUnitsName] [nvarchar] (255) NULL,
+[DataType] [nvarchar] (255) NULL,
+[GeneralCategory] [nvarchar] (255) NULL,
+[MethodID] [int] NULL,
+[MethodDescription] [nvarchar] (max) NULL,
+[SourceID] [int] NULL,
+[Organization] [nvarchar] (255) NULL,
+[SourceDescription] [nvarchar] (max) NULL,
+[Citation] [nvarchar] (max) NULL,
+[QualityControlLevelID] [int] NULL,
+[QualityControlLevelCode] [nvarchar] (50) NULL,
+[BeginDateTime] [datetime] NULL,
+[EndDateTime] [datetime] NULL,
+[BeginDateTimeUTC] [datetime] NULL,
+[EndDateTimeUTC] [datetime] NULL,
+[ValueCount] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+

@@ -1,0 +1,3 @@
+#Name,Network,SiteCode,VariableCode,BeginDate,EndDate,Auth
+GetSites_Mendon,LBR_TEST,USU-LBR-Mendon,USU3,2005-08-05,2005-08-06,a
+GetSites_Mendon,LBR_TEST,USU-LBR-Wellsville,USU3,2005-08-05,2005-08-06,a

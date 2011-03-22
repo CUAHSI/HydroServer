@@ -1,0 +1,15 @@
+#Name,Network,SiteCode,VariableCode,BeginDate,EndDate,Auth
+GetValues_Mendon_usu3,LBR_TEST,USU-LBR-Mendon,USU3,2005-08-05,2005-08-06,a
+GetValues_MultiQC,LBR_TEST,USU-LBR-Wellsville,USU41,2007-10-04,2007-12-31,a
+GetValues_SingleQC,LBR_TEST,USU-LBR-Wellsville,USU41/QualityControlLevelID=2,2007-10-04,2007-12-31,a
+GetValues_wellsville_sample,LBR_TEST,USU-LBR-Wellsville,USU39,2007-11-01,2008-01-01,a
+GetValues_WIthOffset_sample,LBR_TEST,USU-LBR-ExpFarm,USU19,2007-09-01,2008-01-01,a
+GetValues_Qualifiers,LBR_TEST,USU-LBR-Mendon,USU11,1900-01-01,2010-01-01,a
+GetValues_PhosMenAll_SourceID,LBR_TEST,USU-LBR-Mendon,USU40/SOURCEID=3,1900-01-01,2010-01-01,a
+GetValues_SPCMenJan_QCLevel,LBR_TEST,USU-LBR-Mendon,USU34/QUALITYCONTROLLEVELID=1,2008-01-01,2008-02-01,a
+GetValues_TurbMenJan_Method,LBR_TEST,USU-LBR-Mendon,USU6/METHODID=2,2008-01-01,2008-02-01,a
+GetValues_WOffset_WDateTime,LBR_TEST,USU-LBR-ExpFarm,USU20,2008-01-01T00:00:00,2008-01-04T16:00:00,a
+GetValues_WOffset,LBR_TEST,USU-LBR-ExpFarm,USU20,2008-01-01,2008-02-01,a
+GetValues_PhosMenAll,LBR_TEST,USU-LBR-Mendon,USU40,1900-01-01,2010-01-01,a
+GetValues_TurbMenJan,LBR_TEST,USU-LBR-Mendon,USU6,2008-01-01,2008-02-01,a
+GetValues_TurbMenAll_noDates,LBR_TEST,USU-LBR-Mendon,USU6,,,a

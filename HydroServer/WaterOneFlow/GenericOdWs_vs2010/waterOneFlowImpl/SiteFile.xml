@@ -1,0 +1,404 @@
+<AmeriFluxSites>
+  <USA_Sites>
+    <Site>
+      <SiteCodeParam>atqasuk</SiteCodeParam>
+      <Name>Atqasuk</Name>
+      <LongName>Atqasuk</LongName>
+      <State>Alaska</State>
+      <Latitude>70.496</Latitude>
+      <Longitude> -157.489</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>barrow</SiteCodeParam>
+      <Name>Barrow</Name>
+      <LongName>Barrow</LongName>
+      <State>Alaska</State>
+      <Latitude>71.35</Latitude>
+      <Longitude> -156.617</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>happy</SiteCodeParam>
+      <Name>Happy Valley</Name>
+      <LongName>Happy Valley</LongName>
+      <State>Alaska</State>
+      <Latitude>71.35</Latitude>
+      <Longitude> -156.617</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>upad</SiteCodeParam>
+      <Name>Upad</Name>
+      <LongName>Upad</LongName>
+      <State>Alaska</State>
+      <Latitude>70.2815</Latitude>
+      <Longitude> -148.8848</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>audubon</SiteCodeParam>
+      <Name>Audubon</Name>
+      <LongName>Audubon Grasslands</LongName>
+      <State>Arizona</State>
+      <Latitude>31.6000</Latitude>
+      <Longitude> -110.5104</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>blodgett</SiteCodeParam>
+      <Name>Blodgett</Name>
+      <LongName>Blodgett Forest</LongName>
+      <State>California</State>
+      <Latitude>38.8953</Latitude>
+      <Longitude> -120.6328</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>skyoaks_yng</SiteCodeParam>
+      <Name>Sky Oaks young</Name>
+      <LongName>Sky Oaks Biological Field Station, Young Stand</LongName>
+      <State>California</State>
+      <Latitude>33.377</Latitude>
+      <Longitude> -116.623</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>skyoaks_old</SiteCodeParam>
+      <Name>Sky Oaks old</Name>
+      <LongName>Sky Oaks Biological Field Station, Old Stand</LongName>
+      <State>California</State>
+      <Latitude>33.377</Latitude>
+      <Longitude> -116.623</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>tonzi</SiteCodeParam>
+      <Name>Tonzi</Name>
+      <LongName>Tonzi Ranch</LongName>
+      <State>California</State>
+      <Latitude>38.4192</Latitude>
+      <Longitude> -120.9503</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>vaira</SiteCodeParam>
+      <Name>Vaira</Name>
+      <LongName>Vaira Ranch, Ione</LongName>
+      <State>California</State>
+      <Latitude>38.40667</Latitude>
+      <Longitude> -120.9507</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>niwot</SiteCodeParam>
+      <Name>Niwot Ridge</Name>
+      <LongName>Niwot Ridge Forest</LongName>
+      <State>Colorado</State>
+      <Latitude>40.0329</Latitude>
+      <Longitude> -105.5464</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>greatmtn</SiteCodeParam>
+      <Name>Great Mountain</Name>
+      <LongName>Great Mountain Forest, Norfolk</LongName>
+      <State>Connecticut</State>
+      <Latitude>41.9667</Latitude>
+      <Longitude> -73.2333</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>ksc_scrub</SiteCodeParam>
+      <Name>Florida KSC scrub oak</Name>
+      <LongName>Kennedy Space Flight Center (scrub oak)</LongName>
+      <State>Florida</State>
+      <Latitude>28.6086</Latitude>
+      <Longitude> -80.6715</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>ksc_pine</SiteCodeParam>
+      <Name>Florida KSC slash pine</Name>
+      <LongName>Kennedy Space Flight Center (slash pine)</LongName>
+      <State>Florida</State>
+      <Latitude>28.458304</Latitude>
+      <Longitude> -80.670903</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>ga_ac</SiteCodeParam>
+      <Name>Gainesville (Austin Cary)</Name>
+      <LongName>Gainesville (Austin Cary)</LongName>
+      <State>Florida</State>
+      <Latitude>29.7381</Latitude>
+      <Longitude> -82.2188</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>ga_don</SiteCodeParam>
+      <Name>Gainesville (Donaldson)</Name>
+      <LongName>Gainesville (Donaldson)</LongName>
+      <State>Florida</State>
+      <Latitude>29.7548</Latitude>
+      <Longitude> -82.1633</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>ga_miz</SiteCodeParam>
+      <Name>Gainesville (Mize)</Name>
+      <LongName>Gainesville (Mize)</LongName>
+      <State>Florida</State>
+      <Latitude>29.8315</Latitude>
+      <Longitude> -82.2448</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>ga_ray</SiteCodeParam>
+      <Name>Gainesville (Rayonier)</Name>
+      <LongName>Gainesville (Rayonier)</LongName>
+      <State>Florida</State>
+      <Latitude>29.8028</Latitude>
+      <Longitude> -82.2032</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>bondville</SiteCodeParam>
+      <Name>Bondville</Name>
+      <LongName>Bondville</LongName>
+      <State>Illinois</State>
+      <Latitude>40.0061</Latitude>
+      <Longitude> -88.2919</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>indiana</SiteCodeParam>
+      <Name>Indiana MMSF</Name>
+      <LongName>Morgan Monroe State Forest</LongName>
+      <State>Indiana</State>
+      <Latitude>39.3213</Latitude>
+      <Longitude> -86.4134</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>walnut</SiteCodeParam>
+      <Name>Walnut River</Name>
+      <LongName>Walnut River Watershed</LongName>
+      <State>Kansas</State>
+      <Latitude>51.5208</Latitude>
+      <Longitude> -96.8550</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>harvhemlock</SiteCodeParam>
+      <Name>Harvard Forest hemlock</Name>
+      <LongName>Harvard Forest hemlock</LongName>
+      <State>Massachusetts</State>
+      <Latitude>42.5393</Latitude>
+      <Longitude> -72.1779</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>harv</SiteCodeParam>
+      <Name>Harvard Forest</Name>
+      <LongName>Harvard Forest</LongName>
+      <State>Massachusetts</State>
+      <Latitude>42.5357</Latitude>
+      <Longitude> -72.1720</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>howland</SiteCodeParam>
+      <Name>Howland Forest (main tower)</Name>
+      <LongName>Howland Forest (main tower)</LongName>
+      <State>Maine</State>
+      <Latitude>45.20722</Latitude>
+      <Longitude> -68.72648</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>ozark</SiteCodeParam>
+      <Name>Ozark</Name>
+      <LongName>Ozark Columbia</LongName>
+      <State>Missouri</State>
+      <Latitude>38.7441</Latitude>
+      <Longitude> -92.2001</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>goodwin</SiteCodeParam>
+      <Name>Goodwin Creek</Name>
+      <LongName>Goodwin Creek</LongName>
+      <State>Mississippi</State>
+      <Latitude>34.25</Latitude>
+      <Longitude> -89.97</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>sylvania</SiteCodeParam>
+      <Name>Sylvania Wilderness</Name>
+      <LongName>Sylvania Wilderness Area (Watersmeet)</LongName>
+      <State>Michigan</State>
+      <Latitude>46.242</Latitude>
+      <Longitude> -89.34765</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>umich</SiteCodeParam>
+      <Name>Univ of Mich Biological Station</Name>
+      <LongName>Univ of Mich Biological Station</LongName>
+      <State>Michigan</State>
+      <Latitude>45.5597</Latitude>
+      <Longitude> -84.7138</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>fortpeck</SiteCodeParam>
+      <Name>Fort Peck</Name>
+      <LongName>Fort Peck</LongName>
+      <State>Montana</State>
+      <Latitude>48.3080</Latitude>
+      <Longitude> -105.1005</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>dukepine</SiteCodeParam>
+      <Name>Duke Pine</Name>
+      <LongName>Duke Forest, Pine</LongName>
+      <State>North Carolina</State>
+      <Latitude>35.9782</Latitude>
+      <Longitude> -79.0942</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>dukehw</SiteCodeParam>
+      <Name>Duke Hardwoods</Name>
+      <LongName>Duke Forest, Hardwoods</LongName>
+      <State>North Carolina</State>
+      <Latitude>35.9736</Latitude>
+      <Longitude> -79.1000</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>dukeop</SiteCodeParam>
+      <Name>Duke Open Fields</Name>
+      <LongName>Duke Forest, Open Field</LongName>
+      <State>North Carolina</State>
+      <Latitude>35.9712</Latitude>
+      <Longitude> -79.0934</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>mead_irr</SiteCodeParam>
+      <Name>Mead irrigated</Name>
+      <LongName>Mead irrigated</LongName>
+      <State>Nebraska</State>
+      <Latitude>41.099</Latitude>
+      <Longitude> -96.286</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>mead_rot</SiteCodeParam>
+      <Name>Mead rotation</Name>
+      <LongName>Mead rotation</LongName>
+      <State>Nebraska</State>
+      <Latitude>41.099</Latitude>
+      <Longitude> -96.281</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>mead_rain</SiteCodeParam>
+      <Name>Mead rainfed</Name>
+      <LongName>Mead rainfed</LongName>
+      <State>Nebraska</State>
+      <Latitude>41.099</Latitude>
+      <Longitude> -96.440</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>lwashita</SiteCodeParam>
+      <Name>Little Washita</Name>
+      <LongName>Little Washita Watershed</LongName>
+      <State>Oklahoma</State>
+      <Latitude>34.9604</Latitude>
+      <Longitude> -97.9789</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>okwt</SiteCodeParam>
+      <Name>Oklahoma wheat</Name>
+      <LongName>Oklahoma winter wheat</LongName>
+      <State>Oklahoma</State>
+      <Latitude>36.767</Latitude>
+      <Longitude> -97.133</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>oktg</SiteCodeParam>
+      <Name>Oklahoma tallgrass</Name>
+      <LongName>Oklahoma tall grass prairie</LongName>
+      <State>Oklahoma</State>
+      <Latitude>36.767</Latitude>
+      <Longitude> -97.133</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>arm</SiteCodeParam>
+      <Name>ARM</Name>
+      <LongName>ARM Oklahoma</LongName>
+      <State>Oklahoma</State>
+      <Latitude>36.605</Latitude>
+      <Longitude> -97.485</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>metold</SiteCodeParam>
+      <Name>Metolius old</Name>
+      <LongName>Metolius</LongName>
+      <State>Oregon</State>
+      <Latitude>44.4992</Latitude>
+      <Longitude> -121.6224</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>metint</SiteCodeParam>
+      <Name>Metolius intermediate</Name>
+      <LongName>Metolius</LongName>
+      <State>Oregon</State>
+      <Latitude>44.4524325</Latitude>
+      <Longitude> -121.557166</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>metoldyng</SiteCodeParam>
+      <Name>Metolius old young</Name>
+      <LongName>Metolius</LongName>
+      <State>Oregon</State>
+      <Latitude>44.4371895</Latitude>
+      <Longitude> -121.566756</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>blackhills</SiteCodeParam>
+      <Name>Black Hills</Name>
+      <LongName>Black Hills</LongName>
+      <State>South Dakota</State>
+      <Latitude>44.73333</Latitude>
+      <Longitude> -104.1</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>brookings</SiteCodeParam>
+      <Name>Brookings</Name>
+      <LongName>Brookings</LongName>
+      <State>South Dakota</State>
+      <Latitude>44.34529</Latitude>
+      <Longitude> -96.83617</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>wb</SiteCodeParam>
+      <Name>Walker Branch</Name>
+      <LongName>Walker Branch Watershed</LongName>
+      <State>Tennesee</State>
+      <Latitude>35.9588</Latitude>
+      <Longitude> -84.2874</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>windr</SiteCodeParam>
+      <Name>Wind River</Name>
+      <LongName>Wind River Crane Site</LongName>
+      <State>Washington</State>
+      <Latitude>45.8205</Latitude>
+      <Longitude> -121.9519</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>lcreek</SiteCodeParam>
+      <Name>Lost Creek</Name>
+      <LongName>Lost Creek</LongName>
+      <State>Wisconsin</State>
+      <Latitude>46.08268</Latitude>
+      <Longitude> -89.97919</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>parkfalls</SiteCodeParam>
+      <Name>Parkfalls</Name>
+      <LongName>Park Falls</LongName>
+      <State>Wisconsin</State>
+      <Latitude>45.9458778</Latitude>
+      <Longitude> -90.272304</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>wcreek</SiteCodeParam>
+      <Name>Willow Creek</Name>
+      <LongName>Willow Creek</LongName>
+      <State>Wisconsin</State>
+      <Latitude>45.9059</Latitude>
+      <Longitude> -90.0799</Longitude>
+    </Site>
+    <Site>
+      <SiteCodeParam>canaan</SiteCodeParam>
+      <Name>Canaan</Name>
+      <LongName>Canaan Valley</LongName>
+      <State>West Virginia</State>
+      <Latitude>39.0633</Latitude>
+      <Longitude> -79.4208</Longitude>
+    </Site>
+  </USA_Sites>
+</AmeriFluxSites>

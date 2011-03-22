@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataSchemaModel FileFormatVersion="1.0" SchemaVersion="1.0" DspName="Microsoft.Data.Schema.Sql.SqlDsp.Sql90DatabaseSchemaProvider" CollationLcid="1033" CollationCaseSensitive="False">
+	<Header>
+		<CustomData Category="ModelCapability">
+			<Metadata Name="ModelCapability" Value="AllowServerObjects, Default" />
+		</CustomData>
+		<CustomData Category="CompatibilityMode">
+			<Metadata Name="CompatibilityMode" Value="AllowServerObjects, Default" />
+		</CustomData>
+	</Header>
+	<Model>
+		<Element Type="ISql90ServerOptions">
+			<Property Name="IsClrEnabled" Value="True" />
+		</Element>
+	</Model>
+</DataSchemaModel>

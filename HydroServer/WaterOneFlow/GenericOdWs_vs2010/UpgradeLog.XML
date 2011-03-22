@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="genericODws">
+</Property><Property Name="Solution File" Value="C:\dev_hydrocatalog\genericwebservices\trunk\genericODws.sln">
+</Property><Property Name="Date" Value="Friday, March 18, 2011">
+</Property><Property Name="Time" Value="9:59 AM">
+</Property></Properties><Event ErrorLevel="0" Project="waterOneFlowImpl" Source="waterOneFlowImpl\waterOneFlowImpl.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="waterOneFlowImpl" Source="waterOneFlowImpl\waterOneFlowImpl.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Project file opened successfully">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Get root element Project successfully">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="ToolsVersion in String:">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="3.5">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="ToolsVersion in DWORD:">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="3.5">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Require Upgrade">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Ready to exit">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Require Upgrade">
+</Event><Event ErrorLevel="0" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="CustomInstallAction" Source="CustomInstallAction\CustomInstallAction.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="CustomInstallAction" Source="CustomInstallAction\CustomInstallAction.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CustomInstallAction" Source="CustomInstallAction\CustomInstallAction.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="CodeRewriter" Source="CodeRewriter\CodeRewriter.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="CodeRewriter" Source="CodeRewriter\CodeRewriter.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CodeRewriter" Source="CodeRewriter\CodeRewriter.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CodeRewriterTest" Source="CodeRewriterTest\CodeRewriterTest.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CodeRewriterTest" Source="CodeRewriterTest\CodeRewriterTest.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="ODM1_1_Datasets" Source="ODM1_1_Datasets\ODM1_1_Datasets.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="ODM1_1_Datasets" Source="ODM1_1_Datasets\ODM1_1_Datasets.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ODM1_1_Datasets" Source="ODM1_1_Datasets\ODM1_1_Datasets.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="ODM1_0_Datasets" Source="ODM1_0_Datasets\ODM1_0_Datasets.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="ODM1_0_Datasets" Source="ODM1_0_Datasets\ODM1_0_Datasets.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ODM1_0_Datasets" Source="ODM1_0_Datasets\ODM1_0_Datasets.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="WofAuthentication" Source="WofAuthentication\WofAuthentication.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="WofAuthentication" Source="WofAuthentication\WofAuthentication.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="WofAuthentication" Source="WofAuthentication\WofAuthentication.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="GenericGrabSampleFiles" Source="GenericGrabSampleFiles\GenericGrabSampleFiles.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="GenericGrabSampleFiles" Source="GenericGrabSampleFiles\GenericGrabSampleFiles.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="GenericGrabSampleFiles" Source="GenericGrabSampleFiles\GenericGrabSampleFiles.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="EncryptConnectionStrings" Source="EncryptConnectionStrings\EncryptConnectionStrings.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="EncryptConnectionStrings" Source="EncryptConnectionStrings\EncryptConnectionStrings.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="EncryptConnectionStrings" Source="EncryptConnectionStrings\EncryptConnectionStrings.csproj" Description="Converted">
+</Event><Event ErrorLevel="2" Project="genericODws_deploy" Source="genericODws_deploy\genericODws_deploy.wdproj" Description="&#xA;C:\dev_hydrocatalog\genericwebservices\trunk\genericODws_deploy\genericODws_deploy.wdproj(138,3): The imported project &quot;C:\Program Files\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets&quot; was not found. Confirm that the path in the &lt;Import&gt; declaration is correct, and that the file exists on disk.">
+</Event><Event ErrorLevel="0" Project="" Source="genericODws.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="genericODws.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="waterOneFlowImpl" Source="waterOneFlowImpl\waterOneFlowImpl.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="waterOneFlowImpl" Source="waterOneFlowImpl\waterOneFlowImpl.csproj" Description="Created rule set file &quot;C:\dev_hydrocatalog\genericwebservices\trunk\waterOneFlowImpl\Migrated rules for waterOneFlowImpl.ruleset&quot; for the &quot;Debug (Any CPU)&quot; configuration.">
+</Event><Event ErrorLevel="0" Project="CustomInstallAction" Source="CustomInstallAction\CustomInstallAction.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="CodeRewriter" Source="CodeRewriter\CodeRewriter.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="3" Project="" Source="genericODws.vsmdi" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="genericODws.vsmdi" Description="The file was converted to the current format.">
+</Event><Event ErrorLevel="3" Project="" Source="localtestrun.testrunconfig" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="localtestrun.testrunconfig" Description="The file was converted to the current format.">
+</Event><Event ErrorLevel="0" Project="CodeRewriterTest" Source="CodeRewriterTest\CodeRewriterTest.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="ODM1_1_Datasets" Source="ODM1_1_Datasets\ODM1_1_Datasets.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="ODM1_0_Datasets" Source="ODM1_0_Datasets\ODM1_0_Datasets.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="WofAuthentication" Source="WofAuthentication\WofAuthentication.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="GenericGrabSampleFiles" Source="GenericGrabSampleFiles\GenericGrabSampleFiles.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="EncryptConnectionStrings" Source="EncryptConnectionStrings\EncryptConnectionStrings.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
