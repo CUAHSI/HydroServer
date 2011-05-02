@@ -23,3 +23,6 @@ C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.Framework\bin\Hyd
 C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.Framework\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.Framework\obj\Debug\HydroServer.Framework.dll
 C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.Framework\obj\Debug\HydroServer.Framework.pdb
+C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.Framework\bin\HydroServer.USU.dll
+C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.Framework\bin\HydroServer.USU.pdb
+C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.Framework\bin\System.Web.Mvc.dll
