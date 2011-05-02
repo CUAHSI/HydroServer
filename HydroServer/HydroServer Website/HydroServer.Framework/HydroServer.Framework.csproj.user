@@ -7,13 +7,13 @@
           </StartPageUrl>
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
           <NativeDebugging>False</NativeDebugging>
           <SQLDebugging>False</SQLDebugging>
           <PublishCopyOption>RunFiles</PublishCopyOption>
-          <PublishTargetLocation>
-          </PublishTargetLocation>
+          <PublishTargetLocation>C:\Users\Ravi Vegiraju\Desktop\hydro on sand\</PublishTargetLocation>
           <PublishDeleteAllFiles>False</PublishDeleteAllFiles>
-          <PublishCopyAppData>True</PublishCopyAppData>
+          <PublishCopyAppData>False</PublishCopyAppData>
           <ExternalProgram>
           </ExternalProgram>
           <StartExternalURL>
