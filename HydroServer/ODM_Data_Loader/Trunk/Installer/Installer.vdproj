@@ -27,6 +27,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_73027A305D3941F49B7FD02D1B2EA4D0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AA6C5CA9BF024A63B21BA93C8C74DA47"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -53,6 +59,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EE5A2179B82A425781E05E7B82A430D7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_73027A305D3941F49B7FD02D1B2EA4D0"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -127,6 +139,48 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_78F55230BEFC4461A94789A963F839BC"
+            {
+            "Name" = "8:Primary output from AddNewPath (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_73027A305D3941F49B7FD02D1B2EA4D0"
+            "FileType" = "3:1"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_DDB70426_2228_4210_9DAC_F180EF34B81C"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:/targ=\"[TARGETDIR]\\\""
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_7C4D1F0DB769483A9844A9A147A0BBD2"
+            {
+            "Name" = "8:Primary output from AddNewPath (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_73027A305D3941F49B7FD02D1B2EA4D0"
+            "FileType" = "3:1"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_DFC4D533_717C_4486_A96C_26D823775B0E"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_8EADEF354C26406DA1422B5162BECC9C"
+            {
+            "Name" = "8:Primary output from AddNewPath (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_73027A305D3941F49B7FD02D1B2EA4D0"
+            "FileType" = "3:1"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_B029D033_4FEF_40F1_9F01_0BEE4872DF05"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:/targ=\"[TARGETDIR]\\\""
+            }
         }
         "DefaultFeature"
         {
@@ -271,13 +325,14 @@
         "MsiBootstrapper"
         {
         "LangId" = "3:1033"
+        "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM DL 1.1.4"
+        "ProductName" = "8:ODM DL 1.1.5"
         "ProductCode" = "8:{BDE49BA4-0F70-4905-807E-5CB2B105B8A7}"
-        "PackageCode" = "8:{58EFEB27-4E41-4AE7-A6EC-F314FF487F34}"
+        "PackageCode" = "8:{8AF6580E-4CEA-4A7D-8AC5-2B814A4B01C4}"
         "UpgradeCode" = "8:{B3619D6E-AE69-4E35-AFF4-8B2BD9D950AB}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -398,7 +453,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9213E13D767B44D796AF23F19B940C8E"
             {
-            "Name" = "8:ODM DL 1.1.4 Wizard"
+            "Name" = "8:ODM DL 1.1.5 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -412,7 +467,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9624BB8BCC3C440296CE884FE0D59120"
             {
-            "Name" = "8:ODM DL 1.1.4 Wizard"
+            "Name" = "8:ODM DL 1.1.5 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -426,7 +481,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C15D35F33E0047CD812979750CBD340D"
             {
-            "Name" = "8:ODM DL 1.1.4"
+            "Name" = "8:ODM DL 1.1.5"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -440,7 +495,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D0AC355D76CE4AD6BFC427EB4518972D"
             {
-            "Name" = "8:ODM DL 1.1.4"
+            "Name" = "8:ODM DL 1.1.5"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -973,9 +1028,37 @@
                 {
                 }
             }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_73027A305D3941F49B7FD02D1B2EA4D0"
+            {
+            "SourcePath" = "8:..\\AddNewPath\\obj\\Release\\AddNewPath.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_6B8707195AA241168E9AF02920B35157"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{170185F2-1E5D-4697-8F41-322DEC8841F0}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DB56D9B9C47B4CA3B25F9DD6FDD5F19C"
             {
-            "SourcePath" = "8:..\\ODM Data Loader GUI\\obj\\Debug\\ODMLoader.exe"
+            "SourcePath" = "8:..\\ODM Data Loader GUI\\obj\\Release\\ODMLoader.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B8707195AA241168E9AF02920B35157"
@@ -1031,7 +1114,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EE5A2179B82A425781E05E7B82A430D7"
             {
-            "SourcePath" = "8:..\\Simple Wizard\\obj\\Debug\\Simple Wizard.exe"
+            "SourcePath" = "8:..\\Simple Wizard\\obj\\Release\\Simple Wizard.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B8707195AA241168E9AF02920B35157"
@@ -1057,9 +1140,6 @@
                 {
                 }
             }
-        }
-        "VJSharpPlugin"
-        {
         }
     }
 }
