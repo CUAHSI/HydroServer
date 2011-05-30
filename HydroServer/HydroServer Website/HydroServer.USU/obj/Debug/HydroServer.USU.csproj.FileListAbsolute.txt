@@ -50,3 +50,11 @@ C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.USU\obj\Debug\Res
 C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.dll
 C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.pdb
 C:\Users\Ravi Vegiraju\Desktop\HydroServer Website\HydroServer.USU\bin\System.Web.Mvc.dll
+C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.USU.dll
+C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.USU.pdb
+C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.Framework.dll
+C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\bin\System.Web.Mvc.dll
+C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.Framework.pdb
+C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.dll
+C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.pdb
