@@ -101,6 +101,7 @@ Partial Class frmMain
         Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.AutoSize = True
         Me.Panel1.Controls.Add(Me.lblLoadingType)
         Me.Panel1.Controls.Add(Me.btnCommit)
         Me.Panel1.Controls.Add(Me.btnOpen)
@@ -139,51 +140,51 @@ Partial Class frmMain
         '
         Me.tsmiFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiFile_Open, Me.tsmiFile_Sep1, Me.tsmiFile_Exit})
         Me.tsmiFile.Name = "tsmiFile"
-        Me.tsmiFile.Size = New System.Drawing.Size(37, 20)
+        Me.tsmiFile.Size = New System.Drawing.Size(35, 20)
         Me.tsmiFile.Text = "File"
         '
         'tsmiFile_Open
         '
         Me.tsmiFile_Open.Name = "tsmiFile_Open"
-        Me.tsmiFile_Open.Size = New System.Drawing.Size(103, 22)
+        Me.tsmiFile_Open.Size = New System.Drawing.Size(111, 22)
         Me.tsmiFile_Open.Text = "Open"
         '
         'tsmiFile_Sep1
         '
         Me.tsmiFile_Sep1.Name = "tsmiFile_Sep1"
-        Me.tsmiFile_Sep1.Size = New System.Drawing.Size(100, 6)
+        Me.tsmiFile_Sep1.Size = New System.Drawing.Size(108, 6)
         '
         'tsmiFile_Exit
         '
         Me.tsmiFile_Exit.Name = "tsmiFile_Exit"
-        Me.tsmiFile_Exit.Size = New System.Drawing.Size(103, 22)
+        Me.tsmiFile_Exit.Size = New System.Drawing.Size(111, 22)
         Me.tsmiFile_Exit.Text = "Exit"
         '
         'ToolsToolStripMenuItem
         '
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         Me.ToolsToolStripMenuItem.Visible = False
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.OptionsToolStripMenuItem.Text = "Options..."
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'SqlConnection1

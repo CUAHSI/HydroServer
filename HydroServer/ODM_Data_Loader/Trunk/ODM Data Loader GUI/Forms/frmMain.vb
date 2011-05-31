@@ -22,8 +22,8 @@ Public Class frmMain
             My.Settings.DateFormat = My.Application.Culture.DateTimeFormat.ShortDatePattern
         End If
 
-        'LogPath = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location) & "\Log.txt"
-        LogPath = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath) & "\Log.txt"
+        LogPath = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location) & "\Log.txt"
+        'LogPath = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath) & "\Log.txt"
 
 
         For i As Integer = 0 To (My.Application.CommandLineArgs.Count - 1)
@@ -205,11 +205,14 @@ Public Class frmMain
         btnCommit.Enabled = False
         Try
             Dim rows As Integer
-            lblLoadingType.Text = "Committing file to database. This may take a while."
-            rows = file.CommitTable()
+            Dim _clsTableCount As New clsTableCount
 
-            If (rows > 0) Then
-                ShowUpdate(rows)
+            lblLoadingType.Text = "Committing file to database. This may take a while."
+            'rows = file.CommitTable()
+            _clsTableCount = file.GetRowcount_CommitTable()
+
+            If (Not _clsTableCount Is Nothing) Then
+                ShowUpdate(_clsTableCount)
                 ResetForm()
             Else
                 MsgBox("There was an error committing this file to the database." & vbCrLf & "Please read the log file to determine where the error occurred." & vbCrLf & "No data was committed to the database.", MsgBoxStyle.Critical, "Error Committing Data")
@@ -343,5 +346,9 @@ Public Class frmMain
     Private Sub AboutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
         Dim temp As New frmAbout
         temp.ShowDialog()
+    End Sub
+
+    Private Sub frmMain_ResizeEnd(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.ResizeEnd
+
     End Sub
 End Class
