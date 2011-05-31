@@ -292,3 +292,1154 @@ Log @ Tuesday, September 21, 2010	10:21:37 AM
 Log @ Tuesday, September 21, 2010	10:27:14 AM
 Finding New DataValues
 
+Log @ Friday, May 20, 2011	4:18:40 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:18:40 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:19:32 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:19:32 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:19:32 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:19:39 PM
+ROW # 1: Unable to find the specified sitecode in the Sites table.
+Log @ Friday, May 20, 2011	4:20:44 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:20:44 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:20:54 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:21:23 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:21:23 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:21:23 PM
+ROW # 1: Unable to find the specified sitecode in the Sites table.
+Log @ Friday, May 20, 2011	4:26:17 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:26:18 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:28:57 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:28:57 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:29:03 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:29:03 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:29:03 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:29:03 PM
+ROW # 1: Unable to find the specified sitecode in the Sites table.
+Log @ Friday, May 20, 2011	4:31:04 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+ERROR @ Friday, May 20, 2011	4:31:04 PM
+Error Loading C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv .
+Error Message: The process cannot access the file 'C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv' because it is being used by another process.
+Log @ Friday, May 20, 2011	4:31:20 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:31:20 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:31:29 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:34:03 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:34:03 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:34:03 PM
+ROW # 1: Unable to find the specified variablecode in the Variables table.
+Log @ Friday, May 20, 2011	4:37:01 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:37:01 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:37:03 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:37:13 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:37:13 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:37:13 PM
+ROW # 249 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '8.5, , 12/30/2007 9:15:00 AM, -5, 12/30/2007 2:15:00 PM, 1, 43, , , nc, , 0, 1, , , -9999' is already present.
+Log @ Friday, May 20, 2011	4:45:09 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:45:09 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:45:11 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:48:03 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:48:03 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:48:03 PM
+ROW # 255 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '4, , 7/31/2008 9:01:00 AM, -5, 7/31/2008 2:01:00 PM, 1, 43, , , nc, , 0, 1, , , -9999' is already present.
+Log @ Friday, May 20, 2011	4:49:18 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:49:18 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:49:20 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:51:43 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:51:43 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:51:44 PM
+ROW # 318 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '5.6, , 6/10/2007 9:18:00 AM, -5, 6/10/2007 2:18:00 PM, 1, 43, , , nc, , 0, 1, , , -9999' is already present.
+Log @ Friday, May 20, 2011	4:52:29 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:52:29 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:52:32 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:55:00 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:55:00 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:55:01 PM
+ROW # 466 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '4, , 8/17/2009 9:15:00 AM, -5, 8/17/2009 2:15:00 PM, 1, 43, , , nc, , 0, 1, , , -9999' is already present.
+Log @ Friday, May 20, 2011	4:56:14 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:56:14 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:56:16 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:58:12 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:58:12 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	4:58:12 PM
+ROW # 586 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '60, , 3/31/2007 9:07:00 AM, -5, 3/31/2007 2:07:00 PM, 1, 43, , , nc, , 0, 1, , , -9999' is already present.
+Log @ Friday, May 20, 2011	4:59:38 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	4:59:38 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	4:59:41 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	4:59:41 PM
+1 rows committed to OffsetTypes
+
+Log @ Friday, May 20, 2011	4:59:41 PM
+Finding New DataValues
+
+Log @ Friday, May 20, 2011	4:59:42 PM
+672 rows committed to DataValues
+
+Log @ Friday, May 20, 2011	4:59:42 PM
+Updating Series Catalog
+
+Log @ Friday, May 20, 2011	4:59:57 PM
+41 rows committed to SeriesCatalog
+
+Log @ Friday, May 20, 2011	4:59:57 PM
+The update was completed.
+714 rows committed to the database.
+
+Log @ Friday, May 20, 2011	5:03:48 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+ERROR @ Friday, May 20, 2011	5:03:48 PM
+Error Loading C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv .
+Error Message: The process cannot access the file 'C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv' because it is being used by another process.
+Log @ Friday, May 20, 2011	5:04:02 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Friday, May 20, 2011	5:04:03 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Friday, May 20, 2011	5:04:07 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 20, 2011	5:04:07 PM
+Finding New DataValues
+
+ERROR @ Friday, May 20, 2011	5:04:08 PM
+One (or more) rows in DataValues already exist in the database.
+Log @ Tuesday, May 24, 2011	3:35:58 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:35:58 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:37:31 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:37:31 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:37:49 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	3:37:49 PM
+Finding New DataValues
+
+Log @ Tuesday, May 24, 2011	3:37:56 PM
+672 rows committed to DataValues
+
+Log @ Tuesday, May 24, 2011	3:37:56 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 24, 2011	3:38:12 PM
+41 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 24, 2011	3:38:33 PM
+The update was completed.
+713 rows committed to the database.
+
+Log @ Tuesday, May 24, 2011	3:42:16 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:42:16 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:42:34 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:42:34 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:43:09 PM
+		Opening C:\Documents and Settings\karthik iyer\Desktop\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:43:09 PM
+		C:\Documents and Settings\karthik iyer\Desktop\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:43:13 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	3:43:13 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 24, 2011	3:43:13 PM
+ROW # 1: Unable to find the specified variablecode in the Variables table.
+Log @ Tuesday, May 24, 2011	3:43:55 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:43:55 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:44:00 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	3:44:00 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 24, 2011	3:44:00 PM
+One (or more) rows in DataValues already exist in the database.
+Log @ Tuesday, May 24, 2011	3:45:34 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:45:34 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:46:07 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:46:07 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:46:25 PM
+		Opening C:\Documents and Settings\karthik iyer\Desktop\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:46:25 PM
+		C:\Documents and Settings\karthik iyer\Desktop\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:46:32 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:46:32 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:46:36 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues.csv ...
+
+Log @ Tuesday, May 24, 2011	3:47:37 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:47:37 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:47:47 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:47:47 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:51:11 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv ...
+
+Log @ Tuesday, May 24, 2011	3:51:11 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_station1.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:51:17 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	3:51:17 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 24, 2011	3:51:17 PM
+ROW # 294 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '22.6, , 6/18/2007 9:24:00 AM, -5, 6/18/2007 2:24:00 PM, 11, 11, , , nc, , 0, 1, , , -9999' is already present.
+Log @ Tuesday, May 24, 2011	3:57:37 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	3:57:37 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:58:03 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	3:58:03 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 24, 2011	3:58:04 PM
+datavalue cannot be NULL.
+Log @ Tuesday, May 24, 2011	3:59:08 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	3:59:08 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	3:59:09 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	3:59:09 PM
+Finding New DataValues
+
+Log @ Tuesday, May 24, 2011	3:59:09 PM
+24 rows committed to DataValues
+
+Log @ Tuesday, May 24, 2011	3:59:09 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 24, 2011	3:59:25 PM
+1 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 24, 2011	3:59:25 PM
+The update was completed.
+25 rows committed to the database.
+
+Log @ Tuesday, May 24, 2011	4:06:27 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	4:06:27 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	4:06:28 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	4:06:28 PM
+Finding New DataValues
+
+Log @ Tuesday, May 24, 2011	4:06:28 PM
+24 rows committed to DataValues
+
+Log @ Tuesday, May 24, 2011	4:06:28 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 24, 2011	4:06:43 PM
+1 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 24, 2011	4:06:43 PM
+The update was completed.
+25 rows committed to the database.
+
+Log @ Tuesday, May 24, 2011	4:16:02 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	4:16:02 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	4:16:04 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	4:16:04 PM
+Finding New DataValues
+
+Log @ Tuesday, May 24, 2011	4:16:04 PM
+24 rows committed to DataValues
+
+Log @ Tuesday, May 24, 2011	4:16:04 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 24, 2011	4:16:19 PM
+1 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 24, 2011	4:16:19 PM
+The update was completed.
+25 rows committed to the database.
+
+Log @ Tuesday, May 24, 2011	4:27:24 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	4:27:24 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	4:30:10 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	4:45:26 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	4:45:26 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	4:45:31 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	4:45:32 PM
+Finding New DataValues
+
+Log @ Tuesday, May 24, 2011	4:45:32 PM
+24 rows committed to DataValues
+
+Log @ Tuesday, May 24, 2011	4:45:32 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 24, 2011	4:45:48 PM
+1 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 24, 2011	4:45:48 PM
+The update was completed.
+1 rows committed to the database.
+
+Log @ Tuesday, May 24, 2011	4:48:38 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	4:48:38 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	4:52:18 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	4:52:18 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	4:52:40 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	4:53:49 PM
+Finding New DataValues
+
+Log @ Tuesday, May 24, 2011	4:55:47 PM
+24 rows committed to DataValues
+
+Log @ Tuesday, May 24, 2011	4:55:50 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 24, 2011	4:59:43 PM
+1 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 24, 2011	4:59:56 PM
+The update was completed.
+25 rows committed to the database.
+
+Log @ Tuesday, May 24, 2011	5:22:02 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Tuesday, May 24, 2011	5:22:02 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Tuesday, May 24, 2011	5:22:12 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 24, 2011	5:22:15 PM
+Finding New DataValues
+
+Log @ Tuesday, May 24, 2011	5:22:15 PM
+24 rows committed to DataValues
+
+Log @ Tuesday, May 24, 2011	5:22:15 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 24, 2011	5:22:37 PM
+1 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 24, 2011	5:22:37 PM
+The update was completed.
+25 rows committed to the database.
+
+Log @ Wednesday, May 25, 2011	2:18:29 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Wednesday, May 25, 2011	2:18:29 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Wednesday, May 25, 2011	2:21:47 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Wednesday, May 25, 2011	2:21:47 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+ERROR @ Wednesday, May 25, 2011	2:25:49 PM
+Please enter a User Name.
+No Username
+Log @ Wednesday, May 25, 2011	2:26:11 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Wednesday, May 25, 2011	2:26:11 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Wednesday, May 25, 2011	2:27:17 PM
+Finding New OffsetTypes
+
+Log @ Wednesday, May 25, 2011	2:27:20 PM
+Finding New DataValues
+
+Log @ Wednesday, May 25, 2011	2:27:42 PM
+24 rows committed to DataValues
+
+Log @ Wednesday, May 25, 2011	2:27:42 PM
+Updating Series Catalog
+
+Log @ Wednesday, May 25, 2011	2:28:22 PM
+1 rows committed to SeriesCatalog
+
+ERROR @ Wednesday, May 25, 2011	2:28:22 PM
+An Error Occurred. Rolling back database transaction.
+Log @ Wednesday, May 25, 2011	2:29:08 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Wednesday, May 25, 2011	2:29:08 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Wednesday, May 25, 2011	2:29:11 PM
+Finding New OffsetTypes
+
+Log @ Wednesday, May 25, 2011	2:29:12 PM
+Finding New DataValues
+
+Log @ Wednesday, May 25, 2011	2:29:12 PM
+24 rows committed to DataValues
+
+Log @ Wednesday, May 25, 2011	2:29:12 PM
+Updating Series Catalog
+
+Log @ Wednesday, May 25, 2011	2:34:52 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Wednesday, May 25, 2011	2:34:52 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Wednesday, May 25, 2011	2:34:57 PM
+Finding New OffsetTypes
+
+Log @ Wednesday, May 25, 2011	2:34:59 PM
+Finding New DataValues
+
+Log @ Wednesday, May 25, 2011	2:35:06 PM
+24 rows committed to DataValues
+
+Log @ Wednesday, May 25, 2011	2:35:06 PM
+Updating Series Catalog
+
+Log @ Wednesday, May 25, 2011	2:52:51 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Wednesday, May 25, 2011	2:52:51 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Wednesday, May 25, 2011	2:52:54 PM
+Finding New OffsetTypes
+
+Log @ Wednesday, May 25, 2011	2:52:55 PM
+Finding New DataValues
+
+Log @ Wednesday, May 25, 2011	2:52:55 PM
+24 rows committed to DataValues
+
+Log @ Wednesday, May 25, 2011	2:52:55 PM
+Updating Series Catalog
+
+Log @ Wednesday, May 25, 2011	2:53:32 PM
+1 rows committed to SeriesCatalog
+
+ERROR @ Wednesday, May 25, 2011	2:53:32 PM
+An Error Occurred. Rolling back database transaction.
+Log @ Wednesday, May 25, 2011	2:54:17 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv ...
+
+Log @ Wednesday, May 25, 2011	2:54:17 PM
+		C:\Documents and Settings\karthik iyer\My Documents\datavalues_Test.csv Opened.
+
+Log @ Wednesday, May 25, 2011	2:54:20 PM
+Finding New OffsetTypes
+
+Log @ Wednesday, May 25, 2011	2:54:21 PM
+Finding New DataValues
+
+Log @ Wednesday, May 25, 2011	2:54:23 PM
+24 rows committed to DataValues
+
+Log @ Wednesday, May 25, 2011	2:54:23 PM
+Updating Series Catalog
+
+Log @ Friday, May 27, 2011	5:40:30 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Friday, May 27, 2011	5:40:31 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Friday, May 27, 2011	5:40:49 PM
+Finding New Methods
+
+Log @ Friday, May 27, 2011	5:40:52 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 27, 2011	5:40:56 PM
+Finding New DataValues
+
+ERROR @ Friday, May 27, 2011	5:41:12 PM
+ROW # 7: Unable to find the specified sitecode in the Sites table.
+Log @ Friday, May 27, 2011	5:43:31 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+ERROR @ Friday, May 27, 2011	5:43:31 PM
+Error Loading C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv .
+Error Message: The process cannot access the file 'C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv' because it is being used by another process.
+Log @ Friday, May 27, 2011	5:48:04 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Friday, May 27, 2011	5:48:04 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Friday, May 27, 2011	5:48:16 PM
+Finding New Methods
+
+Log @ Friday, May 27, 2011	5:48:16 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 27, 2011	5:48:24 PM
+Finding New DataValues
+
+ERROR @ Friday, May 27, 2011	5:48:24 PM
+ROW # 7: Unable to find the specified variablecode in the Variables table.
+Log @ Friday, May 27, 2011	5:50:47 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Friday, May 27, 2011	5:50:47 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Friday, May 27, 2011	5:50:57 PM
+Finding New Methods
+
+Log @ Friday, May 27, 2011	5:52:43 PM
+Finding New OffsetTypes
+
+Log @ Friday, May 27, 2011	5:53:03 PM
+Finding New DataValues
+
+ERROR @ Friday, May 27, 2011	5:53:04 PM
+ROW # 7: Unable to find the specified variablecode in the Variables table.
+Log @ Friday, May 27, 2011	5:53:10 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Friday, May 27, 2011	5:53:11 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Friday, May 27, 2011	5:53:15 PM
+Finding New Methods
+
+Log @ Friday, May 27, 2011	5:55:53 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	11:48:01 AM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	11:48:01 AM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	11:51:08 AM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	11:51:08 AM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	11:51:11 AM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	11:51:17 AM
+ROW # 7: Unable to find the specified sitecode in the Sites table.
+Log @ Tuesday, May 31, 2011	11:53:32 AM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	11:53:32 AM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	11:53:39 AM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	11:53:39 AM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	11:53:40 AM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	11:53:41 AM
+ROW # 7: Unable to find the specified variablecode in the Variables table.
+Log @ Tuesday, May 31, 2011	11:56:14 AM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	11:56:14 AM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:09:53 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:09:54 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:10:02 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:10:02 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:10:18 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:10:18 PM
+ROW # 78 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '-9999, , 5/29/2008 1:40:00 PM, -6, 5/29/2008 7:40:00 PM, 7, 43, , , nc, , 105, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:14:21 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:14:21 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:14:25 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:14:25 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:14:26 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:14:26 PM
+ROW # 77 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '-9999, , 5/29/2008 1:40:00 PM, -6, 5/29/2008 7:40:00 PM, 7, 43, , , nc, , 118, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:16:19 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:16:19 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:16:28 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:16:28 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:16:29 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:16:29 PM
+ROW # 266: Unable to find the specified siteid in the Sites table.
+Log @ Tuesday, May 31, 2011	12:25:33 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:25:33 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:25:38 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:25:38 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:25:39 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:25:39 PM
+ROW # 506 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '-9999, , 5/29/2008 2:00:00 PM, -6, 5/29/2008 8:00:00 PM, 12, 43, , , nc, , 144, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:27:17 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:27:18 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:27:22 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:27:22 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:27:24 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:27:24 PM
+ROW # 686 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '-9999, , 5/29/2008 11:30:00 AM, -6, 5/29/2008 5:30:00 PM, 7, 43, , , nc, , 157, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:28:37 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:28:37 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:28:41 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:28:41 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:28:41 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:28:41 PM
+ROW # 863 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '-9999, , 5/29/2008 1:15:00 PM, -6, 5/29/2008 7:15:00 PM, 9, 43, , , nc, , 170, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:29:39 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:29:39 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:29:43 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:29:43 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:29:43 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:29:44 PM
+ROW # 1067 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '-9999, , 5/29/2008 12:15:00 PM, -6, 5/29/2008 6:15:00 PM, 8, 43, , , nc, , 183, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:30:38 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:30:38 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:30:42 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:30:42 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:30:42 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:30:42 PM
+ROW # 1118 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '-9999, , 5/29/2008 2:25:00 PM, -6, 5/29/2008 8:25:00 PM, 8, 43, , , nc, , 196, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:32:01 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:32:01 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:32:05 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:32:05 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:32:06 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:32:06 PM
+ROW # 1392 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '-9999, , 5/29/2008 12:30:00 PM, -6, 5/29/2008 6:30:00 PM, 10, 13, , , nc, , 209, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:33:35 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:33:35 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:33:39 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:33:39 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:33:40 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:33:40 PM
+ROW # 1512 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '14.7, , 9/23/2010 12:00:00 PM, -6, 9/23/2010 6:00:00 PM, 10, 13, , , nc, , 222, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:35:37 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:35:37 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:35:45 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:35:45 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:35:45 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:35:46 PM
+ROW # 27 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '0, , 10/2/2008 4:20:00 PM, -6, 10/2/2008 10:20:00 PM, 1, 43, , , nd, , 236, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:36:00 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:36:00 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:36:06 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:38:21 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:38:46 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:38:46 PM
+ROW # 27 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '0, , 10/2/2008 4:20:00 PM, -6, 10/2/2008 10:20:00 PM, 1, 43, , , nd, , 249, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:46:39 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv ...
+
+Log @ Tuesday, May 31, 2011	12:46:39 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:46:43 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:46:43 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:46:53 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:46:54 PM
+ROW # 49 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '0, , 10/2/2008 4:10:00 PM, -6, 10/2/2008 10:10:00 PM, 3, 43, , , nd, , 262, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:48:43 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv ...
+
+Log @ Tuesday, May 31, 2011	12:48:43 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:49:50 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv ...
+
+Log @ Tuesday, May 31, 2011	12:49:50 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:49:57 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:49:57 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:50:00 PM
+Finding New DataValues
+
+ERROR @ Tuesday, May 31, 2011	12:50:00 PM
+ROW # 49 is a duplicate of a previous row.
+Column 'DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID' is constrained to be unique.  Value '0, , 10/2/2008 4:10:00 PM, -6, 10/2/2008 10:10:00 PM, 3, 43, , , nd, , 275, 1, , , -9999' is already present.
+Log @ Tuesday, May 31, 2011	12:51:04 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv ...
+
+Log @ Tuesday, May 31, 2011	12:51:04 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:51:11 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:51:11 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:51:13 PM
+Finding New DataValues
+
+Log @ Tuesday, May 31, 2011	12:51:56 PM
+47 rows committed to DataValues
+
+Log @ Tuesday, May 31, 2011	12:51:56 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 31, 2011	12:53:46 PM
+36 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 31, 2011	12:55:35 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv ...
+
+Log @ Tuesday, May 31, 2011	12:55:35 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv Opened.
+
+Log @ Tuesday, May 31, 2011	12:55:38 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	12:55:38 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	12:55:39 PM
+Finding New DataValues
+
+Log @ Tuesday, May 31, 2011	12:55:40 PM
+47 rows committed to DataValues
+
+Log @ Tuesday, May 31, 2011	12:55:40 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 31, 2011	12:56:17 PM
+36 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 31, 2011	1:13:10 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv ...
+
+Log @ Tuesday, May 31, 2011	1:13:10 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv Opened.
+
+Log @ Tuesday, May 31, 2011	1:13:16 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	1:13:16 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	1:13:17 PM
+Finding New DataValues
+
+Log @ Tuesday, May 31, 2011	1:13:17 PM
+47 rows committed to DataValues
+
+Log @ Tuesday, May 31, 2011	1:13:17 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 31, 2011	1:13:43 PM
+36 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 31, 2011	2:23:33 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv ...
+
+Log @ Tuesday, May 31, 2011	2:23:33 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv Opened.
+
+Log @ Tuesday, May 31, 2011	2:23:36 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	2:23:36 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	2:23:36 PM
+Finding New DataValues
+
+Log @ Tuesday, May 31, 2011	2:23:37 PM
+47 rows committed to DataValues
+
+Log @ Tuesday, May 31, 2011	2:23:37 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 31, 2011	2:23:59 PM
+36 rows committed to SeriesCatalog
+
+Log @ Tuesday, May 31, 2011	2:38:37 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv ...
+
+Log @ Tuesday, May 31, 2011	2:38:37 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv Opened.
+
+Log @ Tuesday, May 31, 2011	2:38:45 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	2:38:45 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	2:38:45 PM
+Finding New DataValues
+
+Log @ Tuesday, May 31, 2011	2:38:46 PM
+47 rows committed to DataValues
+
+Log @ Tuesday, May 31, 2011	2:38:46 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 31, 2011	2:39:34 PM
+36 rows committed to SeriesCatalog
+
+ERROR @ Tuesday, May 31, 2011	2:47:44 PM
+Database Name Incorrect.
+Error Message: Cannot open database "LitttleBear11" requested by the login. The login failed.
+Login failed for user 'ODM'.
+Log @ Tuesday, May 31, 2011	2:48:00 PM
+		Opening C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv ...
+
+Log @ Tuesday, May 31, 2011	2:48:00 PM
+		C:\Documents and Settings\karthik iyer\My Documents\Downloads\datavalues_modified.csv Opened.
+
+Log @ Tuesday, May 31, 2011	2:48:04 PM
+Finding New Methods
+
+Log @ Tuesday, May 31, 2011	2:48:04 PM
+Finding New OffsetTypes
+
+Log @ Tuesday, May 31, 2011	2:48:04 PM
+Finding New DataValues
+
+Log @ Tuesday, May 31, 2011	2:48:05 PM
+47 rows committed to DataValues
+
+Log @ Tuesday, May 31, 2011	2:48:05 PM
+Updating Series Catalog
+
+Log @ Tuesday, May 31, 2011	2:48:28 PM
+36 rows committed to SeriesCatalog
+

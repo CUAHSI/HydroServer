@@ -109,6 +109,7 @@
     <Compile Include="Classes\clsQualityControlLevels.vb" />
     <Compile Include="Classes\clsSamples.vb" />
     <Compile Include="Classes\clsSources.vb" />
+    <Compile Include="Classes\clsTableCount.vb" />
     <Compile Include="Classes\clsVariables.vb" />
     <Compile Include="Classes\clsSites.vb" />
     <Compile Include="Forms\frmAbout.Designer.vb">

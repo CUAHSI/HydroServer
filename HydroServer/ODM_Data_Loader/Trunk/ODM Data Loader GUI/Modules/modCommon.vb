@@ -105,11 +105,52 @@ Module modCommon
         End Try
     End Sub
 
-    Public Sub ShowUpdate(ByVal rows As Integer, Optional ByVal tableName As String = "the database")
-        LogUpdate("The update was completed." & vbCrLf & rows & " rows committed to " & tableName & ".")
+    Public Sub ShowUpdate(ByVal _clsTableCount As clsTableCount, Optional ByVal tableName As String = "the database")
+        'LogUpdate("The update was completed." & vbCrLf & rows & " rows committed to " & tableName & ".")
+        Dim resultstr As New System.Text.StringBuilder
+
+        resultstr.Append(Now.ToLongDateString & " " & Now.ToLongTimeString & vbCrLf & "The update was completed." & vbCrLf)
+        If _clsTableCount.DataValuesTableCount > 0 Then
+            resultstr.AppendLine(_clsTableCount.DataValuesTableCount & " rows committed to " & "DataValuesTable")
+        End If
+
+        If _clsTableCount.MethodTablecount > 0 Then
+            resultstr.AppendLine(_clsTableCount.MethodTablecount & " rows committed to " & "MethodTable")
+        End If
+        If _clsTableCount.OffsetTypesTablecount > 0 Then
+            resultstr.AppendLine(_clsTableCount.OffsetTypesTablecount & " rows committed to " & "OffsetTypesTable")
+        End If
+        If _clsTableCount.qualifiersTablecount > 0 Then
+            resultstr.AppendLine(_clsTableCount.qualifiersTablecount & " rows committed to " & "qualifiersTable")
+        End If
+        If _clsTableCount.QualityControlLevelStableCount > 0 Then
+            resultstr.AppendLine(_clsTableCount.QualityControlLevelStableCount & " rows committed to " & "QualityControlLevelStable")
+        End If
+        If _clsTableCount.SamplesTablecount > 0 Then
+            resultstr.AppendLine(_clsTableCount.SamplesTablecount & " rows committed to " & "SamplesTable")
+
+        End If
+        If _clsTableCount.SeriesCatalogTableCount > 0 Then
+            resultstr.AppendLine(_clsTableCount.SeriesCatalogTableCount & " rows committed to " & "SeriesCatalogTable")
+        End If
+
+        If _clsTableCount.SitesTablecount > 0 Then
+            resultstr.AppendLine(_clsTableCount.SitesTablecount & " rows committed to " & "SitesTable")
+        End If
+
+        If _clsTableCount.SourcesTableCount > 0 Then
+            resultstr.AppendLine(_clsTableCount.SourcesTableCount & " rows committed to " & "SourcesTable")
+        End If
+        If _clsTableCount.VariablesTableCount > 0 Then
+            resultstr.AppendLine(_clsTableCount.VariablesTableCount & " rows committed to " & "VariablesTable")
+        End If
+
+        'resultstr.Append(".")
+
         If Not (CommandLine) Then
+            MsgBox(resultstr.ToString, MsgBoxStyle.Information, "Update was successful!")
             'MsgBox(Now.ToLongDateString & " " & Now.ToLongTimeString & vbCrLf & "The update was completed." & vbCrLf & rows & " rows committed to " & tableName & ".", MsgBoxStyle.Information, "Update was successful!")
-            frmMain.lblStatus.Text = Now.ToLongDateString & " " & Now.ToLongTimeString & ", The update was completed. " & (rows / 2) & " rows committed to " & tableName & "."
+            'frmMain.lblStatus.Text = Now.ToLongDateString & " " & Now.ToLongTimeString & ", The update was completed. " & (rows) & " rows committed to " & tableName & "."
         End If
     End Sub
 

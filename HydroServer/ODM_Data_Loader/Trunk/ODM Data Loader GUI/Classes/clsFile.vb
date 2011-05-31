@@ -174,6 +174,9 @@ Class clsFile
         End If
         Return Me
     End Function
+    Public Overridable Function GetRowcount_CommitTable() As clsTableCount
+        Return Nothing
+    End Function
 
     Public Overridable Function CommitTable() As Integer
         Return 0
