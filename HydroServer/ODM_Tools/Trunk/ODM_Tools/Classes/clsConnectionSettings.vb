@@ -61,13 +61,17 @@ Public Class clsConnectionSettings
         'Generates a connection string for use in accessing a database
         If m_Trusted Then
             If Not (m_ServerAddress = "" And m_DBName = "" And m_Timeout <= 0) Then
-                m_ConnStr = "Provider=SQLOLEDB;Server=" & m_ServerAddress & ";Trusted_Connection=" & "Yes" & ";Connect Timeout=" & m_Timeout & ";Database=" & m_DBName & ";"
+                'm_ConnStr = "Provider=SQLOLEDB;Server=" & m_ServerAddress & ";Trusted_Connection=" & "Yes" & ";Connect Timeout=" & m_Timeout & ";Database=" & m_DBName & ";"
+                m_ConnStr = "Server=" & m_ServerAddress & ";Trusted_Connection=" & "Yes" & ";Connect Timeout=" & m_Timeout & ";Database=" & m_DBName & ";"
+
             Else
                 m_ConnStr = Nothing
             End If
         Else
             If Not (m_ServerAddress = "" And m_DBName = "" And m_Timeout <= 0 And m_UserID = "" And m_Password = "") Then
-                m_ConnStr = "Provider=SQLOLEDB;Server=" & m_ServerAddress & ";Trusted_Connection=" & "No" & ";UID=" & m_UserID & ";PWD=" & m_Password & ";Connect Timeout=" & m_Timeout & ";Database=" & m_DBName & ";"
+                'm_ConnStr = "Provider=SQLOLEDB;Server=" & m_ServerAddress & ";Trusted_Connection=" & "No" & ";UID=" & m_UserID & ";PWD=" & m_Password & ";Connect Timeout=" & m_Timeout & ";Database=" & m_DBName & ";"
+                m_ConnStr = "Server=" & m_ServerAddress & ";Trusted_Connection=" & "No" & ";UID=" & m_UserID & ";PWD=" & m_Password & ";Connect Timeout=" & m_Timeout & ";Database=" & m_DBName & ";"
+
             Else
                 m_ConnStr = Nothing
             End If

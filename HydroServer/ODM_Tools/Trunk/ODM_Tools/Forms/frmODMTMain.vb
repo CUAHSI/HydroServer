@@ -1,3 +1,8 @@
+Imports ZedGraph
+Imports System.Text
+Imports System.Collections.Generic
+Imports ODM_Tools.QualifierHandling
+
 'ODM Tools
 'Copyright (c) 2007, Utah State University
 'All rights reserved.
@@ -175,7 +180,7 @@ Public Class frmODMTools
 	Friend WithEvents btn_qryMetaExport As System.Windows.Forms.Button
 	Friend WithEvents mnuQDRCSelectNone As System.Windows.Forms.MenuItem
 	Friend WithEvents ckboxUseCensoredData As System.Windows.Forms.CheckBox
-	Friend WithEvents zg5TimeSeries As ZedGraph.ZedGraphControl
+    Friend WithEvents zg5TimeSeries As ZedGraph.ZedGraphControl
 	Friend WithEvents zg5Probability As ZedGraph.ZedGraphControl
 	Friend WithEvents zg5Histogram As ZedGraph.ZedGraphControl
 	Friend WithEvents zg5BoxPlot As ZedGraph.ZedGraphControl
@@ -206,7 +211,6 @@ Public Class frmODMTools
 	Friend WithEvents cboxEditSite As System.Windows.Forms.ComboBox
 	Friend WithEvents btnBPViewDesc As System.Windows.Forms.Button
 	Friend WithEvents splitpnlEdit_PlotData As System.Windows.Forms.SplitContainer
-	Friend WithEvents zg5EditPlot As ZedGraph.ZedGraphControl
 	Friend WithEvents btnEditRestoreDefaults As System.Windows.Forms.Button
 	Friend WithEvents btnEditApplyChanges As System.Windows.Forms.Button
 	Friend WithEvents dgvEditTable As System.Windows.Forms.DataGridView
@@ -299,2836 +303,2843 @@ Public Class frmODMTools
 	Friend WithEvents lvcolVisSpeciation As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolVisCitation As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolEditSpeciation As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditCitation As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditCitation As System.Windows.Forms.ColumnHeader
+    Friend WithEvents zg5EditPlot As ZedGraph.ZedGraphControl
+    'Friend WithEvents zg5EditPlot As ODM_Tools.cTimeSeriesPlot
     Friend WithEvents lblEditDFDGTimePeriod As System.Windows.Forms.Label
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-		Me.components = New System.ComponentModel.Container
-		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmODMTools))
-		Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-		Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-		Me.mnuMain = New System.Windows.Forms.MainMenu(Me.components)
-		Me.mnuitmFile = New System.Windows.Forms.MenuItem
-		Me.mnuFileExit = New System.Windows.Forms.MenuItem
-		Me.mnuitmEdit = New System.Windows.Forms.MenuItem
-		Me.mnuEditDBConnect = New System.Windows.Forms.MenuItem
-		Me.mnuitmTools = New System.Windows.Forms.MenuItem
-		Me.mnuToolsIntCVUpdate = New System.Windows.Forms.MenuItem
-		Me.mnuToolsQuickCVUpdate = New System.Windows.Forms.MenuItem
-		Me.MenuItem4 = New System.Windows.Forms.MenuItem
-		Me.mnuToolsReloadQuery = New System.Windows.Forms.MenuItem
-		Me.mnuToolsOptions = New System.Windows.Forms.MenuItem
-		Me.mnuitmHelp = New System.Windows.Forms.MenuItem
-		Me.mnuitmHelpAbout = New System.Windows.Forms.MenuItem
-		Me.tabctlODMTools = New System.Windows.Forms.TabControl
-		Me.tabpgQuery = New System.Windows.Forms.TabPage
-		Me.btn_qryMetaExport = New System.Windows.Forms.Button
-		Me.btn_qryExecute = New System.Windows.Forms.Button
-		Me.btn_qryDataExport = New System.Windows.Forms.Button
-		Me.chb_qrySrc = New System.Windows.Forms.CheckBox
-		Me.chb_qryVar = New System.Windows.Forms.CheckBox
-		Me.grp_qryVars = New System.Windows.Forms.GroupBox
-		Me.lbx_qryVars = New System.Windows.Forms.ListBox
-		Me.txt_qryVarCode = New System.Windows.Forms.TextBox
-		Me.txt_qryVarName = New System.Windows.Forms.TextBox
-		Me.rdo_qryVarCode = New System.Windows.Forms.RadioButton
-		Me.rdo_qryVarName = New System.Windows.Forms.RadioButton
-		Me.rdo_qryVarList = New System.Windows.Forms.RadioButton
-		Me.grp_qryVarSelect = New System.Windows.Forms.GroupBox
-		Me.rdo_qryVarOR = New System.Windows.Forms.RadioButton
-		Me.rdo_qryVarAND = New System.Windows.Forms.RadioButton
-		Me.chb_qrySite = New System.Windows.Forms.CheckBox
-		Me.grp_qrySites = New System.Windows.Forms.GroupBox
-		Me.lbx_qrySites = New System.Windows.Forms.ListBox
-		Me.txt_qrySiteCode = New System.Windows.Forms.TextBox
-		Me.txt_qrySiteName = New System.Windows.Forms.TextBox
-		Me.rdo_qrySiteCode = New System.Windows.Forms.RadioButton
-		Me.rdo_qrySiteName = New System.Windows.Forms.RadioButton
-		Me.rdo_qrySiteList = New System.Windows.Forms.RadioButton
-		Me.grp_qrySiteSelect = New System.Windows.Forms.GroupBox
-		Me.rdo_qrySiteAND = New System.Windows.Forms.RadioButton
-		Me.rdo_qrySiteOR = New System.Windows.Forms.RadioButton
-		Me.grp_qrySources = New System.Windows.Forms.GroupBox
-		Me.txt_qrySrcDesc = New System.Windows.Forms.TextBox
-		Me.txt_qrySrcOrg = New System.Windows.Forms.TextBox
-		Me.rdo_qrySrcDesc = New System.Windows.Forms.RadioButton
-		Me.rdo_qrySrcOrg = New System.Windows.Forms.RadioButton
-		Me.grp_qrySrcSelect = New System.Windows.Forms.GroupBox
-		Me.rdo_qrySrcOR = New System.Windows.Forms.RadioButton
-		Me.rdo_qrySrcAND = New System.Windows.Forms.RadioButton
-		Me.grp_qryOther = New System.Windows.Forms.GroupBox
-		Me.dtp_qryTimeBegin = New System.Windows.Forms.DateTimePicker
-		Me.dtp_qryTimeEnd = New System.Windows.Forms.DateTimePicker
-		Me.txt_qryMethod = New System.Windows.Forms.TextBox
-		Me.lbx_qryQCLevel = New System.Windows.Forms.ListBox
-		Me.lbx_qryDataType = New System.Windows.Forms.ListBox
-		Me.lbx_qryValType = New System.Windows.Forms.ListBox
-		Me.lbx_qrySampleMed = New System.Windows.Forms.ListBox
-		Me.lbx_qryGenCat = New System.Windows.Forms.ListBox
-		Me.lbl_qryTimeBegin = New System.Windows.Forms.Label
-		Me.chb_qryNumObs = New System.Windows.Forms.CheckBox
-		Me.chb_qryDate = New System.Windows.Forms.CheckBox
-		Me.lbl_qryTimeEnd = New System.Windows.Forms.Label
-		Me.chb_qryMethod = New System.Windows.Forms.CheckBox
-		Me.chb_qryQCLevel = New System.Windows.Forms.CheckBox
-		Me.chb_qryDataType = New System.Windows.Forms.CheckBox
-		Me.chb_qryValType = New System.Windows.Forms.CheckBox
-		Me.chb_qrySampleMed = New System.Windows.Forms.CheckBox
-		Me.chb_qryGenCat = New System.Windows.Forms.CheckBox
-		Me.grp_qryNumObs = New System.Windows.Forms.Panel
-		Me.rdo_qryNumObsG = New System.Windows.Forms.RadioButton
-		Me.num_qryObs = New System.Windows.Forms.NumericUpDown
-		Me.rdo_qryNumObsL = New System.Windows.Forms.RadioButton
-		Me.lv_qryResults = New System.Windows.Forms.ListView
-		Me.col_qrySiteCodeName = New System.Windows.Forms.ColumnHeader
-		Me.col_qryVarCodeName = New System.Windows.Forms.ColumnHeader
-		Me.col_qrySpeciation = New System.Windows.Forms.ColumnHeader
-		Me.col_qryVarUnits = New System.Windows.Forms.ColumnHeader
-		Me.col_qryGenCat = New System.Windows.Forms.ColumnHeader
-		Me.col_qryValType = New System.Windows.Forms.ColumnHeader
-		Me.col_qrySampleMed = New System.Windows.Forms.ColumnHeader
-		Me.col_qryDataType = New System.Windows.Forms.ColumnHeader
-		Me.col_qryQCLevel = New System.Windows.Forms.ColumnHeader
-		Me.col_qryMethodDesc = New System.Windows.Forms.ColumnHeader
-		Me.col_qryNumObs = New System.Windows.Forms.ColumnHeader
-		Me.col_qryDateTime = New System.Windows.Forms.ColumnHeader
-		Me.col_qryOrg = New System.Windows.Forms.ColumnHeader
-		Me.col_qrySrcDesc = New System.Windows.Forms.ColumnHeader
-		Me.col_qryCitation = New System.Windows.Forms.ColumnHeader
-		Me.col_qryTimeSupport = New System.Windows.Forms.ColumnHeader
-		Me.col_qryTimeSupportUnits = New System.Windows.Forms.ColumnHeader
-		Me.tabpgVisualize = New System.Windows.Forms.TabPage
-		Me.btnPlot = New System.Windows.Forms.Button
-		Me.tabctlPlotOptions = New System.Windows.Forms.TabControl
-		Me.tabpgSummary = New System.Windows.Forms.TabPage
-		Me.gboxStatistics = New System.Windows.Forms.GroupBox
-		Me.lblPercentiles = New System.Windows.Forms.Label
-		Me.tbox90Perc = New System.Windows.Forms.TextBox
-		Me.tbox75Perc = New System.Windows.Forms.TextBox
-		Me.tbox50Perc = New System.Windows.Forms.TextBox
-		Me.lbl90Perc = New System.Windows.Forms.Label
-		Me.lbl75Perc = New System.Windows.Forms.Label
-		Me.tbox10Perc = New System.Windows.Forms.TextBox
-		Me.tbox25Perc = New System.Windows.Forms.TextBox
-		Me.lbl50Perc = New System.Windows.Forms.Label
-		Me.lbl25Perc = New System.Windows.Forms.Label
-		Me.lbl10Perc = New System.Windows.Forms.Label
-		Me.lblStdDev = New System.Windows.Forms.Label
-		Me.lblMax = New System.Windows.Forms.Label
-		Me.lblCoeffVar = New System.Windows.Forms.Label
-		Me.tboxGeoMean = New System.Windows.Forms.TextBox
-		Me.lblAMean = New System.Windows.Forms.Label
-		Me.tboxAMean = New System.Windows.Forms.TextBox
-		Me.lblGeoMean = New System.Windows.Forms.Label
-		Me.tboxCoeffVar = New System.Windows.Forms.TextBox
-		Me.tboxMin = New System.Windows.Forms.TextBox
-		Me.gboxDivider = New System.Windows.Forms.GroupBox
-		Me.tboxMax = New System.Windows.Forms.TextBox
-		Me.tboxStdDev = New System.Windows.Forms.TextBox
-		Me.lblMin = New System.Windows.Forms.Label
-		Me.lblNumCensoredObs = New System.Windows.Forms.Label
-		Me.lblNumObs = New System.Windows.Forms.Label
-		Me.tboxNumObs = New System.Windows.Forms.TextBox
-		Me.tboxNumCensoredObs = New System.Windows.Forms.TextBox
-		Me.ckboxUseCensoredData = New System.Windows.Forms.CheckBox
-		Me.tabpgOptions = New System.Windows.Forms.TabPage
-		Me.gboxHistPlotOptions = New System.Windows.Forms.GroupBox
-		Me.ckboxHistSetNumBins = New System.Windows.Forms.CheckBox
-		Me.gboxHPNumBarSettings = New System.Windows.Forms.GroupBox
-		Me.rbtnHPExactNumBins = New System.Windows.Forms.RadioButton
-		Me.rbtnHPDiscreteBreakVals = New System.Windows.Forms.RadioButton
-		Me.tboxHPNumBins = New System.Windows.Forms.TextBox
-		Me.lblHPNumBins = New System.Windows.Forms.Label
-		Me.btnAxisOptions = New System.Windows.Forms.Button
-		Me.gboxBoxPlotOptions = New System.Windows.Forms.GroupBox
-		Me.gboxBPPlotType = New System.Windows.Forms.GroupBox
-		Me.btnBPViewDesc = New System.Windows.Forms.Button
-		Me.rbtnBPOverall = New System.Windows.Forms.RadioButton
-		Me.rbtnBPMonthly = New System.Windows.Forms.RadioButton
-		Me.rbtnBPYearly = New System.Windows.Forms.RadioButton
-		Me.rbtnBPSeasonal = New System.Windows.Forms.RadioButton
-		Me.gboxTSPlotOptions = New System.Windows.Forms.GroupBox
-		Me.gboxTSPlotType = New System.Windows.Forms.GroupBox
-		Me.rbtnTSLine = New System.Windows.Forms.RadioButton
-		Me.rbtnTSBoth = New System.Windows.Forms.RadioButton
-		Me.rbtnTSPoint = New System.Windows.Forms.RadioButton
-		Me.gboxDateInfo = New System.Windows.Forms.GroupBox
-		Me.dtpVisEndDate = New System.Windows.Forms.DateTimePicker
-		Me.dtpVisStartDate = New System.Windows.Forms.DateTimePicker
-		Me.lblEndDate = New System.Windows.Forms.Label
-		Me.lblStartDate = New System.Windows.Forms.Label
-		Me.gboxVisDataSel = New System.Windows.Forms.GroupBox
-		Me.lvVisDataSeries = New System.Windows.Forms.ListView
-		Me.lvcolVisGenCategory = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisSpeciation = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisVarUnits = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisTimeSupport = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisTimeUnits = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisSampleMedium = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisValueType = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisDataType = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisQCLevel = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisMethod = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisOrganization = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisSourceDesc = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisCitation = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisLocalDateRange = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisUTCDateRange = New System.Windows.Forms.ColumnHeader
-		Me.lvcolVisValueCount = New System.Windows.Forms.ColumnHeader
-		Me.lblVisDataSeries = New System.Windows.Forms.Label
-		Me.cboxVisVariable = New System.Windows.Forms.ComboBox
-		Me.lblVisSite = New System.Windows.Forms.Label
-		Me.lblVisVariable = New System.Windows.Forms.Label
-		Me.cboxVisSite = New System.Windows.Forms.ComboBox
-		Me.tabctlPlots = New System.Windows.Forms.TabControl
-		Me.tabpgTimeSeries = New System.Windows.Forms.TabPage
-		Me.zg5TimeSeries = New ZedGraph.ZedGraphControl
-		Me.tabpgProbability = New System.Windows.Forms.TabPage
-		Me.zg5Probability = New ZedGraph.ZedGraphControl
-		Me.tabpgHistogram = New System.Windows.Forms.TabPage
-		Me.zg5Histogram = New ZedGraph.ZedGraphControl
-		Me.tabpgBoxPlot = New System.Windows.Forms.TabPage
-		Me.zg5BoxPlot = New ZedGraph.ZedGraphControl
-		Me.tabpgEdit = New System.Windows.Forms.TabPage
-		Me.btnEditDataDeriveNewDS = New System.Windows.Forms.Button
-		Me.gboxEditFilter = New System.Windows.Forms.GroupBox
-		Me.rbtnEditDFDate = New System.Windows.Forms.RadioButton
-		Me.gboxEditDFDate = New System.Windows.Forms.GroupBox
-		Me.dtpEditDFDBefore = New System.Windows.Forms.DateTimePicker
-		Me.ckboxEditDFDBefore = New System.Windows.Forms.CheckBox
-		Me.dtpEditDFDAfter = New System.Windows.Forms.DateTimePicker
-		Me.ckboxEditDFDAfter = New System.Windows.Forms.CheckBox
-		Me.rbtnEditDFValueThreshold = New System.Windows.Forms.RadioButton
-		Me.gboxEditDFValueThreshold = New System.Windows.Forms.GroupBox
-		Me.tboxEditDFVTGreater = New System.Windows.Forms.TextBox
-		Me.ckboxEditDFVTGreater = New System.Windows.Forms.CheckBox
-		Me.tboxEditDFVTLess = New System.Windows.Forms.TextBox
-		Me.ckboxEditDFVTLess = New System.Windows.Forms.CheckBox
-		Me.rbtnEditDFDataGap = New System.Windows.Forms.RadioButton
-		Me.gboxEditDFDataGaps = New System.Windows.Forms.GroupBox
-		Me.cboxEditDFDGTimePeriod = New System.Windows.Forms.ComboBox
-		Me.lblEditDFDGTimePeriod = New System.Windows.Forms.Label
-		Me.tboxEditDFDGValue = New System.Windows.Forms.TextBox
-		Me.lblEditDFDGValue = New System.Windows.Forms.Label
-		Me.btnEditDFApplyFilter = New System.Windows.Forms.Button
-		Me.btnEditDFClearSel = New System.Windows.Forms.Button
-		Me.tboxEditDFVTChange = New System.Windows.Forms.TextBox
-		Me.rbtnEditDFVTChange = New System.Windows.Forms.RadioButton
-		Me.btnEditDataFlag = New System.Windows.Forms.Button
-		Me.btnEditDataInterpolate = New System.Windows.Forms.Button
-		Me.btnEditDataAdd = New System.Windows.Forms.Button
-		Me.btnEditDataRemove = New System.Windows.Forms.Button
-		Me.btnEditDataAdjust = New System.Windows.Forms.Button
-		Me.btnEditRestoreDefaults = New System.Windows.Forms.Button
-		Me.btnEditApplyChanges = New System.Windows.Forms.Button
-		Me.splitpnlEdit_PlotData = New System.Windows.Forms.SplitContainer
-		Me.zg5EditPlot = New ZedGraph.ZedGraphControl
-		Me.dgvEditTable = New System.Windows.Forms.DataGridView
-		Me.gboxEditDataSel = New System.Windows.Forms.GroupBox
-		Me.lvEditDataSeries = New System.Windows.Forms.ListView
-		Me.lvcolEditGenCategory = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditSpeciation = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditVarUnits = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditTimeSupport = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditTimeUnits = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditSampleMedium = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditValueType = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditDataType = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditQCLevel = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditMethod = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditOrganization = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditSourceDesc = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditCitation = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditLocalDateRange = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditUTCDateRange = New System.Windows.Forms.ColumnHeader
-		Me.lvcolEditValueCount = New System.Windows.Forms.ColumnHeader
-		Me.lblEditDataSeries = New System.Windows.Forms.Label
-		Me.cboxEditVariable = New System.Windows.Forms.ComboBox
-		Me.lblEditSite = New System.Windows.Forms.Label
-		Me.lblEditVariable = New System.Windows.Forms.Label
-		Me.cboxEditSite = New System.Windows.Forms.ComboBox
-		Me.cmnuQueryDataRightClick = New System.Windows.Forms.ContextMenu
-		Me.mnuQDRCPlot = New System.Windows.Forms.MenuItem
-		Me.mnuQDRCEdit = New System.Windows.Forms.MenuItem
-		Me.mnuQDRCViewMeta = New System.Windows.Forms.MenuItem
-		Me.mnuQDRCLine1 = New System.Windows.Forms.MenuItem
-		Me.mnuQDRCSingleExport = New System.Windows.Forms.MenuItem
-		Me.mnuQDRCExportMeta = New System.Windows.Forms.MenuItem
-		Me.MenuItem1 = New System.Windows.Forms.MenuItem
-		Me.mnuQDRCSelectSingle = New System.Windows.Forms.MenuItem
-		Me.mnuQDRCSelectAll = New System.Windows.Forms.MenuItem
-		Me.mnuQDRCSelectNone = New System.Windows.Forms.MenuItem
-		Me.sfdExportMyDB = New System.Windows.Forms.SaveFileDialog
-		Me.sfdExportMetadata = New System.Windows.Forms.SaveFileDialog
-		Me.DataGridTextBoxColumn1 = New System.Windows.Forms.DataGridTextBoxColumn
-		Me.ttipEdit = New System.Windows.Forms.ToolTip(Me.components)
-		Me.tabctlODMTools.SuspendLayout()
-		Me.tabpgQuery.SuspendLayout()
-		Me.grp_qryVars.SuspendLayout()
-		Me.grp_qryVarSelect.SuspendLayout()
-		Me.grp_qrySites.SuspendLayout()
-		Me.grp_qrySiteSelect.SuspendLayout()
-		Me.grp_qrySources.SuspendLayout()
-		Me.grp_qrySrcSelect.SuspendLayout()
-		Me.grp_qryOther.SuspendLayout()
-		Me.grp_qryNumObs.SuspendLayout()
-		CType(Me.num_qryObs, System.ComponentModel.ISupportInitialize).BeginInit()
-		Me.tabpgVisualize.SuspendLayout()
-		Me.tabctlPlotOptions.SuspendLayout()
-		Me.tabpgSummary.SuspendLayout()
-		Me.gboxStatistics.SuspendLayout()
-		Me.tabpgOptions.SuspendLayout()
-		Me.gboxHistPlotOptions.SuspendLayout()
-		Me.gboxHPNumBarSettings.SuspendLayout()
-		Me.gboxBoxPlotOptions.SuspendLayout()
-		Me.gboxBPPlotType.SuspendLayout()
-		Me.gboxTSPlotOptions.SuspendLayout()
-		Me.gboxTSPlotType.SuspendLayout()
-		Me.gboxDateInfo.SuspendLayout()
-		Me.gboxVisDataSel.SuspendLayout()
-		Me.tabctlPlots.SuspendLayout()
-		Me.tabpgTimeSeries.SuspendLayout()
-		Me.tabpgProbability.SuspendLayout()
-		Me.tabpgHistogram.SuspendLayout()
-		Me.tabpgBoxPlot.SuspendLayout()
-		Me.tabpgEdit.SuspendLayout()
-		Me.gboxEditFilter.SuspendLayout()
-		Me.gboxEditDFDate.SuspendLayout()
-		Me.gboxEditDFValueThreshold.SuspendLayout()
-		Me.gboxEditDFDataGaps.SuspendLayout()
-		Me.splitpnlEdit_PlotData.Panel1.SuspendLayout()
-		Me.splitpnlEdit_PlotData.Panel2.SuspendLayout()
-		Me.splitpnlEdit_PlotData.SuspendLayout()
-		CType(Me.dgvEditTable, System.ComponentModel.ISupportInitialize).BeginInit()
-		Me.gboxEditDataSel.SuspendLayout()
-		Me.SuspendLayout()
-		'
-		'mnuMain
-		'
-		Me.mnuMain.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuitmFile, Me.mnuitmEdit, Me.mnuitmTools, Me.mnuitmHelp})
-		'
-		'mnuitmFile
-		'
-		Me.mnuitmFile.Index = 0
-		Me.mnuitmFile.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuFileExit})
-		Me.mnuitmFile.Shortcut = System.Windows.Forms.Shortcut.CtrlF
-		Me.mnuitmFile.Text = "File"
-		'
-		'mnuFileExit
-		'
-		Me.mnuFileExit.Index = 0
-		Me.mnuFileExit.Shortcut = System.Windows.Forms.Shortcut.CtrlQ
-		Me.mnuFileExit.Text = "Exit"
-		'
-		'mnuitmEdit
-		'
-		Me.mnuitmEdit.Index = 1
-		Me.mnuitmEdit.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuEditDBConnect})
-		Me.mnuitmEdit.Shortcut = System.Windows.Forms.Shortcut.CtrlE
-		Me.mnuitmEdit.Text = "Edit"
-		'
-		'mnuEditDBConnect
-		'
-		Me.mnuEditDBConnect.Index = 0
-		Me.mnuEditDBConnect.Shortcut = System.Windows.Forms.Shortcut.CtrlC
-		Me.mnuEditDBConnect.Text = "Database Connection..."
-		'
-		'mnuitmTools
-		'
-		Me.mnuitmTools.Index = 2
-		Me.mnuitmTools.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuToolsIntCVUpdate, Me.mnuToolsQuickCVUpdate, Me.MenuItem4, Me.mnuToolsReloadQuery, Me.mnuToolsOptions})
-		Me.mnuitmTools.Shortcut = System.Windows.Forms.Shortcut.CtrlT
-		Me.mnuitmTools.Text = "Tools"
-		'
-		'mnuToolsIntCVUpdate
-		'
-		Me.mnuToolsIntCVUpdate.Index = 0
-		Me.mnuToolsIntCVUpdate.Text = "Interactive CV Update"
-		'
-		'mnuToolsQuickCVUpdate
-		'
-		Me.mnuToolsQuickCVUpdate.Index = 1
-		Me.mnuToolsQuickCVUpdate.Text = "Quick CV Update"
-		'
-		'MenuItem4
-		'
-		Me.MenuItem4.Index = 2
-		Me.MenuItem4.Text = "-"
-		'
-		'mnuToolsReloadQuery
-		'
-		Me.mnuToolsReloadQuery.Index = 3
-		Me.mnuToolsReloadQuery.Text = "Reload Query Items"
-		'
-		'mnuToolsOptions
-		'
-		Me.mnuToolsOptions.Index = 4
-		Me.mnuToolsOptions.Text = "Options..."
-		'
-		'mnuitmHelp
-		'
-		Me.mnuitmHelp.Index = 3
-		Me.mnuitmHelp.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuitmHelpAbout})
-		Me.mnuitmHelp.Shortcut = System.Windows.Forms.Shortcut.CtrlH
-		Me.mnuitmHelp.Text = "Help"
-		'
-		'mnuitmHelpAbout
-		'
-		Me.mnuitmHelpAbout.Index = 0
-		Me.mnuitmHelpAbout.Shortcut = System.Windows.Forms.Shortcut.CtrlA
-		Me.mnuitmHelpAbout.Text = "About..."
-		'
-		'tabctlODMTools
-		'
-		Me.tabctlODMTools.Controls.Add(Me.tabpgQuery)
-		Me.tabctlODMTools.Controls.Add(Me.tabpgVisualize)
-		Me.tabctlODMTools.Controls.Add(Me.tabpgEdit)
-		Me.tabctlODMTools.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.tabctlODMTools.Location = New System.Drawing.Point(0, 0)
-		Me.tabctlODMTools.Name = "tabctlODMTools"
-		Me.tabctlODMTools.SelectedIndex = 0
-		Me.tabctlODMTools.Size = New System.Drawing.Size(792, 545)
-		Me.tabctlODMTools.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
-		Me.tabctlODMTools.TabIndex = 0
-		'
-		'tabpgQuery
-		'
-		Me.tabpgQuery.Controls.Add(Me.btn_qryMetaExport)
-		Me.tabpgQuery.Controls.Add(Me.btn_qryExecute)
-		Me.tabpgQuery.Controls.Add(Me.btn_qryDataExport)
-		Me.tabpgQuery.Controls.Add(Me.chb_qrySrc)
-		Me.tabpgQuery.Controls.Add(Me.chb_qryVar)
-		Me.tabpgQuery.Controls.Add(Me.grp_qryVars)
-		Me.tabpgQuery.Controls.Add(Me.chb_qrySite)
-		Me.tabpgQuery.Controls.Add(Me.grp_qrySites)
-		Me.tabpgQuery.Controls.Add(Me.grp_qrySources)
-		Me.tabpgQuery.Controls.Add(Me.grp_qryOther)
-		Me.tabpgQuery.Controls.Add(Me.lv_qryResults)
-		Me.tabpgQuery.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgQuery.Name = "tabpgQuery"
-		Me.tabpgQuery.Size = New System.Drawing.Size(784, 519)
-		Me.tabpgQuery.TabIndex = 0
-		Me.tabpgQuery.Text = "Query"
-		Me.tabpgQuery.UseVisualStyleBackColor = True
-		'
-		'btn_qryMetaExport
-		'
-		Me.btn_qryMetaExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btn_qryMetaExport.Enabled = False
-		Me.btn_qryMetaExport.Location = New System.Drawing.Point(332, 492)
-		Me.btn_qryMetaExport.Name = "btn_qryMetaExport"
-		Me.btn_qryMetaExport.Size = New System.Drawing.Size(144, 24)
-		Me.btn_qryMetaExport.TabIndex = 9
-		Me.btn_qryMetaExport.Text = "Export Checked &Metadata"
-		'
-		'btn_qryExecute
-		'
-		Me.btn_qryExecute.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btn_qryExecute.Enabled = False
-		Me.btn_qryExecute.Location = New System.Drawing.Point(632, 492)
-		Me.btn_qryExecute.Name = "btn_qryExecute"
-		Me.btn_qryExecute.Size = New System.Drawing.Size(144, 24)
-		Me.btn_qryExecute.TabIndex = 7
-		Me.btn_qryExecute.Text = "&Query"
-		'
-		'btn_qryDataExport
-		'
-		Me.btn_qryDataExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btn_qryDataExport.Enabled = False
-		Me.btn_qryDataExport.Location = New System.Drawing.Point(482, 492)
-		Me.btn_qryDataExport.Name = "btn_qryDataExport"
-		Me.btn_qryDataExport.Size = New System.Drawing.Size(144, 24)
-		Me.btn_qryDataExport.TabIndex = 10
-		Me.btn_qryDataExport.Text = "Export Checked &Data"
-		'
-		'chb_qrySrc
-		'
-		Me.chb_qrySrc.AutoSize = True
-		Me.chb_qrySrc.BackColor = System.Drawing.Color.Transparent
-		Me.chb_qrySrc.Location = New System.Drawing.Point(16, 226)
-		Me.chb_qrySrc.Name = "chb_qrySrc"
-		Me.chb_qrySrc.Size = New System.Drawing.Size(105, 17)
-		Me.chb_qrySrc.TabIndex = 4
-		Me.chb_qrySrc.Text = "Query by Source"
-		Me.chb_qrySrc.UseVisualStyleBackColor = False
-		'
-		'chb_qryVar
-		'
-		Me.chb_qryVar.AutoSize = True
-		Me.chb_qryVar.BackColor = System.Drawing.Color.Transparent
-		Me.chb_qryVar.Location = New System.Drawing.Point(16, 116)
-		Me.chb_qryVar.Name = "chb_qryVar"
-		Me.chb_qryVar.Size = New System.Drawing.Size(109, 17)
-		Me.chb_qryVar.TabIndex = 2
-		Me.chb_qryVar.Text = "Query by Variable"
-		Me.chb_qryVar.UseVisualStyleBackColor = False
-		'
-		'grp_qryVars
-		'
-		Me.grp_qryVars.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.grp_qryVars.Controls.Add(Me.lbx_qryVars)
-		Me.grp_qryVars.Controls.Add(Me.txt_qryVarCode)
-		Me.grp_qryVars.Controls.Add(Me.txt_qryVarName)
-		Me.grp_qryVars.Controls.Add(Me.rdo_qryVarCode)
-		Me.grp_qryVars.Controls.Add(Me.rdo_qryVarName)
-		Me.grp_qryVars.Controls.Add(Me.rdo_qryVarList)
-		Me.grp_qryVars.Controls.Add(Me.grp_qryVarSelect)
-		Me.grp_qryVars.Enabled = False
-		Me.grp_qryVars.Location = New System.Drawing.Point(8, 116)
-		Me.grp_qryVars.Name = "grp_qryVars"
-		Me.grp_qryVars.Size = New System.Drawing.Size(768, 109)
-		Me.grp_qryVars.TabIndex = 3
-		Me.grp_qryVars.TabStop = False
-		'
-		'lbx_qryVars
-		'
-		Me.lbx_qryVars.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.lbx_qryVars.Cursor = System.Windows.Forms.Cursors.Hand
-		Me.lbx_qryVars.Enabled = False
-		Me.lbx_qryVars.Location = New System.Drawing.Point(24, 32)
-		Me.lbx_qryVars.Name = "lbx_qryVars"
-		Me.lbx_qryVars.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-		Me.lbx_qryVars.Size = New System.Drawing.Size(376, 69)
-		Me.lbx_qryVars.TabIndex = 1
-		'
-		'txt_qryVarCode
-		'
-		Me.txt_qryVarCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txt_qryVarCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-		Me.txt_qryVarCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-		Me.txt_qryVarCode.Enabled = False
-		Me.txt_qryVarCode.Location = New System.Drawing.Point(424, 72)
-		Me.txt_qryVarCode.MaxLength = 1000
-		Me.txt_qryVarCode.Name = "txt_qryVarCode"
-		Me.txt_qryVarCode.Size = New System.Drawing.Size(256, 20)
-		Me.txt_qryVarCode.TabIndex = 5
-		'
-		'txt_qryVarName
-		'
-		Me.txt_qryVarName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txt_qryVarName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-		Me.txt_qryVarName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-		Me.txt_qryVarName.Enabled = False
-		Me.txt_qryVarName.Location = New System.Drawing.Point(424, 32)
-		Me.txt_qryVarName.MaxLength = 1000
-		Me.txt_qryVarName.Name = "txt_qryVarName"
-		Me.txt_qryVarName.Size = New System.Drawing.Size(256, 20)
-		Me.txt_qryVarName.TabIndex = 3
-		'
-		'rdo_qryVarCode
-		'
-		Me.rdo_qryVarCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.rdo_qryVarCode.AutoSize = True
-		Me.rdo_qryVarCode.Location = New System.Drawing.Point(406, 55)
-		Me.rdo_qryVarCode.Name = "rdo_qryVarCode"
-		Me.rdo_qryVarCode.Size = New System.Drawing.Size(136, 17)
-		Me.rdo_qryVarCode.TabIndex = 4
-		Me.rdo_qryVarCode.Text = "Query by Variable Code"
-		'
-		'rdo_qryVarName
-		'
-		Me.rdo_qryVarName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.rdo_qryVarName.AutoSize = True
-		Me.rdo_qryVarName.Location = New System.Drawing.Point(406, 15)
-		Me.rdo_qryVarName.Name = "rdo_qryVarName"
-		Me.rdo_qryVarName.Size = New System.Drawing.Size(139, 17)
-		Me.rdo_qryVarName.TabIndex = 2
-		Me.rdo_qryVarName.Text = "Query by Variable Name"
-		'
-		'rdo_qryVarList
-		'
-		Me.rdo_qryVarList.AutoSize = True
-		Me.rdo_qryVarList.Location = New System.Drawing.Point(8, 15)
-		Me.rdo_qryVarList.Name = "rdo_qryVarList"
-		Me.rdo_qryVarList.Size = New System.Drawing.Size(154, 17)
-		Me.rdo_qryVarList.TabIndex = 0
-		Me.rdo_qryVarList.Text = "Choose Variables from a list"
-		'
-		'grp_qryVarSelect
-		'
-		Me.grp_qryVarSelect.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.grp_qryVarSelect.Controls.Add(Me.rdo_qryVarOR)
-		Me.grp_qryVarSelect.Controls.Add(Me.rdo_qryVarAND)
-		Me.grp_qryVarSelect.Enabled = False
-		Me.grp_qryVarSelect.Location = New System.Drawing.Point(688, 8)
-		Me.grp_qryVarSelect.Name = "grp_qryVarSelect"
-		Me.grp_qryVarSelect.Size = New System.Drawing.Size(74, 95)
-		Me.grp_qryVarSelect.TabIndex = 6
-		Me.grp_qryVarSelect.TabStop = False
-		Me.grp_qryVarSelect.Text = "Multiple Entries (; )"
-		'
-		'rdo_qryVarOR
-		'
-		Me.rdo_qryVarOR.AutoSize = True
-		Me.rdo_qryVarOR.Location = New System.Drawing.Point(16, 52)
-		Me.rdo_qryVarOR.Name = "rdo_qryVarOR"
-		Me.rdo_qryVarOR.Size = New System.Drawing.Size(41, 17)
-		Me.rdo_qryVarOR.TabIndex = 1
-		Me.rdo_qryVarOR.Text = "OR"
-		'
-		'rdo_qryVarAND
-		'
-		Me.rdo_qryVarAND.AutoSize = True
-		Me.rdo_qryVarAND.Checked = True
-		Me.rdo_qryVarAND.Location = New System.Drawing.Point(16, 27)
-		Me.rdo_qryVarAND.Name = "rdo_qryVarAND"
-		Me.rdo_qryVarAND.Size = New System.Drawing.Size(48, 17)
-		Me.rdo_qryVarAND.TabIndex = 0
-		Me.rdo_qryVarAND.TabStop = True
-		Me.rdo_qryVarAND.Text = "AND"
-		'
-		'chb_qrySite
-		'
-		Me.chb_qrySite.AutoSize = True
-		Me.chb_qrySite.BackColor = System.Drawing.Color.Transparent
-		Me.chb_qrySite.Location = New System.Drawing.Point(16, 8)
-		Me.chb_qrySite.Name = "chb_qrySite"
-		Me.chb_qrySite.Size = New System.Drawing.Size(89, 17)
-		Me.chb_qrySite.TabIndex = 0
-		Me.chb_qrySite.Text = "Query by Site"
-		Me.chb_qrySite.UseVisualStyleBackColor = False
-		'
-		'grp_qrySites
-		'
-		Me.grp_qrySites.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.grp_qrySites.Controls.Add(Me.lbx_qrySites)
-		Me.grp_qrySites.Controls.Add(Me.txt_qrySiteCode)
-		Me.grp_qrySites.Controls.Add(Me.txt_qrySiteName)
-		Me.grp_qrySites.Controls.Add(Me.rdo_qrySiteCode)
-		Me.grp_qrySites.Controls.Add(Me.rdo_qrySiteName)
-		Me.grp_qrySites.Controls.Add(Me.rdo_qrySiteList)
-		Me.grp_qrySites.Controls.Add(Me.grp_qrySiteSelect)
-		Me.grp_qrySites.Enabled = False
-		Me.grp_qrySites.Location = New System.Drawing.Point(8, 8)
-		Me.grp_qrySites.Name = "grp_qrySites"
-		Me.grp_qrySites.Size = New System.Drawing.Size(768, 108)
-		Me.grp_qrySites.TabIndex = 1
-		Me.grp_qrySites.TabStop = False
-		'
-		'lbx_qrySites
-		'
-		Me.lbx_qrySites.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.lbx_qrySites.Cursor = System.Windows.Forms.Cursors.Hand
-		Me.lbx_qrySites.Enabled = False
-		Me.lbx_qrySites.Location = New System.Drawing.Point(24, 32)
-		Me.lbx_qrySites.Name = "lbx_qrySites"
-		Me.lbx_qrySites.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-		Me.lbx_qrySites.Size = New System.Drawing.Size(376, 69)
-		Me.lbx_qrySites.TabIndex = 1
-		'
-		'txt_qrySiteCode
-		'
-		Me.txt_qrySiteCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txt_qrySiteCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-		Me.txt_qrySiteCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-		Me.txt_qrySiteCode.Enabled = False
-		Me.txt_qrySiteCode.Location = New System.Drawing.Point(424, 72)
-		Me.txt_qrySiteCode.MaxLength = 1000
-		Me.txt_qrySiteCode.Name = "txt_qrySiteCode"
-		Me.txt_qrySiteCode.Size = New System.Drawing.Size(256, 20)
-		Me.txt_qrySiteCode.TabIndex = 5
-		'
-		'txt_qrySiteName
-		'
-		Me.txt_qrySiteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txt_qrySiteName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-		Me.txt_qrySiteName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-		Me.txt_qrySiteName.Enabled = False
-		Me.txt_qrySiteName.Location = New System.Drawing.Point(424, 32)
-		Me.txt_qrySiteName.MaxLength = 1000
-		Me.txt_qrySiteName.Name = "txt_qrySiteName"
-		Me.txt_qrySiteName.Size = New System.Drawing.Size(256, 20)
-		Me.txt_qrySiteName.TabIndex = 3
-		'
-		'rdo_qrySiteCode
-		'
-		Me.rdo_qrySiteCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.rdo_qrySiteCode.AutoSize = True
-		Me.rdo_qrySiteCode.Location = New System.Drawing.Point(406, 55)
-		Me.rdo_qrySiteCode.Name = "rdo_qrySiteCode"
-		Me.rdo_qrySiteCode.Size = New System.Drawing.Size(116, 17)
-		Me.rdo_qrySiteCode.TabIndex = 4
-		Me.rdo_qrySiteCode.Text = "Query by Site Code"
-		'
-		'rdo_qrySiteName
-		'
-		Me.rdo_qrySiteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.rdo_qrySiteName.AutoSize = True
-		Me.rdo_qrySiteName.Location = New System.Drawing.Point(406, 15)
-		Me.rdo_qrySiteName.Name = "rdo_qrySiteName"
-		Me.rdo_qrySiteName.Size = New System.Drawing.Size(119, 17)
-		Me.rdo_qrySiteName.TabIndex = 2
-		Me.rdo_qrySiteName.Text = "Query by Site Name"
-		'
-		'rdo_qrySiteList
-		'
-		Me.rdo_qrySiteList.AutoSize = True
-		Me.rdo_qrySiteList.Location = New System.Drawing.Point(8, 15)
-		Me.rdo_qrySiteList.Name = "rdo_qrySiteList"
-		Me.rdo_qrySiteList.Size = New System.Drawing.Size(134, 17)
-		Me.rdo_qrySiteList.TabIndex = 0
-		Me.rdo_qrySiteList.Text = "Choose Sites from a list"
-		'
-		'grp_qrySiteSelect
-		'
-		Me.grp_qrySiteSelect.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.grp_qrySiteSelect.Controls.Add(Me.rdo_qrySiteAND)
-		Me.grp_qrySiteSelect.Controls.Add(Me.rdo_qrySiteOR)
-		Me.grp_qrySiteSelect.Enabled = False
-		Me.grp_qrySiteSelect.Location = New System.Drawing.Point(688, 8)
-		Me.grp_qrySiteSelect.Name = "grp_qrySiteSelect"
-		Me.grp_qrySiteSelect.Size = New System.Drawing.Size(74, 94)
-		Me.grp_qrySiteSelect.TabIndex = 6
-		Me.grp_qrySiteSelect.TabStop = False
-		Me.grp_qrySiteSelect.Text = "Multiple Entries (; )"
-		'
-		'rdo_qrySiteAND
-		'
-		Me.rdo_qrySiteAND.AutoSize = True
-		Me.rdo_qrySiteAND.Checked = True
-		Me.rdo_qrySiteAND.Location = New System.Drawing.Point(16, 27)
-		Me.rdo_qrySiteAND.Name = "rdo_qrySiteAND"
-		Me.rdo_qrySiteAND.Size = New System.Drawing.Size(48, 17)
-		Me.rdo_qrySiteAND.TabIndex = 0
-		Me.rdo_qrySiteAND.TabStop = True
-		Me.rdo_qrySiteAND.Text = "AND"
-		'
-		'rdo_qrySiteOR
-		'
-		Me.rdo_qrySiteOR.AutoSize = True
-		Me.rdo_qrySiteOR.Location = New System.Drawing.Point(16, 52)
-		Me.rdo_qrySiteOR.Name = "rdo_qrySiteOR"
-		Me.rdo_qrySiteOR.Size = New System.Drawing.Size(41, 17)
-		Me.rdo_qrySiteOR.TabIndex = 1
-		Me.rdo_qrySiteOR.Text = "OR"
-		'
-		'grp_qrySources
-		'
-		Me.grp_qrySources.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.grp_qrySources.Controls.Add(Me.txt_qrySrcDesc)
-		Me.grp_qrySources.Controls.Add(Me.txt_qrySrcOrg)
-		Me.grp_qrySources.Controls.Add(Me.rdo_qrySrcDesc)
-		Me.grp_qrySources.Controls.Add(Me.rdo_qrySrcOrg)
-		Me.grp_qrySources.Controls.Add(Me.grp_qrySrcSelect)
-		Me.grp_qrySources.Enabled = False
-		Me.grp_qrySources.Location = New System.Drawing.Point(8, 226)
-		Me.grp_qrySources.Name = "grp_qrySources"
-		Me.grp_qrySources.Size = New System.Drawing.Size(192, 178)
-		Me.grp_qrySources.TabIndex = 5
-		Me.grp_qrySources.TabStop = False
-		'
-		'txt_qrySrcDesc
-		'
-		Me.txt_qrySrcDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txt_qrySrcDesc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-		Me.txt_qrySrcDesc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-		Me.txt_qrySrcDesc.Enabled = False
-		Me.txt_qrySrcDesc.Location = New System.Drawing.Point(23, 91)
-		Me.txt_qrySrcDesc.MaxLength = 1000
-		Me.txt_qrySrcDesc.Name = "txt_qrySrcDesc"
-		Me.txt_qrySrcDesc.ScrollBars = System.Windows.Forms.ScrollBars.Both
-		Me.txt_qrySrcDesc.Size = New System.Drawing.Size(160, 20)
-		Me.txt_qrySrcDesc.TabIndex = 3
-		'
-		'txt_qrySrcOrg
-		'
-		Me.txt_qrySrcOrg.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txt_qrySrcOrg.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-		Me.txt_qrySrcOrg.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-		Me.txt_qrySrcOrg.Enabled = False
-		Me.txt_qrySrcOrg.Location = New System.Drawing.Point(23, 32)
-		Me.txt_qrySrcOrg.MaxLength = 1000
-		Me.txt_qrySrcOrg.Name = "txt_qrySrcOrg"
-		Me.txt_qrySrcOrg.ScrollBars = System.Windows.Forms.ScrollBars.Both
-		Me.txt_qrySrcOrg.Size = New System.Drawing.Size(160, 20)
-		Me.txt_qrySrcOrg.TabIndex = 1
-		'
-		'rdo_qrySrcDesc
-		'
-		Me.rdo_qrySrcDesc.AutoSize = True
-		Me.rdo_qrySrcDesc.Location = New System.Drawing.Point(8, 68)
-		Me.rdo_qrySrcDesc.Name = "rdo_qrySrcDesc"
-		Me.rdo_qrySrcDesc.Size = New System.Drawing.Size(130, 17)
-		Me.rdo_qrySrcDesc.TabIndex = 2
-		Me.rdo_qrySrcDesc.Text = "Source Description (; )"
-		'
-		'rdo_qrySrcOrg
-		'
-		Me.rdo_qrySrcOrg.AutoSize = True
-		Me.rdo_qrySrcOrg.Location = New System.Drawing.Point(8, 15)
-		Me.rdo_qrySrcOrg.Name = "rdo_qrySrcOrg"
-		Me.rdo_qrySrcOrg.Size = New System.Drawing.Size(99, 17)
-		Me.rdo_qrySrcOrg.TabIndex = 0
-		Me.rdo_qrySrcOrg.Text = "Organization (; )"
-		'
-		'grp_qrySrcSelect
-		'
-		Me.grp_qrySrcSelect.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.grp_qrySrcSelect.Controls.Add(Me.rdo_qrySrcOR)
-		Me.grp_qrySrcSelect.Controls.Add(Me.rdo_qrySrcAND)
-		Me.grp_qrySrcSelect.Location = New System.Drawing.Point(8, 122)
-		Me.grp_qrySrcSelect.Name = "grp_qrySrcSelect"
-		Me.grp_qrySrcSelect.Size = New System.Drawing.Size(178, 50)
-		Me.grp_qrySrcSelect.TabIndex = 4
-		Me.grp_qrySrcSelect.TabStop = False
-		Me.grp_qrySrcSelect.Text = "Multiple Entries (; )"
-		'
-		'rdo_qrySrcOR
-		'
-		Me.rdo_qrySrcOR.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.rdo_qrySrcOR.AutoSize = True
-		Me.rdo_qrySrcOR.Location = New System.Drawing.Point(105, 18)
-		Me.rdo_qrySrcOR.Name = "rdo_qrySrcOR"
-		Me.rdo_qrySrcOR.Size = New System.Drawing.Size(41, 17)
-		Me.rdo_qrySrcOR.TabIndex = 1
-		Me.rdo_qrySrcOR.Text = "OR"
-		'
-		'rdo_qrySrcAND
-		'
-		Me.rdo_qrySrcAND.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.rdo_qrySrcAND.AutoSize = True
-		Me.rdo_qrySrcAND.Checked = True
-		Me.rdo_qrySrcAND.Location = New System.Drawing.Point(32, 18)
-		Me.rdo_qrySrcAND.Name = "rdo_qrySrcAND"
-		Me.rdo_qrySrcAND.Size = New System.Drawing.Size(48, 17)
-		Me.rdo_qrySrcAND.TabIndex = 0
-		Me.rdo_qrySrcAND.TabStop = True
-		Me.rdo_qrySrcAND.Text = "AND"
-		'
-		'grp_qryOther
-		'
-		Me.grp_qryOther.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.grp_qryOther.Controls.Add(Me.dtp_qryTimeBegin)
-		Me.grp_qryOther.Controls.Add(Me.dtp_qryTimeEnd)
-		Me.grp_qryOther.Controls.Add(Me.txt_qryMethod)
-		Me.grp_qryOther.Controls.Add(Me.lbx_qryQCLevel)
-		Me.grp_qryOther.Controls.Add(Me.lbx_qryDataType)
-		Me.grp_qryOther.Controls.Add(Me.lbx_qryValType)
-		Me.grp_qryOther.Controls.Add(Me.lbx_qrySampleMed)
-		Me.grp_qryOther.Controls.Add(Me.lbx_qryGenCat)
-		Me.grp_qryOther.Controls.Add(Me.lbl_qryTimeBegin)
-		Me.grp_qryOther.Controls.Add(Me.chb_qryNumObs)
-		Me.grp_qryOther.Controls.Add(Me.chb_qryDate)
-		Me.grp_qryOther.Controls.Add(Me.lbl_qryTimeEnd)
-		Me.grp_qryOther.Controls.Add(Me.chb_qryMethod)
-		Me.grp_qryOther.Controls.Add(Me.chb_qryQCLevel)
-		Me.grp_qryOther.Controls.Add(Me.chb_qryDataType)
-		Me.grp_qryOther.Controls.Add(Me.chb_qryValType)
-		Me.grp_qryOther.Controls.Add(Me.chb_qrySampleMed)
-		Me.grp_qryOther.Controls.Add(Me.chb_qryGenCat)
-		Me.grp_qryOther.Controls.Add(Me.grp_qryNumObs)
-		Me.grp_qryOther.Location = New System.Drawing.Point(206, 226)
-		Me.grp_qryOther.Name = "grp_qryOther"
-		Me.grp_qryOther.Size = New System.Drawing.Size(570, 178)
-		Me.grp_qryOther.TabIndex = 6
-		Me.grp_qryOther.TabStop = False
-		Me.grp_qryOther.Text = "Other Query Options"
-		'
-		'dtp_qryTimeBegin
-		'
-		Me.dtp_qryTimeBegin.Cursor = System.Windows.Forms.Cursors.IBeam
-		Me.dtp_qryTimeBegin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
-		Me.dtp_qryTimeBegin.Enabled = False
-		Me.dtp_qryTimeBegin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-		Me.dtp_qryTimeBegin.Location = New System.Drawing.Point(467, 83)
-		Me.dtp_qryTimeBegin.MaxDate = New Date(3006, 12, 31, 0, 0, 0, 0)
-		Me.dtp_qryTimeBegin.Name = "dtp_qryTimeBegin"
-		Me.dtp_qryTimeBegin.Size = New System.Drawing.Size(94, 20)
-		Me.dtp_qryTimeBegin.TabIndex = 16
-		Me.dtp_qryTimeBegin.Value = New Date(2007, 1, 5, 0, 0, 0, 0)
-		'
-		'dtp_qryTimeEnd
-		'
-		Me.dtp_qryTimeEnd.Cursor = System.Windows.Forms.Cursors.IBeam
-		Me.dtp_qryTimeEnd.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
-		Me.dtp_qryTimeEnd.Enabled = False
-		Me.dtp_qryTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-		Me.dtp_qryTimeEnd.Location = New System.Drawing.Point(467, 107)
-		Me.dtp_qryTimeEnd.MaxDate = New Date(3006, 12, 31, 0, 0, 0, 0)
-		Me.dtp_qryTimeEnd.Name = "dtp_qryTimeEnd"
-		Me.dtp_qryTimeEnd.Size = New System.Drawing.Size(94, 20)
-		Me.dtp_qryTimeEnd.TabIndex = 18
-		Me.dtp_qryTimeEnd.Value = New Date(2007, 1, 5, 0, 0, 0, 0)
-		'
-		'txt_qryMethod
-		'
-		Me.txt_qryMethod.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-		Me.txt_qryMethod.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-		Me.txt_qryMethod.Enabled = False
-		Me.txt_qryMethod.Location = New System.Drawing.Point(317, 149)
-		Me.txt_qryMethod.MaxLength = 1000
-		Me.txt_qryMethod.Name = "txt_qryMethod"
-		Me.txt_qryMethod.Size = New System.Drawing.Size(244, 20)
-		Me.txt_qryMethod.TabIndex = 11
-		'
-		'lbx_qryQCLevel
-		'
-		Me.lbx_qryQCLevel.Cursor = System.Windows.Forms.Cursors.Hand
-		Me.lbx_qryQCLevel.Enabled = False
-		Me.lbx_qryQCLevel.HorizontalScrollbar = True
-		Me.lbx_qryQCLevel.Location = New System.Drawing.Point(317, 32)
-		Me.lbx_qryQCLevel.Name = "lbx_qryQCLevel"
-		Me.lbx_qryQCLevel.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-		Me.lbx_qryQCLevel.Size = New System.Drawing.Size(112, 95)
-		Me.lbx_qryQCLevel.TabIndex = 9
-		'
-		'lbx_qryDataType
-		'
-		Me.lbx_qryDataType.Cursor = System.Windows.Forms.Cursors.Hand
-		Me.lbx_qryDataType.Enabled = False
-		Me.lbx_qryDataType.Location = New System.Drawing.Point(170, 113)
-		Me.lbx_qryDataType.Name = "lbx_qryDataType"
-		Me.lbx_qryDataType.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-		Me.lbx_qryDataType.Size = New System.Drawing.Size(124, 56)
-		Me.lbx_qryDataType.TabIndex = 7
-		'
-		'lbx_qryValType
-		'
-		Me.lbx_qryValType.Cursor = System.Windows.Forms.Cursors.Hand
-		Me.lbx_qryValType.Enabled = False
-		Me.lbx_qryValType.Location = New System.Drawing.Point(170, 32)
-		Me.lbx_qryValType.Name = "lbx_qryValType"
-		Me.lbx_qryValType.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-		Me.lbx_qryValType.Size = New System.Drawing.Size(124, 56)
-		Me.lbx_qryValType.TabIndex = 5
-		'
-		'lbx_qrySampleMed
-		'
-		Me.lbx_qrySampleMed.Cursor = System.Windows.Forms.Cursors.Hand
-		Me.lbx_qrySampleMed.Enabled = False
-		Me.lbx_qrySampleMed.Location = New System.Drawing.Point(24, 113)
-		Me.lbx_qrySampleMed.Name = "lbx_qrySampleMed"
-		Me.lbx_qrySampleMed.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-		Me.lbx_qrySampleMed.Size = New System.Drawing.Size(124, 56)
-		Me.lbx_qrySampleMed.TabIndex = 3
-		'
-		'lbx_qryGenCat
-		'
-		Me.lbx_qryGenCat.Cursor = System.Windows.Forms.Cursors.Hand
-		Me.lbx_qryGenCat.Enabled = False
-		Me.lbx_qryGenCat.Location = New System.Drawing.Point(24, 32)
-		Me.lbx_qryGenCat.Name = "lbx_qryGenCat"
-		Me.lbx_qryGenCat.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-		Me.lbx_qryGenCat.Size = New System.Drawing.Size(124, 56)
-		Me.lbx_qryGenCat.TabIndex = 1
-		'
-		'lbl_qryTimeBegin
-		'
-		Me.lbl_qryTimeBegin.Enabled = False
-		Me.lbl_qryTimeBegin.Location = New System.Drawing.Point(422, 83)
-		Me.lbl_qryTimeBegin.Name = "lbl_qryTimeBegin"
-		Me.lbl_qryTimeBegin.Size = New System.Drawing.Size(45, 20)
-		Me.lbl_qryTimeBegin.TabIndex = 15
-		Me.lbl_qryTimeBegin.Text = "begin:"
-		Me.lbl_qryTimeBegin.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'chb_qryNumObs
-		'
-		Me.chb_qryNumObs.AutoSize = True
-		Me.chb_qryNumObs.Location = New System.Drawing.Point(451, 15)
-		Me.chb_qryNumObs.Name = "chb_qryNumObs"
-		Me.chb_qryNumObs.Size = New System.Drawing.Size(110, 17)
-		Me.chb_qryNumObs.TabIndex = 12
-		Me.chb_qryNumObs.Text = "# of Observations"
-		'
-		'chb_qryDate
-		'
-		Me.chb_qryDate.AutoSize = True
-		Me.chb_qryDate.Location = New System.Drawing.Point(451, 67)
-		Me.chb_qryDate.Name = "chb_qryDate"
-		Me.chb_qryDate.Size = New System.Drawing.Size(82, 17)
-		Me.chb_qryDate.TabIndex = 14
-		Me.chb_qryDate.Text = "Time Period"
-		'
-		'lbl_qryTimeEnd
-		'
-		Me.lbl_qryTimeEnd.Enabled = False
-		Me.lbl_qryTimeEnd.Location = New System.Drawing.Point(425, 107)
-		Me.lbl_qryTimeEnd.Name = "lbl_qryTimeEnd"
-		Me.lbl_qryTimeEnd.Size = New System.Drawing.Size(42, 20)
-		Me.lbl_qryTimeEnd.TabIndex = 17
-		Me.lbl_qryTimeEnd.Text = "end:"
-		Me.lbl_qryTimeEnd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'chb_qryMethod
-		'
-		Me.chb_qryMethod.AutoSize = True
-		Me.chb_qryMethod.Location = New System.Drawing.Point(301, 133)
-		Me.chb_qryMethod.Name = "chb_qryMethod"
-		Me.chb_qryMethod.Size = New System.Drawing.Size(77, 17)
-		Me.chb_qryMethod.TabIndex = 10
-		Me.chb_qryMethod.Text = "Method (; )"
-		'
-		'chb_qryQCLevel
-		'
-		Me.chb_qryQCLevel.AutoSize = True
-		Me.chb_qryQCLevel.Location = New System.Drawing.Point(301, 16)
-		Me.chb_qryQCLevel.Name = "chb_qryQCLevel"
-		Me.chb_qryQCLevel.Size = New System.Drawing.Size(123, 17)
-		Me.chb_qryQCLevel.TabIndex = 8
-		Me.chb_qryQCLevel.Text = "Quality Control Level"
-		'
-		'chb_qryDataType
-		'
-		Me.chb_qryDataType.AutoSize = True
-		Me.chb_qryDataType.Location = New System.Drawing.Point(154, 97)
-		Me.chb_qryDataType.Name = "chb_qryDataType"
-		Me.chb_qryDataType.Size = New System.Drawing.Size(76, 17)
-		Me.chb_qryDataType.TabIndex = 6
-		Me.chb_qryDataType.Text = "Data Type"
-		'
-		'chb_qryValType
-		'
-		Me.chb_qryValType.AutoSize = True
-		Me.chb_qryValType.Location = New System.Drawing.Point(154, 16)
-		Me.chb_qryValType.Name = "chb_qryValType"
-		Me.chb_qryValType.Size = New System.Drawing.Size(80, 17)
-		Me.chb_qryValType.TabIndex = 4
-		Me.chb_qryValType.Text = "Value Type"
-		'
-		'chb_qrySampleMed
-		'
-		Me.chb_qrySampleMed.AutoSize = True
-		Me.chb_qrySampleMed.Location = New System.Drawing.Point(8, 97)
-		Me.chb_qrySampleMed.Name = "chb_qrySampleMed"
-		Me.chb_qrySampleMed.Size = New System.Drawing.Size(101, 17)
-		Me.chb_qrySampleMed.TabIndex = 2
-		Me.chb_qrySampleMed.Text = "Sample Medium"
-		'
-		'chb_qryGenCat
-		'
-		Me.chb_qryGenCat.AutoSize = True
-		Me.chb_qryGenCat.Location = New System.Drawing.Point(8, 16)
-		Me.chb_qryGenCat.Name = "chb_qryGenCat"
-		Me.chb_qryGenCat.Size = New System.Drawing.Size(108, 17)
-		Me.chb_qryGenCat.TabIndex = 0
-		Me.chb_qryGenCat.Text = "General Category"
-		'
-		'grp_qryNumObs
-		'
-		Me.grp_qryNumObs.Controls.Add(Me.rdo_qryNumObsG)
-		Me.grp_qryNumObs.Controls.Add(Me.num_qryObs)
-		Me.grp_qryNumObs.Controls.Add(Me.rdo_qryNumObsL)
-		Me.grp_qryNumObs.Enabled = False
-		Me.grp_qryNumObs.Location = New System.Drawing.Point(446, 32)
-		Me.grp_qryNumObs.Name = "grp_qryNumObs"
-		Me.grp_qryNumObs.Size = New System.Drawing.Size(118, 34)
-		Me.grp_qryNumObs.TabIndex = 13
-		'
-		'rdo_qryNumObsG
-		'
-		Me.rdo_qryNumObsG.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.rdo_qryNumObsG.Location = New System.Drawing.Point(11, 1)
-		Me.rdo_qryNumObsG.Name = "rdo_qryNumObsG"
-		Me.rdo_qryNumObsG.Size = New System.Drawing.Size(30, 15)
-		Me.rdo_qryNumObsG.TabIndex = 0
-		Me.rdo_qryNumObsG.Text = ">"
-		'
-		'num_qryObs
-		'
-		Me.num_qryObs.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.num_qryObs.Cursor = System.Windows.Forms.Cursors.IBeam
-		Me.num_qryObs.Location = New System.Drawing.Point(44, 0)
-		Me.num_qryObs.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
-		Me.num_qryObs.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-		Me.num_qryObs.Name = "num_qryObs"
-		Me.num_qryObs.Size = New System.Drawing.Size(71, 20)
-		Me.num_qryObs.TabIndex = 1
-		Me.num_qryObs.Value = New Decimal(New Integer() {1, 0, 0, 0})
-		'
-		'rdo_qryNumObsL
-		'
-		Me.rdo_qryNumObsL.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.rdo_qryNumObsL.Location = New System.Drawing.Point(11, 18)
-		Me.rdo_qryNumObsL.Name = "rdo_qryNumObsL"
-		Me.rdo_qryNumObsL.Size = New System.Drawing.Size(41, 15)
-		Me.rdo_qryNumObsL.TabIndex = 2
-		Me.rdo_qryNumObsL.Text = "<="
-		'
-		'lv_qryResults
-		'
-		Me.lv_qryResults.Activation = System.Windows.Forms.ItemActivation.TwoClick
-		Me.lv_qryResults.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.lv_qryResults.AutoArrange = False
-		Me.lv_qryResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.lv_qryResults.CheckBoxes = True
-		Me.lv_qryResults.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.col_qrySiteCodeName, Me.col_qryVarCodeName, Me.col_qrySpeciation, Me.col_qryVarUnits, Me.col_qryGenCat, Me.col_qryValType, Me.col_qrySampleMed, Me.col_qryDataType, Me.col_qryQCLevel, Me.col_qryMethodDesc, Me.col_qryNumObs, Me.col_qryDateTime, Me.col_qryOrg, Me.col_qrySrcDesc, Me.col_qryCitation, Me.col_qryTimeSupport, Me.col_qryTimeSupportUnits})
-		Me.lv_qryResults.Cursor = System.Windows.Forms.Cursors.Hand
-		Me.lv_qryResults.Enabled = False
-		Me.lv_qryResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.lv_qryResults.FullRowSelect = True
-		Me.lv_qryResults.GridLines = True
-		Me.lv_qryResults.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-		Me.lv_qryResults.Location = New System.Drawing.Point(8, 410)
-		Me.lv_qryResults.MultiSelect = False
-		Me.lv_qryResults.Name = "lv_qryResults"
-		Me.lv_qryResults.Size = New System.Drawing.Size(768, 76)
-		Me.lv_qryResults.TabIndex = 8
-		Me.lv_qryResults.UseCompatibleStateImageBehavior = False
-		Me.lv_qryResults.View = System.Windows.Forms.View.Details
-		'
-		'col_qrySiteCodeName
-		'
-		Me.col_qrySiteCodeName.Text = "Site"
-		Me.col_qrySiteCodeName.Width = 50
-		'
-		'col_qryVarCodeName
-		'
-		Me.col_qryVarCodeName.Text = "Variable"
-		Me.col_qryVarCodeName.Width = 50
-		'
-		'col_qrySpeciation
-		'
-		Me.col_qrySpeciation.Text = "Speciation"
-		Me.col_qrySpeciation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		'
-		'col_qryVarUnits
-		'
-		Me.col_qryVarUnits.Text = "Variable Units"
-		Me.col_qryVarUnits.Width = 50
-		'
-		'col_qryGenCat
-		'
-		Me.col_qryGenCat.Text = "General Category"
-		Me.col_qryGenCat.Width = 50
-		'
-		'col_qryValType
-		'
-		Me.col_qryValType.Text = "Value Type"
-		Me.col_qryValType.Width = 50
-		'
-		'col_qrySampleMed
-		'
-		Me.col_qrySampleMed.Text = "Sample Medium"
-		Me.col_qrySampleMed.Width = 50
-		'
-		'col_qryDataType
-		'
-		Me.col_qryDataType.Text = "Data Type"
-		Me.col_qryDataType.Width = 50
-		'
-		'col_qryQCLevel
-		'
-		Me.col_qryQCLevel.Text = "Quality Control Level"
-		Me.col_qryQCLevel.Width = 50
-		'
-		'col_qryMethodDesc
-		'
-		Me.col_qryMethodDesc.Text = "Method Description"
-		Me.col_qryMethodDesc.Width = 50
-		'
-		'col_qryNumObs
-		'
-		Me.col_qryNumObs.Text = "Value Count"
-		Me.col_qryNumObs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.col_qryNumObs.Width = 50
-		'
-		'col_qryDateTime
-		'
-		Me.col_qryDateTime.Text = "Date Range"
-		Me.col_qryDateTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.col_qryDateTime.Width = 50
-		'
-		'col_qryOrg
-		'
-		Me.col_qryOrg.Text = "Organization"
-		Me.col_qryOrg.Width = 50
-		'
-		'col_qrySrcDesc
-		'
-		Me.col_qrySrcDesc.Text = "Source Description"
-		Me.col_qrySrcDesc.Width = 50
-		'
-		'col_qryCitation
-		'
-		Me.col_qryCitation.Text = "Citation"
-		'
-		'col_qryTimeSupport
-		'
-		Me.col_qryTimeSupport.Text = "Time Support"
-		Me.col_qryTimeSupport.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		Me.col_qryTimeSupport.Width = 50
-		'
-		'col_qryTimeSupportUnits
-		'
-		Me.col_qryTimeSupportUnits.Text = "Time Support Units"
-		Me.col_qryTimeSupportUnits.Width = 50
-		'
-		'tabpgVisualize
-		'
-		Me.tabpgVisualize.Controls.Add(Me.btnPlot)
-		Me.tabpgVisualize.Controls.Add(Me.tabctlPlotOptions)
-		Me.tabpgVisualize.Controls.Add(Me.gboxDateInfo)
-		Me.tabpgVisualize.Controls.Add(Me.gboxVisDataSel)
-		Me.tabpgVisualize.Controls.Add(Me.tabctlPlots)
-		Me.tabpgVisualize.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgVisualize.Name = "tabpgVisualize"
-		Me.tabpgVisualize.Size = New System.Drawing.Size(784, 519)
-		Me.tabpgVisualize.TabIndex = 1
-		Me.tabpgVisualize.Text = "Visualize"
-		Me.tabpgVisualize.UseVisualStyleBackColor = True
-		'
-		'btnPlot
-		'
-		Me.btnPlot.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnPlot.Location = New System.Drawing.Point(560, 491)
-		Me.btnPlot.Name = "btnPlot"
-		Me.btnPlot.Size = New System.Drawing.Size(208, 24)
-		Me.btnPlot.TabIndex = 2
-		Me.btnPlot.Text = "Update Plot"
-		'
-		'tabctlPlotOptions
-		'
-		Me.tabctlPlotOptions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tabctlPlotOptions.Controls.Add(Me.tabpgSummary)
-		Me.tabctlPlotOptions.Controls.Add(Me.tabpgOptions)
-		Me.tabctlPlotOptions.Location = New System.Drawing.Point(548, 8)
-		Me.tabctlPlotOptions.Name = "tabctlPlotOptions"
-		Me.tabctlPlotOptions.SelectedIndex = 0
-		Me.tabctlPlotOptions.Size = New System.Drawing.Size(232, 401)
-		Me.tabctlPlotOptions.TabIndex = 6
-		'
-		'tabpgSummary
-		'
-		Me.tabpgSummary.AutoScroll = True
-		Me.tabpgSummary.Controls.Add(Me.gboxStatistics)
-		Me.tabpgSummary.Controls.Add(Me.ckboxUseCensoredData)
-		Me.tabpgSummary.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgSummary.Name = "tabpgSummary"
-		Me.tabpgSummary.Size = New System.Drawing.Size(224, 375)
-		Me.tabpgSummary.TabIndex = 0
-		Me.tabpgSummary.Text = "Summary"
-		'
-		'gboxStatistics
-		'
-		Me.gboxStatistics.Controls.Add(Me.lblPercentiles)
-		Me.gboxStatistics.Controls.Add(Me.tbox90Perc)
-		Me.gboxStatistics.Controls.Add(Me.tbox75Perc)
-		Me.gboxStatistics.Controls.Add(Me.tbox50Perc)
-		Me.gboxStatistics.Controls.Add(Me.lbl90Perc)
-		Me.gboxStatistics.Controls.Add(Me.lbl75Perc)
-		Me.gboxStatistics.Controls.Add(Me.tbox10Perc)
-		Me.gboxStatistics.Controls.Add(Me.tbox25Perc)
-		Me.gboxStatistics.Controls.Add(Me.lbl50Perc)
-		Me.gboxStatistics.Controls.Add(Me.lbl25Perc)
-		Me.gboxStatistics.Controls.Add(Me.lbl10Perc)
-		Me.gboxStatistics.Controls.Add(Me.lblStdDev)
-		Me.gboxStatistics.Controls.Add(Me.lblMax)
-		Me.gboxStatistics.Controls.Add(Me.lblCoeffVar)
-		Me.gboxStatistics.Controls.Add(Me.tboxGeoMean)
-		Me.gboxStatistics.Controls.Add(Me.lblAMean)
-		Me.gboxStatistics.Controls.Add(Me.tboxAMean)
-		Me.gboxStatistics.Controls.Add(Me.lblGeoMean)
-		Me.gboxStatistics.Controls.Add(Me.tboxCoeffVar)
-		Me.gboxStatistics.Controls.Add(Me.tboxMin)
-		Me.gboxStatistics.Controls.Add(Me.gboxDivider)
-		Me.gboxStatistics.Controls.Add(Me.tboxMax)
-		Me.gboxStatistics.Controls.Add(Me.tboxStdDev)
-		Me.gboxStatistics.Controls.Add(Me.lblMin)
-		Me.gboxStatistics.Controls.Add(Me.lblNumCensoredObs)
-		Me.gboxStatistics.Controls.Add(Me.lblNumObs)
-		Me.gboxStatistics.Controls.Add(Me.tboxNumObs)
-		Me.gboxStatistics.Controls.Add(Me.tboxNumCensoredObs)
-		Me.gboxStatistics.Location = New System.Drawing.Point(4, 36)
-		Me.gboxStatistics.Name = "gboxStatistics"
-		Me.gboxStatistics.Size = New System.Drawing.Size(218, 336)
-		Me.gboxStatistics.TabIndex = 36
-		Me.gboxStatistics.TabStop = False
-		Me.gboxStatistics.Text = "Statistics"
-		'
-		'lblPercentiles
-		'
-		Me.lblPercentiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.lblPercentiles.Location = New System.Drawing.Point(8, 216)
-		Me.lblPercentiles.Name = "lblPercentiles"
-		Me.lblPercentiles.Size = New System.Drawing.Size(72, 16)
-		Me.lblPercentiles.TabIndex = 60
-		Me.lblPercentiles.Text = "Percentiles"
-		Me.lblPercentiles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'tbox90Perc
-		'
-		Me.tbox90Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tbox90Perc.BackColor = System.Drawing.SystemColors.Window
-		Me.tbox90Perc.Location = New System.Drawing.Point(124, 312)
-		Me.tbox90Perc.Name = "tbox90Perc"
-		Me.tbox90Perc.ReadOnly = True
-		Me.tbox90Perc.Size = New System.Drawing.Size(90, 20)
-		Me.tbox90Perc.TabIndex = 53
-		Me.tbox90Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'tbox75Perc
-		'
-		Me.tbox75Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tbox75Perc.BackColor = System.Drawing.SystemColors.Window
-		Me.tbox75Perc.Location = New System.Drawing.Point(124, 288)
-		Me.tbox75Perc.Name = "tbox75Perc"
-		Me.tbox75Perc.ReadOnly = True
-		Me.tbox75Perc.Size = New System.Drawing.Size(90, 20)
-		Me.tbox75Perc.TabIndex = 52
-		Me.tbox75Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'tbox50Perc
-		'
-		Me.tbox50Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tbox50Perc.BackColor = System.Drawing.SystemColors.Window
-		Me.tbox50Perc.Location = New System.Drawing.Point(124, 264)
-		Me.tbox50Perc.Name = "tbox50Perc"
-		Me.tbox50Perc.ReadOnly = True
-		Me.tbox50Perc.Size = New System.Drawing.Size(90, 20)
-		Me.tbox50Perc.TabIndex = 51
-		Me.tbox50Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'lbl90Perc
-		'
-		Me.lbl90Perc.Location = New System.Drawing.Point(96, 314)
-		Me.lbl90Perc.Name = "lbl90Perc"
-		Me.lbl90Perc.Size = New System.Drawing.Size(32, 16)
-		Me.lbl90Perc.TabIndex = 59
-		Me.lbl90Perc.Text = "90%"
-		'
-		'lbl75Perc
-		'
-		Me.lbl75Perc.Location = New System.Drawing.Point(96, 290)
-		Me.lbl75Perc.Name = "lbl75Perc"
-		Me.lbl75Perc.Size = New System.Drawing.Size(32, 16)
-		Me.lbl75Perc.TabIndex = 58
-		Me.lbl75Perc.Text = "75%"
-		'
-		'tbox10Perc
-		'
-		Me.tbox10Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tbox10Perc.BackColor = System.Drawing.SystemColors.Window
-		Me.tbox10Perc.Location = New System.Drawing.Point(124, 216)
-		Me.tbox10Perc.Name = "tbox10Perc"
-		Me.tbox10Perc.ReadOnly = True
-		Me.tbox10Perc.Size = New System.Drawing.Size(90, 20)
-		Me.tbox10Perc.TabIndex = 49
-		Me.tbox10Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'tbox25Perc
-		'
-		Me.tbox25Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tbox25Perc.BackColor = System.Drawing.SystemColors.Window
-		Me.tbox25Perc.Location = New System.Drawing.Point(124, 240)
-		Me.tbox25Perc.Name = "tbox25Perc"
-		Me.tbox25Perc.ReadOnly = True
-		Me.tbox25Perc.Size = New System.Drawing.Size(90, 20)
-		Me.tbox25Perc.TabIndex = 50
-		Me.tbox25Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'lbl50Perc
-		'
-		Me.lbl50Perc.Location = New System.Drawing.Point(50, 266)
-		Me.lbl50Perc.Name = "lbl50Perc"
-		Me.lbl50Perc.Size = New System.Drawing.Size(78, 16)
-		Me.lbl50Perc.TabIndex = 57
-		Me.lbl50Perc.Text = "(Median)  50%"
-		'
-		'lbl25Perc
-		'
-		Me.lbl25Perc.Location = New System.Drawing.Point(96, 242)
-		Me.lbl25Perc.Name = "lbl25Perc"
-		Me.lbl25Perc.Size = New System.Drawing.Size(32, 16)
-		Me.lbl25Perc.TabIndex = 56
-		Me.lbl25Perc.Text = "25%"
-		'
-		'lbl10Perc
-		'
-		Me.lbl10Perc.Location = New System.Drawing.Point(96, 218)
-		Me.lbl10Perc.Name = "lbl10Perc"
-		Me.lbl10Perc.Size = New System.Drawing.Size(32, 16)
-		Me.lbl10Perc.TabIndex = 55
-		Me.lbl10Perc.Text = "10%"
-		'
-		'lblStdDev
-		'
-		Me.lblStdDev.Location = New System.Drawing.Point(4, 162)
-		Me.lblStdDev.Name = "lblStdDev"
-		Me.lblStdDev.Size = New System.Drawing.Size(120, 16)
-		Me.lblStdDev.TabIndex = 45
-		Me.lblStdDev.Text = "Standard Deviation :"
-		Me.lblStdDev.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'lblMax
-		'
-		Me.lblMax.Location = New System.Drawing.Point(4, 114)
-		Me.lblMax.Name = "lblMax"
-		Me.lblMax.Size = New System.Drawing.Size(120, 16)
-		Me.lblMax.TabIndex = 43
-		Me.lblMax.Text = "Maximum :"
-		Me.lblMax.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'lblCoeffVar
-		'
-		Me.lblCoeffVar.Location = New System.Drawing.Point(2, 186)
-		Me.lblCoeffVar.Name = "lblCoeffVar"
-		Me.lblCoeffVar.Size = New System.Drawing.Size(122, 16)
-		Me.lblCoeffVar.TabIndex = 46
-		Me.lblCoeffVar.Text = "Coefficiant of Variation:"
-		Me.lblCoeffVar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'tboxGeoMean
-		'
-		Me.tboxGeoMean.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxGeoMean.BackColor = System.Drawing.SystemColors.Window
-		Me.tboxGeoMean.Location = New System.Drawing.Point(124, 88)
-		Me.tboxGeoMean.Name = "tboxGeoMean"
-		Me.tboxGeoMean.ReadOnly = True
-		Me.tboxGeoMean.Size = New System.Drawing.Size(90, 20)
-		Me.tboxGeoMean.TabIndex = 37
-		Me.tboxGeoMean.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'lblAMean
-		'
-		Me.lblAMean.Location = New System.Drawing.Point(4, 66)
-		Me.lblAMean.Name = "lblAMean"
-		Me.lblAMean.Size = New System.Drawing.Size(120, 16)
-		Me.lblAMean.TabIndex = 42
-		Me.lblAMean.Text = "Arithmetic Mean :"
-		Me.lblAMean.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'tboxAMean
-		'
-		Me.tboxAMean.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxAMean.BackColor = System.Drawing.SystemColors.Window
-		Me.tboxAMean.Location = New System.Drawing.Point(124, 64)
-		Me.tboxAMean.Name = "tboxAMean"
-		Me.tboxAMean.ReadOnly = True
-		Me.tboxAMean.Size = New System.Drawing.Size(90, 20)
-		Me.tboxAMean.TabIndex = 36
-		Me.tboxAMean.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'lblGeoMean
-		'
-		Me.lblGeoMean.Location = New System.Drawing.Point(4, 90)
-		Me.lblGeoMean.Name = "lblGeoMean"
-		Me.lblGeoMean.Size = New System.Drawing.Size(120, 16)
-		Me.lblGeoMean.TabIndex = 48
-		Me.lblGeoMean.Text = "Geometric Mean :"
-		Me.lblGeoMean.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'tboxCoeffVar
-		'
-		Me.tboxCoeffVar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxCoeffVar.BackColor = System.Drawing.SystemColors.Window
-		Me.tboxCoeffVar.Location = New System.Drawing.Point(124, 184)
-		Me.tboxCoeffVar.Name = "tboxCoeffVar"
-		Me.tboxCoeffVar.ReadOnly = True
-		Me.tboxCoeffVar.Size = New System.Drawing.Size(90, 20)
-		Me.tboxCoeffVar.TabIndex = 41
-		Me.tboxCoeffVar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'tboxMin
-		'
-		Me.tboxMin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxMin.BackColor = System.Drawing.SystemColors.Window
-		Me.tboxMin.Location = New System.Drawing.Point(124, 136)
-		Me.tboxMin.Name = "tboxMin"
-		Me.tboxMin.ReadOnly = True
-		Me.tboxMin.Size = New System.Drawing.Size(90, 20)
-		Me.tboxMin.TabIndex = 39
-		Me.tboxMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'gboxDivider
-		'
-		Me.gboxDivider.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.gboxDivider.Location = New System.Drawing.Point(7, 204)
-		Me.gboxDivider.Name = "gboxDivider"
-		Me.gboxDivider.Size = New System.Drawing.Size(204, 8)
-		Me.gboxDivider.TabIndex = 47
-		Me.gboxDivider.TabStop = False
-		'
-		'tboxMax
-		'
-		Me.tboxMax.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxMax.BackColor = System.Drawing.SystemColors.Window
-		Me.tboxMax.Location = New System.Drawing.Point(124, 112)
-		Me.tboxMax.Name = "tboxMax"
-		Me.tboxMax.ReadOnly = True
-		Me.tboxMax.Size = New System.Drawing.Size(90, 20)
-		Me.tboxMax.TabIndex = 38
-		Me.tboxMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'tboxStdDev
-		'
-		Me.tboxStdDev.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxStdDev.BackColor = System.Drawing.SystemColors.Window
-		Me.tboxStdDev.Location = New System.Drawing.Point(124, 160)
-		Me.tboxStdDev.Name = "tboxStdDev"
-		Me.tboxStdDev.ReadOnly = True
-		Me.tboxStdDev.Size = New System.Drawing.Size(90, 20)
-		Me.tboxStdDev.TabIndex = 40
-		Me.tboxStdDev.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'lblMin
-		'
-		Me.lblMin.Location = New System.Drawing.Point(4, 138)
-		Me.lblMin.Name = "lblMin"
-		Me.lblMin.Size = New System.Drawing.Size(120, 16)
-		Me.lblMin.TabIndex = 44
-		Me.lblMin.Text = "Minimum :"
-		Me.lblMin.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'lblNumCensoredObs
-		'
-		Me.lblNumCensoredObs.Location = New System.Drawing.Point(4, 42)
-		Me.lblNumCensoredObs.Name = "lblNumCensoredObs"
-		Me.lblNumCensoredObs.Size = New System.Drawing.Size(120, 16)
-		Me.lblNumCensoredObs.TabIndex = 35
-		Me.lblNumCensoredObs.Text = "# Of Censored Obs. :"
-		Me.lblNumCensoredObs.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'lblNumObs
-		'
-		Me.lblNumObs.Location = New System.Drawing.Point(4, 18)
-		Me.lblNumObs.Name = "lblNumObs"
-		Me.lblNumObs.Size = New System.Drawing.Size(120, 16)
-		Me.lblNumObs.TabIndex = 33
-		Me.lblNumObs.Text = "# Of Observations :"
-		Me.lblNumObs.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'tboxNumObs
-		'
-		Me.tboxNumObs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxNumObs.BackColor = System.Drawing.SystemColors.Window
-		Me.tboxNumObs.Location = New System.Drawing.Point(124, 16)
-		Me.tboxNumObs.Name = "tboxNumObs"
-		Me.tboxNumObs.ReadOnly = True
-		Me.tboxNumObs.Size = New System.Drawing.Size(90, 20)
-		Me.tboxNumObs.TabIndex = 32
-		Me.tboxNumObs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'tboxNumCensoredObs
-		'
-		Me.tboxNumCensoredObs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxNumCensoredObs.BackColor = System.Drawing.SystemColors.Window
-		Me.tboxNumCensoredObs.Location = New System.Drawing.Point(124, 40)
-		Me.tboxNumCensoredObs.Name = "tboxNumCensoredObs"
-		Me.tboxNumCensoredObs.ReadOnly = True
-		Me.tboxNumCensoredObs.Size = New System.Drawing.Size(90, 20)
-		Me.tboxNumCensoredObs.TabIndex = 34
-		Me.tboxNumCensoredObs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		'
-		'ckboxUseCensoredData
-		'
-		Me.ckboxUseCensoredData.Location = New System.Drawing.Point(8, 4)
-		Me.ckboxUseCensoredData.Name = "ckboxUseCensoredData"
-		Me.ckboxUseCensoredData.Size = New System.Drawing.Size(212, 32)
-		Me.ckboxUseCensoredData.TabIndex = 30
-		Me.ckboxUseCensoredData.Text = "Use censored data in summary statistics."
-		'
-		'tabpgOptions
-		'
-		Me.tabpgOptions.AutoScroll = True
-		Me.tabpgOptions.Controls.Add(Me.gboxHistPlotOptions)
-		Me.tabpgOptions.Controls.Add(Me.btnAxisOptions)
-		Me.tabpgOptions.Controls.Add(Me.gboxBoxPlotOptions)
-		Me.tabpgOptions.Controls.Add(Me.gboxTSPlotOptions)
-		Me.tabpgOptions.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgOptions.Name = "tabpgOptions"
-		Me.tabpgOptions.Size = New System.Drawing.Size(224, 375)
-		Me.tabpgOptions.TabIndex = 1
-		Me.tabpgOptions.Text = "Plot Options"
-		'
-		'gboxHistPlotOptions
-		'
-		Me.gboxHistPlotOptions.Controls.Add(Me.ckboxHistSetNumBins)
-		Me.gboxHistPlotOptions.Controls.Add(Me.gboxHPNumBarSettings)
-		Me.gboxHistPlotOptions.Location = New System.Drawing.Point(8, 120)
-		Me.gboxHistPlotOptions.Name = "gboxHistPlotOptions"
-		Me.gboxHistPlotOptions.Size = New System.Drawing.Size(208, 104)
-		Me.gboxHistPlotOptions.TabIndex = 14
-		Me.gboxHistPlotOptions.TabStop = False
-		Me.gboxHistPlotOptions.Text = "Histogram  Plot"
-		'
-		'ckboxHistSetNumBins
-		'
-		Me.ckboxHistSetNumBins.Checked = True
-		Me.ckboxHistSetNumBins.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.ckboxHistSetNumBins.Location = New System.Drawing.Point(10, 14)
-		Me.ckboxHistSetNumBins.Name = "ckboxHistSetNumBins"
-		Me.ckboxHistSetNumBins.Size = New System.Drawing.Size(192, 16)
-		Me.ckboxHistSetNumBins.TabIndex = 0
-		Me.ckboxHistSetNumBins.Text = "Manually set the Number Of Bars"
-		Me.ckboxHistSetNumBins.UseVisualStyleBackColor = True
-		'
-		'gboxHPNumBarSettings
-		'
-		Me.gboxHPNumBarSettings.Controls.Add(Me.rbtnHPExactNumBins)
-		Me.gboxHPNumBarSettings.Controls.Add(Me.rbtnHPDiscreteBreakVals)
-		Me.gboxHPNumBarSettings.Controls.Add(Me.tboxHPNumBins)
-		Me.gboxHPNumBarSettings.Controls.Add(Me.lblHPNumBins)
-		Me.gboxHPNumBarSettings.Location = New System.Drawing.Point(4, 28)
-		Me.gboxHPNumBarSettings.Name = "gboxHPNumBarSettings"
-		Me.gboxHPNumBarSettings.Size = New System.Drawing.Size(200, 68)
-		Me.gboxHPNumBarSettings.TabIndex = 1
-		Me.gboxHPNumBarSettings.TabStop = False
-		'
-		'rbtnHPExactNumBins
-		'
-		Me.rbtnHPExactNumBins.Location = New System.Drawing.Point(4, 50)
-		Me.rbtnHPExactNumBins.Name = "rbtnHPExactNumBins"
-		Me.rbtnHPExactNumBins.Size = New System.Drawing.Size(184, 16)
-		Me.rbtnHPExactNumBins.TabIndex = 3
-		Me.rbtnHPExactNumBins.Text = "Allow Decimal Break Values"
-		Me.rbtnHPExactNumBins.UseVisualStyleBackColor = True
-		'
-		'rbtnHPDiscreteBreakVals
-		'
-		Me.rbtnHPDiscreteBreakVals.Checked = True
-		Me.rbtnHPDiscreteBreakVals.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.rbtnHPDiscreteBreakVals.Location = New System.Drawing.Point(4, 32)
-		Me.rbtnHPDiscreteBreakVals.Name = "rbtnHPDiscreteBreakVals"
-		Me.rbtnHPDiscreteBreakVals.Size = New System.Drawing.Size(192, 16)
-		Me.rbtnHPDiscreteBreakVals.TabIndex = 2
-		Me.rbtnHPDiscreteBreakVals.TabStop = True
-		Me.rbtnHPDiscreteBreakVals.Text = "Adjust For Discrete Break Values"
-		Me.rbtnHPDiscreteBreakVals.UseVisualStyleBackColor = True
-		'
-		'tboxHPNumBins
-		'
-		Me.tboxHPNumBins.Location = New System.Drawing.Point(94, 12)
-		Me.tboxHPNumBins.Name = "tboxHPNumBins"
-		Me.tboxHPNumBins.Size = New System.Drawing.Size(98, 20)
-		Me.tboxHPNumBins.TabIndex = 0
-		'
-		'lblHPNumBins
-		'
-		Me.lblHPNumBins.Location = New System.Drawing.Point(4, 12)
-		Me.lblHPNumBins.Name = "lblHPNumBins"
-		Me.lblHPNumBins.Size = New System.Drawing.Size(94, 20)
-		Me.lblHPNumBins.TabIndex = 1
-		Me.lblHPNumBins.Text = "Number Of Bars :"
-		Me.lblHPNumBins.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'btnAxisOptions
-		'
-		Me.btnAxisOptions.Location = New System.Drawing.Point(8, 3)
-		Me.btnAxisOptions.Name = "btnAxisOptions"
-		Me.btnAxisOptions.Size = New System.Drawing.Size(208, 24)
-		Me.btnAxisOptions.TabIndex = 13
-		Me.btnAxisOptions.Text = "Axis Options"
-		Me.btnAxisOptions.Visible = False
-		'
-		'gboxBoxPlotOptions
-		'
-		Me.gboxBoxPlotOptions.Controls.Add(Me.gboxBPPlotType)
-		Me.gboxBoxPlotOptions.Location = New System.Drawing.Point(8, 248)
-		Me.gboxBoxPlotOptions.Name = "gboxBoxPlotOptions"
-		Me.gboxBoxPlotOptions.Size = New System.Drawing.Size(208, 88)
-		Me.gboxBoxPlotOptions.TabIndex = 3
-		Me.gboxBoxPlotOptions.TabStop = False
-		Me.gboxBoxPlotOptions.Text = "Box/Whisker Plot"
-		'
-		'gboxBPPlotType
-		'
-		Me.gboxBPPlotType.Controls.Add(Me.btnBPViewDesc)
-		Me.gboxBPPlotType.Controls.Add(Me.rbtnBPOverall)
-		Me.gboxBPPlotType.Controls.Add(Me.rbtnBPMonthly)
-		Me.gboxBPPlotType.Controls.Add(Me.rbtnBPYearly)
-		Me.gboxBPPlotType.Controls.Add(Me.rbtnBPSeasonal)
-		Me.gboxBPPlotType.Location = New System.Drawing.Point(4, 13)
-		Me.gboxBPPlotType.Name = "gboxBPPlotType"
-		Me.gboxBPPlotType.Size = New System.Drawing.Size(200, 69)
-		Me.gboxBPPlotType.TabIndex = 13
-		Me.gboxBPPlotType.TabStop = False
-		Me.gboxBPPlotType.Text = "Plot Type"
-		'
-		'btnBPViewDesc
-		'
-		Me.btnBPViewDesc.Location = New System.Drawing.Point(72, 42)
-		Me.btnBPViewDesc.Name = "btnBPViewDesc"
-		Me.btnBPViewDesc.Size = New System.Drawing.Size(120, 20)
-		Me.btnBPViewDesc.TabIndex = 7
-		Me.btnBPViewDesc.Text = "Box Plot Description"
-		Me.btnBPViewDesc.UseVisualStyleBackColor = True
-		'
-		'rbtnBPOverall
-		'
-		Me.rbtnBPOverall.Location = New System.Drawing.Point(4, 42)
-		Me.rbtnBPOverall.Name = "rbtnBPOverall"
-		Me.rbtnBPOverall.Size = New System.Drawing.Size(62, 16)
-		Me.rbtnBPOverall.TabIndex = 6
-		Me.rbtnBPOverall.Text = "Overall"
-		'
-		'rbtnBPMonthly
-		'
-		Me.rbtnBPMonthly.Checked = True
-		Me.rbtnBPMonthly.Location = New System.Drawing.Point(4, 16)
-		Me.rbtnBPMonthly.Name = "rbtnBPMonthly"
-		Me.rbtnBPMonthly.Size = New System.Drawing.Size(62, 16)
-		Me.rbtnBPMonthly.TabIndex = 3
-		Me.rbtnBPMonthly.TabStop = True
-		Me.rbtnBPMonthly.Text = "Monthly"
-		'
-		'rbtnBPYearly
-		'
-		Me.rbtnBPYearly.Location = New System.Drawing.Point(142, 16)
-		Me.rbtnBPYearly.Name = "rbtnBPYearly"
-		Me.rbtnBPYearly.Size = New System.Drawing.Size(56, 16)
-		Me.rbtnBPYearly.TabIndex = 5
-		Me.rbtnBPYearly.Text = "Yearly"
-		'
-		'rbtnBPSeasonal
-		'
-		Me.rbtnBPSeasonal.Location = New System.Drawing.Point(70, 16)
-		Me.rbtnBPSeasonal.Name = "rbtnBPSeasonal"
-		Me.rbtnBPSeasonal.Size = New System.Drawing.Size(70, 16)
-		Me.rbtnBPSeasonal.TabIndex = 4
-		Me.rbtnBPSeasonal.Text = "Seasonal"
-		'
-		'gboxTSPlotOptions
-		'
-		Me.gboxTSPlotOptions.Controls.Add(Me.gboxTSPlotType)
-		Me.gboxTSPlotOptions.Location = New System.Drawing.Point(8, 32)
-		Me.gboxTSPlotOptions.Name = "gboxTSPlotOptions"
-		Me.gboxTSPlotOptions.Size = New System.Drawing.Size(208, 63)
-		Me.gboxTSPlotOptions.TabIndex = 0
-		Me.gboxTSPlotOptions.TabStop = False
-		Me.gboxTSPlotOptions.Text = "Time Series Plot"
-		'
-		'gboxTSPlotType
-		'
-		Me.gboxTSPlotType.Controls.Add(Me.rbtnTSLine)
-		Me.gboxTSPlotType.Controls.Add(Me.rbtnTSBoth)
-		Me.gboxTSPlotType.Controls.Add(Me.rbtnTSPoint)
-		Me.gboxTSPlotType.Location = New System.Drawing.Point(8, 16)
-		Me.gboxTSPlotType.Name = "gboxTSPlotType"
-		Me.gboxTSPlotType.Size = New System.Drawing.Size(192, 36)
-		Me.gboxTSPlotType.TabIndex = 0
-		Me.gboxTSPlotType.TabStop = False
-		Me.gboxTSPlotType.Text = "Plot Type"
-		'
-		'rbtnTSLine
-		'
-		Me.rbtnTSLine.Location = New System.Drawing.Point(8, 16)
-		Me.rbtnTSLine.Name = "rbtnTSLine"
-		Me.rbtnTSLine.Size = New System.Drawing.Size(56, 16)
-		Me.rbtnTSLine.TabIndex = 3
-		Me.rbtnTSLine.Text = "Line"
-		'
-		'rbtnTSBoth
-		'
-		Me.rbtnTSBoth.Location = New System.Drawing.Point(140, 16)
-		Me.rbtnTSBoth.Name = "rbtnTSBoth"
-		Me.rbtnTSBoth.Size = New System.Drawing.Size(48, 16)
-		Me.rbtnTSBoth.TabIndex = 5
-		Me.rbtnTSBoth.Text = "Both"
-		'
-		'rbtnTSPoint
-		'
-		Me.rbtnTSPoint.Location = New System.Drawing.Point(70, 16)
-		Me.rbtnTSPoint.Name = "rbtnTSPoint"
-		Me.rbtnTSPoint.Size = New System.Drawing.Size(58, 16)
-		Me.rbtnTSPoint.TabIndex = 4
-		Me.rbtnTSPoint.Text = "Point"
-		'
-		'gboxDateInfo
-		'
-		Me.gboxDateInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.gboxDateInfo.Controls.Add(Me.dtpVisEndDate)
-		Me.gboxDateInfo.Controls.Add(Me.dtpVisStartDate)
-		Me.gboxDateInfo.Controls.Add(Me.lblEndDate)
-		Me.gboxDateInfo.Controls.Add(Me.lblStartDate)
-		Me.gboxDateInfo.Location = New System.Drawing.Point(548, 414)
-		Me.gboxDateInfo.Name = "gboxDateInfo"
-		Me.gboxDateInfo.Size = New System.Drawing.Size(232, 72)
-		Me.gboxDateInfo.TabIndex = 2
-		Me.gboxDateInfo.TabStop = False
-		Me.gboxDateInfo.Text = "Date Range"
-		'
-		'dtpVisEndDate
-		'
-		Me.dtpVisEndDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.dtpVisEndDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
-		Me.dtpVisEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-		Me.dtpVisEndDate.Location = New System.Drawing.Point(72, 44)
-		Me.dtpVisEndDate.Name = "dtpVisEndDate"
-		Me.dtpVisEndDate.Size = New System.Drawing.Size(154, 20)
-		Me.dtpVisEndDate.TabIndex = 15
-		'
-		'dtpVisStartDate
-		'
-		Me.dtpVisStartDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.dtpVisStartDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
-		Me.dtpVisStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-		Me.dtpVisStartDate.Location = New System.Drawing.Point(72, 20)
-		Me.dtpVisStartDate.Name = "dtpVisStartDate"
-		Me.dtpVisStartDate.Size = New System.Drawing.Size(154, 20)
-		Me.dtpVisStartDate.TabIndex = 14
-		'
-		'lblEndDate
-		'
-		Me.lblEndDate.Location = New System.Drawing.Point(10, 48)
-		Me.lblEndDate.Name = "lblEndDate"
-		Me.lblEndDate.Size = New System.Drawing.Size(62, 16)
-		Me.lblEndDate.TabIndex = 13
-		Me.lblEndDate.Text = "End Date :"
-		'
-		'lblStartDate
-		'
-		Me.lblStartDate.Location = New System.Drawing.Point(8, 24)
-		Me.lblStartDate.Name = "lblStartDate"
-		Me.lblStartDate.Size = New System.Drawing.Size(64, 16)
-		Me.lblStartDate.TabIndex = 12
-		Me.lblStartDate.Text = "Start Date :"
-		'
-		'gboxVisDataSel
-		'
-		Me.gboxVisDataSel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.gboxVisDataSel.Controls.Add(Me.lvVisDataSeries)
-		Me.gboxVisDataSel.Controls.Add(Me.lblVisDataSeries)
-		Me.gboxVisDataSel.Controls.Add(Me.cboxVisVariable)
-		Me.gboxVisDataSel.Controls.Add(Me.lblVisSite)
-		Me.gboxVisDataSel.Controls.Add(Me.lblVisVariable)
-		Me.gboxVisDataSel.Controls.Add(Me.cboxVisSite)
-		Me.gboxVisDataSel.Location = New System.Drawing.Point(8, 329)
-		Me.gboxVisDataSel.Name = "gboxVisDataSel"
-		Me.gboxVisDataSel.Size = New System.Drawing.Size(536, 188)
-		Me.gboxVisDataSel.TabIndex = 1
-		Me.gboxVisDataSel.TabStop = False
-		Me.gboxVisDataSel.Text = "Data To Visualize"
-		'
-		'lvVisDataSeries
-		'
-		Me.lvVisDataSeries.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.lvVisDataSeries.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.lvcolVisGenCategory, Me.lvcolVisSpeciation, Me.lvcolVisVarUnits, Me.lvcolVisTimeSupport, Me.lvcolVisTimeUnits, Me.lvcolVisSampleMedium, Me.lvcolVisValueType, Me.lvcolVisDataType, Me.lvcolVisQCLevel, Me.lvcolVisMethod, Me.lvcolVisOrganization, Me.lvcolVisSourceDesc, Me.lvcolVisCitation, Me.lvcolVisLocalDateRange, Me.lvcolVisUTCDateRange, Me.lvcolVisValueCount})
-		Me.lvVisDataSeries.FullRowSelect = True
-		Me.lvVisDataSeries.GridLines = True
-		Me.lvVisDataSeries.HideSelection = False
-		Me.lvVisDataSeries.Location = New System.Drawing.Point(6, 89)
-		Me.lvVisDataSeries.MultiSelect = False
-		Me.lvVisDataSeries.Name = "lvVisDataSeries"
-		Me.lvVisDataSeries.Size = New System.Drawing.Size(520, 94)
-		Me.lvVisDataSeries.TabIndex = 9
-		Me.lvVisDataSeries.UseCompatibleStateImageBehavior = False
-		Me.lvVisDataSeries.View = System.Windows.Forms.View.Details
-		'
-		'lvcolVisGenCategory
-		'
-		Me.lvcolVisGenCategory.Text = "General Category"
-		Me.lvcolVisGenCategory.Width = 75
-		'
-		'lvcolVisSpeciation
-		'
-		Me.lvcolVisSpeciation.Text = "Speciation"
-		Me.lvcolVisSpeciation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		'
-		'lvcolVisVarUnits
-		'
-		Me.lvcolVisVarUnits.Text = "Variable Units"
-		Me.lvcolVisVarUnits.Width = 75
-		'
-		'lvcolVisTimeSupport
-		'
-		Me.lvcolVisTimeSupport.Text = "Time Support"
-		Me.lvcolVisTimeSupport.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		Me.lvcolVisTimeSupport.Width = 75
-		'
-		'lvcolVisTimeUnits
-		'
-		Me.lvcolVisTimeUnits.Text = "Time Units"
-		Me.lvcolVisTimeUnits.Width = 75
-		'
-		'lvcolVisSampleMedium
-		'
-		Me.lvcolVisSampleMedium.Text = "Sample Medium"
-		Me.lvcolVisSampleMedium.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolVisSampleMedium.Width = 75
-		'
-		'lvcolVisValueType
-		'
-		Me.lvcolVisValueType.Text = "Value Type"
-		Me.lvcolVisValueType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolVisValueType.Width = 75
-		'
-		'lvcolVisDataType
-		'
-		Me.lvcolVisDataType.Text = "Data Type"
-		Me.lvcolVisDataType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolVisDataType.Width = 75
-		'
-		'lvcolVisQCLevel
-		'
-		Me.lvcolVisQCLevel.Text = "Quality Control Level"
-		Me.lvcolVisQCLevel.Width = 75
-		'
-		'lvcolVisMethod
-		'
-		Me.lvcolVisMethod.Text = "Method"
-		Me.lvcolVisMethod.Width = 75
-		'
-		'lvcolVisOrganization
-		'
-		Me.lvcolVisOrganization.Text = "Organization"
-		Me.lvcolVisOrganization.Width = 75
-		'
-		'lvcolVisSourceDesc
-		'
-		Me.lvcolVisSourceDesc.Text = "Source Description"
-		Me.lvcolVisSourceDesc.Width = 75
-		'
-		'lvcolVisCitation
-		'
-		Me.lvcolVisCitation.Text = "Citation"
-		'
-		'lvcolVisLocalDateRange
-		'
-		Me.lvcolVisLocalDateRange.Text = "Local Date Range"
-		Me.lvcolVisLocalDateRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolVisLocalDateRange.Width = 75
-		'
-		'lvcolVisUTCDateRange
-		'
-		Me.lvcolVisUTCDateRange.Text = "UTC Date Range"
-		Me.lvcolVisUTCDateRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolVisUTCDateRange.Width = 75
-		'
-		'lvcolVisValueCount
-		'
-		Me.lvcolVisValueCount.Text = "Value Count"
-		Me.lvcolVisValueCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolVisValueCount.Width = 75
-		'
-		'lblVisDataSeries
-		'
-		Me.lblVisDataSeries.Location = New System.Drawing.Point(8, 74)
-		Me.lblVisDataSeries.Name = "lblVisDataSeries"
-		Me.lblVisDataSeries.Size = New System.Drawing.Size(176, 16)
-		Me.lblVisDataSeries.TabIndex = 10
-		Me.lblVisDataSeries.Text = "Select a Data Series to View :"
-		'
-		'cboxVisVariable
-		'
-		Me.cboxVisVariable.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cboxVisVariable.Location = New System.Drawing.Point(58, 44)
-		Me.cboxVisVariable.Name = "cboxVisVariable"
-		Me.cboxVisVariable.Size = New System.Drawing.Size(470, 21)
-		Me.cboxVisVariable.TabIndex = 0
-		'
-		'lblVisSite
-		'
-		Me.lblVisSite.Location = New System.Drawing.Point(8, 18)
-		Me.lblVisSite.Name = "lblVisSite"
-		Me.lblVisSite.Size = New System.Drawing.Size(32, 16)
-		Me.lblVisSite.TabIndex = 7
-		Me.lblVisSite.Text = "Site :"
-		Me.lblVisSite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'lblVisVariable
-		'
-		Me.lblVisVariable.Location = New System.Drawing.Point(8, 46)
-		Me.lblVisVariable.Name = "lblVisVariable"
-		Me.lblVisVariable.Size = New System.Drawing.Size(56, 16)
-		Me.lblVisVariable.TabIndex = 8
-		Me.lblVisVariable.Text = "Variable :"
-		'
-		'cboxVisSite
-		'
-		Me.cboxVisSite.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cboxVisSite.Location = New System.Drawing.Point(40, 16)
-		Me.cboxVisSite.Name = "cboxVisSite"
-		Me.cboxVisSite.Size = New System.Drawing.Size(488, 21)
-		Me.cboxVisSite.TabIndex = 4
-		'
-		'tabctlPlots
-		'
-		Me.tabctlPlots.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tabctlPlots.Controls.Add(Me.tabpgTimeSeries)
-		Me.tabctlPlots.Controls.Add(Me.tabpgProbability)
-		Me.tabctlPlots.Controls.Add(Me.tabpgHistogram)
-		Me.tabctlPlots.Controls.Add(Me.tabpgBoxPlot)
-		Me.tabctlPlots.Location = New System.Drawing.Point(8, 8)
-		Me.tabctlPlots.Name = "tabctlPlots"
-		Me.tabctlPlots.SelectedIndex = 0
-		Me.tabctlPlots.Size = New System.Drawing.Size(536, 321)
-		Me.tabctlPlots.TabIndex = 8
-		'
-		'tabpgTimeSeries
-		'
-		Me.tabpgTimeSeries.Controls.Add(Me.zg5TimeSeries)
-		Me.tabpgTimeSeries.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgTimeSeries.Name = "tabpgTimeSeries"
-		Me.tabpgTimeSeries.Size = New System.Drawing.Size(528, 295)
-		Me.tabpgTimeSeries.TabIndex = 0
-		Me.tabpgTimeSeries.Text = "Time Series"
-		'
-		'zg5TimeSeries
-		'
-		Me.zg5TimeSeries.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.zg5TimeSeries.IsShowHScrollBar = True
-		Me.zg5TimeSeries.IsShowPointValues = True
-		Me.zg5TimeSeries.IsShowVScrollBar = True
-		Me.zg5TimeSeries.Location = New System.Drawing.Point(0, 0)
-		Me.zg5TimeSeries.Name = "zg5TimeSeries"
-		Me.zg5TimeSeries.ScrollMaxX = 0
-		Me.zg5TimeSeries.ScrollMaxY = 0
-		Me.zg5TimeSeries.ScrollMaxY2 = 0
-		Me.zg5TimeSeries.ScrollMinX = 0
-		Me.zg5TimeSeries.ScrollMinY = 0
-		Me.zg5TimeSeries.ScrollMinY2 = 0
-		Me.zg5TimeSeries.Size = New System.Drawing.Size(528, 295)
-		Me.zg5TimeSeries.TabIndex = 0
-		'
-		'tabpgProbability
-		'
-		Me.tabpgProbability.Controls.Add(Me.zg5Probability)
-		Me.tabpgProbability.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgProbability.Name = "tabpgProbability"
-		Me.tabpgProbability.Size = New System.Drawing.Size(528, 295)
-		Me.tabpgProbability.TabIndex = 0
-		Me.tabpgProbability.Text = "Probability"
-		'
-		'zg5Probability
-		'
-		Me.zg5Probability.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.zg5Probability.IsShowHScrollBar = True
-		Me.zg5Probability.IsShowPointValues = True
-		Me.zg5Probability.IsShowVScrollBar = True
-		Me.zg5Probability.Location = New System.Drawing.Point(0, 0)
-		Me.zg5Probability.Name = "zg5Probability"
-		Me.zg5Probability.ScrollMaxX = 0
-		Me.zg5Probability.ScrollMaxY = 0
-		Me.zg5Probability.ScrollMaxY2 = 0
-		Me.zg5Probability.ScrollMinX = 0
-		Me.zg5Probability.ScrollMinY = 0
-		Me.zg5Probability.ScrollMinY2 = 0
-		Me.zg5Probability.Size = New System.Drawing.Size(528, 295)
-		Me.zg5Probability.TabIndex = 1
-		'
-		'tabpgHistogram
-		'
-		Me.tabpgHistogram.Controls.Add(Me.zg5Histogram)
-		Me.tabpgHistogram.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgHistogram.Name = "tabpgHistogram"
-		Me.tabpgHistogram.Size = New System.Drawing.Size(528, 295)
-		Me.tabpgHistogram.TabIndex = 0
-		Me.tabpgHistogram.Text = "Histogram"
-		'
-		'zg5Histogram
-		'
-		Me.zg5Histogram.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.zg5Histogram.IsShowHScrollBar = True
-		Me.zg5Histogram.IsShowPointValues = True
-		Me.zg5Histogram.IsShowVScrollBar = True
-		Me.zg5Histogram.Location = New System.Drawing.Point(0, 0)
-		Me.zg5Histogram.Name = "zg5Histogram"
-		Me.zg5Histogram.PointValueFormat = "N"
-		Me.zg5Histogram.ScrollMaxX = 0
-		Me.zg5Histogram.ScrollMaxY = 0
-		Me.zg5Histogram.ScrollMaxY2 = 0
-		Me.zg5Histogram.ScrollMinX = 0
-		Me.zg5Histogram.ScrollMinY = 0
-		Me.zg5Histogram.ScrollMinY2 = 0
-		Me.zg5Histogram.Size = New System.Drawing.Size(528, 295)
-		Me.zg5Histogram.TabIndex = 2
-		'
-		'tabpgBoxPlot
-		'
-		Me.tabpgBoxPlot.Controls.Add(Me.zg5BoxPlot)
-		Me.tabpgBoxPlot.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgBoxPlot.Name = "tabpgBoxPlot"
-		Me.tabpgBoxPlot.Size = New System.Drawing.Size(528, 295)
-		Me.tabpgBoxPlot.TabIndex = 0
-		Me.tabpgBoxPlot.Text = "Box/Whisker"
-		'
-		'zg5BoxPlot
-		'
-		Me.zg5BoxPlot.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.zg5BoxPlot.IsShowHScrollBar = True
-		Me.zg5BoxPlot.IsShowPointValues = True
-		Me.zg5BoxPlot.IsShowVScrollBar = True
-		Me.zg5BoxPlot.Location = New System.Drawing.Point(0, 0)
-		Me.zg5BoxPlot.Name = "zg5BoxPlot"
-		Me.zg5BoxPlot.ScrollMaxX = 0
-		Me.zg5BoxPlot.ScrollMaxY = 0
-		Me.zg5BoxPlot.ScrollMaxY2 = 0
-		Me.zg5BoxPlot.ScrollMinX = 0
-		Me.zg5BoxPlot.ScrollMinY = 0
-		Me.zg5BoxPlot.ScrollMinY2 = 0
-		Me.zg5BoxPlot.Size = New System.Drawing.Size(528, 295)
-		Me.zg5BoxPlot.TabIndex = 2
-		'
-		'tabpgEdit
-		'
-		Me.tabpgEdit.Controls.Add(Me.btnEditDataDeriveNewDS)
-		Me.tabpgEdit.Controls.Add(Me.gboxEditFilter)
-		Me.tabpgEdit.Controls.Add(Me.btnEditDataFlag)
-		Me.tabpgEdit.Controls.Add(Me.btnEditDataInterpolate)
-		Me.tabpgEdit.Controls.Add(Me.btnEditDataAdd)
-		Me.tabpgEdit.Controls.Add(Me.btnEditDataRemove)
-		Me.tabpgEdit.Controls.Add(Me.btnEditDataAdjust)
-		Me.tabpgEdit.Controls.Add(Me.btnEditRestoreDefaults)
-		Me.tabpgEdit.Controls.Add(Me.btnEditApplyChanges)
-		Me.tabpgEdit.Controls.Add(Me.splitpnlEdit_PlotData)
-		Me.tabpgEdit.Controls.Add(Me.gboxEditDataSel)
-		Me.tabpgEdit.Location = New System.Drawing.Point(4, 22)
-		Me.tabpgEdit.Name = "tabpgEdit"
-		Me.tabpgEdit.Size = New System.Drawing.Size(784, 519)
-		Me.tabpgEdit.TabIndex = 2
-		Me.tabpgEdit.Text = "Edit"
-		Me.tabpgEdit.UseVisualStyleBackColor = True
-		'
-		'btnEditDataDeriveNewDS
-		'
-		Me.btnEditDataDeriveNewDS.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditDataDeriveNewDS.Location = New System.Drawing.Point(440, 303)
-		Me.btnEditDataDeriveNewDS.Name = "btnEditDataDeriveNewDS"
-		Me.btnEditDataDeriveNewDS.Size = New System.Drawing.Size(144, 24)
-		Me.btnEditDataDeriveNewDS.TabIndex = 12
-		Me.btnEditDataDeriveNewDS.Text = "Derive New Data Series"
-		Me.ttipEdit.SetToolTip(Me.btnEditDataDeriveNewDS, "Derive/Create a New Data Series from the selected Data Series")
-		Me.btnEditDataDeriveNewDS.UseVisualStyleBackColor = True
-		'
-		'gboxEditFilter
-		'
-		Me.gboxEditFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.gboxEditFilter.Controls.Add(Me.rbtnEditDFDate)
-		Me.gboxEditFilter.Controls.Add(Me.gboxEditDFDate)
-		Me.gboxEditFilter.Controls.Add(Me.rbtnEditDFValueThreshold)
-		Me.gboxEditFilter.Controls.Add(Me.gboxEditDFValueThreshold)
-		Me.gboxEditFilter.Controls.Add(Me.rbtnEditDFDataGap)
-		Me.gboxEditFilter.Controls.Add(Me.gboxEditDFDataGaps)
-		Me.gboxEditFilter.Controls.Add(Me.btnEditDFApplyFilter)
-		Me.gboxEditFilter.Controls.Add(Me.btnEditDFClearSel)
-		Me.gboxEditFilter.Controls.Add(Me.tboxEditDFVTChange)
-		Me.gboxEditFilter.Controls.Add(Me.rbtnEditDFVTChange)
-		Me.gboxEditFilter.Location = New System.Drawing.Point(440, 328)
-		Me.gboxEditFilter.Name = "gboxEditFilter"
-		Me.gboxEditFilter.Size = New System.Drawing.Size(340, 158)
-		Me.gboxEditFilter.TabIndex = 4
-		Me.gboxEditFilter.TabStop = False
-		Me.gboxEditFilter.Text = "Data Filter"
-		'
-		'rbtnEditDFDate
-		'
-		Me.rbtnEditDFDate.Location = New System.Drawing.Point(12, 96)
-		Me.rbtnEditDFDate.Name = "rbtnEditDFDate"
-		Me.rbtnEditDFDate.Size = New System.Drawing.Size(16, 16)
-		Me.rbtnEditDFDate.TabIndex = 14
-		Me.rbtnEditDFDate.TabStop = True
-		Me.rbtnEditDFDate.UseVisualStyleBackColor = True
-		'
-		'gboxEditDFDate
-		'
-		Me.gboxEditDFDate.Controls.Add(Me.dtpEditDFDBefore)
-		Me.gboxEditDFDate.Controls.Add(Me.ckboxEditDFDBefore)
-		Me.gboxEditDFDate.Controls.Add(Me.dtpEditDFDAfter)
-		Me.gboxEditDFDate.Controls.Add(Me.ckboxEditDFDAfter)
-		Me.gboxEditDFDate.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.gboxEditDFDate.Location = New System.Drawing.Point(4, 98)
-		Me.gboxEditDFDate.Name = "gboxEditDFDate"
-		Me.gboxEditDFDate.Size = New System.Drawing.Size(224, 56)
-		Me.gboxEditDFDate.TabIndex = 25
-		Me.gboxEditDFDate.TabStop = False
-		Me.gboxEditDFDate.Text = "     Date"
-		'
-		'dtpEditDFDBefore
-		'
-		Me.dtpEditDFDBefore.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.dtpEditDFDBefore.CustomFormat = "MM/dd/yyyy  hh:mm tt"
-		Me.dtpEditDFDBefore.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-		Me.dtpEditDFDBefore.Location = New System.Drawing.Point(68, 12)
-		Me.dtpEditDFDBefore.Name = "dtpEditDFDBefore"
-		Me.dtpEditDFDBefore.Size = New System.Drawing.Size(150, 20)
-		Me.dtpEditDFDBefore.TabIndex = 24
-		'
-		'ckboxEditDFDBefore
-		'
-		Me.ckboxEditDFDBefore.Location = New System.Drawing.Point(8, 14)
-		Me.ckboxEditDFDBefore.Name = "ckboxEditDFDBefore"
-		Me.ckboxEditDFDBefore.Size = New System.Drawing.Size(80, 16)
-		Me.ckboxEditDFDBefore.TabIndex = 22
-		Me.ckboxEditDFDBefore.Text = "Before Date"
-		Me.ckboxEditDFDBefore.UseVisualStyleBackColor = True
-		'
-		'dtpEditDFDAfter
-		'
-		Me.dtpEditDFDAfter.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.dtpEditDFDAfter.CustomFormat = "MM/dd/yyyy  hh:mm tt"
-		Me.dtpEditDFDAfter.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-		Me.dtpEditDFDAfter.Location = New System.Drawing.Point(68, 34)
-		Me.dtpEditDFDAfter.Name = "dtpEditDFDAfter"
-		Me.dtpEditDFDAfter.Size = New System.Drawing.Size(150, 20)
-		Me.dtpEditDFDAfter.TabIndex = 25
-		'
-		'ckboxEditDFDAfter
-		'
-		Me.ckboxEditDFDAfter.Location = New System.Drawing.Point(8, 36)
-		Me.ckboxEditDFDAfter.Name = "ckboxEditDFDAfter"
-		Me.ckboxEditDFDAfter.Size = New System.Drawing.Size(80, 16)
-		Me.ckboxEditDFDAfter.TabIndex = 23
-		Me.ckboxEditDFDAfter.Text = "After "
-		Me.ckboxEditDFDAfter.UseVisualStyleBackColor = True
-		'
-		'rbtnEditDFValueThreshold
-		'
-		Me.rbtnEditDFValueThreshold.Location = New System.Drawing.Point(12, 14)
-		Me.rbtnEditDFValueThreshold.Name = "rbtnEditDFValueThreshold"
-		Me.rbtnEditDFValueThreshold.Size = New System.Drawing.Size(16, 16)
-		Me.rbtnEditDFValueThreshold.TabIndex = 0
-		Me.rbtnEditDFValueThreshold.TabStop = True
-		Me.rbtnEditDFValueThreshold.UseVisualStyleBackColor = True
-		'
-		'gboxEditDFValueThreshold
-		'
-		Me.gboxEditDFValueThreshold.Controls.Add(Me.tboxEditDFVTGreater)
-		Me.gboxEditDFValueThreshold.Controls.Add(Me.ckboxEditDFVTGreater)
-		Me.gboxEditDFValueThreshold.Controls.Add(Me.tboxEditDFVTLess)
-		Me.gboxEditDFValueThreshold.Controls.Add(Me.ckboxEditDFVTLess)
-		Me.gboxEditDFValueThreshold.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.gboxEditDFValueThreshold.Location = New System.Drawing.Point(4, 16)
-		Me.gboxEditDFValueThreshold.Name = "gboxEditDFValueThreshold"
-		Me.gboxEditDFValueThreshold.Size = New System.Drawing.Size(136, 58)
-		Me.gboxEditDFValueThreshold.TabIndex = 24
-		Me.gboxEditDFValueThreshold.TabStop = False
-		Me.gboxEditDFValueThreshold.Text = "     Value Threshold"
-		'
-		'tboxEditDFVTGreater
-		'
-		Me.tboxEditDFVTGreater.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxEditDFVTGreater.Location = New System.Drawing.Point(72, 12)
-		Me.tboxEditDFVTGreater.Name = "tboxEditDFVTGreater"
-		Me.tboxEditDFVTGreater.Size = New System.Drawing.Size(58, 20)
-		Me.tboxEditDFVTGreater.TabIndex = 13
-		Me.tboxEditDFVTGreater.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		Me.tboxEditDFVTGreater.WordWrap = False
-		'
-		'ckboxEditDFVTGreater
-		'
-		Me.ckboxEditDFVTGreater.Location = New System.Drawing.Point(8, 14)
-		Me.ckboxEditDFVTGreater.Name = "ckboxEditDFVTGreater"
-		Me.ckboxEditDFVTGreater.Size = New System.Drawing.Size(68, 16)
-		Me.ckboxEditDFVTGreater.TabIndex = 15
-		Me.ckboxEditDFVTGreater.Text = "Value >"
-		Me.ckboxEditDFVTGreater.UseVisualStyleBackColor = True
-		'
-		'tboxEditDFVTLess
-		'
-		Me.tboxEditDFVTLess.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxEditDFVTLess.Location = New System.Drawing.Point(72, 34)
-		Me.tboxEditDFVTLess.Name = "tboxEditDFVTLess"
-		Me.tboxEditDFVTLess.Size = New System.Drawing.Size(58, 20)
-		Me.tboxEditDFVTLess.TabIndex = 14
-		Me.tboxEditDFVTLess.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		Me.tboxEditDFVTLess.WordWrap = False
-		'
-		'ckboxEditDFVTLess
-		'
-		Me.ckboxEditDFVTLess.Location = New System.Drawing.Point(8, 36)
-		Me.ckboxEditDFVTLess.Name = "ckboxEditDFVTLess"
-		Me.ckboxEditDFVTLess.Size = New System.Drawing.Size(68, 16)
-		Me.ckboxEditDFVTLess.TabIndex = 16
-		Me.ckboxEditDFVTLess.Text = "Value <"
-		Me.ckboxEditDFVTLess.UseVisualStyleBackColor = True
-		'
-		'rbtnEditDFDataGap
-		'
-		Me.rbtnEditDFDataGap.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.rbtnEditDFDataGap.Location = New System.Drawing.Point(152, 14)
-		Me.rbtnEditDFDataGap.Name = "rbtnEditDFDataGap"
-		Me.rbtnEditDFDataGap.Size = New System.Drawing.Size(16, 16)
-		Me.rbtnEditDFDataGap.TabIndex = 23
-		Me.rbtnEditDFDataGap.TabStop = True
-		Me.rbtnEditDFDataGap.UseVisualStyleBackColor = True
-		'
-		'gboxEditDFDataGaps
-		'
-		Me.gboxEditDFDataGaps.Controls.Add(Me.cboxEditDFDGTimePeriod)
-		Me.gboxEditDFDataGaps.Controls.Add(Me.lblEditDFDGTimePeriod)
-		Me.gboxEditDFDataGaps.Controls.Add(Me.tboxEditDFDGValue)
-		Me.gboxEditDFDataGaps.Controls.Add(Me.lblEditDFDGValue)
-		Me.gboxEditDFDataGaps.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.gboxEditDFDataGaps.Location = New System.Drawing.Point(144, 16)
-		Me.gboxEditDFDataGaps.Name = "gboxEditDFDataGaps"
-		Me.gboxEditDFDataGaps.Size = New System.Drawing.Size(192, 58)
-		Me.gboxEditDFDataGaps.TabIndex = 22
-		Me.gboxEditDFDataGaps.TabStop = False
-		Me.gboxEditDFDataGaps.Text = "     Data Gaps"
-		'
-		'cboxEditDFDGTimePeriod
-		'
-		Me.cboxEditDFDGTimePeriod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cboxEditDFDGTimePeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-		Me.cboxEditDFDGTimePeriod.FormattingEnabled = True
-		Me.cboxEditDFDGTimePeriod.Location = New System.Drawing.Point(80, 34)
-		Me.cboxEditDFDGTimePeriod.Name = "cboxEditDFDGTimePeriod"
-		Me.cboxEditDFDGTimePeriod.Size = New System.Drawing.Size(108, 21)
-		Me.cboxEditDFDGTimePeriod.TabIndex = 6
-		'
-		'lblEditDFDGTimePeriod
-		'
-		Me.lblEditDFDGTimePeriod.Location = New System.Drawing.Point(8, 36)
-		Me.lblEditDFDGTimePeriod.Name = "lblEditDFDGTimePeriod"
-		Me.lblEditDFDGTimePeriod.Size = New System.Drawing.Size(72, 16)
-		Me.lblEditDFDGTimePeriod.TabIndex = 7
-		Me.lblEditDFDGTimePeriod.Text = "Time Period : "
-		Me.lblEditDFDGTimePeriod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'tboxEditDFDGValue
-		'
-		Me.tboxEditDFDGValue.Location = New System.Drawing.Point(80, 12)
-		Me.tboxEditDFDGValue.Name = "tboxEditDFDGValue"
-		Me.tboxEditDFDGValue.Size = New System.Drawing.Size(58, 20)
-		Me.tboxEditDFDGValue.TabIndex = 5
-		'
-		'lblEditDFDGValue
-		'
-		Me.lblEditDFDGValue.Location = New System.Drawing.Point(8, 14)
-		Me.lblEditDFDGValue.Name = "lblEditDFDGValue"
-		Me.lblEditDFDGValue.Size = New System.Drawing.Size(72, 16)
-		Me.lblEditDFDGValue.TabIndex = 4
-		Me.lblEditDFDGValue.Text = "Value : "
-		Me.lblEditDFDGValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'btnEditDFApplyFilter
-		'
-		Me.btnEditDFApplyFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditDFApplyFilter.Location = New System.Drawing.Point(242, 94)
-		Me.btnEditDFApplyFilter.Name = "btnEditDFApplyFilter"
-		Me.btnEditDFApplyFilter.Size = New System.Drawing.Size(86, 24)
-		Me.btnEditDFApplyFilter.TabIndex = 8
-		Me.btnEditDFApplyFilter.Text = "Apply Filter"
-		Me.btnEditDFApplyFilter.UseVisualStyleBackColor = True
-		'
-		'btnEditDFClearSel
-		'
-		Me.btnEditDFClearSel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditDFClearSel.Location = New System.Drawing.Point(234, 124)
-		Me.btnEditDFClearSel.Name = "btnEditDFClearSel"
-		Me.btnEditDFClearSel.Size = New System.Drawing.Size(100, 24)
-		Me.btnEditDFClearSel.TabIndex = 7
-		Me.btnEditDFClearSel.Text = "Clear Selection"
-		Me.btnEditDFClearSel.UseVisualStyleBackColor = True
-		'
-		'tboxEditDFVTChange
-		'
-		Me.tboxEditDFVTChange.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.tboxEditDFVTChange.Location = New System.Drawing.Point(172, 78)
-		Me.tboxEditDFVTChange.Name = "tboxEditDFVTChange"
-		Me.tboxEditDFVTChange.Size = New System.Drawing.Size(56, 20)
-		Me.tboxEditDFVTChange.TabIndex = 6
-		Me.tboxEditDFVTChange.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		Me.tboxEditDFVTChange.WordWrap = False
-		'
-		'rbtnEditDFVTChange
-		'
-		Me.rbtnEditDFVTChange.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.rbtnEditDFVTChange.Location = New System.Drawing.Point(12, 78)
-		Me.rbtnEditDFVTChange.Name = "rbtnEditDFVTChange"
-		Me.rbtnEditDFVTChange.Size = New System.Drawing.Size(168, 20)
-		Me.rbtnEditDFVTChange.TabIndex = 2
-		Me.rbtnEditDFVTChange.TabStop = True
-		Me.rbtnEditDFVTChange.Text = "Value Change Threshold >= "
-		Me.rbtnEditDFVTChange.UseVisualStyleBackColor = True
-		'
-		'btnEditDataFlag
-		'
-		Me.btnEditDataFlag.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditDataFlag.Image = CType(resources.GetObject("btnEditDataFlag.Image"), System.Drawing.Image)
-		Me.btnEditDataFlag.Location = New System.Drawing.Point(688, 301)
-		Me.btnEditDataFlag.Name = "btnEditDataFlag"
-		Me.btnEditDataFlag.Size = New System.Drawing.Size(28, 28)
-		Me.btnEditDataFlag.TabIndex = 11
-		Me.ttipEdit.SetToolTip(Me.btnEditDataFlag, "Flag the selected Values in the Data Series")
-		Me.btnEditDataFlag.UseVisualStyleBackColor = True
-		'
-		'btnEditDataInterpolate
-		'
-		Me.btnEditDataInterpolate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditDataInterpolate.Image = CType(resources.GetObject("btnEditDataInterpolate.Image"), System.Drawing.Image)
-		Me.btnEditDataInterpolate.Location = New System.Drawing.Point(656, 301)
-		Me.btnEditDataInterpolate.Name = "btnEditDataInterpolate"
-		Me.btnEditDataInterpolate.Size = New System.Drawing.Size(28, 28)
-		Me.btnEditDataInterpolate.TabIndex = 10
-		Me.ttipEdit.SetToolTip(Me.btnEditDataInterpolate, "Interpolate Values")
-		Me.btnEditDataInterpolate.UseVisualStyleBackColor = True
-		'
-		'btnEditDataAdd
-		'
-		Me.btnEditDataAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditDataAdd.Image = CType(resources.GetObject("btnEditDataAdd.Image"), System.Drawing.Image)
-		Me.btnEditDataAdd.Location = New System.Drawing.Point(752, 301)
-		Me.btnEditDataAdd.Name = "btnEditDataAdd"
-		Me.btnEditDataAdd.Size = New System.Drawing.Size(28, 28)
-		Me.btnEditDataAdd.TabIndex = 9
-		Me.ttipEdit.SetToolTip(Me.btnEditDataAdd, "Add a new Value to the Data Series")
-		Me.btnEditDataAdd.UseVisualStyleBackColor = True
-		'
-		'btnEditDataRemove
-		'
-		Me.btnEditDataRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditDataRemove.Image = CType(resources.GetObject("btnEditDataRemove.Image"), System.Drawing.Image)
-		Me.btnEditDataRemove.Location = New System.Drawing.Point(720, 301)
-		Me.btnEditDataRemove.Name = "btnEditDataRemove"
-		Me.btnEditDataRemove.Size = New System.Drawing.Size(28, 28)
-		Me.btnEditDataRemove.TabIndex = 8
-		Me.ttipEdit.SetToolTip(Me.btnEditDataRemove, "Remove the selected Values from the Data Series")
-		Me.btnEditDataRemove.UseVisualStyleBackColor = True
-		'
-		'btnEditDataAdjust
-		'
-		Me.btnEditDataAdjust.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditDataAdjust.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.btnEditDataAdjust.Image = CType(resources.GetObject("btnEditDataAdjust.Image"), System.Drawing.Image)
-		Me.btnEditDataAdjust.Location = New System.Drawing.Point(624, 301)
-		Me.btnEditDataAdjust.Name = "btnEditDataAdjust"
-		Me.btnEditDataAdjust.Size = New System.Drawing.Size(28, 28)
-		Me.btnEditDataAdjust.TabIndex = 7
-		Me.ttipEdit.SetToolTip(Me.btnEditDataAdjust, "Adjust the selected Values in the Data Series")
-		Me.btnEditDataAdjust.UseVisualStyleBackColor = True
-		'
-		'btnEditRestoreDefaults
-		'
-		Me.btnEditRestoreDefaults.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditRestoreDefaults.Location = New System.Drawing.Point(444, 490)
-		Me.btnEditRestoreDefaults.Name = "btnEditRestoreDefaults"
-		Me.btnEditRestoreDefaults.Size = New System.Drawing.Size(152, 24)
-		Me.btnEditRestoreDefaults.TabIndex = 6
-		Me.btnEditRestoreDefaults.Text = "Restore Original Values "
-		Me.ttipEdit.SetToolTip(Me.btnEditRestoreDefaults, "Restore the data from the Database")
-		Me.btnEditRestoreDefaults.UseVisualStyleBackColor = True
-		'
-		'btnEditApplyChanges
-		'
-		Me.btnEditApplyChanges.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnEditApplyChanges.Location = New System.Drawing.Point(602, 490)
-		Me.btnEditApplyChanges.Name = "btnEditApplyChanges"
-		Me.btnEditApplyChanges.Size = New System.Drawing.Size(172, 24)
-		Me.btnEditApplyChanges.TabIndex = 5
-		Me.btnEditApplyChanges.Text = "Apply Changes To Database"
-		Me.ttipEdit.SetToolTip(Me.btnEditApplyChanges, "Apply any changes to the Database")
-		Me.btnEditApplyChanges.UseVisualStyleBackColor = True
-		'
-		'splitpnlEdit_PlotData
-		'
-		Me.splitpnlEdit_PlotData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.splitpnlEdit_PlotData.BackColor = System.Drawing.SystemColors.Highlight
-		Me.splitpnlEdit_PlotData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.splitpnlEdit_PlotData.Location = New System.Drawing.Point(4, 8)
-		Me.splitpnlEdit_PlotData.Name = "splitpnlEdit_PlotData"
-		'
-		'splitpnlEdit_PlotData.Panel1
-		'
-		Me.splitpnlEdit_PlotData.Panel1.Controls.Add(Me.zg5EditPlot)
-		'
-		'splitpnlEdit_PlotData.Panel2
-		'
-		Me.splitpnlEdit_PlotData.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
-		Me.splitpnlEdit_PlotData.Panel2.Controls.Add(Me.dgvEditTable)
-		Me.splitpnlEdit_PlotData.Size = New System.Drawing.Size(776, 289)
-		Me.splitpnlEdit_PlotData.SplitterDistance = 427
-		Me.splitpnlEdit_PlotData.TabIndex = 3
-		'
-		'zg5EditPlot
-		'
-		Me.zg5EditPlot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.zg5EditPlot.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.zg5EditPlot.IsShowHScrollBar = True
-		Me.zg5EditPlot.IsShowPointValues = True
-		Me.zg5EditPlot.IsShowVScrollBar = True
-		Me.zg5EditPlot.Location = New System.Drawing.Point(0, 0)
-		Me.zg5EditPlot.Name = "zg5EditPlot"
-		Me.zg5EditPlot.ScrollMaxX = 0
-		Me.zg5EditPlot.ScrollMaxY = 0
-		Me.zg5EditPlot.ScrollMaxY2 = 0
-		Me.zg5EditPlot.ScrollMinX = 0
-		Me.zg5EditPlot.ScrollMinY = 0
-		Me.zg5EditPlot.ScrollMinY2 = 0
-		Me.zg5EditPlot.Size = New System.Drawing.Size(423, 285)
-		Me.zg5EditPlot.TabIndex = 1
-		'
-		'dgvEditTable
-		'
-		Me.dgvEditTable.AllowUserToAddRows = False
-		Me.dgvEditTable.AllowUserToDeleteRows = False
-		Me.dgvEditTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-		Me.dgvEditTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
-		DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-		DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-		DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-		DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-		DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.dgvEditTable.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-		Me.dgvEditTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-		DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-		DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-		DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-		DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-		DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-		DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-		Me.dgvEditTable.DefaultCellStyle = DataGridViewCellStyle2
-		Me.dgvEditTable.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.dgvEditTable.Location = New System.Drawing.Point(0, 0)
-		Me.dgvEditTable.Name = "dgvEditTable"
-		DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-		DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-		DataGridViewCellStyle3.Format = "N0"
-		DataGridViewCellStyle3.NullValue = Nothing
-		DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-		DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-		DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-		Me.dgvEditTable.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
-		Me.dgvEditTable.RowHeadersWidth = 20
-		Me.dgvEditTable.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-		Me.dgvEditTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-		Me.dgvEditTable.Size = New System.Drawing.Size(341, 285)
-		Me.dgvEditTable.TabIndex = 0
-		'
-		'gboxEditDataSel
-		'
-		Me.gboxEditDataSel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.gboxEditDataSel.Controls.Add(Me.lvEditDataSeries)
-		Me.gboxEditDataSel.Controls.Add(Me.lblEditDataSeries)
-		Me.gboxEditDataSel.Controls.Add(Me.cboxEditVariable)
-		Me.gboxEditDataSel.Controls.Add(Me.lblEditSite)
-		Me.gboxEditDataSel.Controls.Add(Me.lblEditVariable)
-		Me.gboxEditDataSel.Controls.Add(Me.cboxEditSite)
-		Me.gboxEditDataSel.Location = New System.Drawing.Point(4, 297)
-		Me.gboxEditDataSel.Name = "gboxEditDataSel"
-		Me.gboxEditDataSel.Size = New System.Drawing.Size(428, 220)
-		Me.gboxEditDataSel.TabIndex = 2
-		Me.gboxEditDataSel.TabStop = False
-		Me.gboxEditDataSel.Text = "Data To Plot"
-		'
-		'lvEditDataSeries
-		'
-		Me.lvEditDataSeries.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.lvEditDataSeries.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.lvcolEditGenCategory, Me.lvcolEditSpeciation, Me.lvcolEditVarUnits, Me.lvcolEditTimeSupport, Me.lvcolEditTimeUnits, Me.lvcolEditSampleMedium, Me.lvcolEditValueType, Me.lvcolEditDataType, Me.lvcolEditQCLevel, Me.lvcolEditMethod, Me.lvcolEditOrganization, Me.lvcolEditSourceDesc, Me.lvcolEditCitation, Me.lvcolEditLocalDateRange, Me.lvcolEditUTCDateRange, Me.lvcolEditValueCount})
-		Me.lvEditDataSeries.FullRowSelect = True
-		Me.lvEditDataSeries.GridLines = True
-		Me.lvEditDataSeries.HideSelection = False
-		Me.lvEditDataSeries.Location = New System.Drawing.Point(8, 88)
-		Me.lvEditDataSeries.MultiSelect = False
-		Me.lvEditDataSeries.Name = "lvEditDataSeries"
-		Me.lvEditDataSeries.Size = New System.Drawing.Size(412, 126)
-		Me.lvEditDataSeries.TabIndex = 9
-		Me.lvEditDataSeries.UseCompatibleStateImageBehavior = False
-		Me.lvEditDataSeries.View = System.Windows.Forms.View.Details
-		'
-		'lvcolEditGenCategory
-		'
-		Me.lvcolEditGenCategory.Text = "General Category"
-		Me.lvcolEditGenCategory.Width = 75
-		'
-		'lvcolEditSpeciation
-		'
-		Me.lvcolEditSpeciation.Text = "Speciation"
-		Me.lvcolEditSpeciation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		'
-		'lvcolEditVarUnits
-		'
-		Me.lvcolEditVarUnits.Text = "Variable Units"
-		Me.lvcolEditVarUnits.Width = 75
-		'
-		'lvcolEditTimeSupport
-		'
-		Me.lvcolEditTimeSupport.Text = "Time Support"
-		Me.lvcolEditTimeSupport.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-		Me.lvcolEditTimeSupport.Width = 75
-		'
-		'lvcolEditTimeUnits
-		'
-		Me.lvcolEditTimeUnits.Text = "Time Units"
-		Me.lvcolEditTimeUnits.Width = 75
-		'
-		'lvcolEditSampleMedium
-		'
-		Me.lvcolEditSampleMedium.Text = "Sample Medium"
-		Me.lvcolEditSampleMedium.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolEditSampleMedium.Width = 75
-		'
-		'lvcolEditValueType
-		'
-		Me.lvcolEditValueType.Text = "Value Type"
-		Me.lvcolEditValueType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolEditValueType.Width = 75
-		'
-		'lvcolEditDataType
-		'
-		Me.lvcolEditDataType.Text = "Data Type"
-		Me.lvcolEditDataType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolEditDataType.Width = 75
-		'
-		'lvcolEditQCLevel
-		'
-		Me.lvcolEditQCLevel.Text = "Quality Control Level"
-		Me.lvcolEditQCLevel.Width = 75
-		'
-		'lvcolEditMethod
-		'
-		Me.lvcolEditMethod.Text = "Method"
-		Me.lvcolEditMethod.Width = 75
-		'
-		'lvcolEditOrganization
-		'
-		Me.lvcolEditOrganization.Text = "Organization"
-		Me.lvcolEditOrganization.Width = 75
-		'
-		'lvcolEditSourceDesc
-		'
-		Me.lvcolEditSourceDesc.Text = "Source Description"
-		Me.lvcolEditSourceDesc.Width = 75
-		'
-		'lvcolEditCitation
-		'
-		Me.lvcolEditCitation.Text = "Citation"
-		'
-		'lvcolEditLocalDateRange
-		'
-		Me.lvcolEditLocalDateRange.Text = "Date Range"
-		Me.lvcolEditLocalDateRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolEditLocalDateRange.Width = 75
-		'
-		'lvcolEditUTCDateRange
-		'
-		Me.lvcolEditUTCDateRange.Text = "UTC Date Range"
-		Me.lvcolEditUTCDateRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolEditUTCDateRange.Width = 75
-		'
-		'lvcolEditValueCount
-		'
-		Me.lvcolEditValueCount.Text = "Value Count"
-		Me.lvcolEditValueCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		Me.lvcolEditValueCount.Width = 75
-		'
-		'lblEditDataSeries
-		'
-		Me.lblEditDataSeries.Location = New System.Drawing.Point(8, 74)
-		Me.lblEditDataSeries.Name = "lblEditDataSeries"
-		Me.lblEditDataSeries.Size = New System.Drawing.Size(176, 16)
-		Me.lblEditDataSeries.TabIndex = 10
-		Me.lblEditDataSeries.Text = "Select a Data Series to Edit :"
-		'
-		'cboxEditVariable
-		'
-		Me.cboxEditVariable.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cboxEditVariable.Location = New System.Drawing.Point(58, 44)
-		Me.cboxEditVariable.Name = "cboxEditVariable"
-		Me.cboxEditVariable.Size = New System.Drawing.Size(362, 21)
-		Me.cboxEditVariable.TabIndex = 0
-		'
-		'lblEditSite
-		'
-		Me.lblEditSite.Location = New System.Drawing.Point(8, 18)
-		Me.lblEditSite.Name = "lblEditSite"
-		Me.lblEditSite.Size = New System.Drawing.Size(32, 16)
-		Me.lblEditSite.TabIndex = 7
-		Me.lblEditSite.Text = "Site :"
-		Me.lblEditSite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'lblEditVariable
-		'
-		Me.lblEditVariable.Location = New System.Drawing.Point(8, 46)
-		Me.lblEditVariable.Name = "lblEditVariable"
-		Me.lblEditVariable.Size = New System.Drawing.Size(56, 16)
-		Me.lblEditVariable.TabIndex = 8
-		Me.lblEditVariable.Text = "Variable :"
-		'
-		'cboxEditSite
-		'
-		Me.cboxEditSite.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cboxEditSite.Location = New System.Drawing.Point(40, 16)
-		Me.cboxEditSite.Name = "cboxEditSite"
-		Me.cboxEditSite.Size = New System.Drawing.Size(380, 21)
-		Me.cboxEditSite.TabIndex = 4
-		'
-		'cmnuQueryDataRightClick
-		'
-		Me.cmnuQueryDataRightClick.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuQDRCPlot, Me.mnuQDRCEdit, Me.mnuQDRCViewMeta, Me.mnuQDRCLine1, Me.mnuQDRCSingleExport, Me.mnuQDRCExportMeta, Me.MenuItem1, Me.mnuQDRCSelectSingle, Me.mnuQDRCSelectAll, Me.mnuQDRCSelectNone})
-		'
-		'mnuQDRCPlot
-		'
-		Me.mnuQDRCPlot.DefaultItem = True
-		Me.mnuQDRCPlot.Index = 0
-		Me.mnuQDRCPlot.Text = "Plot"
-		'
-		'mnuQDRCEdit
-		'
-		Me.mnuQDRCEdit.Index = 1
-		Me.mnuQDRCEdit.Text = "Edit"
-		'
-		'mnuQDRCViewMeta
-		'
-		Me.mnuQDRCViewMeta.Index = 2
-		Me.mnuQDRCViewMeta.Text = "View MetaData"
-		'
-		'mnuQDRCLine1
-		'
-		Me.mnuQDRCLine1.Index = 3
-		Me.mnuQDRCLine1.Text = "-"
-		'
-		'mnuQDRCSingleExport
-		'
-		Me.mnuQDRCSingleExport.Index = 4
-		Me.mnuQDRCSingleExport.Text = "Export Single Data"
-		'
-		'mnuQDRCExportMeta
-		'
-		Me.mnuQDRCExportMeta.Index = 5
-		Me.mnuQDRCExportMeta.Text = "Export Single MetaData"
-		'
-		'MenuItem1
-		'
-		Me.MenuItem1.Index = 6
-		Me.MenuItem1.Text = "-"
-		'
-		'mnuQDRCSelectSingle
-		'
-		Me.mnuQDRCSelectSingle.Index = 7
-		Me.mnuQDRCSelectSingle.Text = "Select for Group Export"
-		'
-		'mnuQDRCSelectAll
-		'
-		Me.mnuQDRCSelectAll.Index = 8
-		Me.mnuQDRCSelectAll.Text = "Select All"
-		'
-		'mnuQDRCSelectNone
-		'
-		Me.mnuQDRCSelectNone.Index = 9
-		Me.mnuQDRCSelectNone.Text = "Select None"
-		'
-		'sfdExportMyDB
-		'
-		Me.sfdExportMyDB.DefaultExt = "csv"
-		Me.sfdExportMyDB.FileName = "MyDB"
-		Me.sfdExportMyDB.Filter = "Comma Delimited Format(*.csv)|*.csv|TabDelimited(*.txt)|*.txt"
-		Me.sfdExportMyDB.Title = "Export as MyDB Format"
-		'
-		'sfdExportMetadata
-		'
-		Me.sfdExportMetadata.DefaultExt = "xml"
-		Me.sfdExportMetadata.FileName = "Metadata"
-		Me.sfdExportMetadata.Filter = "Metadata(*.xml)|*.xml"
-		Me.sfdExportMetadata.OverwritePrompt = False
-		Me.sfdExportMetadata.SupportMultiDottedExtensions = True
-		Me.sfdExportMetadata.Title = "Export Metadata to XML file"
-		'
-		'DataGridTextBoxColumn1
-		'
-		Me.DataGridTextBoxColumn1.Format = ""
-		Me.DataGridTextBoxColumn1.FormatInfo = Nothing
-		Me.DataGridTextBoxColumn1.Width = 75
-		'
-		'frmODMTools
-		'
-		Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
-		Me.ClientSize = New System.Drawing.Size(792, 545)
-		Me.Controls.Add(Me.tabctlODMTools)
-		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-		Me.Menu = Me.mnuMain
-		Me.MinimumSize = New System.Drawing.Size(800, 552)
-		Me.Name = "frmODMTools"
-		Me.Text = "ODM Tools"
-		Me.tabctlODMTools.ResumeLayout(False)
-		Me.tabpgQuery.ResumeLayout(False)
-		Me.tabpgQuery.PerformLayout()
-		Me.grp_qryVars.ResumeLayout(False)
-		Me.grp_qryVars.PerformLayout()
-		Me.grp_qryVarSelect.ResumeLayout(False)
-		Me.grp_qryVarSelect.PerformLayout()
-		Me.grp_qrySites.ResumeLayout(False)
-		Me.grp_qrySites.PerformLayout()
-		Me.grp_qrySiteSelect.ResumeLayout(False)
-		Me.grp_qrySiteSelect.PerformLayout()
-		Me.grp_qrySources.ResumeLayout(False)
-		Me.grp_qrySources.PerformLayout()
-		Me.grp_qrySrcSelect.ResumeLayout(False)
-		Me.grp_qrySrcSelect.PerformLayout()
-		Me.grp_qryOther.ResumeLayout(False)
-		Me.grp_qryOther.PerformLayout()
-		Me.grp_qryNumObs.ResumeLayout(False)
-		CType(Me.num_qryObs, System.ComponentModel.ISupportInitialize).EndInit()
-		Me.tabpgVisualize.ResumeLayout(False)
-		Me.tabctlPlotOptions.ResumeLayout(False)
-		Me.tabpgSummary.ResumeLayout(False)
-		Me.gboxStatistics.ResumeLayout(False)
-		Me.gboxStatistics.PerformLayout()
-		Me.tabpgOptions.ResumeLayout(False)
-		Me.gboxHistPlotOptions.ResumeLayout(False)
-		Me.gboxHPNumBarSettings.ResumeLayout(False)
-		Me.gboxHPNumBarSettings.PerformLayout()
-		Me.gboxBoxPlotOptions.ResumeLayout(False)
-		Me.gboxBPPlotType.ResumeLayout(False)
-		Me.gboxTSPlotOptions.ResumeLayout(False)
-		Me.gboxTSPlotType.ResumeLayout(False)
-		Me.gboxDateInfo.ResumeLayout(False)
-		Me.gboxVisDataSel.ResumeLayout(False)
-		Me.tabctlPlots.ResumeLayout(False)
-		Me.tabpgTimeSeries.ResumeLayout(False)
-		Me.tabpgProbability.ResumeLayout(False)
-		Me.tabpgHistogram.ResumeLayout(False)
-		Me.tabpgBoxPlot.ResumeLayout(False)
-		Me.tabpgEdit.ResumeLayout(False)
-		Me.gboxEditFilter.ResumeLayout(False)
-		Me.gboxEditFilter.PerformLayout()
-		Me.gboxEditDFDate.ResumeLayout(False)
-		Me.gboxEditDFValueThreshold.ResumeLayout(False)
-		Me.gboxEditDFValueThreshold.PerformLayout()
-		Me.gboxEditDFDataGaps.ResumeLayout(False)
-		Me.gboxEditDFDataGaps.PerformLayout()
-		Me.splitpnlEdit_PlotData.Panel1.ResumeLayout(False)
-		Me.splitpnlEdit_PlotData.Panel2.ResumeLayout(False)
-		Me.splitpnlEdit_PlotData.ResumeLayout(False)
-		CType(Me.dgvEditTable, System.ComponentModel.ISupportInitialize).EndInit()
-		Me.gboxEditDataSel.ResumeLayout(False)
-		Me.ResumeLayout(False)
+        Me.components = New System.ComponentModel.Container
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmODMTools))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Me.mnuMain = New System.Windows.Forms.MainMenu(Me.components)
+        Me.mnuitmFile = New System.Windows.Forms.MenuItem
+        Me.mnuFileExit = New System.Windows.Forms.MenuItem
+        Me.mnuitmEdit = New System.Windows.Forms.MenuItem
+        Me.mnuEditDBConnect = New System.Windows.Forms.MenuItem
+        Me.mnuitmTools = New System.Windows.Forms.MenuItem
+        Me.mnuToolsIntCVUpdate = New System.Windows.Forms.MenuItem
+        Me.mnuToolsQuickCVUpdate = New System.Windows.Forms.MenuItem
+        Me.MenuItem4 = New System.Windows.Forms.MenuItem
+        Me.mnuToolsReloadQuery = New System.Windows.Forms.MenuItem
+        Me.mnuToolsOptions = New System.Windows.Forms.MenuItem
+        Me.mnuitmHelp = New System.Windows.Forms.MenuItem
+        Me.mnuitmHelpAbout = New System.Windows.Forms.MenuItem
+        Me.tabctlODMTools = New System.Windows.Forms.TabControl
+        Me.tabpgQuery = New System.Windows.Forms.TabPage
+        Me.btn_qryMetaExport = New System.Windows.Forms.Button
+        Me.btn_qryExecute = New System.Windows.Forms.Button
+        Me.btn_qryDataExport = New System.Windows.Forms.Button
+        Me.chb_qrySrc = New System.Windows.Forms.CheckBox
+        Me.chb_qryVar = New System.Windows.Forms.CheckBox
+        Me.grp_qryVars = New System.Windows.Forms.GroupBox
+        Me.lbx_qryVars = New System.Windows.Forms.ListBox
+        Me.txt_qryVarCode = New System.Windows.Forms.TextBox
+        Me.txt_qryVarName = New System.Windows.Forms.TextBox
+        Me.rdo_qryVarCode = New System.Windows.Forms.RadioButton
+        Me.rdo_qryVarName = New System.Windows.Forms.RadioButton
+        Me.rdo_qryVarList = New System.Windows.Forms.RadioButton
+        Me.grp_qryVarSelect = New System.Windows.Forms.GroupBox
+        Me.rdo_qryVarOR = New System.Windows.Forms.RadioButton
+        Me.rdo_qryVarAND = New System.Windows.Forms.RadioButton
+        Me.chb_qrySite = New System.Windows.Forms.CheckBox
+        Me.grp_qrySites = New System.Windows.Forms.GroupBox
+        Me.lbx_qrySites = New System.Windows.Forms.ListBox
+        Me.txt_qrySiteCode = New System.Windows.Forms.TextBox
+        Me.txt_qrySiteName = New System.Windows.Forms.TextBox
+        Me.rdo_qrySiteCode = New System.Windows.Forms.RadioButton
+        Me.rdo_qrySiteName = New System.Windows.Forms.RadioButton
+        Me.rdo_qrySiteList = New System.Windows.Forms.RadioButton
+        Me.grp_qrySiteSelect = New System.Windows.Forms.GroupBox
+        Me.rdo_qrySiteAND = New System.Windows.Forms.RadioButton
+        Me.rdo_qrySiteOR = New System.Windows.Forms.RadioButton
+        Me.grp_qrySources = New System.Windows.Forms.GroupBox
+        Me.txt_qrySrcDesc = New System.Windows.Forms.TextBox
+        Me.txt_qrySrcOrg = New System.Windows.Forms.TextBox
+        Me.rdo_qrySrcDesc = New System.Windows.Forms.RadioButton
+        Me.rdo_qrySrcOrg = New System.Windows.Forms.RadioButton
+        Me.grp_qrySrcSelect = New System.Windows.Forms.GroupBox
+        Me.rdo_qrySrcOR = New System.Windows.Forms.RadioButton
+        Me.rdo_qrySrcAND = New System.Windows.Forms.RadioButton
+        Me.grp_qryOther = New System.Windows.Forms.GroupBox
+        Me.dtp_qryTimeBegin = New System.Windows.Forms.DateTimePicker
+        Me.dtp_qryTimeEnd = New System.Windows.Forms.DateTimePicker
+        Me.txt_qryMethod = New System.Windows.Forms.TextBox
+        Me.lbx_qryQCLevel = New System.Windows.Forms.ListBox
+        Me.lbx_qryDataType = New System.Windows.Forms.ListBox
+        Me.lbx_qryValType = New System.Windows.Forms.ListBox
+        Me.lbx_qrySampleMed = New System.Windows.Forms.ListBox
+        Me.lbx_qryGenCat = New System.Windows.Forms.ListBox
+        Me.lbl_qryTimeBegin = New System.Windows.Forms.Label
+        Me.chb_qryNumObs = New System.Windows.Forms.CheckBox
+        Me.chb_qryDate = New System.Windows.Forms.CheckBox
+        Me.lbl_qryTimeEnd = New System.Windows.Forms.Label
+        Me.chb_qryMethod = New System.Windows.Forms.CheckBox
+        Me.chb_qryQCLevel = New System.Windows.Forms.CheckBox
+        Me.chb_qryDataType = New System.Windows.Forms.CheckBox
+        Me.chb_qryValType = New System.Windows.Forms.CheckBox
+        Me.chb_qrySampleMed = New System.Windows.Forms.CheckBox
+        Me.chb_qryGenCat = New System.Windows.Forms.CheckBox
+        Me.grp_qryNumObs = New System.Windows.Forms.Panel
+        Me.rdo_qryNumObsG = New System.Windows.Forms.RadioButton
+        Me.num_qryObs = New System.Windows.Forms.NumericUpDown
+        Me.rdo_qryNumObsL = New System.Windows.Forms.RadioButton
+        Me.lv_qryResults = New System.Windows.Forms.ListView
+        Me.col_qrySiteCodeName = New System.Windows.Forms.ColumnHeader
+        Me.col_qryVarCodeName = New System.Windows.Forms.ColumnHeader
+        Me.col_qrySpeciation = New System.Windows.Forms.ColumnHeader
+        Me.col_qryVarUnits = New System.Windows.Forms.ColumnHeader
+        Me.col_qryGenCat = New System.Windows.Forms.ColumnHeader
+        Me.col_qryValType = New System.Windows.Forms.ColumnHeader
+        Me.col_qrySampleMed = New System.Windows.Forms.ColumnHeader
+        Me.col_qryDataType = New System.Windows.Forms.ColumnHeader
+        Me.col_qryQCLevel = New System.Windows.Forms.ColumnHeader
+        Me.col_qryMethodDesc = New System.Windows.Forms.ColumnHeader
+        Me.col_qryNumObs = New System.Windows.Forms.ColumnHeader
+        Me.col_qryDateTime = New System.Windows.Forms.ColumnHeader
+        Me.col_qryOrg = New System.Windows.Forms.ColumnHeader
+        Me.col_qrySrcDesc = New System.Windows.Forms.ColumnHeader
+        Me.col_qryCitation = New System.Windows.Forms.ColumnHeader
+        Me.col_qryTimeSupport = New System.Windows.Forms.ColumnHeader
+        Me.col_qryTimeSupportUnits = New System.Windows.Forms.ColumnHeader
+        Me.tabpgVisualize = New System.Windows.Forms.TabPage
+        Me.btnPlot = New System.Windows.Forms.Button
+        Me.tabctlPlotOptions = New System.Windows.Forms.TabControl
+        Me.tabpgSummary = New System.Windows.Forms.TabPage
+        Me.gboxStatistics = New System.Windows.Forms.GroupBox
+        Me.lblPercentiles = New System.Windows.Forms.Label
+        Me.tbox90Perc = New System.Windows.Forms.TextBox
+        Me.tbox75Perc = New System.Windows.Forms.TextBox
+        Me.tbox50Perc = New System.Windows.Forms.TextBox
+        Me.lbl90Perc = New System.Windows.Forms.Label
+        Me.lbl75Perc = New System.Windows.Forms.Label
+        Me.tbox10Perc = New System.Windows.Forms.TextBox
+        Me.tbox25Perc = New System.Windows.Forms.TextBox
+        Me.lbl50Perc = New System.Windows.Forms.Label
+        Me.lbl25Perc = New System.Windows.Forms.Label
+        Me.lbl10Perc = New System.Windows.Forms.Label
+        Me.lblStdDev = New System.Windows.Forms.Label
+        Me.lblMax = New System.Windows.Forms.Label
+        Me.lblCoeffVar = New System.Windows.Forms.Label
+        Me.tboxGeoMean = New System.Windows.Forms.TextBox
+        Me.lblAMean = New System.Windows.Forms.Label
+        Me.tboxAMean = New System.Windows.Forms.TextBox
+        Me.lblGeoMean = New System.Windows.Forms.Label
+        Me.tboxCoeffVar = New System.Windows.Forms.TextBox
+        Me.tboxMin = New System.Windows.Forms.TextBox
+        Me.gboxDivider = New System.Windows.Forms.GroupBox
+        Me.tboxMax = New System.Windows.Forms.TextBox
+        Me.tboxStdDev = New System.Windows.Forms.TextBox
+        Me.lblMin = New System.Windows.Forms.Label
+        Me.lblNumCensoredObs = New System.Windows.Forms.Label
+        Me.lblNumObs = New System.Windows.Forms.Label
+        Me.tboxNumObs = New System.Windows.Forms.TextBox
+        Me.tboxNumCensoredObs = New System.Windows.Forms.TextBox
+        Me.ckboxUseCensoredData = New System.Windows.Forms.CheckBox
+        Me.tabpgOptions = New System.Windows.Forms.TabPage
+        Me.gboxHistPlotOptions = New System.Windows.Forms.GroupBox
+        Me.ckboxHistSetNumBins = New System.Windows.Forms.CheckBox
+        Me.gboxHPNumBarSettings = New System.Windows.Forms.GroupBox
+        Me.rbtnHPExactNumBins = New System.Windows.Forms.RadioButton
+        Me.rbtnHPDiscreteBreakVals = New System.Windows.Forms.RadioButton
+        Me.tboxHPNumBins = New System.Windows.Forms.TextBox
+        Me.lblHPNumBins = New System.Windows.Forms.Label
+        Me.btnAxisOptions = New System.Windows.Forms.Button
+        Me.gboxBoxPlotOptions = New System.Windows.Forms.GroupBox
+        Me.gboxBPPlotType = New System.Windows.Forms.GroupBox
+        Me.btnBPViewDesc = New System.Windows.Forms.Button
+        Me.rbtnBPOverall = New System.Windows.Forms.RadioButton
+        Me.rbtnBPMonthly = New System.Windows.Forms.RadioButton
+        Me.rbtnBPYearly = New System.Windows.Forms.RadioButton
+        Me.rbtnBPSeasonal = New System.Windows.Forms.RadioButton
+        Me.gboxTSPlotOptions = New System.Windows.Forms.GroupBox
+        Me.gboxTSPlotType = New System.Windows.Forms.GroupBox
+        Me.rbtnTSLine = New System.Windows.Forms.RadioButton
+        Me.rbtnTSBoth = New System.Windows.Forms.RadioButton
+        Me.rbtnTSPoint = New System.Windows.Forms.RadioButton
+        Me.gboxDateInfo = New System.Windows.Forms.GroupBox
+        Me.dtpVisEndDate = New System.Windows.Forms.DateTimePicker
+        Me.dtpVisStartDate = New System.Windows.Forms.DateTimePicker
+        Me.lblEndDate = New System.Windows.Forms.Label
+        Me.lblStartDate = New System.Windows.Forms.Label
+        Me.gboxVisDataSel = New System.Windows.Forms.GroupBox
+        Me.lvVisDataSeries = New System.Windows.Forms.ListView
+        Me.lvcolVisGenCategory = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisSpeciation = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisVarUnits = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisTimeSupport = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisTimeUnits = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisSampleMedium = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisValueType = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisDataType = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisQCLevel = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisMethod = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisOrganization = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisSourceDesc = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisCitation = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisLocalDateRange = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisUTCDateRange = New System.Windows.Forms.ColumnHeader
+        Me.lvcolVisValueCount = New System.Windows.Forms.ColumnHeader
+        Me.lblVisDataSeries = New System.Windows.Forms.Label
+        Me.cboxVisVariable = New System.Windows.Forms.ComboBox
+        Me.lblVisSite = New System.Windows.Forms.Label
+        Me.lblVisVariable = New System.Windows.Forms.Label
+        Me.cboxVisSite = New System.Windows.Forms.ComboBox
+        Me.tabctlPlots = New System.Windows.Forms.TabControl
+        Me.tabpgTimeSeries = New System.Windows.Forms.TabPage
+        Me.zg5TimeSeries = New ZedGraph.ZedGraphControl
+        Me.tabpgProbability = New System.Windows.Forms.TabPage
+        Me.zg5Probability = New ZedGraph.ZedGraphControl
+        Me.tabpgHistogram = New System.Windows.Forms.TabPage
+        Me.zg5Histogram = New ZedGraph.ZedGraphControl
+        Me.tabpgBoxPlot = New System.Windows.Forms.TabPage
+        Me.zg5BoxPlot = New ZedGraph.ZedGraphControl
+        Me.tabpgEdit = New System.Windows.Forms.TabPage
+        Me.btnEditDataDeriveNewDS = New System.Windows.Forms.Button
+        Me.gboxEditFilter = New System.Windows.Forms.GroupBox
+        Me.rbtnEditDFDate = New System.Windows.Forms.RadioButton
+        Me.gboxEditDFDate = New System.Windows.Forms.GroupBox
+        Me.dtpEditDFDBefore = New System.Windows.Forms.DateTimePicker
+        Me.ckboxEditDFDBefore = New System.Windows.Forms.CheckBox
+        Me.dtpEditDFDAfter = New System.Windows.Forms.DateTimePicker
+        Me.ckboxEditDFDAfter = New System.Windows.Forms.CheckBox
+        Me.rbtnEditDFValueThreshold = New System.Windows.Forms.RadioButton
+        Me.gboxEditDFValueThreshold = New System.Windows.Forms.GroupBox
+        Me.tboxEditDFVTGreater = New System.Windows.Forms.TextBox
+        Me.ckboxEditDFVTGreater = New System.Windows.Forms.CheckBox
+        Me.tboxEditDFVTLess = New System.Windows.Forms.TextBox
+        Me.ckboxEditDFVTLess = New System.Windows.Forms.CheckBox
+        Me.rbtnEditDFDataGap = New System.Windows.Forms.RadioButton
+        Me.gboxEditDFDataGaps = New System.Windows.Forms.GroupBox
+        Me.cboxEditDFDGTimePeriod = New System.Windows.Forms.ComboBox
+        Me.lblEditDFDGTimePeriod = New System.Windows.Forms.Label
+        Me.tboxEditDFDGValue = New System.Windows.Forms.TextBox
+        Me.lblEditDFDGValue = New System.Windows.Forms.Label
+        Me.btnEditDFApplyFilter = New System.Windows.Forms.Button
+        Me.btnEditDFClearSel = New System.Windows.Forms.Button
+        Me.tboxEditDFVTChange = New System.Windows.Forms.TextBox
+        Me.rbtnEditDFVTChange = New System.Windows.Forms.RadioButton
+        Me.btnEditDataFlag = New System.Windows.Forms.Button
+        Me.btnEditDataInterpolate = New System.Windows.Forms.Button
+        Me.btnEditDataAdd = New System.Windows.Forms.Button
+        Me.btnEditDataRemove = New System.Windows.Forms.Button
+        Me.btnEditDataAdjust = New System.Windows.Forms.Button
+        Me.btnEditRestoreDefaults = New System.Windows.Forms.Button
+        Me.btnEditApplyChanges = New System.Windows.Forms.Button
+        Me.splitpnlEdit_PlotData = New System.Windows.Forms.SplitContainer
+        Me.zg5EditPlot = New ZedGraph.ZedGraphControl
+        Me.dgvEditTable = New System.Windows.Forms.DataGridView
+        Me.gboxEditDataSel = New System.Windows.Forms.GroupBox
+        Me.lvEditDataSeries = New System.Windows.Forms.ListView
+        Me.lvcolEditGenCategory = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditSpeciation = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditVarUnits = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditTimeSupport = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditTimeUnits = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditSampleMedium = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditValueType = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditDataType = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditQCLevel = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditMethod = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditOrganization = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditSourceDesc = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditCitation = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditLocalDateRange = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditUTCDateRange = New System.Windows.Forms.ColumnHeader
+        Me.lvcolEditValueCount = New System.Windows.Forms.ColumnHeader
+        Me.lblEditDataSeries = New System.Windows.Forms.Label
+        Me.cboxEditVariable = New System.Windows.Forms.ComboBox
+        Me.lblEditSite = New System.Windows.Forms.Label
+        Me.lblEditVariable = New System.Windows.Forms.Label
+        Me.cboxEditSite = New System.Windows.Forms.ComboBox
+        Me.cmnuQueryDataRightClick = New System.Windows.Forms.ContextMenu
+        Me.mnuQDRCPlot = New System.Windows.Forms.MenuItem
+        Me.mnuQDRCEdit = New System.Windows.Forms.MenuItem
+        Me.mnuQDRCViewMeta = New System.Windows.Forms.MenuItem
+        Me.mnuQDRCLine1 = New System.Windows.Forms.MenuItem
+        Me.mnuQDRCSingleExport = New System.Windows.Forms.MenuItem
+        Me.mnuQDRCExportMeta = New System.Windows.Forms.MenuItem
+        Me.MenuItem1 = New System.Windows.Forms.MenuItem
+        Me.mnuQDRCSelectSingle = New System.Windows.Forms.MenuItem
+        Me.mnuQDRCSelectAll = New System.Windows.Forms.MenuItem
+        Me.mnuQDRCSelectNone = New System.Windows.Forms.MenuItem
+        Me.sfdExportMyDB = New System.Windows.Forms.SaveFileDialog
+        Me.sfdExportMetadata = New System.Windows.Forms.SaveFileDialog
+        Me.DataGridTextBoxColumn1 = New System.Windows.Forms.DataGridTextBoxColumn
+        Me.ttipEdit = New System.Windows.Forms.ToolTip(Me.components)
+        Me.tabctlODMTools.SuspendLayout()
+        Me.tabpgQuery.SuspendLayout()
+        Me.grp_qryVars.SuspendLayout()
+        Me.grp_qryVarSelect.SuspendLayout()
+        Me.grp_qrySites.SuspendLayout()
+        Me.grp_qrySiteSelect.SuspendLayout()
+        Me.grp_qrySources.SuspendLayout()
+        Me.grp_qrySrcSelect.SuspendLayout()
+        Me.grp_qryOther.SuspendLayout()
+        Me.grp_qryNumObs.SuspendLayout()
+        CType(Me.num_qryObs, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpgVisualize.SuspendLayout()
+        Me.tabctlPlotOptions.SuspendLayout()
+        Me.tabpgSummary.SuspendLayout()
+        Me.gboxStatistics.SuspendLayout()
+        Me.tabpgOptions.SuspendLayout()
+        Me.gboxHistPlotOptions.SuspendLayout()
+        Me.gboxHPNumBarSettings.SuspendLayout()
+        Me.gboxBoxPlotOptions.SuspendLayout()
+        Me.gboxBPPlotType.SuspendLayout()
+        Me.gboxTSPlotOptions.SuspendLayout()
+        Me.gboxTSPlotType.SuspendLayout()
+        Me.gboxDateInfo.SuspendLayout()
+        Me.gboxVisDataSel.SuspendLayout()
+        Me.tabctlPlots.SuspendLayout()
+        Me.tabpgTimeSeries.SuspendLayout()
+        Me.tabpgProbability.SuspendLayout()
+        Me.tabpgHistogram.SuspendLayout()
+        Me.tabpgBoxPlot.SuspendLayout()
+        Me.tabpgEdit.SuspendLayout()
+        Me.gboxEditFilter.SuspendLayout()
+        Me.gboxEditDFDate.SuspendLayout()
+        Me.gboxEditDFValueThreshold.SuspendLayout()
+        Me.gboxEditDFDataGaps.SuspendLayout()
+        Me.splitpnlEdit_PlotData.Panel1.SuspendLayout()
+        Me.splitpnlEdit_PlotData.Panel2.SuspendLayout()
+        Me.splitpnlEdit_PlotData.SuspendLayout()
+        CType(Me.dgvEditTable, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.gboxEditDataSel.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'mnuMain
+        '
+        Me.mnuMain.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuitmFile, Me.mnuitmEdit, Me.mnuitmTools, Me.mnuitmHelp})
+        '
+        'mnuitmFile
+        '
+        Me.mnuitmFile.Index = 0
+        Me.mnuitmFile.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuFileExit})
+        Me.mnuitmFile.Shortcut = System.Windows.Forms.Shortcut.CtrlF
+        Me.mnuitmFile.Text = "File"
+        '
+        'mnuFileExit
+        '
+        Me.mnuFileExit.Index = 0
+        Me.mnuFileExit.Shortcut = System.Windows.Forms.Shortcut.CtrlQ
+        Me.mnuFileExit.Text = "Exit"
+        '
+        'mnuitmEdit
+        '
+        Me.mnuitmEdit.Index = 1
+        Me.mnuitmEdit.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuEditDBConnect})
+        Me.mnuitmEdit.Shortcut = System.Windows.Forms.Shortcut.CtrlE
+        Me.mnuitmEdit.Text = "Edit"
+        '
+        'mnuEditDBConnect
+        '
+        Me.mnuEditDBConnect.Index = 0
+        Me.mnuEditDBConnect.Shortcut = System.Windows.Forms.Shortcut.CtrlC
+        Me.mnuEditDBConnect.Text = "Database Connection..."
+        '
+        'mnuitmTools
+        '
+        Me.mnuitmTools.Index = 2
+        Me.mnuitmTools.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuToolsIntCVUpdate, Me.mnuToolsQuickCVUpdate, Me.MenuItem4, Me.mnuToolsReloadQuery, Me.mnuToolsOptions})
+        Me.mnuitmTools.Shortcut = System.Windows.Forms.Shortcut.CtrlT
+        Me.mnuitmTools.Text = "Tools"
+        '
+        'mnuToolsIntCVUpdate
+        '
+        Me.mnuToolsIntCVUpdate.Index = 0
+        Me.mnuToolsIntCVUpdate.Text = "Interactive CV Update"
+        '
+        'mnuToolsQuickCVUpdate
+        '
+        Me.mnuToolsQuickCVUpdate.Index = 1
+        Me.mnuToolsQuickCVUpdate.Text = "Quick CV Update"
+        '
+        'MenuItem4
+        '
+        Me.MenuItem4.Index = 2
+        Me.MenuItem4.Text = "-"
+        '
+        'mnuToolsReloadQuery
+        '
+        Me.mnuToolsReloadQuery.Index = 3
+        Me.mnuToolsReloadQuery.Text = "Reload Query Items"
+        '
+        'mnuToolsOptions
+        '
+        Me.mnuToolsOptions.Index = 4
+        Me.mnuToolsOptions.Text = "Options..."
+        '
+        'mnuitmHelp
+        '
+        Me.mnuitmHelp.Index = 3
+        Me.mnuitmHelp.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuitmHelpAbout})
+        Me.mnuitmHelp.Shortcut = System.Windows.Forms.Shortcut.CtrlH
+        Me.mnuitmHelp.Text = "Help"
+        '
+        'mnuitmHelpAbout
+        '
+        Me.mnuitmHelpAbout.Index = 0
+        Me.mnuitmHelpAbout.Shortcut = System.Windows.Forms.Shortcut.CtrlA
+        Me.mnuitmHelpAbout.Text = "About..."
+        '
+        'tabctlODMTools
+        '
+        Me.tabctlODMTools.Controls.Add(Me.tabpgQuery)
+        Me.tabctlODMTools.Controls.Add(Me.tabpgVisualize)
+        Me.tabctlODMTools.Controls.Add(Me.tabpgEdit)
+        Me.tabctlODMTools.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tabctlODMTools.Location = New System.Drawing.Point(0, 0)
+        Me.tabctlODMTools.Name = "tabctlODMTools"
+        Me.tabctlODMTools.SelectedIndex = 0
+        Me.tabctlODMTools.Size = New System.Drawing.Size(792, 545)
+        Me.tabctlODMTools.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
+        Me.tabctlODMTools.TabIndex = 0
+        '
+        'tabpgQuery
+        '
+        Me.tabpgQuery.Controls.Add(Me.btn_qryMetaExport)
+        Me.tabpgQuery.Controls.Add(Me.btn_qryExecute)
+        Me.tabpgQuery.Controls.Add(Me.btn_qryDataExport)
+        Me.tabpgQuery.Controls.Add(Me.chb_qrySrc)
+        Me.tabpgQuery.Controls.Add(Me.chb_qryVar)
+        Me.tabpgQuery.Controls.Add(Me.grp_qryVars)
+        Me.tabpgQuery.Controls.Add(Me.chb_qrySite)
+        Me.tabpgQuery.Controls.Add(Me.grp_qrySites)
+        Me.tabpgQuery.Controls.Add(Me.grp_qrySources)
+        Me.tabpgQuery.Controls.Add(Me.grp_qryOther)
+        Me.tabpgQuery.Controls.Add(Me.lv_qryResults)
+        Me.tabpgQuery.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgQuery.Name = "tabpgQuery"
+        Me.tabpgQuery.Size = New System.Drawing.Size(784, 519)
+        Me.tabpgQuery.TabIndex = 0
+        Me.tabpgQuery.Text = "Query"
+        Me.tabpgQuery.UseVisualStyleBackColor = True
+        '
+        'btn_qryMetaExport
+        '
+        Me.btn_qryMetaExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_qryMetaExport.Enabled = False
+        Me.btn_qryMetaExport.Location = New System.Drawing.Point(332, 492)
+        Me.btn_qryMetaExport.Name = "btn_qryMetaExport"
+        Me.btn_qryMetaExport.Size = New System.Drawing.Size(144, 24)
+        Me.btn_qryMetaExport.TabIndex = 9
+        Me.btn_qryMetaExport.Text = "Export Checked &Metadata"
+        '
+        'btn_qryExecute
+        '
+        Me.btn_qryExecute.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_qryExecute.Enabled = False
+        Me.btn_qryExecute.Location = New System.Drawing.Point(632, 492)
+        Me.btn_qryExecute.Name = "btn_qryExecute"
+        Me.btn_qryExecute.Size = New System.Drawing.Size(144, 24)
+        Me.btn_qryExecute.TabIndex = 7
+        Me.btn_qryExecute.Text = "&Query"
+        '
+        'btn_qryDataExport
+        '
+        Me.btn_qryDataExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_qryDataExport.Enabled = False
+        Me.btn_qryDataExport.Location = New System.Drawing.Point(482, 492)
+        Me.btn_qryDataExport.Name = "btn_qryDataExport"
+        Me.btn_qryDataExport.Size = New System.Drawing.Size(144, 24)
+        Me.btn_qryDataExport.TabIndex = 10
+        Me.btn_qryDataExport.Text = "Export Checked &Data"
+        '
+        'chb_qrySrc
+        '
+        Me.chb_qrySrc.AutoSize = True
+        Me.chb_qrySrc.BackColor = System.Drawing.Color.Transparent
+        Me.chb_qrySrc.Location = New System.Drawing.Point(16, 226)
+        Me.chb_qrySrc.Name = "chb_qrySrc"
+        Me.chb_qrySrc.Size = New System.Drawing.Size(105, 17)
+        Me.chb_qrySrc.TabIndex = 4
+        Me.chb_qrySrc.Text = "Query by Source"
+        Me.chb_qrySrc.UseVisualStyleBackColor = False
+        '
+        'chb_qryVar
+        '
+        Me.chb_qryVar.AutoSize = True
+        Me.chb_qryVar.BackColor = System.Drawing.Color.Transparent
+        Me.chb_qryVar.Location = New System.Drawing.Point(16, 116)
+        Me.chb_qryVar.Name = "chb_qryVar"
+        Me.chb_qryVar.Size = New System.Drawing.Size(109, 17)
+        Me.chb_qryVar.TabIndex = 2
+        Me.chb_qryVar.Text = "Query by Variable"
+        Me.chb_qryVar.UseVisualStyleBackColor = False
+        '
+        'grp_qryVars
+        '
+        Me.grp_qryVars.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp_qryVars.Controls.Add(Me.lbx_qryVars)
+        Me.grp_qryVars.Controls.Add(Me.txt_qryVarCode)
+        Me.grp_qryVars.Controls.Add(Me.txt_qryVarName)
+        Me.grp_qryVars.Controls.Add(Me.rdo_qryVarCode)
+        Me.grp_qryVars.Controls.Add(Me.rdo_qryVarName)
+        Me.grp_qryVars.Controls.Add(Me.rdo_qryVarList)
+        Me.grp_qryVars.Controls.Add(Me.grp_qryVarSelect)
+        Me.grp_qryVars.Enabled = False
+        Me.grp_qryVars.Location = New System.Drawing.Point(8, 116)
+        Me.grp_qryVars.Name = "grp_qryVars"
+        Me.grp_qryVars.Size = New System.Drawing.Size(768, 109)
+        Me.grp_qryVars.TabIndex = 3
+        Me.grp_qryVars.TabStop = False
+        '
+        'lbx_qryVars
+        '
+        Me.lbx_qryVars.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lbx_qryVars.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lbx_qryVars.Enabled = False
+        Me.lbx_qryVars.Location = New System.Drawing.Point(24, 32)
+        Me.lbx_qryVars.Name = "lbx_qryVars"
+        Me.lbx_qryVars.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lbx_qryVars.Size = New System.Drawing.Size(376, 69)
+        Me.lbx_qryVars.TabIndex = 1
+        '
+        'txt_qryVarCode
+        '
+        Me.txt_qryVarCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_qryVarCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txt_qryVarCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txt_qryVarCode.Enabled = False
+        Me.txt_qryVarCode.Location = New System.Drawing.Point(424, 72)
+        Me.txt_qryVarCode.MaxLength = 1000
+        Me.txt_qryVarCode.Name = "txt_qryVarCode"
+        Me.txt_qryVarCode.Size = New System.Drawing.Size(256, 20)
+        Me.txt_qryVarCode.TabIndex = 5
+        '
+        'txt_qryVarName
+        '
+        Me.txt_qryVarName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_qryVarName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txt_qryVarName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txt_qryVarName.Enabled = False
+        Me.txt_qryVarName.Location = New System.Drawing.Point(424, 32)
+        Me.txt_qryVarName.MaxLength = 1000
+        Me.txt_qryVarName.Name = "txt_qryVarName"
+        Me.txt_qryVarName.Size = New System.Drawing.Size(256, 20)
+        Me.txt_qryVarName.TabIndex = 3
+        '
+        'rdo_qryVarCode
+        '
+        Me.rdo_qryVarCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdo_qryVarCode.AutoSize = True
+        Me.rdo_qryVarCode.Location = New System.Drawing.Point(406, 55)
+        Me.rdo_qryVarCode.Name = "rdo_qryVarCode"
+        Me.rdo_qryVarCode.Size = New System.Drawing.Size(136, 17)
+        Me.rdo_qryVarCode.TabIndex = 4
+        Me.rdo_qryVarCode.Text = "Query by Variable Code"
+        '
+        'rdo_qryVarName
+        '
+        Me.rdo_qryVarName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdo_qryVarName.AutoSize = True
+        Me.rdo_qryVarName.Location = New System.Drawing.Point(406, 15)
+        Me.rdo_qryVarName.Name = "rdo_qryVarName"
+        Me.rdo_qryVarName.Size = New System.Drawing.Size(139, 17)
+        Me.rdo_qryVarName.TabIndex = 2
+        Me.rdo_qryVarName.Text = "Query by Variable Name"
+        '
+        'rdo_qryVarList
+        '
+        Me.rdo_qryVarList.AutoSize = True
+        Me.rdo_qryVarList.Location = New System.Drawing.Point(8, 15)
+        Me.rdo_qryVarList.Name = "rdo_qryVarList"
+        Me.rdo_qryVarList.Size = New System.Drawing.Size(154, 17)
+        Me.rdo_qryVarList.TabIndex = 0
+        Me.rdo_qryVarList.Text = "Choose Variables from a list"
+        '
+        'grp_qryVarSelect
+        '
+        Me.grp_qryVarSelect.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp_qryVarSelect.Controls.Add(Me.rdo_qryVarOR)
+        Me.grp_qryVarSelect.Controls.Add(Me.rdo_qryVarAND)
+        Me.grp_qryVarSelect.Enabled = False
+        Me.grp_qryVarSelect.Location = New System.Drawing.Point(688, 8)
+        Me.grp_qryVarSelect.Name = "grp_qryVarSelect"
+        Me.grp_qryVarSelect.Size = New System.Drawing.Size(74, 95)
+        Me.grp_qryVarSelect.TabIndex = 6
+        Me.grp_qryVarSelect.TabStop = False
+        Me.grp_qryVarSelect.Text = "Multiple Entries (; )"
+        '
+        'rdo_qryVarOR
+        '
+        Me.rdo_qryVarOR.AutoSize = True
+        Me.rdo_qryVarOR.Location = New System.Drawing.Point(16, 52)
+        Me.rdo_qryVarOR.Name = "rdo_qryVarOR"
+        Me.rdo_qryVarOR.Size = New System.Drawing.Size(41, 17)
+        Me.rdo_qryVarOR.TabIndex = 1
+        Me.rdo_qryVarOR.Text = "OR"
+        '
+        'rdo_qryVarAND
+        '
+        Me.rdo_qryVarAND.AutoSize = True
+        Me.rdo_qryVarAND.Checked = True
+        Me.rdo_qryVarAND.Location = New System.Drawing.Point(16, 27)
+        Me.rdo_qryVarAND.Name = "rdo_qryVarAND"
+        Me.rdo_qryVarAND.Size = New System.Drawing.Size(48, 17)
+        Me.rdo_qryVarAND.TabIndex = 0
+        Me.rdo_qryVarAND.TabStop = True
+        Me.rdo_qryVarAND.Text = "AND"
+        '
+        'chb_qrySite
+        '
+        Me.chb_qrySite.AutoSize = True
+        Me.chb_qrySite.BackColor = System.Drawing.Color.Transparent
+        Me.chb_qrySite.Location = New System.Drawing.Point(16, 8)
+        Me.chb_qrySite.Name = "chb_qrySite"
+        Me.chb_qrySite.Size = New System.Drawing.Size(89, 17)
+        Me.chb_qrySite.TabIndex = 0
+        Me.chb_qrySite.Text = "Query by Site"
+        Me.chb_qrySite.UseVisualStyleBackColor = False
+        '
+        'grp_qrySites
+        '
+        Me.grp_qrySites.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp_qrySites.Controls.Add(Me.lbx_qrySites)
+        Me.grp_qrySites.Controls.Add(Me.txt_qrySiteCode)
+        Me.grp_qrySites.Controls.Add(Me.txt_qrySiteName)
+        Me.grp_qrySites.Controls.Add(Me.rdo_qrySiteCode)
+        Me.grp_qrySites.Controls.Add(Me.rdo_qrySiteName)
+        Me.grp_qrySites.Controls.Add(Me.rdo_qrySiteList)
+        Me.grp_qrySites.Controls.Add(Me.grp_qrySiteSelect)
+        Me.grp_qrySites.Enabled = False
+        Me.grp_qrySites.Location = New System.Drawing.Point(8, 8)
+        Me.grp_qrySites.Name = "grp_qrySites"
+        Me.grp_qrySites.Size = New System.Drawing.Size(768, 108)
+        Me.grp_qrySites.TabIndex = 1
+        Me.grp_qrySites.TabStop = False
+        '
+        'lbx_qrySites
+        '
+        Me.lbx_qrySites.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lbx_qrySites.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lbx_qrySites.Enabled = False
+        Me.lbx_qrySites.Location = New System.Drawing.Point(24, 32)
+        Me.lbx_qrySites.Name = "lbx_qrySites"
+        Me.lbx_qrySites.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lbx_qrySites.Size = New System.Drawing.Size(376, 69)
+        Me.lbx_qrySites.TabIndex = 1
+        '
+        'txt_qrySiteCode
+        '
+        Me.txt_qrySiteCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_qrySiteCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txt_qrySiteCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txt_qrySiteCode.Enabled = False
+        Me.txt_qrySiteCode.Location = New System.Drawing.Point(424, 72)
+        Me.txt_qrySiteCode.MaxLength = 1000
+        Me.txt_qrySiteCode.Name = "txt_qrySiteCode"
+        Me.txt_qrySiteCode.Size = New System.Drawing.Size(256, 20)
+        Me.txt_qrySiteCode.TabIndex = 5
+        '
+        'txt_qrySiteName
+        '
+        Me.txt_qrySiteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_qrySiteName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txt_qrySiteName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txt_qrySiteName.Enabled = False
+        Me.txt_qrySiteName.Location = New System.Drawing.Point(424, 32)
+        Me.txt_qrySiteName.MaxLength = 1000
+        Me.txt_qrySiteName.Name = "txt_qrySiteName"
+        Me.txt_qrySiteName.Size = New System.Drawing.Size(256, 20)
+        Me.txt_qrySiteName.TabIndex = 3
+        '
+        'rdo_qrySiteCode
+        '
+        Me.rdo_qrySiteCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdo_qrySiteCode.AutoSize = True
+        Me.rdo_qrySiteCode.Location = New System.Drawing.Point(406, 55)
+        Me.rdo_qrySiteCode.Name = "rdo_qrySiteCode"
+        Me.rdo_qrySiteCode.Size = New System.Drawing.Size(116, 17)
+        Me.rdo_qrySiteCode.TabIndex = 4
+        Me.rdo_qrySiteCode.Text = "Query by Site Code"
+        '
+        'rdo_qrySiteName
+        '
+        Me.rdo_qrySiteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdo_qrySiteName.AutoSize = True
+        Me.rdo_qrySiteName.Location = New System.Drawing.Point(406, 15)
+        Me.rdo_qrySiteName.Name = "rdo_qrySiteName"
+        Me.rdo_qrySiteName.Size = New System.Drawing.Size(119, 17)
+        Me.rdo_qrySiteName.TabIndex = 2
+        Me.rdo_qrySiteName.Text = "Query by Site Name"
+        '
+        'rdo_qrySiteList
+        '
+        Me.rdo_qrySiteList.AutoSize = True
+        Me.rdo_qrySiteList.Location = New System.Drawing.Point(8, 15)
+        Me.rdo_qrySiteList.Name = "rdo_qrySiteList"
+        Me.rdo_qrySiteList.Size = New System.Drawing.Size(134, 17)
+        Me.rdo_qrySiteList.TabIndex = 0
+        Me.rdo_qrySiteList.Text = "Choose Sites from a list"
+        '
+        'grp_qrySiteSelect
+        '
+        Me.grp_qrySiteSelect.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp_qrySiteSelect.Controls.Add(Me.rdo_qrySiteAND)
+        Me.grp_qrySiteSelect.Controls.Add(Me.rdo_qrySiteOR)
+        Me.grp_qrySiteSelect.Enabled = False
+        Me.grp_qrySiteSelect.Location = New System.Drawing.Point(688, 8)
+        Me.grp_qrySiteSelect.Name = "grp_qrySiteSelect"
+        Me.grp_qrySiteSelect.Size = New System.Drawing.Size(74, 94)
+        Me.grp_qrySiteSelect.TabIndex = 6
+        Me.grp_qrySiteSelect.TabStop = False
+        Me.grp_qrySiteSelect.Text = "Multiple Entries (; )"
+        '
+        'rdo_qrySiteAND
+        '
+        Me.rdo_qrySiteAND.AutoSize = True
+        Me.rdo_qrySiteAND.Checked = True
+        Me.rdo_qrySiteAND.Location = New System.Drawing.Point(16, 27)
+        Me.rdo_qrySiteAND.Name = "rdo_qrySiteAND"
+        Me.rdo_qrySiteAND.Size = New System.Drawing.Size(48, 17)
+        Me.rdo_qrySiteAND.TabIndex = 0
+        Me.rdo_qrySiteAND.TabStop = True
+        Me.rdo_qrySiteAND.Text = "AND"
+        '
+        'rdo_qrySiteOR
+        '
+        Me.rdo_qrySiteOR.AutoSize = True
+        Me.rdo_qrySiteOR.Location = New System.Drawing.Point(16, 52)
+        Me.rdo_qrySiteOR.Name = "rdo_qrySiteOR"
+        Me.rdo_qrySiteOR.Size = New System.Drawing.Size(41, 17)
+        Me.rdo_qrySiteOR.TabIndex = 1
+        Me.rdo_qrySiteOR.Text = "OR"
+        '
+        'grp_qrySources
+        '
+        Me.grp_qrySources.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp_qrySources.Controls.Add(Me.txt_qrySrcDesc)
+        Me.grp_qrySources.Controls.Add(Me.txt_qrySrcOrg)
+        Me.grp_qrySources.Controls.Add(Me.rdo_qrySrcDesc)
+        Me.grp_qrySources.Controls.Add(Me.rdo_qrySrcOrg)
+        Me.grp_qrySources.Controls.Add(Me.grp_qrySrcSelect)
+        Me.grp_qrySources.Enabled = False
+        Me.grp_qrySources.Location = New System.Drawing.Point(8, 226)
+        Me.grp_qrySources.Name = "grp_qrySources"
+        Me.grp_qrySources.Size = New System.Drawing.Size(192, 178)
+        Me.grp_qrySources.TabIndex = 5
+        Me.grp_qrySources.TabStop = False
+        '
+        'txt_qrySrcDesc
+        '
+        Me.txt_qrySrcDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_qrySrcDesc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txt_qrySrcDesc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txt_qrySrcDesc.Enabled = False
+        Me.txt_qrySrcDesc.Location = New System.Drawing.Point(23, 91)
+        Me.txt_qrySrcDesc.MaxLength = 1000
+        Me.txt_qrySrcDesc.Name = "txt_qrySrcDesc"
+        Me.txt_qrySrcDesc.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txt_qrySrcDesc.Size = New System.Drawing.Size(160, 20)
+        Me.txt_qrySrcDesc.TabIndex = 3
+        '
+        'txt_qrySrcOrg
+        '
+        Me.txt_qrySrcOrg.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_qrySrcOrg.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txt_qrySrcOrg.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txt_qrySrcOrg.Enabled = False
+        Me.txt_qrySrcOrg.Location = New System.Drawing.Point(23, 32)
+        Me.txt_qrySrcOrg.MaxLength = 1000
+        Me.txt_qrySrcOrg.Name = "txt_qrySrcOrg"
+        Me.txt_qrySrcOrg.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txt_qrySrcOrg.Size = New System.Drawing.Size(160, 20)
+        Me.txt_qrySrcOrg.TabIndex = 1
+        '
+        'rdo_qrySrcDesc
+        '
+        Me.rdo_qrySrcDesc.AutoSize = True
+        Me.rdo_qrySrcDesc.Location = New System.Drawing.Point(8, 68)
+        Me.rdo_qrySrcDesc.Name = "rdo_qrySrcDesc"
+        Me.rdo_qrySrcDesc.Size = New System.Drawing.Size(130, 17)
+        Me.rdo_qrySrcDesc.TabIndex = 2
+        Me.rdo_qrySrcDesc.Text = "Source Description (; )"
+        '
+        'rdo_qrySrcOrg
+        '
+        Me.rdo_qrySrcOrg.AutoSize = True
+        Me.rdo_qrySrcOrg.Location = New System.Drawing.Point(8, 15)
+        Me.rdo_qrySrcOrg.Name = "rdo_qrySrcOrg"
+        Me.rdo_qrySrcOrg.Size = New System.Drawing.Size(99, 17)
+        Me.rdo_qrySrcOrg.TabIndex = 0
+        Me.rdo_qrySrcOrg.Text = "Organization (; )"
+        '
+        'grp_qrySrcSelect
+        '
+        Me.grp_qrySrcSelect.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp_qrySrcSelect.Controls.Add(Me.rdo_qrySrcOR)
+        Me.grp_qrySrcSelect.Controls.Add(Me.rdo_qrySrcAND)
+        Me.grp_qrySrcSelect.Location = New System.Drawing.Point(8, 122)
+        Me.grp_qrySrcSelect.Name = "grp_qrySrcSelect"
+        Me.grp_qrySrcSelect.Size = New System.Drawing.Size(178, 50)
+        Me.grp_qrySrcSelect.TabIndex = 4
+        Me.grp_qrySrcSelect.TabStop = False
+        Me.grp_qrySrcSelect.Text = "Multiple Entries (; )"
+        '
+        'rdo_qrySrcOR
+        '
+        Me.rdo_qrySrcOR.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.rdo_qrySrcOR.AutoSize = True
+        Me.rdo_qrySrcOR.Location = New System.Drawing.Point(105, 18)
+        Me.rdo_qrySrcOR.Name = "rdo_qrySrcOR"
+        Me.rdo_qrySrcOR.Size = New System.Drawing.Size(41, 17)
+        Me.rdo_qrySrcOR.TabIndex = 1
+        Me.rdo_qrySrcOR.Text = "OR"
+        '
+        'rdo_qrySrcAND
+        '
+        Me.rdo_qrySrcAND.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.rdo_qrySrcAND.AutoSize = True
+        Me.rdo_qrySrcAND.Checked = True
+        Me.rdo_qrySrcAND.Location = New System.Drawing.Point(32, 18)
+        Me.rdo_qrySrcAND.Name = "rdo_qrySrcAND"
+        Me.rdo_qrySrcAND.Size = New System.Drawing.Size(48, 17)
+        Me.rdo_qrySrcAND.TabIndex = 0
+        Me.rdo_qrySrcAND.TabStop = True
+        Me.rdo_qrySrcAND.Text = "AND"
+        '
+        'grp_qryOther
+        '
+        Me.grp_qryOther.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp_qryOther.Controls.Add(Me.dtp_qryTimeBegin)
+        Me.grp_qryOther.Controls.Add(Me.dtp_qryTimeEnd)
+        Me.grp_qryOther.Controls.Add(Me.txt_qryMethod)
+        Me.grp_qryOther.Controls.Add(Me.lbx_qryQCLevel)
+        Me.grp_qryOther.Controls.Add(Me.lbx_qryDataType)
+        Me.grp_qryOther.Controls.Add(Me.lbx_qryValType)
+        Me.grp_qryOther.Controls.Add(Me.lbx_qrySampleMed)
+        Me.grp_qryOther.Controls.Add(Me.lbx_qryGenCat)
+        Me.grp_qryOther.Controls.Add(Me.lbl_qryTimeBegin)
+        Me.grp_qryOther.Controls.Add(Me.chb_qryNumObs)
+        Me.grp_qryOther.Controls.Add(Me.chb_qryDate)
+        Me.grp_qryOther.Controls.Add(Me.lbl_qryTimeEnd)
+        Me.grp_qryOther.Controls.Add(Me.chb_qryMethod)
+        Me.grp_qryOther.Controls.Add(Me.chb_qryQCLevel)
+        Me.grp_qryOther.Controls.Add(Me.chb_qryDataType)
+        Me.grp_qryOther.Controls.Add(Me.chb_qryValType)
+        Me.grp_qryOther.Controls.Add(Me.chb_qrySampleMed)
+        Me.grp_qryOther.Controls.Add(Me.chb_qryGenCat)
+        Me.grp_qryOther.Controls.Add(Me.grp_qryNumObs)
+        Me.grp_qryOther.Location = New System.Drawing.Point(206, 226)
+        Me.grp_qryOther.Name = "grp_qryOther"
+        Me.grp_qryOther.Size = New System.Drawing.Size(570, 178)
+        Me.grp_qryOther.TabIndex = 6
+        Me.grp_qryOther.TabStop = False
+        Me.grp_qryOther.Text = "Other Query Options"
+        '
+        'dtp_qryTimeBegin
+        '
+        Me.dtp_qryTimeBegin.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.dtp_qryTimeBegin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
+        Me.dtp_qryTimeBegin.Enabled = False
+        Me.dtp_qryTimeBegin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtp_qryTimeBegin.Location = New System.Drawing.Point(467, 83)
+        Me.dtp_qryTimeBegin.MaxDate = New Date(3006, 12, 31, 0, 0, 0, 0)
+        Me.dtp_qryTimeBegin.Name = "dtp_qryTimeBegin"
+        Me.dtp_qryTimeBegin.Size = New System.Drawing.Size(94, 20)
+        Me.dtp_qryTimeBegin.TabIndex = 16
+        Me.dtp_qryTimeBegin.Value = New Date(2007, 1, 5, 0, 0, 0, 0)
+        '
+        'dtp_qryTimeEnd
+        '
+        Me.dtp_qryTimeEnd.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.dtp_qryTimeEnd.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
+        Me.dtp_qryTimeEnd.Enabled = False
+        Me.dtp_qryTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtp_qryTimeEnd.Location = New System.Drawing.Point(467, 107)
+        Me.dtp_qryTimeEnd.MaxDate = New Date(3006, 12, 31, 0, 0, 0, 0)
+        Me.dtp_qryTimeEnd.Name = "dtp_qryTimeEnd"
+        Me.dtp_qryTimeEnd.Size = New System.Drawing.Size(94, 20)
+        Me.dtp_qryTimeEnd.TabIndex = 18
+        Me.dtp_qryTimeEnd.Value = New Date(2007, 1, 5, 0, 0, 0, 0)
+        '
+        'txt_qryMethod
+        '
+        Me.txt_qryMethod.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txt_qryMethod.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txt_qryMethod.Enabled = False
+        Me.txt_qryMethod.Location = New System.Drawing.Point(317, 149)
+        Me.txt_qryMethod.MaxLength = 1000
+        Me.txt_qryMethod.Name = "txt_qryMethod"
+        Me.txt_qryMethod.Size = New System.Drawing.Size(244, 20)
+        Me.txt_qryMethod.TabIndex = 11
+        '
+        'lbx_qryQCLevel
+        '
+        Me.lbx_qryQCLevel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lbx_qryQCLevel.Enabled = False
+        Me.lbx_qryQCLevel.HorizontalScrollbar = True
+        Me.lbx_qryQCLevel.Location = New System.Drawing.Point(317, 32)
+        Me.lbx_qryQCLevel.Name = "lbx_qryQCLevel"
+        Me.lbx_qryQCLevel.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lbx_qryQCLevel.Size = New System.Drawing.Size(112, 95)
+        Me.lbx_qryQCLevel.TabIndex = 9
+        '
+        'lbx_qryDataType
+        '
+        Me.lbx_qryDataType.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lbx_qryDataType.Enabled = False
+        Me.lbx_qryDataType.Location = New System.Drawing.Point(170, 113)
+        Me.lbx_qryDataType.Name = "lbx_qryDataType"
+        Me.lbx_qryDataType.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lbx_qryDataType.Size = New System.Drawing.Size(124, 56)
+        Me.lbx_qryDataType.TabIndex = 7
+        '
+        'lbx_qryValType
+        '
+        Me.lbx_qryValType.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lbx_qryValType.Enabled = False
+        Me.lbx_qryValType.Location = New System.Drawing.Point(170, 32)
+        Me.lbx_qryValType.Name = "lbx_qryValType"
+        Me.lbx_qryValType.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lbx_qryValType.Size = New System.Drawing.Size(124, 56)
+        Me.lbx_qryValType.TabIndex = 5
+        '
+        'lbx_qrySampleMed
+        '
+        Me.lbx_qrySampleMed.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lbx_qrySampleMed.Enabled = False
+        Me.lbx_qrySampleMed.Location = New System.Drawing.Point(24, 113)
+        Me.lbx_qrySampleMed.Name = "lbx_qrySampleMed"
+        Me.lbx_qrySampleMed.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lbx_qrySampleMed.Size = New System.Drawing.Size(124, 56)
+        Me.lbx_qrySampleMed.TabIndex = 3
+        '
+        'lbx_qryGenCat
+        '
+        Me.lbx_qryGenCat.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lbx_qryGenCat.Enabled = False
+        Me.lbx_qryGenCat.Location = New System.Drawing.Point(24, 32)
+        Me.lbx_qryGenCat.Name = "lbx_qryGenCat"
+        Me.lbx_qryGenCat.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lbx_qryGenCat.Size = New System.Drawing.Size(124, 56)
+        Me.lbx_qryGenCat.TabIndex = 1
+        '
+        'lbl_qryTimeBegin
+        '
+        Me.lbl_qryTimeBegin.Enabled = False
+        Me.lbl_qryTimeBegin.Location = New System.Drawing.Point(422, 83)
+        Me.lbl_qryTimeBegin.Name = "lbl_qryTimeBegin"
+        Me.lbl_qryTimeBegin.Size = New System.Drawing.Size(45, 20)
+        Me.lbl_qryTimeBegin.TabIndex = 15
+        Me.lbl_qryTimeBegin.Text = "begin:"
+        Me.lbl_qryTimeBegin.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'chb_qryNumObs
+        '
+        Me.chb_qryNumObs.AutoSize = True
+        Me.chb_qryNumObs.Location = New System.Drawing.Point(451, 15)
+        Me.chb_qryNumObs.Name = "chb_qryNumObs"
+        Me.chb_qryNumObs.Size = New System.Drawing.Size(110, 17)
+        Me.chb_qryNumObs.TabIndex = 12
+        Me.chb_qryNumObs.Text = "# of Observations"
+        '
+        'chb_qryDate
+        '
+        Me.chb_qryDate.AutoSize = True
+        Me.chb_qryDate.Location = New System.Drawing.Point(451, 67)
+        Me.chb_qryDate.Name = "chb_qryDate"
+        Me.chb_qryDate.Size = New System.Drawing.Size(82, 17)
+        Me.chb_qryDate.TabIndex = 14
+        Me.chb_qryDate.Text = "Time Period"
+        '
+        'lbl_qryTimeEnd
+        '
+        Me.lbl_qryTimeEnd.Enabled = False
+        Me.lbl_qryTimeEnd.Location = New System.Drawing.Point(425, 107)
+        Me.lbl_qryTimeEnd.Name = "lbl_qryTimeEnd"
+        Me.lbl_qryTimeEnd.Size = New System.Drawing.Size(42, 20)
+        Me.lbl_qryTimeEnd.TabIndex = 17
+        Me.lbl_qryTimeEnd.Text = "end:"
+        Me.lbl_qryTimeEnd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'chb_qryMethod
+        '
+        Me.chb_qryMethod.AutoSize = True
+        Me.chb_qryMethod.Location = New System.Drawing.Point(301, 133)
+        Me.chb_qryMethod.Name = "chb_qryMethod"
+        Me.chb_qryMethod.Size = New System.Drawing.Size(77, 17)
+        Me.chb_qryMethod.TabIndex = 10
+        Me.chb_qryMethod.Text = "Method (; )"
+        '
+        'chb_qryQCLevel
+        '
+        Me.chb_qryQCLevel.AutoSize = True
+        Me.chb_qryQCLevel.Location = New System.Drawing.Point(301, 16)
+        Me.chb_qryQCLevel.Name = "chb_qryQCLevel"
+        Me.chb_qryQCLevel.Size = New System.Drawing.Size(123, 17)
+        Me.chb_qryQCLevel.TabIndex = 8
+        Me.chb_qryQCLevel.Text = "Quality Control Level"
+        '
+        'chb_qryDataType
+        '
+        Me.chb_qryDataType.AutoSize = True
+        Me.chb_qryDataType.Location = New System.Drawing.Point(154, 97)
+        Me.chb_qryDataType.Name = "chb_qryDataType"
+        Me.chb_qryDataType.Size = New System.Drawing.Size(76, 17)
+        Me.chb_qryDataType.TabIndex = 6
+        Me.chb_qryDataType.Text = "Data Type"
+        '
+        'chb_qryValType
+        '
+        Me.chb_qryValType.AutoSize = True
+        Me.chb_qryValType.Location = New System.Drawing.Point(154, 16)
+        Me.chb_qryValType.Name = "chb_qryValType"
+        Me.chb_qryValType.Size = New System.Drawing.Size(80, 17)
+        Me.chb_qryValType.TabIndex = 4
+        Me.chb_qryValType.Text = "Value Type"
+        '
+        'chb_qrySampleMed
+        '
+        Me.chb_qrySampleMed.AutoSize = True
+        Me.chb_qrySampleMed.Location = New System.Drawing.Point(8, 97)
+        Me.chb_qrySampleMed.Name = "chb_qrySampleMed"
+        Me.chb_qrySampleMed.Size = New System.Drawing.Size(101, 17)
+        Me.chb_qrySampleMed.TabIndex = 2
+        Me.chb_qrySampleMed.Text = "Sample Medium"
+        '
+        'chb_qryGenCat
+        '
+        Me.chb_qryGenCat.AutoSize = True
+        Me.chb_qryGenCat.Location = New System.Drawing.Point(8, 16)
+        Me.chb_qryGenCat.Name = "chb_qryGenCat"
+        Me.chb_qryGenCat.Size = New System.Drawing.Size(108, 17)
+        Me.chb_qryGenCat.TabIndex = 0
+        Me.chb_qryGenCat.Text = "General Category"
+        '
+        'grp_qryNumObs
+        '
+        Me.grp_qryNumObs.Controls.Add(Me.rdo_qryNumObsG)
+        Me.grp_qryNumObs.Controls.Add(Me.num_qryObs)
+        Me.grp_qryNumObs.Controls.Add(Me.rdo_qryNumObsL)
+        Me.grp_qryNumObs.Enabled = False
+        Me.grp_qryNumObs.Location = New System.Drawing.Point(446, 32)
+        Me.grp_qryNumObs.Name = "grp_qryNumObs"
+        Me.grp_qryNumObs.Size = New System.Drawing.Size(118, 34)
+        Me.grp_qryNumObs.TabIndex = 13
+        '
+        'rdo_qryNumObsG
+        '
+        Me.rdo_qryNumObsG.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdo_qryNumObsG.Location = New System.Drawing.Point(11, 1)
+        Me.rdo_qryNumObsG.Name = "rdo_qryNumObsG"
+        Me.rdo_qryNumObsG.Size = New System.Drawing.Size(30, 15)
+        Me.rdo_qryNumObsG.TabIndex = 0
+        Me.rdo_qryNumObsG.Text = ">"
+        '
+        'num_qryObs
+        '
+        Me.num_qryObs.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.num_qryObs.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.num_qryObs.Location = New System.Drawing.Point(44, 0)
+        Me.num_qryObs.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
+        Me.num_qryObs.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.num_qryObs.Name = "num_qryObs"
+        Me.num_qryObs.Size = New System.Drawing.Size(71, 20)
+        Me.num_qryObs.TabIndex = 1
+        Me.num_qryObs.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'rdo_qryNumObsL
+        '
+        Me.rdo_qryNumObsL.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdo_qryNumObsL.Location = New System.Drawing.Point(11, 18)
+        Me.rdo_qryNumObsL.Name = "rdo_qryNumObsL"
+        Me.rdo_qryNumObsL.Size = New System.Drawing.Size(41, 15)
+        Me.rdo_qryNumObsL.TabIndex = 2
+        Me.rdo_qryNumObsL.Text = "<="
+        '
+        'lv_qryResults
+        '
+        Me.lv_qryResults.Activation = System.Windows.Forms.ItemActivation.TwoClick
+        Me.lv_qryResults.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lv_qryResults.AutoArrange = False
+        Me.lv_qryResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lv_qryResults.CheckBoxes = True
+        Me.lv_qryResults.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.col_qrySiteCodeName, Me.col_qryVarCodeName, Me.col_qrySpeciation, Me.col_qryVarUnits, Me.col_qryGenCat, Me.col_qryValType, Me.col_qrySampleMed, Me.col_qryDataType, Me.col_qryQCLevel, Me.col_qryMethodDesc, Me.col_qryNumObs, Me.col_qryDateTime, Me.col_qryOrg, Me.col_qrySrcDesc, Me.col_qryCitation, Me.col_qryTimeSupport, Me.col_qryTimeSupportUnits})
+        Me.lv_qryResults.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lv_qryResults.Enabled = False
+        Me.lv_qryResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lv_qryResults.FullRowSelect = True
+        Me.lv_qryResults.GridLines = True
+        Me.lv_qryResults.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lv_qryResults.Location = New System.Drawing.Point(8, 410)
+        Me.lv_qryResults.MultiSelect = False
+        Me.lv_qryResults.Name = "lv_qryResults"
+        Me.lv_qryResults.Size = New System.Drawing.Size(768, 76)
+        Me.lv_qryResults.TabIndex = 8
+        Me.lv_qryResults.UseCompatibleStateImageBehavior = False
+        Me.lv_qryResults.View = System.Windows.Forms.View.Details
+        '
+        'col_qrySiteCodeName
+        '
+        Me.col_qrySiteCodeName.Text = "Site"
+        Me.col_qrySiteCodeName.Width = 50
+        '
+        'col_qryVarCodeName
+        '
+        Me.col_qryVarCodeName.Text = "Variable"
+        Me.col_qryVarCodeName.Width = 50
+        '
+        'col_qrySpeciation
+        '
+        Me.col_qrySpeciation.Text = "Speciation"
+        Me.col_qrySpeciation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'col_qryVarUnits
+        '
+        Me.col_qryVarUnits.Text = "Variable Units"
+        Me.col_qryVarUnits.Width = 50
+        '
+        'col_qryGenCat
+        '
+        Me.col_qryGenCat.Text = "General Category"
+        Me.col_qryGenCat.Width = 50
+        '
+        'col_qryValType
+        '
+        Me.col_qryValType.Text = "Value Type"
+        Me.col_qryValType.Width = 50
+        '
+        'col_qrySampleMed
+        '
+        Me.col_qrySampleMed.Text = "Sample Medium"
+        Me.col_qrySampleMed.Width = 50
+        '
+        'col_qryDataType
+        '
+        Me.col_qryDataType.Text = "Data Type"
+        Me.col_qryDataType.Width = 50
+        '
+        'col_qryQCLevel
+        '
+        Me.col_qryQCLevel.Text = "Quality Control Level"
+        Me.col_qryQCLevel.Width = 50
+        '
+        'col_qryMethodDesc
+        '
+        Me.col_qryMethodDesc.Text = "Method Description"
+        Me.col_qryMethodDesc.Width = 50
+        '
+        'col_qryNumObs
+        '
+        Me.col_qryNumObs.Text = "Value Count"
+        Me.col_qryNumObs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.col_qryNumObs.Width = 50
+        '
+        'col_qryDateTime
+        '
+        Me.col_qryDateTime.Text = "Date Range"
+        Me.col_qryDateTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.col_qryDateTime.Width = 50
+        '
+        'col_qryOrg
+        '
+        Me.col_qryOrg.Text = "Organization"
+        Me.col_qryOrg.Width = 50
+        '
+        'col_qrySrcDesc
+        '
+        Me.col_qrySrcDesc.Text = "Source Description"
+        Me.col_qrySrcDesc.Width = 50
+        '
+        'col_qryCitation
+        '
+        Me.col_qryCitation.Text = "Citation"
+        '
+        'col_qryTimeSupport
+        '
+        Me.col_qryTimeSupport.Text = "Time Support"
+        Me.col_qryTimeSupport.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.col_qryTimeSupport.Width = 50
+        '
+        'col_qryTimeSupportUnits
+        '
+        Me.col_qryTimeSupportUnits.Text = "Time Support Units"
+        Me.col_qryTimeSupportUnits.Width = 50
+        '
+        'tabpgVisualize
+        '
+        Me.tabpgVisualize.Controls.Add(Me.btnPlot)
+        Me.tabpgVisualize.Controls.Add(Me.tabctlPlotOptions)
+        Me.tabpgVisualize.Controls.Add(Me.gboxDateInfo)
+        Me.tabpgVisualize.Controls.Add(Me.gboxVisDataSel)
+        Me.tabpgVisualize.Controls.Add(Me.tabctlPlots)
+        Me.tabpgVisualize.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgVisualize.Name = "tabpgVisualize"
+        Me.tabpgVisualize.Size = New System.Drawing.Size(784, 519)
+        Me.tabpgVisualize.TabIndex = 1
+        Me.tabpgVisualize.Text = "Visualize"
+        Me.tabpgVisualize.UseVisualStyleBackColor = True
+        '
+        'btnPlot
+        '
+        Me.btnPlot.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnPlot.Location = New System.Drawing.Point(560, 491)
+        Me.btnPlot.Name = "btnPlot"
+        Me.btnPlot.Size = New System.Drawing.Size(208, 24)
+        Me.btnPlot.TabIndex = 2
+        Me.btnPlot.Text = "Update Plot"
+        '
+        'tabctlPlotOptions
+        '
+        Me.tabctlPlotOptions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tabctlPlotOptions.Controls.Add(Me.tabpgSummary)
+        Me.tabctlPlotOptions.Controls.Add(Me.tabpgOptions)
+        Me.tabctlPlotOptions.Location = New System.Drawing.Point(548, 8)
+        Me.tabctlPlotOptions.Name = "tabctlPlotOptions"
+        Me.tabctlPlotOptions.SelectedIndex = 0
+        Me.tabctlPlotOptions.Size = New System.Drawing.Size(232, 401)
+        Me.tabctlPlotOptions.TabIndex = 6
+        '
+        'tabpgSummary
+        '
+        Me.tabpgSummary.AutoScroll = True
+        Me.tabpgSummary.Controls.Add(Me.gboxStatistics)
+        Me.tabpgSummary.Controls.Add(Me.ckboxUseCensoredData)
+        Me.tabpgSummary.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgSummary.Name = "tabpgSummary"
+        Me.tabpgSummary.Size = New System.Drawing.Size(224, 375)
+        Me.tabpgSummary.TabIndex = 0
+        Me.tabpgSummary.Text = "Summary"
+        '
+        'gboxStatistics
+        '
+        Me.gboxStatistics.Controls.Add(Me.lblPercentiles)
+        Me.gboxStatistics.Controls.Add(Me.tbox90Perc)
+        Me.gboxStatistics.Controls.Add(Me.tbox75Perc)
+        Me.gboxStatistics.Controls.Add(Me.tbox50Perc)
+        Me.gboxStatistics.Controls.Add(Me.lbl90Perc)
+        Me.gboxStatistics.Controls.Add(Me.lbl75Perc)
+        Me.gboxStatistics.Controls.Add(Me.tbox10Perc)
+        Me.gboxStatistics.Controls.Add(Me.tbox25Perc)
+        Me.gboxStatistics.Controls.Add(Me.lbl50Perc)
+        Me.gboxStatistics.Controls.Add(Me.lbl25Perc)
+        Me.gboxStatistics.Controls.Add(Me.lbl10Perc)
+        Me.gboxStatistics.Controls.Add(Me.lblStdDev)
+        Me.gboxStatistics.Controls.Add(Me.lblMax)
+        Me.gboxStatistics.Controls.Add(Me.lblCoeffVar)
+        Me.gboxStatistics.Controls.Add(Me.tboxGeoMean)
+        Me.gboxStatistics.Controls.Add(Me.lblAMean)
+        Me.gboxStatistics.Controls.Add(Me.tboxAMean)
+        Me.gboxStatistics.Controls.Add(Me.lblGeoMean)
+        Me.gboxStatistics.Controls.Add(Me.tboxCoeffVar)
+        Me.gboxStatistics.Controls.Add(Me.tboxMin)
+        Me.gboxStatistics.Controls.Add(Me.gboxDivider)
+        Me.gboxStatistics.Controls.Add(Me.tboxMax)
+        Me.gboxStatistics.Controls.Add(Me.tboxStdDev)
+        Me.gboxStatistics.Controls.Add(Me.lblMin)
+        Me.gboxStatistics.Controls.Add(Me.lblNumCensoredObs)
+        Me.gboxStatistics.Controls.Add(Me.lblNumObs)
+        Me.gboxStatistics.Controls.Add(Me.tboxNumObs)
+        Me.gboxStatistics.Controls.Add(Me.tboxNumCensoredObs)
+        Me.gboxStatistics.Location = New System.Drawing.Point(4, 36)
+        Me.gboxStatistics.Name = "gboxStatistics"
+        Me.gboxStatistics.Size = New System.Drawing.Size(218, 336)
+        Me.gboxStatistics.TabIndex = 36
+        Me.gboxStatistics.TabStop = False
+        Me.gboxStatistics.Text = "Statistics"
+        '
+        'lblPercentiles
+        '
+        Me.lblPercentiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPercentiles.Location = New System.Drawing.Point(8, 216)
+        Me.lblPercentiles.Name = "lblPercentiles"
+        Me.lblPercentiles.Size = New System.Drawing.Size(72, 16)
+        Me.lblPercentiles.TabIndex = 60
+        Me.lblPercentiles.Text = "Percentiles"
+        Me.lblPercentiles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'tbox90Perc
+        '
+        Me.tbox90Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbox90Perc.BackColor = System.Drawing.SystemColors.Window
+        Me.tbox90Perc.Location = New System.Drawing.Point(124, 312)
+        Me.tbox90Perc.Name = "tbox90Perc"
+        Me.tbox90Perc.ReadOnly = True
+        Me.tbox90Perc.Size = New System.Drawing.Size(90, 20)
+        Me.tbox90Perc.TabIndex = 53
+        Me.tbox90Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbox75Perc
+        '
+        Me.tbox75Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbox75Perc.BackColor = System.Drawing.SystemColors.Window
+        Me.tbox75Perc.Location = New System.Drawing.Point(124, 288)
+        Me.tbox75Perc.Name = "tbox75Perc"
+        Me.tbox75Perc.ReadOnly = True
+        Me.tbox75Perc.Size = New System.Drawing.Size(90, 20)
+        Me.tbox75Perc.TabIndex = 52
+        Me.tbox75Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbox50Perc
+        '
+        Me.tbox50Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbox50Perc.BackColor = System.Drawing.SystemColors.Window
+        Me.tbox50Perc.Location = New System.Drawing.Point(124, 264)
+        Me.tbox50Perc.Name = "tbox50Perc"
+        Me.tbox50Perc.ReadOnly = True
+        Me.tbox50Perc.Size = New System.Drawing.Size(90, 20)
+        Me.tbox50Perc.TabIndex = 51
+        Me.tbox50Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lbl90Perc
+        '
+        Me.lbl90Perc.Location = New System.Drawing.Point(96, 314)
+        Me.lbl90Perc.Name = "lbl90Perc"
+        Me.lbl90Perc.Size = New System.Drawing.Size(32, 16)
+        Me.lbl90Perc.TabIndex = 59
+        Me.lbl90Perc.Text = "90%"
+        '
+        'lbl75Perc
+        '
+        Me.lbl75Perc.Location = New System.Drawing.Point(96, 290)
+        Me.lbl75Perc.Name = "lbl75Perc"
+        Me.lbl75Perc.Size = New System.Drawing.Size(32, 16)
+        Me.lbl75Perc.TabIndex = 58
+        Me.lbl75Perc.Text = "75%"
+        '
+        'tbox10Perc
+        '
+        Me.tbox10Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbox10Perc.BackColor = System.Drawing.SystemColors.Window
+        Me.tbox10Perc.Location = New System.Drawing.Point(124, 216)
+        Me.tbox10Perc.Name = "tbox10Perc"
+        Me.tbox10Perc.ReadOnly = True
+        Me.tbox10Perc.Size = New System.Drawing.Size(90, 20)
+        Me.tbox10Perc.TabIndex = 49
+        Me.tbox10Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbox25Perc
+        '
+        Me.tbox25Perc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbox25Perc.BackColor = System.Drawing.SystemColors.Window
+        Me.tbox25Perc.Location = New System.Drawing.Point(124, 240)
+        Me.tbox25Perc.Name = "tbox25Perc"
+        Me.tbox25Perc.ReadOnly = True
+        Me.tbox25Perc.Size = New System.Drawing.Size(90, 20)
+        Me.tbox25Perc.TabIndex = 50
+        Me.tbox25Perc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lbl50Perc
+        '
+        Me.lbl50Perc.Location = New System.Drawing.Point(50, 266)
+        Me.lbl50Perc.Name = "lbl50Perc"
+        Me.lbl50Perc.Size = New System.Drawing.Size(78, 16)
+        Me.lbl50Perc.TabIndex = 57
+        Me.lbl50Perc.Text = "(Median)  50%"
+        '
+        'lbl25Perc
+        '
+        Me.lbl25Perc.Location = New System.Drawing.Point(96, 242)
+        Me.lbl25Perc.Name = "lbl25Perc"
+        Me.lbl25Perc.Size = New System.Drawing.Size(32, 16)
+        Me.lbl25Perc.TabIndex = 56
+        Me.lbl25Perc.Text = "25%"
+        '
+        'lbl10Perc
+        '
+        Me.lbl10Perc.Location = New System.Drawing.Point(96, 218)
+        Me.lbl10Perc.Name = "lbl10Perc"
+        Me.lbl10Perc.Size = New System.Drawing.Size(32, 16)
+        Me.lbl10Perc.TabIndex = 55
+        Me.lbl10Perc.Text = "10%"
+        '
+        'lblStdDev
+        '
+        Me.lblStdDev.Location = New System.Drawing.Point(4, 162)
+        Me.lblStdDev.Name = "lblStdDev"
+        Me.lblStdDev.Size = New System.Drawing.Size(120, 16)
+        Me.lblStdDev.TabIndex = 45
+        Me.lblStdDev.Text = "Standard Deviation :"
+        Me.lblStdDev.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblMax
+        '
+        Me.lblMax.Location = New System.Drawing.Point(4, 114)
+        Me.lblMax.Name = "lblMax"
+        Me.lblMax.Size = New System.Drawing.Size(120, 16)
+        Me.lblMax.TabIndex = 43
+        Me.lblMax.Text = "Maximum :"
+        Me.lblMax.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblCoeffVar
+        '
+        Me.lblCoeffVar.Location = New System.Drawing.Point(2, 186)
+        Me.lblCoeffVar.Name = "lblCoeffVar"
+        Me.lblCoeffVar.Size = New System.Drawing.Size(122, 16)
+        Me.lblCoeffVar.TabIndex = 46
+        Me.lblCoeffVar.Text = "Coefficiant of Variation:"
+        Me.lblCoeffVar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'tboxGeoMean
+        '
+        Me.tboxGeoMean.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxGeoMean.BackColor = System.Drawing.SystemColors.Window
+        Me.tboxGeoMean.Location = New System.Drawing.Point(124, 88)
+        Me.tboxGeoMean.Name = "tboxGeoMean"
+        Me.tboxGeoMean.ReadOnly = True
+        Me.tboxGeoMean.Size = New System.Drawing.Size(90, 20)
+        Me.tboxGeoMean.TabIndex = 37
+        Me.tboxGeoMean.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblAMean
+        '
+        Me.lblAMean.Location = New System.Drawing.Point(4, 66)
+        Me.lblAMean.Name = "lblAMean"
+        Me.lblAMean.Size = New System.Drawing.Size(120, 16)
+        Me.lblAMean.TabIndex = 42
+        Me.lblAMean.Text = "Arithmetic Mean :"
+        Me.lblAMean.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'tboxAMean
+        '
+        Me.tboxAMean.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxAMean.BackColor = System.Drawing.SystemColors.Window
+        Me.tboxAMean.Location = New System.Drawing.Point(124, 64)
+        Me.tboxAMean.Name = "tboxAMean"
+        Me.tboxAMean.ReadOnly = True
+        Me.tboxAMean.Size = New System.Drawing.Size(90, 20)
+        Me.tboxAMean.TabIndex = 36
+        Me.tboxAMean.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblGeoMean
+        '
+        Me.lblGeoMean.Location = New System.Drawing.Point(4, 90)
+        Me.lblGeoMean.Name = "lblGeoMean"
+        Me.lblGeoMean.Size = New System.Drawing.Size(120, 16)
+        Me.lblGeoMean.TabIndex = 48
+        Me.lblGeoMean.Text = "Geometric Mean :"
+        Me.lblGeoMean.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'tboxCoeffVar
+        '
+        Me.tboxCoeffVar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxCoeffVar.BackColor = System.Drawing.SystemColors.Window
+        Me.tboxCoeffVar.Location = New System.Drawing.Point(124, 184)
+        Me.tboxCoeffVar.Name = "tboxCoeffVar"
+        Me.tboxCoeffVar.ReadOnly = True
+        Me.tboxCoeffVar.Size = New System.Drawing.Size(90, 20)
+        Me.tboxCoeffVar.TabIndex = 41
+        Me.tboxCoeffVar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tboxMin
+        '
+        Me.tboxMin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxMin.BackColor = System.Drawing.SystemColors.Window
+        Me.tboxMin.Location = New System.Drawing.Point(124, 136)
+        Me.tboxMin.Name = "tboxMin"
+        Me.tboxMin.ReadOnly = True
+        Me.tboxMin.Size = New System.Drawing.Size(90, 20)
+        Me.tboxMin.TabIndex = 39
+        Me.tboxMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'gboxDivider
+        '
+        Me.gboxDivider.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gboxDivider.Location = New System.Drawing.Point(7, 204)
+        Me.gboxDivider.Name = "gboxDivider"
+        Me.gboxDivider.Size = New System.Drawing.Size(204, 8)
+        Me.gboxDivider.TabIndex = 47
+        Me.gboxDivider.TabStop = False
+        '
+        'tboxMax
+        '
+        Me.tboxMax.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxMax.BackColor = System.Drawing.SystemColors.Window
+        Me.tboxMax.Location = New System.Drawing.Point(124, 112)
+        Me.tboxMax.Name = "tboxMax"
+        Me.tboxMax.ReadOnly = True
+        Me.tboxMax.Size = New System.Drawing.Size(90, 20)
+        Me.tboxMax.TabIndex = 38
+        Me.tboxMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tboxStdDev
+        '
+        Me.tboxStdDev.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxStdDev.BackColor = System.Drawing.SystemColors.Window
+        Me.tboxStdDev.Location = New System.Drawing.Point(124, 160)
+        Me.tboxStdDev.Name = "tboxStdDev"
+        Me.tboxStdDev.ReadOnly = True
+        Me.tboxStdDev.Size = New System.Drawing.Size(90, 20)
+        Me.tboxStdDev.TabIndex = 40
+        Me.tboxStdDev.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblMin
+        '
+        Me.lblMin.Location = New System.Drawing.Point(4, 138)
+        Me.lblMin.Name = "lblMin"
+        Me.lblMin.Size = New System.Drawing.Size(120, 16)
+        Me.lblMin.TabIndex = 44
+        Me.lblMin.Text = "Minimum :"
+        Me.lblMin.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblNumCensoredObs
+        '
+        Me.lblNumCensoredObs.Location = New System.Drawing.Point(4, 42)
+        Me.lblNumCensoredObs.Name = "lblNumCensoredObs"
+        Me.lblNumCensoredObs.Size = New System.Drawing.Size(120, 16)
+        Me.lblNumCensoredObs.TabIndex = 35
+        Me.lblNumCensoredObs.Text = "# Of Censored Obs. :"
+        Me.lblNumCensoredObs.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblNumObs
+        '
+        Me.lblNumObs.Location = New System.Drawing.Point(4, 18)
+        Me.lblNumObs.Name = "lblNumObs"
+        Me.lblNumObs.Size = New System.Drawing.Size(120, 16)
+        Me.lblNumObs.TabIndex = 33
+        Me.lblNumObs.Text = "# Of Observations :"
+        Me.lblNumObs.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'tboxNumObs
+        '
+        Me.tboxNumObs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxNumObs.BackColor = System.Drawing.SystemColors.Window
+        Me.tboxNumObs.Location = New System.Drawing.Point(124, 16)
+        Me.tboxNumObs.Name = "tboxNumObs"
+        Me.tboxNumObs.ReadOnly = True
+        Me.tboxNumObs.Size = New System.Drawing.Size(90, 20)
+        Me.tboxNumObs.TabIndex = 32
+        Me.tboxNumObs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tboxNumCensoredObs
+        '
+        Me.tboxNumCensoredObs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxNumCensoredObs.BackColor = System.Drawing.SystemColors.Window
+        Me.tboxNumCensoredObs.Location = New System.Drawing.Point(124, 40)
+        Me.tboxNumCensoredObs.Name = "tboxNumCensoredObs"
+        Me.tboxNumCensoredObs.ReadOnly = True
+        Me.tboxNumCensoredObs.Size = New System.Drawing.Size(90, 20)
+        Me.tboxNumCensoredObs.TabIndex = 34
+        Me.tboxNumCensoredObs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'ckboxUseCensoredData
+        '
+        Me.ckboxUseCensoredData.Location = New System.Drawing.Point(8, 4)
+        Me.ckboxUseCensoredData.Name = "ckboxUseCensoredData"
+        Me.ckboxUseCensoredData.Size = New System.Drawing.Size(212, 32)
+        Me.ckboxUseCensoredData.TabIndex = 30
+        Me.ckboxUseCensoredData.Text = "Use censored data in summary statistics."
+        '
+        'tabpgOptions
+        '
+        Me.tabpgOptions.AutoScroll = True
+        Me.tabpgOptions.Controls.Add(Me.gboxHistPlotOptions)
+        Me.tabpgOptions.Controls.Add(Me.btnAxisOptions)
+        Me.tabpgOptions.Controls.Add(Me.gboxBoxPlotOptions)
+        Me.tabpgOptions.Controls.Add(Me.gboxTSPlotOptions)
+        Me.tabpgOptions.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgOptions.Name = "tabpgOptions"
+        Me.tabpgOptions.Size = New System.Drawing.Size(224, 375)
+        Me.tabpgOptions.TabIndex = 1
+        Me.tabpgOptions.Text = "Plot Options"
+        '
+        'gboxHistPlotOptions
+        '
+        Me.gboxHistPlotOptions.Controls.Add(Me.ckboxHistSetNumBins)
+        Me.gboxHistPlotOptions.Controls.Add(Me.gboxHPNumBarSettings)
+        Me.gboxHistPlotOptions.Location = New System.Drawing.Point(8, 120)
+        Me.gboxHistPlotOptions.Name = "gboxHistPlotOptions"
+        Me.gboxHistPlotOptions.Size = New System.Drawing.Size(208, 104)
+        Me.gboxHistPlotOptions.TabIndex = 14
+        Me.gboxHistPlotOptions.TabStop = False
+        Me.gboxHistPlotOptions.Text = "Histogram  Plot"
+        '
+        'ckboxHistSetNumBins
+        '
+        Me.ckboxHistSetNumBins.Checked = True
+        Me.ckboxHistSetNumBins.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ckboxHistSetNumBins.Location = New System.Drawing.Point(10, 14)
+        Me.ckboxHistSetNumBins.Name = "ckboxHistSetNumBins"
+        Me.ckboxHistSetNumBins.Size = New System.Drawing.Size(192, 16)
+        Me.ckboxHistSetNumBins.TabIndex = 0
+        Me.ckboxHistSetNumBins.Text = "Manually set the Number Of Bars"
+        Me.ckboxHistSetNumBins.UseVisualStyleBackColor = True
+        '
+        'gboxHPNumBarSettings
+        '
+        Me.gboxHPNumBarSettings.Controls.Add(Me.rbtnHPExactNumBins)
+        Me.gboxHPNumBarSettings.Controls.Add(Me.rbtnHPDiscreteBreakVals)
+        Me.gboxHPNumBarSettings.Controls.Add(Me.tboxHPNumBins)
+        Me.gboxHPNumBarSettings.Controls.Add(Me.lblHPNumBins)
+        Me.gboxHPNumBarSettings.Location = New System.Drawing.Point(4, 28)
+        Me.gboxHPNumBarSettings.Name = "gboxHPNumBarSettings"
+        Me.gboxHPNumBarSettings.Size = New System.Drawing.Size(200, 68)
+        Me.gboxHPNumBarSettings.TabIndex = 1
+        Me.gboxHPNumBarSettings.TabStop = False
+        '
+        'rbtnHPExactNumBins
+        '
+        Me.rbtnHPExactNumBins.Location = New System.Drawing.Point(4, 50)
+        Me.rbtnHPExactNumBins.Name = "rbtnHPExactNumBins"
+        Me.rbtnHPExactNumBins.Size = New System.Drawing.Size(184, 16)
+        Me.rbtnHPExactNumBins.TabIndex = 3
+        Me.rbtnHPExactNumBins.Text = "Allow Decimal Break Values"
+        Me.rbtnHPExactNumBins.UseVisualStyleBackColor = True
+        '
+        'rbtnHPDiscreteBreakVals
+        '
+        Me.rbtnHPDiscreteBreakVals.Checked = True
+        Me.rbtnHPDiscreteBreakVals.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbtnHPDiscreteBreakVals.Location = New System.Drawing.Point(4, 32)
+        Me.rbtnHPDiscreteBreakVals.Name = "rbtnHPDiscreteBreakVals"
+        Me.rbtnHPDiscreteBreakVals.Size = New System.Drawing.Size(192, 16)
+        Me.rbtnHPDiscreteBreakVals.TabIndex = 2
+        Me.rbtnHPDiscreteBreakVals.TabStop = True
+        Me.rbtnHPDiscreteBreakVals.Text = "Adjust For Discrete Break Values"
+        Me.rbtnHPDiscreteBreakVals.UseVisualStyleBackColor = True
+        '
+        'tboxHPNumBins
+        '
+        Me.tboxHPNumBins.Location = New System.Drawing.Point(94, 12)
+        Me.tboxHPNumBins.Name = "tboxHPNumBins"
+        Me.tboxHPNumBins.Size = New System.Drawing.Size(98, 20)
+        Me.tboxHPNumBins.TabIndex = 0
+        '
+        'lblHPNumBins
+        '
+        Me.lblHPNumBins.Location = New System.Drawing.Point(4, 12)
+        Me.lblHPNumBins.Name = "lblHPNumBins"
+        Me.lblHPNumBins.Size = New System.Drawing.Size(94, 20)
+        Me.lblHPNumBins.TabIndex = 1
+        Me.lblHPNumBins.Text = "Number Of Bars :"
+        Me.lblHPNumBins.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'btnAxisOptions
+        '
+        Me.btnAxisOptions.Location = New System.Drawing.Point(8, 3)
+        Me.btnAxisOptions.Name = "btnAxisOptions"
+        Me.btnAxisOptions.Size = New System.Drawing.Size(208, 24)
+        Me.btnAxisOptions.TabIndex = 13
+        Me.btnAxisOptions.Text = "Axis Options"
+        Me.btnAxisOptions.Visible = False
+        '
+        'gboxBoxPlotOptions
+        '
+        Me.gboxBoxPlotOptions.Controls.Add(Me.gboxBPPlotType)
+        Me.gboxBoxPlotOptions.Location = New System.Drawing.Point(8, 248)
+        Me.gboxBoxPlotOptions.Name = "gboxBoxPlotOptions"
+        Me.gboxBoxPlotOptions.Size = New System.Drawing.Size(208, 88)
+        Me.gboxBoxPlotOptions.TabIndex = 3
+        Me.gboxBoxPlotOptions.TabStop = False
+        Me.gboxBoxPlotOptions.Text = "Box/Whisker Plot"
+        '
+        'gboxBPPlotType
+        '
+        Me.gboxBPPlotType.Controls.Add(Me.btnBPViewDesc)
+        Me.gboxBPPlotType.Controls.Add(Me.rbtnBPOverall)
+        Me.gboxBPPlotType.Controls.Add(Me.rbtnBPMonthly)
+        Me.gboxBPPlotType.Controls.Add(Me.rbtnBPYearly)
+        Me.gboxBPPlotType.Controls.Add(Me.rbtnBPSeasonal)
+        Me.gboxBPPlotType.Location = New System.Drawing.Point(4, 13)
+        Me.gboxBPPlotType.Name = "gboxBPPlotType"
+        Me.gboxBPPlotType.Size = New System.Drawing.Size(200, 69)
+        Me.gboxBPPlotType.TabIndex = 13
+        Me.gboxBPPlotType.TabStop = False
+        Me.gboxBPPlotType.Text = "Plot Type"
+        '
+        'btnBPViewDesc
+        '
+        Me.btnBPViewDesc.Location = New System.Drawing.Point(72, 42)
+        Me.btnBPViewDesc.Name = "btnBPViewDesc"
+        Me.btnBPViewDesc.Size = New System.Drawing.Size(120, 20)
+        Me.btnBPViewDesc.TabIndex = 7
+        Me.btnBPViewDesc.Text = "Box Plot Description"
+        Me.btnBPViewDesc.UseVisualStyleBackColor = True
+        '
+        'rbtnBPOverall
+        '
+        Me.rbtnBPOverall.Location = New System.Drawing.Point(4, 42)
+        Me.rbtnBPOverall.Name = "rbtnBPOverall"
+        Me.rbtnBPOverall.Size = New System.Drawing.Size(62, 16)
+        Me.rbtnBPOverall.TabIndex = 6
+        Me.rbtnBPOverall.Text = "Overall"
+        '
+        'rbtnBPMonthly
+        '
+        Me.rbtnBPMonthly.Checked = True
+        Me.rbtnBPMonthly.Location = New System.Drawing.Point(4, 16)
+        Me.rbtnBPMonthly.Name = "rbtnBPMonthly"
+        Me.rbtnBPMonthly.Size = New System.Drawing.Size(62, 16)
+        Me.rbtnBPMonthly.TabIndex = 3
+        Me.rbtnBPMonthly.TabStop = True
+        Me.rbtnBPMonthly.Text = "Monthly"
+        '
+        'rbtnBPYearly
+        '
+        Me.rbtnBPYearly.Location = New System.Drawing.Point(142, 16)
+        Me.rbtnBPYearly.Name = "rbtnBPYearly"
+        Me.rbtnBPYearly.Size = New System.Drawing.Size(56, 16)
+        Me.rbtnBPYearly.TabIndex = 5
+        Me.rbtnBPYearly.Text = "Yearly"
+        '
+        'rbtnBPSeasonal
+        '
+        Me.rbtnBPSeasonal.Location = New System.Drawing.Point(70, 16)
+        Me.rbtnBPSeasonal.Name = "rbtnBPSeasonal"
+        Me.rbtnBPSeasonal.Size = New System.Drawing.Size(70, 16)
+        Me.rbtnBPSeasonal.TabIndex = 4
+        Me.rbtnBPSeasonal.Text = "Seasonal"
+        '
+        'gboxTSPlotOptions
+        '
+        Me.gboxTSPlotOptions.Controls.Add(Me.gboxTSPlotType)
+        Me.gboxTSPlotOptions.Location = New System.Drawing.Point(8, 32)
+        Me.gboxTSPlotOptions.Name = "gboxTSPlotOptions"
+        Me.gboxTSPlotOptions.Size = New System.Drawing.Size(208, 63)
+        Me.gboxTSPlotOptions.TabIndex = 0
+        Me.gboxTSPlotOptions.TabStop = False
+        Me.gboxTSPlotOptions.Text = "Time Series Plot"
+        '
+        'gboxTSPlotType
+        '
+        Me.gboxTSPlotType.Controls.Add(Me.rbtnTSLine)
+        Me.gboxTSPlotType.Controls.Add(Me.rbtnTSBoth)
+        Me.gboxTSPlotType.Controls.Add(Me.rbtnTSPoint)
+        Me.gboxTSPlotType.Location = New System.Drawing.Point(8, 16)
+        Me.gboxTSPlotType.Name = "gboxTSPlotType"
+        Me.gboxTSPlotType.Size = New System.Drawing.Size(192, 36)
+        Me.gboxTSPlotType.TabIndex = 0
+        Me.gboxTSPlotType.TabStop = False
+        Me.gboxTSPlotType.Text = "Plot Type"
+        '
+        'rbtnTSLine
+        '
+        Me.rbtnTSLine.Location = New System.Drawing.Point(8, 16)
+        Me.rbtnTSLine.Name = "rbtnTSLine"
+        Me.rbtnTSLine.Size = New System.Drawing.Size(56, 16)
+        Me.rbtnTSLine.TabIndex = 3
+        Me.rbtnTSLine.Text = "Line"
+        '
+        'rbtnTSBoth
+        '
+        Me.rbtnTSBoth.Location = New System.Drawing.Point(140, 16)
+        Me.rbtnTSBoth.Name = "rbtnTSBoth"
+        Me.rbtnTSBoth.Size = New System.Drawing.Size(48, 16)
+        Me.rbtnTSBoth.TabIndex = 5
+        Me.rbtnTSBoth.Text = "Both"
+        '
+        'rbtnTSPoint
+        '
+        Me.rbtnTSPoint.Location = New System.Drawing.Point(70, 16)
+        Me.rbtnTSPoint.Name = "rbtnTSPoint"
+        Me.rbtnTSPoint.Size = New System.Drawing.Size(58, 16)
+        Me.rbtnTSPoint.TabIndex = 4
+        Me.rbtnTSPoint.Text = "Point"
+        '
+        'gboxDateInfo
+        '
+        Me.gboxDateInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gboxDateInfo.Controls.Add(Me.dtpVisEndDate)
+        Me.gboxDateInfo.Controls.Add(Me.dtpVisStartDate)
+        Me.gboxDateInfo.Controls.Add(Me.lblEndDate)
+        Me.gboxDateInfo.Controls.Add(Me.lblStartDate)
+        Me.gboxDateInfo.Location = New System.Drawing.Point(548, 414)
+        Me.gboxDateInfo.Name = "gboxDateInfo"
+        Me.gboxDateInfo.Size = New System.Drawing.Size(232, 72)
+        Me.gboxDateInfo.TabIndex = 2
+        Me.gboxDateInfo.TabStop = False
+        Me.gboxDateInfo.Text = "Date Range"
+        '
+        'dtpVisEndDate
+        '
+        Me.dtpVisEndDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dtpVisEndDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
+        Me.dtpVisEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpVisEndDate.Location = New System.Drawing.Point(72, 44)
+        Me.dtpVisEndDate.Name = "dtpVisEndDate"
+        Me.dtpVisEndDate.Size = New System.Drawing.Size(154, 20)
+        Me.dtpVisEndDate.TabIndex = 15
+        '
+        'dtpVisStartDate
+        '
+        Me.dtpVisStartDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dtpVisStartDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
+        Me.dtpVisStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpVisStartDate.Location = New System.Drawing.Point(72, 20)
+        Me.dtpVisStartDate.Name = "dtpVisStartDate"
+        Me.dtpVisStartDate.Size = New System.Drawing.Size(154, 20)
+        Me.dtpVisStartDate.TabIndex = 14
+        '
+        'lblEndDate
+        '
+        Me.lblEndDate.Location = New System.Drawing.Point(10, 48)
+        Me.lblEndDate.Name = "lblEndDate"
+        Me.lblEndDate.Size = New System.Drawing.Size(62, 16)
+        Me.lblEndDate.TabIndex = 13
+        Me.lblEndDate.Text = "End Date :"
+        '
+        'lblStartDate
+        '
+        Me.lblStartDate.Location = New System.Drawing.Point(8, 24)
+        Me.lblStartDate.Name = "lblStartDate"
+        Me.lblStartDate.Size = New System.Drawing.Size(64, 16)
+        Me.lblStartDate.TabIndex = 12
+        Me.lblStartDate.Text = "Start Date :"
+        '
+        'gboxVisDataSel
+        '
+        Me.gboxVisDataSel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gboxVisDataSel.Controls.Add(Me.lvVisDataSeries)
+        Me.gboxVisDataSel.Controls.Add(Me.lblVisDataSeries)
+        Me.gboxVisDataSel.Controls.Add(Me.cboxVisVariable)
+        Me.gboxVisDataSel.Controls.Add(Me.lblVisSite)
+        Me.gboxVisDataSel.Controls.Add(Me.lblVisVariable)
+        Me.gboxVisDataSel.Controls.Add(Me.cboxVisSite)
+        Me.gboxVisDataSel.Location = New System.Drawing.Point(8, 329)
+        Me.gboxVisDataSel.Name = "gboxVisDataSel"
+        Me.gboxVisDataSel.Size = New System.Drawing.Size(536, 188)
+        Me.gboxVisDataSel.TabIndex = 1
+        Me.gboxVisDataSel.TabStop = False
+        Me.gboxVisDataSel.Text = "Data To Visualize"
+        '
+        'lvVisDataSeries
+        '
+        Me.lvVisDataSeries.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lvVisDataSeries.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.lvcolVisGenCategory, Me.lvcolVisSpeciation, Me.lvcolVisVarUnits, Me.lvcolVisTimeSupport, Me.lvcolVisTimeUnits, Me.lvcolVisSampleMedium, Me.lvcolVisValueType, Me.lvcolVisDataType, Me.lvcolVisQCLevel, Me.lvcolVisMethod, Me.lvcolVisOrganization, Me.lvcolVisSourceDesc, Me.lvcolVisCitation, Me.lvcolVisLocalDateRange, Me.lvcolVisUTCDateRange, Me.lvcolVisValueCount})
+        Me.lvVisDataSeries.FullRowSelect = True
+        Me.lvVisDataSeries.GridLines = True
+        Me.lvVisDataSeries.HideSelection = False
+        Me.lvVisDataSeries.Location = New System.Drawing.Point(6, 89)
+        Me.lvVisDataSeries.MultiSelect = False
+        Me.lvVisDataSeries.Name = "lvVisDataSeries"
+        Me.lvVisDataSeries.Size = New System.Drawing.Size(520, 94)
+        Me.lvVisDataSeries.TabIndex = 9
+        Me.lvVisDataSeries.UseCompatibleStateImageBehavior = False
+        Me.lvVisDataSeries.View = System.Windows.Forms.View.Details
+        '
+        'lvcolVisGenCategory
+        '
+        Me.lvcolVisGenCategory.Text = "General Category"
+        Me.lvcolVisGenCategory.Width = 75
+        '
+        'lvcolVisSpeciation
+        '
+        Me.lvcolVisSpeciation.Text = "Speciation"
+        Me.lvcolVisSpeciation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lvcolVisVarUnits
+        '
+        Me.lvcolVisVarUnits.Text = "Variable Units"
+        Me.lvcolVisVarUnits.Width = 75
+        '
+        'lvcolVisTimeSupport
+        '
+        Me.lvcolVisTimeSupport.Text = "Time Support"
+        Me.lvcolVisTimeSupport.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.lvcolVisTimeSupport.Width = 75
+        '
+        'lvcolVisTimeUnits
+        '
+        Me.lvcolVisTimeUnits.Text = "Time Units"
+        Me.lvcolVisTimeUnits.Width = 75
+        '
+        'lvcolVisSampleMedium
+        '
+        Me.lvcolVisSampleMedium.Text = "Sample Medium"
+        Me.lvcolVisSampleMedium.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolVisSampleMedium.Width = 75
+        '
+        'lvcolVisValueType
+        '
+        Me.lvcolVisValueType.Text = "Value Type"
+        Me.lvcolVisValueType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolVisValueType.Width = 75
+        '
+        'lvcolVisDataType
+        '
+        Me.lvcolVisDataType.Text = "Data Type"
+        Me.lvcolVisDataType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolVisDataType.Width = 75
+        '
+        'lvcolVisQCLevel
+        '
+        Me.lvcolVisQCLevel.Text = "Quality Control Level"
+        Me.lvcolVisQCLevel.Width = 75
+        '
+        'lvcolVisMethod
+        '
+        Me.lvcolVisMethod.Text = "Method"
+        Me.lvcolVisMethod.Width = 75
+        '
+        'lvcolVisOrganization
+        '
+        Me.lvcolVisOrganization.Text = "Organization"
+        Me.lvcolVisOrganization.Width = 75
+        '
+        'lvcolVisSourceDesc
+        '
+        Me.lvcolVisSourceDesc.Text = "Source Description"
+        Me.lvcolVisSourceDesc.Width = 75
+        '
+        'lvcolVisCitation
+        '
+        Me.lvcolVisCitation.Text = "Citation"
+        '
+        'lvcolVisLocalDateRange
+        '
+        Me.lvcolVisLocalDateRange.Text = "Local Date Range"
+        Me.lvcolVisLocalDateRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolVisLocalDateRange.Width = 75
+        '
+        'lvcolVisUTCDateRange
+        '
+        Me.lvcolVisUTCDateRange.Text = "UTC Date Range"
+        Me.lvcolVisUTCDateRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolVisUTCDateRange.Width = 75
+        '
+        'lvcolVisValueCount
+        '
+        Me.lvcolVisValueCount.Text = "Value Count"
+        Me.lvcolVisValueCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolVisValueCount.Width = 75
+        '
+        'lblVisDataSeries
+        '
+        Me.lblVisDataSeries.Location = New System.Drawing.Point(8, 74)
+        Me.lblVisDataSeries.Name = "lblVisDataSeries"
+        Me.lblVisDataSeries.Size = New System.Drawing.Size(176, 16)
+        Me.lblVisDataSeries.TabIndex = 10
+        Me.lblVisDataSeries.Text = "Select a Data Series to View :"
+        '
+        'cboxVisVariable
+        '
+        Me.cboxVisVariable.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboxVisVariable.Location = New System.Drawing.Point(58, 44)
+        Me.cboxVisVariable.Name = "cboxVisVariable"
+        Me.cboxVisVariable.Size = New System.Drawing.Size(470, 21)
+        Me.cboxVisVariable.TabIndex = 0
+        '
+        'lblVisSite
+        '
+        Me.lblVisSite.Location = New System.Drawing.Point(8, 18)
+        Me.lblVisSite.Name = "lblVisSite"
+        Me.lblVisSite.Size = New System.Drawing.Size(32, 16)
+        Me.lblVisSite.TabIndex = 7
+        Me.lblVisSite.Text = "Site :"
+        Me.lblVisSite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblVisVariable
+        '
+        Me.lblVisVariable.Location = New System.Drawing.Point(8, 46)
+        Me.lblVisVariable.Name = "lblVisVariable"
+        Me.lblVisVariable.Size = New System.Drawing.Size(56, 16)
+        Me.lblVisVariable.TabIndex = 8
+        Me.lblVisVariable.Text = "Variable :"
+        '
+        'cboxVisSite
+        '
+        Me.cboxVisSite.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboxVisSite.Location = New System.Drawing.Point(40, 16)
+        Me.cboxVisSite.Name = "cboxVisSite"
+        Me.cboxVisSite.Size = New System.Drawing.Size(488, 21)
+        Me.cboxVisSite.TabIndex = 4
+        '
+        'tabctlPlots
+        '
+        Me.tabctlPlots.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tabctlPlots.Controls.Add(Me.tabpgTimeSeries)
+        Me.tabctlPlots.Controls.Add(Me.tabpgProbability)
+        Me.tabctlPlots.Controls.Add(Me.tabpgHistogram)
+        Me.tabctlPlots.Controls.Add(Me.tabpgBoxPlot)
+        Me.tabctlPlots.Location = New System.Drawing.Point(8, 8)
+        Me.tabctlPlots.Name = "tabctlPlots"
+        Me.tabctlPlots.SelectedIndex = 0
+        Me.tabctlPlots.Size = New System.Drawing.Size(536, 321)
+        Me.tabctlPlots.TabIndex = 8
+        '
+        'tabpgTimeSeries
+        '
+        Me.tabpgTimeSeries.Controls.Add(Me.zg5TimeSeries)
+        Me.tabpgTimeSeries.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgTimeSeries.Name = "tabpgTimeSeries"
+        Me.tabpgTimeSeries.Size = New System.Drawing.Size(528, 295)
+        Me.tabpgTimeSeries.TabIndex = 0
+        Me.tabpgTimeSeries.Text = "Time Series"
+        '
+        'zg5TimeSeries
+        '
+        Me.zg5TimeSeries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zg5TimeSeries.IsShowHScrollBar = True
+        Me.zg5TimeSeries.IsShowPointValues = True
+        Me.zg5TimeSeries.IsShowVScrollBar = True
+        Me.zg5TimeSeries.Location = New System.Drawing.Point(0, 0)
+        Me.zg5TimeSeries.Name = "zg5TimeSeries"
+        Me.zg5TimeSeries.ScrollGrace = 0
+        Me.zg5TimeSeries.ScrollMaxX = 0
+        Me.zg5TimeSeries.ScrollMaxY = 0
+        Me.zg5TimeSeries.ScrollMaxY2 = 0
+        Me.zg5TimeSeries.ScrollMinX = 0
+        Me.zg5TimeSeries.ScrollMinY = 0
+        Me.zg5TimeSeries.ScrollMinY2 = 0
+        Me.zg5TimeSeries.Size = New System.Drawing.Size(528, 295)
+        Me.zg5TimeSeries.TabIndex = 0
+        '
+        'tabpgProbability
+        '
+        Me.tabpgProbability.Controls.Add(Me.zg5Probability)
+        Me.tabpgProbability.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgProbability.Name = "tabpgProbability"
+        Me.tabpgProbability.Size = New System.Drawing.Size(528, 295)
+        Me.tabpgProbability.TabIndex = 0
+        Me.tabpgProbability.Text = "Probability"
+        '
+        'zg5Probability
+        '
+        Me.zg5Probability.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zg5Probability.IsShowHScrollBar = True
+        Me.zg5Probability.IsShowPointValues = True
+        Me.zg5Probability.IsShowVScrollBar = True
+        Me.zg5Probability.Location = New System.Drawing.Point(0, 0)
+        Me.zg5Probability.Name = "zg5Probability"
+        Me.zg5Probability.ScrollGrace = 0
+        Me.zg5Probability.ScrollMaxX = 0
+        Me.zg5Probability.ScrollMaxY = 0
+        Me.zg5Probability.ScrollMaxY2 = 0
+        Me.zg5Probability.ScrollMinX = 0
+        Me.zg5Probability.ScrollMinY = 0
+        Me.zg5Probability.ScrollMinY2 = 0
+        Me.zg5Probability.Size = New System.Drawing.Size(528, 295)
+        Me.zg5Probability.TabIndex = 1
+        '
+        'tabpgHistogram
+        '
+        Me.tabpgHistogram.Controls.Add(Me.zg5Histogram)
+        Me.tabpgHistogram.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgHistogram.Name = "tabpgHistogram"
+        Me.tabpgHistogram.Size = New System.Drawing.Size(528, 295)
+        Me.tabpgHistogram.TabIndex = 0
+        Me.tabpgHistogram.Text = "Histogram"
+        '
+        'zg5Histogram
+        '
+        Me.zg5Histogram.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zg5Histogram.IsShowHScrollBar = True
+        Me.zg5Histogram.IsShowPointValues = True
+        Me.zg5Histogram.IsShowVScrollBar = True
+        Me.zg5Histogram.Location = New System.Drawing.Point(0, 0)
+        Me.zg5Histogram.Name = "zg5Histogram"
+        Me.zg5Histogram.PointValueFormat = "N"
+        Me.zg5Histogram.ScrollGrace = 0
+        Me.zg5Histogram.ScrollMaxX = 0
+        Me.zg5Histogram.ScrollMaxY = 0
+        Me.zg5Histogram.ScrollMaxY2 = 0
+        Me.zg5Histogram.ScrollMinX = 0
+        Me.zg5Histogram.ScrollMinY = 0
+        Me.zg5Histogram.ScrollMinY2 = 0
+        Me.zg5Histogram.Size = New System.Drawing.Size(528, 295)
+        Me.zg5Histogram.TabIndex = 2
+        '
+        'tabpgBoxPlot
+        '
+        Me.tabpgBoxPlot.Controls.Add(Me.zg5BoxPlot)
+        Me.tabpgBoxPlot.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgBoxPlot.Name = "tabpgBoxPlot"
+        Me.tabpgBoxPlot.Size = New System.Drawing.Size(528, 295)
+        Me.tabpgBoxPlot.TabIndex = 0
+        Me.tabpgBoxPlot.Text = "Box/Whisker"
+        '
+        'zg5BoxPlot
+        '
+        Me.zg5BoxPlot.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zg5BoxPlot.IsShowHScrollBar = True
+        Me.zg5BoxPlot.IsShowPointValues = True
+        Me.zg5BoxPlot.IsShowVScrollBar = True
+        Me.zg5BoxPlot.Location = New System.Drawing.Point(0, 0)
+        Me.zg5BoxPlot.Name = "zg5BoxPlot"
+        Me.zg5BoxPlot.ScrollGrace = 0
+        Me.zg5BoxPlot.ScrollMaxX = 0
+        Me.zg5BoxPlot.ScrollMaxY = 0
+        Me.zg5BoxPlot.ScrollMaxY2 = 0
+        Me.zg5BoxPlot.ScrollMinX = 0
+        Me.zg5BoxPlot.ScrollMinY = 0
+        Me.zg5BoxPlot.ScrollMinY2 = 0
+        Me.zg5BoxPlot.Size = New System.Drawing.Size(528, 295)
+        Me.zg5BoxPlot.TabIndex = 2
+        '
+        'tabpgEdit
+        '
+        Me.tabpgEdit.Controls.Add(Me.btnEditDataDeriveNewDS)
+        Me.tabpgEdit.Controls.Add(Me.gboxEditFilter)
+        Me.tabpgEdit.Controls.Add(Me.btnEditDataFlag)
+        Me.tabpgEdit.Controls.Add(Me.btnEditDataInterpolate)
+        Me.tabpgEdit.Controls.Add(Me.btnEditDataAdd)
+        Me.tabpgEdit.Controls.Add(Me.btnEditDataRemove)
+        Me.tabpgEdit.Controls.Add(Me.btnEditDataAdjust)
+        Me.tabpgEdit.Controls.Add(Me.btnEditRestoreDefaults)
+        Me.tabpgEdit.Controls.Add(Me.btnEditApplyChanges)
+        Me.tabpgEdit.Controls.Add(Me.splitpnlEdit_PlotData)
+        Me.tabpgEdit.Controls.Add(Me.gboxEditDataSel)
+        Me.tabpgEdit.Location = New System.Drawing.Point(4, 22)
+        Me.tabpgEdit.Name = "tabpgEdit"
+        Me.tabpgEdit.Size = New System.Drawing.Size(784, 519)
+        Me.tabpgEdit.TabIndex = 2
+        Me.tabpgEdit.Text = "Edit"
+        Me.tabpgEdit.UseVisualStyleBackColor = True
+        '
+        'btnEditDataDeriveNewDS
+        '
+        Me.btnEditDataDeriveNewDS.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditDataDeriveNewDS.Location = New System.Drawing.Point(440, 303)
+        Me.btnEditDataDeriveNewDS.Name = "btnEditDataDeriveNewDS"
+        Me.btnEditDataDeriveNewDS.Size = New System.Drawing.Size(144, 24)
+        Me.btnEditDataDeriveNewDS.TabIndex = 12
+        Me.btnEditDataDeriveNewDS.Text = "Derive New Data Series"
+        Me.ttipEdit.SetToolTip(Me.btnEditDataDeriveNewDS, "Derive/Create a New Data Series from the selected Data Series")
+        Me.btnEditDataDeriveNewDS.UseVisualStyleBackColor = True
+        '
+        'gboxEditFilter
+        '
+        Me.gboxEditFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gboxEditFilter.Controls.Add(Me.rbtnEditDFDate)
+        Me.gboxEditFilter.Controls.Add(Me.gboxEditDFDate)
+        Me.gboxEditFilter.Controls.Add(Me.rbtnEditDFValueThreshold)
+        Me.gboxEditFilter.Controls.Add(Me.gboxEditDFValueThreshold)
+        Me.gboxEditFilter.Controls.Add(Me.rbtnEditDFDataGap)
+        Me.gboxEditFilter.Controls.Add(Me.gboxEditDFDataGaps)
+        Me.gboxEditFilter.Controls.Add(Me.btnEditDFApplyFilter)
+        Me.gboxEditFilter.Controls.Add(Me.btnEditDFClearSel)
+        Me.gboxEditFilter.Controls.Add(Me.tboxEditDFVTChange)
+        Me.gboxEditFilter.Controls.Add(Me.rbtnEditDFVTChange)
+        Me.gboxEditFilter.Location = New System.Drawing.Point(440, 328)
+        Me.gboxEditFilter.Name = "gboxEditFilter"
+        Me.gboxEditFilter.Size = New System.Drawing.Size(340, 158)
+        Me.gboxEditFilter.TabIndex = 4
+        Me.gboxEditFilter.TabStop = False
+        Me.gboxEditFilter.Text = "Data Filter"
+        '
+        'rbtnEditDFDate
+        '
+        Me.rbtnEditDFDate.Location = New System.Drawing.Point(12, 96)
+        Me.rbtnEditDFDate.Name = "rbtnEditDFDate"
+        Me.rbtnEditDFDate.Size = New System.Drawing.Size(16, 16)
+        Me.rbtnEditDFDate.TabIndex = 14
+        Me.rbtnEditDFDate.TabStop = True
+        Me.rbtnEditDFDate.UseVisualStyleBackColor = True
+        '
+        'gboxEditDFDate
+        '
+        Me.gboxEditDFDate.Controls.Add(Me.dtpEditDFDBefore)
+        Me.gboxEditDFDate.Controls.Add(Me.ckboxEditDFDBefore)
+        Me.gboxEditDFDate.Controls.Add(Me.dtpEditDFDAfter)
+        Me.gboxEditDFDate.Controls.Add(Me.ckboxEditDFDAfter)
+        Me.gboxEditDFDate.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.gboxEditDFDate.Location = New System.Drawing.Point(4, 98)
+        Me.gboxEditDFDate.Name = "gboxEditDFDate"
+        Me.gboxEditDFDate.Size = New System.Drawing.Size(224, 56)
+        Me.gboxEditDFDate.TabIndex = 25
+        Me.gboxEditDFDate.TabStop = False
+        Me.gboxEditDFDate.Text = "     Date"
+        '
+        'dtpEditDFDBefore
+        '
+        Me.dtpEditDFDBefore.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dtpEditDFDBefore.CustomFormat = "MM/dd/yyyy  hh:mm tt"
+        Me.dtpEditDFDBefore.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpEditDFDBefore.Location = New System.Drawing.Point(68, 12)
+        Me.dtpEditDFDBefore.Name = "dtpEditDFDBefore"
+        Me.dtpEditDFDBefore.Size = New System.Drawing.Size(150, 20)
+        Me.dtpEditDFDBefore.TabIndex = 24
+        '
+        'ckboxEditDFDBefore
+        '
+        Me.ckboxEditDFDBefore.Location = New System.Drawing.Point(8, 14)
+        Me.ckboxEditDFDBefore.Name = "ckboxEditDFDBefore"
+        Me.ckboxEditDFDBefore.Size = New System.Drawing.Size(80, 16)
+        Me.ckboxEditDFDBefore.TabIndex = 22
+        Me.ckboxEditDFDBefore.Text = "Before Date"
+        Me.ckboxEditDFDBefore.UseVisualStyleBackColor = True
+        '
+        'dtpEditDFDAfter
+        '
+        Me.dtpEditDFDAfter.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dtpEditDFDAfter.CustomFormat = "MM/dd/yyyy  hh:mm tt"
+        Me.dtpEditDFDAfter.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpEditDFDAfter.Location = New System.Drawing.Point(68, 34)
+        Me.dtpEditDFDAfter.Name = "dtpEditDFDAfter"
+        Me.dtpEditDFDAfter.Size = New System.Drawing.Size(150, 20)
+        Me.dtpEditDFDAfter.TabIndex = 25
+        '
+        'ckboxEditDFDAfter
+        '
+        Me.ckboxEditDFDAfter.Location = New System.Drawing.Point(8, 36)
+        Me.ckboxEditDFDAfter.Name = "ckboxEditDFDAfter"
+        Me.ckboxEditDFDAfter.Size = New System.Drawing.Size(80, 16)
+        Me.ckboxEditDFDAfter.TabIndex = 23
+        Me.ckboxEditDFDAfter.Text = "After "
+        Me.ckboxEditDFDAfter.UseVisualStyleBackColor = True
+        '
+        'rbtnEditDFValueThreshold
+        '
+        Me.rbtnEditDFValueThreshold.Location = New System.Drawing.Point(12, 14)
+        Me.rbtnEditDFValueThreshold.Name = "rbtnEditDFValueThreshold"
+        Me.rbtnEditDFValueThreshold.Size = New System.Drawing.Size(16, 16)
+        Me.rbtnEditDFValueThreshold.TabIndex = 0
+        Me.rbtnEditDFValueThreshold.TabStop = True
+        Me.rbtnEditDFValueThreshold.UseVisualStyleBackColor = True
+        '
+        'gboxEditDFValueThreshold
+        '
+        Me.gboxEditDFValueThreshold.Controls.Add(Me.tboxEditDFVTGreater)
+        Me.gboxEditDFValueThreshold.Controls.Add(Me.ckboxEditDFVTGreater)
+        Me.gboxEditDFValueThreshold.Controls.Add(Me.tboxEditDFVTLess)
+        Me.gboxEditDFValueThreshold.Controls.Add(Me.ckboxEditDFVTLess)
+        Me.gboxEditDFValueThreshold.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.gboxEditDFValueThreshold.Location = New System.Drawing.Point(4, 16)
+        Me.gboxEditDFValueThreshold.Name = "gboxEditDFValueThreshold"
+        Me.gboxEditDFValueThreshold.Size = New System.Drawing.Size(136, 58)
+        Me.gboxEditDFValueThreshold.TabIndex = 24
+        Me.gboxEditDFValueThreshold.TabStop = False
+        Me.gboxEditDFValueThreshold.Text = "     Value Threshold"
+        '
+        'tboxEditDFVTGreater
+        '
+        Me.tboxEditDFVTGreater.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxEditDFVTGreater.Location = New System.Drawing.Point(72, 12)
+        Me.tboxEditDFVTGreater.Name = "tboxEditDFVTGreater"
+        Me.tboxEditDFVTGreater.Size = New System.Drawing.Size(58, 20)
+        Me.tboxEditDFVTGreater.TabIndex = 13
+        Me.tboxEditDFVTGreater.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.tboxEditDFVTGreater.WordWrap = False
+        '
+        'ckboxEditDFVTGreater
+        '
+        Me.ckboxEditDFVTGreater.Location = New System.Drawing.Point(8, 14)
+        Me.ckboxEditDFVTGreater.Name = "ckboxEditDFVTGreater"
+        Me.ckboxEditDFVTGreater.Size = New System.Drawing.Size(68, 16)
+        Me.ckboxEditDFVTGreater.TabIndex = 15
+        Me.ckboxEditDFVTGreater.Text = "Value >"
+        Me.ckboxEditDFVTGreater.UseVisualStyleBackColor = True
+        '
+        'tboxEditDFVTLess
+        '
+        Me.tboxEditDFVTLess.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxEditDFVTLess.Location = New System.Drawing.Point(72, 34)
+        Me.tboxEditDFVTLess.Name = "tboxEditDFVTLess"
+        Me.tboxEditDFVTLess.Size = New System.Drawing.Size(58, 20)
+        Me.tboxEditDFVTLess.TabIndex = 14
+        Me.tboxEditDFVTLess.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.tboxEditDFVTLess.WordWrap = False
+        '
+        'ckboxEditDFVTLess
+        '
+        Me.ckboxEditDFVTLess.Location = New System.Drawing.Point(8, 36)
+        Me.ckboxEditDFVTLess.Name = "ckboxEditDFVTLess"
+        Me.ckboxEditDFVTLess.Size = New System.Drawing.Size(68, 16)
+        Me.ckboxEditDFVTLess.TabIndex = 16
+        Me.ckboxEditDFVTLess.Text = "Value <"
+        Me.ckboxEditDFVTLess.UseVisualStyleBackColor = True
+        '
+        'rbtnEditDFDataGap
+        '
+        Me.rbtnEditDFDataGap.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rbtnEditDFDataGap.Location = New System.Drawing.Point(152, 14)
+        Me.rbtnEditDFDataGap.Name = "rbtnEditDFDataGap"
+        Me.rbtnEditDFDataGap.Size = New System.Drawing.Size(16, 16)
+        Me.rbtnEditDFDataGap.TabIndex = 23
+        Me.rbtnEditDFDataGap.TabStop = True
+        Me.rbtnEditDFDataGap.UseVisualStyleBackColor = True
+        '
+        'gboxEditDFDataGaps
+        '
+        Me.gboxEditDFDataGaps.Controls.Add(Me.cboxEditDFDGTimePeriod)
+        Me.gboxEditDFDataGaps.Controls.Add(Me.lblEditDFDGTimePeriod)
+        Me.gboxEditDFDataGaps.Controls.Add(Me.tboxEditDFDGValue)
+        Me.gboxEditDFDataGaps.Controls.Add(Me.lblEditDFDGValue)
+        Me.gboxEditDFDataGaps.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.gboxEditDFDataGaps.Location = New System.Drawing.Point(144, 16)
+        Me.gboxEditDFDataGaps.Name = "gboxEditDFDataGaps"
+        Me.gboxEditDFDataGaps.Size = New System.Drawing.Size(192, 58)
+        Me.gboxEditDFDataGaps.TabIndex = 22
+        Me.gboxEditDFDataGaps.TabStop = False
+        Me.gboxEditDFDataGaps.Text = "     Data Gaps"
+        '
+        'cboxEditDFDGTimePeriod
+        '
+        Me.cboxEditDFDGTimePeriod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboxEditDFDGTimePeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboxEditDFDGTimePeriod.FormattingEnabled = True
+        Me.cboxEditDFDGTimePeriod.Location = New System.Drawing.Point(80, 34)
+        Me.cboxEditDFDGTimePeriod.Name = "cboxEditDFDGTimePeriod"
+        Me.cboxEditDFDGTimePeriod.Size = New System.Drawing.Size(108, 21)
+        Me.cboxEditDFDGTimePeriod.TabIndex = 6
+        '
+        'lblEditDFDGTimePeriod
+        '
+        Me.lblEditDFDGTimePeriod.Location = New System.Drawing.Point(8, 36)
+        Me.lblEditDFDGTimePeriod.Name = "lblEditDFDGTimePeriod"
+        Me.lblEditDFDGTimePeriod.Size = New System.Drawing.Size(72, 16)
+        Me.lblEditDFDGTimePeriod.TabIndex = 7
+        Me.lblEditDFDGTimePeriod.Text = "Time Period : "
+        Me.lblEditDFDGTimePeriod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'tboxEditDFDGValue
+        '
+        Me.tboxEditDFDGValue.Location = New System.Drawing.Point(80, 12)
+        Me.tboxEditDFDGValue.Name = "tboxEditDFDGValue"
+        Me.tboxEditDFDGValue.Size = New System.Drawing.Size(58, 20)
+        Me.tboxEditDFDGValue.TabIndex = 5
+        '
+        'lblEditDFDGValue
+        '
+        Me.lblEditDFDGValue.Location = New System.Drawing.Point(8, 14)
+        Me.lblEditDFDGValue.Name = "lblEditDFDGValue"
+        Me.lblEditDFDGValue.Size = New System.Drawing.Size(72, 16)
+        Me.lblEditDFDGValue.TabIndex = 4
+        Me.lblEditDFDGValue.Text = "Value : "
+        Me.lblEditDFDGValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnEditDFApplyFilter
+        '
+        Me.btnEditDFApplyFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditDFApplyFilter.Location = New System.Drawing.Point(242, 94)
+        Me.btnEditDFApplyFilter.Name = "btnEditDFApplyFilter"
+        Me.btnEditDFApplyFilter.Size = New System.Drawing.Size(86, 24)
+        Me.btnEditDFApplyFilter.TabIndex = 8
+        Me.btnEditDFApplyFilter.Text = "Apply Filter"
+        Me.btnEditDFApplyFilter.UseVisualStyleBackColor = True
+        '
+        'btnEditDFClearSel
+        '
+        Me.btnEditDFClearSel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditDFClearSel.Location = New System.Drawing.Point(234, 124)
+        Me.btnEditDFClearSel.Name = "btnEditDFClearSel"
+        Me.btnEditDFClearSel.Size = New System.Drawing.Size(100, 24)
+        Me.btnEditDFClearSel.TabIndex = 7
+        Me.btnEditDFClearSel.Text = "Clear Selection"
+        Me.btnEditDFClearSel.UseVisualStyleBackColor = True
+        '
+        'tboxEditDFVTChange
+        '
+        Me.tboxEditDFVTChange.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tboxEditDFVTChange.Location = New System.Drawing.Point(172, 78)
+        Me.tboxEditDFVTChange.Name = "tboxEditDFVTChange"
+        Me.tboxEditDFVTChange.Size = New System.Drawing.Size(56, 20)
+        Me.tboxEditDFVTChange.TabIndex = 6
+        Me.tboxEditDFVTChange.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.tboxEditDFVTChange.WordWrap = False
+        '
+        'rbtnEditDFVTChange
+        '
+        Me.rbtnEditDFVTChange.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rbtnEditDFVTChange.Location = New System.Drawing.Point(12, 78)
+        Me.rbtnEditDFVTChange.Name = "rbtnEditDFVTChange"
+        Me.rbtnEditDFVTChange.Size = New System.Drawing.Size(168, 20)
+        Me.rbtnEditDFVTChange.TabIndex = 2
+        Me.rbtnEditDFVTChange.TabStop = True
+        Me.rbtnEditDFVTChange.Text = "Value Change Threshold >= "
+        Me.rbtnEditDFVTChange.UseVisualStyleBackColor = True
+        '
+        'btnEditDataFlag
+        '
+        Me.btnEditDataFlag.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditDataFlag.Image = CType(resources.GetObject("btnEditDataFlag.Image"), System.Drawing.Image)
+        Me.btnEditDataFlag.Location = New System.Drawing.Point(688, 301)
+        Me.btnEditDataFlag.Name = "btnEditDataFlag"
+        Me.btnEditDataFlag.Size = New System.Drawing.Size(28, 28)
+        Me.btnEditDataFlag.TabIndex = 11
+        Me.ttipEdit.SetToolTip(Me.btnEditDataFlag, "Flag the selected Values in the Data Series")
+        Me.btnEditDataFlag.UseVisualStyleBackColor = True
+        '
+        'btnEditDataInterpolate
+        '
+        Me.btnEditDataInterpolate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditDataInterpolate.Image = CType(resources.GetObject("btnEditDataInterpolate.Image"), System.Drawing.Image)
+        Me.btnEditDataInterpolate.Location = New System.Drawing.Point(656, 301)
+        Me.btnEditDataInterpolate.Name = "btnEditDataInterpolate"
+        Me.btnEditDataInterpolate.Size = New System.Drawing.Size(28, 28)
+        Me.btnEditDataInterpolate.TabIndex = 10
+        Me.ttipEdit.SetToolTip(Me.btnEditDataInterpolate, "Interpolate Values")
+        Me.btnEditDataInterpolate.UseVisualStyleBackColor = True
+        '
+        'btnEditDataAdd
+        '
+        Me.btnEditDataAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditDataAdd.Image = CType(resources.GetObject("btnEditDataAdd.Image"), System.Drawing.Image)
+        Me.btnEditDataAdd.Location = New System.Drawing.Point(752, 301)
+        Me.btnEditDataAdd.Name = "btnEditDataAdd"
+        Me.btnEditDataAdd.Size = New System.Drawing.Size(28, 28)
+        Me.btnEditDataAdd.TabIndex = 9
+        Me.ttipEdit.SetToolTip(Me.btnEditDataAdd, "Add a new Value to the Data Series")
+        Me.btnEditDataAdd.UseVisualStyleBackColor = True
+        '
+        'btnEditDataRemove
+        '
+        Me.btnEditDataRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditDataRemove.Image = CType(resources.GetObject("btnEditDataRemove.Image"), System.Drawing.Image)
+        Me.btnEditDataRemove.Location = New System.Drawing.Point(720, 301)
+        Me.btnEditDataRemove.Name = "btnEditDataRemove"
+        Me.btnEditDataRemove.Size = New System.Drawing.Size(28, 28)
+        Me.btnEditDataRemove.TabIndex = 8
+        Me.ttipEdit.SetToolTip(Me.btnEditDataRemove, "Remove the selected Values from the Data Series")
+        Me.btnEditDataRemove.UseVisualStyleBackColor = True
+        '
+        'btnEditDataAdjust
+        '
+        Me.btnEditDataAdjust.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditDataAdjust.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnEditDataAdjust.Image = CType(resources.GetObject("btnEditDataAdjust.Image"), System.Drawing.Image)
+        Me.btnEditDataAdjust.Location = New System.Drawing.Point(624, 301)
+        Me.btnEditDataAdjust.Name = "btnEditDataAdjust"
+        Me.btnEditDataAdjust.Size = New System.Drawing.Size(28, 28)
+        Me.btnEditDataAdjust.TabIndex = 7
+        Me.ttipEdit.SetToolTip(Me.btnEditDataAdjust, "Adjust the selected Values in the Data Series")
+        Me.btnEditDataAdjust.UseVisualStyleBackColor = True
+        '
+        'btnEditRestoreDefaults
+        '
+        Me.btnEditRestoreDefaults.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditRestoreDefaults.Location = New System.Drawing.Point(444, 490)
+        Me.btnEditRestoreDefaults.Name = "btnEditRestoreDefaults"
+        Me.btnEditRestoreDefaults.Size = New System.Drawing.Size(152, 24)
+        Me.btnEditRestoreDefaults.TabIndex = 6
+        Me.btnEditRestoreDefaults.Text = "Restore Original Values "
+        Me.ttipEdit.SetToolTip(Me.btnEditRestoreDefaults, "Restore the data from the Database")
+        Me.btnEditRestoreDefaults.UseVisualStyleBackColor = True
+        '
+        'btnEditApplyChanges
+        '
+        Me.btnEditApplyChanges.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEditApplyChanges.Location = New System.Drawing.Point(602, 490)
+        Me.btnEditApplyChanges.Name = "btnEditApplyChanges"
+        Me.btnEditApplyChanges.Size = New System.Drawing.Size(172, 26)
+        Me.btnEditApplyChanges.TabIndex = 5
+        Me.btnEditApplyChanges.Text = "Apply Changes To Database"
+        Me.ttipEdit.SetToolTip(Me.btnEditApplyChanges, "Apply any changes to the Database")
+        Me.btnEditApplyChanges.UseVisualStyleBackColor = True
+        '
+        'splitpnlEdit_PlotData
+        '
+        Me.splitpnlEdit_PlotData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.splitpnlEdit_PlotData.BackColor = System.Drawing.SystemColors.Highlight
+        Me.splitpnlEdit_PlotData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.splitpnlEdit_PlotData.Location = New System.Drawing.Point(4, 8)
+        Me.splitpnlEdit_PlotData.Name = "splitpnlEdit_PlotData"
+        '
+        'splitpnlEdit_PlotData.Panel1
+        '
+        Me.splitpnlEdit_PlotData.Panel1.Controls.Add(Me.zg5EditPlot)
+        '
+        'splitpnlEdit_PlotData.Panel2
+        '
+        Me.splitpnlEdit_PlotData.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.splitpnlEdit_PlotData.Panel2.Controls.Add(Me.dgvEditTable)
+        Me.splitpnlEdit_PlotData.Size = New System.Drawing.Size(776, 289)
+        Me.splitpnlEdit_PlotData.SplitterDistance = 430
+        Me.splitpnlEdit_PlotData.TabIndex = 3
+        '
+        'zg5EditPlot
+        '
+        Me.zg5EditPlot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.zg5EditPlot.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zg5EditPlot.IsShowHScrollBar = True
+        Me.zg5EditPlot.IsShowPointValues = True
+        Me.zg5EditPlot.IsShowVScrollBar = True
+        Me.zg5EditPlot.Location = New System.Drawing.Point(0, 0)
+        Me.zg5EditPlot.Name = "zg5EditPlot"
+        Me.zg5EditPlot.ScrollGrace = 0
+        Me.zg5EditPlot.ScrollMaxX = 0
+        Me.zg5EditPlot.ScrollMaxY = 0
+        Me.zg5EditPlot.ScrollMaxY2 = 0
+        Me.zg5EditPlot.ScrollMinX = 0
+        Me.zg5EditPlot.ScrollMinY = 0
+        Me.zg5EditPlot.ScrollMinY2 = 0
+        Me.zg5EditPlot.Size = New System.Drawing.Size(426, 285)
+        Me.zg5EditPlot.TabIndex = 2
+        '
+        'dgvEditTable
+        '
+        Me.dgvEditTable.AllowUserToAddRows = False
+        Me.dgvEditTable.AllowUserToDeleteRows = False
+        Me.dgvEditTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.dgvEditTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEditTable.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvEditTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEditTable.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvEditTable.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvEditTable.Location = New System.Drawing.Point(0, 0)
+        Me.dgvEditTable.Name = "dgvEditTable"
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.Format = "N0"
+        DataGridViewCellStyle3.NullValue = Nothing
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEditTable.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvEditTable.RowHeadersWidth = 20
+        Me.dgvEditTable.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgvEditTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvEditTable.Size = New System.Drawing.Size(338, 285)
+        Me.dgvEditTable.TabIndex = 0
+        '
+        'gboxEditDataSel
+        '
+        Me.gboxEditDataSel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gboxEditDataSel.Controls.Add(Me.lvEditDataSeries)
+        Me.gboxEditDataSel.Controls.Add(Me.lblEditDataSeries)
+        Me.gboxEditDataSel.Controls.Add(Me.cboxEditVariable)
+        Me.gboxEditDataSel.Controls.Add(Me.lblEditSite)
+        Me.gboxEditDataSel.Controls.Add(Me.lblEditVariable)
+        Me.gboxEditDataSel.Controls.Add(Me.cboxEditSite)
+        Me.gboxEditDataSel.Location = New System.Drawing.Point(4, 297)
+        Me.gboxEditDataSel.Name = "gboxEditDataSel"
+        Me.gboxEditDataSel.Size = New System.Drawing.Size(428, 220)
+        Me.gboxEditDataSel.TabIndex = 2
+        Me.gboxEditDataSel.TabStop = False
+        Me.gboxEditDataSel.Text = "Data To Plot"
+        '
+        'lvEditDataSeries
+        '
+        Me.lvEditDataSeries.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lvEditDataSeries.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.lvcolEditGenCategory, Me.lvcolEditSpeciation, Me.lvcolEditVarUnits, Me.lvcolEditTimeSupport, Me.lvcolEditTimeUnits, Me.lvcolEditSampleMedium, Me.lvcolEditValueType, Me.lvcolEditDataType, Me.lvcolEditQCLevel, Me.lvcolEditMethod, Me.lvcolEditOrganization, Me.lvcolEditSourceDesc, Me.lvcolEditCitation, Me.lvcolEditLocalDateRange, Me.lvcolEditUTCDateRange, Me.lvcolEditValueCount})
+        Me.lvEditDataSeries.FullRowSelect = True
+        Me.lvEditDataSeries.GridLines = True
+        Me.lvEditDataSeries.HideSelection = False
+        Me.lvEditDataSeries.Location = New System.Drawing.Point(8, 88)
+        Me.lvEditDataSeries.MultiSelect = False
+        Me.lvEditDataSeries.Name = "lvEditDataSeries"
+        Me.lvEditDataSeries.Size = New System.Drawing.Size(412, 126)
+        Me.lvEditDataSeries.TabIndex = 9
+        Me.lvEditDataSeries.UseCompatibleStateImageBehavior = False
+        Me.lvEditDataSeries.View = System.Windows.Forms.View.Details
+        '
+        'lvcolEditGenCategory
+        '
+        Me.lvcolEditGenCategory.Text = "General Category"
+        Me.lvcolEditGenCategory.Width = 75
+        '
+        'lvcolEditSpeciation
+        '
+        Me.lvcolEditSpeciation.Text = "Speciation"
+        Me.lvcolEditSpeciation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lvcolEditVarUnits
+        '
+        Me.lvcolEditVarUnits.Text = "Variable Units"
+        Me.lvcolEditVarUnits.Width = 75
+        '
+        'lvcolEditTimeSupport
+        '
+        Me.lvcolEditTimeSupport.Text = "Time Support"
+        Me.lvcolEditTimeSupport.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.lvcolEditTimeSupport.Width = 75
+        '
+        'lvcolEditTimeUnits
+        '
+        Me.lvcolEditTimeUnits.Text = "Time Units"
+        Me.lvcolEditTimeUnits.Width = 75
+        '
+        'lvcolEditSampleMedium
+        '
+        Me.lvcolEditSampleMedium.Text = "Sample Medium"
+        Me.lvcolEditSampleMedium.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolEditSampleMedium.Width = 75
+        '
+        'lvcolEditValueType
+        '
+        Me.lvcolEditValueType.Text = "Value Type"
+        Me.lvcolEditValueType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolEditValueType.Width = 75
+        '
+        'lvcolEditDataType
+        '
+        Me.lvcolEditDataType.Text = "Data Type"
+        Me.lvcolEditDataType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolEditDataType.Width = 75
+        '
+        'lvcolEditQCLevel
+        '
+        Me.lvcolEditQCLevel.Text = "Quality Control Level"
+        Me.lvcolEditQCLevel.Width = 75
+        '
+        'lvcolEditMethod
+        '
+        Me.lvcolEditMethod.Text = "Method"
+        Me.lvcolEditMethod.Width = 75
+        '
+        'lvcolEditOrganization
+        '
+        Me.lvcolEditOrganization.Text = "Organization"
+        Me.lvcolEditOrganization.Width = 75
+        '
+        'lvcolEditSourceDesc
+        '
+        Me.lvcolEditSourceDesc.Text = "Source Description"
+        Me.lvcolEditSourceDesc.Width = 75
+        '
+        'lvcolEditCitation
+        '
+        Me.lvcolEditCitation.Text = "Citation"
+        '
+        'lvcolEditLocalDateRange
+        '
+        Me.lvcolEditLocalDateRange.Text = "Date Range"
+        Me.lvcolEditLocalDateRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolEditLocalDateRange.Width = 75
+        '
+        'lvcolEditUTCDateRange
+        '
+        Me.lvcolEditUTCDateRange.Text = "UTC Date Range"
+        Me.lvcolEditUTCDateRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolEditUTCDateRange.Width = 75
+        '
+        'lvcolEditValueCount
+        '
+        Me.lvcolEditValueCount.Text = "Value Count"
+        Me.lvcolEditValueCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.lvcolEditValueCount.Width = 75
+        '
+        'lblEditDataSeries
+        '
+        Me.lblEditDataSeries.Location = New System.Drawing.Point(8, 74)
+        Me.lblEditDataSeries.Name = "lblEditDataSeries"
+        Me.lblEditDataSeries.Size = New System.Drawing.Size(176, 16)
+        Me.lblEditDataSeries.TabIndex = 10
+        Me.lblEditDataSeries.Text = "Select a Data Series to Edit :"
+        '
+        'cboxEditVariable
+        '
+        Me.cboxEditVariable.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboxEditVariable.Location = New System.Drawing.Point(58, 44)
+        Me.cboxEditVariable.Name = "cboxEditVariable"
+        Me.cboxEditVariable.Size = New System.Drawing.Size(362, 21)
+        Me.cboxEditVariable.TabIndex = 0
+        '
+        'lblEditSite
+        '
+        Me.lblEditSite.Location = New System.Drawing.Point(8, 18)
+        Me.lblEditSite.Name = "lblEditSite"
+        Me.lblEditSite.Size = New System.Drawing.Size(32, 16)
+        Me.lblEditSite.TabIndex = 7
+        Me.lblEditSite.Text = "Site :"
+        Me.lblEditSite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblEditVariable
+        '
+        Me.lblEditVariable.Location = New System.Drawing.Point(8, 46)
+        Me.lblEditVariable.Name = "lblEditVariable"
+        Me.lblEditVariable.Size = New System.Drawing.Size(56, 16)
+        Me.lblEditVariable.TabIndex = 8
+        Me.lblEditVariable.Text = "Variable :"
+        '
+        'cboxEditSite
+        '
+        Me.cboxEditSite.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboxEditSite.Location = New System.Drawing.Point(40, 16)
+        Me.cboxEditSite.Name = "cboxEditSite"
+        Me.cboxEditSite.Size = New System.Drawing.Size(380, 21)
+        Me.cboxEditSite.TabIndex = 4
+        '
+        'cmnuQueryDataRightClick
+        '
+        Me.cmnuQueryDataRightClick.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuQDRCPlot, Me.mnuQDRCEdit, Me.mnuQDRCViewMeta, Me.mnuQDRCLine1, Me.mnuQDRCSingleExport, Me.mnuQDRCExportMeta, Me.MenuItem1, Me.mnuQDRCSelectSingle, Me.mnuQDRCSelectAll, Me.mnuQDRCSelectNone})
+        '
+        'mnuQDRCPlot
+        '
+        Me.mnuQDRCPlot.DefaultItem = True
+        Me.mnuQDRCPlot.Index = 0
+        Me.mnuQDRCPlot.Text = "Plot"
+        '
+        'mnuQDRCEdit
+        '
+        Me.mnuQDRCEdit.Index = 1
+        Me.mnuQDRCEdit.Text = "Edit"
+        '
+        'mnuQDRCViewMeta
+        '
+        Me.mnuQDRCViewMeta.Index = 2
+        Me.mnuQDRCViewMeta.Text = "View MetaData"
+        '
+        'mnuQDRCLine1
+        '
+        Me.mnuQDRCLine1.Index = 3
+        Me.mnuQDRCLine1.Text = "-"
+        '
+        'mnuQDRCSingleExport
+        '
+        Me.mnuQDRCSingleExport.Index = 4
+        Me.mnuQDRCSingleExport.Text = "Export Single Data"
+        '
+        'mnuQDRCExportMeta
+        '
+        Me.mnuQDRCExportMeta.Index = 5
+        Me.mnuQDRCExportMeta.Text = "Export Single MetaData"
+        '
+        'MenuItem1
+        '
+        Me.MenuItem1.Index = 6
+        Me.MenuItem1.Text = "-"
+        '
+        'mnuQDRCSelectSingle
+        '
+        Me.mnuQDRCSelectSingle.Index = 7
+        Me.mnuQDRCSelectSingle.Text = "Select for Group Export"
+        '
+        'mnuQDRCSelectAll
+        '
+        Me.mnuQDRCSelectAll.Index = 8
+        Me.mnuQDRCSelectAll.Text = "Select All"
+        '
+        'mnuQDRCSelectNone
+        '
+        Me.mnuQDRCSelectNone.Index = 9
+        Me.mnuQDRCSelectNone.Text = "Select None"
+        '
+        'sfdExportMyDB
+        '
+        Me.sfdExportMyDB.DefaultExt = "csv"
+        Me.sfdExportMyDB.FileName = "MyDB"
+        Me.sfdExportMyDB.Filter = "Comma Delimited Format(*.csv)|*.csv|TabDelimited(*.txt)|*.txt"
+        Me.sfdExportMyDB.Title = "Export as MyDB Format"
+        '
+        'sfdExportMetadata
+        '
+        Me.sfdExportMetadata.DefaultExt = "xml"
+        Me.sfdExportMetadata.FileName = "Metadata"
+        Me.sfdExportMetadata.Filter = "Metadata(*.xml)|*.xml"
+        Me.sfdExportMetadata.OverwritePrompt = False
+        Me.sfdExportMetadata.SupportMultiDottedExtensions = True
+        Me.sfdExportMetadata.Title = "Export Metadata to XML file"
+        '
+        'DataGridTextBoxColumn1
+        '
+        Me.DataGridTextBoxColumn1.Format = ""
+        Me.DataGridTextBoxColumn1.FormatInfo = Nothing
+        Me.DataGridTextBoxColumn1.Width = 75
+        '
+        'frmODMTools
+        '
+        Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
+        Me.ClientSize = New System.Drawing.Size(792, 545)
+        Me.Controls.Add(Me.tabctlODMTools)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Menu = Me.mnuMain
+        Me.MinimumSize = New System.Drawing.Size(800, 552)
+        Me.Name = "frmODMTools"
+        Me.Text = "ODM Tools"
+        Me.tabctlODMTools.ResumeLayout(False)
+        Me.tabpgQuery.ResumeLayout(False)
+        Me.tabpgQuery.PerformLayout()
+        Me.grp_qryVars.ResumeLayout(False)
+        Me.grp_qryVars.PerformLayout()
+        Me.grp_qryVarSelect.ResumeLayout(False)
+        Me.grp_qryVarSelect.PerformLayout()
+        Me.grp_qrySites.ResumeLayout(False)
+        Me.grp_qrySites.PerformLayout()
+        Me.grp_qrySiteSelect.ResumeLayout(False)
+        Me.grp_qrySiteSelect.PerformLayout()
+        Me.grp_qrySources.ResumeLayout(False)
+        Me.grp_qrySources.PerformLayout()
+        Me.grp_qrySrcSelect.ResumeLayout(False)
+        Me.grp_qrySrcSelect.PerformLayout()
+        Me.grp_qryOther.ResumeLayout(False)
+        Me.grp_qryOther.PerformLayout()
+        Me.grp_qryNumObs.ResumeLayout(False)
+        CType(Me.num_qryObs, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabpgVisualize.ResumeLayout(False)
+        Me.tabctlPlotOptions.ResumeLayout(False)
+        Me.tabpgSummary.ResumeLayout(False)
+        Me.gboxStatistics.ResumeLayout(False)
+        Me.gboxStatistics.PerformLayout()
+        Me.tabpgOptions.ResumeLayout(False)
+        Me.gboxHistPlotOptions.ResumeLayout(False)
+        Me.gboxHPNumBarSettings.ResumeLayout(False)
+        Me.gboxHPNumBarSettings.PerformLayout()
+        Me.gboxBoxPlotOptions.ResumeLayout(False)
+        Me.gboxBPPlotType.ResumeLayout(False)
+        Me.gboxTSPlotOptions.ResumeLayout(False)
+        Me.gboxTSPlotType.ResumeLayout(False)
+        Me.gboxDateInfo.ResumeLayout(False)
+        Me.gboxVisDataSel.ResumeLayout(False)
+        Me.tabctlPlots.ResumeLayout(False)
+        Me.tabpgTimeSeries.ResumeLayout(False)
+        Me.tabpgProbability.ResumeLayout(False)
+        Me.tabpgHistogram.ResumeLayout(False)
+        Me.tabpgBoxPlot.ResumeLayout(False)
+        Me.tabpgEdit.ResumeLayout(False)
+        Me.gboxEditFilter.ResumeLayout(False)
+        Me.gboxEditFilter.PerformLayout()
+        Me.gboxEditDFDate.ResumeLayout(False)
+        Me.gboxEditDFValueThreshold.ResumeLayout(False)
+        Me.gboxEditDFValueThreshold.PerformLayout()
+        Me.gboxEditDFDataGaps.ResumeLayout(False)
+        Me.gboxEditDFDataGaps.PerformLayout()
+        Me.splitpnlEdit_PlotData.Panel1.ResumeLayout(False)
+        Me.splitpnlEdit_PlotData.Panel2.ResumeLayout(False)
+        Me.splitpnlEdit_PlotData.ResumeLayout(False)
+        CType(Me.dgvEditTable, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.gboxEditDataSel.ResumeLayout(False)
+        Me.ResumeLayout(False)
 
-	End Sub
+    End Sub
 
 
 
@@ -3179,8 +3190,8 @@ Public Class frmODMTools
     Private Const m_EditDFVTMethod_Less As String = "Less Than" 'Data Filter Value Threshold Method = Less Than (<)
     Private Const m_EditDFDMethod_Before As String = "Before" 'Data Filter Date Method = Before (<)
     Private Const m_EditDFDMethod_After As String = "After" 'Data Filter Date Method = After (>)
-    Private m_EditRemoveDFIDs As System.Collections.ArrayList 'A collection of DerivedFromIDs to be deleted from the DerivedFrom, Data Values tables when edits are saved to the database
-    Private m_EditHaveRemoveDFIDs As Boolean = False 'tracks if have any DerivedFromIDs to be deleted from the database (stored in m_EditRemoveDFIDs) when edits are saved to the database
+    'Private m_EditRemoveDFIDs As System.Collections.ArrayList 'A collection of DerivedFromIDs to be deleted from the DerivedFrom, Data Values tables when edits are saved to the database
+    'Private m_EditHaveRemoveDFIDs As Boolean = False 'tracks if have any DerivedFromIDs to be deleted from the database (stored in m_EditRemoveDFIDs) when edits are saved to the database
     Private m_EditTableColName_DateTime As String 'holds the LocalDateTime column name for the Data Table on the Edit Tab, NOTE: This is set when the Table is loaded on the Edit Tab
     Private m_EditTableColName_UTCDateTime As String 'holds the UTCDateTime column name for the Data Table on the Edit Tab, NOTE: This is set when the Table is loaded on the Edit Tab
     Private m_EditTableColName_Value As String 'holds the DataValue column name for the Data Table on the Edit Tab, NOTE: This is set when the Table is loaded on the Edit Tab
@@ -3190,9 +3201,17 @@ Public Class frmODMTools
     Private m_EditDeletingVals As Boolean = False 'tracks if currently deleting Values from the Data Table (this is not when saving edits to the Database, it is only for making the current Data Series look correct for the edits the user wants)
     Private m_EditAddingVals As Boolean = False 'tracks if adding values to the current Data Series (this is not when saving added values (edits) to the Database, it is only for making the current Data Series look correct for the edits the user wants)
     Private m_EditNoDataVal As Double 'holds the No Data Value for the currently selected Data Series on the Edit Tab.
-	Private m_Edit_SelZVal As String = "SelZValue" 'holds the col name for m_EditData to put data into to sel plot values
+    Private m_Edit_SelZVal As String = "Selected" 'holds the col name for m_EditData to put data into to sel plot values
     Private m_XBorder As Double = 0.025
     Private m_YBorder As Double = 0.1
+
+
+    Private CurveEditingColor As Drawing.Color = Color.Black
+    'Public Originaldt As Data.DataTable
+    'Public Editdt As DataTable
+    Public newseriesID As Integer = 0
+
+
 #End Region
 
 #Region " Enumerations "
@@ -3302,14 +3321,14 @@ Public Class frmODMTools
 						m_EditHaveDeletedValIDs = False
 						If Not (m_EditDeletedValIDs Is Nothing) Then
 							m_EditDeletedValIDs.Clear()
-						End If
-						m_EditHaveRemoveDFIDs = False
-						If Not (m_EditRemoveDFIDs Is Nothing) Then
-							m_EditRemoveDFIDs.Clear()
-						End If
-						'reload current data series
-						'lvEditDataSeries_SelectedIndexChanged(Me, New System.EventArgs())
-						cboxEditVariable_SelectedIndexChanged(Me, New System.EventArgs())
+                        End If
+                        'm_EditHaveRemoveDFIDs = False
+                        'If Not (m_EditRemoveDFIDs Is Nothing) Then
+                        'm_EditRemoveDFIDs.Clear()
+                        'End If
+                        'reload current data series
+                        'lvEditDataSeries_SelectedIndexChanged(Me, New System.EventArgs())
+                        cboxEditVariable_SelectedIndexChanged(Me, New System.EventArgs())
                     End If
                 End If
 
@@ -3330,14 +3349,14 @@ Public Class frmODMTools
 						m_EditHaveDeletedValIDs = False
 						If Not (m_EditDeletedValIDs Is Nothing) Then
 							m_EditDeletedValIDs.Clear()
-						End If
-						m_EditHaveRemoveDFIDs = False
-						If Not (m_EditRemoveDFIDs Is Nothing) Then
-							m_EditRemoveDFIDs.Clear()
-						End If
-                        'reload current data series
-						'lvEditDataSeries_SelectedIndexChanged(Me, New System.EventArgs())
-						cboxEditVariable_SelectedIndexChanged(Me, New System.EventArgs())
+						End If						
+                        'm_EditHaveRemoveDFIDs = False
+                        'If Not (m_EditRemoveDFIDs Is Nothing) Then
+                        'm_EditRemoveDFIDs.Clear()
+                        'End If
+                        'reload current data series						
+                        'lvEditDataSeries_SelectedIndexChanged(Me, New System.EventArgs())
+                        cboxEditVariable_SelectedIndexChanged(Me, New System.EventArgs())
                     End If
                 End If
                 If Not (m_VisualizeTabLoaded) Then
@@ -3462,11 +3481,11 @@ Public Class frmODMTools
 					If Not (m_EditDeletedValIDs Is Nothing) Then
 						m_EditDeletedValIDs.Clear()
 					End If
-					m_EditHaveRemoveDFIDs = False
-					If Not (m_EditRemoveDFIDs Is Nothing) Then
-						m_EditRemoveDFIDs.Clear()
-					End If
-				End If
+                    'm_EditHaveRemoveDFIDs = False
+                    'If Not (m_EditRemoveDFIDs Is Nothing) Then
+                    'm_EditRemoveDFIDs.Clear()
+                    'End If
+                End If
 			End If
 		End If
 
@@ -6496,9 +6515,9 @@ Public Class frmODMTools
 
 		Try
 			'reset/initialize the Time Series Plot only if it says it is current -> was current, changes occurred, so redrawing
-			If m_IsPlotCurrent_TimeSeries Then
-				InitializeZedGraphPlot(zg5TimeSeries)
-				zg5TimeSeries.GraphPane.Title.Text = "Waiting For Update ..."
+			If m_IsPlotCurrent_TimeSeries Then				
+                InitializeZedGraphPlot(zg5TimeSeries)
+                zg5TimeSeries.GraphPane.Title.Text = "Waiting For Update ..."
 				zg5TimeSeries.Refresh()
 			End If
 			'reset/initialize the Probability Plot only if it says it is current -> was current, changes occurred, so redrawing
@@ -8233,35 +8252,37 @@ Public Class frmODMTools
             '1. Draw Confidence Interval -> red line
             confIntervalLine = New ZedGraph.LineObj(Color.Red, boxData.xValue, boxData.confidenceInterval95_Upper, boxData.xValue, boxData.confidenceInterval95_Lower)
             confIntervalLine.IsClippedToChartRect = True
-            confIntervalLine.ZOrder = ZedGraph.ZOrder.D_BehindCurves
+            confIntervalLine.ZOrder = ZedGraph.ZOrder.E_BehindCurves
             gPane.GraphObjList.Add(confIntervalLine)
 
             '2. Draw Upper Whisker, line
             'whisker
             whisker_Upper = New ZedGraph.LineObj(Color.Black, boxData.xValue - 0.15, boxData.adjacentLevel_Upper, boxData.xValue + 0.15, boxData.adjacentLevel_Upper)
             whisker_Upper.IsClippedToChartRect = True
-            whisker_Upper.ZOrder = ZedGraph.ZOrder.D_BehindCurves
-            whisker_Upper.PenWidth = 2
+
+            whisker_Upper.ZOrder = ZedGraph.ZOrder.E_BehindCurves
+            'whisker_Upper.PenWidth = 2
             gPane.GraphObjList.Add(whisker_Upper)
             'line between whisker, top of hourglass
             lineToWhisker_Upper = New ZedGraph.LineObj(Color.Black, boxData.xValue, boxData.adjacentLevel_Upper, boxData.xValue, boxData.quantile_75th)
             lineToWhisker_Upper.IsClippedToChartRect = True
-            lineToWhisker_Upper.ZOrder = ZedGraph.ZOrder.D_BehindCurves
-            lineToWhisker_Upper.PenWidth = 2
+            lineToWhisker_Upper.ZOrder = ZedGraph.ZOrder.E_BehindCurves
+            'lineToWhisker_Upper.PenWidth = 2
             gPane.GraphObjList.Add(lineToWhisker_Upper)
 
             '3. Draw Lower Whisker, line
             'whisker
             whisker_Lower = New ZedGraph.LineObj(Color.Black, boxData.xValue - 0.15, boxData.adjacentLevel_Lower, boxData.xValue + 0.15, boxData.adjacentLevel_Lower)
             whisker_Lower.IsClippedToChartRect = True
-            whisker_Lower.ZOrder = ZedGraph.ZOrder.D_BehindCurves
-            whisker_Lower.PenWidth = 2
+            whisker_Lower.ZOrder = ZedGraph.ZOrder.E_BehindCurves
+            'whisker_Lower.PenWidth = 2
             gPane.GraphObjList.Add(whisker_Lower)
             'line between whisker, top of hourglass
             lineToWhisker_Lower = New ZedGraph.LineObj(Color.Black, boxData.xValue, boxData.quantile_25th, boxData.xValue, boxData.adjacentLevel_Lower)
             lineToWhisker_Lower.IsClippedToChartRect = True
-            lineToWhisker_Lower.ZOrder = ZedGraph.ZOrder.D_BehindCurves
-            lineToWhisker_Lower.PenWidth = 2
+
+            lineToWhisker_Lower.ZOrder = ZedGraph.ZOrder.E_BehindCurves
+            'lineToWhisker_Lower.PenWidth = 2
             gPane.GraphObjList.Add(lineToWhisker_Lower)
 
             '4. Draw Hourglass outline
@@ -8289,7 +8310,7 @@ Public Class frmODMTools
             hourglassOutline.Border.IsVisible = True
             hourglassOutline.Fill.IsVisible = False
             hourglassOutline.IsClippedToChartRect = True
-            hourglassOutline.ZOrder = ZedGraph.ZOrder.D_BehindCurves
+            hourglassOutline.ZOrder = ZedGraph.ZOrder.E_BehindCurves
             gPane.GraphObjList.Add(hourglassOutline)
 
             '5. Draw Upper shaded box ->Upper 95% Confidence Limit to 75% quantile value
@@ -8309,7 +8330,7 @@ Public Class frmODMTools
                 upperBoxShaded.Border.IsVisible = False
                 upperBoxShaded.Fill = New ZedGraph.Fill(System.Drawing.Color.LightGray)
                 upperBoxShaded.IsClippedToChartRect = True
-                upperBoxShaded.ZOrder = ZedGraph.ZOrder.D_BehindCurves
+                upperBoxShaded.ZOrder = ZedGraph.ZOrder.E_BehindCurves
                 gPane.GraphObjList.Add(upperBoxShaded)
             End If
             '6. Draw Lower shaded box ->Lower 95% Confidence Limit to 25% quantile value
@@ -8329,7 +8350,7 @@ Public Class frmODMTools
                 lowerBoxShaded.Border.IsVisible = False
                 lowerBoxShaded.Fill = New ZedGraph.Fill(System.Drawing.Color.LightGray)
                 lowerBoxShaded.IsClippedToChartRect = True
-                lowerBoxShaded.ZOrder = ZedGraph.ZOrder.D_BehindCurves
+                lowerBoxShaded.ZOrder = ZedGraph.ZOrder.E_BehindCurves
                 gPane.GraphObjList.Add(lowerBoxShaded)
             End If
 
@@ -8979,6 +9000,243 @@ Public Class frmODMTools
 
 #Region " Edit Tab: Form Controls Functions "
 
+#Region " Edit Tab: Plot Functions "
+
+    Private Sub PlotEditData(ByVal site As String, ByVal variable As String, ByVal varUnits As String)
+        'This function plots the Time Series graph for the selected data series
+        'Inputs:  site -> Code - Name of the site to plot -> used for the title
+        '         variable -> Code - Name of the variable to plot -> used for the y-axis label
+        '         varUnits -> (units) of the variable abbreviated -> used for the y-axis label
+        '         startDate -> Start Date of the data -> for calculating Scroll padding
+        '         endDate -> End Date of the data -> for calculating Scroll padding
+        'Outputs: None
+        'Dim i As Integer 'counter
+        Dim gPane As ZedGraph.GraphPane 'GraphPane of the zgTimeSeries plot object -> used to set data and characteristics
+        'Dim g As Drawing.Graphics 'graphics object of the zgTimeSeries plot object -> used to redraw/update the plot
+        Dim ptList As ZedGraph.PointPairList 'collection of points for the Time Series line
+        Dim editCurve As ZedGraph.LineItem 'Line object -> Time Series line that is added to the plot
+        'Dim validRows() As Data.DataRow 'collection of valid data retrieved from m_VisPlotData -> data to plot
+        'Dim numRows As Integer 'number of valid rows returned
+        'Dim curDate As Date	'Date of the current item -> x-value for the current point
+        'Dim curValue As Double 'Value of the curren item -> y-value for the current point
+        'Dim xScrollPad As Double 'scroll padding value for the x-axis
+        Dim maxDate As DateTime
+        Dim minDate As DateTime
+        Dim maxValue As Double
+        Dim minValue As Double
+        Dim minX, maxX As Date
+        Dim minY, maxY As Double
+        Dim rangeX, rangeY As Double
+        Try
+            '1. set the Graph Pane, graphics object
+            gPane = zg5EditPlot.GraphPane
+            'g = zg5EditPlot.CreateGraphics
+
+            '2. Validate Data
+            If m_EditData Is Nothing Then
+                'If site = "" OrElse variable = "" OrElse (m_VisPlotData Is Nothing) Then
+                'reset Title = No Data
+                gPane.Title.Text = "No Data"
+                zg5EditPlot.Refresh()
+                'release resources
+                'If Not (g Is Nothing) Then
+                '	g.Dispose()
+                '	g = Nothing
+                'End If
+                'exit
+                Exit Try
+            End If
+
+            '3. Let user know something is being plotted
+            gPane.Title.Text = "Loading Graph ... "
+            zg5EditPlot.Refresh()
+            Me.Cursor = Cursors.WaitCursor
+
+            '4. set Graph Properties
+            If gPane.IsZoomed() = True Then
+                zg5EditPlot.ZoomOutAll(gPane)
+            End If
+            'x-axis
+            minX = m_EditData.Compute("MIN(" & db_fld_ValDateTime & ")", "")
+            maxX = m_EditData.Compute("MAX(" & db_fld_ValDateTime & ")", "")
+            rangeX = maxX.ToOADate - minX.ToOADate
+            gPane.XAxis.IsVisible = True
+            gPane.XAxis.MajorGrid.IsVisible = True
+            gPane.XAxis.MajorGrid.Color = Drawing.Color.Gray
+            gPane.XAxis.Type = ZedGraph.AxisType.Date
+            gPane.XAxis.Title.Text = "Date"
+            gPane.XAxis.Scale.Min = minX.ToOADate - (m_XBorder * rangeX)
+            gPane.XAxis.Scale.Max = maxX.ToOADate + (m_XBorder * rangeX)
+            'gPane.XAxis.Min = startDate.ToOADate
+            'gPane.XAxis.Max = endDate.ToOADate
+            'gPane.XAxis.Scale.MinGrace = 0.025 '2.5% of time padding on front
+            'gPane.XAxis.Scale.MaxGrace = 0.025 '2.5% of time padding on back
+            gPane.XAxis.Scale.MajorUnit = ZedGraph.DateUnit.Month
+            gPane.XAxis.Scale.MinorUnit = ZedGraph.DateUnit.Hour
+            'y-axis
+            minY = m_EditData.Compute("MIN(" & db_fld_ValValue & ")", "")
+            maxY = m_EditData.Compute("MAX(" & db_fld_ValValue & ")", "")
+            rangeY = maxY - minY
+            gPane.YAxis.IsVisible = True
+            gPane.YAxis.MajorGrid.IsVisible = True
+            gPane.YAxis.MajorGrid.Color = Drawing.Color.Gray
+            gPane.YAxis.Type = ZedGraph.AxisType.Linear
+            gPane.YAxis.Title.Text = variable & "   " & varUnits
+            gPane.YAxis.Scale.Min = minY - (m_YBorder * rangeY)
+            gPane.YAxis.Scale.Max = maxY + (m_YBorder * rangeY)
+            'gPane.YAxis.Scale.MaxGrace = 0.025
+            'gPane.YAxis.Scale.MinGrace = 0.025
+            'gPane.YAxis.Scale.MajorStep = 50
+            'Title
+            While (GetStringLen(site, gPane.Title.FontSpec.GetFont(gPane.CalcScaleFactor)) > zg5TimeSeries.Width)
+                site = GraphTitleBreaks(site)
+            End While
+
+            gPane.Title.Text = site
+
+            '5. calculate max,min Date values, max Y Value
+            minDate = m_EditData.Rows(0).Item(db_fld_ValDateTime) 'NOTE: m_EditData should already be sorted by date, so min = 1st value
+            maxDate = m_EditData.Rows(m_EditData.Rows.Count - 1).Item(db_fld_ValDateTime) 'NOTE: m_EditData should already be sorted by date, so max = last value
+            maxValue = m_EditData.Compute("Max (" & db_fld_ValValue & ")", "")
+            minValue = m_EditData.Compute("Min (" & db_fld_ValValue & ")", "")
+
+            '6. Create the Pts for the Line
+            Dim temp As New ZedGraph.DataSourcePointList
+            temp.DataSource = m_EditData_Graphing
+            temp.XDataMember = db_fld_ValDateTime
+            temp.YDataMember = db_fld_ValValue
+            temp.ZDataMember = m_Edit_SelZVal
+
+            'NOTE: This DOES NOT work!!  must change the points in the data source!!
+            ''Add in Z-Value for all points, initialize to 1.0 so = not selected
+            'For i = 0 To m_EditData.Rows.Count - 1
+            '	temp.Item(i).Z = 2.0
+            'Next i
+
+            'NOTE: Justin changed to using DataMembers to speed up plotting time
+            'ptList = New ZedGraph.PointPairList
+            'For i = 0 To m_EditData.Rows.Count - 1
+            '	curDate = m_EditData.Rows(i).Item(db_fld_ValDateTime)
+            '	curValue = m_EditData.Rows(i).Item(db_fld_ValValue)
+            '	ptList.Add(curDate.ToOADate, curValue, 1.0)
+            'Next i
+
+            '7. Plot the Data
+            'create the curve
+            editCurve = New ZedGraph.LineItem("editTS")
+            editCurve = gPane.AddCurve("editTS", temp, Drawing.Color.Black, ZedGraph.SymbolType.Circle)
+            editCurve.Line.IsVisible = True
+            'NOTE: Set a GradientByZ Fill, set all z-values = 1.0 for Black, then when selected, zvalue = 2.0, so sel points will show up red
+            Dim zFill As New ZedGraph.Fill(Drawing.Color.Black, Drawing.Color.Red)
+            zFill.Type = ZedGraph.FillType.GradientByZ
+            zFill.RangeMin = 1.0
+            zFill.RangeMax = 2.0
+            zFill.RangeDefault = 1.0
+            zFill.SecondaryValueGradientColor = Drawing.Color.Empty
+            editCurve.Symbol.Fill = zFill
+            'editCurve.Symbol.Fill = New ZedGraph.Fill(Drawing.Color.Black)
+            editCurve.Symbol.Size = 7
+            editCurve.Symbol.Border.IsVisible = False
+
+            'set up scrolling
+            zg5EditPlot.IsAutoScrollRange = False
+            zg5EditPlot.ScrollMinX = minX.ToOADate - (m_XBorder * rangeX)
+            zg5EditPlot.ScrollMaxX = maxX.ToOADate + (m_XBorder * rangeX)
+            zg5EditPlot.ScrollMinY = minY - (m_YBorder * rangeY)
+            zg5EditPlot.ScrollMaxY = maxY + (m_YBorder * rangeY)
+            'draw the plot
+            zg5EditPlot.AxisChange()
+
+            zg5EditPlot.Refresh()
+
+            '8. release resources
+            'If Not (g Is Nothing) Then
+            '	g.Dispose()
+            '	g = Nothing
+            'End If
+            If Not (ptList Is Nothing) Then
+                ptList = Nothing
+            End If
+            If Not (editCurve Is Nothing) Then
+                editCurve = Nothing
+            End If
+        Catch ex As Exception
+            'show an error message
+            ShowError("An Error occurred while plotting the Edit Data." & vbCrLf & "Message = " & ex.Message, ex)
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ResetPlotBounds()
+        'This function plots the Time Series graph for the selected data series
+        'Inputs: None
+        'Outputs: None
+
+        Dim gPane As ZedGraph.GraphPane 'GraphPane of the zgTimeSeries plot object -> used to set data and characteristics
+        Dim minX, maxX As Date
+        Dim minY, maxY As Double
+        Dim rangeX, rangeY As Double
+        Try
+            '1. set the Graph Pane, graphics object
+            gPane = zg5EditPlot.GraphPane
+
+            '2. Validate Data
+            If m_EditData Is Nothing Then
+                'If site = "" OrElse variable = "" OrElse (m_VisPlotData Is Nothing) Then
+                'reset Title = No Data
+                gPane.Title.Text = "No Data"
+                zg5EditPlot.Refresh()
+                'release resources
+                'If Not (g Is Nothing) Then
+                '	g.Dispose()
+                '	g = Nothing
+                'End If
+                'exit
+                Exit Try
+            End If
+
+            '3. Let user know something is being plotted
+            Me.Cursor = Cursors.WaitCursor
+
+            '4. set Graph Properties
+            If gPane.IsZoomed() = True Then
+                zg5EditPlot.ZoomOutAll(gPane)
+            End If
+            'x-axis
+            minX = m_EditData.Compute("MIN(" & db_fld_ValDateTime & ")", "")
+            maxX = m_EditData.Compute("MAX(" & db_fld_ValDateTime & ")", "")
+            rangeX = maxX.ToOADate - minX.ToOADate
+            gPane.XAxis.Scale.Min = minX.ToOADate - (m_XBorder * rangeX)
+            gPane.XAxis.Scale.Max = maxX.ToOADate + (m_XBorder * rangeX)
+
+            gPane.XAxis.Scale.MajorUnit = ZedGraph.DateUnit.Month
+            gPane.XAxis.Scale.MinorUnit = ZedGraph.DateUnit.Hour
+            'y-axis
+            minY = m_EditData.Compute("MIN(" & db_fld_ValValue & ")", "")
+            maxY = m_EditData.Compute("MAX(" & db_fld_ValValue & ")", "")
+            rangeY = maxY - minY
+            gPane.YAxis.Scale.Min = minY - (m_YBorder * rangeY)
+            gPane.YAxis.Scale.Max = maxY + (m_YBorder * rangeY)
+
+            zg5EditPlot.IsAutoScrollRange = False
+            zg5EditPlot.ScrollMinX = minX.ToOADate - (m_XBorder * rangeX)
+            zg5EditPlot.ScrollMaxX = maxX.ToOADate + (m_XBorder * rangeX)
+            zg5EditPlot.ScrollMinY = minY - (m_YBorder * rangeY)
+            zg5EditPlot.ScrollMaxY = maxY + (m_YBorder * rangeY)
+            'draw the plot
+            zg5EditPlot.AxisChange()
+
+            zg5EditPlot.Refresh()
+
+        Catch ex As Exception
+            'show an error message
+            ShowError("An Error occurred while plotting the Edit Data." & vbCrLf & "Message = " & ex.Message, ex)
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+#End Region
+
 #Region " Data Selection Functions "
 
     Private Sub cboxEditSite_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboxEditSite.SelectedIndexChanged
@@ -9129,10 +9387,10 @@ Public Class frmODMTools
                     If Not (m_EditDeletedValIDs Is Nothing) Then
                         m_EditDeletedValIDs.Clear()
                     End If
-                    m_EditHaveRemoveDFIDs = False
-                    If Not (m_EditRemoveDFIDs Is Nothing) Then
-                        m_EditRemoveDFIDs.Clear()
-                    End If
+                    'm_EditHaveRemoveDFIDs = False
+                    'If Not (m_EditRemoveDFIDs Is Nothing) Then
+                    'm_EditRemoveDFIDs.Clear()
+                    'End If
                     'reload current data series
                     'lvEditDataSeries_SelectedIndexChanged(Me, New System.EventArgs())
                     cboxEditVariable_SelectedIndexChanged(Me, New System.EventArgs())
@@ -9377,7 +9635,7 @@ Public Class frmODMTools
         End Try
     End Sub
 
-    Private Sub dgvEditTable_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dgvEditTable.SelectionChanged
+    Private Sub dgvEditTable_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim i As Integer 'counter
         Dim selIndexes As Integer()
         Dim numSel As Integer = 0
@@ -9418,6 +9676,7 @@ Public Class frmODMTools
                 '8. reset that done updating selection
                 m_EditUpdatingSelection = False
             End If
+
         Catch ex As Exception
             ShowError("An Error occurred while selecting rows in the Data Table on the Edit Tab." & vbCrLf & "Message = " & ex.Message, ex)
         End Try
@@ -9471,10 +9730,10 @@ Public Class frmODMTools
     End Sub
 
     Private Sub tboxEditDFVTGreater_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles tboxEditDFVTGreater.KeyPress
-        Select Case e.KeyChar
-            Case vbCr, vbCrLf, vbLf 'return key
-                tboxEditDFVTGreater_Validating(sender, New System.ComponentModel.CancelEventArgs)
-        End Select
+        ' Select Case e.KeyChar
+        'Case vbCr, vbCrLf, vbLf 'return key
+        tboxEditDFVTGreater_Validating(sender, New System.ComponentModel.CancelEventArgs)
+        'End Select
     End Sub
 
     Private Sub tboxEditDFVTGreater_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles tboxEditDFVTGreater.Validating
@@ -9946,6 +10205,7 @@ Public Class frmODMTools
         End Try
     End Sub
 
+
 #End Region
 
 #Region " Data Edit Functions "
@@ -9972,10 +10232,9 @@ Public Class frmODMTools
                             AdjustValDrift(fAdjustValues.m_adjustValue)
                     End Select
 
-					'update the y-values, bounds in the plot
-					'UpdateYValForSelPtsInPlot()
-
-					UpdateZedGraphPlotBounds(zg5EditPlot, m_EditData, m_EditNoDataVal)
+                    'update the y-values, bounds in the plot
+                    'UpdateYValForSelPtsInPlot()
+                    UpdateZedGraphPlotBounds(zg5EditPlot, m_EditData, m_EditNoDataVal)
 
                     'set that have edits uncommitted to the database
                     m_EditHaveEditsUncommitted = True
@@ -10271,21 +10530,22 @@ Public Class frmODMTools
         Dim sourceDesc As String
         'Dim methodDesc As String
         'NOTE: Colums for lvEditData Series:
-		'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
-		Dim varUnitsID As Integer = 2
-		Dim sampleMedID As Integer = 5
-        Dim genCatID As Integer = 0
-		Dim tsValueID As Integer = 3
-		Dim tsUnitsID As Integer = 4
-		Dim valueTypeID As Integer = 6
-		Dim dataTypeID As Integer = 7
-		Dim orgID As Integer = 10
-		Dim sourceDescID As Integer = 11
-		'Dim methodDescID As Integer = 9
-		Dim speciationID As Integer = 1
-		Dim citationID As Integer = 12
-		Dim speciation As String
-		Dim citation As String
+		
+        'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
+        Dim varUnitsID As Integer = 2
+        Dim sampleMedID As Integer = 5
+        Dim genCatID As Integer = 0		
+        Dim tsValueID As Integer = 3
+        Dim tsUnitsID As Integer = 4
+        Dim valueTypeID As Integer = 6
+        Dim dataTypeID As Integer = 7
+        Dim orgID As Integer = 10
+        Dim sourceDescID As Integer = 11
+        'Dim methodDescID As Integer = 9
+        Dim speciationID As Integer = 1
+        Dim citationID As Integer = 12
+        Dim speciation As String
+        Dim citation As String
         Try
             '1. see if any edits are uncommitted
             If m_EditHaveEditsUncommitted Then
@@ -10299,10 +10559,11 @@ Public Class frmODMTools
                     If Not (m_EditDeletedValIDs Is Nothing) Then
                         m_EditDeletedValIDs.Clear()
                     End If
-                    m_EditHaveRemoveDFIDs = False
-                    If Not (m_EditRemoveDFIDs Is Nothing) Then
-                        m_EditRemoveDFIDs.Clear()
-                    End If
+                    
+                    'm_EditHaveRemoveDFIDs = False
+                    'If Not (m_EditRemoveDFIDs Is Nothing) Then
+                    '    m_EditRemoveDFIDs.Clear()
+                    'End If
                     'reload current data series
                     'lvEditDataSeries_SelectedIndexChanged(Me, New System.EventArgs())
                     cboxEditVariable_SelectedIndexChanged(Me, New System.EventArgs())
@@ -10638,14 +10899,14 @@ Public Class frmODMTools
         Dim varID As Integer 'the VariableID value retrieved from the database -> added to lvVisDataSeries
         Dim methodID As Integer
         Dim methodDesc As String
-		Dim qcLevelID As Integer
+        Dim qcLevelID As Integer
         Dim organization As String
         Dim sourceID As Integer
-		Dim sourceDesc As String
-		Dim qcLevelCode As String
-		Dim qcLevelDef As String
-		Dim speciation As String
-		Dim citation As String
+        Dim sourceDesc As String
+        Dim qcLevelCode As String
+        Dim qcLevelDef As String
+        Dim speciation As String
+        Dim citation As String
         Try
             '1. clear out any old data 
             lvEditDataSeries.Items.Clear()
@@ -10882,9 +11143,10 @@ Public Class frmODMTools
 #Region " Edit Data Loading Functions "
 
     Private Sub LoadEditDataFromDB(ByVal dataSeriesIDs As clsDataSeriesIDs)
-        'This function loads all data from the Database for the selected Data Series
-        'Inputs:  dataSeriesIDs ->
-        'Outputs: None
+        '        This function loads all data from the Database for the selected Data Series
+        '        Inputs:  dataSeriesIDs ->
+        '        Outputs: None()
+        Dim query As String
         Try
             ''1. let user know loading data
             'zg5EditPlot.GraphPane.Title.Text = "Loading Data From Database ..."
@@ -10902,7 +11164,7 @@ Public Class frmODMTools
 
             '4. create the query
             'NOTE: for now using this one till get qcLevel,Method info
-            'query = "SELECT * FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & dataSeriesIDs.MethodID & " AND " & db_fld_ValQCLevel & " = " & dataSeriesIDs.QCLevel & " AND " & db_fld_ValSiteID & " = " & dataSeriesIDs.SiteID & " AND " & db_fld_ValVarID & " = " & dataSeriesIDs.VariableID & " AND " & db_fld_ValSourceID & " = " & dataSeriesIDs.SourceID & ") ORDER BY " & db_fld_ValDateTime
+            query = "SELECT * FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & dataSeriesIDs.MethodID & " AND " & db_fld_ValQCLevel & " = " & dataSeriesIDs.QCLevelID & " AND " & db_fld_ValSiteID & " = " & dataSeriesIDs.SiteID & " AND " & db_fld_ValVarID & " = " & dataSeriesIDs.VariableID & " AND " & db_fld_ValSourceID & " = " & dataSeriesIDs.SourceID & ") ORDER BY " & db_fld_ValDateTime
 
             '4. get the Edit data from the Database
             m_EditData = GetValuesFromDB("CurrentEditData", dataSeriesIDs.SiteID, dataSeriesIDs.VariableID, dataSeriesIDs.QCLevelID, dataSeriesIDs.MethodID, dataSeriesIDs.SourceID)
@@ -10926,6 +11188,7 @@ Public Class frmODMTools
 
 #End Region
 
+
 #Region " Data Filter Loading Functions "
 
     Private Function LoadEditDataFilterDateRange() As Boolean
@@ -10934,9 +11197,9 @@ Public Class frmODMTools
         'Outputs: Boolean -> Tracks if successfully loaded the Date Range for the selected Data Series -> values are in selected lvVisDataSeries item          
         Dim startDate As Date = Date.Today
         Dim endDate As Date = Date.Today
-		Dim dateIndex As Integer = 13
+        Dim dateIndex As Integer = 13
         'NOTE: Colums for lvEditData Series:
-		'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
+        'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
         Try
             '1. make sure have a valid selected item
             If lvEditDataSeries.SelectedItems.Count <= 0 Then
@@ -11147,183 +11410,21 @@ Public Class frmODMTools
             Me.Cursor = Cursors.WaitCursor
 
             '3. Load Data into the Table
-            dgvEditTable.AutoGenerateColumns = False
+            'dgvEditTable.AutoGenerateColumns = False
+            dgvEditTable.AutoGenerateColumns = True
             dgvEditTable.DataSource = m_EditData
 
-            '4. Create the columns
-            'ValueID
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.Frozen = True
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValID
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValID
-            curTxtCol.DataPropertyName = db_fld_ValID
-            dgvEditTable.Columns.Add(curTxtCol)
-            'DataValue
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = False
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValValue
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValValue
-            m_EditTableColName_Value = curTxtCol.Name
-            curTxtCol.DataPropertyName = db_fld_ValValue
-            dgvEditTable.Columns.Add(curTxtCol)
-            'ValueAccuracy
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValAccuracyStdDev
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValAccuracyStdDev
-            curTxtCol.DataPropertyName = db_fld_ValAccuracyStdDev
-            dgvEditTable.Columns.Add(curTxtCol)
-            'LocalDateTime
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValDateTime
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValDateTime
-            m_EditTableColName_DateTime = curTxtCol.Name
-            curTxtCol.DataPropertyName = db_fld_ValDateTime
-            dgvEditTable.Columns.Add(curTxtCol)
-            'UTCOffset
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValUTCOffset
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValUTCOffset
-            curTxtCol.DataPropertyName = db_fld_ValUTCOffset
-            dgvEditTable.Columns.Add(curTxtCol)
-            'UTCDateTime
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValUTCDateTime
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValUTCDateTime
-            m_EditTableColName_UTCDateTime = curTxtCol.Name
-            curTxtCol.DataPropertyName = db_fld_ValUTCDateTime
-            dgvEditTable.Columns.Add(curTxtCol)
-            'OffsetValue
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValOffsetValue
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValOffsetValue
-            curTxtCol.DataPropertyName = db_fld_ValOffsetValue
-            dgvEditTable.Columns.Add(curTxtCol)
-            'OffsetTypeID
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValOffsetTypeID
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValOffsetTypeID
-            curTxtCol.DataPropertyName = db_fld_ValOffsetTypeID
-            dgvEditTable.Columns.Add(curTxtCol)
-            'CensorCode
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValCensorCode
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValCensorCode
-            curTxtCol.DataPropertyName = db_fld_ValCensorCode
-            dgvEditTable.Columns.Add(curTxtCol)
-            'QualifierID
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValQualifierID
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValQualifierID
-            curTxtCol.DataPropertyName = db_fld_ValQualifierID
-            dgvEditTable.Columns.Add(curTxtCol)
-            'SampleID
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValSampleID
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValSampleID
-            curTxtCol.DataPropertyName = db_fld_ValSampleID
-            dgvEditTable.Columns.Add(curTxtCol)
-            'DerivedFromID
-            curTxtCol = New DataGridViewTextBoxColumn
-            curTxtCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.HeaderCell.Style.WrapMode = DataGridViewTriState.False
-            curTxtCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            curTxtCol.ReadOnly = True
-            'curTxtCol.Resizable = DataGridViewTriState.True
-            curTxtCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            curTxtCol.SortMode = DataGridViewColumnSortMode.NotSortable
-            curTxtCol.HeaderText = db_fldName_ValDerivedFromID
-            curTxtCol.Width = 50
-            curTxtCol.Name = db_fld_ValDerivedFromID
-            curTxtCol.DataPropertyName = db_fld_ValDerivedFromID
-            dgvEditTable.Columns.Add(curTxtCol)
+            'dgvEditTable.AllowUserToResizeColumns = True
+            'dgvEditTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader
+            'For i As Integer = 0 To dgvEditTable.ColumnCount - 1
+            '    dgvEditTable.EditMode
+            'Next
+
+
+            'dgvEditTable.Columns("DateYear").Visible = False
+            'dgvEditTable.Columns("DateMonth").Visible = False
+            'dgvEditTable.Columns("DateDay").Visible = False
+
 
             '5. 'make only Value Col editable
 
@@ -11473,7 +11574,7 @@ Public Class frmODMTools
         btnEditDataAdjust.Enabled = enabled
         btnEditDataAdd.Enabled = enabled
         btnEditDataInterpolate.Enabled = enabled
-		btnEditDataFlag.Enabled = enabled
+        btnEditDataFlag.Enabled = enabled
 
         'btnEditDataSmooth.Enabled = enabled
         'btnEditDataDeriveNewDS.Enabled = enabled
@@ -11529,244 +11630,8 @@ Public Class frmODMTools
 
 #End Region
 
-#Region " Edit Tab: Plot Functions "
+#Region "Not Sure yet"
 
-    Private Sub PlotEditData(ByVal site As String, ByVal variable As String, ByVal varUnits As String)
-        'This function plots the Time Series graph for the selected data series
-        'Inputs:  site -> Code - Name of the site to plot -> used for the title
-        '         variable -> Code - Name of the variable to plot -> used for the y-axis label
-        '         varUnits -> (units) of the variable abbreviated -> used for the y-axis label
-        '         startDate -> Start Date of the data -> for calculating Scroll padding
-        '         endDate -> End Date of the data -> for calculating Scroll padding
-        'Outputs: None
-		'Dim i As Integer 'counter
-        Dim gPane As ZedGraph.GraphPane 'GraphPane of the zgTimeSeries plot object -> used to set data and characteristics
-        'Dim g As Drawing.Graphics 'graphics object of the zgTimeSeries plot object -> used to redraw/update the plot
-        Dim ptList As ZedGraph.PointPairList 'collection of points for the Time Series line
-        Dim editCurve As ZedGraph.LineItem 'Line object -> Time Series line that is added to the plot
-        'Dim validRows() As Data.DataRow 'collection of valid data retrieved from m_VisPlotData -> data to plot
-        'Dim numRows As Integer 'number of valid rows returned
-        'Dim curDate As Date	'Date of the current item -> x-value for the current point
-        'Dim curValue As Double 'Value of the curren item -> y-value for the current point
-        'Dim xScrollPad As Double 'scroll padding value for the x-axis
-        Dim maxDate As DateTime
-        Dim minDate As DateTime
-        Dim maxValue As Double
-        Dim minValue As Double
-        Dim minX, maxX As Date
-        Dim minY, maxY As Double
-        Dim rangeX, rangeY As Double
-        Try
-            '1. set the Graph Pane, graphics object
-            gPane = zg5EditPlot.GraphPane
-            'g = zg5EditPlot.CreateGraphics
-
-            '2. Validate Data
-            If m_EditData Is Nothing Then
-                'If site = "" OrElse variable = "" OrElse (m_VisPlotData Is Nothing) Then
-                'reset Title = No Data
-                gPane.Title.Text = "No Data"
-                zg5EditPlot.Refresh()
-                'release resources
-                'If Not (g Is Nothing) Then
-                '	g.Dispose()
-                '	g = Nothing
-                'End If
-                'exit
-                Exit Try
-            End If
-
-            '3. Let user know something is being plotted
-            gPane.Title.Text = "Loading Graph ... "
-            zg5EditPlot.Refresh()
-            Me.Cursor = Cursors.WaitCursor
-
-            '4. set Graph Properties
-            If gPane.IsZoomed() = True Then
-                zg5EditPlot.ZoomOutAll(gPane)
-            End If
-            'x-axis
-            minX = m_EditData.Compute("MIN(" & db_fld_ValDateTime & ")", "")
-            maxX = m_EditData.Compute("MAX(" & db_fld_ValDateTime & ")", "")
-            rangeX = maxX.ToOADate - minX.ToOADate
-            gPane.XAxis.IsVisible = True
-            gPane.XAxis.MajorGrid.IsVisible = True
-            gPane.XAxis.MajorGrid.Color = Drawing.Color.Gray
-            gPane.XAxis.Type = ZedGraph.AxisType.Date
-            gPane.XAxis.Title.Text = "Date"
-            gPane.XAxis.Scale.Min = minX.ToOADate - (m_XBorder * rangeX)
-            gPane.XAxis.Scale.Max = maxX.ToOADate + (m_XBorder * rangeX)
-            'gPane.XAxis.Min = startDate.ToOADate
-            'gPane.XAxis.Max = endDate.ToOADate
-            'gPane.XAxis.Scale.MinGrace = 0.025 '2.5% of time padding on front
-            'gPane.XAxis.Scale.MaxGrace = 0.025 '2.5% of time padding on back
-            gPane.XAxis.Scale.MajorUnit = ZedGraph.DateUnit.Month
-            gPane.XAxis.Scale.MinorUnit = ZedGraph.DateUnit.Hour
-            'y-axis
-            minY = m_EditData.Compute("MIN(" & db_fld_ValValue & ")", "")
-            maxY = m_EditData.Compute("MAX(" & db_fld_ValValue & ")", "")
-            rangeY = maxY - minY
-            gPane.YAxis.IsVisible = True
-            gPane.YAxis.MajorGrid.IsVisible = True
-            gPane.YAxis.MajorGrid.Color = Drawing.Color.Gray
-            gPane.YAxis.Type = ZedGraph.AxisType.Linear
-            gPane.YAxis.Title.Text = variable & "   " & varUnits
-            gPane.YAxis.Scale.Min = minY - (m_YBorder * rangeY)
-            gPane.YAxis.Scale.Max = maxY + (m_YBorder * rangeY)
-            'gPane.YAxis.Scale.MaxGrace = 0.025
-            'gPane.YAxis.Scale.MinGrace = 0.025
-            'gPane.YAxis.Scale.MajorStep = 50
-            'Title
-            While (GetStringLen(site, gPane.Title.FontSpec.GetFont(gPane.CalcScaleFactor)) > zg5TimeSeries.Width)
-                site = GraphTitleBreaks(site)
-            End While
-
-            gPane.Title.Text = site
-
-            '5. calculate max,min Date values, max Y Value
-            minDate = m_EditData.Rows(0).Item(db_fld_ValDateTime) 'NOTE: m_EditData should already be sorted by date, so min = 1st value
-            maxDate = m_EditData.Rows(m_EditData.Rows.Count - 1).Item(db_fld_ValDateTime) 'NOTE: m_EditData should already be sorted by date, so max = last value
-            maxValue = m_EditData.Compute("Max (" & db_fld_ValValue & ")", "")
-            minValue = m_EditData.Compute("Min (" & db_fld_ValValue & ")", "")
-
-            '6. Create the Pts for the Line
-            Dim temp As New ZedGraph.DataSourcePointList
-            temp.DataSource = m_EditData_Graphing
-            temp.XDataMember = db_fld_ValDateTime
-            temp.YDataMember = db_fld_ValValue
-            temp.ZDataMember = m_Edit_SelZVal
-
-            'NOTE: This DOES NOT work!!  must change the points in the data source!!
-            ''Add in Z-Value for all points, initialize to 1.0 so = not selected
-            'For i = 0 To m_EditData.Rows.Count - 1
-            '	temp.Item(i).Z = 2.0
-            'Next i
-
-            'NOTE: Justin changed to using DataMembers to speed up plotting time
-            'ptList = New ZedGraph.PointPairList
-            'For i = 0 To m_EditData.Rows.Count - 1
-            '	curDate = m_EditData.Rows(i).Item(db_fld_ValDateTime)
-            '	curValue = m_EditData.Rows(i).Item(db_fld_ValValue)
-            '	ptList.Add(curDate.ToOADate, curValue, 1.0)
-            'Next i
-
-            '7. Plot the Data
-            'create the curve
-            editCurve = New ZedGraph.LineItem("editTS")
-            editCurve = gPane.AddCurve("editTS", temp, Drawing.Color.Black, ZedGraph.SymbolType.Circle)
-            editCurve.Line.IsVisible = True
-            'NOTE: Set a GradientByZ Fill, set all z-values = 1.0 for Black, then when selected, zvalue = 2.0, so sel points will show up red
-            Dim zFill As New ZedGraph.Fill(Drawing.Color.Black, Drawing.Color.Red)
-            zFill.Type = ZedGraph.FillType.GradientByZ
-            zFill.RangeMin = 1.0
-            zFill.RangeMax = 2.0
-            zFill.RangeDefault = 1.0
-            zFill.SecondaryValueGradientColor = Drawing.Color.Empty
-            editCurve.Symbol.Fill = zFill
-            'editCurve.Symbol.Fill = New ZedGraph.Fill(Drawing.Color.Black)
-            editCurve.Symbol.Size = 7
-            editCurve.Symbol.Border.IsVisible = False
-
-            'set up scrolling
-            zg5EditPlot.IsAutoScrollRange = False
-            zg5EditPlot.ScrollMinX = minX.ToOADate - (m_XBorder * rangeX)
-            zg5EditPlot.ScrollMaxX = maxX.ToOADate + (m_XBorder * rangeX)
-            zg5EditPlot.ScrollMinY = minY - (m_YBorder * rangeY)
-            zg5EditPlot.ScrollMaxY = maxY + (m_YBorder * rangeY)
-            'draw the plot
-            zg5EditPlot.AxisChange()
-
-            zg5EditPlot.Refresh()
-
-            '8. release resources
-            'If Not (g Is Nothing) Then
-            '	g.Dispose()
-            '	g = Nothing
-            'End If
-            If Not (ptList Is Nothing) Then
-                ptList = Nothing
-            End If
-            If Not (editCurve Is Nothing) Then
-                editCurve = Nothing
-            End If
-        Catch ex As Exception
-            'show an error message
-            ShowError("An Error occurred while plotting the Edit Data." & vbCrLf & "Message = " & ex.Message, ex)
-        End Try
-        Me.Cursor = Cursors.Default
-    End Sub
-
-    Private Sub ResetPlotBounds()
-        'This function plots the Time Series graph for the selected data series
-        'Inputs: None
-        'Outputs: None
-
-        Dim gPane As ZedGraph.GraphPane 'GraphPane of the zgTimeSeries plot object -> used to set data and characteristics
-        Dim minX, maxX As Date
-        Dim minY, maxY As Double
-        Dim rangeX, rangeY As Double
-        Try
-            '1. set the Graph Pane, graphics object
-            gPane = zg5EditPlot.GraphPane
-
-            '2. Validate Data
-            If m_EditData Is Nothing Then
-                'If site = "" OrElse variable = "" OrElse (m_VisPlotData Is Nothing) Then
-                'reset Title = No Data
-                gPane.Title.Text = "No Data"
-                zg5EditPlot.Refresh()
-                'release resources
-                'If Not (g Is Nothing) Then
-                '	g.Dispose()
-                '	g = Nothing
-                'End If
-                'exit
-                Exit Try
-            End If
-
-            '3. Let user know something is being plotted
-            Me.Cursor = Cursors.WaitCursor
-
-            '4. set Graph Properties
-            If gPane.IsZoomed() = True Then
-                zg5EditPlot.ZoomOutAll(gPane)
-            End If
-            'x-axis
-            minX = m_EditData.Compute("MIN(" & db_fld_ValDateTime & ")", "")
-            maxX = m_EditData.Compute("MAX(" & db_fld_ValDateTime & ")", "")
-            rangeX = maxX.ToOADate - minX.ToOADate
-            gPane.XAxis.Scale.Min = minX.ToOADate - (m_XBorder * rangeX)
-            gPane.XAxis.Scale.Max = maxX.ToOADate + (m_XBorder * rangeX)
-
-            gPane.XAxis.Scale.MajorUnit = ZedGraph.DateUnit.Month
-            gPane.XAxis.Scale.MinorUnit = ZedGraph.DateUnit.Hour
-            'y-axis
-            minY = m_EditData.Compute("MIN(" & db_fld_ValValue & ")", "")
-            maxY = m_EditData.Compute("MAX(" & db_fld_ValValue & ")", "")
-            rangeY = maxY - minY
-            gPane.YAxis.Scale.Min = minY - (m_YBorder * rangeY)
-            gPane.YAxis.Scale.Max = maxY + (m_YBorder * rangeY)
-
-            zg5EditPlot.IsAutoScrollRange = False
-            zg5EditPlot.ScrollMinX = minX.ToOADate - (m_XBorder * rangeX)
-            zg5EditPlot.ScrollMaxX = maxX.ToOADate + (m_XBorder * rangeX)
-            zg5EditPlot.ScrollMinY = minY - (m_YBorder * rangeY)
-            zg5EditPlot.ScrollMaxY = maxY + (m_YBorder * rangeY)
-            'draw the plot
-            zg5EditPlot.AxisChange()
-
-            zg5EditPlot.Refresh()
-
-        Catch ex As Exception
-            'show an error message
-            ShowError("An Error occurred while plotting the Edit Data." & vbCrLf & "Message = " & ex.Message, ex)
-        End Try
-        Me.Cursor = Cursors.Default
-    End Sub
-
-#End Region
-
-#Region " Edit Tab: Data Filter Functions "
 
     Private Function HaveValidEditDataFilter() As Boolean
         Dim valid As Boolean = False
@@ -11896,6 +11761,27 @@ Public Class frmODMTools
             '3. Move through selected values, find the ones that match the criteria, store in indexes
             numFound = 0
             numVals = m_EditData.Rows.Count
+
+            'Dim rowlist() As DataRow
+
+            'Select vtMethod
+            '    Case m_EditDFMethod_Both
+            '        If greaterVal > lessVal Then
+            '            rowlist = m_EditData.Select("DataValue > " & greaterVal & " OR DataValue < " & lessVal)
+            '        Else
+            '            rowlist = m_EditData.Select("DataValue > " & greaterVal & " AND DataValue < " & lessVal)
+            '        End If
+            '    Case m_EditDFVTMethod_Greater
+            '        rowlist = m_EditData.Select("DataValue > " & greaterVal)
+            '    Case m_EditDFVTMethod_Less
+            '        rowlist = m_EditData.Select("DataValue < " & lessVal)
+            'End Select
+
+            'm_EditSelPtIndexes = rowlist.IndexOf(
+            'numFound = rowlist.Length
+
+
+            'm_EditSelPtIndexes
             For i = 0 To numVals - 1
                 curVal = m_EditData.Rows(i).Item(db_fld_ValValue)
                 Select Case vtMethod
@@ -12428,22 +12314,22 @@ Public Class frmODMTools
             End If
 
             '6. get DFIDs to remove, add to m_EditRemoveDFIDs
-            If (m_EditRemoveDFIDs Is Nothing) Then
-                m_EditRemoveDFIDs = New System.Collections.ArrayList
-            End If
-            If Not (m_EditHaveRemoveDFIDs) Then
-                m_EditRemoveDFIDs.Clear()
-            End If
-            For i = 0 To numDFIDs - 1
-                curDFID = dfIDsDT.Rows(i).Item(db_fld_DFID)
-                If Not (m_EditRemoveDFIDs.Contains(curDFID)) Then
-                    m_EditRemoveDFIDs.Add(curDFID)
-                End If
-            Next i
-            'set m_EditHaveRemoveDFIDs = True
-            If m_EditRemoveDFIDs.Count > 0 Then
-                m_EditHaveRemoveDFIDs = True
-            End If
+            'If (m_EditRemoveDFIDs Is Nothing) Then
+            '    m_EditRemoveDFIDs = New System.Collections.ArrayList
+            'End If
+            'If Not (m_EditHaveRemoveDFIDs) Then
+            '    m_EditRemoveDFIDs.Clear()
+            'End If
+            'For i = 0 To numDFIDs - 1
+            '    curDFID = dfIDsDT.Rows(i).Item(db_fld_DFID)
+            '    If Not (m_EditRemoveDFIDs.Contains(curDFID)) Then
+            '        m_EditRemoveDFIDs.Add(curDFID)
+            '    End If
+            'Next i
+            ''set m_EditHaveRemoveDFIDs = True
+            'If m_EditRemoveDFIDs.Count > 0 Then
+            '    m_EditHaveRemoveDFIDs = True
+            'End If
 
             '7. Move through m_EditData and set DFID = db_val_DerivedFromID_Removed for any that match
             For i = 0 To m_EditData.Rows.Count - 1
@@ -12451,11 +12337,12 @@ Public Class frmODMTools
                 curDFID = m_EditData.Rows(i).Item(db_fld_ValDerivedFromID)
                 If Not (curDFID Is DBNull.Value) Then
                     '2. see if is in dfIDS
-                    If m_EditRemoveDFIDs.Contains(curDFID) Then
-                        '3. change it if needed
-                        m_EditData.Rows(i).Item(db_fld_ValDerivedFromID) = db_val_DerivedFromID_Removed
-                        m_EditData_Graphing.Rows(i).Item(db_fld_ValDerivedFromID) = db_val_DerivedFromID_Removed
-                    End If
+                  
+                    'If m_EditRemoveDFIDs.Contains(curDFID) Then
+                    '    '3. change it if needed
+                    '    m_EditData.Rows(i).Item(db_fld_ValDerivedFromID) = db_val_DerivedFromID_Removed
+                    '    m_EditData_Graphing.Rows(i).Item(db_fld_ValDerivedFromID) = db_val_DerivedFromID_Removed
+                    'End If
                 End If
             Next i
 
@@ -12619,7 +12506,7 @@ Public Class frmODMTools
 #End If
 
             '4. Update DerivedFromIDs to Database 'NOTE: have to do this first, so can remove from DataValues Table!!
-            UpdateDerivedFromIDsInDB() 'NOTE: this function resets m_EditRemoveDFIDs and m_EditHaveRemoveDFIDs
+            'UpdateDerivedFromIDsInDB() 'NOTE: this function resets m_EditRemoveDFIDs and m_EditHaveRemoveDFIDs
 
             '5. Remove deleted rows in the Values Table from the Database
             UpdateDeletedValuesInDB() 'NOTE: this function reset m_EditHaveDeletedValIDS and m_DeletedValIDs
@@ -12652,8 +12539,8 @@ Public Class frmODMTools
     Private Sub UpdateDeletedValuesInDB()
         Dim i As Integer 'counter
         Dim delQuery As String
-        Dim delCmd As OleDb.OleDbCommand
-        Dim delConn As OleDb.OleDbConnection
+        Dim delCmd As SqlClient.SqlCommand
+        Dim delConn As SqlClient.SqlConnection
         Dim numAffctd As Integer
         Try
             '1. make sure have values to deleted
@@ -12678,10 +12565,10 @@ Public Class frmODMTools
             delQuery = delQuery & ")"
 
             '3. Run the nonQuery
-            delConn = New OleDb.OleDbConnection(g_CurrConnSettings.ConnectionString)
+            delConn = New SqlClient.SqlConnection(g_CurrConnSettings.ConnectionString)
             delConn.Open()
             'execute delete command -> NonQuery
-            delCmd = New OleDb.OleDbCommand(delQuery, delConn)
+            delCmd = New SqlClient.SqlCommand(delQuery, delConn)
             numAffctd = delCmd.ExecuteNonQuery()
 
             '4. Close the connection
@@ -12718,115 +12605,123 @@ Public Class frmODMTools
         End If
     End Sub
 
-    Private Sub UpdateDerivedFromIDsInDB()
-        Dim i As Integer 'counter
-        Dim deleteQuery As String
-        Dim numAffctd As Integer 'tracks the number of rows affected by the delete command
-        Dim delCmd As OleDb.OleDbCommand
-        Dim delConn As OleDb.OleDbConnection
-        Dim updateQuery As String
-        Dim updateDT As DataTable
-        Try
-            '1. make sure have values to update
-            If Not (m_EditHaveRemoveDFIDs) OrElse m_EditRemoveDFIDs.Count <= 0 Then
-                'reset variables
-                m_EditHaveRemoveDFIDs = False
-                If Not (m_EditDeletedValIDs Is Nothing) Then
-                    m_EditRemoveDFIDs.Clear()
-                End If
-                'exit 
-                Exit Try
-            End If
 
-            '2. Delete Values from the DerivedFrom table
-            deleteQuery = "DELETE FROM " & db_tbl_DerivedFrom & " WHERE " & db_fld_DFID & " IN ("
-            For i = 0 To m_EditRemoveDFIDs.Count - 1
-                If i > 0 Then
-                    deleteQuery = deleteQuery & ", " & m_EditRemoveDFIDs(i)
-                Else
-                    deleteQuery = deleteQuery & m_EditRemoveDFIDs(i)
-                End If
-            Next i
-            deleteQuery = deleteQuery & ")"
-            delConn = New OleDb.OleDbConnection(g_CurrConnSettings.ConnectionString)
-            delConn.Open()
-            'execute delete command -> NonQuery
-            delCmd = New OleDb.OleDbCommand(deleteQuery, delConn)
-            numAffctd = delCmd.ExecuteNonQuery()
-            'Close the connection
-            delConn.Close()
-            'validate that some were affected
-            If numAffctd <= 0 Then
 
-                MsgBox("No values were deleted from the " & db_tbl_DerivedFrom & " Table in the Database." & vbCrLf & "Please manually verify that it is correct.")
+    ''REMOVE REFERENCE TO DERIVED FROM ID'S
+    'Private Sub UpdateDerivedFromIDsInDB()
+    '    Dim i As Integer 'counter
+    '    Dim deleteQuery As String
+    '    Dim numAffctd As Integer 'tracks the number of rows affected by the delete command
+    '    Dim delCmd As SqlClient.SqlCommand 'OleDb.OleDbCommand
+    '    Dim delConn As SqlClient.SqlConnection 'OleDb.OleDbConnection
+    '    Dim updateQuery As String
+    '    Dim updateDT As DataTable
+    '    Try
+    '        '1. make sure have values to update
+    '        'If Not (m_EditHaveRemoveDFIDs) OrElse m_EditRemoveDFIDs.Count <= 0 Then
+    '        '    'reset variables
+    '        '    m_EditHaveRemoveDFIDs = False
+    '        '    If Not (m_EditDeletedValIDs Is Nothing) Then
+    '        '        m_EditRemoveDFIDs.Clear()
+    '        '    End If
+    '        '    'exit 
+    '        '    Exit Try
+    '        'End If
 
-                'reset m_EditRemoveDFIDs,m_EditHaveRemoveDFIDs
-                m_EditHaveRemoveDFIDs = False
-                m_EditRemoveDFIDs.Clear()
+    '        '2. Delete Values from the DerivedFrom table
+    '        deleteQuery = "DELETE FROM " & db_tbl_DerivedFrom & " WHERE " & db_fld_DFID & " IN ("            
+    '        'For i = 0 To m_EditRemoveDFIDs.Count - 1
+    '        '    If i > 0 Then
+    '        '        deleteQuery = deleteQuery & ", " & m_EditRemoveDFIDs(i)
+    '        '    Else
+    '        '        deleteQuery = deleteQuery & m_EditRemoveDFIDs(i)
+    '        '    End If
+    '        'Next i
+    '        deleteQuery = deleteQuery & ")"
+    '        'delConn = New OleDb.OleDbConnection(g_CurrConnSettings.ConnectionString)
+    '        delConn = New SqlClient.SqlConnection(g_CurrConnSettings.ConnectionString)
+    '        delConn.Open()
+    '        'execute delete command -> NonQuery
+    '        'delCmd = New OleDb.OleDbCommand(deleteQuery, delConn)
+    '        delCmd = New SqlClient.SqlCommand(deleteQuery, delConn)
+    '        numAffctd = delCmd.ExecuteNonQuery()
+    '        'Close the connection
+    '        delConn.Close()
+    '        'validate that some were affected
+    '        If numAffctd <= 0 Then
 
-                'exit
-                Exit Try
-            End If
+    '            MsgBox("No values were deleted from the " & db_tbl_DerivedFrom & " Table in the Database." & vbCrLf & "Please manually verify that it is correct.")
 
-            '3. Get the rows that need to be changed in the Data Values table
-            updateQuery = "SELECT * FROM " & db_tbl_DataValues & " WHERE " & db_fld_ValDerivedFromID & " IN ("
-            For i = 0 To m_EditRemoveDFIDs.Count - 1
-                If i > 0 Then
-                    updateQuery = updateQuery & ", " & m_EditRemoveDFIDs(i)
-                Else
-                    updateQuery = updateQuery & m_EditRemoveDFIDs(i)
-                End If
-            Next i
-            updateQuery = updateQuery & ") ORDER BY " & db_fld_ValID
-            updateDT = OpenTable("UpdateDeletedDFIDsinValuesTable", updateQuery, g_CurrConnSettings)
-            'validate have values
-            If (updateDT Is Nothing) Then
-                MsgBox("Unable to update the " & db_fld_ValDerivedFromID & " field in the " & db_tbl_DataValues & " Table." & vbCrLf & "Unable to access the " & db_tbl_DataValues & " Table in the Database.")
+    '            'reset m_EditRemoveDFIDs,m_EditHaveRemoveDFIDs
+    '            'm_EditHaveRemoveDFIDs = False
+    '            'm_EditRemoveDFIDs.Clear()
 
-                'reset m_EditRemoveDFIDs,m_EditHaveRemoveDFIDs
-                m_EditHaveRemoveDFIDs = False
-                m_EditRemoveDFIDs.Clear()
-                'exit
-                Exit Try
-            End If
-            '4. Move through DataValues table and change any DFIDs = -1 for any of the deleted values
-            If updateDT.Rows.Count > 0 Then 'NOTE: affected rows may have already been updated!!
-                For i = 0 To updateDT.Rows.Count - 1
-                    updateDT.Rows(i).Item(db_fld_ValDerivedFromID) = db_val_DerivedFromID_Removed
-                Next i
-            End If
+    '            'exit
+    '            Exit Try
+    '        End If
 
-            '5. Apply to Database
-            If Not (UpdateTable(updateDT, updateQuery, g_CurrConnSettings.ConnectionString)) Then
-                MsgBox("Unable to update the " & db_fld_ValDerivedFromID & " field in the " & db_tbl_DataValues & " Table." & vbCrLf & "You may need to manually verify the Values table to make sure it is correct.")
+    '        '3. Get the rows that need to be changed in the Data Values table
+    '        updateQuery = "SELECT * FROM " & db_tbl_DataValues & " WHERE " & db_fld_ValDerivedFromID & " IN ("
 
-                'reset m_EditRemoveDFIDs,m_EditHaveRemoveDFIDs
-                m_EditHaveRemoveDFIDs = False
-                m_EditRemoveDFIDs.Clear()
-                'exit
-                Exit Try
-            End If
+    '        'For i = 0 To m_EditRemoveDFIDs.Count - 1
+    '        '    If i > 0 Then
+    '        '        updateQuery = updateQuery & ", " & m_EditRemoveDFIDs(i)
+    '        '    Else
+    '        '        updateQuery = updateQuery & m_EditRemoveDFIDs(i)
+    '        '    End If
+    '        'Next i
+    '        updateQuery = updateQuery & ") ORDER BY " & db_fld_ValID
+    '        updateDT = OpenTable("UpdateDeletedDFIDsinValuesTable", updateQuery, g_CurrConnSettings)
+    '        'validate have values
+    '        If (updateDT Is Nothing) Then
+    '            MsgBox("Unable to update the " & db_fld_ValDerivedFromID & " field in the " & db_tbl_DataValues & " Table." & vbCrLf & "Unable to access the " & db_tbl_DataValues & " Table in the Database.")
 
-            '6. reset m_EditRemoveDFIDs,m_EditHaveRemoveDFIDs
-            m_EditHaveRemoveDFIDs = False
-            m_EditRemoveDFIDs.Clear()
-        Catch ex As Exception
-            ShowError("An Error occurred while updating the " & db_tbl_DerivedFrom & " Table in the Database to reflect the Edits made." & vbCrLf & "Message = " & ex.Message, ex)
-        End Try
-        'release resources
-        If Not (delConn Is Nothing) Then
-            delConn.Dispose()
-            delConn = Nothing
-        End If
-        If Not (delCmd Is Nothing) Then
-            delCmd.Dispose()
-            delCmd = Nothing
-        End If
-        If Not (updateDT Is Nothing) Then
-            updateDT.Dispose()
-            updateDT = Nothing
-        End If
-    End Sub
+    '            'reset m_EditRemoveDFIDs,m_EditHaveRemoveDFIDs
+    '            'm_EditHaveRemoveDFIDs = False
+    '            'm_EditRemoveDFIDs.Clear()
+    '            'exit
+    '            Exit Try
+    '        End If
+    '        '4. Move through DataValues table and change any DFIDs = -1 for any of the deleted values
+    '        If updateDT.Rows.Count > 0 Then 'NOTE: affected rows may have already been updated!!
+    '            For i = 0 To updateDT.Rows.Count - 1
+    '                updateDT.Rows(i).Item(db_fld_ValDerivedFromID) = db_val_DerivedFromID_Removed
+    '            Next i
+    '        End If
+
+    '        '5. Apply to Database
+    '        If Not (UpdateTable(updateDT, updateQuery, g_CurrConnSettings.ConnectionString)) Then
+    '            MsgBox("Unable to update the " & db_fld_ValDerivedFromID & " field in the " & db_tbl_DataValues & " Table." & vbCrLf & "You may need to manually verify the Values table to make sure it is correct.")
+
+    '            'reset m_EditRemoveDFIDs,m_EditHaveRemoveDFIDs
+
+    '            'm_EditHaveRemoveDFIDs = False
+    '            'm_EditRemoveDFIDs.Clear()
+    '            'exit
+    '            Exit Try
+    '        End If
+
+    '        '6. reset m_EditRemoveDFIDs,m_EditHaveRemoveDFIDs
+
+    '        'm_EditHaveRemoveDFIDs = False
+    '        'm_EditRemoveDFIDs.Clear()
+    '    Catch ex As Exception
+    '        ShowError("An Error occurred while updating the " & db_tbl_DerivedFrom & " Table in the Database to reflect the Edits made." & vbCrLf & "Message = " & ex.Message, ex)
+    '    End Try
+    '    'release resources
+    '    If Not (delConn Is Nothing) Then
+    '        delConn.Dispose()
+    '        delConn = Nothing
+    '    End If
+    '    If Not (delCmd Is Nothing) Then
+    '        delCmd.Dispose()
+    '        delCmd = Nothing
+    '    End If
+    '    If Not (updateDT Is Nothing) Then
+    '        updateDT.Dispose()
+    '        updateDT = Nothing
+    '    End If
+    'End Sub
 
 #End Region
 
@@ -12838,11 +12733,11 @@ Public Class frmODMTools
         Dim beginUTCDate As DateTime
         Dim endUTCDate As DateTime
         Dim valCount As Integer
-		Dim vcIndex As Integer = 15	'value Count index
-		Dim dtIndex As Integer = 13	'date/time index
-		Dim utcDTIndex As Integer = 14 'utc date/time index
-		'NOTE: Colums for lvEditData Series:
-		'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
+		Dim vcIndex As Integer = 15 'value Count index
+        Dim dtIndex As Integer = 13 'date/time index
+        Dim utcDTIndex As Integer = 14 'utc date/time index
+        'NOTE: Colums for lvEditData Series:
+        'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
         Try
             '1. make sure have edits to reset 
             If Not (m_EditHaveEditsUncommitted) Then
@@ -12857,13 +12752,15 @@ Public Class frmODMTools
             lvEditDataSeries_SelectedIndexChanged(Me, New System.EventArgs())
 
             '4. if have DFIDs to be removed, clear them
-            If m_EditHaveRemoveDFIDs = True Then
-                m_EditHaveRemoveDFIDs = False
-            End If
+            
+            'If m_EditHaveRemoveDFIDs = True Then
+            '    m_EditHaveRemoveDFIDs = False
+            'End If
             'make sure all values are cleared out
-            If Not (m_EditRemoveDFIDs Is Nothing) Then
-                m_EditRemoveDFIDs.Clear()
-            End If
+            
+            'If Not (m_EditRemoveDFIDs Is Nothing) Then
+            '    m_EditRemoveDFIDs.Clear()
+            'End If
 
             '5. if have deletedIDs to be deleted, clear them
             If m_EditHaveDeletedValIDs = True Then
@@ -13072,14 +12969,14 @@ Public Class frmODMTools
         End Try
     End Sub
 
-	Private Sub UpdateYValForSelPtsInPlot()	'NOTE: This may no longer be necessary -> plot now updates based on data source changes, I think!!
-		Dim i As Integer 'counter
-		Dim gPane As ZedGraph.GraphPane	'GraphPane of the zgTimeSeries plot object -> used to set data and characteristics
-		'Dim g As Drawing.Graphics 'graphics object of the zgTimeSeries plot object -> used to redraw/update the plot
-		Dim line As ZedGraph.LineItem
-		Dim curIndex As Integer = -1
-		Dim curValue As Double
-		Try
+    Private Sub UpdateYValForSelPtsInPlot() 'NOTE: This may no longer be necessary -> plot now updates based on data source changes, I think!!
+        Dim i As Integer 'counter
+        Dim gPane As ZedGraph.GraphPane 'GraphPane of the zgTimeSeries plot object -> used to set data and characteristics
+        'Dim g As Drawing.Graphics 'graphics object of the zgTimeSeries plot object -> used to redraw/update the plot
+        Dim line As ZedGraph.LineItem
+        Dim curIndex As Integer = -1
+        Dim curValue As Double
+        Try
 
             '1. set the Graph Pane, graphics object
             gPane = zg5EditPlot.GraphPane
@@ -13107,8 +13004,239 @@ Public Class frmODMTools
             'show error msg
             ShowError("An Error occurred while updating the selected points on the Edit Tab." & vbCrLf & "Message = " & ex.Message, ex)
         End Try
-	End Sub
+    End Sub
+#End Region
+#Region "From Edit View"
 
+    '    'Reset style of data grid view
+    '    Public Sub ResetGridViewStyle() Handles dgvDataValues.Sorted
+    '        'dgvDataValues.ReadOnly = True
+    '        For i As Integer = 0 To dgvDataValues.Columns.Count - 1
+    '            dgvDataValues.Columns(i).ReadOnly = True
+    '        Next
+    '        'dgvDataValues.Columns("DataValue").ReadOnly = False
+    '        dgvDataValues.Columns("Other").Visible = False
+    '        dgvDataValues.Columns("Selected").Visible = False
+
+    '        dgvDataValues.ClearSelection()
+    '        For i As Integer = 0 To dgvDataValues.Rows.Count - 1
+    '            If dgvDataValues.Rows(i).Cells("Other").Value = -1 Then
+    '                dgvDataValues.Rows(i).DefaultCellStyle.BackColor = Color.Red
+    '            Else
+    '                dgvDataValues.Rows(i).DefaultCellStyle.BackColor = Nothing
+    '            End If
+
+    '            If dgvDataValues.Rows(i).Cells("Selected").Value = 1 Then
+    '                dgvDataValues.Rows(i).Selected = True
+    '            Else
+    '                dgvDataValues.Rows(i).Selected = False
+    '            End If
+    '        Next
+    '    End Sub
+
+    'Private Sub UpdateDataSeries(ByVal SeriesID As Integer)
+    '    Dim SQLstring As String
+    '    Dim BeginDateTime As DateTime
+    '    Dim EndDateTime As DateTime
+    '    Dim BeginDateTimeUTC As DateTime
+    '    Dim EndDateTimeUTC As DateTime
+
+    '    SQLstring = "SELECT LocalDateTime FROM DataValues WHERE SeriesID = " + SeriesID.ToString + " ORDER BY LocalDateTime"
+    '    BeginDateTime = dbTools.ExecuteSingleOutput(SQLstring)
+    '    SQLstring = "SELECT LocalDateTime FROM DataValues WHERE SeriesID = " + SeriesID.ToString + " ORDER BY LocalDateTime DESC"
+    '    EndDateTime = dbTools.ExecuteSingleOutput(SQLstring)
+    '    SQLstring = "SELECT DateTimeUTC FROM DataValues WHERE SeriesID = " + SeriesID.ToString + " ORDER BY DateTimeUTC"
+    '    BeginDateTimeUTC = dbTools.ExecuteSingleOutput(SQLstring)
+    '    SQLstring = "SELECT DateTimeUTC FROM DataValues WHERE SeriesID = " + SeriesID.ToString + " ORDER BY DateTimeUTC DESC"
+    '    EndDateTimeUTC = dbTools.ExecuteSingleOutput(SQLstring)
+
+    '    SQLstring = "UPDATE DataSeries SET ValueCount = " + SeriesRowsCount(SeriesID).ToString + ", "
+    '    SQLstring += "BeginDateTime = '" + BeginDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "', "
+    '    SQLstring += "EndDateTime = '" + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "', "
+    '    SQLstring += "BeginDateTimeUTC = '" + BeginDateTimeUTC.ToString("yyyy-MM-dd HH:mm:ss") + "', "
+    '    SQLstring += "EndDateTimeUTC = '" + EndDateTimeUTC.ToString("yyyy-MM-dd HH:mm:ss") + "', "
+    '    SQLstring += "UpdateDateTime = '" + Now.ToString("yyyy-MM-dd HH:mm:ss") + "' "
+    '    SQLstring += "WHERE SeriesID = " + SeriesID.ToString
+
+    '    dbTools.ExecuteNonQuery(SQLstring)
+    'End Sub
+
+    'Public Sub SaveGraphChangesToDatabase()
+    '    Dim SQLstring As String
+    '    Dim SQLstring2 As String
+    '    Dim datavalue As Double
+    '    'Dim QualifierCode As String
+    '    Dim ValueID As Integer
+    '    Dim RowIndexList As New List(Of Integer)
+    '    Dim RestoreDeletedPoint As Boolean = False
+    '    Dim dt As New DataTable
+    '    Dim ValueIDList As New List(Of Integer)
+
+
+    '    'Deleting added points after restore data
+    '    For i As Integer = 0 To dgvEditTable.Rows.Count - 1
+    '        ValueIDList.Add(dgvEditTable.Rows(i).Cells("ValueID").Value)
+    '    Next
+    '    dt = dbTools.LoadTable("SELECT ValueID FROM DataValues WHERE SeriesID = " + newseriesID.ToString)
+    '    For i As Integer = 0 To dt.Rows.Count - 1
+    '        If Not ValueIDList.Contains(dt.Rows(i)("ValueID")) Then
+    '            SQLstring = "DELETE FROM DataValues WHERE ValueID = " + dt.Rows(i)("ValueID").ToString
+    '            dbTools.ExecuteNonQuery(SQLstring)
+    '        End If
+    '    Next
+
+
+    '    'Setting progress bar
+    '    ''Dim frmloading As ProgressBar = pbProgressBar
+    '    'frmloading.Visible = True
+    '    'frmloading.Maximum = dgvDataValues.Rows.Count - 1
+    '    'frmloading.Minimum = 0
+    '    'frmloading.Value = 0
+
+    '    ' lblstatus.Text = "Saving..."
+    '    SQLstring2 = "BEGIN TRANSACTION; "
+    '    'saving by table
+    '    For i As Integer = 0 To m_EditData.Rows.Count - 1
+
+    '        ValueID = m_EditData.Rows(i)("ValueID")
+
+    '        'deleting point
+
+    '        If Not m_EditData.Rows(i)("Other") = 0 Then
+    '            'Deleteing point
+    '            If m_EditData.Rows(i)("Other") = -1 Then
+    '                SQLstring = "DELETE FROM DataValues WHERE ValueID = " + ValueID.ToString + "; "
+    '                SQLstring2 += SQLstring
+
+
+    '                'Adding point
+    '            ElseIf m_EditData.Rows(i)("Other") = 1 Then
+    '                If dbTools.ExecuteSingleOutput("Select ValueID FROM DataValues WHERE ValueID = " + ValueID.ToString) = Nothing Then
+    '                    SQLstring = "INSERT INTO DataValues (ValueID,SeriesID,DataValue,ValueAccuracy,LocalDateTime,UTCOffset,DateTimeUTC, "
+    '                    SQLstring += "OffsetValue, OffsetTypeID, CensorCode, QualifierID, SampleID, FileID) VALUES ("
+    '                    'ValueID,SeriesID,DataValue
+    '                    For j As Integer = 0 To 2
+    '                        SQLstring += m_EditData.Rows(i)(j).ToString + ","
+    '                    Next
+    '                    'ValueAccuracy
+    '                    If m_EditData.Rows(i)(3) Is DBNull.Value Then
+    '                        SQLstring += "NULL,"
+    '                    Else
+    '                        SQLstring += m_EditData.Rows(i)(3).ToString + ","
+    '                    End If
+    '                    'LocalDateTime
+    '                    SQLstring += "'" + Convert.ToDateTime(m_EditData.Rows(i)(4)).ToString("yyyy-MM-dd HH:mm:ss") + "',"
+    '                    'UTCOffset
+    '                    SQLstring += m_EditData.Rows(i)(5).ToString
+    '                    'DateTimeUTC
+    '                    SQLstring += ",'" + Convert.ToDateTime(m_EditData.Rows(i)(6)).ToString("yyyy-MM-dd HH:mm:ss") + "',"
+    '                    'OffsetValue
+    '                    If m_EditData.Rows(i)(8) Is DBNull.Value Then
+    '                        SQLstring += "NULL,"
+    '                    Else
+    '                        SQLstring += m_EditData.Rows(i)(8).ToString + ","
+    '                    End If
+    '                    'OffsetTypeID
+    '                    If m_EditData.Rows(i)(9) Is DBNull.Value Then
+    '                        SQLstring += "NULL,"
+    '                    Else
+    '                        SQLstring += m_EditData.Rows(i)(9).ToString + ","
+    '                    End If
+    '                    'CensorCode
+    '                    If m_EditData.Rows(i)(10) Is DBNull.Value Then
+    '                        SQLstring += "NULL,"
+    '                    Else
+    '                        SQLstring += "'" + m_EditData.Rows(i)(10).ToString + "',"
+    '                    End If
+    '                    'QualifierID
+    '                    If m_EditData.Rows(i)(7) Is DBNull.Value Then
+    '                        SQLstring += "NULL,"
+    '                    Else
+    '                        SQLstring += GetQualifierID(m_EditData.Rows(i)(7).ToString).ToString + ","
+    '                    End If
+    '                    'SampleID
+    '                    If m_EditData.Rows(i)(11) Is DBNull.Value Then
+    '                        SQLstring += "NULL,"
+    '                    Else
+    '                        SQLstring += m_EditData.Rows(i)(11).ToString() + ","
+    '                    End If
+    '                    'FileID
+    '                    If m_EditData.Rows(i)(12) Is DBNull.Value Then
+    '                        SQLstring += "NULL)"
+    '                    Else
+    '                        SQLstring += m_EditData.Rows(i)(12).ToString() + "); "
+    '                    End If
+
+    '                    SQLstring2 += SQLstring
+    '                End If
+
+
+    '                'updating point
+    '            ElseIf m_EditData.Rows(i)("Other") = 2 Then
+    '                'Update 
+    '                If Not datavalue = dgvEditTable.Rows(i).Cells("DataValue").Value Then
+    '                    SQLstring = "UPDATE DataValues SET DataValue = "
+    '                    SQLstring += m_EditData.Rows(i)("DataValue").ToString + ", QualifierID = "
+    '                    SQLstring += GetQualifierID(m_EditData.Rows(i)("QualifierCode")).ToString
+    '                    SQLstring += " WHERE ValueID = "
+    '                    SQLstring += ValueID.ToString + "; "
+
+    '                    SQLstring2 += SQLstring
+
+    '                End If
+    '            End If
+    '        End If
+
+    '        'frmloading.Value = i
+    '    Next
+
+    '    SQLstring2 += "COMMIT;"
+
+    '    dbTools.ExecuteNonQuery(SQLstring2)
+
+    '    'Update DataSeries
+    '    'UpdateDataSeries(newseriesID)
+
+    '    ''Remove rows from dgvDataValues where is deleted
+    '    'For i As Integer = 0 To dgvDataValues.Rows.Count - 1
+    '    '    If dgvDataValues.Rows(i).Cells("Other").Value = -1 Then
+    '    '        RowIndexList.Add(i)
+    '    '    End If
+    '    'Next
+
+    '    'If RowIndexList.Count > 0 Then
+    '    '    For i As Integer = RowIndexList.Count - 1 To 0
+    '    '        dgvDataValues.Rows.Remove(dgvDataValues.Rows(RowIndexList(i)))
+    '    '    Next
+    '    'End If
+
+
+
+    '    'Update Data Series
+    '    DataSeriesHandling.UpdateDataSeriesFromDataValues(newseriesID)
+
+
+    '    RefreshDataGridView()
+    '    'zg5EditPlot.ReplotEditingCurve(m_EditData)
+
+    '    'frmloading.Value = 0
+    '    'lblstatus.Text = "Ready"
+
+    'End Sub
+    'Public Sub RefreshDataGridView()
+    '    m_EditData.DefaultView.Sort = "[LocalDateTime] Asc"
+
+    '    dgvEditTable.DataSource = m_EditData.DefaultView
+    '    ResetGridViewStyle()
+    'End Sub
 #End Region
 
+
+    Private Sub dgvEditTable_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dgvEditTable.KeyUp
+        dgvEditTable_SelectionChanged(sender, e)
+    End Sub
+
+    Private Sub dgvEditTable_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvEditTable.MouseClick
+        dgvEditTable_SelectionChanged(sender, e)
+    End Sub
 End Class
