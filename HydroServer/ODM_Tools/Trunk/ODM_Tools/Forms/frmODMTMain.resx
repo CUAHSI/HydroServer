@@ -135,9 +135,9 @@
   <data name="btnEditDataInterpolate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAGpJREFUOE9jZGBg
-        +H/t2jUgRT74Ty4AWvwfZC25+kEuJ98AqNcHyACYt8nzAijMoOFGkgESG1MhgU2qAXCNWOIK0wVIpuPT
-        CDMLrwHEJA4UA0AhS2qiwjCAGFuR1ZAUC9gMp54BMP+TQwMAdAs4RWSHXKMAAAAASUVORK5CYII=
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAGZJREFUOE9jYGBg
+        +H/t2jWyMVA/w39yAcjigTMA5nWyXUCRAbBwIy8MQIEODXiSDJDYmAqJLFINgGvEEteYLkAyHZ9GmFl4
+        DSAmcaEYAApZUlMlhgHE2IqshqRYwGY49QyA+Z8cGgDGc2pRujdYvQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnEditDataAdd.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -162,10 +162,10 @@
   <data name="btnEditDataAdjust.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAJBJREFUOE+lk4EO
-        gCAIROnP+zS/wt8xSM8hE9FiYzXWPc5zXTnnQj+rfC0sD/WJqEjb2gLw6V6xtLzrmgL0NisQscwwXwJm
-        4hDgibyQBgfaGlFim2nQ0c3Wud0MVgCILcS9Be0AW7UYsy0ALIdHqAnXcw8OMIsy6JtagDbILQcWohM/
-        AoQ/R/ugh4grPH0K4AGOddQuLyX8CAAAAABJRU5ErkJggg==
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAIdJREFUOE+lkwsK
+        wCAMQ3v0Hc1TeB3XwjKi+Em3QhGKvqZRrdba/qR5tK8RjSVA8SaRY0iAUAjAqHYK4G6z8aKG+haw8mYL
+        yBraKWCyWXGZpfPMLpfuySEDcHiELG+BFaArH0ZNAkDycYTYiLk7BY8XEgAQANhIGcAQdjwFUD/XayLe
+        QHYNwA0ClgjLrYEv1wAAAABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="cmnuQueryDataRightClick.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -178,7 +178,7 @@
     <value>422, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>40</value>
+    <value>35</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

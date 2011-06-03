@@ -115,9 +115,9 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <Reference Include="ZedGraph, Version=5.0.2.16769, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+    <Reference Include="ZedGraph, Version=5.1.4.31904, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\zedgraph_src_5.0.2\source\bin\Debug\ZedGraph.dll</HintPath>
+      <HintPath>..\..\..\..\HydroDesktop\Trunk\Source\Plugins\EditView\References\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -2731,7 +2731,7 @@ Public Class frmDeriveNewDataSeries
 		Dim newRow As Data.DataRow 'used to create/add new points (rows) to addDT
 		Dim lastID As Integer 'holds the maximum ValueID retrieved from the Database -> used to create the ValueIDs for the new points
 		Dim added As Boolean = False 'tracks if the new points were successfully updated to the database or not
-		Dim deriveFromID As Integer	'holds the DerivedFromID for the current point being created
+        'Dim deriveFromID As Integer	'holds the DerivedFromID for the current point being created
 		Dim numVals_percent As Integer
 
 		Try
@@ -2785,13 +2785,13 @@ Public Class frmDeriveNewDataSeries
                 'deriveFromID = GetDerivedFromIDFromDB(valDT.Rows(i).Item(db_fld_ValID))
                 'If deriveFromID < 0 Then
                 'try creating one
-                deriveFromID = CreateNewDerivedFromIDInDB(valDT.Rows(i).Item(db_fld_ValID))
-                If deriveFromID < 0 Then
-                    'leave it NULL
-                Else
-                    'set the value
-                    newRow.Item(db_fld_ValDerivedFromID) = deriveFromID
-                End If
+                'deriveFromID = CreateNewDerivedFromIDInDB(valDT.Rows(i).Item(db_fld_ValID))
+                'If deriveFromID < 0 Then
+                '    'leave it NULL
+                'Else
+                '    'set the value
+                '    newRow.Item(db_fld_ValDerivedFromID) = deriveFromID
+                'End If
                 'Else
                 '	'set the value
                 '	newRow.Item(db_fld_ValDerivedFromID) = deriveFromID
@@ -2903,7 +2903,7 @@ Public Class frmDeriveNewDataSeries
 		Dim newRow As Data.DataRow 'used to create/add new points (rows) to addDT
 		Dim lastID As Integer 'holds the maximum ValueID retrieved from the Database -> used to create the ValueIDs for the new points
 		Dim added As Boolean = False 'tracks if the new points were successfully updated to the database or not
-		Dim derivedFromID As Integer	'holds the DerivedFromID for the current point being created
+        'Dim derivedFromID As Integer	'holds the DerivedFromID for the current point being created
 		Dim newVal As Double 'the new value for the current point creating
 		Dim curVal As Double 'the current value deriving from -> used to see if use no data value or if use new value for new point
 		Dim censorCode As String 'holds the NC censor code -> used to create a new point
@@ -2985,13 +2985,13 @@ Public Class frmDeriveNewDataSeries
 				'If derivedFromID < 0 Then
 
 				'try creating one
-				derivedFromID = CreateNewDerivedFromIDInDB(valDT.Rows(i).Item(db_fld_ValID))
-				If derivedFromID < 0 Then
-					'leave it NULL
-				Else
-					'set the value
-					newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
-				End If
+                'derivedFromID = CreateNewDerivedFromIDInDB(valDT.Rows(i).Item(db_fld_ValID))
+                'If derivedFromID < 0 Then
+                '	'leave it NULL
+                'Else
+                '	'set the value
+                '	newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
+                'End If
 				'Else
 				'	'set the value
 				'	newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
@@ -3104,12 +3104,12 @@ Public Class frmDeriveNewDataSeries
 		Dim newRow As Data.DataRow 'used to create/add new points (rows) to addDT
 		Dim lastID As Integer 'holds the maximum ValueID retrieved from the Database -> used to create the ValueIDs for the new points
 		Dim added As Boolean = False 'tracks if the new points were successfully updated to the database or not
-		Dim derivedFromID As Integer	'holds the DerivedFromID for the current point being created
+        'Dim derivedFromID As Integer	'holds the DerivedFromID for the current point being created
 		Dim newVal As Object 'the computed aggregate value to be input for the current point being created
 		Dim curDate As DateTime	'the date value for the current point being created
-		Dim year As Integer	'the year value of curDate -> used to calculate newVal value
-		Dim month As Integer 'the month value of curDate -> used to calculate newVal value
-		Dim day As Integer 'the day value of curDate -> used to calculate newVal value
+        'Dim year As Integer	'the year value of curDate -> used to calculate newVal value
+        'Dim month As Integer 'the month value of curDate -> used to calculate newVal value
+        'Dim day As Integer 'the day value of curDate -> used to calculate newVal value
 		Dim utcOffset As Integer 'the utcOffset for the Data Series deriving from -> used to calculate the new UTC Date Time (because new local date = 12:00:00 AM on the day
 		Dim utcDate As DateTime	'the newly calculate UTC Date for the current point being created
 		Dim offsetValue As Object 'holds the offsetValue of the first value of the group of values that is used to calculate the new value for the current point being created
@@ -3157,74 +3157,82 @@ Public Class frmDeriveNewDataSeries
 			numVals_percent = CInt((lastDate.Subtract(firstDate).Days) * 0.2)
 			While curDate <= lastDate
 				'get the Date qualifiers
-				year = curDate.Year
-				month = curDate.Month
-				day = curDate.Day
-				'get the aggregated value
-				Select Case aggMethod
-					Case db_val_DTCVTerm_Maximum
-						newVal = valDT.Compute("Max(" & db_fld_ValValue & ")", db_outFld_ValDTYear & " = " & year & " AND " & db_outFld_ValDTMonth & " = " & month & " AND " & db_outFld_ValDTDay & " = " & day & " AND " & db_fld_ValValue & " <> " & noDataValue)
-					Case db_val_DTCVTerm_Minimum
-						newVal = valDT.Compute("Min(" & db_fld_ValValue & ")", db_outFld_ValDTYear & " = " & year & " AND " & db_outFld_ValDTMonth & " = " & month & " AND " & db_outFld_ValDTDay & " = " & day & " AND " & db_fld_ValValue & " <> " & noDataValue)
-					Case db_val_DTCVTerm_Average
-						newVal = valDT.Compute("Avg(" & db_fld_ValValue & ")", db_outFld_ValDTYear & " = " & year & " AND " & db_outFld_ValDTMonth & " = " & month & " AND " & db_outFld_ValDTDay & " = " & day & " AND " & db_fld_ValValue & " <> " & noDataValue)
-				End Select
-				'get the values that come from data series deriving from
-				selRows = valDT.Select(db_outFld_ValDTYear & " = " & year & " AND " & db_outFld_ValDTMonth & " = " & month & " AND " & db_outFld_ValDTDay & " = " & day, db_fld_ValDateTime)
-				'see if there is any data for this date, if not -> go to next date
-				If selRows.Length > 0 Then
-					utcOffset = selRows(0).Item(db_fld_ValUTCOffset)
-					utcDate = curDate.AddHours(-utcOffset) 'this subtracts the utcOffset -> UTCDate = LocalDate - UTCOffset
-					offsetValue = selRows(0).Item(db_fld_ValOffsetValue)
-					offsetTypeID = selRows(0).Item(db_fld_ValOffsetTypeID)
+                'year = curDate.Year
+                'month = curDate.Month
+                'day = curDate.Day
+                'get the aggregated value
+                Dim dateFilter As String = "LocalDateTime >='" & curDate.ToString() & "' AND LocalDateTime <'" & curDate.AddDays(1).ToString() & "'"
+                Select Case aggMethod
+                    Case db_val_DTCVTerm_Maximum
+                        newVal = valDT.Compute("Max(" & db_fld_ValValue & ")", dateFilter & " AND " & db_fld_ValValue & " <> " & noDataValue)
+                        'newVal = valDT.Compute("Max(" & db_fld_ValValue & ")", db_outFld_ValDTYear & " = " & year & " AND " & db_outFld_ValDTMonth & " = " & month & " AND " & db_outFld_ValDTDay & " = " & day & " AND " & db_fld_ValValue & " <> " & noDataValue)
+                    Case db_val_DTCVTerm_Minimum
+                        newVal = valDT.Compute("Min(" & db_fld_ValValue & ")", dateFilter & " AND " & db_fld_ValValue & " <> " & noDataValue)
+                        ' newVal = valDT.Compute("Min(" & db_fld_ValValue & ")", db_outFld_ValDTYear & " = " & year & " AND " & db_outFld_ValDTMonth & " = " & month & " AND " & db_outFld_ValDTDay & " = " & day & " AND " & db_fld_ValValue & " <> " & noDataValue)
+                    Case db_val_DTCVTerm_Average
+                        newVal = valDT.Compute("Avg(" & db_fld_ValValue & ")", dateFilter & " AND " & db_fld_ValValue & " <> " & noDataValue)
+                        'newVal = valDT.Compute("Avg(" & db_fld_ValValue & ")", db_outFld_ValDTYear & " = " & year & " AND " & db_outFld_ValDTMonth & " = " & month & " AND " & db_outFld_ValDTDay & " = " & day & " AND " & db_fld_ValValue & " <> " & noDataValue)
+                End Select
+                'get the values that come from data series deriving from
+                'selRows = valDT.Select(db_outFld_ValDTYear & " = " & year & " AND " & db_outFld_ValDTMonth & " = " & month & " AND " & db_outFld_ValDTDay & " = " & day, db_fld_ValDateTime)
+                selRows = valDT.Select(dateFilter, db_fld_ValDateTime)
 
-					'create the new point
-					newRow = addDT.NewRow()
-					newRow.Item(db_fld_ValID) = lastID + (i + 1)
-					If (newVal Is DBNull.Value) Then
-						newRow.Item(db_fld_ValValue) = noDataValue
-					Else
-						newRow.Item(db_fld_ValValue) = CDbl(newVal)
-					End If
-					newRow.Item(db_fld_ValDateTime) = FormatDateForInsertIntoDB(curDate)
-					newRow.Item(db_fld_ValUTCOffset) = utcOffset
-					newRow.Item(db_fld_ValUTCDateTime) = FormatDateForInsertIntoDB(utcDate)
-					newRow.Item(db_fld_ValSiteID) = siteID
-					newRow.Item(db_fld_ValVarID) = varID
-					newRow.Item(db_fld_ValOffsetValue) = offsetValue
-					newRow.Item(db_fld_ValOffsetTypeID) = offsetTypeID
-					newRow.Item(db_fld_ValCensorCode) = censorCode
-					'NOTE: These values become NULL!!
-					'***************************************************
-					'newRow.Item(db_fld_ValQualifierID) = qualifierID
-					'***************************************************
-					newRow.Item(db_fld_ValMethodID) = methodID
-					newRow.Item(db_fld_ValSourceID) = sourceID
-					'NOTE: Per Jeff 4/4/07, just create a new DFID everytime!!
-					'***********************************************************************************************
-					'derivedFromID = GetDerivedFromIDFromDB(selRows)
-					'If derivedFromID < 0 Then
+                'see if there is any data for this date, if not -> go to next date
+                If selRows.Length > 0 Then
+                    utcOffset = selRows(0).Item(db_fld_ValUTCOffset)
+                    utcDate = curDate.AddHours(-utcOffset) 'this subtracts the utcOffset -> UTCDate = LocalDate - UTCOffset
+                    offsetValue = selRows(0).Item(db_fld_ValOffsetValue)
+                    offsetTypeID = selRows(0).Item(db_fld_ValOffsetTypeID)
 
-					'try creating one
-					derivedFromID = CreateNewDerivedFromIDInDB(selRows)
-					If derivedFromID < 0 Then
-						'leave it NULL
-					Else
-						'set the value
-						newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
-					End If
-					'Else
-					'	'set the value
-					'	newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
-					'End If
-					'***********************************************************************************************
+                    'create the new point
+                    newRow = addDT.NewRow()
+                    newRow.Item(db_fld_ValID) = lastID + (i + 1)
+                    If (newVal Is DBNull.Value) Then
+                        newRow.Item(db_fld_ValValue) = noDataValue
+                    Else
+                        newRow.Item(db_fld_ValValue) = CDbl(newVal)
+                    End If
+                    newRow.Item(db_fld_ValDateTime) = FormatDateForInsertIntoDB(curDate)
+                    newRow.Item(db_fld_ValUTCOffset) = utcOffset
+                    newRow.Item(db_fld_ValUTCDateTime) = FormatDateForInsertIntoDB(utcDate)
+                    newRow.Item(db_fld_ValSiteID) = siteID
+                    newRow.Item(db_fld_ValVarID) = varID
+                    newRow.Item(db_fld_ValOffsetValue) = offsetValue
+                    newRow.Item(db_fld_ValOffsetTypeID) = offsetTypeID
+                    newRow.Item(db_fld_ValCensorCode) = censorCode
+                    'NOTE: These values become NULL!!
+                    '***************************************************
+                    'newRow.Item(db_fld_ValQualifierID) = qualifierID
+                    '***************************************************
+                    newRow.Item(db_fld_ValMethodID) = methodID
+                    newRow.Item(db_fld_ValSourceID) = sourceID
+                    'NOTE: Per Jeff 4/4/07, just create a new DFID everytime!!
+                    '***********************************************************************************************
+                    'derivedFromID = GetDerivedFromIDFromDB(selRows)
+                    'If derivedFromID < 0 Then
 
-					newRow.Item(db_fld_ValQCLevel) = qcLevelID
-					'add it to the dataTable
-					addDT.Rows.Add(newRow)
-					numCreated += 1
-					i += 1
-				End If
+                    'try creating one
+
+                    'derivedFromID = CreateNewDerivedFromIDInDB(selRows)
+                    'If derivedFromID < 0 Then
+                    '    'leave it NULL
+                    'Else
+                    '    'set the value
+                    '    newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
+                    'End If
+
+                    'Else
+                    '	'set the value
+                    '	newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
+                    'End If
+                    '***********************************************************************************************
+
+                    newRow.Item(db_fld_ValQCLevel) = qcLevelID
+                    'add it to the dataTable
+                    addDT.Rows.Add(newRow)
+                    numCreated += 1
+                    i += 1
+                End If
 				If lastDate.Subtract(curDate).Days Mod numVals_percent = 0 AndAlso i <> 0 Then
 					'update progress bar
 					g_FProgress.pbarProgress.Value += 10
@@ -3336,7 +3344,7 @@ Public Class frmDeriveNewDataSeries
 		Dim newRow As Data.DataRow 'used to create/add new points (rows) to addDT
 		Dim lastID As Integer 'holds the maximum ValueID retrieved from the Database -> used to create the ValueIDs for the new points
 		Dim added As Boolean = False 'tracks if the new points were successfully updated to the database or not
-		Dim derivedFromID As Integer 'holds the DerivedFromID for the current point being created
+        'Dim derivedFromID As Integer 'holds the DerivedFromID for the current point being created
 		Dim newVal As Double 'the calculate new value for the current point being created
 		Dim curVal As Double ' the value deriving the new value from for the current point being created (from the Data Series deriving from)
 		Dim censorCode As String 'holds the NC censor code -> used to create a new point
@@ -3406,17 +3414,17 @@ Public Class frmDeriveNewDataSeries
 
 				'NOTE: Per Jeff 4/4/07, just create a new DFID everytime!!
 				'***********************************************************************************************
-				'derivedFromID = GetDerivedFromIDFromDB(valDT.Rows(i).Item(db_fld_ValID))
+                'derivedFromID = GetDerivedFromIDFromDB(valDT.Rows(i).Item(db_fld_ValID))
 				'If derivedFromID < 0 Then
 
 				'try creating one
-				derivedFromID = CreateNewDerivedFromIDInDB(valDT.Rows(i).Item(db_fld_ValID))
-				If derivedFromID < 0 Then
-					'leave it NULL
-				Else
-					'set the value
-					newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
-				End If
+                'derivedFromID = CreateNewDerivedFromIDInDB(valDT.Rows(i).Item(db_fld_ValID))
+                'If derivedFromID < 0 Then
+                '	'leave it NULL
+                'Else
+                '	'set the value
+                '	newRow.Item(db_fld_ValDerivedFromID) = derivedFromID
+                'End If
 				'Else
 				'	'set the value
 				'	newRow.Item(db_fld_ValDerivedFromID) = derivedFromID

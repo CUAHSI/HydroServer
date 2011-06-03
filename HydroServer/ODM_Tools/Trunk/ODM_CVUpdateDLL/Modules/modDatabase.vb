@@ -343,10 +343,10 @@ Module modDatabase
         'Outputs: the dataTable of data retreived from the database using SqlQuery
         'create a flow table
         Dim table As New System.Data.DataTable(tableName) 'the table of data to return
-        Dim dataAdapter As OleDb.OleDbDataAdapter 'the dataAdapter to fill the table
+        Dim dataAdapter As SqlClient.SqlDataAdapter 'the dataAdapter to fill the table
         Try
             'connect to the Database
-            dataAdapter = New OleDb.OleDbDataAdapter(SqlQuery, settings.ConnectionString)
+            dataAdapter = New SqlClient.SqlDataAdapter(SqlQuery, settings.ConnectionString)
 
             'get the table from the database
             dataAdapter.Fill(table)
@@ -377,12 +377,12 @@ Module modDatabase
         '        query -> the query used to create the original dataTable
         '        connectionString -> the connectionString to the database
         'Outputs: none
-        Dim updateAdapter As System.Data.OleDb.OleDbDataAdapter 'updateAdapter -> finds out if anything has been changed and marks the rows that need to be added -> used by the command builder
-        Dim commandBuilder As System.Data.OleDb.OleDbCommandBuilder 'CommandBuilder -> creates the insert function for updating the database
+        Dim updateAdapter As System.Data.SqlClient.SqlDataAdapter 'updateAdapter -> finds out if anything has been changed and marks the rows that need to be added -> used by the command builder
+        Dim commandBuilder As System.Data.SqlClient.SqlCommandBuilder 'CommandBuilder -> creates the insert function for updating the database
         Try
             'crate the updateAdapter,commandBuilder
-            updateAdapter = New System.Data.OleDb.OleDbDataAdapter(query, connectionString)
-            commandBuilder = New System.Data.OleDb.OleDbCommandBuilder(updateAdapter)
+            updateAdapter = New System.Data.SqlClient.SqlDataAdapter(query, connectionString)
+            commandBuilder = New System.Data.SqlClient.SqlCommandBuilder(updateAdapter)
 
             'update the database
             Dim count As Integer
@@ -407,7 +407,7 @@ Module modDatabase
         'Outputs: TestDBConnection -> Returns True if the test was successful, otherwise returns False
 
         'Create a new connection
-        Dim TestConn As New OleDb.OleDbConnection(e_DBSettings.ConnectionString)
+        Dim TestConn As New SqlClient.SqlConnection(e_DBSettings.ConnectionString)
         Dim SQL As String
         If e_DBSettings.DBName = "" Or e_DBSettings.ServerAddress = "" Then
             Return False
@@ -422,7 +422,7 @@ Module modDatabase
                    & db_tbl_DataTypeCV
 
                 'Test the connection
-                Dim temp As New OleDb.OleDbCommand(SQL, TestConn)
+                Dim temp As New SqlClient.SqlCommand(SQL, TestConn)
                 temp.ExecuteNonQuery()
 
                 TestConn.Close()

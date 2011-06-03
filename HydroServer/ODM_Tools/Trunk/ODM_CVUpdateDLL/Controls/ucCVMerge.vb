@@ -634,10 +634,10 @@ Public Class ucCVMerge
     End Function 'Commits a dataTable to the Database
 
     Private Function ApplyFixRow() As Boolean
-        Dim connection As New OleDb.OleDbConnection(g_CurrConnSettings.ConnectionString)
-        Dim trans As OleDb.OleDbTransaction
+        Dim connection As New SqlClient.SqlConnection(g_CurrConnSettings.ConnectionString)
+        Dim trans As SqlClient.SqlTransaction
         Dim commit As Boolean = True
-        Dim command As OleDb.OleDbCommand
+        Dim command As SqlClient.SqlCommand
         Dim sql As String = ""
         Dim i As Integer
         connection.Open()
@@ -647,81 +647,81 @@ Public Class ucCVMerge
                 Select Case type
                     Case CVType.CensorCode
                         sql = "UPDATE " & db_tbl_DataValues & " SET " & db_fld_ValCensorCode & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_ValCensorCode & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.DataType
                         sql = "UPDATE " & db_tbl_Variables & " SET " & db_fld_VarDataType & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarDataType & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_SeriesCatalog & " SET " & db_fld_SCDataType & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarDataType & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.GeneralCategory
                         sql = "UPDATE " & db_tbl_Variables & " SET " & db_fld_VarGenCat & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarGenCat & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_SeriesCatalog & " SET " & db_fld_SCGenCat & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarGenCat & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.SampleMedium
                         sql = "UPDATE " & db_tbl_Variables & " SET " & db_fld_VarSampleMed & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarSampleMed & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.SampleType
                         sql = "UPDATE " & db_tbl_Samples & " SET " & db_fld_SampleType & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_SampleType & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.TopicCategory
                         sql = "UPDATE " & db_tbl_ISOMetaData & " SET " & db_fld_IMDTopicCat & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_IMDTopicCat & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.ValueType
                         sql = "UPDATE " & db_tbl_Variables & " SET " & db_fld_VarValueType & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarValueType & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_SeriesCatalog & " SET " & db_fld_SCValueType & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarValueType & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.VariableName
                         sql = "UPDATE " & db_tbl_Variables & " SET " & db_fld_VarName & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarName & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_SeriesCatalog & " SET " & db_fld_SCVarName & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarName & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.VerticalDatum
                         sql = "UPDATE " & db_tbl_Sites & " SET " & db_fld_SiteVertDatum & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_SiteVertDatum & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.Speciation
                         sql = "UPDATE " & db_tbl_Sites & " SET " & db_fld_VarSpec & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarSpec & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_SeriesCatalog & " SET " & db_fld_SCSpeciation & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_CV_Term) & "' WHERE (" & db_fld_VarSpec & " = '" & fixedData.Rows(i).Item(db_fld_CV_Term) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.SpatialRef
                         sql = "UPDATE " & db_tbl_Sites & " SET " & db_fld_SiteLatLongDatumID & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_SRID) & "' WHERE (" & db_fld_SiteLatLongDatumID & " = '" & fixedData.Rows(i).Item(db_fld_SRID) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_Sites & " SET " & db_fld_SiteLocProjID & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_SRID) & "' WHERE (" & db_fld_SiteLocProjID & " = '" & fixedData.Rows(i).Item(db_fld_SRID) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case CVType.Unit
                         sql = "UPDATE " & db_tbl_SeriesCatalog & " SET " & db_fld_SCTimeUnitsID & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_UnitsID) & "' WHERE (" & db_fld_SCTimeUnitsID & " = '" & fixedData.Rows(i).Item(db_fld_UnitsID) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_SeriesCatalog & " SET " & db_fld_SCVarUnitsID & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_UnitsID) & "' WHERE (" & db_fld_SCVarUnitsID & " = '" & fixedData.Rows(i).Item(db_fld_UnitsID) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_OffsetTypes & " SET " & db_fld_OTUnitsID & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_UnitsID) & "' WHERE (" & db_fld_OTUnitsID & " = '" & fixedData.Rows(i).Item(db_fld_UnitsID) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_Variables & " SET " & db_fld_VarUnitsID & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_UnitsID) & "' WHERE (" & db_fld_VarUnitsID & " = '" & fixedData.Rows(i).Item(db_fld_UnitsID) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                         sql = "UPDATE " & db_tbl_Variables & " SET " & db_fld_VarTimeUnitsID & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_UnitsID) & "' WHERE (" & db_fld_VarTimeUnitsID & " = '" & fixedData.Rows(i).Item(db_fld_UnitsID) & "')"
-                        command = New OleDb.OleDbCommand(sql, connection, trans)
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
                     Case Else
                         Return True
@@ -739,7 +739,7 @@ Public Class ucCVMerge
 
     'Private Sub UpdateOtherTables()
     '    'Justin: REPLACE
-    '    Dim connection As New OleDb.OleDbConnection(g_CurrConnSettings.ConnectionString)
+    '    Dim connection As New SqlClient.SqlConnection(g_CurrConnSettings.ConnectionString)
     '    Dim command As OleDb.OleDbCommand
     '    Dim trans As OleDb.OleDbTransaction
     '    Dim sql As String

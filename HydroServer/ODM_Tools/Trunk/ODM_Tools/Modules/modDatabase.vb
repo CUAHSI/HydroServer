@@ -403,10 +403,10 @@ Module modDatabase
 		'Outputs: the dataTable of data retreived from the database using SqlQuery
 		'create a flow table
 		Dim table As New System.Data.DataTable(tableName) 'the table of data to return
-		Dim dataAdapter As OleDb.OleDbDataAdapter 'the dataAdapter to fill the table
+        Dim dataAdapter As SqlClient.SqlDataAdapter ' OleDb.OleDbDataAdapter 'the dataAdapter to fill the table
 		Try
 			'connect to the Database
-			dataAdapter = New OleDb.OleDbDataAdapter(sqlQuery, settings.ConnectionString)
+            dataAdapter = New SqlClient.SqlDataAdapter(sqlQuery, settings.ConnectionString) 'New OleDb.OleDbDataAdapter(sqlQuery, settings.ConnectionString)
 
 			'get the table from the database
 			dataAdapter.Fill(table)
@@ -439,12 +439,14 @@ Module modDatabase
 		'        query -> the query used to create the original dataTable
 		'        connectionString -> the connectionString to the database
 		'Outputs: none
-		Dim updateAdapter As System.Data.OleDb.OleDbDataAdapter	'updateAdapter -> finds out if anything has been changed and marks the rows that need to be added -> used by the command builder
-		Dim commandBuilder As System.Data.OleDb.OleDbCommandBuilder	'CommandBuilder -> creates the insert function for updating the database
+        Dim updateAdapter As System.Data.SqlClient.SqlDataAdapter 'OleDb.OleDbDataAdapter	'updateAdapter -> finds out if anything has been changed and marks the rows that need to be added -> used by the command builder
+        Dim commandBuilder As System.Data.SqlClient.SqlCommandBuilder 'OleDb.OleDbCommandBuilder	'CommandBuilder -> creates the insert function for updating the database
 		Try
 			'crate the updateAdapter,commandBuilder
-			updateAdapter = New System.Data.OleDb.OleDbDataAdapter(query, connectionString)
-			commandBuilder = New System.Data.OleDb.OleDbCommandBuilder(updateAdapter)
+            'updateAdapter = New System.Data.OleDb.OleDbDataAdapter(query, connectionString)
+            updateAdapter = New System.Data.SqlClient.SqlDataAdapter(query, connectionString)
+            'commandBuilder = New System.Data.OleDb.OleDbCommandBuilder(updateAdapter)
+            commandBuilder = New System.Data.SqlClient.SqlCommandBuilder(updateAdapter)
 			'update the database
             Dim count As Integer ' counter variable
             count = updateAdapter.Update(dataTable)
@@ -464,7 +466,7 @@ Module modDatabase
 		'Outputs: TestDBConnection -> Returns True if the test was successful, otherwise returns False
 
 		'Create a new connection
-		Dim testConn As New OleDb.OleDbConnection(e_DBSettings.ConnectionString) 'Temporary connection settings to test
+        Dim testConn As New SqlClient.SqlConnection(e_DBSettings.ConnectionString) 'OleDb.OleDbConnection(e_DBSettings.ConnectionString) 'Temporary connection settings to test
 		Dim sql As String 'SQL command to test DB with
 		If e_DBSettings.DBName = "" Or e_DBSettings.ServerAddress = "" Then
 			Return False
@@ -477,7 +479,7 @@ Module modDatabase
                 sql = "SELECT MAX(" & db_fld_ODMVersionNumber & ") AS Max_Version FROM " & db_tbl_ODMVersion
 
                 'Test the connection
-                Dim temp As New OleDb.OleDbCommand(sql, testConn) 'Command to test the DB with
+                Dim temp As New SqlClient.SqlCommand(sql, testConn) '  OleDb.OleDbCommand(sql, testConn) 'Command to test the DB with
                 Dim maxVersion As String = temp.ExecuteScalar
                 If maxVersion <> db_const_Version Then
                     Throw New Exception("Database Version Incorrect." & vbCrLf & _
@@ -1055,9 +1057,10 @@ Module modDatabase
 			End If
 
 			'2. create the query
-			query = "SELECT *, Year(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTYear & ", Month(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTMonth & ", Day(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTDay & " FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & methodID & " AND " & db_fld_ValQCLevel & " = " & qcLevel & " AND " & db_fld_ValSiteID & " = " & siteID & " AND " & db_fld_ValVarID & " = " & varID & " AND " & db_fld_ValSourceID & " = " & sourceID & ") ORDER BY " & db_fld_ValDateTime
+            ' query = "SELECT *, Year(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTYear & ", Month(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTMonth & ", Day(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTDay & " FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & methodID & " AND " & db_fld_ValQCLevel & " = " & qcLevel & " AND " & db_fld_ValSiteID & " = " & siteID & " AND " & db_fld_ValVarID & " = " & varID & " AND " & db_fld_ValSourceID & " = " & sourceID & ") ORDER BY " & db_fld_ValDateTime
+            query = "SELECT * FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & methodID & " AND " & db_fld_ValQCLevel & " = " & qcLevel & " AND " & db_fld_ValSiteID & " = " & siteID & " AND " & db_fld_ValVarID & " = " & varID & " AND " & db_fld_ValSourceID & " = " & sourceID & ") ORDER BY " & db_fld_ValDateTime
 
-			'3. Open the table
+            '3. Open the table
 			valuesDT = OpenTable(tblName, query, g_CurrConnSettings)
 			'validate have data
 			If Not (valuesDT Is Nothing) Then
@@ -1067,6 +1070,8 @@ Module modDatabase
 					valuesDT = Nothing
 				End If
 			End If
+
+
 
 			'4. Return what was retrieved
 			Return valuesDT
