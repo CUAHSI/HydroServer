@@ -1,8 +1,6 @@
 Imports ZedGraph
 Imports System.Text
 Imports System.Collections.Generic
-Imports ODM_Tools.QualifierHandling
-
 'ODM Tools
 'Copyright (c) 2007, Utah State University
 'All rights reserved.
@@ -6432,30 +6430,33 @@ Public Class frmODMTools
         'Inputs:  units ->
         'Outputs: String -> 
         Dim query As String
-        Dim unitsDT As System.Data.DataTable
+        'Dim unitsDT As System.Data.DataTable
         Dim abrvUnits As String = ""
         Try
             '1. connect to database
             query = "SELECT " & db_fld_UnitsAbrv & " FROM " & db_tbl_Units & " WHERE " & db_fld_UnitsName & " = '" & FormatStringForQueryFromDB(units) & "' ORDER BY " & db_fld_UnitsID
             '2. get abbreviation for given units
-            unitsDT = OpenTable("GetAbrvUnits", query, g_CurrConnSettings)
-            'make sure have data
-            If (unitsDT Is Nothing) OrElse unitsDT.Rows.Count <= 0 Then
-                'release resources
-                If Not (unitsDT Is Nothing) Then
-                    unitsDT.Dispose()
-                    unitsDT = Nothing
-                End If
-                'return (unk) = unknown
-                Exit Try
-            End If
-            abrvUnits = unitsDT.Rows(0).Item(db_fld_UnitsAbrv)
+            abrvUnits = getValue(query, g_CurrConnSettings)
 
-            '3. release resources
-            If Not (unitsDT Is Nothing) Then
-                unitsDT.Dispose()
-                unitsDT = Nothing
-            End If
+
+            'unitsDT = OpenTable("GetAbrvUnits", query, g_CurrConnSettings)
+            ''make sure have data
+            'If (unitsDT Is Nothing) OrElse unitsDT.Rows.Count <= 0 Then
+            '    'release resources
+            '    If Not (unitsDT Is Nothing) Then
+            '        unitsDT.Dispose()
+            '        unitsDT = Nothing
+            '    End If
+            '    'return (unk) = unknown
+            '    Exit Try
+            'End If
+            'abrvUnits = unitsDT.Rows(0).Item(db_fld_UnitsAbrv)
+
+            ''3. release resources
+            'If Not (unitsDT Is Nothing) Then
+            '    unitsDT.Dispose()
+            '    unitsDT = Nothing
+            'End If
 
             '4. Return value
             Return "(" & abrvUnits & ")"
@@ -6464,10 +6465,10 @@ Public Class frmODMTools
             ShowError("An Error occurred while retrieving the Abbreviation for the Units = " & units & "." & vbCrLf & "Message = " & ex.Message, ex)
         End Try
         'release resources
-        If Not (unitsDT Is Nothing) Then
-            unitsDT.Dispose()
-            unitsDT = Nothing
-        End If
+        'If Not (unitsDT Is Nothing) Then
+        '    unitsDT.Dispose()
+        '    unitsDT = Nothing
+        'End If
         Return "(unk)"
     End Function
 
@@ -12490,7 +12491,7 @@ Public Class frmODMTools
 #End If
 
             '3. Update changes to m_EditData to the Database
-            updateQuery = "SELECT * FROM " & db_tbl_DataValues ' & " WHERE (" & db_fld_ValMethodID & " = " & editIDs.MethodID & " AND " & db_fld_ValQCLevel & " = " & editIDs.QCLevelID & " AND " & db_fld_ValSiteID & " = " & editIDs.SiteID & " AND " & db_fld_ValVarID & " = " & editIDs.VariableID & " AND " & db_fld_ValSourceID & " = " & editIDs.SourceID & ")"
+            updateQuery = "SELECT * FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & editIDs.MethodID & " AND " & db_fld_ValQCLevel & " = " & editIDs.QCLevelID & " AND " & db_fld_ValSiteID & " = " & editIDs.SiteID & " AND " & db_fld_ValVarID & " = " & editIDs.VariableID & " AND " & db_fld_ValSourceID & " = " & editIDs.SourceID & ")"
             'SELECT *<, Year(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTYear & ", Month(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTMonth & ", Day(" & db_fld_ValDateTime & ") AS " & db_outFld_ValDTDay & "
             ') <ORDER BY " & db_fld_ValDateTime
             If Not (UpdateTable(m_EditData, updateQuery, g_CurrConnSettings.ConnectionString)) Then
@@ -13006,7 +13007,7 @@ Public Class frmODMTools
         End Try
     End Sub
 #End Region
-#Region "From Edit View"
+#Region "From Hydrodesktop: Edit View"
 
     '    'Reset style of data grid view
     '    Public Sub ResetGridViewStyle() Handles dgvDataValues.Sorted
@@ -13240,3 +13241,4 @@ Public Class frmODMTools
         dgvEditTable_SelectionChanged(sender, e)
     End Sub
 End Class
+
