@@ -258,7 +258,15 @@ Public Class FrmDBConnection
         'Tests the Connection and marks whether the connection has been tested
         'Input:     Default form inputs plus the customconnect() function's result
         'Output:    ConnectionTested
-        m_ConnectionTested = CustomConnect()
+        txtSQLUID.Text = Trim(txtSQLUID.Text)
+        Dim r As New System.Text.RegularExpressions.Regex("[a-zA-Z0-9_@#][a-zA-Z0-9_@#$]{1,127}")
+        Dim match As System.Text.RegularExpressions.Match = r.Match(txtSQLUID.Text, 0)
+
+        If Not match.Value = txtSQLUID.Text Then
+            MsgBox("Invalid UserName", MsgBoxStyle.OkOnly, "Error")
+        Else
+            m_ConnectionTested = CustomConnect()
+        End If
     End Sub
 
     Private Sub btnSaveMasterPrefs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveMasterPrefs.Click
@@ -272,7 +280,15 @@ Public Class FrmDBConnection
             m_Saving = True
             Close()
         Else
-            m_ConnectionTested = CustomConnect()
+            txtSQLUID.Text = Trim(txtSQLUID.Text)
+            Dim r As New System.Text.RegularExpressions.Regex("[a-zA-Z0-9_@#][a-zA-Z0-9_@#$]{1,127}")
+            Dim match As System.Text.RegularExpressions.Match = r.Match(txtSQLUID.Text, 0)
+
+            If Not match.Value = txtSQLUID.Text Then
+                MsgBox("Invalid UserName", MsgBoxStyle.OkOnly, "Error")
+            Else
+                m_ConnectionTested = CustomConnect()
+            End If
             If m_ConnectionTested Then
                 m_Saving = True
                 Close()
@@ -335,15 +351,15 @@ Public Class FrmDBConnection
     End Sub
 
     Private Sub txtSQLUID_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSQLUID.TextChanged
-        Dim i As Integer 'Counter Variable
-        While i < (txtSQLUID.Text.Length)
-            If Not Char.IsLetterOrDigit(txtSQLUID.Text, i) Then
-                txtSQLUID.Text = txtSQLUID.Text.Remove(i, 1)
-                txtSQLUID.SelectionStart = i
-            Else
-                i += 1
-            End If
-        End While
+        'Dim i As Integer 'Counter Variable
+        'While i < (txtSQLUID.Text.Length)
+        '    If Not Char.IsLetterOrDigit(txtSQLUID.Text, i) Then
+        '        txtSQLUID.Text = txtSQLUID.Text.Remove(i, 1)
+        '        txtSQLUID.SelectionStart = i
+        '    Else
+        '        i += 1
+        '    End If
+        'End While
         m_ConnectionTested = False
     End Sub
 

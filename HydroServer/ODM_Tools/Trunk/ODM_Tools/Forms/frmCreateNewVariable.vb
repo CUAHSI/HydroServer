@@ -502,11 +502,11 @@ Public Class frmCreateNewVariable
 
 			'2. try to create the new variable
 			newVarID = CreateNewVariableInDB(varCode, varName, speciation, varUnitsID, m_sampleMed, m_valueType, m_tsValue, m_tsUnitsID, m_dataType, m_genCategory, m_IsRegular, m_noDataVal)
-			If newVarID < 0 Then
-				MsgBox("Unable to create the new Variable in the Database!", MsgBoxStyle.Exclamation)
-				'return false
-				Exit Try
-			End If
+            If newVarID <= 0 Then
+                MsgBox("Unable to create the new Variable in the Database!", MsgBoxStyle.Exclamation)
+                'return false
+                Exit Try
+            End If
 
 			'3. return true
 			Return True
