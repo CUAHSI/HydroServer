@@ -1142,6 +1142,7 @@ Public Class frmDeriveNewDataSeries
                     dsFromVarID = m_DSFromIDs.VariableID
                     Select Case True
                         'Note: won't ever use this when creating a controlled ds for editing, so not putting in check for it
+                        
                         Case rbtnCreateDS_Smoothed.Checked
                             deriveMethod = g_DeriveMethod_Smooth
                             varName = Split(m_Variable, " - ")(1)
