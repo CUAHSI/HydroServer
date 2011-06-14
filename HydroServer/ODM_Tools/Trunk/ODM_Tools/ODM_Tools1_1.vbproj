@@ -121,7 +121,7 @@
     </Reference>
     <Reference Include="VBEnumerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Users\Stephanie\Documents\StephanieDev\VBEnumerator\ClassLibrary1\bin\Debug\VBEnumerator.dll</HintPath>
+      <HintPath>.\VBEnumerator.dll</HintPath>
     </Reference>
     <Reference Include="ZedGraph, Version=5.1.4.31904, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
