@@ -39,11 +39,10 @@ Public Class frmODMSDL
             Dim tempdir As String
             tempdir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
             Dim section As String()
-            'section = tempdir.Split("ODMSDL")
             'tempdir = section(0) '& section(1) & "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
-            section = Split(tempdir, "ODMSDL", , CompareMethod.Text)
-            g_EXE_Dir = section(0) & "StreamingDataLoader\"
-            CreateDir(g_EXE_Dir)
+            section = Split(tempdir, "Configuration", , CompareMethod.Text)
+            g_EXE_Dir = section(0) & "StreamingDataLoader\1.1.2\"
+            IO.Directory.CreateDirectory(g_EXE_Dir)
             'g_EXE_Dir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
 
             'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)

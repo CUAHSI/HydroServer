@@ -68,8 +68,8 @@ Public Class frmODMSDLWizard
             Dim section As String()
             'tempdir = section(0) '& section(1) & "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
             section = Split(tempdir, "Configuration", , CompareMethod.Text)
-            g_EXE_Dir = section(0) & "StreamingDataLoader\"
-            CreateDir(g_EXE_Dir)
+            g_EXE_Dir = section(0) & "StreamingDataLoader\1.1.2\"
+            IO.Directory.CreateDirectory(g_EXE_Dir)
             'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)
             'config.SaveAs(g_EXE_Dir)
 
