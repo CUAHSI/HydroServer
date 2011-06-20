@@ -2803,7 +2803,7 @@ Public Class frmDeriveNewDataSeries
                 numCreated += 1
                 If i Mod numVals_percent = 0 AndAlso i <> 0 Then
                     'update progress bar
-                    g_FProgress.pbarProgress.Value += 10
+                    g_FProgress.pbarProgress.Value += 10 '80 / (numVals / numVals_percent) '10
                     g_FProgress.pbarProgress.Refresh()
                 End If
             Next i
@@ -2988,7 +2988,7 @@ Public Class frmDeriveNewDataSeries
 
                 If i Mod numVals_percent = 0 AndAlso i <> 0 Then
                     'update progress bar
-                    g_FProgress.pbarProgress.Value += 10
+                    g_FProgress.pbarProgress.Value += 5
                     g_FProgress.pbarProgress.Refresh()
                 End If
             Next i
@@ -3119,6 +3119,7 @@ Public Class frmDeriveNewDataSeries
                 Exit Try
             End If
             numVals = valDT.Rows.Count
+
 
             '2. Get the max ValueID value
             'NOTE: There has to be values to derive from, so there have to be values in valDT = always get ID of last value
@@ -3591,6 +3592,7 @@ Public Class frmDeriveNewDataSeries
             numVals = valDT.Rows.Count
             numVals_percent = CInt(numVals * 0.125)
 
+
             '2. Get the max ValueID value
             'NOTE: There has to be values to derive from, so there have to be values in valDT = always get ID of last value
             maxQuery = "SELECT MAX(" & db_fld_ValID & ") AS " & db_expr_MaxID & " FROM " & db_tbl_DataValues
@@ -3719,18 +3721,7 @@ Public Class frmDeriveNewDataSeries
                 valDT.Dispose()
                 valDT = Nothing
             End If
-            'If Not (maxDT Is Nothing) Then
-            '	maxDT.Dispose()
-            '	maxDT = Nothing
-            'End If
-            'If Not (addDT Is Nothing) Then
-            '	addDT.Dispose()
-            '	addDT = Nothing
-            'End If
-            'If Not (newRow Is Nothing) Then
-            '	newRow = Nothing
-            'End If
-
+            
             '8. return number of values created, True -> everything worked!!
             valueCount = numCreated
             Return True
@@ -3794,6 +3785,9 @@ Public Class frmDeriveNewDataSeries
             ReDim diffSmoothY(numVals - 1)
             sortedDSY = New System.Collections.ArrayList
 
+            numVals = valDT.Rows.Count
+
+            Dim numVals_percent As Double = CInt(numVals * 0.125)
             '2. Determine initial weightings
             For i = 0 To numVals - 1
                 'set initial weightings to 1 for y direction (residuals) -> weight in Y-Value direction
@@ -3804,7 +3798,8 @@ Public Class frmDeriveNewDataSeries
                 curXVal = CType(valDT.Rows(i).Item(db_fld_ValDateTime), DateTime).ToOADate
                 newYVals(i) = RWLReg(smoothWindow_Days, numVals, curXVal, residuals, valDT)
             Next i
-
+            g_FProgress.pbarProgress.Value += 10
+            g_FProgress.pbarProgress.Refresh()
             '3. make two iterations
             For i = 0 To 1
                 'clear out values in sortedDSY -> only used to calculate Median, so needs to reset for each pass!!
@@ -3815,6 +3810,8 @@ Public Class frmDeriveNewDataSeries
                     diffSmoothY(j) = Math.Abs(curYVal - newYVals(j))
                     sortedDSY.Add(diffSmoothY(j))
                 Next j
+                g_FProgress.pbarProgress.Value += 10
+                g_FProgress.pbarProgress.Refresh()
                 'sort the values in sortedDSY
                 sortedDSY.Sort()
                 'find the Median value of all (|y - (smoothed y)|) values
@@ -3836,11 +3833,19 @@ Public Class frmDeriveNewDataSeries
                         residuals(j) = Math.Round(Math.Pow(temp1_TRSquared, 2), 5)
                     End If
                 Next j
+                g_FProgress.pbarProgress.Value += 10
+                g_FProgress.pbarProgress.Refresh()
                 'weight in the xdirection and do weighted least squares
                 For j = 0 To numVals - 1
                     curXVal = CType(valDT.Rows(j).Item(db_fld_ValDateTime), DateTime).ToOADate
                     newYVals(j) = RWLReg(smoothWindow_Days, numVals, curXVal, residuals, valDT)
                 Next j
+                g_FProgress.pbarProgress.Value += 10
+                g_FProgress.pbarProgress.Refresh()
+                'If i Mod numVals_percent & i <> 0 Then
+                '    g_FProgress.pbarProgress.Value += 5
+                '    g_FProgress.pbarProgress.Refresh()
+                'End If
             Next i
             '**********************************************************************************************************************
 
