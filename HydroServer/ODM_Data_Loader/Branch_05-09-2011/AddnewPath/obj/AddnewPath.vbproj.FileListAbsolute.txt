@@ -1,9 +1,0 @@
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\bin\Release\AddnewPath.dll
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\bin\Release\AddnewPath.pdb
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\bin\Release\AddnewPath.xml
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\obj\Release\ResolveAssemblyReference.cache
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\obj\Release\AddnewPath.Resources.resources
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\obj\Release\AddnewPath.vbproj.GenerateResource.Cache
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\obj\Release\AddnewPath.dll
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\obj\Release\AddnewPath.xml
-C:\Dev\HydroServer\ODM_Data_Loader\Branch_12-22-2010\AddnewPath\obj\Release\AddnewPath.pdb
