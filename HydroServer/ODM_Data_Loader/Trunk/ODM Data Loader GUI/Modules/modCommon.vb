@@ -6,8 +6,10 @@ Module modCommon
 
 #Region " Error Reporting Functionality "
     Public writer As System.IO.StreamWriter
-    Public path As String = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
-    Public LogPath As String = path & "\" & "log.txt"
+    'Public path As String = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
+    'move config file out of the programfiles directory
+    Public dirPath As String = Split(System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath), "ODMLoader", , CompareMethod.Text)(0) & "DataLoader\1.1.5"
+    Public LogPath As String = dirPath & "\" & "log.txt"
 
 
     'Console.WriteLine("Local user config path: {0}", config.FilePath);
@@ -149,8 +151,10 @@ Module modCommon
 
         If Not (CommandLine) Then
             MsgBox(resultstr.ToString, MsgBoxStyle.Information, "Update was successful!")
+            'Method 1: commented out because trying to remove any popups-SR
             'MsgBox(Now.ToLongDateString & " " & Now.ToLongTimeString & vbCrLf & "The update was completed." & vbCrLf & rows & " rows committed to " & tableName & ".", MsgBoxStyle.Information, "Update was successful!")
-            'frmMain.lblStatus.Text = Now.ToLongDateString & " " & Now.ToLongTimeString & ", The update was completed. " & (rows) & " rows committed to " & tableName & "."
+            'Method 2: commented out because giving more data to user- KI
+            'frmMain.lblStatus.Text = Now.ToLongDateString & " " & Now.ToLongTimeString & ", The update was completed. " & rows & " rows committed to " & tableName & "."
         End If
     End Sub
 
