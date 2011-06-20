@@ -81,7 +81,8 @@ Public Class frmCreateNewVariable
 			'Variable Code
 			tboxVarCode.Text = ""
 			'Variable Names
-			LoadVarNames()
+            LoadVarNames()
+            'cboxVarName.DisplayMember = cboxVarName.Items(0)
 			'Variable Units
 			LoadVarUnits()
 			'Speciation
