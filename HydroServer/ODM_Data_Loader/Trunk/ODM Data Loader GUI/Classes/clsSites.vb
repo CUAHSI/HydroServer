@@ -285,8 +285,8 @@ Class clsSites
 
                     If IsNumeric(fileRow.Item(file_Sites_LocalX)) Then
                         If IsNumeric(fileRow.Item(file_Sites_LocalY)) Then
-                            tempRow.Item(db_fld_LocalY) = Val(fileRow.Item(file_Sites_LocalX))
-                            tempRow.Item(db_fld_LocalX) = Val(fileRow.Item(file_Sites_LocalY))
+                            tempRow.Item(db_fld_LocalY) = Val(fileRow.Item(file_Sites_LocalY))
+                            tempRow.Item(db_fld_LocalX) = Val(fileRow.Item(file_Sites_LocalX))
                         Else
                             Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & db_fld_LocalY & " must be numeric.")
                         End If

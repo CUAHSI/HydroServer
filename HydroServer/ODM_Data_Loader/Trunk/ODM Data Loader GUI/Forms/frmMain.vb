@@ -3,6 +3,7 @@ Public Class frmMain
     Dim WithEvents file As clsFile
     Dim table as new datatable
     Dim path As String
+    Public dirPath As String
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If Not (file Is Nothing) Then
@@ -22,8 +23,16 @@ Public Class frmMain
             My.Settings.DateFormat = My.Application.Culture.DateTimeFormat.ShortDatePattern
         End If
 
-        LogPath = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location) & "\Log.txt"
+        'LogPath = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location) & "\Log.txt"
         'LogPath = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath) & "\Log.txt"
+        'original Logpath Stephanie 'LogPath = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location) & "\Log.txt"
+        dirPath = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
+        Dim section As String()
+        section = Split(dirPath, "ODMLoader", , CompareMethod.Text)
+        'tempdir = section(0) & section(1) '& "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
+        dirPath = section(0) & "DataLoader\1.1.5"
+        IO.Directory.CreateDirectory(dirPath)
+        LogPath = dirPath + "\Log.txt"
 
 
         For i As Integer = 0 To (My.Application.CommandLineArgs.Count - 1)
@@ -68,7 +77,7 @@ Public Class frmMain
                                 LogPath = tempLog
                             End If
                         Else
-                            LogPath = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location) & "\" & tempLog
+                            LogPath = dirPath & "\" & tempLog
                         End If
                     Case Else
                         Dim tempError As String = _
@@ -204,7 +213,7 @@ Public Class frmMain
         btnOpen.Enabled = False
         btnCommit.Enabled = False
         Try
-            Dim rows As Integer
+            'Dim rows As Integer
             Dim _clsTableCount As New clsTableCount
 
             lblLoadingType.Text = "Committing file to database. This may take a while."
