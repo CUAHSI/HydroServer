@@ -4384,125 +4384,126 @@ Public Class frmODMTools
 		Dim i As Integer 'counter
 
 		'If a radio button is checked and the inputed text is invalid, display a message and exit the sub.
-		If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
-			ShowError("Please Enter A Valid Date Range")
-			Exit Sub
-		End If
+        If chb_qryDate.Checked AndAlso dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
+            ShowError("Please Enter A Valid Date Range")
+            Exit Sub
+        End If
 
-		If rdo_qrySiteName.Checked And (Not ValidQueryText(txt_qrySiteName.Text)) Then
-			ShowError("Please Enter A Valid Site Name")
-			Exit Sub
-		End If
-		If rdo_qrySiteCode.Checked And (Not ValidQueryText(txt_qrySiteCode.Text)) Then
-			ShowError("Please Enter A Valid Site Code")
-			Exit Sub
-		End If
-		If rdo_qryVarName.Checked And (Not ValidQueryText(txt_qryVarName.Text)) Then
-			ShowError("Please Enter A Valid Variable Name")
-			Exit Sub
-		End If
-		If rdo_qryVarCode.Checked And (Not ValidQueryText(txt_qryVarCode.Text)) Then
-			ShowError("Please Enter A Valid Variable Code")
-			Exit Sub
-		End If
+        If rdo_qrySiteName.Checked And (Not ValidQueryText(txt_qrySiteName.Text)) Then
+            ShowError("Please Enter A Valid Site Name")
+            Exit Sub
+        End If
+        If rdo_qrySiteCode.Checked And (Not ValidQueryText(txt_qrySiteCode.Text)) Then
+            ShowError("Please Enter A Valid Site Code")
+            Exit Sub
+        End If
+        If rdo_qryVarName.Checked And (Not ValidQueryText(txt_qryVarName.Text)) Then
+            ShowError("Please Enter A Valid Variable Name")
+            Exit Sub
+        End If
+        If rdo_qryVarCode.Checked And (Not ValidQueryText(txt_qryVarCode.Text)) Then
+            ShowError("Please Enter A Valid Variable Code")
+            Exit Sub
+        End If
 
-		'change the cursor to the wait cursor
-		Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        'change the cursor to the wait cursor
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
 
-		Try
-			'1. clear out old data
-			lv_qryResults.Items.Clear()
+        Try
+            '1. clear out old data
+            lv_qryResults.Items.Clear()
 
-			'2. create the query -> based on selected criteria
-			sql = CreateCustomQuery()
+            '2. create the query -> based on selected criteria
+            sql = CreateCustomQuery()
 
-			If sql = "" Then
-				Exit Try
-			End If
-			QueryTable = OpenTable("customQuery", sql, g_CurrConnSettings)
-			'make sure data was retreived from the database
-			If QueryTable Is Nothing Or QueryTable.Rows.Count = 0 Then
-				lv_qryResults.Enabled = False
+            If sql = "" Then
+                Exit Try
+            End If
+            queryTable = OpenTable("customQuery", sql, g_CurrConnSettings)
+            'make sure data was retreived from the database
+            If queryTable Is Nothing Or queryTable.Rows.Count = 0 Then
+                lv_qryResults.Enabled = False
+                MsgBox("No Results found for Query Parameters", MsgBoxStyle.OkOnly)
 
-				Exit Try
-			Else
-				lv_qryResults.Enabled = True
-			End If
+                Exit Try
+            Else
+                lv_qryResults.Enabled = True
+            End If
 
-			'3. show results in the lvResults
-			Dim lvItem As Windows.Forms.ListViewItem 'used to add stations/station info to lvResults
-			Dim numResults As Integer = 0 'tracks the number of valid Stations added to lvResults
-			Dim qclevel_Code As String 'holds the Quality Control Level code value to be displayed
-			Dim qclevel_Def As String 'holds the QC Level Definition to be displayed
-			'if checking for #Data Points, set the numObs
-			'loop through the returned stations/data
-			ReDim m_qrySeriesID(QueryTable.Rows.Count - 1)
-			For i = 0 To QueryTable.Rows.Count - 1
-				'add the valid series to lv_qryResults
-				m_qrySeriesID(i) = Val(QueryTable.Rows(i).Item(db_fld_SCSeriesID))	'Series ID
-				lvItem = lv_qryResults.Items.Add(QueryTable.Rows(i).Item(db_fld_SCSiteCode) & " - " & QueryTable.Rows(i).Item(db_fld_SCSiteName)) 'Site Code - Site Name
-				lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCVarCode) & " - " & queryTable.Rows(i).Item(db_fld_SCVarName)) 'Variable Code - Variable Name
-				lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCSpeciation)) 'Speciation
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCVarUnitsName))	'Variable Units Name
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCGenCat)) 'General Category
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCValueType)) 'Value Type
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCSampleMed)) 'Sample Medium
-				lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCDataType))	'Data Type
-				qclevel_Code = queryTable.Rows(i).Item(db_fld_SCQCLCode) 'QCLevel Code
-				qclevel_Def = GetQCLevelDefinitionFromDB(queryTable.Rows(i).Item(db_fld_SCQCLevel))	'QCLevel Defition
-				lvItem.SubItems.Add(qclevel_Code & " - " & qclevel_Def)	'QCLevel = Code - Definition
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCMethodDesc)) 'Method Description
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCValueCount)) 'Value Count
-				lvItem.SubItems.Add(CDate(QueryTable.Rows(i).Item(db_fld_SCBeginDT)).ToString & " - " & CDate(QueryTable.Rows(i).Item(db_fld_SCEndDT)).ToString)	   'Begin Date Time - End Date Time
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCOrganization))	'Organization
-				lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCSourceDesc)) 'Source Description
-				lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCCitation))	'Citation
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCTimeSupport)) 'Time support
-				lvItem.SubItems.Add(QueryTable.Rows(i).Item(db_fld_SCTimeUnitsName)) 'time support units
+            '3. show results in the lvResults
+            Dim lvItem As Windows.Forms.ListViewItem 'used to add stations/station info to lvResults
+            Dim numResults As Integer = 0 'tracks the number of valid Stations added to lvResults
+            Dim qclevel_Code As String 'holds the Quality Control Level code value to be displayed
+            Dim qclevel_Def As String 'holds the QC Level Definition to be displayed
+            'if checking for #Data Points, set the numObs
+            'loop through the returned stations/data
+            ReDim m_qrySeriesID(queryTable.Rows.Count - 1)
+            For i = 0 To queryTable.Rows.Count - 1
+                'add the valid series to lv_qryResults
+                m_qrySeriesID(i) = Val(queryTable.Rows(i).Item(db_fld_SCSeriesID))  'Series ID
+                lvItem = lv_qryResults.Items.Add(queryTable.Rows(i).Item(db_fld_SCSiteCode) & " - " & queryTable.Rows(i).Item(db_fld_SCSiteName)) 'Site Code - Site Name
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCVarCode) & " - " & queryTable.Rows(i).Item(db_fld_SCVarName)) 'Variable Code - Variable Name
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCSpeciation)) 'Speciation
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCVarUnitsName)) 'Variable Units Name
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCGenCat)) 'General Category
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCValueType)) 'Value Type
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCSampleMed)) 'Sample Medium
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCDataType)) 'Data Type
+                qclevel_Code = queryTable.Rows(i).Item(db_fld_SCQCLCode) 'QCLevel Code
+                qclevel_Def = GetQCLevelDefinitionFromDB(queryTable.Rows(i).Item(db_fld_SCQCLevel)) 'QCLevel Defition
+                lvItem.SubItems.Add(qclevel_Code & " - " & qclevel_Def) 'QCLevel = Code - Definition
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCMethodDesc)) 'Method Description
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCValueCount)) 'Value Count
+                lvItem.SubItems.Add(CDate(queryTable.Rows(i).Item(db_fld_SCBeginDT)).ToString & " - " & CDate(queryTable.Rows(i).Item(db_fld_SCEndDT)).ToString)       'Begin Date Time - End Date Time
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCOrganization)) 'Organization
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCSourceDesc)) 'Source Description
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCCitation)) 'Citation
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCTimeSupport)) 'Time support
+                lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCTimeUnitsName)) 'time support units
 
-				numResults += 1
-			Next
+                numResults += 1
+            Next
 
 
-			'5. release resources
-			QueryTable.Dispose()
-			QueryTable = Nothing
-			lvItem = Nothing
+            '5. release resources
+            queryTable.Dispose()
+            queryTable = Nothing
+            lvItem = Nothing
 
-			'6. if there are any results, enable the listview and store the query parameters
-			If numResults = 0 Then
-				lv_qryResults.Enabled = False
-			Else
-				lv_qryResults.Enabled = True
-				lv_qryResults_AutoSizeColumns(True)
-				If rdo_qrySiteName.Checked Then
-					txt_qrySiteName.AutoCompleteCustomSource.Add(txt_qrySiteName.Text)
-				End If
-				If rdo_qrySiteCode.Checked Then
-					txt_qrySiteCode.AutoCompleteCustomSource.Add(txt_qrySiteCode.Text)
-				End If
-				If rdo_qryVarName.Checked Then
-					txt_qryVarName.AutoCompleteCustomSource.Add(txt_qryVarName.Text)
-				End If
-				If rdo_qryVarCode.Checked Then
-					txt_qryVarCode.AutoCompleteCustomSource.Add(txt_qryVarCode.Text)
-				End If
-				If rdo_qrySrcOrg.Checked Then
-					txt_qrySrcOrg.AutoCompleteCustomSource.Add(txt_qrySrcOrg.Text)
-				End If
-				If rdo_qrySrcDesc.Checked Then
-					txt_qrySrcDesc.AutoCompleteCustomSource.Add(txt_qrySrcDesc.Text)
-				End If
-				If chb_qryMethod.Checked Then
-					txt_qryMethod.AutoCompleteCustomSource.Add(txt_qryMethod.Text)
-				End If
-			End If
+            '6. if there are any results, enable the listview and store the query parameters
+            If numResults = 0 Then
+                lv_qryResults.Enabled = False
+            Else
+                lv_qryResults.Enabled = True
+                lv_qryResults_AutoSizeColumns(True)
+                If rdo_qrySiteName.Checked Then
+                    txt_qrySiteName.AutoCompleteCustomSource.Add(txt_qrySiteName.Text)
+                End If
+                If rdo_qrySiteCode.Checked Then
+                    txt_qrySiteCode.AutoCompleteCustomSource.Add(txt_qrySiteCode.Text)
+                End If
+                If rdo_qryVarName.Checked Then
+                    txt_qryVarName.AutoCompleteCustomSource.Add(txt_qryVarName.Text)
+                End If
+                If rdo_qryVarCode.Checked Then
+                    txt_qryVarCode.AutoCompleteCustomSource.Add(txt_qryVarCode.Text)
+                End If
+                If rdo_qrySrcOrg.Checked Then
+                    txt_qrySrcOrg.AutoCompleteCustomSource.Add(txt_qrySrcOrg.Text)
+                End If
+                If rdo_qrySrcDesc.Checked Then
+                    txt_qrySrcDesc.AutoCompleteCustomSource.Add(txt_qrySrcDesc.Text)
+                End If
+                If chb_qryMethod.Checked Then
+                    txt_qryMethod.AutoCompleteCustomSource.Add(txt_qryMethod.Text)
+                End If
+            End If
 
-		Catch ex As Exception
+        Catch ex As Exception
             ShowError("An Error occurred while running the Query." & "Message = " & ex.Message, ex)
-		End Try
-		'change the cursor back to the default
-		Me.Cursor = System.Windows.Forms.Cursors.Default
+        End Try
+        'change the cursor back to the default
+        Me.Cursor = System.Windows.Forms.Cursors.Default
 	End Sub
 
 	Private Function CreateCustomQuery() As String
@@ -4936,7 +4937,7 @@ Public Class frmODMTools
 				max = dtp_qryTimeEnd.Value.AddDays(1)
 
 				'set the date values in sql
-				sql = sql & "(" & db_fld_SCBeginDT & " >= '" & min & "' AND " & db_fld_SCEndDT & " <= '" & max & "') "
+                sql = sql & "(" & db_fld_SCBeginDT & " Between '" & min & "'And '" & max & "' OR " & db_fld_SCEndDT & " Between '" & min & "'And '" & max & "') "
 			End If
 			'Search for Matching Number of Observations
 			If chb_qryNumObs.Checked Then
