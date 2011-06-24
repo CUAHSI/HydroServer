@@ -80,7 +80,7 @@
                                     &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
                                     
                                     
-    &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
                                     
                                     
                                     
@@ -105,7 +105,7 @@
                                           <Columns>  
                                                 <asp:TemplateField HeaderText="Select">
                                                     <ItemTemplate>
-                                                        <asp:CheckBox ID="selectUserGroupCheckBox" runat="server"   AutoPostBack="false"  onclick ="CheckOne(this)"/>
+                                                        <asp:CheckBox ID="selectUserGroupCheckBox" runat="server"   AutoPostBack="true" OnCheckedChanged="selectUserGroupCheckBox_CheckedChanged"  onclick ="CheckOne(this)" />
                                                     </ItemTemplate>                    
                                                 </asp:TemplateField>
                                             </Columns>
@@ -286,8 +286,7 @@
                     <div class="art-Footer-inner" style="left: 0px; top: -4px">
                         
                         <div class="art-Footer-text">
-                            <p align="right"><a href="#" >Contact Us</a></p>
-                        </div>
+                            <p align="right"><a href="#" >Contact Us>
                     </div>
                     <div class="art-Footer-background" style="left: 4px; bottom: -80px"></div>
                 </div>

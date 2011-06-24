@@ -316,7 +316,7 @@ namespace HydroAdmin
                 {
                     string dbrow = row["resourcesid"].ToString();
                     string gridRow = resRow.Cells[15].Text.ToString();
-                    if(row["resourcesid"].ToString() == resRow.Cells[15].Text.ToString())
+                    if (row["resourcesid"].ToString() == resRow.Cells[15].Text.ToString())
                     {
                         if (row["privilegeid"].ToString() == readPrivId.ToString())
                         {
@@ -346,6 +346,7 @@ namespace HydroAdmin
 
         protected void odmInfoGridView_RowCreated(object sender, GridViewRowEventArgs e)
         {
+            
             for (int i = 15; i < e.Row.Cells.Count; i++)
             {
                 e.Row.Cells[i].Visible = false;
@@ -468,6 +469,39 @@ namespace HydroAdmin
 
             }
         }
+
+        protected void selectUserGroupCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            AccessDisplay();
+            TemplateGridDisplay();
+            odmInfoGridView.Width = 1300;
+            foreach (GridViewRow row in odmInfoGridView.Rows)
+            {
+                for (int i = 15; i < row.Cells.Count; i++)
+                {
+                    row.Cells[i].Visible = false;
+                    //e.Row.Cells[i].Visible = false;
+                }
+
+                row.Cells[0].Width = 10;
+                row.Cells[1].Width = 10;
+                row.Cells[2].Width = 10;
+                row.Cells[3].Width = 10;
+                row.Cells[4].Width = 100;
+                row.Cells[5].Width = 70;
+                row.Cells[6].Width = 30;
+                row.Cells[7].Width = 30;
+                row.Cells[8].Width = 30;
+                row.Cells[9].Width = 30;
+                row.Cells[10].Width = 250;
+                row.Cells[11].Width = 70;
+                row.Cells[12].Width = 150;
+                row.Cells[13].Width = 30;
+                row.Cells[14].Width = 30;
+            }
+        }
+
+        
 
     }
 }
