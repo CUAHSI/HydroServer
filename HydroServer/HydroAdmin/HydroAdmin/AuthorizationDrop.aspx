@@ -118,7 +118,7 @@
                                   <table style=" height:23px" >
                                           <tr>
                                           <td>
-                                          <asp:Label ID="recordCount" runat="server" Width="70px" BorderStyle="Solid" BorderWidth="1"  Font-Size="Small"></asp:Label>
+                                          <asp:Label ID="recordCount" runat="server" Width="120px" BorderStyle="Solid" BorderWidth="1"  Font-Size="Small"></asp:Label>
                                           </td>
                                           <td style=" font-size:11px;">Filter by Sitecode
                                           </td>
