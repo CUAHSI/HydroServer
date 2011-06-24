@@ -49,6 +49,7 @@
     <Compile Include="AccessControl.cs" />
     <Compile Include="DataRequest.cs" />
     <Compile Include="ODM.cs" />
+    <Compile Include="Privilege.cs" />
     <Compile Include="TimeSeriesResources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserGroup.cs" />
