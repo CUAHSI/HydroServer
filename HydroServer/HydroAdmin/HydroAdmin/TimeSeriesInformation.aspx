@@ -14,12 +14,8 @@
     <asp:DetailsView ID="timeSeriesInfoView" runat="server" BackColor="White" 
         BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
         GridLines="Horizontal" Height="50px" Width="125px">
-        <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
-        <RowStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" />
-        <PagerStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" HorizontalAlign="Right" />
-        <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />
-        <EditRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="#F7F7F7" />
-        <AlternatingRowStyle BackColor="#F7F7F7" />
+        <rowstyle backcolor="LightCyan"  font-italic="true"/>
+        <alternatingrowstyle backcolor="lightblue"  font-italic="true"/>
     </asp:DetailsView>
     </form>
 </body>

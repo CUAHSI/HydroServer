@@ -3,3 +3,8 @@ C:\Documents and Settings\Ketan\Desktop\HydroAdmin\DBLayer\bin\Debug\DBLayer.pdb
 C:\Documents and Settings\Ketan\Desktop\HydroAdmin\DBLayer\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\Ketan\Desktop\HydroAdmin\DBLayer\obj\Debug\DBLayer.dll
 C:\Documents and Settings\Ketan\Desktop\HydroAdmin\DBLayer\obj\Debug\DBLayer.pdb
+C:\Documents and Settings\Ketan\Desktop\hydrosecurity\HydroServer\HydroAdmin\DBLayer\bin\Debug\DBLayer.dll
+C:\Documents and Settings\Ketan\Desktop\hydrosecurity\HydroServer\HydroAdmin\DBLayer\bin\Debug\DBLayer.pdb
+C:\Documents and Settings\Ketan\Desktop\hydrosecurity\HydroServer\HydroAdmin\DBLayer\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Ketan\Desktop\hydrosecurity\HydroServer\HydroAdmin\DBLayer\obj\Debug\DBLayer.dll
+C:\Documents and Settings\Ketan\Desktop\hydrosecurity\HydroServer\HydroAdmin\DBLayer\obj\Debug\DBLayer.pdb
