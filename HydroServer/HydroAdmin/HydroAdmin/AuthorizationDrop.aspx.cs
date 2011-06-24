@@ -281,6 +281,12 @@ namespace HydroAdmin
 
         private void AccessDisplay()
         {
+            Privilege priv = new Privilege();
+            int readPrivId = priv.GetPrivilegeId("read");
+            int writePrivId = priv.GetPrivilegeId("write");
+            int deletePrivId = priv.GetPrivilegeId("delete");
+            int createPrivId = priv.GetPrivilegeId("create");
+
             foreach (GridViewRow resRow in odmInfoGridView.Rows)
                 {
                          CheckBox readbox = (CheckBox)resRow.FindControl("readStatusCheckBox");
@@ -312,17 +318,17 @@ namespace HydroAdmin
                     string gridRow = resRow.Cells[15].Text.ToString();
                     if(row["resourcesid"].ToString() == resRow.Cells[15].Text.ToString())
                     {
-                        if (row["privilegeid"].ToString() == "2")
+                        if (row["privilegeid"].ToString() == readPrivId.ToString())
                         {
                             CheckBox readbox = (CheckBox)resRow.FindControl("readStatusCheckBox");
                             readbox.Checked = true;
                         }
-                        if (row["privilegeid"].ToString() == "3")
+                        if (row["privilegeid"].ToString() == writePrivId.ToString())
                         {
                             CheckBox readbox = (CheckBox)resRow.FindControl("updateStatusCheckBox");
                             readbox.Checked = true;
                         }
-                        if (row["privilegeid"].ToString() == "5")
+                        if (row["privilegeid"].ToString() == deletePrivId.ToString())
                         {
                             CheckBox readbox = (CheckBox)resRow.FindControl("deleteStatusCheckBox");
                             readbox.Checked = true;
