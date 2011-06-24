@@ -74,9 +74,9 @@
                                             SelectCommand="select distinct databasename from TimeSeriesResource;">
                                         </asp:SqlDataSource>
                                         <div style = "z-index:100; left:0px; text-align:right">
-                                        <asp:LinkButton ID="addODM" runat="server" Font-Size="11pt" onclick="addODM_Click">Add</asp:LinkButton>
-                                        <asp:LinkButton ID="updateODM" runat="server" Font-Size="11pt" >Update</asp:LinkButton>
-                                        <asp:LinkButton ID="deleteODM" runat="server" Font-Size="11pt" onclick="deleteODM_Click">Delete</asp:LinkButton>
+                                        <asp:LinkButton ID="addODM" runat="server" Font-Size="Small" onclick="addODM_Click">Add</asp:LinkButton>
+                                        <asp:LinkButton ID="updateODM" runat="server" Font-Size="Small" >Update</asp:LinkButton>
+                                        <asp:LinkButton ID="deleteODM" runat="server" Font-Size="Small" onclick="deleteODM_Click">Delete</asp:LinkButton>
                                         </div>
                                      </div> 
                                      <div class="info-block"  style="z-index:100; height:230px; border-style:groove; left: 240px; position: absolute; top: 0px">
@@ -102,41 +102,150 @@
                                </tr>
                                </table>
                                      </div>
-                                     <div style="z-index:100;text-align:left; width:100%; height:25px;left:10px; position:absolute; top: 240px; overflow: auto">
-                                         <asp:Label ID="recordCount" runat="server" Width="120px" Font-Size="Small"></asp:Label>
-                                         
-                                         <asp:DropDownList ID="siteCodeDropDownList" runat="server" Width="120px" 
-                                             AutoPostBack="True" 
-                                             onselectedindexchanged="siteCodeDropDownList_SelectedIndexChanged">
-                                         </asp:DropDownList>
-                                         <asp:DropDownList ID="variableCodeDropDownList" runat="server" Width="120px" 
-                                             AutoPostBack="True" 
-                                             onselectedindexchanged="variableCodeDropDownList_SelectedIndexChanged">
-                                         </asp:DropDownList>
-                                         <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
-                                             onclick="resetOdmInfoButton_Click" />
+                                     <div style="z-index:100;text-align:left; width:100%; height:25px;left:10px;  position:absolute; top: 240px;">
+                                          <table style=" height:23px" >
+                                          <tr>
+                                          <td>
+                                          <asp:Label ID="recordCount" runat="server" Width="70px" BorderStyle="Solid" BorderWidth="1" Font-Size="Small"></asp:Label>
+                                          </td>
+                                          <td style=" font-size:11px;">Filter by Sitecode
+                                          </td>
+                                          <td>
+                                          <asp:DropDownList ID="siteCodeDropDownList" runat="server" Width="170px" 
+                                                     AutoPostBack="True" 
+                                                     onselectedindexchanged="siteCodeDropDownList_SelectedIndexChanged">
+                                                 </asp:DropDownList>
+                                          </td>
+                                          <td style=" font-size:11px;">Variablecode
+                                          </td>
+                                          <td>
+                                          <asp:DropDownList ID="variableCodeDropDownList" runat="server" Width="170px" 
+                                                     AutoPostBack="True" 
+                                                     onselectedindexchanged="variableCodeDropDownList_SelectedIndexChanged">
+                                                 </asp:DropDownList>
+                                          </td>
+                                          
+                                                 
+                                          <td>
+                                          <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
+                                                     onclick="resetOdmInfoButton_Click" />
+                                          </td>
+                                          </tr>
+                                          </table>
+                                                 
+                                                 
+                                                 
+                                                 
+                                                     </div>
                                      </div>
                                      <div class="info-block"  style="z-index:100; height:370px; border-style:groove; width:100%; left: 0px; position:absolute; top: 270px; overflow: auto">
                                         
-                                         <asp:GridView ID="odmInfoGridView" runat="server" Font-Size="Small" 
+                                         <asp:GridView ID="odmInfoGridView" runat="server" Font-Size="X-Small" 
                                              onrowcreated="odmInfoGridView_RowCreated" onload="odmInfoGridView_Load" 
                                              ondatabound="odmInfoGridView_DataBound" 
-                                             onprerender="odmInfoGridView_PreRender">
+                                             onprerender="odmInfoGridView_PreRender" 
+                                             onrowdatabound="odmInfoGridView_RowDataBound">
                                              <HeaderStyle BorderStyle="Solid" CssClass="header" />
+                                             <rowstyle backcolor="LightCyan"  
+                                               font-italic="true"/>
+                                            <alternatingrowstyle backcolor="lightblue"  
+                                              font-italic="true"/>
                                          <Columns>  
                                 <asp:TemplateField HeaderText="Information">
                                     <ItemTemplate>
-                                    <asp:HyperLink ID="odmInfoLink" runat="server" Font-Size="Small">View</asp:HyperLink>
+                                    <asp:HyperLink ID="odmInfoLink" runat="server" Font-Size="X-Small">View</asp:HyperLink>
                                     </ItemTemplate> 
                                     </asp:TemplateField>
                                     </Columns> 
-                                     <Columns>  
-                                <asp:TemplateField HeaderText="TimeSeriesInformation">
+                                      <Columns>  
+                                      
+                                <asp:TemplateField HeaderText="Site Code">
                                     <ItemTemplate>
-                                    <asp:Table ID="TimeSeriesInfoTable" runat="server"></asp:Table>
+                                    <asp:Table ID="sitecodetable" runat="server"></asp:Table>
                                     </ItemTemplate> 
                                     </asp:TemplateField>
                                     </Columns> 
+                                    <Columns>  
+                                    
+                                <asp:TemplateField HeaderText="Variable Code">
+                                    <ItemTemplate>
+                                    <asp:Table ID="variablecodetable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
+                                    <Columns>  
+                                <asp:TemplateField HeaderText="General Category">
+                                    <ItemTemplate>
+                                    <asp:Table ID="generalcategorytable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    <Columns>  
+                                    
+                                <asp:TemplateField HeaderText="Value Type">
+                                    <ItemTemplate>
+                                    <asp:Table ID="valuetypetable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
+                                    <Columns>  
+                                <asp:TemplateField HeaderText="Sample Medium">
+                                    <ItemTemplate>
+                                    <asp:Table ID="samplemediumtable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
+                                    <Columns>  
+                                <asp:TemplateField HeaderText="QC Level">
+                                    <ItemTemplate>
+                                    <asp:Table ID="qcleveltable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
+                                    <Columns>  
+                                <asp:TemplateField HeaderText="Method Description">
+                                    <ItemTemplate>
+                                    <asp:Table ID="methoddescriptiontable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
+                                     <Columns>  
+                                <asp:TemplateField HeaderText="Organization">
+                                    <ItemTemplate>
+                                    <asp:Table ID="organizationtable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
+                                     <Columns>  
+                                <asp:TemplateField HeaderText="Source Description">
+                                    <ItemTemplate>
+                                    <asp:Table ID="sourcedescriptiontable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
+                                     <Columns>  
+                                <asp:TemplateField HeaderText="DateTime Range">
+                                    <ItemTemplate>
+                                    <asp:Table ID="datetimerangetable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
+                                     <Columns>  
+                                <asp:TemplateField HeaderText="# of observations">
+                                    <ItemTemplate>
+                                    <asp:Table ID="observationstable" runat="server"></asp:Table>
+                                    </ItemTemplate> 
+                                    </asp:TemplateField>
+                                    </Columns> 
+                                    
                                       </asp:GridView>
                                      </div>
                                 </div>        
