@@ -212,7 +212,11 @@ namespace HydroAdmin
             List<int> userIdList = new List<int>();
             List<int> userGroupList = new List<int>();
             List<KeyValuePair<string, int>> resourcePrivilegeList = new List<KeyValuePair<string, int>>();
-
+            Privilege priv = new Privilege();
+            int readPrivId = priv.GetPrivilegeId("read");
+            int writePrivId = priv.GetPrivilegeId("write");
+            int deletePrivId = priv.GetPrivilegeId("delete");
+            int createPrivId = priv.GetPrivilegeId("create");
             
             
             if (userCheckBox.Checked)
@@ -238,20 +242,20 @@ namespace HydroAdmin
                     CheckBox readbox = (CheckBox)row.FindControl("readStatusCheckBox");
                     if (readbox.Checked)
                     {
-                        resourcePrivilegeList.Add(new KeyValuePair<string, int>(row.Cells[15].Text.ToString(), 2));
+                        resourcePrivilegeList.Add(new KeyValuePair<string, int>(row.Cells[15].Text.ToString(), readPrivId));
                     }
 
                     CheckBox updateBox = (CheckBox)row.FindControl("updateStatusCheckBox");
                     if (updateBox.Checked)
                     {
-                        resourcePrivilegeList.Add(new KeyValuePair<string, int>(row.Cells[15].Text.ToString(), 3));
+                        resourcePrivilegeList.Add(new KeyValuePair<string, int>(row.Cells[15].Text.ToString(), writePrivId));
                     }
 
                     CheckBox deleteBox = (CheckBox)row.FindControl("deleteStatusCheckBox");
 
                     if (deleteBox.Checked)
                     {
-                        resourcePrivilegeList.Add(new KeyValuePair<string, int>(row.Cells[15].Text.ToString(), 5));
+                        resourcePrivilegeList.Add(new KeyValuePair<string, int>(row.Cells[15].Text.ToString(), deletePrivId));
                     }
                 }
                
