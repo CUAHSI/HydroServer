@@ -200,10 +200,13 @@ Public Class AddMap_Full
         Next row
     End Sub
     Private Sub btnRemoveMeta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemoveMeta.Click
-        Dim rows As DataGridViewSelectedRowCollection = dgvMeta.SelectedRows
-        For Each row As DataGridViewRow In rows
-            dgvMeta.Rows.Remove(row)
-        Next
+        If MsgBox("Are you sure you wish to delete the selected row?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+            Dim rows As DataGridViewSelectedRowCollection = dgvMeta.SelectedRows
+            For Each row As DataGridViewRow In rows
+                dgvMeta.Rows.Remove(row)
+            Next
+        End If
     End Sub
 
     Private Sub getContactList()

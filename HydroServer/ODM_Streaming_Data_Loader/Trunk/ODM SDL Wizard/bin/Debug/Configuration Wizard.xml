@@ -6,68 +6,326 @@ ConfigurationWizard
 </name>
 </assembly>
 <members>
-<member name="F:ODMSDLConfigWiz.frmNewQCL.sqlQuery">
+<member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_ServerAddress">
 	<summary>
- The query used to fill qualityControlLevels and generate insert/update statements when needed
+ The network address of the server
  </summary>
 	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewQCL.qualityControlLevels">
+</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_DBName">
 	<summary>
- Data table containing the old Sites to ensure no exact replicas.
+ The Name of the Database
  </summary>
 	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewQCL.NewID">
+</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_Trusted">
 	<summary>
- ID for the new QualityControlLevel, if none created = -99)
+ True if using Windows Authentication
  </summary>
 	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewQCL.m_connSettings">
+</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_UserID">
 	<summary>
- The connection settings for the database
+ User Name for the connection
  </summary>
 	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.frmNewQCL.ID">
+</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_Password">
 	<summary>
- The ID of the newly created record in the QualityControlLevels table
+ Password of the connection
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_Timeout">
+	<summary>
+ Timeout of the connection
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_ConnStr">
+	<summary>
+ The actual connection string used by the DB connection
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.clsConnectionSettings.#ctor(System.String,System.String,System.Int32,System.Boolean,System.String,System.String)">
+	<summary>
+ Create a new set of connection settings with the specified parameters (if any are specified)
+ </summary>
+	<param name="e_ServerAddress">[IP Address]\[Instance Name] or [Server Name]\[Instance Name] for Named Instances such as SQLExpress
+ or just use [IP Address] or [Server Name] for Unnamed Instances.</param>
+	<param name="e_DBName">Name of the database to connect to.</param>
+	<param name="e_Timeout">How long the connection should stay open before timeout.</param>
+	<param name="e_Trusted">Whether the connection uses Windows Authentication.</param>
+	<param name="e_UserID">The Username for the Database Server</param>
+	<param name="e_Password">The Password for the Database Server</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.clsConnectionSettings.IncrementTimeout">
+	<summary>
+ Increases the Timeout setting by 1 as long as it is less than or equal to 15
+ Then regenerates the conntection string
+ </summary>
+	<returns>Returns True if m_timeout is not too high</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.clsConnectionSettings.SetConnectionString">
+	<summary>
+ Generates a connection string for use in accessing a database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.ServerAddress">
+	<summary>
+ Returns the Server Address
+ </summary>
+	<value></value>
+	<returns>Formated as [IP] or [IP]\[Instance] or [Server Name] or [Server Name]\[Instance]</returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.DBName">
+	<summary>
+ returns the Database Name value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.Trusted">
+	<summary>
+ returns the Trusted Connection value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.UserID">
+	<summary>
+ returns the User ID value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.Password">
+	<summary>
+ returns the User Password value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.Timeout">
+	<summary>
+ returns the Timeout value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.ConnectionString">
+	<summary>
+ returns the Connection String created for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.clsConnectionSettings">
+	<summary>
+ Object for storing all nessecary data to create a Database Connection String
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.ucDBConnection.m_FinalConnSettings">
+	<summary>
+ The returned Connection Settings to connect to the database
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.ucDBConnection.m_ConnectionTested">
+	<summary>
+ Tracks whether the recently modified connection has been tested.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.ucDBConnection.m_NewConnection">
+	<summary>
+ Tracks whether the tool is generating a new connection or changing an old one.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.ucDBConnection.GetDBSetttings">
+	<summary>
+ Returns a clsConnectionSettings object based on the Provided Database settings
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="E:ODMSDLConfigWiz.ucDBConnection.DataChanged">
+	<summary>
+ Reports when the data has been changed
+ </summary>
+	<remarks></remarks>
+</member><member name="E:ODMSDLConfigWiz.ucDBConnection.ErrorOccured">
+	<summary>
+ Reports when an error has occurred.
+ </summary>
+	<param name="ex">an exception that describes the error</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucDBConnection.PasswordReset">
+	<summary>
+ Resets the password to ""
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucDBConnection.txtSQLAddress_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ When the server address is changed, marks the connection as untested
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucDBConnection.txtDatabaseName_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ When the databasename is changed, marks the connection as untested.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucDBConnection.txtSQLUID_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ When the username is changed, marks the connection as untested.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucDBConnection.txtSQLPWD_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ When the password is changed, marks the connection as untested.
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucDBConnection.TestConnection">
+	<summary>
+ Validates and tests the database connection.
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewQCL.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
+</member><member name="T:ODMSDLConfigWiz.ucDBConnection">
+	<summary>
+ Custom Control designed to allow the user to enter connection settings for a MSSQL database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:ODMSDLConfigWiz.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="F:ODMSDLConfigWiz.modEncryption.Entropy">
+	<summary>
+ Used to protect the integrity of Encrypted Data
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modEncryption.Encrypt(System.String,System.Byte)">
+	<summary>
+ Encrypts data for security purposes
+ </summary>
+	<param name="data">The data to decrypt</param>
+	<param name="padding">Whether the data should be padded</param>
+	<returns>The decrypted data</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modEncryption.EncryptInMemoryData(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)">
+	<summary>
+ Encrypts data
+ </summary>
+	<param name="Data">The data to encrypt as an array of Bytes</param>
+	<param name="Scope">the MemoryProtecitonScope used to encrypt the data</param>
+	<returns>Encrypted data as an array of Bytes</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modEncryption.Decrypt(System.String,System.Byte)">
+	<summary>
+ Decrypts data that has been encrypted by the ODM SDL Config Wizard.
+ </summary>
+	<param name="data">The data to decrypt</param>
+	<param name="padding">Whether the data should be padded</param>
+	<returns>The decrypted data</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modEncryption.DecryptInMemoryData(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)">
+	<summary>
+ Decrypts Data
+ </summary>
+	<param name="Data">The data to decrypt as an array of Bytes</param>
+	<param name="Scope">the MemoryProtecitonScope used to encrypt the data</param>
+	<returns>Decrypted data as an array of Bytes</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modFile.LoadFile(System.Boolean,System.String,System.Int32,System.Int32,System.String)">
+	<summary>
+ Loads a comma delimited text file into a datatable.  Can specify which row Column Headers begin on.  Can specify which row Data begins on, must be after column header row.
+ </summary>
+	<param name="isWeb">Is path a URL?</param>
+	<param name="path">The filepath / URL to the data</param>
+	<param name="headerRow">Which row the column headers are on (starting at 1, 0 means no headers)</param>
+	<param name="dataRow">Which row the data starts on (starting at 1, must be greater than headerRow)</param>
+	<param name="delimiter">the delimiter to split the file by</param>
+	<returns>Returns the data as a DataTable, each row is a line of text in the file</returns>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewOffsetType.SQLQuery">
+	<summary>
+ The query used to create OffsetTypes and generate insert/update statements when required
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewOffsetType.OffsetTypes">
+	<summary>
+ DataTable to store old OffsetTypes to ensure no exact replicas
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewOffsetType.NewID">
+	<summary>
+ ID for the new Offset Type, if none created = -99.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewOffsetType.m_connSettings">
+	<summary>
+ The connection settings of the database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.frmNewOffsetType.ID">
+	<summary>
+ The ID of the new OffsetTypes record
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
 	<summary>
  Constructor
  </summary>
 	<param name="e_connSettings">the connection settings of the database</param>
 	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewQCL.frmNewSite_Load(System.Object,System.EventArgs)">
+</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.frmNewOffsetType_Load(System.Object,System.EventArgs)">
 	<summary>
  Prepares the form, loads dropdowns, loads validation data
  </summary>
 	<param name="sender">Visual Studio Required Parameter</param>
 	<param name="e">Visual Studio Required Parameter</param>
 	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewQCL.btnOK_Click(System.Object,System.EventArgs)">
+</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.btnOK_Click(System.Object,System.EventArgs)">
 	<summary>
  Runs Validation, commits record to database, and returns dialog result
  </summary>
 	<param name="sender">Visual Studio Required Parameter</param>
 	<param name="e">Visual Studio Required Parameter</param>
 	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewQCL.TextField_TextChanged(System.Object,System.EventArgs)">
+</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.TextField_TextChanged(System.Object,System.EventArgs)">
 	<summary>
  Checks whether the form is complete.
  </summary>
 	<param name="sender">Visual Studio Required Parameter</param>
 	<param name="e">Visual Studio Required Parameter</param>
 	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewQCL.isDone">
+</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
+	<summary>
+ Checks whether the form is complete.
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.isDone">
 	<summary>
  Checks if all required data is entered
  </summary>
 	<returns>returns true if the form is valid and complete</returns>
 	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.frmNewQCL">
+</member><member name="T:ODMSDLConfigWiz.frmNewOffsetType">
 	<summary>
- Form used to create a new record in the QualityControlLevels table
+ Form to create a new record in the OffsetTypes table
  </summary>
 	<remarks></remarks>
 </member><member name="F:ODMSDLConfigWiz.Common.g_Pattern_NumericExpression">
@@ -124,6 +382,102 @@ ConfigurationWizard
 	<param name="line">a line of text from the file</param>
 	<param name="delimiter">usually ',' for CSV files</param>
 	<returns>The array of split strings</returns>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmODMSDLWizard.RunningUpdate">
+	<summary>
+ True if there is currently an update running
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmODMSDLWizard.proc">
+	<summary>
+ The background process to open the SDL to run an update
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.dgvFiles_SelectionChanged(System.Object,System.EventArgs)">
+	<summary>
+ Enables/Disables buttons based on selection
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.frmDataImportWizard_Load(System.Object,System.EventArgs)">
+	<summary>
+ Loads all necessary data and sets up the dgvFiles columns
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbAdd_Click(System.Object,System.EventArgs)">
+	<summary>
+ Adds a new file mapping
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbEdit_Click(System.Object,System.EventArgs)">
+	<summary>
+ edits an existing file mapping
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbDelete_Click(System.Object,System.EventArgs)">
+	<summary>
+ removes an existing file mapping
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbRun_Click(System.Object,System.EventArgs)">
+	<summary>
+ runs the selected file mappings
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbRefresh_Click(System.Object,System.EventArgs)">
+	<summary>
+ Refreshes the list of files
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.LoadFileList">
+	<summary>
+ Loads the list of files from the XML Configuration File
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.RemoveFile">
+	<summary>
+ Removes a file from the XML Configuration File
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.mnuFileExit_Click(System.Object,System.EventArgs)">
+	<summary>
+ Closes the program
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.mnuHelpAbout_Click(System.Object,System.EventArgs)">
+	<summary>
+ Displays the About dialog
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tmrProc_Tick(System.Object,System.EventArgs)">
+	<summary>
+ Check whether the SDL background process is complete
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.frmODMSDLWizard">
+	<summary>
+ Starting form of the wizard. 
+ Displays a list of all streaming data files listed in the configuration file
+ </summary>
 	<remarks></remarks>
 </member><member name="T:ODMSDLConfigWiz.frmNewSeries.Pages">
 	<summary>
@@ -345,6 +699,708 @@ ConfigurationWizard
 </member><member name="T:ODMSDLConfigWiz.frmNewSeries">
 	<summary>
  Everything needed to create/choose a data series for a column of streaming data to connect to.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewVariable.sqlQuery">
+	<summary>
+ Query used to get the schema for Variables and generate Insert and Update methods when necessary
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewVariable.Variables">
+	<summary>
+ DataTable to store old Variables to ensure no exact replicas
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewVariable.NewID">
+	<summary>
+ ID for the new site, if none created = -99)
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewVariable.m_connSettings">
+	<summary>
+ The connection settings to the database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.frmNewVariable.ID">
+	<summary>
+ The ID of the newly generated Variable
+ </summary>
+	<value></value>
+	<returns>-99 If variable not created, otherwise the ID of the newly generated variable</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewVariable.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Constructor to create a new record
+ </summary>
+	<param name="e_connSettings">The connection settings to the database</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewVariable.#ctor(ODMSDLConfigWiz.clsConnectionSettings,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Constructor to edit an existing record
+ </summary>
+	<param name="e_connSettings">The connection settings to the database</param>
+	<param name="e_VarCode">The variable code of the existing record</param>
+	<param name="e_VarName">The Variable name of the existing record</param>
+	<param name="e_Spec">The speciation of the existing record</param>
+	<param name="e_VarUnitsName">The units name of the existing record</param>
+	<param name="e_SampleMed">The sample medium of the existing record</param>
+	<param name="e_ValType">The value type of the existing record</param>
+	<param name="e_TSVal">The time support value of the existing record</param>
+	<param name="e_TSUnitsName">The time support units name of the existing record</param>
+	<param name="e_DataType">The data type of the existing record</param>
+	<param name="e_GenCat">The general category of the existing record</param>
+	<param name="e_NDV">The no data value of the existing record</param>
+	<param name="e_IsReg">Whether the existing variable is Regular or not</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewVariable.frmNewVariable_Load(System.Object,System.EventArgs)">
+	<summary>
+ Prepares the form, loads dropdowns, loads validation data
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewVariable.btnOK_Click(System.Object,System.EventArgs)">
+	<summary>
+ Runs Validation, commits record to database, and returns dialog result
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewVariable.NumericField_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Ensures that all numeric fields are valid using regular expressions
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewVariable.VariableCode_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Ensures that the VariableCode field is valid using regular expressions
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>&gt;
+ <remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewVariable.ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
+	<summary>
+ Checks if the form is complete and valid
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewVariable.isDone">
+	<summary>
+ Returns true if the form is complete and valid
+ </summary>
+	<returns>True if the form is complete and valid</returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.frmNewVariable">
+	<summary>
+ Form to create a new record in the Variables Table
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewMethod.sqlQuery">
+	<summary>
+ Query used to fill Methods and generate insert/update statements when necessary
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewMethod.Methods">
+	<summary>
+ DataTable to store old Methods to ensure no exact replicas.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewMethod.NewID">
+	<summary>
+ ID for the new Method, when none created = -99
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewMethod.m_connSettings">
+	<summary>
+ The connection settings of the database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.frmNewMethod.ID">
+	<summary>
+ The ID of the newly created record in the Methods table
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewMethod.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Constructor
+ </summary>
+	<param name="e_connSettings">The connection settings of the database</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewMethod.frmNewMethod_Load(System.Object,System.EventArgs)">
+	<summary>
+ Prepares the form, loads dropdowns, loads validation data
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewMethod.btnOK_Click(System.Object,System.EventArgs)">
+	<summary>
+ Runs Validation, commits record to database, and returns dialog result
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewMethod.ShortText_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Validates text fields using a Regex defined in modcommon
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewMethod.LongText_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Checks whether the form is complete.
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewMethod.isDone">
+	<summary>
+ Checks if all required data is entered
+ </summary>
+	<returns>returns true if the form is valid and complete</returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.frmNewMethod">
+	<summary>
+ Form to create a new record in the Methods table.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSource.SQLQuery">
+	<summary>
+ Query to load schema Sources and create Update and Insert methods when needed
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSource.Sources">
+	<summary>
+ Data table to store old Sources to ensure no exact replicas
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSource.NewID">
+	<summary>
+ ID for the new site, if none created = -99)
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSource.m_connSettings">
+	<summary>
+ The connection settings to the database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.frmNewSource.ID">
+	<summary>
+ Returns the ID of the newly generated site
+ </summary>
+	<returns>The ID of the newly generated site, -99 if site not created</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Constructor
+ </summary>
+	<param name="e_connSettings">The connection settings to the database</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.frmNewSource_Load(System.Object,System.EventArgs)">
+	<summary>
+ Prepares the form, loads dropdowns, loads validation data
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.btnOK_Click(System.Object,System.EventArgs)">
+	<summary>
+ Runs Validation, commits record to database, and returns dialog result
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.LoadMetadata">
+	<summary>
+ Loads ISOMetadata for dropdowns
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.btnAdd_Click(System.Object,System.EventArgs)">
+	<summary>
+ Adds a new ISOMetadata record to the database and dropdown
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.txtContactPhone_MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ Clears txtContactPhone when selected
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.txtZipCode_MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ Clears txtZipCode when selected
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.ShortText_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Validates short text fields using modCommon.g_Pattern_ShortText
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.LongText_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Checks if the form is complete and valid
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.cboISOMetadata_SelectedIndexChanged(System.Object,System.EventArgs)">
+	<summary>
+ Checks if the form is complete and valid
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSource.isDone">
+	<summary>
+ Returns true if the form is complete and valid
+ </summary>
+	<returns>True if the form is complete and valid</returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.frmNewSource">
+	<summary>
+ Form to create a new record in the Sources table
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.OpenTable(System.String,System.String,ODMSDLConfigWiz.clsConnectionSettings@)">
+	<summary>
+ Retrieves an entire data table using the given query
+ </summary>
+	<param name="tableName">The name of the created DataTable to return</param>
+	<param name="SqlQuery">The SQL Query used to generate the DataTable</param>
+	<param name="settings">the connection settings to the database</param>
+	<returns>The DataTable created by the given query</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.CommitTable(System.Data.DataTable@,System.String,ODMSDLConfigWiz.clsConnectionSettings@)">
+	<summary>
+ Commits data to the database and returns updated data
+ </summary>
+	<param name="table">name of the table</param>
+	<param name="SqlQuery">sql Query to retreive the data with</param>
+	<param name="settings">the connection settings for the database to connect to</param>
+	<returns>the dataTable of data retreived from the database using SqlQuery</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.TestDBConnection(ODMSDLConfigWiz.clsConnectionSettings@)">
+	<summary>
+ Tries to establish a connection to a MSSQL database using the given connection settings
+ </summary>
+	<param name="e_DBSettings">the connetion settings to the database</param>
+	<returns>True if the program was able to establish a conneciton to the database</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetMetadata(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves metadata from the Database.  Returns metadata in a datatable.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>metadata in a datatable</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetQualityControlLevels(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves QCLevels from the Database.  Returns QCLevels in a datatable.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>QCLevels in a datatable</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetSpatialReferences(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Spatial References from the Database.  Returns Spatial References in a datatable.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Spatial References in a datatable</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetUnits(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Units from the Database.  Returns Units in a datatable.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Units in a datatable</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetVerticalDatum(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Vertical Datum from the Database.  Returns Vertical Datum in a string Array.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Vertical Datum in a string Array</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetVariableNames(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Variable Names from the Database.  Returns Variable Names in a String Array.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Variable Names in a String Array</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetSpeciation(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Variable Names from the Database.  Returns Variable Names in a String Array.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Variable Names in a String Array</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetSampleMediums(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Sample Mediums  from the Database.  Returns Sample Mediums in a String Array.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Sample Mediums in a String Array</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetValueTypes(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Value Types from the Database.  Returns Value Types in a String Array.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Value Types in a String Array</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetDataTypes(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Data Types from the Database.  Returns Data Types in a String Array.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Data Types in a String Array</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetGeneralCategories(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves General Categories from the Database.  Returns General Categories in a String Array.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>General Categories in a String Array</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetTopicCategories(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Retrieves Topic Categories from the Database.  Returns Topic Categories in a String Array.
+ </summary>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>Topic Categories in a String Array</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modDB.GetMaxFromTable(System.String,System.String,ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Gets the maximumn (fieldName) from the (tableName) table in the database
+ </summary>
+	<param name="tableName">The table to access</param>
+	<param name="fieldName">The field to get the max of</param>
+	<param name="e_settings">the connetion settings to the database</param>
+	<returns>The maximum value from the field</returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.ucSelectRow.TableNames">
+	<summary>
+ Used to Determine which table is being worked with
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.ucSelectRow.m_data">
+	<summary>
+ Used to Store all the existing values from the current table
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.ucSelectRow.m_Table">
+	<summary>
+ The current table being worked on
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.ucSelectRow.m_Connection">
+	<summary>
+ The current connection settings
+ </summary>
+	<remarks></remarks>
+</member><member name="E:ODMSDLConfigWiz.ucSelectRow.SelectionChanged">
+	<summary>
+ Reports when a selection has been changed
+ </summary>
+	<remarks></remarks>
+</member><member name="E:ODMSDLConfigWiz.ucSelectRow.ErrorOccured">
+	<summary>
+ Reports when an error has occurred
+ </summary>
+	<param name="ex">The exception that describes the error</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.ResetData(ODMSDLConfigWiz.ucSelectRow.TableNames,ODMSDLConfigWiz.clsConnectionSettings,System.String,System.String)">
+	<summary>
+ Sets the current table to e_table and loads initial data.
+ </summary>
+	<param name="e_Table">an enum describing which type of table to load</param>
+	<param name="e_Connection">the connection settings to use to connect to the database</param>
+	<param name="e_Default">The row to start selected</param>
+	<param name="e_OffsetValue">The offset value to start with</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.SelectedValue">
+	<summary>
+ Returns the currently selected value.
+ </summary>
+	<returns>Currently selected value</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.SelectedOffsetValue">
+	<summary>
+ Returns the current offset value (if valid)
+ </summary>
+	<returns>Current offset value as string</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.LoadData">
+	<summary>
+ Loads initial data
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.dgvData_SelectionChanged(System.Object,System.EventArgs)">
+	<summary>
+ Performs validation when the selection is changed.
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.NumericField_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Performs validation when the offset value is changed.
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.btnAdd_Click(System.Object,System.EventArgs)">
+	<summary>
+ Opens the correct frmNew____ dialog when clicked
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.btnCopy_Click(System.Object,System.EventArgs)">
+	<summary>
+ Opens the NewVariable dialog with preset values.
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.ReturnField">
+	<summary>
+ Returns the name of the database field that is being selected.
+ </summary>
+	<returns>The name of the database field that will be returned</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.ucSelectRow.Title">
+	<summary>
+ Returns the Title (and instructions) for each table type
+ </summary>
+	<returns>Title and instructions</returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.ucSelectRow">
+	<summary>
+ Custom control used to make defining a data series easier.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modXML.AddFile(ODMSDLConfigWiz.clsConnectionSettings,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Data.DataTable,System.String,System.String,System.String,System.Boolean,System.Boolean,System.String)">
+	<summary>
+ Adds a new streaming data file to the configuration file
+ </summary>
+	<param name="e_ConnSettings">The connection settings to the database</param>
+	<param name="e_Type">The filetype (web or local)</param>
+	<param name="e_Location">The Location of the file (URL or Filepath)</param>
+	<param name="e_Period">The schedule interval</param>
+	<param name="e_offset">The date/time the file should first be run </param>
+	<param name="e_HeaderRow">The number of the header row (min = 0)</param>
+	<param name="e_DataRow">The number of the data row (min = HeaderRow + 1)</param>
+	<param name="e_SeriesData">The specifications of what dataseries each column belongs to</param>
+	<param name="e_DT">The Date Time column</param>
+	<param name="e_UTCDT">The UTC Date Time column</param>
+	<param name="e_UTCoff">The UTC offset</param>
+	<param name="e_DST">Whether to use Daylight Saving Time</param>
+	<param name="e_OldData">Whether to include older data</param>
+	<param name="e_delimiter">The delimiter used in the file</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.modXML.EditFile(ODMSDLConfigWiz.clsConnectionSettings,System.Int32,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Data.DataTable,System.String,System.String,System.String,System.Boolean,System.Boolean,System.String)">
+	<summary>
+ Edist and existing streaming data file in the configuration file
+ </summary>
+	<param name="e_ConnSettings">The connection settings to the database</param>
+	<param name="oldFileID">The fileID of the old Steaming Data File in the configuration file</param>
+	<param name="e_Type">The filetype (web or local)</param>
+	<param name="e_Location">The Location of the file (URL or Filepath)</param>
+	<param name="e_Period">The schedule interval</param>
+	<param name="e_offset">The date/time the file should first be run </param>
+	<param name="e_HeaderRow">The number of the header row (min = 0)</param>
+	<param name="e_DataRow">The number of the data row (min = HeaderRow + 1)</param>
+	<param name="e_SeriesData">The specifications of what dataseries each column belongs to</param>
+	<param name="e_DT">The Date Time column</param>
+	<param name="e_UTCDT">The UTC Date Time column</param>
+	<param name="e_UTCoff">The UTC offset</param>
+	<param name="e_DST">Whether to use Daylight Saving Time</param>
+	<param name="e_OldData">Whether to include older data</param>
+	<param name="e_delimiter">The delimiter used in the file</param>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewQCL.sqlQuery">
+	<summary>
+ The query used to fill qualityControlLevels and generate insert/update statements when needed
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewQCL.qualityControlLevels">
+	<summary>
+ Data table containing the old Sites to ensure no exact replicas.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewQCL.NewID">
+	<summary>
+ ID for the new QualityControlLevel, if none created = -99)
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewQCL.m_connSettings">
+	<summary>
+ The connection settings for the database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.frmNewQCL.ID">
+	<summary>
+ The ID of the newly created record in the QualityControlLevels table
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewQCL.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Constructor
+ </summary>
+	<param name="e_connSettings">the connection settings of the database</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewQCL.frmNewSite_Load(System.Object,System.EventArgs)">
+	<summary>
+ Prepares the form, loads dropdowns, loads validation data
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewQCL.btnOK_Click(System.Object,System.EventArgs)">
+	<summary>
+ Runs Validation, commits record to database, and returns dialog result
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewQCL.TextField_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Checks whether the form is complete.
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewQCL.isDone">
+	<summary>
+ Checks if all required data is entered
+ </summary>
+	<returns>returns true if the form is valid and complete</returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.frmNewQCL">
+	<summary>
+ Form used to create a new record in the QualityControlLevels table
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSite.sqlQuery">
+	<summary>
+ The query that loads Sites and generates the Insert/Update queries when necessary
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSite.Sites">
+	<summary>
+ Data table containing the old Sites to ensure no exact replicas.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSite.defaultVertDatum">
+	<summary>
+ The default Vertical Datum
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSite.defaultLocProj">
+	<summary>
+ The default Local Projection ID
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSite.NewID">
+	<summary>
+ ID for the new site, if none created = -99)
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDLConfigWiz.frmNewSite.m_connSettings">
+	<summary>
+ The connection settings to the database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDLConfigWiz.frmNewSite.ID">
+	<summary>
+ The SiteID of the new record in the Sites table
+ </summary>
+	<value></value>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
+	<summary>
+ Constructor
+ </summary>
+	<param name="e_connSettings">The connection settings to the database</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.frmNewSite_Load(System.Object,System.EventArgs)">
+	<summary>
+ Prepares the form, loads dropdowns, loads validation data
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.btnOK_Click(System.Object,System.EventArgs)">
+	<summary>
+ Runs Validation, commits record to database, and returns dialog result
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.NumericField_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Uses a regular expression to ensure that only numbers are allowed 
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.SiteCode_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Uses regular expressions to ensure that only valid text is allowed into the site code field
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.ShortText_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Uses modCommon.g_Pattern_ShortText to ensure that only valid text is allowed
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.LongText_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Checks whether the form is complete and valid
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
+	<summary>
+ Checks whether the form is complete and valid
+ </summary>
+	<param name="sender">Visual Studio Required Parameter</param>
+	<param name="e">Visual Studio Required Parameter</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.CheckRequirements">
+	<summary>
+ Enables/Disables certain fields if their prerequisites are not complete/valid
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDLConfigWiz.frmNewSite.isDone">
+	<summary>
+ Returns true if the form is complete and valid
+ </summary>
+	<returns>true if the form is complete and valid</returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDLConfigWiz.frmNewSite">
+	<summary>
+ Form to create a new record in the Sites table
  </summary>
 	<remarks></remarks>
 </member><member name="F:ODMSDLConfigWiz.frmAddNewFile.m_file">
@@ -577,650 +1633,6 @@ ConfigurationWizard
  Defines a new Streaming Data file
  </summary>
 	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.ucSelectRow.TableNames">
-	<summary>
- Used to Determine which table is being worked with
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.ucSelectRow.m_data">
-	<summary>
- Used to Store all the existing values from the current table
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.ucSelectRow.m_Table">
-	<summary>
- The current table being worked on
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.ucSelectRow.m_Connection">
-	<summary>
- The current connection settings
- </summary>
-	<remarks></remarks>
-</member><member name="E:ODMSDLConfigWiz.ucSelectRow.SelectionChanged">
-	<summary>
- Reports when a selection has been changed
- </summary>
-	<remarks></remarks>
-</member><member name="E:ODMSDLConfigWiz.ucSelectRow.ErrorOccured">
-	<summary>
- Reports when an error has occurred
- </summary>
-	<param name="ex">The exception that describes the error</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.ResetData(ODMSDLConfigWiz.ucSelectRow.TableNames,ODMSDLConfigWiz.clsConnectionSettings,System.String,System.String)">
-	<summary>
- Sets the current table to e_table and loads initial data.
- </summary>
-	<param name="e_Table">an enum describing which type of table to load</param>
-	<param name="e_Connection">the connection settings to use to connect to the database</param>
-	<param name="e_Default">The row to start selected</param>
-	<param name="e_OffsetValue">The offset value to start with</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.SelectedValue">
-	<summary>
- Returns the currently selected value.
- </summary>
-	<returns>Currently selected value</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.SelectedOffsetValue">
-	<summary>
- Returns the current offset value (if valid)
- </summary>
-	<returns>Current offset value as string</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.LoadData">
-	<summary>
- Loads initial data
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.dgvData_SelectionChanged(System.Object,System.EventArgs)">
-	<summary>
- Performs validation when the selection is changed.
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.NumericField_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Performs validation when the offset value is changed.
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.btnAdd_Click(System.Object,System.EventArgs)">
-	<summary>
- Opens the correct frmNew____ dialog when clicked
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.btnCopy_Click(System.Object,System.EventArgs)">
-	<summary>
- Opens the NewVariable dialog with preset values.
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.ReturnField">
-	<summary>
- Returns the name of the database field that is being selected.
- </summary>
-	<returns>The name of the database field that will be returned</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucSelectRow.Title">
-	<summary>
- Returns the Title (and instructions) for each table type
- </summary>
-	<returns>Title and instructions</returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.ucSelectRow">
-	<summary>
- Custom control used to make defining a data series easier.
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.modEncryption.Entropy">
-	<summary>
- Used to protect the integrity of Encrypted Data
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modEncryption.Encrypt(System.String,System.Byte)">
-	<summary>
- Encrypts data for security purposes
- </summary>
-	<param name="data">The data to decrypt</param>
-	<param name="padding">Whether the data should be padded</param>
-	<returns>The decrypted data</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modEncryption.EncryptInMemoryData(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)">
-	<summary>
- Encrypts data
- </summary>
-	<param name="Data">The data to encrypt as an array of Bytes</param>
-	<param name="Scope">the MemoryProtecitonScope used to encrypt the data</param>
-	<returns>Encrypted data as an array of Bytes</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modEncryption.Decrypt(System.String,System.Byte)">
-	<summary>
- Decrypts data that has been encrypted by the ODM SDL Config Wizard.
- </summary>
-	<param name="data">The data to decrypt</param>
-	<param name="padding">Whether the data should be padded</param>
-	<returns>The decrypted data</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modEncryption.DecryptInMemoryData(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)">
-	<summary>
- Decrypts Data
- </summary>
-	<param name="Data">The data to decrypt as an array of Bytes</param>
-	<param name="Scope">the MemoryProtecitonScope used to encrypt the data</param>
-	<returns>Decrypted data as an array of Bytes</returns>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSource.SQLQuery">
-	<summary>
- Query to load schema Sources and create Update and Insert methods when needed
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSource.Sources">
-	<summary>
- Data table to store old Sources to ensure no exact replicas
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSource.NewID">
-	<summary>
- ID for the new site, if none created = -99)
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSource.m_connSettings">
-	<summary>
- The connection settings to the database
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.frmNewSource.ID">
-	<summary>
- Returns the ID of the newly generated site
- </summary>
-	<returns>The ID of the newly generated site, -99 if site not created</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Constructor
- </summary>
-	<param name="e_connSettings">The connection settings to the database</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.frmNewSource_Load(System.Object,System.EventArgs)">
-	<summary>
- Prepares the form, loads dropdowns, loads validation data
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.btnOK_Click(System.Object,System.EventArgs)">
-	<summary>
- Runs Validation, commits record to database, and returns dialog result
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.LoadMetadata">
-	<summary>
- Loads ISOMetadata for dropdowns
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.btnAdd_Click(System.Object,System.EventArgs)">
-	<summary>
- Adds a new ISOMetadata record to the database and dropdown
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.txtContactPhone_MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)">
-	<summary>
- Clears txtContactPhone when selected
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.txtZipCode_MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)">
-	<summary>
- Clears txtZipCode when selected
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.ShortText_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Validates short text fields using modCommon.g_Pattern_ShortText
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.LongText_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Checks if the form is complete and valid
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.cboISOMetadata_SelectedIndexChanged(System.Object,System.EventArgs)">
-	<summary>
- Checks if the form is complete and valid
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSource.isDone">
-	<summary>
- Returns true if the form is complete and valid
- </summary>
-	<returns>True if the form is complete and valid</returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.frmNewSource">
-	<summary>
- Form to create a new record in the Sources table
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewMethod.sqlQuery">
-	<summary>
- Query used to fill Methods and generate insert/update statements when necessary
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewMethod.Methods">
-	<summary>
- DataTable to store old Methods to ensure no exact replicas.
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewMethod.NewID">
-	<summary>
- ID for the new Method, when none created = -99
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewMethod.m_connSettings">
-	<summary>
- The connection settings of the database
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.frmNewMethod.ID">
-	<summary>
- The ID of the newly created record in the Methods table
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewMethod.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Constructor
- </summary>
-	<param name="e_connSettings">The connection settings of the database</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewMethod.frmNewMethod_Load(System.Object,System.EventArgs)">
-	<summary>
- Prepares the form, loads dropdowns, loads validation data
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewMethod.btnOK_Click(System.Object,System.EventArgs)">
-	<summary>
- Runs Validation, commits record to database, and returns dialog result
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewMethod.ShortText_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Validates text fields using a Regex defined in modcommon
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewMethod.LongText_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Checks whether the form is complete.
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewMethod.isDone">
-	<summary>
- Checks if all required data is entered
- </summary>
-	<returns>returns true if the form is valid and complete</returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.frmNewMethod">
-	<summary>
- Form to create a new record in the Methods table.
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewOffsetType.SQLQuery">
-	<summary>
- The query used to create OffsetTypes and generate insert/update statements when required
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewOffsetType.OffsetTypes">
-	<summary>
- DataTable to store old OffsetTypes to ensure no exact replicas
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewOffsetType.NewID">
-	<summary>
- ID for the new Offset Type, if none created = -99.
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewOffsetType.m_connSettings">
-	<summary>
- The connection settings of the database
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.frmNewOffsetType.ID">
-	<summary>
- The ID of the new OffsetTypes record
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Constructor
- </summary>
-	<param name="e_connSettings">the connection settings of the database</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.frmNewOffsetType_Load(System.Object,System.EventArgs)">
-	<summary>
- Prepares the form, loads dropdowns, loads validation data
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.btnOK_Click(System.Object,System.EventArgs)">
-	<summary>
- Runs Validation, commits record to database, and returns dialog result
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.TextField_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Checks whether the form is complete.
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
-	<summary>
- Checks whether the form is complete.
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewOffsetType.isDone">
-	<summary>
- Checks if all required data is entered
- </summary>
-	<returns>returns true if the form is valid and complete</returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.frmNewOffsetType">
-	<summary>
- Form to create a new record in the OffsetTypes table
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmODMSDLWizard.RunningUpdate">
-	<summary>
- True if there is currently an update running
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmODMSDLWizard.proc">
-	<summary>
- The background process to open the SDL to run an update
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.dgvFiles_SelectionChanged(System.Object,System.EventArgs)">
-	<summary>
- Enables/Disables buttons based on selection
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.frmDataImportWizard_Load(System.Object,System.EventArgs)">
-	<summary>
- Loads all necessary data and sets up the dgvFiles columns
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbAdd_Click(System.Object,System.EventArgs)">
-	<summary>
- Adds a new file mapping
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbEdit_Click(System.Object,System.EventArgs)">
-	<summary>
- edits an existing file mapping
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbDelete_Click(System.Object,System.EventArgs)">
-	<summary>
- removes an existing file mapping
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbRun_Click(System.Object,System.EventArgs)">
-	<summary>
- runs the selected file mappings
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tsbRefresh_Click(System.Object,System.EventArgs)">
-	<summary>
- Refreshes the list of files
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.LoadFileList">
-	<summary>
- Loads the list of files from the XML Configuration File
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.RemoveFile">
-	<summary>
- Removes a file from the XML Configuration File
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.mnuFileExit_Click(System.Object,System.EventArgs)">
-	<summary>
- Closes the program
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.mnuHelpAbout_Click(System.Object,System.EventArgs)">
-	<summary>
- Displays the About dialog
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmODMSDLWizard.tmrProc_Tick(System.Object,System.EventArgs)">
-	<summary>
- Check whether the SDL background process is complete
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.frmODMSDLWizard">
-	<summary>
- Starting form of the wizard. 
- Displays a list of all streaming data files listed in the configuration file
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modFile.LoadFile(System.Boolean,System.String,System.Int32,System.Int32,System.String)">
-	<summary>
- Loads a comma delimited text file into a datatable.  Can specify which row Column Headers begin on.  Can specify which row Data begins on, must be after column header row.
- </summary>
-	<param name="isWeb">Is path a URL?</param>
-	<param name="path">The filepath / URL to the data</param>
-	<param name="headerRow">Which row the column headers are on (starting at 1, 0 means no headers)</param>
-	<param name="dataRow">Which row the data starts on (starting at 1, must be greater than headerRow)</param>
-	<param name="delimiter">the delimiter to split the file by</param>
-	<returns>Returns the data as a DataTable, each row is a line of text in the file</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modXML.AddFile(ODMSDLConfigWiz.clsConnectionSettings,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Data.DataTable,System.String,System.String,System.String,System.Boolean,System.Boolean,System.String)">
-	<summary>
- Adds a new streaming data file to the configuration file
- </summary>
-	<param name="e_ConnSettings">The connection settings to the database</param>
-	<param name="e_Type">The filetype (web or local)</param>
-	<param name="e_Location">The Location of the file (URL or Filepath)</param>
-	<param name="e_Period">The schedule interval</param>
-	<param name="e_offset">The date/time the file should first be run </param>
-	<param name="e_HeaderRow">The number of the header row (min = 0)</param>
-	<param name="e_DataRow">The number of the data row (min = HeaderRow + 1)</param>
-	<param name="e_SeriesData">The specifications of what dataseries each column belongs to</param>
-	<param name="e_DT">The Date Time column</param>
-	<param name="e_UTCDT">The UTC Date Time column</param>
-	<param name="e_UTCoff">The UTC offset</param>
-	<param name="e_DST">Whether to use Daylight Saving Time</param>
-	<param name="e_OldData">Whether to include older data</param>
-	<param name="e_delimiter">The delimiter used in the file</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modXML.EditFile(ODMSDLConfigWiz.clsConnectionSettings,System.Int32,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Data.DataTable,System.String,System.String,System.String,System.Boolean,System.Boolean,System.String)">
-	<summary>
- Edist and existing streaming data file in the configuration file
- </summary>
-	<param name="e_ConnSettings">The connection settings to the database</param>
-	<param name="oldFileID">The fileID of the old Steaming Data File in the configuration file</param>
-	<param name="e_Type">The filetype (web or local)</param>
-	<param name="e_Location">The Location of the file (URL or Filepath)</param>
-	<param name="e_Period">The schedule interval</param>
-	<param name="e_offset">The date/time the file should first be run </param>
-	<param name="e_HeaderRow">The number of the header row (min = 0)</param>
-	<param name="e_DataRow">The number of the data row (min = HeaderRow + 1)</param>
-	<param name="e_SeriesData">The specifications of what dataseries each column belongs to</param>
-	<param name="e_DT">The Date Time column</param>
-	<param name="e_UTCDT">The UTC Date Time column</param>
-	<param name="e_UTCoff">The UTC offset</param>
-	<param name="e_DST">Whether to use Daylight Saving Time</param>
-	<param name="e_OldData">Whether to include older data</param>
-	<param name="e_delimiter">The delimiter used in the file</param>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_ServerAddress">
-	<summary>
- The network address of the server
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_DBName">
-	<summary>
- The Name of the Database
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_Trusted">
-	<summary>
- True if using Windows Authentication
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_UserID">
-	<summary>
- User Name for the connection
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_Password">
-	<summary>
- Password of the connection
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_Timeout">
-	<summary>
- Timeout of the connection
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.clsConnectionSettings.m_ConnStr">
-	<summary>
- The actual connection string used by the DB connection
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.clsConnectionSettings.#ctor(System.String,System.String,System.Int32,System.Boolean,System.String,System.String)">
-	<summary>
- Create a new set of connection settings with the specified parameters (if any are specified)
- </summary>
-	<param name="e_ServerAddress">[IP Address]\[Instance Name] or [Server Name]\[Instance Name] for Named Instances such as SQLExpress
- or just use [IP Address] or [Server Name] for Unnamed Instances.</param>
-	<param name="e_DBName">Name of the database to connect to.</param>
-	<param name="e_Timeout">How long the connection should stay open before timeout.</param>
-	<param name="e_Trusted">Whether the connection uses Windows Authentication.</param>
-	<param name="e_UserID">The Username for the Database Server</param>
-	<param name="e_Password">The Password for the Database Server</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.clsConnectionSettings.IncrementTimeout">
-	<summary>
- Increases the Timeout setting by 1 as long as it is less than or equal to 15
- Then regenerates the conntection string
- </summary>
-	<returns>Returns True if m_timeout is not too high</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.clsConnectionSettings.SetConnectionString">
-	<summary>
- Generates a connection string for use in accessing a database
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.ServerAddress">
-	<summary>
- Returns the Server Address
- </summary>
-	<value></value>
-	<returns>Formated as [IP] or [IP]\[Instance] or [Server Name] or [Server Name]\[Instance]</returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.DBName">
-	<summary>
- returns the Database Name value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.Trusted">
-	<summary>
- returns the Trusted Connection value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.UserID">
-	<summary>
- returns the User ID value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.Password">
-	<summary>
- returns the User Password value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.Timeout">
-	<summary>
- returns the Timeout value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.clsConnectionSettings.ConnectionString">
-	<summary>
- returns the Connection String created for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.clsConnectionSettings">
-	<summary>
- Object for storing all nessecary data to create a Database Connection String
- </summary>
-	<remarks></remarks>
 </member><member name="F:ODMSDLConfigWiz.frmNewISOMetadata.SQLQuery">
 	<summary>
  The query use to fill Metadata and generate insert/update statements when necessary
@@ -1299,418 +1711,6 @@ ConfigurationWizard
  Form to create a new record in the ISOMetadata Table
  </summary>
 	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.OpenTable(System.String,System.String,ODMSDLConfigWiz.clsConnectionSettings@)">
-	<summary>
- Retrieves an entire data table using the given query
- </summary>
-	<param name="tableName">The name of the created DataTable to return</param>
-	<param name="SqlQuery">The SQL Query used to generate the DataTable</param>
-	<param name="settings">the connection settings to the database</param>
-	<returns>The DataTable created by the given query</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.CommitTable(System.Data.DataTable@,System.String,ODMSDLConfigWiz.clsConnectionSettings@)">
-	<summary>
- Commits data to the database and returns updated data
- </summary>
-	<param name="table">name of the table</param>
-	<param name="SqlQuery">sql Query to retreive the data with</param>
-	<param name="settings">the connection settings for the database to connect to</param>
-	<returns>the dataTable of data retreived from the database using SqlQuery</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.TestDBConnection(ODMSDLConfigWiz.clsConnectionSettings@)">
-	<summary>
- Tries to establish a connection to a MSSQL database using the given connection settings
- </summary>
-	<param name="e_DBSettings">the connetion settings to the database</param>
-	<returns>True if the program was able to establish a conneciton to the database</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetMetadata(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves metadata from the Database.  Returns metadata in a datatable.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>metadata in a datatable</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetQualityControlLevels(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves QCLevels from the Database.  Returns QCLevels in a datatable.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>QCLevels in a datatable</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetSpatialReferences(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Spatial References from the Database.  Returns Spatial References in a datatable.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Spatial References in a datatable</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetUnits(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Units from the Database.  Returns Units in a datatable.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Units in a datatable</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetVerticalDatum(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Vertical Datum from the Database.  Returns Vertical Datum in a string Array.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Vertical Datum in a string Array</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetVariableNames(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Variable Names from the Database.  Returns Variable Names in a String Array.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Variable Names in a String Array</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetSpeciation(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Variable Names from the Database.  Returns Variable Names in a String Array.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Variable Names in a String Array</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetSampleMediums(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Sample Mediums  from the Database.  Returns Sample Mediums in a String Array.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Sample Mediums in a String Array</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetValueTypes(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Value Types from the Database.  Returns Value Types in a String Array.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Value Types in a String Array</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetDataTypes(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Data Types from the Database.  Returns Data Types in a String Array.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Data Types in a String Array</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetGeneralCategories(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves General Categories from the Database.  Returns General Categories in a String Array.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>General Categories in a String Array</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetTopicCategories(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Retrieves Topic Categories from the Database.  Returns Topic Categories in a String Array.
- </summary>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>Topic Categories in a String Array</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.modDB.GetMaxFromTable(System.String,System.String,ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Gets the maximumn (fieldName) from the (tableName) table in the database
- </summary>
-	<param name="tableName">The table to access</param>
-	<param name="fieldName">The field to get the max of</param>
-	<param name="e_settings">the connetion settings to the database</param>
-	<returns>The maximum value from the field</returns>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSite.sqlQuery">
-	<summary>
- The query that loads Sites and generates the Insert/Update queries when necessary
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSite.Sites">
-	<summary>
- Data table containing the old Sites to ensure no exact replicas.
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSite.defaultVertDatum">
-	<summary>
- The default Vertical Datum
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSite.defaultLocProj">
-	<summary>
- The default Local Projection ID
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSite.NewID">
-	<summary>
- ID for the new site, if none created = -99)
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewSite.m_connSettings">
-	<summary>
- The connection settings to the database
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.frmNewSite.ID">
-	<summary>
- The SiteID of the new record in the Sites table
- </summary>
-	<value></value>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Constructor
- </summary>
-	<param name="e_connSettings">The connection settings to the database</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.frmNewSite_Load(System.Object,System.EventArgs)">
-	<summary>
- Prepares the form, loads dropdowns, loads validation data
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.btnOK_Click(System.Object,System.EventArgs)">
-	<summary>
- Runs Validation, commits record to database, and returns dialog result
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.NumericField_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Uses a regular expression to ensure that only numbers are allowed 
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.SiteCode_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Uses regular expressions to ensure that only valid text is allowed into the site code field
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.ShortText_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Uses modCommon.g_Pattern_ShortText to ensure that only valid text is allowed
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.LongText_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Checks whether the form is complete and valid
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
-	<summary>
- Checks whether the form is complete and valid
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.CheckRequirements">
-	<summary>
- Enables/Disables certain fields if their prerequisites are not complete/valid
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewSite.isDone">
-	<summary>
- Returns true if the form is complete and valid
- </summary>
-	<returns>true if the form is complete and valid</returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.frmNewSite">
-	<summary>
- Form to create a new record in the Sites table
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.ucDBConnection.m_FinalConnSettings">
-	<summary>
- The returned Connection Settings to connect to the database
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.ucDBConnection.m_ConnectionTested">
-	<summary>
- Tracks whether the recently modified connection has been tested.
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.ucDBConnection.m_NewConnection">
-	<summary>
- Tracks whether the tool is generating a new connection or changing an old one.
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.ucDBConnection.GetDBSetttings">
-	<summary>
- Returns a clsConnectionSettings object based on the Provided Database settings
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="E:ODMSDLConfigWiz.ucDBConnection.DataChanged">
-	<summary>
- Reports when the data has been changed
- </summary>
-	<remarks></remarks>
-</member><member name="E:ODMSDLConfigWiz.ucDBConnection.ErrorOccured">
-	<summary>
- Reports when an error has occurred.
- </summary>
-	<param name="ex">an exception that describes the error</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucDBConnection.PasswordReset">
-	<summary>
- Resets the password to ""
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucDBConnection.txtSQLAddress_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- When the server address is changed, marks the connection as untested
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucDBConnection.txtDatabaseName_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- When the databasename is changed, marks the connection as untested.
- </summary>
-	<param name="sender"></param>
-	<param name="e"></param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucDBConnection.txtSQLUID_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- When the username is changed, marks the connection as untested.
- </summary>
-	<param name="sender"></param>
-	<param name="e"></param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucDBConnection.txtSQLPWD_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- When the password is changed, marks the connection as untested.
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.ucDBConnection.TestConnection">
-	<summary>
- Validates and tests the database connection.
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.ucDBConnection">
-	<summary>
- Custom Control designed to allow the user to enter connection settings for a MSSQL database
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewVariable.sqlQuery">
-	<summary>
- Query used to get the schema for Variables and generate Insert and Update methods when necessary
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewVariable.Variables">
-	<summary>
- DataTable to store old Variables to ensure no exact replicas
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewVariable.NewID">
-	<summary>
- ID for the new site, if none created = -99)
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDLConfigWiz.frmNewVariable.m_connSettings">
-	<summary>
- The connection settings to the database
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.frmNewVariable.ID">
-	<summary>
- The ID of the newly generated Variable
- </summary>
-	<value></value>
-	<returns>-99 If variable not created, otherwise the ID of the newly generated variable</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewVariable.#ctor(ODMSDLConfigWiz.clsConnectionSettings)">
-	<summary>
- Constructor to create a new record
- </summary>
-	<param name="e_connSettings">The connection settings to the database</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewVariable.#ctor(ODMSDLConfigWiz.clsConnectionSettings,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
-	<summary>
- Constructor to edit an existing record
- </summary>
-	<param name="e_connSettings">The connection settings to the database</param>
-	<param name="e_VarCode">The variable code of the existing record</param>
-	<param name="e_VarName">The Variable name of the existing record</param>
-	<param name="e_Spec">The speciation of the existing record</param>
-	<param name="e_VarUnitsName">The units name of the existing record</param>
-	<param name="e_SampleMed">The sample medium of the existing record</param>
-	<param name="e_ValType">The value type of the existing record</param>
-	<param name="e_TSVal">The time support value of the existing record</param>
-	<param name="e_TSUnitsName">The time support units name of the existing record</param>
-	<param name="e_DataType">The data type of the existing record</param>
-	<param name="e_GenCat">The general category of the existing record</param>
-	<param name="e_NDV">The no data value of the existing record</param>
-	<param name="e_IsReg">Whether the existing variable is Regular or not</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewVariable.frmNewVariable_Load(System.Object,System.EventArgs)">
-	<summary>
- Prepares the form, loads dropdowns, loads validation data
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewVariable.btnOK_Click(System.Object,System.EventArgs)">
-	<summary>
- Runs Validation, commits record to database, and returns dialog result
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewVariable.NumericField_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Ensures that all numeric fields are valid using regular expressions
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewVariable.VariableCode_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Ensures that the VariableCode field is valid using regular expressions
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>&gt;
- <remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewVariable.ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
-	<summary>
- Checks if the form is complete and valid
- </summary>
-	<param name="sender">Visual Studio Required Parameter</param>
-	<param name="e">Visual Studio Required Parameter</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDLConfigWiz.frmNewVariable.isDone">
-	<summary>
- Returns true if the form is complete and valid
- </summary>
-	<returns>True if the form is complete and valid</returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDLConfigWiz.frmNewVariable">
-	<summary>
- Form to create a new record in the Variables Table
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:ODMSDLConfigWiz.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
 </member>
 </members>
 </doc>

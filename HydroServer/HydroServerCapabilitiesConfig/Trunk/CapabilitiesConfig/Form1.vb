@@ -250,6 +250,7 @@ Public Class Form1
         End If
     End Sub
     Private Sub btnRemoveDatabase_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRemoveDatabase.Click
+
         If dgvDatabases.SelectedRows.Count = 1 Then
             Dim databaseID As Integer = dgvDatabases.SelectedRows(0).Cells("DatabaseID").Value
             Dim databaseCmd As New SqlClient.SqlCommand("SELECT COUNT(RegionID) AS RegionCount FROM RegionDatabases GROUP BY DatabaseID HAVING (DatabaseID = '" & databaseID & "')", IcewaterConnection)

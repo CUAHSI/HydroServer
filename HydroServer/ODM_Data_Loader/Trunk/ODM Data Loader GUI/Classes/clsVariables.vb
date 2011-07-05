@@ -50,10 +50,10 @@ Class clsVariables
 #End Region
 
 #Region " File Field Constants "
-    Public Const file_Variables As String = "variables"
-    Public Const file_Variables_VariableCode As String = "variablecode"             'R
-    Public Const file_Variables_VariableName As String = "variablename"             'R
-    Public Const file_Variables_Speciation As String = "speciation"                 'R
+    Public Const file_Variables As String = "Variables"
+    Public Const file_Variables_VariableCode As String = "VariableCode"             'R
+    Public Const file_Variables_VariableName As String = "VariableName"             'R
+    Public Const file_Variables_Speciation As String = "Speciation"                 'R
 #Region " Variable Units Columns "
     Public Const file_Variables_VariableUnitsID As String = "variableunitsid"       'R
     Public Const file_Variables_VariableUnitsName As String = "variableunitsname"   'A
@@ -396,14 +396,14 @@ Class clsVariables
         Return New DataTable("ERROR")
     End Function
 
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
         'Dim scope As New Transactions.TransactionScope
         Dim count As Integer = 0
 
         'Using scope
         Dim connect As New System.Data.SqlClient.SqlConnection(m_Connection.ConnectionString)
         connect.Open()
-        Dim trans As SqlClient.SqlTransaction = connect.BeginTransaction(Data.IsolationLevel.Readcommitted, "this is a test")
+        Dim trans As SqlClient.SqlTransaction = connect.BeginTransaction(Data.IsolationLevel.ReadCommitted, "this is a test")
         Try
             count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Variables)
 
@@ -428,15 +428,21 @@ Class clsVariables
         End Try
         connect.Close()
         connect.Close()
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Variables, count)
+        'Return count
+        Return tc
     End Function
 
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
         Dim count As Integer = 0
 
         count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Variables)
         GC.Collect()
 
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Variables, count)
+        'Return count
+        Return tc
     End Function
 End Class

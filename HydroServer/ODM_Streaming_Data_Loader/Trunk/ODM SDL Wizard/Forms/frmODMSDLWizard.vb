@@ -61,15 +61,13 @@ Public Class frmODMSDLWizard
             dgvFiles.Columns.Add(config_File_SchedPeriod, "Schedule Period")
             dgvFiles.Columns.Add(config_File_SchedOffset, "Schedule Begginning")
             dgvFiles.Columns.Add(config_File_Last, "Last Update")
-            'g_EXE_Dir = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location)
+            g_EXE_Dir = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location)
 
             Dim tempdir As String
             tempdir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
-            Dim section As String()
-            'tempdir = section(0) '& section(1) & "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
-            section = Split(tempdir, "Configuration", , CompareMethod.Text)
-            g_EXE_Dir = section(0) & "StreamingDataLoader\1.1.2\"
-            IO.Directory.CreateDirectory(g_EXE_Dir)
+            Dim section As String() = Split(tempdir, "Configuration", , CompareMethod.Text)
+            g_Config_Dir = section(0) & "StreamingDataLoader\1.1.2\"
+            IO.Directory.CreateDirectory(g_Config_Dir)
             'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)
             'config.SaveAs(g_EXE_Dir)
 
@@ -120,8 +118,8 @@ Public Class frmODMSDLWizard
             Dim xmlDoc As New System.Xml.XmlDocument 'The XML Document to edit
             Dim root As System.Xml.XmlNode 'The root node of the XML Document
             Dim node As System.Xml.XmlNode 'The current node in th XML Document
-            If (System.IO.File.Exists(g_EXE_Dir & "\Config.xml")) Then
-                xmlDoc.Load(g_EXE_Dir & "\Config.xml")
+            If (System.IO.File.Exists(g_Config_Dir & "\Config.xml")) Then
+                xmlDoc.Load(g_Config_Dir & "\Config.xml")
                 root = xmlDoc.DocumentElement
                 For x = 0 To (root.ChildNodes.Count - 1)
                     node = root.ChildNodes(x)
@@ -158,14 +156,16 @@ Public Class frmODMSDLWizard
     ''' <remarks></remarks>
     Private Sub tsbDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbDelete.Click
         '
-        Try
-            RemoveFile()
-            LoadFileList()
-        Catch ex As Exception
-            ShowError(ex)
-            Me.Close()
-            Me.DialogResult = Windows.Forms.DialogResult.Cancel
-        End Try
+        If (MsgBox("Are You Sure You Would Like to DELETE the selected File?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes) Then
+            Try
+                RemoveFile()
+                LoadFileList()
+            Catch ex As Exception
+                ShowError(ex)
+                Me.Close()
+                Me.DialogResult = Windows.Forms.DialogResult.Cancel
+            End Try
+        End If
     End Sub
 
     ''' <summary>
@@ -185,7 +185,8 @@ Public Class frmODMSDLWizard
             For i = 0 To (dgvFiles.SelectedRows.Count - 1)
                 IDs = IDs & " " & dgvFiles.SelectedRows(i).Cells(config_File_ID).Value
             Next
-            proc = Process.Start(g_EXE_Dir & "\ODMSDL.exe", IDs)
+            Dim path As String = g_EXE_Dir & "\ODMSDL.exe"
+            proc = Process.Start(path, IDs)
             tmrProc.Start()
             RunningUpdate = True
         Catch ex As Exception
@@ -224,8 +225,8 @@ Public Class frmODMSDLWizard
             Dim root As System.Xml.XmlNode 'The Root Node of the XML Document
             Dim node As System.Xml.XmlNode 'The current node within the XML Document
 
-            If (System.IO.File.Exists(g_EXE_Dir & "\Config.xml")) Then
-                xmlDoc.Load(g_EXE_Dir & "\Config.xml")
+            If (System.IO.File.Exists(g_Config_Dir & "\Config.xml")) Then
+                xmlDoc.Load(g_Config_Dir & "\Config.xml")
                 root = xmlDoc.DocumentElement
                 For i = 0 To (root.ChildNodes.Count - 1)
                     node = root.ChildNodes(i)
@@ -250,8 +251,8 @@ Public Class frmODMSDLWizard
             Dim xmlDoc As New System.Xml.XmlDocument 'The XML Document to Change
             Dim root As System.Xml.XmlNode 'The root node of the XML Document
             Dim node As System.Xml.XmlNode 'The current node within the XML Document
-            If (System.IO.File.Exists(g_EXE_Dir & "\Config.xml")) Then
-                xmlDoc.Load(g_EXE_Dir & "\Config.xml")
+            If (System.IO.File.Exists(g_Config_Dir & "\Config.xml")) Then
+                xmlDoc.Load(g_Config_Dir & "\Config.xml")
                 root = xmlDoc.DocumentElement
                 While (i < root.ChildNodes.Count)
                     node = root.ChildNodes(i)
@@ -262,7 +263,7 @@ Public Class frmODMSDLWizard
                     End If
                 End While
             End If
-            xmlDoc.Save(g_EXE_Dir & "\Config.xml")
+            xmlDoc.Save(g_Config_Dir & "\Config.xml")
         Catch ex As Exception
             ShowError(ex)
             Me.Close()

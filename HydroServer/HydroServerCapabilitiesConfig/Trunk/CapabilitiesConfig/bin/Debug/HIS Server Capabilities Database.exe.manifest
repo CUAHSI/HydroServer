@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Show.ICO" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="HIS Server Capabilities Database" version="1.1.1.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="HIS Server Capabilities Database" version="1.1.2.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="HIS Server Capabilities Database.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -68,38 +68,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HIS Server Capabilities Database.exe" size="557056">
-      <assemblyIdentity name="HIS Server Capabilities Database" version="1.1.1.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HIS Server Capabilities Database.exe" size="557568">
+      <assemblyIdentity name="HIS Server Capabilities Database" version="1.1.2.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>GLuIt9uWYq09hceovBMiEPSBTD0=</dsig:DigestValue>
+        <dsig:DigestValue>iyw44tqdz25sRW+ngmjvlH3hQ/I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.SqlServer.BatchParser.dll" size="360800">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.SqlServer.BatchParser.dll" size="359776">
       <assemblyIdentity name="Microsoft.SqlServer.BatchParser" version="9.0.242.0" publicKeyToken="89845DCD8080CC91" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>TAu+Mbonw3dPSnEjcVVksiO8hMA=</dsig:DigestValue>
+        <dsig:DigestValue>pxgZ8RnM19a5xy1gMaByBI4SMjc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.SqlServer.ConnectionInfo.dll" size="154464">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.SqlServer.ConnectionInfo.dll" size="153440">
       <assemblyIdentity name="Microsoft.SqlServer.ConnectionInfo" version="9.0.242.0" publicKeyToken="89845DCD8080CC91" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>nhf30LFXvZs1kRqDRF7LRFEHCoM=</dsig:DigestValue>
+        <dsig:DigestValue>EILMOCyYNOY0HaWuPVdFn9idSjc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -116,26 +116,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.SqlServer.Smo.dll" size="1604448">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.SqlServer.Smo.dll" size="1603424">
       <assemblyIdentity name="Microsoft.SqlServer.Smo" version="9.0.242.0" publicKeyToken="89845DCD8080CC91" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>4/JJfWSLlKxkNSoAD1mcjk49WWE=</dsig:DigestValue>
+        <dsig:DigestValue>ehgob37/eK/b/aLZ3rOvdXS5+tQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.SqlServer.SmoEnum.dll" size="220000">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.SqlServer.SmoEnum.dll" size="218976">
       <assemblyIdentity name="Microsoft.SqlServer.SmoEnum" version="9.0.242.0" publicKeyToken="89845DCD8080CC91" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>kbhlnB8tlNCXzVTLwzCEgI5aoBc=</dsig:DigestValue>
+        <dsig:DigestValue>lJw2cq4OsVNQCYJCbHn9P9ZM8cU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

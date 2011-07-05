@@ -139,14 +139,14 @@ Class clsGroupDescriptions
         Return New DataTable("ERROR")
     End Function
 
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
         'Dim scope As New Transactions.TransactionScope
         Dim count As Integer = 0
 
         'Using scope
         Dim connect As New System.Data.SqlClient.SqlConnection(m_Connection.ConnectionString)
         connect.Open()
-        Dim trans As SqlClient.SqlTransaction = connect.BeginTransaction(Data.IsolationLevel.Readcommitted, "this is a test")
+        Dim trans As SqlClient.SqlTransaction = connect.BeginTransaction(Data.IsolationLevel.ReadCommitted, "this is a test")
         Try
             count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_GroupDescriptions)
 
@@ -170,15 +170,21 @@ Class clsGroupDescriptions
             Throw New ExitError("Error Committing Samples")
         End Try
         connect.Close()
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_GroupDescriptions, count)
+        'Return count
+        Return tc
     End Function
 
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
         Dim count As Integer = 0
 
         count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_GroupDescriptions)
         GC.Collect()
 
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_GroupDescriptions, count)
+        'Return count
+        Return tc
     End Function
 End Class

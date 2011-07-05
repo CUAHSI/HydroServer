@@ -218,7 +218,7 @@ Public Class frmMain
 
             lblLoadingType.Text = "Committing file to database. This may take a while."
             'rows = file.CommitTable()
-            _clsTableCount = file.GetRowcount_CommitTable()
+            _clsTableCount = file.CommitTable()
 
             If (Not _clsTableCount Is Nothing) Then
                 ShowUpdate(_clsTableCount)
@@ -306,7 +306,13 @@ Public Class frmMain
                 tempFile = Nothing
                 LogUpdate("You are loading """ & file.MyType & """")
                 Dim rows As Integer
-                rows = file.CommitTable()
+                'Dim tc As New clsTableCount
+                ' tc.Add(New counts(db_tbl_ISOMetadata, count))
+                'Return count
+                'Return tcDim rows As Integer
+
+
+                rows = file.CommitTable()(0)
 
                 If (rows > 0) Then
                     LogUpdate("Committed " & rows & " rows to the database.")

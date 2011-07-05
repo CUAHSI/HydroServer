@@ -78,9 +78,9 @@ Module modXML
         Dim MaxID As Integer = 1
         Dim i As Integer
 
-        If System.IO.File.Exists(g_EXE_Dir & "\Config.xml") Then
+        If System.IO.File.Exists(g_Config_Dir & "\Config.xml") Then
             Try
-                oldDoc.Load(g_EXE_Dir & "\Config.xml")
+                oldDoc.Load(g_Config_Dir & "\Config.xml")
                 root = oldDoc.DocumentElement
                 For i = 0 To (root.ChildNodes.Count - 1)
                     Dim tempID As Integer = Val(root.ChildNodes(i).Attributes(config_File_ID).Value)
@@ -95,7 +95,7 @@ Module modXML
             End Try
         End If
 
-        Dim writer As New XmlTextWriter(g_EXE_Dir & "\Config.xml", System.Text.Encoding.UTF8)
+        Dim writer As New XmlTextWriter(g_Config_Dir & "\Config.xml", System.Text.Encoding.UTF8)
 
         Try
             writer.WriteStartDocument()
@@ -176,9 +176,9 @@ Module modXML
 
 
         Try
-            If System.IO.File.Exists(g_EXE_Dir & "\Config.xml") Then
+            If System.IO.File.Exists(g_Config_Dir & "\Config.xml") Then
                 Dim tempFile As XmlNode
-                oldDoc.Load(g_EXE_Dir & "\Config.xml")
+                oldDoc.Load(g_Config_Dir & "\Config.xml")
                 root = oldDoc.DocumentElement
                 For Each tempFile In root
                     If Val(tempFile.Attributes(config_File_ID).Value) = oldFileID Then
@@ -236,7 +236,7 @@ Module modXML
                         Next
                         'root.AppendChild(tempFile)
                     End If
-                        oldDoc.Save(g_EXE_Dir & "\Config.xml")
+                    oldDoc.Save(g_Config_Dir & "\Config.xml")
                 Next tempFile
             End If
             Return
@@ -248,7 +248,7 @@ Module modXML
             Try
 
 
-                Dim writer As New XmlTextWriter(g_EXE_Dir & "\Config.xml", System.Text.Encoding.UTF8)
+                Dim writer As New XmlTextWriter(g_Config_Dir & "\Config.xml", System.Text.Encoding.UTF8)
                 writer.Formatting = Formatting.Indented
 
                 writer.WriteStartDocument()
