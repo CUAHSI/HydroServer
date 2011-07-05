@@ -112,40 +112,10 @@ Module modCommon
         Dim resultstr As New System.Text.StringBuilder
 
         resultstr.Append(Now.ToLongDateString & " " & Now.ToLongTimeString & vbCrLf & "The update was completed." & vbCrLf)
-        If _clsTableCount.DataValuesTableCount > 0 Then
-            resultstr.AppendLine(_clsTableCount.DataValuesTableCount & " rows committed to " & "DataValuesTable")
-        End If
 
-        If _clsTableCount.MethodTablecount > 0 Then
-            resultstr.AppendLine(_clsTableCount.MethodTablecount & " rows committed to " & "MethodTable")
-        End If
-        If _clsTableCount.OffsetTypesTablecount > 0 Then
-            resultstr.AppendLine(_clsTableCount.OffsetTypesTablecount & " rows committed to " & "OffsetTypesTable")
-        End If
-        If _clsTableCount.qualifiersTablecount > 0 Then
-            resultstr.AppendLine(_clsTableCount.qualifiersTablecount & " rows committed to " & "qualifiersTable")
-        End If
-        If _clsTableCount.QualityControlLevelStableCount > 0 Then
-            resultstr.AppendLine(_clsTableCount.QualityControlLevelStableCount & " rows committed to " & "QualityControlLevelStable")
-        End If
-        If _clsTableCount.SamplesTablecount > 0 Then
-            resultstr.AppendLine(_clsTableCount.SamplesTablecount & " rows committed to " & "SamplesTable")
-
-        End If
-        If _clsTableCount.SeriesCatalogTableCount > 0 Then
-            resultstr.AppendLine(_clsTableCount.SeriesCatalogTableCount & " rows committed to " & "SeriesCatalogTable")
-        End If
-
-        If _clsTableCount.SitesTablecount > 0 Then
-            resultstr.AppendLine(_clsTableCount.SitesTablecount & " rows committed to " & "SitesTable")
-        End If
-
-        If _clsTableCount.SourcesTableCount > 0 Then
-            resultstr.AppendLine(_clsTableCount.SourcesTableCount & " rows committed to " & "SourcesTable")
-        End If
-        If _clsTableCount.VariablesTableCount > 0 Then
-            resultstr.AppendLine(_clsTableCount.VariablesTableCount & " rows committed to " & "VariablesTable")
-        End If
+        For Each c As KeyValuePair(Of String, Integer) In _clsTableCount
+            resultstr.AppendLine(c.Value & " rows committed to " & c.Key & " Table")
+        Next
 
         'resultstr.Append(".")
 

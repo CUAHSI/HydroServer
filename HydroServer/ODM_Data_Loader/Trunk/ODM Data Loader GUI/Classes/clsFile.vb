@@ -174,16 +174,23 @@ Class clsFile
         End If
         Return Me
     End Function
-    Public Overridable Function GetRowcount_CommitTable() As clsTableCount
-        Return Nothing
-    End Function
 
-    Public Overridable Function CommitTable() As Integer
-        Return 0
+
+    'Public Overridable Function CommitTable() As Integer
+    '    Return 0
+    '    'Return m_Connection.UpdateTable(ValidateTable(m_ViewTable), "SELECT * FROM" & db_tblTableName)
+    'End Function
+    'Public Overridable Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    '    Return 0
+    '    'Return m_Connection.UpdateTable(ValidateTable(m_ViewTable), "SELECT * FROM" & db_tblTableName)
+    'End Function
+
+    Public Overridable Function CommitTable() As clsTableCount
+        Return Nothing
         'Return m_Connection.UpdateTable(ValidateTable(m_ViewTable), "SELECT * FROM" & db_tblTableName)
     End Function
-    Public Overridable Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
-        Return 0
+    Public Overridable Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
+        Return Nothing
         'Return m_Connection.UpdateTable(ValidateTable(m_ViewTable), "SELECT * FROM" & db_tblTableName)
     End Function
 

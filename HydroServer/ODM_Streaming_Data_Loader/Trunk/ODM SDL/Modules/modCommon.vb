@@ -18,6 +18,7 @@ Module Common
     ''' </summary>
     ''' <remarks></remarks>
     Public g_EXE_Dir As String
+    Public g_Config_Dir As String
 
 #End Region
 
@@ -34,7 +35,7 @@ Module Common
         '        MsgBox(message & vbCrLf & vbCrLf & err.StackTrace)
         '#End If
         Try
-            Dim Writer As New System.IO.StreamWriter(g_EXE_Dir & "\Log.txt", True)
+            Dim Writer As New System.IO.StreamWriter(g_Config_Dir & "\Log.txt", True)
             Writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Writer.WriteLine(message)
             Writer.WriteLine("Error Message: " & err.Message)
@@ -42,7 +43,7 @@ Module Common
             Writer.WriteLine()
             Writer.Close()
         Catch ex As Exception
-            Dim Writer As New System.IO.StreamWriter(g_EXE_Dir & "\Errors.txt", True)
+            Dim Writer As New System.IO.StreamWriter(g_Config_Dir & "\Errors.txt", True)
             Writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Writer.WriteLine("Error Writing to Log File.")
             Writer.WriteLine("Error Message: " & ex.Message)
@@ -61,13 +62,13 @@ Module Common
         '
 
         Try
-            Dim Writer As New System.IO.StreamWriter(g_EXE_Dir & "\Log.txt", True)
+            Dim Writer As New System.IO.StreamWriter(g_Config_Dir & "\Log.txt", True)
             Writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Writer.WriteLine("Error Message: " & message)
             Writer.WriteLine()
             Writer.Close()
         Catch ex As Exception
-            Dim Writer As New System.IO.StreamWriter(g_EXE_Dir & "\Errors.txt", True)
+            Dim Writer As New System.IO.StreamWriter(g_Config_Dir & "\Errors.txt", True)
             Writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Writer.WriteLine("Error Writing to Log File.")
             Writer.WriteLine("Error Message: " & ex.Message)
@@ -84,7 +85,7 @@ Module Common
     ''' <remarks></remarks>
     Public Sub LogUpdate(ByVal comment As String)
         Try
-            Dim Writer As New System.IO.StreamWriter(g_EXE_Dir & "\Log.txt", True)
+            Dim Writer As New System.IO.StreamWriter(g_Config_Dir & "\Log.txt", True)
             'Writer.WriteLine(Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Writer.WriteLine(comment)
             Writer.WriteLine()
@@ -92,7 +93,7 @@ Module Common
         Catch ex As Exception
             ErrorLog("Unable to update log file.", ex)
 
-            Dim Writer As New System.IO.StreamWriter(g_EXE_Dir & "\Errors.txt", True)
+            Dim Writer As New System.IO.StreamWriter(g_Config_Dir & "\Errors.txt", True)
             Writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Writer.WriteLine("Error Writing to Log File.")
             Writer.WriteLine("Error Message: " & ex.Message)

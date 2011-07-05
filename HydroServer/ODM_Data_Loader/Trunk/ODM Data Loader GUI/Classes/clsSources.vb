@@ -380,10 +380,12 @@ Class clsSources
         Return New DataTable("ERROR")
     End Function
 
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
         'Dim scope As New Transactions.TransactionScope
         Dim count As Integer = 0
         Dim otherCount As Integer = 0
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_ISOMetadata, count)
 
 
         Dim connect As New System.Data.SqlClient.SqlConnection(m_Connection.ConnectionString)
@@ -394,7 +396,8 @@ Class clsSources
             If (m_ViewTable.Columns.IndexOf(db_fld_TopicCategory) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(db_fld_Title) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(db_fld_Abstract) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(db_fld_ProfileVersion) >= 0) Then
                 LogUpdate("Finding New ISOMetadata")
                 Dim newMetaData As New clsISOMetadata(m_Connection, m_ViewTable)
-                count = newMetaData.CommitTable(connect, trans)
+                tc.AddTable(newMetaData.CommitTable(connect, trans))
+                count = tc(db_tbl_ISOMetadata)
                 If (count > 0) Then
                     otherCount += count
                     LogUpdate(count & " rows committed to ISOMetadata")
@@ -403,7 +406,9 @@ Class clsSources
 
             LogUpdate("Finding New Sources")
 
-            count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Sources)
+
+            tc.Add(db_tbl_Sources, m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Sources))
+            count = tc(db_tbl_Sources)
             otherCount += count
             LogUpdate(count & " rows committed to Sources")
             GC.Collect()
@@ -426,22 +431,27 @@ Class clsSources
             Throw New ExitError("Error Committing Samples")
         End Try
         connect.Close()
-        Return otherCount
+        'Return otherCount
+        Return tc
     End Function
 
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
         Dim count As Integer = 0
+        Dim tc As New clsTableCount
 
         If (m_ViewTable.Columns.IndexOf(db_fld_TopicCategory) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(db_fld_Title) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(db_fld_Abstract) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(db_fld_ProfileVersion) >= 0) Then
             LogUpdate("Finding New ISOMetadata")
             Dim newMetaData As New clsISOMetadata(m_Connection, m_ViewTable)
-            count = newMetaData.CommitTable(connect, trans)
+            tc.AddTable(newMetaData.CommitTable(connect, trans))
+            count = tc(db_tbl_ISOMetadata)
             LogUpdate(count & " rows committed to ISOMetadata")
         End If
 
         count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Sources)
         GC.Collect()
+        tc.Add(db_tbl_Sources, count)
+        'Return count
+        Return tc
 
-        Return count
     End Function
 End Class

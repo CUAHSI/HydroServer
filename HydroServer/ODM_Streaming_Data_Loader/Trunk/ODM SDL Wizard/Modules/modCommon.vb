@@ -38,6 +38,7 @@ Module Common
     ''' </summary>
     ''' <remarks></remarks>
     Public g_EXE_Dir As String
+    Public g_Config_Dir As String
 
 #End Region
 

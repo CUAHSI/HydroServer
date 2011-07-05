@@ -35,16 +35,15 @@ Public Class frmODMSDL
         Try
             Dim ids() As Integer = {}
             'Dim config As String = ConfigurationManager.openEXEConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal)
-            'g_EXE_Dir = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location)
+            g_EXE_Dir = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location)
             Dim tempdir As String
             tempdir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
             Dim section As String()
             'tempdir = section(0) '& section(1) & "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
-            section = Split(tempdir, "Configuration", , CompareMethod.Text)
-            g_EXE_Dir = section(0) & "StreamingDataLoader\1.1.2\"
-            IO.Directory.CreateDirectory(g_EXE_Dir)
+            section = Split(tempdir, "ODMSDL", , CompareMethod.Text)
+            g_Config_Dir = section(0) & "StreamingDataLoader\1.1.2\"
+            IO.Directory.CreateDirectory(g_Config_Dir)
             'g_EXE_Dir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
-
             'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)
             'config.SaveAs(g_EXE_Dir)
 
@@ -101,8 +100,8 @@ Public Class frmODMSDL
             Dim valueIDOffset As Integer = 0
             Dim delimiter As String = ","
 
-            If System.IO.File.Exists(g_EXE_Dir & "\Config.xml") Then
-                xmlDoc.Load(g_EXE_Dir & "\Config.xml")
+            If System.IO.File.Exists(g_Config_Dir & "\Config.xml") Then
+                xmlDoc.Load(g_Config_Dir & "\Config.xml")
 
                 LogUpdate(Now.ToLongDateString & vbTab & Now.ToLongTimeString & vbCrLf & "Config File Loaded." & vbCrLf & "Running Scheduled Update...")
                 root = xmlDoc.DocumentElement
@@ -405,7 +404,7 @@ Public Class frmODMSDL
                 Next x
                 LogUpdate("Series Catalog Tables Updated.")
 
-                xmlDoc.Save(g_EXE_Dir & "\Config.xml")
+                xmlDoc.Save(g_Config_Dir & "\Config.xml")
 
                 LogUpdate("Update Completed @ " & vbCrLf & Now.ToLongDateString & vbTab & Now.ToLongTimeString & vbCrLf & vbCrLf & " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" & vbCrLf & vbCrLf)
             Else
@@ -448,8 +447,8 @@ Public Class frmODMSDL
             Dim valueIDOffset As Integer = 0
             Dim delimiter As String = ","
 
-            If System.IO.File.Exists(g_EXE_Dir & "\Config.xml") Then
-                xmlDoc.Load(g_EXE_Dir & "\Config.xml")
+            If System.IO.File.Exists(g_Config_Dir & "\Config.xml") Then
+                xmlDoc.Load(g_Config_Dir & "\Config.xml")
 
                 LogUpdate(Now.ToLongDateString & vbTab & Now.ToLongTimeString & vbCrLf & "Config File Loaded." & vbCrLf & "Ignoring Update Schedule...")
                 root = xmlDoc.DocumentElement
@@ -740,7 +739,7 @@ Public Class frmODMSDL
                 Next x
                 LogUpdate("Series Catalog Table Updated.")
 
-                xmlDoc.Save(g_EXE_Dir & "\Config.xml")
+                xmlDoc.Save(g_Config_Dir & "\Config.xml")
 
                 LogUpdate("Update Completed @ " & vbCrLf & Now.ToLongDateString & vbTab & Now.ToLongTimeString & vbCrLf & vbCrLf & " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" & vbCrLf & vbCrLf)
             Else
