@@ -312,7 +312,8 @@ Public Class HydroServerCapabilities
                         If LCase(column.ColumnName) <> LCase(linkColumnName) Then
                             If (LCase(column.ColumnName) <> "displayorder") Then
                                 Dim columnElement As XmlElement = doc.CreateElement(column.ColumnName)
-                                columnElement.InnerText = rows(0).Item(column)
+                                'columnElement.InnerText = rows(0).Item(column)
+                                columnElement.InnerText = row.Item(column)
                                 item.AppendChild(columnElement)
                             End If
                         End If
