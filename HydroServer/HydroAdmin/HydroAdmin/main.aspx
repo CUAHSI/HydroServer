@@ -63,6 +63,8 @@
                                 <div class="art-PostHeader">
                                     &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
                                     
+                                    
+                                    
                                     <div class="infolist-block" style="z-index: 100; height:230px; border-style:groove; left: 0px; position: absolute; top: 0px">
                                     <asp:ListBox ID="odmList"  runat="server" Height="210px" Width="225px" 
                                             BackColor="#E7F2F9" 
@@ -102,7 +104,7 @@
                                </tr>
                                </table>
                                      </div>
-                                     <div style="z-index:100;text-align:left; width:100%; height:25px;left:10px;  position:absolute; top: 240px;">
+                                     <div style="z-index:100;text-align:left; width:100%; height:25px;left:10px;  position:absolute; top: 270px;">
                                           <table style=" height:23px" >
                                           <tr>
                                           <td>
@@ -137,8 +139,8 @@
                                                  
                                                  
                                                      </div>
-                                     </div>
-                                     <div class="info-block"  style="z-index:100; height:370px; border-style:groove; width:100%; left: 0px; position:absolute; top: 270px; overflow: auto">
+                                     
+                                     <div class="info-block"  style="z-index:100; height:370px; border-style:groove; width:100%; left: 0px; position:absolute; top: 300px; overflow: auto">
                                         
                                          <asp:GridView ID="odmInfoGridView" runat="server" Font-Size="X-Small" 
                                              onrowcreated="odmInfoGridView_RowCreated" onload="odmInfoGridView_Load" 
@@ -248,6 +250,7 @@
                                     
                                       </asp:GridView>
                                      </div>
+                                     
                                 </div>        
                                     &nbsp;&nbsp;
                                 
