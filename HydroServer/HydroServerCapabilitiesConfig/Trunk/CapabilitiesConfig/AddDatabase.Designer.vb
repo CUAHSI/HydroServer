@@ -218,7 +218,7 @@ Partial Class AddDatabase
         Me.txtCitation.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCitation.Location = New System.Drawing.Point(68, 327)
-        Me.txtCitation.MaxLength = 255
+        Me.txtCitation.MaxLength = 4000
         Me.txtCitation.Multiline = True
         Me.txtCitation.Name = "txtCitation"
         Me.txtCitation.Size = New System.Drawing.Size(243, 46)
