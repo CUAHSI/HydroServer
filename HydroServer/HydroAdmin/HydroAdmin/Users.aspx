@@ -73,7 +73,7 @@
                                          AutoPostBack="True" onselectedindexchanged="UserListBox_SelectedIndexChanged"></asp:ListBox>
                                  </div>
                                  </div>
-                                 <div class="info-block"  style="z-index:100; height:170px; border-style:groove; left: 240px; position: absolute; top: 0px">
+                                 <div class="info-block"  style="z-index:100; height:200px; border-style:groove; left: 240px; position: absolute; top: 0px">
                                          <table class="contacts" border="1">
                                        <tr>
                                        <td class="contactDept">Name</td><td class="value"><asp:TextBox ID="name" 
@@ -92,7 +92,7 @@
                                        </tr>
                                        </table>
                                  </div>
-                                  <div class="info-block"  style="z-index:100; height:420px; border-style:groove; left: 240px; position:absolute; top: 180px; overflow: auto">
+                                  <div class="info-block"  style="z-index:100; height:390px; border-style:groove; left: 240px; position:absolute; top: 220px; overflow: auto">
                                       <asp:GridView ID="userGroup" runat="server" Font-Size="Small" 
                                           onrowcreated="userGroup_RowCreated">
                                       <Columns>  

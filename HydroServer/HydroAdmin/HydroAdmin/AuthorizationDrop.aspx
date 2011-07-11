@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AuthorizationDrop.aspx.cs" Inherits="HydroAdmin.AuthorizationDrop" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="AuthorizationDrop.aspx.cs" Inherits="HydroAdmin.AuthorizationDrop" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -27,14 +27,15 @@
     }
     
    </script>
-</head>
+    </head>
 <body>
     <form id="form1" runat="server">
     <div id="art-page-background-simple-gradient">
     </div>
     <div id="art-main" style="left: 0px; top: 0px">
         &nbsp;&nbsp;
-        <div class="art-Sheet" style="z-index: 101">
+        
+        <div class="art-Sheet" style="z-index: 101 ; height:1100px;">
             <div class="art-Sheet-tl"></div>
             <div class="art-Sheet-tr"></div>
             <div class="art-Sheet-bl"></div>
@@ -67,27 +68,38 @@
                 			<a href="DataRequest.aspx"><span class="l"></span><span class="r"></span><span class="t">Data Request</span></a>                			
                 		</li>	
                 		<li>
-                			<a href="#" class=" active" style="z-index: 100"><span class="l"></span><span class="r"></span><span class="t">Admin</span></a>&nbsp;
+                			<a href="AuthorizationDrop.aspx" class=" active" style="z-index: 100"><span class="l"></span><span class="r"></span><span class="t">Admin</span></a>&nbsp;
                 		</li>    
                 	</ul>
                 </div>
                 <div class="art-contentLayout-main">
-                    <div class="art-content-main" style="left: 0px; top: 0px">
+                    <div class="art-content-main" style="left: 0px; top: 0px ; height:860px;">
                         <div class="art-Post">
                             <div class="art-Post-body">
                         
                                 <div class="art-PostHeader">
                                     &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+                                    <div style = " z-index: 100;  left:0px; position: absolute; top: 0px;width:100%; height:25px" >
+                                    <div style = " z-index: 100;  left:0px; position: absolute; top: 0px;width:40%; height:25px">
+                                    <table style=" width:100%; background-color:#13242e; height: 25px" border="1">
+                                       <tr>
+                                       <td style=" color: #E7F2F9 !important;   width:100%; border:none; text-align:center; background-color:#13242e;">ODM List</td>
+                                       </tr>
+                                  </table>
+                                    </div>
+                                    <div style = " z-index: 100;  left:300px; position: absolute; top: 0px;width:60%; height:25px">
+                                    <table style=" width:100%; background-color:#13242e; height: 25px" border="1">
+                                       <tr>
+                                       <td style=" color: #E7F2F9 !important;   width:100%; border:none; text-align:center; background-color:#13242e;">Users/Groups List</td>
+                                       </tr>
+                                  </table>
+                                    </div>
+                                    </div>
                                     
-                                    
-    &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
-                                    
-                                    
-                                    
-                                    <div style = " z-index: 100;left : 0px; position: absolute; top: 0px;width:100%; height:320px" >
+                                    <div style = " z-index: 100;left : 0px; position: absolute; top: 30px;width:100%; height:320px" >
                                       <div style = " z-index: 100; border-style:ridge; left : 0px; position: absolute; top: 0px;width:40%; height:320px" >
                                           
-                                          <asp:ListBox ID="DbListBox" runat="server" Height="325px" Width="300px" 
+                                          <asp:ListBox ID="DbListBox" runat="server" Height="327px" Width="290px" 
                                               AutoPostBack="True" onselectedindexchanged="DbListBox_SelectedIndexChanged"></asp:ListBox>
                                           
                                       </div>
@@ -101,8 +113,12 @@
                                                   oncheckedchanged="groupCheckBox_CheckedChanged" />
                                           </div>
                                           <div style = " z-index:100; text-align:left;   border-bottom-style:groove; float:right; position: relative; top: 5px;width:98%; height:290px; overflow:auto;">
-                                         <asp:GridView ID="userGroupGridView" runat="server" Font-Size="Small">
+                                         <asp:GridView ID="userGroupGridView" runat="server" Font-Size="Small" 
+                                                  onrowdatabound="userGroupGridView_RowDataBound" 
+                                                  onselectedindexchanged="userGroupGridView_SelectedIndexChanged">
+                                                  <HeaderStyle BorderStyle="Solid" CssClass="header" />
                                           <Columns>  
+                                                <asp:ButtonField CommandName="Select" Text="Button" Visible="False" />
                                                 <asp:TemplateField HeaderText="Select">
                                                     <ItemTemplate>
                                                         <asp:CheckBox ID="selectUserGroupCheckBox" runat="server"   AutoPostBack="true" OnCheckedChanged="selectUserGroupCheckBox_CheckedChanged"  onclick ="CheckOne(this)" />
@@ -113,43 +129,66 @@
                                           </div>
                                       </div>
                                   </div>
-                                  <div style=" text-align:left; z-index: 100;left : 0px; position: absolute; top: 330px;width:100%; height:25px;">
-                                  
-                                  <table style=" height:23px" >
-                                          <tr>
-                                          <td>
-                                          <asp:Label ID="recordCount" runat="server" Width="120px" BorderStyle="Solid" BorderWidth="1"  Font-Size="Small"></asp:Label>
-                                          </td>
-                                          <td style=" font-size:11px;">Filter by Sitecode
-                                          </td>
-                                          <td>
-                                          <asp:DropDownList ID="siteCodeDropDownList" runat="server" Width="170px" 
-                                          AutoPostBack="True" 
-                                          onselectedindexchanged="siteCodeDropDownList_SelectedIndexChanged">
-                                         </asp:DropDownList>
-                                          </td>
-                                          <td style=" font-size:11px;">Variablecode
-                                          </td>
-                                          <td>
-                                           <asp:DropDownList ID="variableCodeDropDownList" runat="server" Width="170px" 
-                                          AutoPostBack="True" 
-                                          onselectedindexchanged="variableCodeDropDownList_SelectedIndexChanged" >
-                                         </asp:DropDownList>
-                                          </td>
-                                          <td>
-                                          <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
-                                          onclick="resetOdmInfoButton_Click" />
-                                         </td>
-                                          <td> 
-                                          
-                                          <asp:Button ID="authorizationUpdate" runat="server" Text="Update" onclick="authorizationUpdate_Click" 
-                                          />
-                                          </td>
-                                          </tr>
-                                          </table>
-                                         
+                                  <div style = " z-index: 100; left:0px;position: absolute; top: 360px;width:100%; height:25px"> 
+                                  <table style=" width:100%; background-color:#13242e; height: 25px" border="1">
+                                       <tr>
+                                       <td style=" color: #E7F2F9 !important;   width:100%; border:none; text-align:left; background-color:#13242e;">Filters 
+                                           </td>
+                                       </tr>
+                                  </table>
                                   </div>
-                                   <div id="DataDiv" style = " z-index: 100; border-style:ridge; left : 0px; position: absolute; top: 365px; width:100%; height:270px; overflow:auto;">
+                                  
+                                  
+                                  
+                                  <div style=" text-align:left; z-index: 100;left : 0px; vertical-align:middle; border-style:groove; position: absolute; top: 390px;width:99%; height:36px;">
+                                  <table style=" width:100%; height:28px;">
+                                  <tr>
+                                  <td style=" width:130px;">
+                                  <asp:RadioButton ID="enableFiltersRadioButton" Text="Enable Filters" runat="server" Font-Size="13px" />
+                                  </td >
+                                          <td >
+                                                      <table>
+                                                      <tr>
+                                                      <td style=" font-size:13px; padding-right:5px;">
+                                                      SiteCode
+                                                      </td>
+                                                      <td>
+                                                      <asp:DropDownList ID="siteCodeDropDownList" runat="server" Width="170px" 
+                                                              AutoPostBack="True" 
+                                                              onselectedindexchanged="siteCodeDropDownList_SelectedIndexChanged">
+                                                             </asp:DropDownList>
+                                                      </td>
+                                                      </tr>
+                                                      </table>
+                                          </td>
+                                          <td>
+                                          
+                                                        <table>
+                                                      <tr>
+                                                      <td style=" font-size:13px; padding-right:5px;">
+                                                      VariableCode
+                                                      </td>
+                                                      <td>
+                                                      <asp:DropDownList ID="variableCodeDropDownList" runat="server" Width="170px" 
+                                                          AutoPostBack="True" 
+                                                          onselectedindexchanged="variableCodeDropDownList_SelectedIndexChanged" >
+                                                         </asp:DropDownList>
+                                                      </td>
+                                                      </tr>
+                                                      </table>
+                                          
+                                          </td>
+                                  <td>
+                                  <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
+                                          onclick="resetOdmInfoButton_Click" />
+                                  </td>
+                                  </tr>
+                                  </table>
+                                  
+                                  </div>
+                                  
+                                  
+                                   <div id="DataDiv" style = " z-index: 100; border-style:ridge; left : 0px; position: absolute; top: 435px; width:99%; height:375px; overflow:auto;">
                                       <asp:GridView ID="odmInfoGridView" runat="server" Font-Size="X-Small" 
                                           BorderStyle="Solid"  onprerender="odmInfoGridView_PreRender" 
                                           AutoGenerateColumns="true" 
@@ -271,12 +310,14 @@
                                     
                                     
                                       </asp:GridView>
-                                  </div>
+                                  </div>        
                                   
-                                </div>        
+                                  <div style = " z-index: 100;  left:0px; text-align:right; position: absolute; top: 825px;width:100%; height:25px">
+                                      <asp:Button ID="updateAccessControl" runat="server" Text="Update" />
+                                  </div>
                                     &nbsp;&nbsp;
                                 
-                        
+                        </div>
                         		<div class="cleared"></div>
                             </div>
                         </div>
@@ -286,7 +327,8 @@
                     <div class="art-Footer-inner" style="left: 0px; top: -4px">
                         
                         <div class="art-Footer-text">
-                            <p align="right"><a href="#" >Contact Us>
+                            <p align="right"><a href="#" >Contact Us</a></p>
+                        </div>
                     </div>
                     <div class="art-Footer-background" style="left: 4px; bottom: -80px"></div>
                 </div>
@@ -299,4 +341,3 @@
     </form>
 </body>
 </html>
-

@@ -90,6 +90,7 @@
     <Content Include="images\uptri.gif" />
     <Content Include="ODMUpload.aspx" />
     <Content Include="stylesheets\style.css" />
+    <Content Include="tesdesign.aspx" />
     <Content Include="TimeSeriesInformation.aspx" />
     <Content Include="UserQuickInfo.aspx" />
     <Content Include="Users.aspx" />
@@ -133,6 +134,13 @@
       <DependentUpon>ODMUpload.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tesdesign.aspx.cs">
+      <DependentUpon>tesdesign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tesdesign.aspx.designer.cs">
+      <DependentUpon>tesdesign.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TimeSeriesInformation.aspx.cs">
       <DependentUpon>TimeSeriesInformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

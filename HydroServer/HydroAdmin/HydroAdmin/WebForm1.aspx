@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="HydroAdmin.WebForm1" %>
+﻿<%@ Page Language="C#" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="HydroAdmin.WebForm1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -30,37 +30,22 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+  
+    <div style=" height:400px; width:400px; border-style:groove; overflow:auto">
     
     
+    <asp:GridView ID="GridView1" runat="server" 
+        onrowdatabound="GridView1_RowDataBound" 
+        onselectedindexchanged="GridView1_SelectedIndexChanged">
+        <Columns>
+            <asp:ButtonField  CommandName="Select" Text="Button" Visible="False" />
+        </Columns>
+    </asp:GridView>
+        
     </div>
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    <asp:Table ID="Table1" runat="server">
-    </asp:Table>
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
+    <div>
+    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+    </div>
     
     
     

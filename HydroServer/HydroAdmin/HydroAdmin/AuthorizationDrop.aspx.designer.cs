@@ -59,13 +59,13 @@ namespace HydroAdmin {
         protected global::System.Web.UI.WebControls.GridView userGroupGridView;
         
         /// <summary>
-        /// recordCount control.
+        /// enableFiltersRadioButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label recordCount;
+        protected global::System.Web.UI.WebControls.RadioButton enableFiltersRadioButton;
         
         /// <summary>
         /// siteCodeDropDownList control.
@@ -95,15 +95,6 @@ namespace HydroAdmin {
         protected global::System.Web.UI.WebControls.Button resetOdmInfoButton;
         
         /// <summary>
-        /// authorizationUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button authorizationUpdate;
-        
-        /// <summary>
         /// odmInfoGridView control.
         /// </summary>
         /// <remarks>
@@ -111,5 +102,14 @@ namespace HydroAdmin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView odmInfoGridView;
+        
+        /// <summary>
+        /// updateAccessControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button updateAccessControl;
     }
 }

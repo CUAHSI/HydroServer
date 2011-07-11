@@ -53,7 +53,7 @@ namespace HydroAdmin
             odmInfoGridView.DataSource = timeSeriesTable;
             odmInfoGridView.DataBind();
             ViewState["mydata"] = timeSeriesTable;
-            recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
+            //recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
 
             List<string> siteCodeListObj = new List<string>();
             List<string> variableCodeListObj = new List<string>();
@@ -104,7 +104,7 @@ namespace HydroAdmin
             siteCodeDropDownList.DataBind();
             variableCodeDropDownList.DataSource = variableCodeListObj.Distinct().ToList();
             variableCodeDropDownList.DataBind();
-            recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
+            //recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
 
         }
 
@@ -139,7 +139,7 @@ namespace HydroAdmin
             siteCodeDropDownList.DataBind();
             variableCodeDropDownList.DataSource = variableCodeListObj.Distinct().ToList();
             variableCodeDropDownList.DataBind();
-            recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
+            //recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
         }
 
         protected void resetOdmInfoButton_Click(object sender, EventArgs e)
@@ -156,7 +156,7 @@ namespace HydroAdmin
             odmInfoGridView.DataSource = timeSeriesTable;
             odmInfoGridView.DataBind();
             ViewState["mydata"] = timeSeriesTable;
-            recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
+            //recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
 
             List<string> siteCodeListObj = new List<string>();
             List<string> variableCodeListObj = new List<string>();
@@ -226,7 +226,7 @@ namespace HydroAdmin
                     CheckBox box = (CheckBox)row.FindControl("selectUserGroupCheckBox");
                     if (box.Checked)
                     {
-                        int userid = Convert.ToInt16(row.Cells[1].Text.ToString());
+                        int userid = Convert.ToInt16(row.Cells[2].Text.ToString());
                         userIdList.Add(userid);
                     }
                 }
@@ -304,7 +304,7 @@ namespace HydroAdmin
               CheckBox box = (CheckBox)row.FindControl("selectUserGroupCheckBox");
               if (box.Checked)
               {
-                  userIdSelected = Convert.ToInt16(row.Cells[1].Text.ToString());
+                  userIdSelected = Convert.ToInt16(row.Cells[2].Text.ToString());
               }
             }
             AccessControl accessObj = new AccessControl();
@@ -500,6 +500,37 @@ namespace HydroAdmin
                 row.Cells[14].Width = 30;
             }
         }
+
+        protected void userGroupGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            e.Row.Cells[1].Visible = false;
+            e.Row.Cells[2].Visible = false;
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    // Get reference to button field in the gridview.  
+                    LinkButton _singleClickButton = (LinkButton)e.Row.Cells[0].Controls[0];
+                    string _jsSingle = ClientScript.GetPostBackClientHyperlink(_singleClickButton, "Select$" + e.Row.RowIndex);
+                    e.Row.Style["cursor"] = "hand";
+                    e.Row.Attributes["onclick"] = _jsSingle;
+                }
+            }  
+        }
+
+        protected void userGroupGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (GridViewRow row in userGroupGridView.Rows)
+            {
+                row.BackColor = System.Drawing.Color.White;
+            }
+            
+            GridViewRow selectedRow = userGroupGridView.SelectedRow;
+            //TextBox1.Text = selectedRow.Cells[3].Text;
+            selectedRow.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.LightBlue);
+        }
+
 
         
 
