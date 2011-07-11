@@ -268,13 +268,20 @@ Public Class HydroServerCapabilities
             record.Attributes.Append(RecordID)
             For Each column As DataColumn In table.Columns
                 Dim info As XmlElement = record.AppendChild(doc.CreateElement(column.ColumnName))
-                info.InnerText = row.Item(column).ToString
+                info.InnerText = prepareString(row.Item(column).ToString)
             Next column
         Next row
 
         Return records
     End Function
+    Private Function prepareString(ByVal text As String) As String
 
+        text = text.Replace("’", "'")
+        'text = text.Replace("'", "&apos;")
+        ’'
+
+        Return text
+    End Function
     Private Sub LinkTableToXML(ByVal table As DataTable, ByVal linkingElementName As String, ByVal linkingColumnName As String, ByVal linkedElementName As String, ByRef Records As XmlElement, ByRef doc As XmlDocument)
         For Each Record As XmlElement In Records.ChildNodes
             Dim LinkColumn As XmlElement = Record.Item(linkingElementName)
@@ -285,7 +292,7 @@ Public Class HydroServerCapabilities
                 If rows.Count > 0 Then
                     For Each column As DataColumn In table.Columns
                         Dim columnElement As XmlElement = doc.CreateElement(column.ColumnName)
-                        columnElement.InnerText = rows(0).Item(column).ToString
+                        columnElement.InnerText = prepareString(rows(0).Item(column).ToString)
                         LinkElement.AppendChild(columnElement)
                     Next column
 
@@ -294,6 +301,7 @@ Public Class HydroServerCapabilities
             End If
         Next Record
     End Sub
+   
 
     Private Sub LinkMetadataToXML(ByVal Metadata As DataTable, ByVal linkColumnName As String, ByVal records As XmlElement, ByVal doc As XmlDocument)
         For Each Record As XmlElement In records.ChildNodes
@@ -313,7 +321,7 @@ Public Class HydroServerCapabilities
                             If (LCase(column.ColumnName) <> "displayorder") Then
                                 Dim columnElement As XmlElement = doc.CreateElement(column.ColumnName)
                                 'columnElement.InnerText = rows(0).Item(column)
-                                columnElement.InnerText = row.Item(column)
+                                columnElement.InnerText = prepareString(row.Item(column))
                                 item.AppendChild(columnElement)
                             End If
                         End If
