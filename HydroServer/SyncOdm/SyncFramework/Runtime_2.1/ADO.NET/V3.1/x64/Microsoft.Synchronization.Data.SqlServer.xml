@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Synchronization.Data.SqlServer</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncDescriptionBuilder">
+      <summary>Represents scope and table information for a SQL Server database that is involved in synchronization.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncDescriptionBuilder.GetDescriptionForScope(System.String,System.Data.SqlClient.SqlConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope that is defined for a SQL Server database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope.</returns>
+      <param name="scopeName">The name of the scope for which to retrieve a description.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is  null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="scopeName" /> is a null or empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncDescriptionBuilder.GetDescriptionForScope(System.String,System.String,System.Data.SqlClient.SqlConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope that is defined for a SQL Server database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope.</returns>
+      <param name="scopeName">The name of the scope for which to retrieve a description.</param>
+      <param name="objectPrefix">The optional prefix that is used to identify objects that Sync Framework creates.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is  null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="scopeName" /> is a null or empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncDescriptionBuilder.GetDescriptionForScope(System.String,System.String,System.String,System.Data.SqlClient.SqlConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope that is defined for a SQL Server database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope.</returns>
+      <param name="scopeName">The name of the scope for which to retrieve a description.</param>
+      <param name="objectPrefix">The optional prefix that is used to identify objects that Sync Framework creates.</param>
+      <param name="objectSchema">The database schema in which Sync Framework creates objects.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is  null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="scopeName" /> is a null or empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncDescriptionBuilder.GetDescriptionForTable(System.String,System.Collections.ObjectModel.Collection{System.String},System.Data.SqlClient.SqlConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object that contains schema information about the specified table in a SQL Server database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object that contains schema information about the specified table.</returns>
+      <param name="tableName">The name of the table for which to retrieve a description.</param>
+      <param name="columnNames">A list of columns for which to retrieve information.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlServerCe.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is  null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="tableName" /> is a null or empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncDescriptionBuilder.GetDescriptionForTable(System.String,System.Data.SqlClient.SqlConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object that contains schema information about the specified table in a SQL Server database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object that contains schema information about the specified table.</returns>
+      <param name="tableName">The name of the table for which to retrieve a description.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is  null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="tableName" /> is a null or empty.</exception>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider">
+      <summary>Represents a synchronization provider that communicates with a SQL Server database and shields other Sync Framework components from the specific implementation of the database.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider" /> class by using default values.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.#ctor(System.String,System.Data.SqlClient.SqlConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider" /> class for the specified scope name and connection.</summary>
+      <param name="scopeName">The name of the scope, which defines the set of tables (with optional filters) to synchronize.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.#ctor(System.String,System.Data.SqlClient.SqlConnection,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider" /> class for the specified scope name, connection, and synchronization object prefix.</summary>
+      <param name="scopeName">The name of the scope, which defines the set of tables (with optional filters) to synchronize.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.#ctor(System.String,System.Data.SqlClient.SqlConnection,System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider" /> class for the specified scope name, connection, synchronization object prefix, and object schema.</summary>
+      <param name="scopeName">The name of the scope, which defines the set of tables (with optional filters) to synchronize.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+      <param name="objectSchema">The database schema in which Sync Framework creates objects.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.ApplicationTransactionSize">
+      <summary>Gets or sets the maximum transaction size used during change application, in kilobytes.</summary>
+      <returns>The maximum transaction size used during change application, in kilobytes. The default value is 0, which indicates no limit on the transaction size.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.BeginSession(Microsoft.Synchronization.SyncProviderPosition,Microsoft.Synchronization.SyncSessionContext)">
+      <summary>Called by the <see cref="T:Microsoft.Synchronization.SyncOrchestrator" /> to indicate that a synchronization session has started.</summary>
+      <param name="position">A <see cref="T:Microsoft.Synchronization.SyncProviderPosition" /> enumeration value that represents whether a provider is associated with the local or remote database.</param>
+      <param name="syncSessionContext">A <see cref="T:Microsoft.Synchronization.SyncSessionContext" /> object that contains information about the current synchronization session.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DbSyncException">A session is already begun.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.CommandTimeout">
+      <summary>Gets or sets the wait time, in seconds, before a synchronization command is stopped and an error is generated.</summary>
+      <returns>The wait time, in seconds, before a synchronization command is stopped and an error is generated. The default value is the default ADO.NET value of 30 seconds. Setting this value to 0 indicates that commands do not time out.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.ObjectSchema">
+      <summary>Gets or sets the optional database schema in which Sync Framework creates objects.</summary>
+      <returns>The database schema in which Sync Framework creates objects.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider.ScopeName">
+      <summary>Sets the name of the scope to synchronize, which is a logical group of tables with optional filters.</summary>
+      <returns>The name of the scope to synchronize.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration">
+      <summary>Represents synchronization adapter configuration for a table in a SQL Server database.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.BuildAdapter(System.Data.SqlClient.SqlConnection)">
+      <summary>Creates and returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncAdapter" /> object that represents a table in a SQL Server database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncAdapter" /> object that represents a table in a SQL Server database.</returns>
+      <param name="connection">A connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.BulkDeleteProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to delete data in bulk in a base table during synchronization.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to delete bulk data in a base table during synchronization.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.BulkInsertProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to add data in bulk in a base table during synchronization.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to add data in bulk in a base table during synchronization.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.BulkTableTypeName">
+      <summary>Gets or sets the table type name that Sync Framework uses for bulk procedures.</summary>
+      <returns>The table type name that Sync Framework uses for bulk procedures.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.BulkUpdateProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to update data in bulk in a base table during synchronization.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to update data in bulk in a base table during synchronization.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.Columns">
+      <summary>Gets a collection of <see cref="T:Microsoft.Synchronization.Data.DbSyncColumnDescription" /> objects that represent all columns in a table.</summary>
+      <returns>A collection of objects that represent all columns in a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.DeleteMetadataProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to delete metadata from a tracking table.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to delete metadata from a tracking table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.DeleteProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to delete data from a base table during synchronization.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to delete data from a base table during synchronization.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.DeleteTriggerName">
+      <summary>Gets or sets the name of the delete trigger that Sync Framework creates on a base table to update metadata in a tracking table.</summary>
+      <returns>The name of the delete trigger that Sync Framework creates on a base table to update metadata in a tracking table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.FilterClause">
+      <summary>Specifies the SQL WHERE clause (without the WHERE keyword) that is used to filter the result set from the base table.</summary>
+      <returns>The SQL WHERE clause (without the WHERE keyword) that is used to filter the result set from the base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.FilterColumns">
+      <summary>Gets the list of columns that are used for filtering.</summary>
+      <returns>The list of columns that are used for filtering.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.FilterParameters">
+      <summary>Gets a collection of parameters that are used for filtering and that are specified in <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.FilterClause" />.</summary>
+      <returns>The collection of parameters that are used for filtering.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.GlobalTableName">
+      <summary>Gets or sets the name, including database-specific delimiters that other nodes in a synchronization topology use to identify a table.</summary>
+      <returns>The name that other nodes in a synchronization topology use to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.InsertMetadataProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to insert metadata into a tracking table.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to insert metadata into a tracking table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.InsertProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to insert data into a base table during synchronization.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to insert data into a base table during synchronization.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.InsertTriggerName">
+      <summary>Gets or sets the name of the insert trigger that Sync Framework creates on a base table to update metadata in a tracking table.</summary>
+      <returns>The name of the insert trigger that Sync Framework creates on a base table to update metadata in a tracking table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.SelectChangesProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to select changes from a base table during synchronization.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to select changes from a base table during synchronization.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.SelectRowProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to select conflicting rows from a base table during synchronization.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to select conflicting rows from a base table during synchronization.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.TableName">
+      <summary>Gets or sets the name, not including database-specific delimiters, that the local node in a synchronization topology uses to identify a table.</summary>
+      <returns>The name that the local node in a synchronization topology uses to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.TrackingTableName">
+      <summary>Gets the name, not including database-specific delimiters, of the tracking table for a specific base table.</summary>
+      <returns>The name of the tracking table for a specific base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.UnmappedElements">
+      <summary>Gets or sets an array of any XML configuration elements that are not recognized by Sync Framework when an adapter is configured.</summary>
+      <returns>An array of any XML configuration elements that are not recognized by Sync Framework.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.UnquotedTrackingTableName">
+      <summary>Gets the name, not including database-specific delimiters, of the tracking table for a specific base table.</summary>
+      <returns>The name of the tracking table for a specific base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.UpdateMetadataProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to update metadata in a tracking table.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to update metadata in a tracking table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.UpdateProcName">
+      <summary>Gets or sets the name of the stored procedure that Sync Framework uses to update data in a base table during synchronization.</summary>
+      <returns>The name of the stored procedure that Sync Framework uses to update data in a base table during synchronization.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration.UpdateTriggerName">
+      <summary>Gets or sets the name of the update trigger that Sync Framework creates on a base table to update metadata in a tracking table.</summary>
+      <returns>The name of the update trigger that Sync Framework creates on a base table to update metadata in a tracking table.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfigurationCollection">
+      <summary>Represents a collection of <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration" /> objects that can be indexed by the names of their associated tables.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfigurationCollection.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfigurationCollection" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfigurationCollection.Item(System.String)">
+      <summary>An indexer property that gets the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration" /> object that is associated with the specified table.</summary>
+      <returns>The <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration" /> object that is associated with <paramref name="globalTableName" />. Returns null if the specified table is not found.</returns>
+      <param name="globalTableName">The name of the table to look up.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParameters">
+      <summary>Represents a set of parameters and the name of their associated table.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParameters.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParameters" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParameters.FilterParameters">
+      <summary>Gets the collection of filter parameters that are used to control which items are enumerated from the table specified in <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParameters.TableName" />.</summary>
+      <returns>The filter parameters for the associated table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParameters.TableName">
+      <summary>Gets or sets the name of the SQL Server table that is associated with this set of parameters.</summary>
+      <returns>The name of the data table that is associated with this set of parameters.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParametersCollection">
+      <summary>Represents the collection of parameter sets that are associated with the tables used by this adapter.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParametersCollection.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParametersCollection" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterParametersCollection.Item(System.String)">
+      <summary>An indexer property that gets the parameters that are associated with the specified table.</summary>
+      <returns>Returns the parameters that are associated with the table specified by <paramref name="tableName" />.</returns>
+      <param name="tableName">The name of the table to look up.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderFilterParameter">
+      <summary>Contains a name and value pair for a filter parameter that controls what items are enumerated during synchronization.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderFilterParameter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderFilterParameter" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderFilterParameter.#ctor(System.Data.SqlClient.SqlParameter)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderFilterParameter" /> class with the specified <see cref="T:System.Data.SqlClient.SqlParameter" />.</summary>
+      <param name="parameter">The <see cref="T:System.Data.SqlClient.SqlParameter" /> that is used to initialize the object.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderFilterParameter.ParameterName">
+      <summary>Gets or sets the name of the filter parameter.</summary>
+      <returns>The parameter name.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderFilterParameter.Value">
+      <summary>Gets or set the value of the filter parameter.</summary>
+      <returns>The value of the filter parameter.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeConfiguration">
+      <summary>Represents configuration information that is used by <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider" /> for a particular scope.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeConfiguration.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeConfiguration" /> class. </summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeConfiguration.AdapterConfigurations">
+      <summary>Gets or sets a list of <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration" /> objects that are each associated with a table in a SQL Server database.</summary>
+      <returns>A list of <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderAdapterConfiguration" /> objects that are each associated with a table in a SQL Server database.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeConfiguration.IsTemplate">
+      <summary>Gets or sets a value that indicates whether the associated scope is a template.</summary>
+      <returns>true if the associated scope is a template; otherwise, false.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeConfiguration.UnmappedElements">
+      <summary>Gets or sets an array of any XML configuration elements that are not recognized by Sync Framework when a scope is configured.</summary>
+      <returns>An array of any XML configuration elements that are not recognized by Sync Framework.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeParameters">
+      <summary>Represents the collection of parameter sets associated with all of the tables in the scope.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeParameters.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeParameters" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncProviderScopeParameters.AdapterParameters">
+      <summary>Gets the collection of parameter sets associated with all of the tables in the scope.</summary>
+      <returns>The collection of parameter sets associated with all of the tables in the scope.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning">
+      <summary>Removes scopes, templates, and other synchronization elements from a SQL Server database that was previously provisioned for synchronization.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.#ctor(System.Data.SqlClient.SqlConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning" /> class with the specified connection.</summary>
+      <param name="connection">A connection to the database.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.CommandTimeout">
+      <summary>Gets or sets the wait time, in seconds, before a deprovisioning command is stopped and an error is generated.</summary>
+      <returns>The wait time, in seconds, before a deprovisioning command is stopped and an error is generated. The default value is the default ADO.NET value of 30 seconds. Setting this value to 0 indicates that commands do not time out.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.DeprovisionScope(System.String)">
+      <summary>Deprovisions the specified scope by removing all associated synchronization elements from the database.</summary>
+      <param name="scopeName">The name of the scope to deprovision.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.DeprovisionStore">
+      <summary>Removes all synchronization metadata tables, triggers, and stored procedures from the database.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.DeprovisionTemplate(System.String)">
+      <summary>Deprovisions the specified template and all scopes that were created from the specified template by removing all associated synchronization elements from the database.</summary>
+      <param name="templateName">The name of the template to deprovision.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The optional prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.ObjectSchema">
+      <summary>Gets or sets the optional database schema in which Sync Framework creates objects.</summary>
+      <returns>The database schema in which Sync Framework creates objects.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.ScriptDeprovisionScope(System.String)">
+      <summary>Generates a script that can be used to deprovision a scope.</summary>
+      <returns>The generated script for deprovisioning a scope.</returns>
+      <param name="scopeName">A scope for which to produce a deprovisioning script.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.ScriptDeprovisionStore">
+      <summary>Generates a script that can be used to remove all synchronization metadata, triggers, and stored procedures from a database.</summary>
+      <returns>The generated script for deprovisioning a database.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeDeprovisioning.ScriptDeprovisionTemplate(System.String)">
+      <summary>Generates a script that can be used to deprovision a template and all scopes that were created from that template.</summary>
+      <returns>The generated script for deprovisioning a template and all scopes that were created from that template.</returns>
+      <param name="templateName">The name of the template to deprovision.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning">
+      <summary>Represents the provisioning of a SQL Server database for a particular scope that is represented by a <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning" /> class by using default values.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.#ctor(Microsoft.Synchronization.Data.DbSyncScopeDescription)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning" /> class for the specified scope.</summary>
+      <param name="scopeDescription">A logical grouping of tables (optionally filtered) that are synchronized as a unit.</param>
+      <exception cref="T:Micrososft.Synchronization.Data.DbProvisioningException">
+        <paramref name="scopeDescription" /> is empty or  null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.#ctor(System.Data.SqlClient.SqlConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning" /> class with the specified connection.</summary>
+      <param name="connection">A connection to the database that will be provisioned.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.#ctor(System.Data.SqlClient.SqlConnection,Microsoft.Synchronization.Data.DbSyncScopeDescription)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning" /> class with the specified connection and scope description.</summary>
+      <param name="connection">A connection to the database that will be provisioned.</param>
+      <param name="scopeDescription">The description of the scope.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.#ctor(System.Data.SqlClient.SqlConnection,Microsoft.Synchronization.Data.DbSyncScopeDescription,Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioningType)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning" /> class with the specified connection, scope description, and provisioning type.</summary>
+      <param name="connection">A connection to the database that will be provisioned.</param>
+      <param name="scopeDescription">The description of the scope.</param>
+      <param name="provisioningType">The kind of provisioning that this object will be used for.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.#ctor(System.Data.SqlClient.SqlConnection,Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioningType)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning" /> class with the specified connection and provisioning type</summary>
+      <param name="connection">A connection to the database that will be provisioned.</param>
+      <param name="provisioningType">The kind of provisioning that this object will be used for.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.Apply">
+      <summary>Applies the provisioning script to a SQL Server database by using the connection that was specified in the constructor.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.Apply(System.Data.SqlClient.SqlConnection)">
+      <summary>Applies the provisioning script to a SQL Server database over the specified connection.</summary>
+      <param name="connection">A connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is  null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.CommandTimeout">
+      <summary>Gets or sets the wait time, in seconds, before a provisioning command is stopped and an error is generated.</summary>
+      <returns>The wait time, in seconds, before a provisioning command is stopped and an error is generated. The default value is the default ADO.NET value of 30 seconds. Setting this value to 0 indicates that commands do not time out.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectSchema">
+      <summary>Gets or sets the database schema in which Sync Framework creates objects.</summary>
+      <returns>The database schema in which Sync Framework creates objects.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.PopulateFromScopeDescription(Microsoft.Synchronization.Data.DbSyncScopeDescription)">
+      <summary>Sets the scope description from which the database should be provisioned.</summary>
+      <param name="scopeDescription">An object that represents how the scope is configured.</param>
+      <exception cref="T:Micrososft.Synchronization.Data.DbProvisioningException">
+        <paramref name="scopeDescription" /> is empty or null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.PopulateFromTemplate(System.String,System.String)">
+      <summary>Sets the template-based scope description from which the database should be provisioned.</summary>
+      <param name="scopeName">The name the scope.</param>
+      <param name="templateName">The name of the template.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ScopeExists(System.String)">
+      <summary>Indicates whether the specified scope exists in the database by using the connection that was specified in the constructor.</summary>
+      <returns>true if the specified scope exists in the database; otherwise, false.</returns>
+      <param name="scopeName">The name of the scope to look up.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ScopeExists(System.String,System.Data.SqlClient.SqlConnection)">
+      <summary>Returns whether the specified scope exists.</summary>
+      <param name="scopeName">The name of the scope to check.</param>
+      <param name="connection">A connection to the database.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="scopeName" /> is null or empty.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ScopeName">
+      <summary>Gets the name of the scope or template that this object represents.</summary>
+      <returns>The name of the scope or template that this object represents.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.Script">
+      <summary>Generates a string that contains the SQL code to provision the database for a particular scope by using the connection that was specified in the constructor.</summary>
+      <returns>The SQL code to provision the database.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.Script(System.String)">
+      <summary>Generates a string that contains the SQL code to provision the database for a particular scope.</summary>
+      <returns>The SQL code to provision the database for a particular scope.</returns>
+      <param name="targetDatabaseName">The name of the database for which the provisioning script should be generated.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="targetDatabaseName" /> is  null or empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.SetCreateProceduresDefault(Microsoft.Synchronization.Data.DbSyncCreationOption)">
+      <summary>Sets whether to create a set of stored procedures that insert, update, and delete data and synchronization metadata.</summary>
+      <param name="defaultOption">A <see cref="T:Microsoft.Synchronization.Data.DbSyncCreationOption" /> enumeration value that specifies whether to create the stored procedures.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.SetCreateProceduresForAdditionalScopeDefault(Microsoft.Synchronization.Data.DbSyncCreationOption)">
+      <summary>Sets whether to create additional stored procedures for a scope that contains tables that have already been provisioned for other scopes. For example, this scope adds a filter column to a table that has already been provisioned without the filter column. Set this option to <see cref="F:Microsoft.Synchronization.Data.DbSyncCreationOption.Create" /> to ensure that an additional change enumeration procedure is created that can handle the filter column.</summary>
+      <param name="defaultOption">A <see cref="T:Microsoft.Synchronization.Data.DbSyncCreationOption" /> enumeration value that specifies whether to create the additional stored procedures.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.SetCreateTableDefault(Microsoft.Synchronization.Data.DbSyncCreationOption)">
+      <summary>Sets whether to create base tables when a scope is configured. Base tables are tables that contain user data, as opposed to tracking tables that contain synchronization metadata.</summary>
+      <param name="defaultOption">A <see cref="T:Microsoft.Synchronization.Data.DbSyncCreationOption" /> enumeration value that specifies whether to create base tables.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.SetCreateTrackingTableDefault(Microsoft.Synchronization.Data.DbSyncCreationOption)">
+      <summary>Sets whether to create tables that store change-tracking metadata.</summary>
+      <param name="defaultOption">A <see cref="T:Microsoft.Synchronization.Data.DbSyncCreationOption" /> enumeration value that specifies whether to create tables that store change-tracking metadata.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.SetCreateTriggersDefault(Microsoft.Synchronization.Data.DbSyncCreationOption)">
+      <summary>Sets whether to create, on base tables, triggers that update tracking tables.</summary>
+      <param name="defaultOption">A <see cref="T:Microsoft.Synchronization.Data.DbSyncCreationOption" /> enumeration value that specifies whether to create triggers on base tables.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.SetPopulateTrackingTableDefault(Microsoft.Synchronization.Data.DbSyncCreationOption)">
+      <summary>Sets whether to insert metadata into change-tracking tables for rows that already exist in base tables.</summary>
+      <param name="defaultOption">A <see cref="T:Microsoft.Synchronization.Data.DbSyncCreationOption" /> enumeration value that specifies whether to insert metadata into change-tracking tables.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.SetUseBulkProceduresDefault(System.Boolean)">
+      <summary>Sets a value that indicates whether bulk procedures should be created when provisioning stored procedures.</summary>
+      <param name="useBulk">true if bulk procedures should be provisioned; otherwise false.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.Tables">
+      <summary>Gets a collection of objects that each represent the provisioning of a database table.</summary>
+      <returns>A collection of objects that each represent the provisioning of a database table.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.TemplateExists(System.String)">
+      <summary>Returns whether the specified template exists in the database.</summary>
+      <returns>true if the specified template exists in the database; otherwise, false.</returns>
+      <param name="templateName"> The name of the template to look up.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.UserComment">
+      <summary>Gets or sets the user-specified comment about the scope.</summary>
+      <returns>The user-specified comment about the scope.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioningType">
+      <summary>Defines the kind of provisioning performed by a <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning" /> object.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioningType.Scope">
+      <summary>Scope provisioning. After a scope is provisioned, the database can be synchronized for the specified scope.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioningType.Template">
+      <summary>Template provisioning. After a template is provisioned, a scope can be created from the template by specifying a set of parameter values.</summary>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncSqlParameterCollection">
+      <summary>Represents a collection of <see cref="T:System.Data.SqlClient.SqlParameter" /> objects that can be indexed by the name of the parameter.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncSqlParameterCollection.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncSqlParameterCollection" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncSqlParameterCollection.Item(System.String)">
+      <summary>An indexer property that gets the parameter object with the specified name in the collection.</summary>
+      <returns>The parameter object with the specified name in the collection.</returns>
+      <param name="parameterName">The name of the parameter to retrieve from the collection.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup">
+      <summary>Represents cleanup of change-tracking metadata in a SQL Server database that is synchronized by using a <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncProvider" />.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.#ctor(System.Data.SqlClient.SqlConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup" /> class with the specified connection.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.#ctor(System.Data.SqlClient.SqlConnection,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup" /> class with the specified connection and object prefix.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.#ctor(System.Data.SqlClient.SqlConnection,System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup" /> class with the specified connection, object prefix, and object schema.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+      <param name="objectSchema">The database schema in which Sync Framework creates objects.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.#ctor(System.Data.SqlClient.SqlConnection,System.String,System.String,System.Int32)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup" /> class with the specified connection, object prefix, object schema, and metadata retention period.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+      <param name="objectSchema">The database schema in which Sync Framework creates objects.</param>
+      <param name="retentionInDays">How old change-tracking metadata must be, in days, for that metadata to be deleted when <see cref="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.PerformCleanup" /> is called.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.CommandTimeout">
+      <summary>Gets or sets the wait time, in seconds, before a metadata cleanup command is stopped and an error is generated.</summary>
+      <returns>The wait time, in seconds, before a metadata cleanup command is stopped and an error is generated. The default value is the default ADO.NET value of 30 seconds. Setting this value to 0 indicates that commands do not time out.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.Connection">
+      <summary>Gets or sets a <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</summary>
+      <returns>A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.ObjectSchema">
+      <summary>Gets or sets the database schema in which Sync Framework creates objects.</summary>
+      <returns>The database schema in which Sync Framework creates objects.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.PerformCleanup">
+      <summary>Removes change-tracking metadata for all scopes from the database and updates the cleanup knowledge to reflect the point where the cleanup process stopped.</summary>
+      <returns>true if metadata cleanup ran successfully. Otherwise false.</returns>
+      <exception cref="T:System.ArgumentNullException">
+        <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.Connection" /> is a null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.RetentionInDays">
+      <summary>Gets or sets how old change-tracking metadata must be, in days, for that metadata to be deleted when <see cref="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataCleanup.PerformCleanup" /> is called.</summary>
+      <returns>The number of days old that change-tracking metadata must be for that metadata to be deleted.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade">
+      <summary>Upgrades the metadata format of the database to the current version.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade.#ctor(System.Data.SqlClient.SqlConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade" /> class with the specified connection.</summary>
+      <param name="connection">A connection to the database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade.#ctor(System.Data.SqlClient.SqlConnection,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade" /> class with the specified connection and object prefix.</summary>
+      <param name="connection">A connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates. This prefix must match the prefix that was used to provision the database or the upgrade will fail.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade.#ctor(System.Data.SqlClient.SqlConnection,System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade" /> class with the specified connection, object prefix, and object schema.</summary>
+      <param name="connection">A connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates. This prefix must match the prefix that was used to provision the database or the upgrade will fail.</param>
+      <param name="objectSchema">The database schema that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectSchema" /> property. When specified, Sync Framework creates synchronization objects in this schema. This schema must match the schema that was used to provision the database or the upgrade will fail.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade.Connection">
+      <summary>Gets or sets the database connection over which the upgrade is performed.</summary>
+      <returns>The connection to the database over which the upgrade is performed.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade.NeedsUpgrade">
+      <summary>Indicates whether the metadata format of the database needs to be upgraded.</summary>
+      <returns>true when the metadata format needs to be upgraded. false when the metadata format is the current version.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade.ObjectSchema">
+      <summary>Gets or sets the database schema in which Sync Framework creates objects.</summary>
+      <returns>The database schema in which Sync Framework creates objects.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreMetadataUpgrade.UpgradeSyncSchema">
+      <summary>Upgrades the metadata format to the current version.</summary>
+      <returns>true when the upgrade succeeds; otherwise, false.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore">
+      <summary>Represents operations that must occur after a SQL Server database is restored from a backup.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.#ctor(System.Data.SqlClient.SqlConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore" /> class with the specified connection.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.#ctor(System.Data.SqlClient.SqlConnection,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore" /> class with the specified connection and object prefix.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.#ctor(System.Data.SqlClient.SqlConnection,System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore" /> class with the specified connection, object prefix, and object schema.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+      <param name="objectSchema">The database schema in which Sync Framework creates objects.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.CommandTimeout">
+      <summary>Gets or sets the wait time, in seconds, before a restore command is stopped and an error is generated.</summary>
+      <returns>The wait time, in seconds, before a restore command is stopped and an error is generated. The default value is the default ADO.NET value of 30 seconds. Setting this value to 0 indicates that commands do not time out.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.Connection">
+      <summary>Gets or sets a <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</summary>
+      <returns>A <see cref="T:System.Data.SqlClient.SqlConnection" /> object that contains a connection to the database.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.ObjectSchema">
+      <summary>Gets or sets the database schema in which Sync Framework creates objects.</summary>
+      <returns>The database schema in which Sync Framework creates objects.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.PerformPostRestoreFixup">
+      <summary>Updates synchronization metadata in a SQL Server database after the database has been restored from a backup.</summary>
+      <exception cref="T:System.ArgumentNullException">
+        <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncStoreRestore.Connection" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DbSyncException">The knowledge for a scope could not be updated.</exception>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning">
+      <summary>Represents the provisioning of a SQL Server database table that is represented by a <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.#ctor(Microsoft.Synchronization.Data.DbSyncTableDescription)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> class for the specified table.</summary>
+      <param name="tableDescription">The schema of a table.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableDescription" /> is null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DbProvisioningException">
+        <see cref="P:Microsoft.Synchronization.Data.DbSyncTableDescription.GlobalName" /> or  <see cref="P:Microsoft.Synchronization.Data.DbSyncTableDescription.GlobalName" /> for <paramref name="tableDescription" /> is null or empty, <paramref name="tableDescription" /> has no columns,—or—<paramref name="tableDescription" /> has no primary keys.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.#ctor(Microsoft.Synchronization.Data.DbSyncTableDescription,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> class for the specified table and synchronization object prefix.</summary>
+      <param name="tableDescription">The schema of a table.</param>
+      <param name="objectPrefix">The prefix that is used to identify objects that Sync Framework creates.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.#ctor(System.Data.SqlClient.SqlConnection,Microsoft.Synchronization.Data.DbSyncTableDescription)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> class for the specified connection and table schema.</summary>
+      <param name="connection">The connection to use for provisioning.</param>
+      <param name="tableDescription">The schema of the table that will be provisioned.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.AddFilterColumn(System.String)">
+      <summary>Adds a column that is used in the filter clause that is specified in <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterClause" />.</summary>
+      <param name="name">The name of the column to add.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="name" /> is null or empty.</exception>
+      <exception cref="T:Micrososft.Synchronization.Data.DbProvisioningException">
+        <paramref name="name" /> represents a column that does not exist in the <paramref name="tableDescription" /> that was specified when this <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> was constructed.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.Apply">
+      <summary>Applies the provisioning script to a SQL Server database over the connection specified when this object was constructed.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.Apply(System.Data.SqlClient.SqlConnection)">
+      <summary>Applies the provisioning script to a SQL Server database over the specified connection.</summary>
+      <param name="connection">A connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterColumns" /> is empty and <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterClause" /> is empty or null.</exception>
+      <exception cref="T:System.InvalidOperationException">Another transaction is already open on <paramref name="connection" />.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.Apply(System.Data.SqlClient.SqlTransaction)">
+      <summary>Applies the provisioning script to a SQL Server database within the specified transaction.</summary>
+      <param name="trans">A database transaction.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="trans" /> is null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterColumns" /> is empty and <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterClause" /> is empty or null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.CreateProcedures">
+      <summary>Gets or sets whether to create a set of stored procedures that insert, update, and delete data and synchronization metadata.</summary>
+      <returns>One of the enumeration values that specifies whether to create the stored procedures.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.CreateProceduresForAdditionalScope">
+      <summary>Gets or sets whether to create, for any additional scopes, sets of stored procedures that insert, update, and delete data and synchronization metadata.</summary>
+      <returns>One of the enumeration values that specifies whether to create the stored procedures.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.CreateTable">
+      <summary>Gets or sets whether to create a base table.</summary>
+      <returns>One of the enumeration values that specifies whether to create the base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.CreateTrackingTable">
+      <summary>Gets or sets whether to create a table that stores change-tracking metadata for the base table.</summary>
+      <returns>One of the enumeration values that specifies whether to create a table that stores change-tracking metadata for the base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.CreateTriggers">
+      <summary>Gets or sets whether to create triggers on the base table that update to the tracking table.</summary>
+      <returns>One of the enumeration values that specifies whether to create triggers on the base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterClause">
+      <summary>Gets or sets the SQL WHERE clause (without the WHERE keyword) that is used to filter the result set from the base table.</summary>
+      <returns>The SQL WHERE clause (without the WHERE keyword) that is used to filter the result set from the base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterColumns">
+      <summary>Gets the list of columns that were added by using <see cref="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.AddFilterColumn(System.String)" />.</summary>
+      <returns>A list of <see cref="T:Microsoft.Synchronization.Data.DbSyncColumnDescription" /> objects that includes the columns that were added by using <see cref="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.AddFilterColumn(System.String)" />.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterParameters">
+      <summary>Gets the list of filter parameters that are used to control which items are enumerated.</summary>
+      <returns>The list of filter parameters that are used to control which items are enumerated.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.GlobalName">
+      <summary>Gets the name, including database-specific delimiters, that other nodes in a synchronization topology use to identify a table.</summary>
+      <returns>The name that other nodes in a synchronization topology use to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.LocalName">
+      <summary>Gets the name, including database-specific delimiters, that the local node in a synchronization topology uses to identify a table.</summary>
+      <returns>The name that the local node in a synchronization topology uses to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.ObjectSchema">
+      <summary>Gets or sets the database schema in which Sync Framework creates objects.</summary>
+      <returns>The database schema in which Sync Framework creates objects.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.PopulateTrackingTable">
+      <summary>Gets or sets whether to insert metadata into the change-tracking table for rows that already exist in the base table.</summary>
+      <returns>One of the enumeration values that specifies whether to insert metadata into the change-tracking table.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.Script">
+      <summary>Generates a string that contains the SQL code to provision a table for a particular scope.</summary>
+      <returns>The SQL code to provision a table for a particular scope.</returns>
+      <exception cref="T:System.ArgumentException">
+        <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterColumns" /> is empty and <see cref="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.FilterClause" /> is empty or null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.ToString">
+      <summary>Returns a string that represents the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> object.</summary>
+      <returns>The <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> object.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.UnquotedGlobalName">
+      <summary>Gets the name, not including database-specific delimiters, that other nodes in a synchronization topology use to identify a table.</summary>
+      <returns>The name that other nodes in a synchronization topology use to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.UnquotedLocalName">
+      <summary>Gets the name, not including database-specific delimiters, that the local node in a synchronization topology uses to identify a table.</summary>
+      <returns>The name that the local node in a synchronization topology uses to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning.UseBulkProcedures">
+      <summary>Gets or sets a value that indicates whether the bulk procedures should be created during provisioning.</summary>
+      <returns>true if the bulk procedures are created during provisioning; otherwise, false.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioningCollection">
+      <summary>Represents a collection of <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> objects.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioningCollection.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioningCollection" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioningCollection.Item(System.String)">
+      <summary>An indexer property that gets a <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> object with the specified table name from the collection.</summary>
+      <returns>The <see cref="T:Microsoft.Synchronization.Data.SqlServer.SqlSyncTableProvisioning" /> object associated with <paramref name="globalTableName" />. Returns null if the specified table name is not found.</returns>
+      <param name="globalTableName">The name of the table to look up.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="globalTableName" /> is null or empty.</exception>
+    </member>
+  </members>
+</doc>

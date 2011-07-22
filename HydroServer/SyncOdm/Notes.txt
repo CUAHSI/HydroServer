@@ -1,0 +1,24 @@
+Created LocalOdm.config using Sync Service Utility UI tool
+C:\Program Files\Microsoft SDKs\Microsoft Sync Framework\4.0\bin
+http://msdn.microsoft.com/en-us/library/gg436103(v=SQL.110).aspx
+
+Provisioned
+
+Created Client and Server
+
+Next coded a  program:
+http://blogs.msdn.com/b/sync/archive/2010/08/31/sql-server-to-sql-azure-synchronization-using-sync-framework-2-1.aspx
+
+sqlnotes:
+ drop all tables from a db
+    EXEC sp_MSforeachtable @command1 = "DROP TABLE ?"
+	
+	
+	Microsoft.Synchronization.Data.DbSyncException: Cannot apply changes because the
+ local provider does not have adapters configured for the following tables that
+were received from the remote provider: SpatialReferences, ValueTypeCV, Sources,
+ VariableNameCV, DataValues, SampleTypeCV. Ensure that the correct adapters have
+ been added to both providers for Scope 'OdmScope', and that any table mapping h
+as been correctly configured.
+
+

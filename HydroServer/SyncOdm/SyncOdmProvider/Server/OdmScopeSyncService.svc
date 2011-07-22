@@ -1,0 +1,1 @@
+<%@ ServiceHost Language="cs" Service="cuahsi.sync.OdmScope.OdmScopeSyncService" CodeBehind="OdmScopeSyncService.svc.cs" Factory="Microsoft.Synchronization.Services.SyncServiceHostFactory, Microsoft.Synchronization.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91 " %>

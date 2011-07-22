@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Synchronization.SimpleProviders</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext">
+      <summary>The synchronization session context that is passed to an <see cref="T:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext.ReportChanges(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.LocalItemChange},System.Byte[])">
+      <summary>Reports the set of changes that were retrieved during a call to <see cref="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider.EnumerateChanges(System.Byte[],Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext)" />.</summary>
+      <param name="itemChanges">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.LocalItemChange" /> objects that contain metadata about changes to items in the local replica.</param>
+      <param name="updatedAnchor">A byte array that represents an enumeration anchor, such as a timestamp.</param>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <see cref="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext.ReportItemsAndAutodetectDeletes(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary},System.Byte[])" /> was called in the same session.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext.ReportItemsAndAutodetectDeletes(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary},System.Byte[])">
+      <summary>Reports item changes, including deletes, when a full enumeration of a replica is required by an anchor-based provider.</summary>
+      <param name="items">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> objects that contain item metadata.</param>
+      <param name="updatedAnchor">A byte array that represents an enumeration anchor, such as a timestamp.</param>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <see cref="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext.ReportChanges(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.LocalItemChange},System.Byte[])" /> was called in the same session.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext.SetDeleteMode(Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderDeleteMode)">
+      <summary>Sets whether a delete is a normal delete that is propagated to other replicas, or a local-only delete.</summary>
+      <param name="deleteMode">A <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderDeleteMode" /> enumeration value that specifies whether a delete is a normal delete that is propagated to other replicas, or a local-only delete.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider">
+      <summary>Represents a provider for replicas that track changes by using anchors.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider.EnumerateChanges(System.Byte[],Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext)">
+      <summary>When overridden in a derived class, enumerates changes from a replica that occurred since the specified anchor value.</summary>
+      <param name="anchor">A byte array that represents an enumeration anchor, such as a timestamp. Changes that occurred since this anchor are enumerated. If the anchor is null, the provider should enumerate all items in the store.</param>
+      <param name="context">An <see cref="T:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext" /> object that enables you to report items and changes, and to specify how item deletes are handled.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider.GetEnumerationAnchor">
+      <summary>When overridden in a derived class, returns an enumeration anchor that is used to determine the set of changes to synchronize during a session.</summary>
+      <returns>A byte array that represents an enumeration anchor, such as a timestamp.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ChangeDetectionCompletedEventArgs">
+      <summary>Provides data for the <see cref="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ChangeDetectionCompleted" /> event.</summary>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition">
+      <summary>Represents the set of fields that the Sync Framework runtime uses to determine whether a change unit's version should be updated.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition.#ctor(Microsoft.Synchronization.SyncIdFormatGroup,Microsoft.Synchronization.SyncId,System.Collections.Generic.IEnumerable{System.UInt32})">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition" /> class that contains the specified ID format, change unit ID, and version field ID.</summary>
+      <param name="idFormats">A <see cref="T:Microsoft.Synchronization.SyncIdFormatGroup" /> object that is used to define the format of the change unit ID.</param>
+      <param name="changeUnitId">A <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains the ID of the change unit to which the version definition applies.</param>
+      <param name="versionFieldIds">A collection of integers that comprise the version fields of the specified change unit.</param>
+      <exception cref="T:Microsoft.Synchronization.SyncIdFormatMismatchException">
+        <paramref name="changeUnitId" /> contained a byte array with an unexpected length.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="idFormats" />, <paramref name="changeUnitId" />, or <paramref name="versionFieldIds" /> is a null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="versionFieldIds" /> contained no more version field IDs.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition.ChangeUnitId">
+      <summary>Gets a <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains the ID of the change unit to which the version definition applies.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains the ID of the change unit.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition.VersionFieldIds">
+      <summary>Gets a collection of integers that comprise the version fields of the specified change unit.</summary>
+      <returns>A collection of integers that comprise the version fields of the specified change unit.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ConcurrencyConflictKind">
+      <summary>Represents the types of conflicts that can occur because of changes that occurred to the same item at local and remote replicas.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.ConcurrencyConflictKind.UpdateUpdate">
+      <summary>The item was updated locally and remotely concurrently.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.ConcurrencyConflictKind.LocalUpdateRemoteDelete">
+      <summary>The item was updated locally and deleted remotely.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.ConcurrencyConflictKind.LocalDeleteRemoteUpdate">
+      <summary>The item was deleted locally and updated remotely.</summary>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ConflictVersionInformation">
+      <summary>Represents information about what item versions are known to the remote provider for a particular item that is in conflict.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ConflictVersionInformation.RemoteProviderKnowsLocalItemChangeVersion">
+      <summary>Gets whether the local item’s change version is contained in the remote provider's knowledge.</summary>
+      <returns>True if the local item’s change version is contained in the remote provider's knowledge. Otherwise false.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ConflictVersionInformation.RemoteProviderKnowsLocalItemCreationVersion">
+      <summary>Gets whether the local item’s creation version is contained in the remote provider's knowledge.</summary>
+      <returns>True if the local item’s creation version is contained in the remote provider's knowledge. Otherwise false.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition">
+      <summary>Represents a field that can be used to identify an item in the metadata store or to store version-related information for an item or a change unit.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition.#ctor(System.UInt32,System.Type)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" /> class that contains a field ID and a field type.</summary>
+      <param name="fieldId">An integer ID for the field.</param>
+      <param name="fieldType">The data type of the field. For a list of supported types, see <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" />.</param>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <paramref name="fieldType" /> was set to either byte[] or string, which is only supported by the three-parameter constructor.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition.#ctor(System.UInt32,System.Type,System.UInt32)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" /> class that contains a field ID, a field type, and field size.</summary>
+      <param name="fieldId">An integer ID for the field.</param>
+      <param name="fieldType">The data type of the field. For a list of supported types, see <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" />.</param>
+      <param name="fieldSize">The size associated with the field, such as the length of the string or byte array that it will store.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition.FieldId">
+      <summary>Gets the integer ID for the field.</summary>
+      <returns>An integer ID for the field.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition.FieldSize">
+      <summary>Gets the size associated with the field, such as the length of the string or byte array that it will store.</summary>
+      <returns>The size associated with the field.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition.FieldType">
+      <summary>Gets the data type of the field.</summary>
+      <returns>The data type of the field. For a list of supported types, see <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" />.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.FullEnumerationContext">
+      <summary>The synchronization session context that is passed to an <see cref="T:Microsoft.Synchronization.SimpleProviders.FullEnumerationSimpleSyncProvider" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.FullEnumerationContext.ReportItems(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary})">
+      <summary>Reports items that were enumerated from the local replica.</summary>
+      <param name="items">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> objects that contain item metadata.</param>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <see cref="M:Microsoft.Synchronization.SimpleProviders.FullEnumerationContext.SkipChangeDetection" /> was called earlier in the session or a previous change detection failed.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.FullEnumerationContext.SkipChangeDetection">
+      <summary>Called by a provider to cause the Sync Framework runtime to skip change detection for a synchronization session.</summary>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <see cref="M:Microsoft.Synchronization.SimpleProviders.FullEnumerationContext.ReportItems(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary})" /> or <see cref="M:Microsoft.Synchronization.SimpleProviders.FullEnumerationContext.SkipChangeDetection" /> was called earlier, or a previous change detection failed.</exception>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.FullEnumerationSimpleSyncProvider">
+      <summary>Represents a provider for replicas that do not support any type of change tracking.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.FullEnumerationSimpleSyncProvider.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.FullEnumerationSimpleSyncProvider" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.FullEnumerationSimpleSyncProvider.EnumerateItems(Microsoft.Synchronization.SimpleProviders.FullEnumerationContext)">
+      <summary>When overridden in a derived class, enumerates all items in a replica.</summary>
+      <param name="context">A <see cref="T:Microsoft.Synchronization.SimpleProviders.FullEnumerationContext" /> object that represents the context of the synchronization session.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.IdentityRule">
+      <summary>Defines the way in which an item is identified within a replica.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.IdentityRule.#ctor(System.Collections.Generic.IEnumerable{System.UInt32})">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.IdentityRule" /> class that contains a collection of integer field IDs to identify an item.</summary>
+      <param name="identityFieldIds">A collection of integer field IDs that identify an item in a replica.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="identityFieldIds" /> is a null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="identityFieldIds" /> contained no more identity field IDs.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.IdentityRule.IdentityFieldIds">
+      <summary>Gets a collection of integer field IDs that identify an item in a replica.</summary>
+      <returns>A collection of integer field IDs to identify an item in a replica.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.IFilteredSimpleSyncProvider">
+      <summary>Represents a provider that filters data, which can result in two replicas synchronizing only a subset of the data that is available at each replica.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.IFilteredSimpleSyncProvider.FilterOptions">
+      <summary>When overridden in a derived class, gets a <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderFilterOptions" /> object, which provides options about which items to send to the destination replica.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderFilterOptions" /> object, which provides options about which items to send to the destination replica.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.IFilteredSimpleSyncProvider.IsItemInFilterScope(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary)">
+      <summary>When overridden in a derived class, called by the Sync Framework runtime to determine whether an item satisfies the filtering criteria of the provider.</summary>
+      <returns>True if the item satisfies the filtering criteria. Otherwise false.</returns>
+      <param name="keyAndVersion">An <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that contains the key and version of the item to be checked.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.IFilteredSimpleSyncProvider.UseFilterThisSession">
+      <summary>When overridden in a derived class, gets whether a provider is filtering data items during this synchronization session.</summary>
+      <returns>True if the provider is filtering items. Otherwise false.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConcurrencyConflictResolver">
+      <summary>Represents a custom conflict resolver that handles concurrency conflicts, such as the same item being updated at the local replica and deleted at the remote replica.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConcurrencyConflictResolver.ResolveLocalDeleteRemoteUpdateConflict(System.Object,System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,System.Boolean@,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary@)">
+      <summary>When overridden in a derived class, resolves conflicts in which an item was deleted from the local replica and updated at the remote replica.</summary>
+      <param name="itemData">Data for the item in a provider-specific format.</param>
+      <param name="changeUnitsToUpdate">A collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent a set of change units that should be updated during conflict resolution.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to resolve a conflict.</param>
+      <param name="itemWasDeletedAsResultOfResolution">Returns whether the item was deleted as a result of the custom resolution process.</param>
+      <param name="updatedVersion">Returns the updated version properties of the updated items. If the return value is not valid, the Sync Framework runtime throws <see cref="T:System.ArgumentOutOfRangeException" />, which ends the session.</param>
+      <exception cref="T:Microsoft.Synchronization.SyncRuntimeInternalErrorException">
+        <paramref name="changeUnitsToUpdate" />      contained a change unit of unexpected size.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConcurrencyConflictResolver.ResolveLocalUpdateRemoteDeleteConflict(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,System.Boolean@)">
+      <summary>When overridden in a derived class, resolves conflicts in which an item was updated at the local replica and deleted from the remote replica.</summary>
+      <param name="keyAndExpectedVersion">The key and version properties of the item that is in conflict.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to resolve a conflict.</param>
+      <param name="itemWasDeletedAsResultOfResolution">Returns whether the item was deleted as a result of the custom resolution process.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConcurrencyConflictResolver.ResolveUpdateUpdateConflict(System.Object,System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary@)">
+      <summary>When overridden in a derived class, resolves conflicts in which an item was updated at both replicas.</summary>
+      <param name="itemData">Data for the item in a provider-specific format.</param>
+      <param name="changeUnitsToMerge">A collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent a set of change units that should be merged during conflict resolution.</param>
+      <param name="changeUnitsToUpdate">A collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent a set of change units that should be updated during conflict resolution.</param>
+      <param name="keyAndExpectedVersion">The key and version properties of the item that is in conflict.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to resolve a conflict.</param>
+      <param name="updatedVersion">Returns the updated version properties of the updated items. If the return value is invalid, the Sync Framework runtime throws <see cref="T:System.ArgumentOutOfRangeException" />, which ends the session.</param>
+      <exception cref="T:Microsoft.Synchronization.SyncRuntimeInternalErrorException">
+        <paramref name="changeUnitsToMerge " />or <paramref name="changeUnitsToUpdate " />contained a change unit of unexpected size.</exception>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConstraintConflictResolver">
+      <summary>Represents a custom conflict resolver that handles constraint conflicts, such as duplicate items being inserted at multiple replicas.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConstraintConflictResolver.MergeConstraintConflict(System.Object,Microsoft.Synchronization.SimpleProviders.ConflictVersionInformation,System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary@)">
+      <summary>When overridden in a derived class, merges local and remote data into one item that is applied at the destination.</summary>
+      <param name="itemData">Data for the item in a provider-specific format.</param>
+      <param name="conflictVersionInformation">A <see cref="T:Microsoft.Synchronization.SimpleProviders.ConflictVersionInformation" /> object that contains information about what item versions, if any, are known to the remote provider for the item that is in conflict.</param>
+      <param name="changeUnitsToMerge">A collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent the set of change units to merge during conflict resolution.</param>
+      <param name="localConflictingItem">The fields that are associated with the local item that is in conflict.</param>
+      <param name="keyAndExpectedVersion">The key and version properties of the item that is in conflict.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to resolve a conflict.</param>
+      <param name="updatedKeyAndVersion">Returns the key and version properties that were modified as a result of conflict resolution.</param>
+      <exception cref="T:Microsoft.Synchronization.SyncRuntimeInternalErrorException">
+        <paramref name="changeUnitsToMerge" /> contained a change unit of unexpected size.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConstraintConflictResolver.ModifyAndInsertRemoteItem(System.Object,System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary@)">
+      <summary>When overridden in a derived class, renames the remote item so that it no longer conflicts with the local item name and inserts the remote item into the local replica.</summary>
+      <param name="itemData">Data for the item in a provider-specific format.</param>
+      <param name="changeUnitsToCreate">A collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent the set of change units to create during conflict resolution.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to resolve a conflict.</param>
+      <param name="updatedKeyAndVersion">Returns the key and version properties that were created as a result of conflict resolution.</param>
+      <exception cref="T:Microsoft.Synchronization.SyncRuntimeInternalErrorException">
+        <paramref name="changeUnitsToCreate" /> contained a change unit of unexpected size.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConstraintConflictResolver.ModifyAndUpdateRemoteItem(System.Object,System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary@)">
+      <summary>When overridden in a derived class, renames the remote item so that it no longer conflicts with the local item name and updates the remote item in the local replica.</summary>
+      <param name="itemData">Data for the item in a provider-specific format.</param>
+      <param name="changeUnitsToUpdate">A collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent the set of change units to update during conflict resolution.</param>
+      <param name="keyAndExpectedVersion">The key and version properties of the item that is in conflict.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to resolve a conflict.</param>
+      <param name="updatedKeyAndVersion">Returns the key and version properties that were modified as a result of conflict resolution.</param>
+      <exception cref="T:Microsoft.Synchronization.SyncRuntimeInternalErrorException">
+        <paramref name="changeUnitsToUpdate" /> contained a change unit of unexpected size.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderConstraintConflictResolver.ModifyLocalItem(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary@)">
+      <summary>When overridden in a derived class, renames the local item so that it no longer conflicts with the remote item name.</summary>
+      <param name="keyAndExpectedVersion">The key and version properties of the item that is in conflict.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to resolve a conflict.</param>
+      <param name="updatedKeyAndVersion">Returns the key and version properties that were modified as a result of conflict resolution.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderIdGenerator">
+      <summary>Provides a way to generate IDs of a custom format that are used to identify replicas and items in a metadata store.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ISimpleSyncProviderIdGenerator.GenerateNewItemId(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary)">
+      <summary>When overridden in a derived class, returns a <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains a ID for a new item.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains a ID for a new item.</returns>
+      <param name="keyAndVersion">An <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that contains the key and version properties of the item that requires an ID.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ItemEnumerationContext">
+      <summary>Represents the synchronization session context that is passed to a provider.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemEnumerationContext.SetDeleteMode(Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderDeleteMode)">
+      <summary>Sets whether a delete is a normal delete that is propagated to other replicas, or a local-only delete.</summary>
+      <param name="deleteMode">A <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderDeleteMode" /> enumeration value that specifies whether a delete is a normal delete that is propagated to other replicas, or a local-only delete.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">deleteMode is not a <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderDeleteMode" /> enumeration value.</exception>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ItemField">
+      <summary>Represents the way in which an item is identified when changes are applied to a destination.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemField.#ctor(System.UInt32,System.Type,System.Object)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> class that contains a field ID, a field type, and a metadata value for the field.</summary>
+      <param name="fieldId">An integer ID for the field.</param>
+      <param name="fieldType">The data type of the field.</param>
+      <param name="value">The metadata value that is stored in the item field.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="value" /> is a null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemField.Equals(System.Object)">
+      <summary>Determines whether a <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object is equal to the specified object.</summary>
+      <returns>True if <paramref name="obj" /> references the current <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object.Otherwise, false.</returns>
+      <param name="obj">The object to compare to the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemField.FieldId">
+      <summary>An integer ID for the field.</summary>
+      <returns>An integer ID for the field.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemField.FieldSize">
+      <summary>Gets the size associated with the field, such as the length of the string or byte array that it will store.</summary>
+      <returns>The size associated with the field.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemField.FieldType">
+      <summary>Gets the data type of the field.</summary>
+      <returns>The data type of the field.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemField.GetHashCode">
+      <summary>Serves as a hash function for a <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" />. This is suitable for use in hashing algorithms and data structures such as a hash table.</summary>
+      <returns>A hash code for the current object.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemField.Value">
+      <summary>Gets the metadata value that is stored in the item field.</summary>
+      <returns>The metadata value that is stored in the item field.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary">
+      <summary>Represents an item and its associated fields.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.ItemField})">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> class that contains a collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> objects.</summary>
+      <param name="itemFields">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> objects.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="itemFields" /> is null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="itemFields" /> contains null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Add(Microsoft.Synchronization.SimpleProviders.ItemField)">
+      <summary>Adds an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <param name="item">The <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to add to the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="item" /> is null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Add(System.Collections.Generic.KeyValuePair{System.UInt32,Microsoft.Synchronization.SimpleProviders.ItemField})">
+      <summary>Adds an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <param name="item">The <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to add to the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</param>
+      <exception cref="T:System.ArgumentNullException">The value of the key/value pair in <paramref name="item" /> is null. </exception>
+      <exception cref="T:System.ArgumentException">The key in <paramref name="item" /> is different than the field id for the value in <paramref name="item" />.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Add(System.UInt32,Microsoft.Synchronization.SimpleProviders.ItemField)">
+      <summary>Adds an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <param name="key">The key of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to add.</param>
+      <param name="value">The value of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to add.</param>
+      <exception cref="T:System.ArgumentNullException">The <paramref name="value" /> is null. </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="key" /> is different than the field id for <paramref name="value" />.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Clear">
+      <summary>Removes all <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> objects from the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Contains(System.Collections.Generic.KeyValuePair{System.UInt32,Microsoft.Synchronization.SimpleProviders.ItemField})">
+      <summary>Indicates whether an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object is contained in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>true if the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object exists in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection; otherwise false.</returns>
+      <param name="item">The <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to find.</param>
+      <exception cref="T:System.ArgumentNullException">The value of the key/value pair in <paramref name="item" /> is null. </exception>
+      <exception cref="T:System.ArgumentException">The key in <paramref name="item" /> is different than the field id for the value in <paramref name="item" />.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.ContainsKey(System.UInt32)">
+      <summary>Indicates whether the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection contains an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object with the specified key.</summary>
+      <returns>true if the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object with the specified key exists in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection; otherwise false.</returns>
+      <param name="key">The key of the item field to find.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.CopyTo(System.Collections.Generic.KeyValuePair{System.UInt32,Microsoft.Synchronization.SimpleProviders.ItemField}[],System.Int32)">
+      <summary>Copies the elements of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection to the specified array.</summary>
+      <param name="array">An instance of a one-dimensional Array object in which to copy the elements of the collection. The Array object must have zero-based indexing.</param>
+      <param name="arrayIndex">The zero-based index at which to begin copying.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Count">
+      <summary>Gets the number of <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> objects in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>The number of <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> objects in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.GetEnumerator">
+      <summary>Returns an <see cref="T:System.Collections.IEnumerator" /> object that enables you to iterate through the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>An <see cref="T:System.Collections.IEnumerator" /> object that enables you to iterate through the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.IsReadOnly">
+      <summary>Indicates whether a value the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection is read-only.</summary>
+      <returns>true if the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection is read-only. Otherwise, false.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Item(System.UInt32)">
+      <summary>Gets or sets the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object that corresponds to the specified key.</summary>
+      <returns>The <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object that corresponds to the specified key.</returns>
+      <param name="key">The key of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to get or set.</param>
+      <exception cref="T:System.ArgumentNullException">The value of the key/value pair in <paramref name="value" /> is null. </exception>
+      <exception cref="T:System.ArgumentException">The key in <paramref name="value" /> is different than the field id for the value in <paramref name="value" />.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Keys">
+      <summary>Gets a collection of the keys that are contained in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>A collection of the keys that are contained in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Remove(System.Collections.Generic.KeyValuePair{System.UInt32,Microsoft.Synchronization.SimpleProviders.ItemField})">
+      <summary>Removes the specified <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object from the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>true if the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object was successfully removed from the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection; otherwise false.</returns>
+      <param name="item">The <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object to remove from the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</param>
+      <exception cref="T:System.ArgumentNullException">The value of the key/value pair in <paramref name="item" /> is null. </exception>
+      <exception cref="T:System.ArgumentException">The key in <paramref name="item" /> is different than the field id for the value in <paramref name="item" />.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Remove(System.UInt32)">
+      <summary>Removes the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object with the specified key from the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>true if the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object was successfully removed from the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection; otherwise false.</returns>
+      <param name="key">The key of the item to remove.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+      <summary>Returns an <see cref="T:System.Collections.IEnumerator" /> object that enables you to iterate through the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>An <see cref="T:System.Collections.IEnumerator" /> object that enables you to iterate through the collection.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.System#Collections#IEnumerable#GetEnumerator">
+      <summary>Returns an <see cref="T:System.Collections.IEnumerator" /> object that enables you to iterate through the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>An <see cref="T:System.Collections.IEnumerator" /> object that enables you to iterate through the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.TryGetValue(System.UInt32,Microsoft.Synchronization.SimpleProviders.ItemField@)">
+      <summary>Gets the value associated with the specified key.</summary>
+      <returns>true if an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemField" /> object with the specified key exists in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection; otherwise false.</returns>
+      <param name="key">The key of the value to get.</param>
+      <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter. This parameter is passed uninitialized.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary.Values">
+      <summary>Gets a collection of the values that are contained in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</summary>
+      <returns>A collection of the values that are contained in the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> collection.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema">
+      <summary>Represents the metadata schema for an item, including how to identify an item and its version information, and how change units are defined.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition},System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.IdentityRule})">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema" /> class that contains information about custom fields and how to identify an item.</summary>
+      <param name="customFields">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" /> objects that each represent a custom field. Fields can be used to identify an item in the metadata or store version information about an item.</param>
+      <param name="identityRules">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.IdentityRule" /> objects that defines the way in which an item is identified within a replica.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="customFields" /> or <paramref name="identityRules" /> is a null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="customFields" /> or <paramref name="identityRules" /> contains no more data. </exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition},System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.IdentityRule},System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition})">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema" /> class that contains information about custom fields, how to identify an item, and how change units are defined.</summary>
+      <param name="customFields">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" /> objects that each represent a custom field. Fields can be used to identify an item in the metadata or store version information about an item.</param>
+      <param name="identityRules">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.IdentityRule" /> objects that defines the way in which an item is identified within a replica.</param>
+      <param name="changeUnitVersionDefinitions">A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition" /> objects that represent the way in which a change unit is identified in terms of an ID, an ID format, and a set of fields that define a change unit's version.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="customFields" /> or <paramref name="identityRules" /> is a null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="customFields" /> or <paramref name="identityRules" /> contains no more data. </exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema.ChangeUnitVersionDefinitions">
+      <summary>Gets a collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition" /> objects that represent the way in which a change unit is identified in terms of an ID, an ID format, and a set of fields that define a change unit's version.</summary>
+      <returns>A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.ChangeUnitVersionDefinition" /> objects that represent the way in which a change unit is identified</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema.CustomFields">
+      <summary>Gets a collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" /> objects that each represent a custom field. Fields can be used to identify an item in the metadata or store version information about an item.</summary>
+      <returns>A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.CustomFieldDefinition" /> objects that each represent a custom field in the metadata store.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema.IdentityRules">
+      <summary>Gets a collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.IdentityRule" /> objects that defines the way in which an item is identified within a replica.</summary>
+      <returns>A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.IdentityRule" /> objects that defines the way in which an item is identified within a replica.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.LocalItemChange">
+      <summary>Represents a change to an item in the local replica that is returned by <see cref="M:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider.EnumerateChanges(System.Byte[],Microsoft.Synchronization.SimpleProviders.AnchorEnumerationContext,System.Byte[]@)" />.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.LocalItemChange.#ctor(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.LocalItemChangeType)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.LocalItemChange" /> class that contains the item key and version, and the type of change to the item.</summary>
+      <param name="keyAndVersion">The key and version that identify the changed item.</param>
+      <param name="localItemChangeType">A <see cref="T:Microsoft.Synchronization.SimpleProviders.LocalItemChangeType" /> enumeration value that specifies whether an item was created, updated, or deleted.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="localItemChangeType" /> is not a valid <see cref="T:Microsoft.Synchronization.SimpleProviders.LocalItemChangeType" /> enumeration value or <paramref name="keyAndVersion" /> is empty.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="keyAndVersion" /> is a null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.LocalItemChange.KeyAndVersion">
+      <summary>Returns the key and version that identify the changed item.</summary>
+      <returns>The key and version that identify the changed item.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.LocalItemChange.LocalItemChangeType">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.SimpleProviders.LocalItemChangeType" /> enumeration value that specifies whether an item was created, updated, or deleted.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.SimpleProviders.LocalItemChangeType" /> enumeration value that specifies whether an item was created, updated, or deleted.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.LocalItemChangeType">
+      <summary>Represents the type of changes that can occur to an item in the local replica.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.LocalItemChangeType.Create">
+      <summary>The item was created.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.LocalItemChangeType.Update">
+      <summary>The item was updated.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.LocalItemChangeType.Delete">
+      <summary>The item was deleted.</summary>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.MetadataStoreInitializedEventArgs">
+      <summary>Provides data for the <see cref="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.MetadataStoreInitialized" /> event.</summary>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext">
+      <summary>Represents the synchronization session context that is passed to the provider during some calls, so that the provider can report any recoverable errors that occur within the context of that call.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext.RecordConstraintError(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary)">
+      <summary>Records a constraint error that occurred when attempting to apply a change to an item. Used to describe a local item that is in a constraint conflict with the change.</summary>
+      <param name="conflictingItemKey">The key of the item for which a constraint error is being recorded.</param>
+      <exception cref="T:Microsoft.Synchronization.ChangeDeferredByProviderException">The change being applied was deferred by the provider until the next synchronization session as a result of the constraint conflict. </exception>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">There were multiple constraint errors, a constraint error was reported on an object that is no longer valid, or the constraint error policy does not allow constraint errors to be recoverable. </exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext.RecordRecoverableErrorForChange(Microsoft.Synchronization.RecoverableErrorData)">
+      <summary>Records a recoverable error that occurred when attempting to apply a change to an item.</summary>
+      <param name="errorData">The <see cref="T:Microsoft.Synchronization.RecoverableErrorData" /> object associated with the recoverable error that is reported.</param>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">There were multiple recoverable errors, or a change was attempted on an object that is no longer valid. </exception>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConflictingEventArgs">
+      <summary>Provides data for the <see cref="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ItemConflicting" /> event.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConflictingEventArgs.ChangeUnitsInConflict">
+      <summary>Gets a collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent a set of change units for which a conflict was reported.</summary>
+      <returns>A collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent a set of change units for which a conflict was reported.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConflictingEventArgs.ConflictKind">
+      <summary>Gets a <see cref="T:Microsoft.Synchronization.SimpleProviders.ConcurrencyConflictKind" /> enumeration value that represents the type of conflict, such as a <see cref="F:Microsoft.Synchronization.SimpleProviders.ConcurrencyConflictKind.LocalDeleteRemoteUpdate" /> conflict.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.SimpleProviders.ConcurrencyConflictKind" /> enumeration value that represents the type of conflict.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConflictingEventArgs.LocalItem">
+      <summary>Gets an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that contains the fields for the local item that is in conflict.</summary>
+      <returns>An <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that contains the fields for the local item that is in conflict.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConflictingEventArgs.RemoteItemData">
+      <summary>Gets the data for the remote item that is in conflict.</summary>
+      <returns>An object that contains the data for the remote item that is in conflict.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConflictingEventArgs.SetResolutionAction(Microsoft.Synchronization.ConflictResolutionAction)">
+      <summary>Sets the resolution action for the conflict, such as <see cref="F:Microsoft.Synchronization.ConflictResolutionAction.DestinationWins" />.</summary>
+      <param name="action">A <see cref="T:Microsoft.Synchronization.ConflictResolutionAction" /> enumeration value that specifies the resolution action for the conflict.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs">
+      <summary>Provides data for the <see cref="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ItemConstraint" /> event.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs.ChangeUnitsOnRemoteItem">
+      <summary>Gets a set of change units in the remote item for which a conflict was reported.</summary>
+      <returns>A collection of <see cref="T:Microsoft.Synchronization.SyncId" /> objects that represent a set of change units in the remote item for which a conflict was reported.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs.ConflictVersionInformation">
+      <summary>Gets a <see cref="T:Microsoft.Synchronization.SimpleProviders.ConflictVersionInformation" /> object that contains information about what item versions, if any, are known to the remote provider for the item that is in conflict.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.SimpleProviders.ConflictVersionInformation" /> object that contains information about what item versions, if any, are known to the remote provider for the item that is in conflict.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs.LocalItem">
+      <summary>Gets an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that contains the fields for the local item that is in conflict.</summary>
+      <returns>An <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that contains the fields for the local item that is in conflict.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs.RemoteItem">
+      <summary>Gets an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that contains the fields for the remote item that is in conflict.</summary>
+      <returns>An <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that contains the fields for the remote item that is in conflict.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs.RemoteItemData">
+      <summary>Gets the data for the remote item that is in conflict.</summary>
+      <returns>An object that contains the data for the remote item that is in conflict.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs.SetResolutionAction(Microsoft.Synchronization.ConstraintConflictResolutionAction)">
+      <summary>Sets the resolution action for the conflict, such as <see cref="F:Microsoft.Synchronization.ConstraintConflictResolutionAction.DestinationWins" />.</summary>
+      <param name="resolutionAction">A <see cref="T:Microsoft.Synchronization.ConstraintConflictResolutionAction" /> enumeration value that specifies the resolution action for the conflict.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider">
+      <summary>Represents a simple provider that is used to synchronize a replica. You will typically extend <see cref="T:Microsoft.Synchronization.SimpleProviders.FullEnumerationSimpleSyncProvider" /> or <see cref="T:Microsoft.Synchronization.SimpleProviders.AnchorEnumerationSimpleSyncProvider" />.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.BeginSession">
+      <summary>When overridden in a derived class, called by the Sync Framework runtime at the start of each session.</summary>
+    </member>
+    <member name="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ChangeDetectionCompleted">
+      <summary>Occurs when change detection is complete for a source provider.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.Configuration">
+      <summary>When overridden in a derived class, gets a <see cref="T:Microsoft.Synchronization.KnowledgeSyncProviderConfiguration" /> object that represents configuration information for a provider, such as the conflict resolution policy.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.KnowledgeSyncProviderConfiguration" /> object that represents configuration information for a provider.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.DeleteItem(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,System.Boolean@)">
+      <summary>When overridden in a derived class, called by the Sync Framework runtime to delete an item from the destination store.</summary>
+      <param name="keyAndExpectedVersion">The key and expected version properties of the item to be deleted. The provider must perform an optimistic concurrency check to verify that the version of the item on the destination corresponds to the values found in <paramref name="keyAndExpectedVersion" />. If this check fails, provider should report a recoverable error by using a <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to delete an item.</param>
+      <param name="commitKnowledgeAfterThisItem">Returns whether the Sync Framework runtime should commit knowledge to the metadata store after processing is complete for the specified item.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.DestinationCallbacks">
+      <summary>When overridden in a derived class, gets a <see cref="T:Microsoft.Synchronization.SyncCallbacks" /> object that is used to dispatch a synchronization event.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.SyncCallbacks" /> object that is used to dispatch a synchronization event.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.EndSession">
+      <summary>When overridden in a derived class, called by the Sync Framework runtime at the end of each session unless a session is terminated because of an exception.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.GetMetadataStore(Microsoft.Synchronization.SyncId@,System.Globalization.CultureInfo@)">
+      <summary>When overridden in a derived class, called by the Sync Framework runtime to return a <see cref="T:Microsoft.Synchronization.MetadataStorage.MetadataStore" /> object for a replica.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.MetadataStorage.MetadataStore" /> object that represents a metadata store for the specified replica.</returns>
+      <param name="replicaId">A <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains the ID of the replica for which the <see cref="T:Microsoft.Synchronization.MetadataStorage.MetadataStore" /> object is returned.</param>
+      <param name="culture">A <see cref="T:System.Globalization.CultureInfo" /> object that represents the culture that is used for string comparisons.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.IdFormats">
+      <summary>When overridden in a derived class, gets a <see cref="T:Microsoft.Synchronization.SyncIdFormatGroup" /> object that represents the format of replica and item IDs.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.SyncIdFormatGroup" /> object that is used to define the format of replica and item IDs.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.InsertItem(System.Object,System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary@,System.Boolean@)">
+      <summary>When overridden in a derived class, called by the Sync Framework runtime to insert an item into the destination store.</summary>
+      <param name="itemData">Data for the item in provider-specific format.</param>
+      <param name="changeUnitsToCreate">A <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains the change units to insert for an item. The parameter should be null (not empty) if no change units are specified.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to insert an item.</param>
+      <param name="keyAndUpdatedVersion">Returns the key and updated version properties of the item to be inserted. If the return value is not valid, the Sync Framework runtime throws <see cref="T:System.ArgumentOutOfRangeException" />, which ends the session.</param>
+      <param name="commitKnowledgeAfterThisItem">Returns whether the Sync Framework runtime should commit knowledge to the metadata store after processing is complete for the specified item.</param>
+    </member>
+    <member name="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ItemConflicting">
+      <summary>Occurs when Sync Framework detects that an item being processed is involved in a concurrency conflict.</summary>
+    </member>
+    <member name="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ItemConstraint">
+      <summary>Occurs when Sync Framework detects that an item being processed is involved in a constraint conflict.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.LoadChangeData(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext)">
+      <summary>When overridden in a derived class, called by the Sync Framework runtime to load the change data for the item with the specified key.</summary>
+      <returns>An object that represents the change data for the item with the specified key.</returns>
+      <param name="keyAndExpectedVersion">The key and expected version properties of the item for which data is loaded. The provider must perform an optimistic concurrency check to verify that the version of the item on the destination corresponds to the values found in <paramref name="keyAndExpectedVersion" />. If this check fails, provider should report a recoverable error by using a <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object.</param>
+      <param name="changeUnitsToLoad">A <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains the change units to load for an item. The parameter should be null (not empty) if no change units are specified.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to update an item.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.MetadataSchema">
+      <summary>When overridden in a derived class, gets an <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema" /> object that represents the metadata schema for an item.</summary>
+      <returns>An <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemMetadataSchema" /> object that represents the metadata schema for an item.</returns>
+    </member>
+    <member name="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.MetadataStoreInitialized">
+      <summary>Occurs when the metadata store that is associated with a provider is initialized.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.OnChangeDetectionCompleted(Microsoft.Synchronization.SimpleProviders.ChangeDetectionCompletedEventArgs)">
+      <summary>When overridden in a derived class, raises the <see cref="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ChangeDetectionCompleted" /> event.</summary>
+      <param name="args">A <see cref="T:Microsoft.Synchronization.SimpleProviders.ChangeDetectionCompletedEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.OnItemConflicting(Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConflictingEventArgs)">
+      <summary>When overridden in a derived class, raises the <see cref="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ItemConflicting" /> event.</summary>
+      <param name="args">A <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConflictingEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.OnItemConstraint(Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs)">
+      <summary>When overridden in a derived class, raises the <see cref="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ItemConstraint" /> event.</summary>
+      <param name="args">A <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncItemConstraintEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.OnMetadataStoreInitialized(Microsoft.Synchronization.SimpleProviders.MetadataStoreInitializedEventArgs)">
+      <summary>When overridden in a derived class, raises the <see cref="E:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.MetadataStoreInitialized" /> event.</summary>
+      <param name="args">A <see cref="T:Microsoft.Synchronization.SimpleProviders.MetadataStoreInitializedEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.ProviderVersion">
+      <summary>When overridden in a derived class, gets the version number for the simple provider.</summary>
+      <returns>The version number for the simple provider.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncProvider.UpdateItem(System.Object,System.Collections.Generic.IEnumerable{Microsoft.Synchronization.SyncId},Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary,Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext,Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary@,System.Boolean@)">
+      <summary>When overridden in a derived class, called by the Sync Framework runtime to update an item in the destination store.</summary>
+      <param name="itemData">Data for the item in provider-specific format.</param>
+      <param name="changeUnitsToUpdate">A <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains the change units to update for an item. The parameter should be null (not empty) if no change units are specified.</param>
+      <param name="keyAndExpectedVersion">The key and expected version properties of the item to be updated. The provider must perform an optimistic concurrency check to verify that the version of the item on the destination corresponds to the values found in <paramref name="keyAndExpectedVersion" />. If this check fails, provider should report a recoverable error by using a <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object.</param>
+      <param name="recoverableErrorReportingContext">A <see cref="T:Microsoft.Synchronization.SimpleProviders.RecoverableErrorReportingContext" /> object that is used to report recoverable errors that occur during attempts to update an item.</param>
+      <param name="keyAndUpdatedVersion">Returns the key and updated version properties of the updated items. If the return value is not valid, the Sync Framework runtime throws <see cref="T:System.ArgumentOutOfRangeException" />, which ends the session.</param>
+      <param name="commitKnowledgeAfterThisItem">Returns whether the Sync Framework runtime should commit knowledge to the metadata store after processing is complete for the specified item.</param>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderDeleteMode">
+      <summary>Represents the options for whether a local item delete is propagated to other replicas.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderDeleteMode.Normal">
+      <summary>The item is deleted from the local store, and the delete is propagated to other replicas.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderDeleteMode.LocalOnly">
+      <summary>The item is deleted from the local store, but the delete is not propagated to other replicas.</summary>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderFilterOptions">
+      <summary>Represents the options that are available for filtered synchronization.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderFilterOptions.None">
+      <summary>Propagate to the destination only the items that satisfy the filter.</summary>
+    </member>
+    <member name="F:Microsoft.Synchronization.SimpleProviders.SimpleSyncProviderFilterOptions.AlwaysIncludeItemsKnownToDestination">
+      <summary>Propagate to the destination all items that a destination knows, even if the items fall outside the filter.</summary>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices">
+      <summary>Represents a set of services that are designed for replicas that use a simple provider.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.#ctor(Microsoft.Synchronization.SyncIdFormatGroup,Microsoft.Synchronization.MetadataStorage.MetadataStore,Microsoft.Synchronization.SyncId,System.Globalization.CultureInfo,System.Int16)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices" /> class that contains ID formats, a metadata store with a culture setting, a replica ID, and a provider version.</summary>
+      <param name="idFormats">A <see cref="T:Microsoft.Synchronization.SyncIdFormatGroup" /> object that is used to define the format of replica and item IDs.</param>
+      <param name="metadataStore">A <see cref="T:Microsoft.Synchronization.MetadataStorage.MetadataStore" /> object that represents the store in which the replica keeps metadata.</param>
+      <param name="replicaId">A <see cref="T:Microsoft.Synchronization.SyncId" /> object that contains the ID of the replica.</param>
+      <param name="culture">A <see cref="T:System.Globalization.CultureInfo" /> object that represents the culture that is used for string comparisons. This should match the culture of the metadata store.</param>
+      <param name="providerVersion">The version number for the simple provider.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="idFormats" />, <paramref name="metadataStore" />, <paramref name="replicaId" />, or <paramref name="culture" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.MetadataStoreVersion2RequiredException">The version of the metadata storage assembly is not supported.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.BeginRemoveItemsFromReplica">
+      <summary>Starts a transaction in which items can be removed by calling <see cref="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.RemoveItemFromReplica(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary)" />. This method must be called before <see cref="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.RemoveItemFromReplica(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary)" /> is called.</summary>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">This method has already been called, and the transaction has not been ended by calling <see cref="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.EndRemoveItemsFromReplica" />.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.CleanupDeletedItems(System.TimeSpan)">
+      <summary>Calls a cleanup operation to remove from the metadata store any metadata that is associated with deleted items.</summary>
+      <param name="cleanupInterval">Cleanup runs in the metadata store if <paramref name="cleanUpInterval" /> is less than the elapsed time since the last cleanup. If you specify 0, cleanup runs regardless of when cleanup last ran.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.DeserializeReplicaMetadata(System.String,System.Int16)">
+      <summary>Deserializes the contents of a canonical metadata file to a metadata storage service store.</summary>
+      <param name="filePath">The file that contains the serialized metadata.</param>
+      <param name="providerVersion">The version number for the simple provider.</param>
+      <exception cref="T:Microsoft.Synchronization.ProviderVersionMismatchException">The provider version does not match the version stored in the metadata store.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.EndRemoveItemsFromReplica">
+      <summary>Ends a transaction in which items were removed by calling <see cref="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.RemoveItemFromReplica(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary)" />.</summary>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">A transaction was not started by calling <see cref="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.BeginRemoveItemsFromReplica" />.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.EnumerateAllLiveItems">
+      <summary>Enumerates all items for a replica that have not been deleted, either by using a normal delete or a local delete.</summary>
+      <returns>A collection of <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> objects that represent each item and its associated fields.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.GetSerializedReplicaInfo(System.String,Microsoft.Synchronization.SyncId@,Microsoft.Synchronization.SyncIdFormatGroup@)">
+      <summary>Gets information about serialized metadata, such as the ID of the replica with which it is associated.</summary>
+      <param name="filePath">The file that contains the serialized metadata.</param>
+      <param name="replicaId">The ID of the replica that is associated with this metadata.</param>
+      <param name="syncIdFormats">The ID format schema of the provider.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="filePath" /> is a null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.IsItemLastModifiedLocally(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary)">
+      <summary>Returns whether an item was last modified on the local replica.</summary>
+      <returns>True if the local metadata indicates that the specified item was last modified locally. False if the item is known, but it was not last modified locally.</returns>
+      <param name="key">An <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that represents an item and its associated fields.</param>
+      <exception cref="T:Microsoft.Synchronization.ItemNotFoundInMetadataStoreException">The simple provider did not find an item with the given identity fields in the metadata store.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="key" /> is a null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="key" /> is empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.RemoveItemFromReplica(Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary)">
+      <summary>Removes metadata for an item from a replica, but not the item itself.</summary>
+      <returns>true if the item is found and metadata is removed. Otherwise false.</returns>
+      <param name="key">An <see cref="T:Microsoft.Synchronization.SimpleProviders.ItemFieldDictionary" /> object that represents the item to remove.</param>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <see cref="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.BeginRemoveItemsFromReplica" /> was not called before this method was called.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="key" /> is a null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="key" /> is empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.ResetLocalOnlyDeletes">
+      <summary>Resets metadata so that the next time a replica serves as a source local deletes are enumerated again and propagated as normal deletes.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.SimpleSyncServices.SerializeReplicaMetadata(System.String,Microsoft.Synchronization.CompatibilityLevel)">
+      <summary>Serializes the contents of a metadata storage service store to a destination file in a canonical format.</summary>
+      <param name="filePath">Serializes the contents of a metadata storage service store to a destination file in a canonical format.</param>
+      <param name="compatibilityLevel">A <see cref="T:Microsoft.Synchronization.CompatibilityLevel" /> enumeration value that specifies which version of Sync Framework the serialized metadata is compatible with.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="filePath" /> is a null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="compatibilityLevel" /> is <see cref="F:Microsoft.Synchronization.CompatibilityLevel.SyncFrameworkVersion2" />.</exception>
+    </member>
+    <member name="T:Microsoft.Synchronization.SimpleProviders.UnmanagedSimpleSyncProviderWrapper">
+      <summary>Represents a managed object that wraps an unmanaged simple provider.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.UnmanagedSimpleSyncProviderWrapper.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.UnmanagedSimpleSyncProviderWrapper" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.UnmanagedSimpleSyncProviderWrapper.#ctor(System.Object)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.UnmanagedSimpleSyncProviderWrapper" /> class that represents the specified unmanaged provider.</summary>
+      <param name="unmanagedSyncProvider">The unmanaged provider that is wrapped by this object.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="unmanagedSyncProvider" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <paramref name="unmanagedSyncProvider" /> is already initialized—or—<paramref name="unmanagedSyncProvider" /> is not an IAnchorSyncProvider Interface or IFullEnumerationSyncProvider Interface.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.UnmanagedSimpleSyncProviderWrapper.#ctor(System.Object,Microsoft.Synchronization.ChangeDataAdapter)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.SimpleProviders.UnmanagedSimpleSyncProviderWrapper" /> class that represents the specified unmanaged provider and uses the specified change data retriever adapter to convert between managed and unmanaged data retrievers.</summary>
+      <param name="unmanagedSyncProvider">The unmanaged provider that is wrapped by this object.</param>
+      <param name="changeDataAdapter">A <see cref="T:Microsoft.Synchronization.ChangeDataAdapter" /> object that can convert the change data between its managed and unmanaged representations.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="unmanagedSyncProvider" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <paramref name="unmanagedSyncProvider" /> is already initialized—or—<paramref name="unmanagedSyncProvider" /> is not an IAnchorSyncProvider Interface or IFullEnumerationSyncProvider Interface.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.SimpleProviders.UnmanagedSimpleSyncProviderWrapper.Initialize(System.Object,Microsoft.Synchronization.ChangeDataAdapter)">
+      <summary>Initializes the wrapper so that it represents the specified unmanaged provider and uses the specified change data retriever adapter to convert between managed and unmanaged data retrievers.</summary>
+      <param name="unmanagedSyncProvider">The unmanaged provider that is wrapped by this object.</param>
+      <param name="changeDataAdapter">A <see cref="T:Microsoft.Synchronization.ChangeDataAdapter" /> object that can convert the change data between its managed and unmanaged representations.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="unmanagedSyncProvider" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.SimpleProviderInvalidOperationException">
+        <paramref name="unmanagedSyncProvider" /> is already initialized—or—<paramref name="unmanagedSyncProvider" /> is not an IAnchorSyncProvider Interface or IFullEnumerationSyncProvider Interface.</exception>
+    </member>
+  </members>
+</doc>

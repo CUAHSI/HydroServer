@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Synchronization.Services</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Synchronization.Services.Conflict"></member>
+    <member name="M:Microsoft.Synchronization.Services.Conflict.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.Services.Conflict.LiveEntity"></member>
+    <member name="T:Microsoft.Synchronization.Services.ConflictResolutionPolicy"></member>
+    <member name="F:Microsoft.Synchronization.Services.ConflictResolutionPolicy.ServerWins">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.Services.ConflictResolutionPolicy.ClientWins">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Synchronization.Services.IOfflineEntity"></member>
+    <member name="P:Microsoft.Synchronization.Services.IOfflineEntity.ServiceMetadata"></member>
+    <member name="T:Microsoft.Synchronization.Services.ISyncServiceConfiguration"></member>
+    <member name="M:Microsoft.Synchronization.Services.ISyncServiceConfiguration.AddFilterParameterConfiguration(System.String,System.String,System.String,System.Type)"></member>
+    <member name="P:Microsoft.Synchronization.Services.ISyncServiceConfiguration.EnableDiagnosticPage"></member>
+    <member name="P:Microsoft.Synchronization.Services.ISyncServiceConfiguration.IsBatchingEnabled"></member>
+    <member name="P:Microsoft.Synchronization.Services.ISyncServiceConfiguration.ServerConnectionString"></member>
+    <member name="M:Microsoft.Synchronization.Services.ISyncServiceConfiguration.SetBatchSpoolDirectory(System.String)"></member>
+    <member name="M:Microsoft.Synchronization.Services.ISyncServiceConfiguration.SetConflictResolutionPolicy(Microsoft.Synchronization.Services.ConflictResolutionPolicy)"></member>
+    <member name="M:Microsoft.Synchronization.Services.ISyncServiceConfiguration.SetDefaultSyncSerializationFormat(Microsoft.Synchronization.Services.SyncSerializationFormat)"></member>
+    <member name="M:Microsoft.Synchronization.Services.ISyncServiceConfiguration.SetDownloadBatchSize(System.UInt32)"></member>
+    <member name="M:Microsoft.Synchronization.Services.ISyncServiceConfiguration.SetEnableScope(System.String)"></member>
+    <member name="M:Microsoft.Synchronization.Services.ISyncServiceConfiguration.SetSyncObjectSchema(System.String)"></member>
+    <member name="P:Microsoft.Synchronization.Services.ISyncServiceConfiguration.UseVerboseErrors"></member>
+    <member name="T:Microsoft.Synchronization.Services.OfflineEntityMetadata"></member>
+    <member name="M:Microsoft.Synchronization.Services.OfflineEntityMetadata.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.Services.OfflineEntityMetadata.#ctor(System.Boolean,System.String,System.String,System.Uri)"></member>
+    <member name="P:Microsoft.Synchronization.Services.OfflineEntityMetadata.EditUri"></member>
+    <member name="P:Microsoft.Synchronization.Services.OfflineEntityMetadata.ETag"></member>
+    <member name="P:Microsoft.Synchronization.Services.OfflineEntityMetadata.Id"></member>
+    <member name="P:Microsoft.Synchronization.Services.OfflineEntityMetadata.IsTombstone"></member>
+    <member name="E:Microsoft.Synchronization.Services.OfflineEntityMetadata.PropertyChanged"></member>
+    <member name="T:Microsoft.Synchronization.Services.OnEndSyncRequestEventArgs"></member>
+    <member name="M:Microsoft.Synchronization.Services.OnEndSyncRequestEventArgs.#ctor(System.ServiceModel.Channels.Message)"></member>
+    <member name="P:Microsoft.Synchronization.Services.OnEndSyncRequestEventArgs.Msg"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncConflict"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncConflict.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncConflict.LosingEntity"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncConflict.Resolution"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncConflictContext"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncConflictContext.ClientChange"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncConflictContext.ServerChange"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncConflictInterceptorAttribute"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncConflictInterceptorAttribute.#ctor(System.String)"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncConflictResolution"></member>
+    <member name="F:Microsoft.Synchronization.Services.SyncConflictResolution.ServerWins">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.Services.SyncConflictResolution.ClientWins">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.Services.SyncConflictResolution.Merge">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Synchronization.Services.SyncDownloadResponseOperationContext"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncDownloadResponseOperationContext.IsLastBatch"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncDownloadResponseOperationContext.OutgoingChanges"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncEntityPropertyIsNullableAttribute"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncEntityPropertyIsNullableAttribute.#ctor"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncEntityPropertyMappingAttribute"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncEntityPropertyMappingAttribute.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncEntityPropertyMappingAttribute.LocalName"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncEntityTypeAttribute"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncEntityTypeAttribute.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncEntityTypeAttribute.KeyFields"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncEntityTypeAttribute.TableGlobalName"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncEntityTypeAttribute.TableLocalName"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncError"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncError.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncError.Description"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncError.ErrorEntity"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncInterceptorAttribute"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncInterceptorAttribute.#ctor(System.String,Microsoft.Synchronization.Services.SyncOperations)"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncInterceptorAttribute.EntityType"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncInterceptorAttribute.Operation"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncInterceptorAttribute.ScopeName"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncOperationContext"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncOperationContext.Operation"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncOperationContext.QueryString"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncOperationContext.RequestHeaders"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncOperationContext.ResponseHeaders"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncOperationContext.ScopeName"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncOperations"></member>
+    <member name="F:Microsoft.Synchronization.Services.SyncOperations.Download">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.Services.SyncOperations.Upload">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.Services.SyncOperations.All">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Synchronization.Services.SyncRequestInterceptorAttribute"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncRequestInterceptorAttribute.#ctor(System.String,Microsoft.Synchronization.Services.SyncOperations)"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncResponseInterceptorAttribute"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncResponseInterceptorAttribute.#ctor(System.String,Microsoft.Synchronization.Services.SyncOperations)"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncScopeAttribute"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncScopeAttribute.#ctor"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncSerializationFormat"></member>
+    <member name="F:Microsoft.Synchronization.Services.SyncSerializationFormat.ODataAtom">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.Services.SyncSerializationFormat.ODataJson">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Synchronization.Services.SyncService`1">
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="M:Microsoft.Synchronization.Services.SyncService`1.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncService`1.OnBeginDiagnosticRequest"></member>
+    <member name="E:Microsoft.Synchronization.Services.SyncService`1.OnBeginSyncRequest"></member>
+    <member name="E:Microsoft.Synchronization.Services.SyncService`1.OnEndSyncRequest"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncService`1.ProcessRequestForDiagnostics"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncService`1.ProcessRequestForMessage(System.IO.Stream)"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncService`1.ProcessRequestToServiceRoot"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncServiceHost"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncServiceHost.#ctor(System.Type,System.Uri[])"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncServiceHostFactory"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncServiceHostFactory.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncServiceHostFactory.CreateServiceHost(System.Type,System.Uri[])"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncServiceTracer"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncServiceTracer.TraceError(System.String,System.Object[])"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncServiceTracer.TraceInfo(System.String,System.Object[])"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncServiceTracer.TraceVerbose(System.String,System.Object[])"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncServiceTracer.TraceWarning(System.String,System.Object[])"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncUploadRequestOperationContext"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncUploadRequestOperationContext.IncomingChanges"></member>
+    <member name="M:Microsoft.Synchronization.Services.SyncUploadRequestOperationContext.RejectChange(Microsoft.Synchronization.Services.IOfflineEntity,System.String)"></member>
+    <member name="T:Microsoft.Synchronization.Services.SyncUploadResponseOperationContext"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncUploadResponseOperationContext.Conflicts"></member>
+    <member name="P:Microsoft.Synchronization.Services.SyncUploadResponseOperationContext.OutgoingChanges"></member>
+  </members>
+</doc>

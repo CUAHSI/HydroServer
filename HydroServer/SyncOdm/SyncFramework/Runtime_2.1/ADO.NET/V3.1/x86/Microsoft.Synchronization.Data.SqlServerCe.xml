@@ -1,0 +1,689 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Synchronization.Data.SqlServerCe</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider">
+      <summary>Abstracts a client synchronization provider for SQL Server Compact that communicates with the client and shields the synchronization agent from the specific implementation of the client database.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider" /> class by using default values.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider" /> class by using a connection string parameter.</summary>
+      <param name="connectionString">The string that is used to connect to a SQL Server Compact database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.#ctor(System.String,System.Boolean)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider" /> class by using connection string and database creation parameters.</summary>
+      <param name="connectionString">The string that is used to connect to a SQL Server Compact database.</param>
+      <param name="createDbIfNotExists">True to create the client database if it does not exist; false not to create it. The default is true.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.AcceptChanges(System.Collections.Generic.IEnumerable{System.String})">
+      <summary>Updates tracking metadata for the specified tables so that pending changes for the specified tables are not uploaded during the next synchronization.</summary>
+      <param name="tableNames">A collection of tables in the client database for which to accept changes.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.AcceptChanges(System.Collections.Generic.IEnumerable{System.String},Microsoft.Synchronization.Data.SyncAnchor)">
+      <summary>Updates tracking metadata up to the specified anchor point so that pending changes for the specified tables at the client are not uploaded during the next synchronization.</summary>
+      <param name="tableNames">A collection of tables in the client database for which to accept changes.</param>
+      <param name="newAnchor">A <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that represents the point up to which changes should be accepted.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> or <paramref name="newAnchor" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.AcceptChanges(System.String)">
+      <summary>Updates tracking metadata so that pending changes for the specified table are not uploaded during the next synchronization.</summary>
+      <param name="tableName">A table in the client database for which to accept changes.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.AcceptChanges(System.String,Microsoft.Synchronization.Data.SyncAnchor)">
+      <summary>Updates tracking metadata up to the specified anchor point so that pending changes for the specified table at the client are not uploaded during the next synchronization.</summary>
+      <param name="tableName">A table in the client database for which to accept changes.</param>
+      <param name="newAnchor">A <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that represents the point up to which changes should be accepted.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> or <paramref name="newAnchor" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ApplyChangeFailed">
+      <summary>Occurs after a row could not be applied at the client.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ApplyChanges(Microsoft.Synchronization.Data.SyncGroupMetadata,System.Data.DataSet,Microsoft.Synchronization.Data.SyncSession)">
+      <summary>Applies inserts, updates, and deletes for a synchronization group to the client database when given group metadata, a data set, and synchronization session parameters.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncContext" /> object that contains data changes and anchor values and other metadata for a synchronization session.</returns>
+      <param name="groupMetadata">A <see cref="T:Microsoft.Synchronization.Data.SyncGroupMetadata" /> object that contains metadata about the synchronization group.</param>
+      <param name="dataSet">A <see cref="T:System.Data.DataSet" /> object that contains the rows of data to be applied to the client database.</param>
+      <param name="syncSession">A <see cref="T:Microsoft.Synchronization.Data.SyncSession" /> object that contains metadata about the current synchronization session.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="groupMetadata" /> or <paramref name="dataSet" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ApplyChanges(System.Collections.Generic.IEnumerable{System.String},System.Data.DataSet,Microsoft.Synchronization.Data.SyncAnchor)">
+      <summary>Applies inserts, updates, and deletes for a synchronization group to the client database when given table names, a data set, and server anchor parameters.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncContext" /> object that contains data changes and anchor values and other metadata for a synchronization session.</returns>
+      <param name="tableNames">A collection of tables in the client database for which to apply changes.</param>
+      <param name="dataSet">A <see cref="T:System.Data.DataSet" /> object that contains the rows of data to be applied to the database.</param>
+      <param name="serverAnchor">A <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that represents the <see cref="P:Microsoft.Synchronization.Data.SyncContext.NewAnchor" /> value for this synchronization session.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> or <paramref name="dataSet" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ApplyChanges(System.String,System.Data.DataSet,Microsoft.Synchronization.Data.SyncAnchor)">
+      <summary>Applies inserts, updates, and deletes for a synchronization group to the client database when given a table name, a data set, and server anchor parameters.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncContext" /> object that contains data changes and anchor values and other metadata for a synchronization session.</returns>
+      <param name="tableName">A table in the client database for which to apply changes.</param>
+      <param name="dataSet">A <see cref="T:System.Data.DataSet" /> object that contains the rows of data to be applied to the database.</param>
+      <param name="serverAnchor">A <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that represents the <see cref="P:Microsoft.Synchronization.Data.SyncContext.NewAnchor" /> value for this synchronization session.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> or <paramref name="dataSet" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ApplyingChanges">
+      <summary>Occurs before changes are applied at the client for a synchronization group.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.BeginTransaction(Microsoft.Synchronization.Data.SyncSession)">
+      <summary>Called by the <see cref="T:Microsoft.Synchronization.SyncAgent" /> to begin a transaction. This allows the agent to commit a set of changes as an atomic unit.</summary>
+      <param name="syncSession">A <see cref="T:Microsoft.Synchronization.Data.SyncSession" /> object that contains metadata about the current synchronization session.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ChangesApplied">
+      <summary>Occurs after all changes are applied at the client for a synchronization group.</summary>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ChangesSelected">
+      <summary>Occurs after all changes to be applied to the server for a synchronization group are selected from the client.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ClientId">
+      <summary>Gets or sets the GUID that Sync Framework uses to identify the client database.</summary>
+      <returns>A GUID that identifies the client database.</returns>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ConflictResolver">
+      <summary>Gets a <see cref="T:Microsoft.Synchronization.Data.SyncConflictResolver" /> object for the client synchronization provider, which determines what action to take when a conflict occurs.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncConflictResolver" /> object that determines what action to take when a conflict occurs.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.Connection">
+      <summary>Gets the <see cref="T:System.Data.IDbConnection" /> object that is used to connect to the client database.</summary>
+      <returns>An <see cref="T:System.Data.IDbConnection" /> object that is used to connect to a Microsoft SQL Server Compact database.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ConnectionString">
+      <summary>Gets or sets the string that is used to connect to the client database.</summary>
+      <returns>The string that is used to connect to a Microsoft SQL Server Compact database.</returns>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="value" /> or <see cref="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ConnectionString" /> is a null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.CreateDatabaseIfNotExists">
+      <summary>Gets or sets whether to create the client database if it does not exist.</summary>
+      <returns>true to create the client database if it does not exist; false not to create it.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.CreateSchema(Microsoft.Synchronization.Data.SyncTable,Microsoft.Synchronization.Data.SyncSchema)">
+      <summary>Creates the table schema in the client database if the schema does not exist.</summary>
+      <param name="syncTable">A <see cref="T:Microsoft.Synchronization.Data.SyncTable" /> object that contains settings for the table that will be created, such as the direction of synchronization.</param>
+      <param name="syncSchema">A <see cref="T:Microsoft.Synchronization.Data.SyncSchema" /> object. This object is a <see cref="T:System.Data.DataSet" /> that contains schema information for the table that will be created.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="syncTable" /> is a null or <paramref name="syncSchema" /> is a null and <paramref name="syncTable.CreationOption" /> is not <see cref="F:Microsoft.Synchronization.Data.TableCreationOption.UseExistingTableOrFail" />.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.SchemaException">
+        <paramref name="syncTable" /> already exists and <paramref name="syncTable.CreationOption" /> is not <see cref="F:Microsoft.Synchronization.Data.TableCreationOption.UseExistingTableOrFail" />,—or—<paramref name="syncTable" /> does not exist and <paramref name="syncTable.CreationOption" /> is <see cref="F:Microsoft.Synchronization.Data.TableCreationOption.UseExistingTableOrFail" />.</exception>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.CreatingSchema">
+      <summary>Occurs before the schema is created at the client for each table.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.Dispose">
+      <summary>Releases all resources that are used by the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider" />.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources that are used by the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider" /> and optionally releases the managed resources.</summary>
+      <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.EndTransaction(System.Boolean,Microsoft.Synchronization.Data.SyncSession)">
+      <summary>Called by the <see cref="T:Microsoft.Synchronization.SyncAgent" /> to end a transaction. This allows the agent to commit a set of changes as an atomic unit.</summary>
+      <param name="commit">true to commit the transaction; false to roll back the transaction.</param>
+      <param name="syncSession">A <see cref="T:Microsoft.Synchronization.Data.SyncSession" /> object that contains metadata about the current synchronization session.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.Finalize">
+      <summary>Is the destructor for <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider" />.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.GetChanges(Microsoft.Synchronization.Data.SyncGroupMetadata,Microsoft.Synchronization.Data.SyncSession)">
+      <summary>Gets inserts, updates, and deletes for the specified synchronization group and session that occurred at the client since the last time <see cref="M:Microsoft.Synchronization.SyncAgent.Synchronize" /> or <see cref="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.AcceptChanges(System.String)" /> was called.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncContext" /> object that contains data changes and anchor values and other metadata for a synchronization session.</returns>
+      <param name="groupMetadata">A <see cref="T:Microsoft.Synchronization.Data.SyncGroupMetadata" /> object that contains metadata about the synchronization group.</param>
+      <param name="syncSession">A <see cref="T:Microsoft.Synchronization.Data.SyncSession" /> object that contains metadata about the current synchronization session.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="groupMetadata" /> or<paramref name=" syncSession" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.GetChanges(System.Collections.Generic.IEnumerable{System.String})">
+      <summary>Gets inserts, updates, and deletes from the specified tables at the client that occurred since the last time <see cref="M:Microsoft.Synchronization.SyncAgent.Synchronize" /> or <see cref="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.AcceptChanges(System.String)" /> was called.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncContext" /> object that contains data changes and anchor values and other metadata for a synchronization session.</returns>
+      <param name="tableNames">A collection of tables in the client database for which to get changes.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableNames" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.GetChanges(System.String)">
+      <summary>Gets inserts, updates, and deletes from the specified table at the client that occurred since the last time <see cref="M:Microsoft.Synchronization.SyncAgent.Synchronize" /> or <see cref="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.AcceptChanges(System.String)" /> was called.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncContext" /> object that contains data changes and anchor values and other metadata for a synchronization session.</returns>
+      <param name="tableName">A table in the client database for which to get changes.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.GetTableReceivedAnchor(System.String)">
+      <summary>Gets a <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that contains the time when the last change was received from the server.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that contains the time when the last change was received from the server.</returns>
+      <param name="tableName">The name of the table.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.MetadataException">The table anchor could not be retrieved.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.GetTableSentAnchor(System.String)">
+      <summary>Gets a <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that contains the time when the last change was sent from the client.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that contains the time when the last change was sent from the client.</returns>
+      <param name="tableName">The name of the table.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.MetadataException">The table anchor could not be retrieved.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnApplyChangeFailed(Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ApplyChangeFailed" /> event.</summary>
+      <param name="value">An <see cref="T:Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnApplyingChanges(Microsoft.Synchronization.Data.ApplyingChangesEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ApplyingChanges" /> event.</summary>
+      <param name="value">An <see cref="T:Microsoft.Synchronization.Data.ApplyingChangesEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnChangesApplied(Microsoft.Synchronization.Data.ChangesAppliedEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ChangesApplied" /> event.</summary>
+      <param name="value">A <see cref="T:Microsoft.Synchronization.Data.ChangesAppliedEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnChangesSelected(Microsoft.Synchronization.Data.ChangesSelectedEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.ChangesSelected" /> event.</summary>
+      <param name="value">A <see cref="T:Microsoft.Synchronization.Data.ChangesSelectedEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnCreatingSchema(Microsoft.Synchronization.Data.CreatingSchemaEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.CreatingSchema" /> event.</summary>
+      <param name="value">A <see cref="T:Microsoft.Synchronization.Data.CreatingSchemaEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnInitialized">
+      <summary>Raises the initialized event.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnSchemaCreated(Microsoft.Synchronization.Data.SchemaCreatedEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.SchemaCreated" /> event.</summary>
+      <param name="value">A <see cref="T:Microsoft.Synchronization.Data.SchemaCreatedEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnSelectingChanges(Microsoft.Synchronization.Data.SelectingChangesEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.SelectingChanges" /> event.</summary>
+      <param name="value">A <see cref="T:Microsoft.Synchronization.Data.SelectingChangesEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.OnSyncProgress(Microsoft.Synchronization.Data.SyncProgressEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.SyncProgress" /> event.</summary>
+      <param name="value">A <see cref="T:Microsoft.Synchronization.Data.SyncProgressEventArgs" /> object that contains event data.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.RetentionInDays">
+      <summary>Gets or sets the number of days that change-tracking metadata is stored in a SQL Server Compact database.</summary>
+      <returns>The number of days that change-tracking metadata should be stored in a SQL Server Compact database.</returns>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.SchemaCreated">
+      <summary>Occurs after the schema is created at the client for each table.</summary>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.SelectingChanges">
+      <summary>Occurs before all changes to be applied to the server for a synchronization group are selected from the client.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.SetTableReceivedAnchor(System.String,Microsoft.Synchronization.Data.SyncAnchor)">
+      <summary>Sets a <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that contains the time that the last change was received from the server.</summary>
+      <param name="tableName">The name of the table.</param>
+      <param name="anchor">A <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object, with the anchor value to persist.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> or <paramref name="anchor" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.MetadataException">The table anchor could not be set.</exception>
+      <exception cref="T:System.ArgumentException">No table with the name <paramref name="tableName" /> exists.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.SetTableSentAnchor(System.String,Microsoft.Synchronization.Data.SyncAnchor)">
+      <summary>Sets a <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object that contains the time when the last change was sent from the client.</summary>
+      <param name="tableName">The name of the table.</param>
+      <param name="anchor">A <see cref="T:Microsoft.Synchronization.Data.SyncAnchor" /> object, with the anchor value to persist.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DataSyncException">Another transaction is in progress.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> or <paramref name="anchor" /> is a null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.MetadataException">The table anchor could not be set.</exception>
+      <exception cref="T:System.ArgumentException">No table with the name <paramref name="tableName" /> exists.</exception>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeClientSyncProvider.SyncProgress">
+      <summary>Occurs during the selection and application of changes for a synchronization group at the client.</summary>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncDescriptionBuilder">
+      <summary>Represents scope and table information for a SQL Server Compact database that is involved in synchronization.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncDescriptionBuilder.GetDescriptionForScope(System.String,System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope that is defined for a SQL Server Compact database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope.</returns>
+      <param name="scopeName">The name of the scope for which to retrieve a description.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlServerCe.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is a null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="scopeName" /> is a null or empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncDescriptionBuilder.GetDescriptionForScope(System.String,System.String,System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope that is defined for a SQL Server Compact database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that contains information about the specified scope.</returns>
+      <param name="scopeName">The name of the scope for which to retrieve a description.</param>
+      <param name="objectPrefix">The optional prefix that is used to identify objects that Sync Framework creates.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is a null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="scopeName" /> is a null or empty.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncDescriptionBuilder.GetDescriptionForTable(System.String,System.Collections.ObjectModel.Collection{System.String},System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object that contains schema information about the specified table in a SQL Server Compact database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object that contains schema information about the specified table in a SQL Server Compact database.</returns>
+      <param name="tableName">The name of the table for which to retrieve a description.</param>
+      <param name="columnNames">A list of columns for which to retrieve information.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlServerCe.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> or <paramref name="connection" /> is a null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncDescriptionBuilder.GetDescriptionForTable(System.String,System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Returns a <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object that contains schema information about the specified table in a SQL Server Compact database.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object that contains schema information about the specified table.</returns>
+      <param name="tableName">The name of the table for which to retrieve a description.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlServerCe.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="tableName" /> or <paramref name="connection" /> is a null.</exception>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider">
+      <summary>Encapsulates a synchronization provider for SQL Server Compact that communicates with the client and shields the synchronization orchestrator from the specific implementation of the client database.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider" /> class by using default values.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.#ctor(System.String,System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider" /> class for the specified scope name and connection.</summary>
+      <param name="scopeName">The name of the scope, which defines the set of tables (with optional filters) to synchronize.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlServerCe.SqlCeConnection" /> object that contains a connection to the database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.#ctor(System.String,System.Data.SqlServerCe.SqlCeConnection,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider" /> class for the specified scope name, connection, and synchronization object prefix.</summary>
+      <param name="scopeName">The name of the scope, which defines the set of tables (with optional filters) to synchronize.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.BeginSession(Microsoft.Synchronization.SyncProviderPosition,Microsoft.Synchronization.SyncSessionContext)">
+      <summary>Called by the <see cref="T:Microsoft.Synchronization.SyncOrchestrator" /> to indicate that a synchronization session has started.</summary>
+      <param name="position">A <see cref="T:Microsoft.Synchronization.SyncProviderPosition" /> enumeration value that represents whether a provider is associated with the local or remote database.</param>
+      <param name="syncSessionContext">A <see cref="T:Microsoft.Synchronization.SyncSessionContext" /> object that contains information about the current synchronization session.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DbSyncException">A transaction is already in progress.</exception>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.BeginSnapshotInitialization">
+      <summary>Occurs when Sync Framework determines that a database is a snapshot that needs to be initialized before synchronization starts.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.Connection">
+      <summary>Gets or sets the <see cref="T:System.Data.IDbConnection" /> object that is used to connect to the client database.</summary>
+      <returns>The <see cref="T:System.Data.IDbConnection" /> object that is used to connect to the client database.</returns>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="value" /> has an invalid connection string.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.CreateApplicationTransaction">
+      <summary>Creates a read-committed transaction over which to apply changes to the SQL Server Compact database.</summary>
+      <returns>The transaction used for change application.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.CreateEnumerationTransaction">
+      <summary>Creates a read-committed transaction over which to enumerate changes from the SQL Server Compact database.</summary>
+      <returns>The transaction used for change enumeration.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources that are used by the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider" /> and optionally releases the managed resources.</summary>
+      <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.EndSnapshotInitialization">
+      <summary>Occurs when all tables for a particular scope have been initialized from a snapshot.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.OnApplyChangeFailed(Microsoft.Synchronization.Data.DbApplyChangeFailedEventArgs)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.RelationalSyncProvider.ApplyChangeFailed" /> event that is inherited by this class.</summary>
+      <param name="value">The event data.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.OnApplyingChanges(Microsoft.Synchronization.Data.DbApplyingChangesEventArgs,System.Data.IDbTransaction)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.RelationalSyncProvider.ApplyingChanges" /> event that is inherited by this class.</summary>
+      <param name="value">The event data.</param>
+      <param name="transaction">The current database transaction.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.OnApplyMetadataFailed(Microsoft.Synchronization.Data.ApplyMetadataFailedEventArgs,System.Data.IDbTransaction)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.RelationalSyncProvider.ApplyMetadataFailed" /> event that is inherited by this class.</summary>
+      <param name="value">The event data.</param>
+      <param name="transaction">The current database transaction.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.OnChangesApplied(Microsoft.Synchronization.Data.DbChangesAppliedEventArgs,System.Data.IDbTransaction)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.RelationalSyncProvider.ChangesApplied" /> event that is inherited by this class.</summary>
+      <param name="value">The event data.</param>
+      <param name="transaction">The current database transaction.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.OnSyncProgress(Microsoft.Synchronization.Data.DbSyncProgressEventArgs,System.Data.IDbTransaction)">
+      <summary>Raises the <see cref="E:Microsoft.Synchronization.Data.RelationalSyncProvider.SyncProgress" /> event that is inherited by this class.</summary>
+      <param name="value">The event data.</param>
+      <param name="transaction">The current database transaction.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider.ScopeName">
+      <summary>Gets or sets the name of the scope to synchronize.</summary>
+      <returns>The name of the scope, which is a set of objects to synchronize.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration">
+      <summary>Represents synchronization adapter configuration for a table in a SQL Server Compact database.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration.Columns">
+      <summary>Gets or sets a list of <see cref="T:Microsoft.Synchronization.Data.DbSyncColumnDescription" /> objects that represent all columns in a table.</summary>
+      <returns>A list of <see cref="T:Microsoft.Synchronization.Data.DbSyncColumnDescription" /> objects that represent all columns in a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration.GlobalTableName">
+      <summary>Gets or sets the name, including database-specific delimiters, that other nodes in a synchronization topology use to identify a table.</summary>
+      <returns>The name that other nodes in a synchronization topology use to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration.NonPkColumns">
+      <summary>Gets a list of <see cref="T:Microsoft.Synchronization.Data.DbSyncColumnDescription" /> objects that represent all columns in a table other than the primary key columns.</summary>
+      <returns>A list of <see cref="T:Microsoft.Synchronization.Data.DbSyncColumnDescription" /> objects that represent all columns in a table other than the primary key columns.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration.PkColumns">
+      <summary>Gets a list of <see cref="T:Microsoft.Synchronization.Data.DbSyncColumnDescription" /> objects that represent all primary key columns in a table.</summary>
+      <returns>A list of <see cref="T:Microsoft.Synchronization.Data.DbSyncColumnDescription" /> objects that represent all primary key columns in a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration.TableName">
+      <summary>Gets or sets the name, not including database-specific delimiters, that the local node in a synchronization topology uses to identify a table.</summary>
+      <returns>The name that the local node in a synchronization topology uses to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration.TrackingTableName">
+      <summary>Gets or sets the name, not including database-specific delimiters, of the tracking table for a specific base table.</summary>
+      <returns>The name of the tracking table for a specific base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration.UnmappedElements">
+      <summary>Gets or sets an array of any XML configuration elements that are not recognized by Sync Framework when an adapter is configured.</summary>
+      <returns>An array of any XML configuration elements that are not recognized by Sync Framework.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderScopeConfiguration">
+      <summary>Represents configuration information that is used by <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider" /> for a particular scope.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderScopeConfiguration.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderScopeConfiguration" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderScopeConfiguration.AdapterConfigurations">
+      <summary>Gets or sets a list of <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration" /> objects that are each associated with a table in a SQL Server Compact database.</summary>
+      <returns>A list of <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderAdapterConfiguration" /> objects that are each associated with a table in a SQL Server Compact database.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProviderScopeConfiguration.UnmappedElements">
+      <summary>Gets or sets an array of any XML configuration elements that are not recognized by Sync Framework when a scope is configured.</summary>
+      <returns>An array of any XML configuration elements that are not recognized by Sync Framework.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeDeprovisioning">
+      <summary>Removes scopes and other synchronization elements from a SQL Server Compact database that was previously provisioned for synchronization.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeDeprovisioning.#ctor(System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeDeprovisioning" /> class with the specified connection.</summary>
+      <param name="connection">A connection to the database to deprovision.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeDeprovisioning.DeprovisionScope(System.String)">
+      <summary>Deprovisions the specified scope by removing all associated synchronization elements from the database.</summary>
+      <param name="scopeName">The name of the scope to deprovision.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeDeprovisioning.DeprovisionStore">
+      <summary>Removes all synchronization metadata tables, triggers, and stored procedures from the database.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeDeprovisioning.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The optional prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning">
+      <summary>Represents the provisioning of a SQL Server Compact database for a particular scope that is represented by a <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning" /> class by using default values.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.#ctor(Microsoft.Synchronization.Data.DbSyncScopeDescription)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning" /> class for the specified scope.</summary>
+      <param name="scopeDescription">A <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that represents a logical grouping of tables (optionally filtered) that are synchronized as a unit.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DbProvisioningException">
+        <paramref name="scopeDescription" /> is null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.#ctor(System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning" /> class with the specified connection.</summary>
+      <param name="connection">A connection to the database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.#ctor(System.Data.SqlServerCe.SqlCeConnection,Microsoft.Synchronization.Data.DbSyncScopeDescription)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning" /> class with the specified connection and scope description.</summary>
+      <param name="connection">A connection to the database.</param>
+      <param name="scopeDescription">A <see cref="T:Microsoft.Synchronization.Data.DbSyncScopeDescription" /> object that represents a logical grouping of tables (optionally filtered) that are synchronized as a unit.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.Apply">
+      <summary>Applies the provisioning script over the connection that was specified in the constructor.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.Apply(System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Applies the provisioning script to a SQL Server Compact database over the specified connection.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is null.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DbSyncException">A transaction is already in progress.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.PopulateFromScopeDescription(Microsoft.Synchronization.Data.DbSyncScopeDescription)">
+      <summary>Sets the scope description from which the database should be provisioned.</summary>
+      <param name="scopeDescription">An object that represents how the scope is configured.</param>
+      <exception cref="T:Microsoft.Synchronization.Data.DbProvisioningException">
+        <paramref name="scopeDescription" /> is null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ScopeExists(System.String)">
+      <summary>Indicates whether the specified scope exists in the database by using the connection previously specified in the constructor.</summary>
+      <returns>true if the specified scope exists on the database; otherwise, false.</returns>
+      <param name="scopeName">The name of the scope to look up.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ScopeExists(System.String,System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Returns whether the specified scope exists.</summary>
+      <param name="scopeName">The name of the scope to check.</param>
+      <param name="connection">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is  null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="scopeName" /> is null or empty.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DbSyncException">A transaction is already in progress.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ScopeName">
+      <summary>Gets the name of the scope that this object represents.</summary>
+      <returns>The name of the scope that this object represents.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.SetCreateTableDefault(Microsoft.Synchronization.Data.DbSyncCreationOption)">
+      <summary>Sets whether to create base tables when a scope is configured.</summary>
+      <param name="defaultOption">A <see cref="T:Microsoft.Synchronization.Data.DbSyncCreationOption" /> enumeration value that specifies whether to create base tables.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.Tables">
+      <summary>Gets a collection of <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning" /> objects that each represent the provisioning of a database table.</summary>
+      <returns>A collection of <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning" /> objects that each represent the provisioning of a database table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.UserComment">
+      <summary>Gets or sets the user comment about the scope.</summary>
+      <returns>The user comment about the scope.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup">
+      <summary>Represents cleanup of change-tracking metadata in a SQL Server Compact database that is synchronized by using a <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncProvider" />.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.#ctor(System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup" /> class with the specified connection.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.#ctor(System.Data.SqlServerCe.SqlCeConnection,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup" /> class with the specified connection and object prefix.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.#ctor(System.Data.SqlServerCe.SqlCeConnection,System.String,System.Int32)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup" /> class with the specified connection, object prefix, and metadata retention period.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+      <param name="retentionInDays">How old change-tracking metadata must be, in days, for that metadata to be deleted when <see cref="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.PerformCleanup" /> is called.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.Connection">
+      <summary>Gets or sets a <see cref="T:System.Data.SqlServerCe.SqlCeConnection" /> object that contains a connection to the database.</summary>
+      <returns>A <see cref="T:System.Data.SqlServerCe.SqlCeConnection" /> object that contains a connection to the database.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.PerformCleanup">
+      <summary>Removes change-tracking metadata from the database and updates the cleanup knowledge to reflect the point where the cleanup process stopped.</summary>
+      <returns>true if metadata cleanup ran successfully. Otherwise, false.</returns>
+      <exception cref="T:System.ArgumentNullException">The <see cref="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.Connection" /> property is a null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.RetentionInDays">
+      <summary>Gets or sets how old change-tracking metadata must be, in days, for that metadata to be deleted when <see cref="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataCleanup.PerformCleanup" /> is called.</summary>
+      <returns>The number of days old that change-tracking metadata must be for that metadata to be deleted.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade">
+      <summary>Upgrades the metadata format of the database to the current version.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade.#ctor(System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade" /> class with the specified connection.</summary>
+      <param name="connection">A connection to the database.</param>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade.#ctor(System.Data.SqlServerCe.SqlCeConnection,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade" /> class with the specified connection and object prefix.</summary>
+      <param name="connection">A connection to the database.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade.Connection">
+      <summary>Gets or sets the database connection over which the upgrade is performed.</summary>
+      <returns>The database connection over which the upgrade is performed.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade.NeedsUpgrade">
+      <summary>Indicates whether the metadata format of the database needs to be upgraded.</summary>
+      <returns>true when the metadata format needs to be upgraded; false when the metadata format is the current version.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreMetadataUpgrade.UpgradeSyncSchema">
+      <summary>Upgrades the metadata format to the current version.</summary>
+      <returns>true when the upgrade succeeds; otherwise, false.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization">
+      <summary>Represents an existing SQL Server Compact database file that can be used to initialize another SQL Server Compact database for synchronization.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization" /> class by using default values.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.#ctor(Microsoft.Synchronization.SyncIdFormatGroup,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization" /> class for the specified ID format and object prefix.</summary>
+      <param name="idFormats">A <see cref="T:Microsoft.Synchronization.SyncIdFormatGroup" /> object that represents the format schema for the group of IDs that identify entities in a synchronization session.</param>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="idFormats" /> is a null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization" /> class for the specified object prefix.</summary>
+      <param name="objectPrefix">The prefix that is optionally specified for the <see cref="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncScopeProvisioning.ObjectPrefix" /> property, to identify objects that Sync Framework creates.</param>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.BeginSnapshotInitialization">
+      <summary>Occurs when <see cref="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.InitializeSnapshot(System.Data.SqlServerCe.SqlCeConnection)" /> is called.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.Dispose">
+      <summary>Releases all resources that are used by the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization" /> object and optionally releases the managed resources.</summary>
+      <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+    </member>
+    <member name="E:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.EndSnapshotInitialization">
+      <summary>Occurs when all tables for a particular scope in the snapshot have been initialized.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.GenerateSnapshot(System.Data.SqlServerCe.SqlCeConnection,System.String)">
+      <summary>Generates a snapshot of an existing SQL Server Compact database file that can be used to initialize another SQL Server Compact database for synchronization.</summary>
+      <param name="sourceConnection">A <see cref="T:System.Data.SqlServerCe.SqlCeConnection" /> object that contains a connection to the database from which the snapshot should be generated.</param>
+      <param name="destinationDatabasePath">The file path to which the snapshot should be written.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="sourceConnection" /> is a null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="destinationDatabasePath" /> is a null or empty,<paramref name="destinationDatabasePath" /> is not a file,—or—<paramref name="destinationDatabasePath" /> is a UNC path.</exception>
+      <exception cref="T:Microsoft.Synchronization.Data.DbSyncException">The snapshot could not be initialized.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.InitializeSnapshot(System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Updates metadata for a snapshot so that the snapshot can be used by a new synchronization node.</summary>
+      <param name="snapshotConn">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database file that was generated by calling <see cref="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.GenerateSnapshot(System.Data.SqlServerCe.SqlCeConnection,System.String)" />.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="snapshotConn" /> is a null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncStoreSnapshotInitialization.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning">
+      <summary>Represents the provisioning of a SQL Server Compact database table that is represented by a <see cref="T:Microsoft.Synchronization.Data.DbSyncTableDescription" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.Apply(System.Data.SqlServerCe.SqlCeConnection)">
+      <summary>Applies the provisioning script to a SQL Server Compact database over the specified connection.</summary>
+      <param name="connection">A <see cref="T:System.Data.SqlCeConnection" /> object that contains a connection to the database.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="connection" /> is a null.</exception>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.Apply(System.Data.SqlServerCe.SqlCeTransaction)">
+      <summary>Applies the provisioning script to a SQL Server Compact database within the specified transaction.</summary>
+      <param name="trans">A <see cref="T:System.Data.SqlServerCe.SqlCeTransaction" /> object that represents a database transaction.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="trans" /> is a null.</exception>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.CreateTable">
+      <summary>Gets or sets whether to create a base table.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.DbSyncCreationOption" /> enumeration value that specifies whether to create the base table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.GlobalName">
+      <summary>Gets the name, including database-specific delimiters, that other nodes in a synchronization topology use to identify a table.</summary>
+      <returns>The name that other nodes in a synchronization topology use to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.LocalName">
+      <summary>Gets the name, including database-specific delimiters, that the local node in a synchronization topology uses to identify a table.</summary>
+      <returns>The name that the local node in a synchronization topology uses to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.ObjectPrefix">
+      <summary>Gets or sets the optional prefix that is used to identify objects that Sync Framework creates.</summary>
+      <returns>The prefix that is used to identify objects that Sync Framework creates.</returns>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.ToString">
+      <summary>Returns a string that represents the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning" /> object.</summary>
+      <returns>A string that represents the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning" /> object.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.UnquotedGlobalName">
+      <summary>Gets the name, not including database-specific delimiters, that other nodes in a synchronization topology use to identify a table.</summary>
+      <returns>The name that other nodes in a synchronization topology use to identify a table.</returns>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning.UnquotedLocalName">
+      <summary>Gets the name, not including database-specific delimiters, that the local node in a synchronization topology uses to identify a table.</summary>
+      <returns>The name that the local node in a synchronization topology uses to identify a table.</returns>
+    </member>
+    <member name="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioningCollection">
+      <summary>Represents a collection of <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning" /> objects.</summary>
+    </member>
+    <member name="M:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioningCollection.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioningCollection" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioningCollection.Item(System.String)">
+      <summary>Gets a <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning" /> object with the specified name from the collection.</summary>
+      <returns>A <see cref="T:Microsoft.Synchronization.Data.SqlServerCe.SqlCeSyncTableProvisioning" /> object.</returns>
+      <param name="globalTableName">The name of the table to add to the collection.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="globalTableName" /> is a null.</exception>
+    </member>
+  </members>
+</doc>
