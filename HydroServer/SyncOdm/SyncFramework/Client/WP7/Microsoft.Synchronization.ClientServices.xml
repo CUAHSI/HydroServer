@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Synchronization.ClientServices</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Synchronization.ClientServices.CacheController"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheController.#ctor(System.Uri,System.String,Microsoft.Synchronization.ClientServices.OfflineSyncProvider)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheController.CancelAsync"></member>
+    <member name="E:Microsoft.Synchronization.ClientServices.CacheController.CancelCompleted"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheController.ControllerBehavior"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheController.IsBusy"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheController.LocalProvider"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheController.RefreshAsync"></member>
+    <member name="E:Microsoft.Synchronization.ClientServices.CacheController.RefreshCompleted"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheController.ServiceUri"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.CacheControllerBehavior"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.AddScopeParameters(System.String,System.String)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.AddType``1">
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.AfterReceivingResponse"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.BeforeSendingRequest"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.Credentials"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.KnownTypes"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.ScopeName"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.ScopeParameters"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheControllerBehavior.SerializationFormat"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.CacheControllerException"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheControllerException.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheControllerException.#ctor(System.String)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheControllerException.#ctor(System.String,System.Exception)"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.EndTime"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.StartTime"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.TotalChangeSetsDownloaded"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.TotalChangeSetsUploaded"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.TotalDownloads"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.TotalSyncConflicts"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.TotalSyncErrors"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CacheRefreshStatistics.TotalUploads"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.CancelCompletedEventArgs"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CancelCompletedEventArgs.Statistics"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.CancelCompletedEventArgs.WasCancelled"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.ChangeSet"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.ChangeSet.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.ChangeSet.Data"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.ChangeSet.IsLastBatch"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.ChangeSet.ServerBlob"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.ChangeSetResponse"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.ChangeSetResponse.Conflicts"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.ChangeSetResponse.Error"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.ChangeSetResponse.ServerBlob"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.ChangeSetResponse.UpdatedItems"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.Conflict"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.Conflict.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.Conflict.LiveEntity"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IOfflineEntity"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IOfflineEntity.ServiceMetadata"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.OfflineEntityMetadata"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineEntityMetadata.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineEntityMetadata.#ctor(System.Boolean,System.String,System.String,System.Uri)"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.OfflineEntityMetadata.EditUri"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.OfflineEntityMetadata.ETag"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.OfflineEntityMetadata.Id"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.OfflineEntityMetadata.IsTombstone"></member>
+    <member name="E:Microsoft.Synchronization.ClientServices.OfflineEntityMetadata.PropertyChanged"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.OfflineSyncProvider"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineSyncProvider.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineSyncProvider.BeginSession"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineSyncProvider.EndSession"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineSyncProvider.GetChangeSet(System.Guid)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineSyncProvider.GetServerBlob"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineSyncProvider.OnChangeSetUploaded(System.Guid,Microsoft.Synchronization.ClientServices.ChangeSetResponse)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.OfflineSyncProvider.SaveChangeSet(Microsoft.Synchronization.ClientServices.ChangeSet)"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.RefreshCompletedEventArgs"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.RefreshCompletedEventArgs.Error"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.RefreshCompletedEventArgs.Statistics"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.SerializationFormat"></member>
+    <member name="F:Microsoft.Synchronization.ClientServices.SerializationFormat.ODataAtom">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.ClientServices.SerializationFormat.ODataJSON">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Synchronization.ClientServices.SyncConflict"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.SyncConflict.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.SyncConflict.LosingEntity"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.SyncConflict.Resolution"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.SyncConflictResolution"></member>
+    <member name="F:Microsoft.Synchronization.ClientServices.SyncConflictResolution.ClientChangeLost">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.ClientServices.SyncConflictResolution.ClientChangeWon">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.ClientServices.SyncConflictResolution.Merge">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Synchronization.ClientServices.SyncError"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.SyncError.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.SyncError.Description"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.SyncError.ErrorEntity"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.#ctor(Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageSchema,System.String,System.String,System.Uri)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.#ctor(Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageSchema,System.String,System.String,System.Uri,System.Security.Cryptography.SymmetricAlgorithm)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.AddItem``1(``0)">
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.BeginSession"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.CacheController"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.CachePath"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.CancelChanges"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.ClearCache"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.ClearSyncConflicts"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.ClearSyncErrors"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.Close"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.DeleteItem``1(``0)">
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.Dispose"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.Dispose(System.Boolean)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.EndSession"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.GetChangeSet(System.Guid)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.GetCollection``1">
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.GetServerBlob"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.IsEncrypted"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.Load"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.LoadAsync"></member>
+    <member name="E:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.LoadCompleted"></member>
+    <member name="E:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.ModifiedItemChanged"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.OnChangeSetUploaded(System.Guid,Microsoft.Synchronization.ClientServices.ChangeSetResponse)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.SaveChanges"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.SaveChangeSet(Microsoft.Synchronization.ClientServices.ChangeSet)"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.Schema"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.ScopeUri"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.SetArchiveTimerInterval(System.Int64)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.SetArchiveTimerInterval(System.TimeSpan)"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.StoreConflicts"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.SyncConflicts"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineContext.SyncErrors"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.#ctor"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.EntityState"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.GetOriginal"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.HasChanges"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.HasStoreConflict"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.IsReadOnly"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.OnPropertyChanged(System.String)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.OnPropertyChanging(System.String)"></member>
+    <member name="E:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.PropertyChanged"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.RejectChanges"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.ServiceMetadata"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.StoreConflict"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageOfflineEntity.SyncErrorInfo"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageSchema"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageSchema.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageSchema.AddCollection``1">
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.IsolatedStorageSchema.Collections"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.LoadCompletedEventArgs"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.LoadCompletedEventArgs.#ctor(System.Exception)"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.LoadCompletedEventArgs.Exception"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.OfflineEntityState"></member>
+    <member name="F:Microsoft.Synchronization.ClientServices.IsolatedStorage.OfflineEntityState.Detached">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.ClientServices.IsolatedStorage.OfflineEntityState.Unmodified">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.ClientServices.IsolatedStorage.OfflineEntityState.Modified">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.ClientServices.IsolatedStorage.OfflineEntityState.Saved">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.SaveFailedException"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SaveFailedException.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflict})"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SaveFailedException.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflict},System.String)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SaveFailedException.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflict},System.String,System.Exception)"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.SaveFailedException.Conflicts"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflict"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflict.ModifiedEntity"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflict.Resolve(Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflictResolutionAction)"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflictResolutionAction"></member>
+    <member name="F:Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflictResolutionAction.AcceptStoreEntity">
+      <summary />
+    </member>
+    <member name="F:Microsoft.Synchronization.ClientServices.IsolatedStorage.StoreConflictResolutionAction.AcceptModifiedEntity">
+      <summary />
+    </member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncActiveException"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncActiveException.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncActiveException.#ctor(System.String)"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncActiveException.#ctor(System.String,System.Exception)"></member>
+    <member name="T:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo.#ctor"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo.ClearSyncConflict"></member>
+    <member name="M:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo.ClearSyncError"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo.HasSyncConflict"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo.HasSyncError"></member>
+    <member name="E:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo.PropertyChanged"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo.SyncConflict"></member>
+    <member name="P:Microsoft.Synchronization.ClientServices.IsolatedStorage.SyncErrorInfo.SyncError"></member>
+  </members>
+</doc>
