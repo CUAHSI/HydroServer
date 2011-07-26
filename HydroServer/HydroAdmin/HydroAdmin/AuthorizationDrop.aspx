@@ -65,6 +65,9 @@
                 			<a href="users.aspx" ><span class="l"></span><span class="r"></span><span class="t">Users</span></a>                			
                 		</li>		
                 		<li>
+                			<a href="Groups.aspx" ><span class="l"></span><span class="r"></span><span class="t">Groups</span></a>                			
+                		</li>
+                		<li>
                 			<a href="DataRequest.aspx"><span class="l"></span><span class="r"></span><span class="t">Data Request</span></a>                			
                 		</li>	
                 		<li>
@@ -140,11 +143,14 @@
                                   
                                   
                                   
-                                  <div style=" text-align:left; z-index: 100;left : 0px; vertical-align:middle; border-style:groove; position: absolute; top: 390px;width:99%; height:36px;">
+                                  <div style=" text-align:left;  border-width:thin;  border-color:#13242e; z-index: 100;left : 0px; vertical-align:middle; border-style:groove; position: absolute; top: 390px;width:99%; height:36px;">
                                   <table style=" width:100%; height:28px;">
                                   <tr>
                                   <td style=" width:130px;">
-                                  <asp:RadioButton ID="enableFiltersRadioButton" Text="Enable Filters" runat="server" Font-Size="13px" />
+                                  
+                                  <asp:CheckBox ID="enableFiltersCheckBox" runat="server" Font-Size="13px" Text="Enable Filters" 
+                                                   AutoPostBack="True" oncheckedchanged="CheckBox1_CheckedChanged" 
+                                                   />
                                   </td >
                                           <td >
                                                       <table>

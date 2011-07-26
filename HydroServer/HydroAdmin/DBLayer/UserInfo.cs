@@ -92,5 +92,92 @@ namespace DBLayer
             }
             return dt;
         }
+
+        public DataTable GetUserGroupParticipation(int userGroupId)
+        {
+            DataTable dt = new DataTable();
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "select rc.ResourceConsumerId as Id, rc.ResourceConsumerName as name, rc.ResourceConsumerEmailAdd as email,cc.SubjectCountry as country, cc.SubjectOrganization as organization from ResourceConsumer rc inner join ConsumerCertificate cc on rc.ResourceConsumerCertificate = cc.CertificateId where rc.ResourceConsumerId in (select ugrc.ResourceConsumerId from UserGroupResourceConsumer ugrc where ugrc.UserGroupId = "+userGroupId+") ;";
+                cmd.CommandText = queryString;
+                SqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+                myConnection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+            return dt;
+        }
+
+        public DataTable GetUserGroupNotParticipation(int userGroupId)
+        {
+            DataTable dt = new DataTable();
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "select rc.ResourceConsumerId as Id, rc.ResourceConsumerName as name, rc.ResourceConsumerEmailAdd as email,cc.SubjectCountry as country, cc.SubjectOrganization as organization from ResourceConsumer rc inner join ConsumerCertificate cc on rc.ResourceConsumerCertificate = cc.CertificateId where rc.ResourceConsumerId not in (select ugrc.ResourceConsumerId from UserGroupResourceConsumer ugrc where ugrc.UserGroupId = " + userGroupId + ") ;";
+                cmd.CommandText = queryString;
+                SqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+                myConnection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+            return dt;
+        }
+
+        public void ReleaseUserRows(int groupId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "delete from UserGroupResourceConsumer where UserGroupId =" + groupId + ";";
+                cmd.CommandText = queryString;
+                cmd.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+        }
+
+        public void GroupUserAdd(int userId, int userGroupId)
+        {
+            string connectionStringin = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnectionin = new SqlConnection(connectionStringin);
+            myConnectionin.Open();
+            SqlCommand cmdin = new SqlCommand();
+            cmdin.Connection = myConnectionin;
+            try
+            {
+                string queryStringin = "insert into usergroupresourceconsumer values('" + userGroupId + "'," + userId + ",1,'12-12-2011');";
+                cmdin.CommandText = queryStringin;
+                cmdin.ExecuteNonQuery();
+
+
+            }
+            catch (Exception em)
+            {
+            }
+            myConnectionin.Close();
+        }
     }
 }

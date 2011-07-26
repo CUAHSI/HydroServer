@@ -11,7 +11,16 @@
 namespace HydroAdmin {
     
     
-    public partial class Users {
+    public partial class Groups {
+        
+        /// <summary>
+        /// Head1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
         
         /// <summary>
         /// form1 control.
@@ -23,13 +32,13 @@ namespace HydroAdmin {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// UserListBox control.
+        /// GroupListBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox UserListBox;
+        protected global::System.Web.UI.WebControls.ListBox GroupListBox;
         
         /// <summary>
         /// name control.
@@ -41,57 +50,66 @@ namespace HydroAdmin {
         protected global::System.Web.UI.WebControls.TextBox name;
         
         /// <summary>
-        /// emailId control.
+        /// owner control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emailId;
+        protected global::System.Web.UI.WebControls.TextBox owner;
         
         /// <summary>
-        /// organization control.
+        /// dateCreated control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox organization;
+        protected global::System.Web.UI.WebControls.TextBox dateCreated;
         
         /// <summary>
-        /// country control.
+        /// newGroupButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox country;
+        protected global::System.Web.UI.WebControls.Button newGroupButton;
         
         /// <summary>
-        /// userGroup control.
+        /// addGroupButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView userGroup;
+        protected global::System.Web.UI.WebControls.Button addGroupButton;
         
         /// <summary>
-        /// groupAddButton control.
+        /// groupUserGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button groupAddButton;
+        protected global::System.Web.UI.WebControls.GridView groupUserGridView;
         
         /// <summary>
-        /// groupRemoveButton control.
+        /// userAddButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button groupRemoveButton;
+        protected global::System.Web.UI.WebControls.Button userAddButton;
+        
+        /// <summary>
+        /// userRemoveButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button userRemoveButton;
     }
 }
