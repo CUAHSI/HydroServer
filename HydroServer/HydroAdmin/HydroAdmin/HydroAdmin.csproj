@@ -60,6 +60,8 @@
     <Content Include="AuthorizationDrop.aspx" />
     <Content Include="CustomDOI.aspx" />
     <Content Include="DataRequest.aspx" />
+    <Content Include="Groups.aspx" />
+    <Content Include="GroupUserSelectionPopUp.aspx" />
     <Content Include="main.aspx" />
     <Content Include="images\arrowdown.png" />
     <Content Include="images\arrowup.png" />
@@ -92,6 +94,7 @@
     <Content Include="stylesheets\style.css" />
     <Content Include="tesdesign.aspx" />
     <Content Include="TimeSeriesInformation.aspx" />
+    <Content Include="UserGroupSelectionPopUp.aspx" />
     <Content Include="UserQuickInfo.aspx" />
     <Content Include="Users.aspx" />
     <Content Include="Web.config" />
@@ -118,6 +121,20 @@
     </Compile>
     <Compile Include="DataRequest.aspx.designer.cs">
       <DependentUpon>DataRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Groups.aspx.cs">
+      <DependentUpon>Groups.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Groups.aspx.designer.cs">
+      <DependentUpon>Groups.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GroupUserSelectionPopUp.aspx.cs">
+      <DependentUpon>GroupUserSelectionPopUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GroupUserSelectionPopUp.aspx.designer.cs">
+      <DependentUpon>GroupUserSelectionPopUp.aspx</DependentUpon>
     </Compile>
     <Compile Include="main.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -147,6 +164,13 @@
     </Compile>
     <Compile Include="TimeSeriesInformation.aspx.designer.cs">
       <DependentUpon>TimeSeriesInformation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserGroupSelectionPopUp.aspx.cs">
+      <DependentUpon>UserGroupSelectionPopUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserGroupSelectionPopUp.aspx.designer.cs">
+      <DependentUpon>UserGroupSelectionPopUp.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserQuickInfo.aspx.cs">
       <DependentUpon>UserQuickInfo.aspx</DependentUpon>

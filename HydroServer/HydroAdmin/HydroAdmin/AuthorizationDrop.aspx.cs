@@ -20,6 +20,9 @@ namespace HydroAdmin
             odmInfoGridView.Width = 1200;
             if (!IsPostBack)
             {
+                siteCodeDropDownList.Enabled = false;
+                variableCodeDropDownList.Enabled = false;
+                resetOdmInfoButton.Enabled = false;
                 DbList_Load();
                 userInfo_Load();
                 userCheckBox.Checked = true;
@@ -76,43 +79,32 @@ namespace HydroAdmin
         protected void siteCodeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             timeSeriesTable = (DataTable)ViewState["mydata"];
-            ViewState["mydata"] = null;
-            DataTable dt = timeSeriesTable;
-            for (int i = 0; i < timeSeriesTable.Rows.Count; i++)
-            {
-                DataRow row = timeSeriesTable.Rows[i];
-                string sel = row["sitecode"].ToString();
-                if (!sel.Equals(siteCodeDropDownList.SelectedValue.ToString()))
-                {
-                    timeSeriesTable.Rows[i].Delete();
-                }
-            }
-            timeSeriesTable.AcceptChanges();
-            odmInfoGridView.DataSource = timeSeriesTable;
-            odmInfoGridView.DataBind();
-            ViewState["mydata"] = timeSeriesTable;
+            DataTable dt = new DataTable();
+             dt = timeSeriesTable;
+             ViewState["mydata"] = dt;
+             for (int i = 0; i < timeSeriesTable.Rows.Count; i++)
+             {
+                 DataRow row = timeSeriesTable.Rows[i];
+                 string sel = row["sitecode"].ToString();
+                 if (!sel.Equals(siteCodeDropDownList.SelectedValue.ToString()))
+                 {
+                     timeSeriesTable.Rows[i].Delete();
+                 }
+             }
+             //timeSeriesTable.AcceptChanges();
+             odmInfoGridView.DataSource = timeSeriesTable;
+             odmInfoGridView.DataBind();
+             timeSeriesTable.RejectChanges();
 
-            List<string> siteCodeListObj = new List<string>();
-            List<string> variableCodeListObj = new List<string>();
-            foreach (DataRow row in dt.Rows)
-            {
-                siteCodeListObj.Add(row["sitecode"].ToString());
-                variableCodeListObj.Add(row["variablecode"].ToString());
-            }
-
-            siteCodeDropDownList.DataSource = siteCodeListObj.Distinct().ToList();
-            siteCodeDropDownList.DataBind();
-            variableCodeDropDownList.DataSource = variableCodeListObj.Distinct().ToList();
-            variableCodeDropDownList.DataBind();
-            //recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
 
         }
 
         protected void variableCodeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             timeSeriesTable = (DataTable)ViewState["mydata"];
-            ViewState["mydata"] = null;
-            DataTable dt = timeSeriesTable;
+            DataTable dt = new DataTable();
+            dt = timeSeriesTable;
+            ViewState["mydata"] = dt;
             for (int i = 0; i < timeSeriesTable.Rows.Count; i++)
             {
                 DataRow row = timeSeriesTable.Rows[i];
@@ -122,54 +114,48 @@ namespace HydroAdmin
                     timeSeriesTable.Rows[i].Delete();
                 }
             }
-            timeSeriesTable.AcceptChanges();
             odmInfoGridView.DataSource = timeSeriesTable;
             odmInfoGridView.DataBind();
-            ViewState["mydata"] = timeSeriesTable;
+            timeSeriesTable.RejectChanges();
 
-            List<string> siteCodeListObj = new List<string>();
-            List<string> variableCodeListObj = new List<string>();
-            foreach (DataRow row in dt.Rows)
-            {
-                siteCodeListObj.Add(row["sitecode"].ToString());
-                variableCodeListObj.Add(row["variablecode"].ToString());
-            }
-
-            siteCodeDropDownList.DataSource = siteCodeListObj.Distinct().ToList();
-            siteCodeDropDownList.DataBind();
-            variableCodeDropDownList.DataSource = variableCodeListObj.Distinct().ToList();
-            variableCodeDropDownList.DataBind();
-            //recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
         }
 
         protected void resetOdmInfoButton_Click(object sender, EventArgs e)
         {
-            siteCodeDropDownList.Items.Clear();
-            variableCodeDropDownList.Items.Clear();
-
-            ODM odmInfo = new ODM();
+            timeSeriesTable = (DataTable)ViewState["mydata"];
             DataTable dt = new DataTable();
-            dt = odmInfo.GetODMInfo(DbListBox.SelectedValue.ToString());
-            TimeSeriesResources tmResObj = new TimeSeriesResources();
-
-            timeSeriesTable = tmResObj.GetTimeSeriesResources(DbListBox.SelectedValue.ToString());
-            odmInfoGridView.DataSource = timeSeriesTable;
+            dt = timeSeriesTable;
+            ViewState["mydata"] = dt;
+            odmInfoGridView.DataSource = dt;
             odmInfoGridView.DataBind();
-            ViewState["mydata"] = timeSeriesTable;
-            //recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
+            timeSeriesTable.RejectChanges();
 
-            List<string> siteCodeListObj = new List<string>();
-            List<string> variableCodeListObj = new List<string>();
-            foreach (DataRow row in timeSeriesTable.Rows)
-            {
-                siteCodeListObj.Add(row["sitecode"].ToString());
-                variableCodeListObj.Add(row["variablecode"].ToString());
-            }
+            //siteCodeDropDownList.Items.Clear();
+            //variableCodeDropDownList.Items.Clear();
 
-            siteCodeDropDownList.DataSource = siteCodeListObj.Distinct().ToList();
-            siteCodeDropDownList.DataBind();
-            variableCodeDropDownList.DataSource = variableCodeListObj.Distinct().ToList();
-            variableCodeDropDownList.DataBind();
+            //ODM odmInfo = new ODM();
+            //DataTable dt = new DataTable();
+            //dt = odmInfo.GetODMInfo(DbListBox.SelectedValue.ToString());
+            //TimeSeriesResources tmResObj = new TimeSeriesResources();
+
+            //timeSeriesTable = tmResObj.GetTimeSeriesResources(DbListBox.SelectedValue.ToString());
+            //odmInfoGridView.DataSource = timeSeriesTable;
+            //odmInfoGridView.DataBind();
+            //ViewState["mydata"] = timeSeriesTable;
+            ////recordCount.Text = timeSeriesTable.Rows.Count.ToString() + " records";
+
+            //List<string> siteCodeListObj = new List<string>();
+            //List<string> variableCodeListObj = new List<string>();
+            //foreach (DataRow row in timeSeriesTable.Rows)
+            //{
+            //    siteCodeListObj.Add(row["sitecode"].ToString());
+            //    variableCodeListObj.Add(row["variablecode"].ToString());
+            //}
+
+            //siteCodeDropDownList.DataSource = siteCodeListObj.Distinct().ToList();
+            //siteCodeDropDownList.DataBind();
+            //variableCodeDropDownList.DataSource = variableCodeListObj.Distinct().ToList();
+            //variableCodeDropDownList.DataBind();
         }
 
         protected void userInfo_Load()
@@ -525,11 +511,86 @@ namespace HydroAdmin
             {
                 row.BackColor = System.Drawing.Color.White;
             }
-            
             GridViewRow selectedRow = userGroupGridView.SelectedRow;
-            //TextBox1.Text = selectedRow.Cells[3].Text;
             selectedRow.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.LightBlue);
+
+
+            Privilege priv = new Privilege();
+            int readPrivId = priv.GetPrivilegeId("read");
+            int writePrivId = priv.GetPrivilegeId("write");
+            int deletePrivId = priv.GetPrivilegeId("delete");
+            int createPrivId = priv.GetPrivilegeId("create");
+
+            foreach (GridViewRow resRow in odmInfoGridView.Rows)
+            {
+                CheckBox readbox = (CheckBox)resRow.FindControl("readStatusCheckBox");
+                readbox.Checked = false;
+
+                CheckBox updateBox = (CheckBox)resRow.FindControl("updateStatusCheckBox");
+                readbox.Checked = false;
+
+                CheckBox deleteBox = (CheckBox)resRow.FindControl("deleteStatusCheckBox");
+                readbox.Checked = false;
+            }
+
+            GridViewRow selRow = userGroupGridView.Rows[userGroupGridView.SelectedIndex];
+            userIdSelected = Convert.ToInt16(selRow.Cells[2].Text.ToString());
+            AccessControl accessObj = new AccessControl();
+            DataTable accessTable = new DataTable();
+            accessTable = accessObj.AccessData(userIdSelected);
+            foreach (DataRow row in accessTable.Rows)
+            {
+                foreach (GridViewRow resRow in odmInfoGridView.Rows)
+                {
+                    string dbrow = row["resourcesid"].ToString();
+                    string gridRow = resRow.Cells[15].Text.ToString();
+                    if (row["resourcesid"].ToString() == resRow.Cells[15].Text.ToString())
+                    {
+                        if (row["privilegeid"].ToString() == readPrivId.ToString())
+                        {
+                            CheckBox readbox = (CheckBox)resRow.FindControl("readStatusCheckBox");
+                            readbox.Checked = true;
+                        }
+                        if (row["privilegeid"].ToString() == writePrivId.ToString())
+                        {
+                            CheckBox readbox = (CheckBox)resRow.FindControl("updateStatusCheckBox");
+                            readbox.Checked = true;
+                        }
+                        if (row["privilegeid"].ToString() == deletePrivId.ToString())
+                        {
+                            CheckBox readbox = (CheckBox)resRow.FindControl("deleteStatusCheckBox");
+                            readbox.Checked = true;
+                        }
+                    }
+                }
+            }
+
+            TemplateGridDisplay();
+
         }
+
+        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (enableFiltersCheckBox.Checked)
+            {
+                siteCodeDropDownList.Enabled = true;
+                variableCodeDropDownList.Enabled = true;
+                resetOdmInfoButton.Enabled = true;
+            }
+            else
+            {
+                siteCodeDropDownList.Enabled = false;
+                variableCodeDropDownList.Enabled = false;
+                resetOdmInfoButton.Enabled = false;
+
+            }
+
+            timeSeriesTable = (DataTable)ViewState["mydata"];
+            odmInfoGridView.DataSource = timeSeriesTable;
+            odmInfoGridView.DataBind();
+        }
+
+        
 
 
         

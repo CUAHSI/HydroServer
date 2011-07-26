@@ -18,7 +18,7 @@
     <div id="art-main" style="left: 0px; top: 0px">
         &nbsp;&nbsp;
         
-        <div class="art-Sheet" style="z-index: 101">
+        <div class="art-Sheet" style="z-index: 101 ; height:1100px;">
             <div class="art-Sheet-tl"></div>
             <div class="art-Sheet-tr"></div>
             <div class="art-Sheet-bl"></div>
@@ -48,6 +48,9 @@
                 			<a href="users.aspx" ><span class="l"></span><span class="r"></span><span class="t">Users</span></a>                			
                 		</li>		
                 		<li>
+                			<a href="Groups.aspx" ><span class="l"></span><span class="r"></span><span class="t">Groups</span></a>                			
+                		</li>
+                		<li>
                 			<a href="DataRequest.aspx"><span class="l"></span><span class="r"></span><span class="t">Data Request</span></a>                			
                 		</li>	
                 		<li>
@@ -56,16 +59,36 @@
                 	</ul>
                 </div>
                 <div class="art-contentLayout-main">
-                    <div class="art-content-main" style="left: 0px; top: 0px">
+                    <div class="art-content-main" style="left: 0px; top: 0px ; height:860px;">
                         <div class="art-Post">
                             <div class="art-Post-body">
                         
                                 <div class="art-PostHeader">
                                     &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
                                     
+                                    <div style = " z-index: 100;  left:0px; position: absolute; top: 0px;width:100%; height:25px" >
+                                    <div style = " z-index: 100;  left:0px; position: absolute; top: 0px;width:31%; height:25px">
+                                    <table style=" width:100%; background-color:#13242e; height: 25px" border="1">
+                                       <tr>
+                                       <td style=" color: #E7F2F9 !important;   width:100%; border:none; text-align:center; background-color:#13242e;">ODM List</td>
+                                       </tr>
+                                  </table>
+                                    </div>
+                                    <div style = " z-index: 100;  left:240px; position: absolute; top: 0px;width:68%; height:25px">
+                                    <table style=" width:100%; background-color:#13242e; height: 25px" border="1">
+                                       <tr>
+                                       <td style=" color: #E7F2F9 !important;   width:100%; border:none; text-align:center; background-color:#13242e;">ODM Information</td>
+                                       </tr>
+                                  </table>
+                                    </div>
+                                    </div>
                                     
                                     
-                                    <div class="infolist-block" style="z-index: 100; height:230px; border-style:groove; left: 0px; position: absolute; top: 0px">
+                                    
+                                    
+                                    
+                                    
+                                    <div class="infolist-block" style="z-index: 100; height:250px; border-style:groove; left: 0px; position: absolute; top: 31px">
                                     <asp:ListBox ID="odmList"  runat="server" Height="210px" Width="225px" 
                                             BackColor="#E7F2F9" 
                                             ForeColor="Black" AutoPostBack="True" 
@@ -75,13 +98,21 @@
                                             ConnectionString="<%$ ConnectionStrings:SecurityDb %>" 
                                             SelectCommand="select distinct databasename from TimeSeriesResource;">
                                         </asp:SqlDataSource>
-                                        <div style = "z-index:100; left:0px; text-align:right">
+                                        <%--<div style = "z-index:100; left:0px; text-align:right">
                                         <asp:LinkButton ID="addODM" runat="server" Font-Size="Small" onclick="addODM_Click">Add</asp:LinkButton>
                                         <asp:LinkButton ID="updateODM" runat="server" Font-Size="Small" >Update</asp:LinkButton>
                                         <asp:LinkButton ID="deleteODM" runat="server" Font-Size="Small" onclick="deleteODM_Click">Delete</asp:LinkButton>
-                                        </div>
+                                        </div>--%>
                                      </div> 
-                                     <div class="info-block"  style="z-index:100; height:230px; border-style:groove; left: 240px; position: absolute; top: 0px">
+                                     
+                                     <div style = "z-index:100; position:absolute; top:285px; width:30%; left:7px; text-align:right">
+                                        <asp:LinkButton ID="addODM" runat="server" Font-Size="Small" ForeColor="#13242e" onclick="addODM_Click">Add</asp:LinkButton>
+                                        <asp:LinkButton ID="updateODM" runat="server" Font-Size="Small"  ForeColor="#13242e">Update</asp:LinkButton>
+                                        <asp:LinkButton ID="deleteODM" runat="server" Font-Size="Small" ForeColor="#13242e" onclick="deleteODM_Click">Delete</asp:LinkButton>
+                                        </div>
+                                     
+                                     
+                                     <div class="info-block"  style="z-index:100; height:265px; border-style:groove; left: 240px; position: absolute; top: 31px">
                                <table class="contacts" border="1">
                                <tr>
                                <td class="contactDept">Title</td><td class="value"><asp:TextBox ID="Title" 
@@ -104,43 +135,74 @@
                                </tr>
                                </table>
                                      </div>
-                                     <div style="z-index:100;text-align:left; width:100%; height:25px;left:10px;  position:absolute; top: 270px;">
-                                          <table style=" height:23px" >
-                                          <tr>
-                                          <td>
-                                          <asp:Label ID="recordCount" runat="server" Width="120px" BorderStyle="Solid" BorderWidth="1" Font-Size="Small"></asp:Label>
-                                          </td>
-                                          <td style=" font-size:11px;">Filter by Sitecode
-                                          </td>
-                                          <td>
-                                          <asp:DropDownList ID="siteCodeDropDownList" runat="server" Width="170px" 
+                                     
+                                     
+                                     
+                                     <div style = " z-index: 100; left:0px;position: absolute; top: 305px;width:99.5%; height:25px"> 
+                                  <table style=" width:100%; background-color:#13242e; height: 25px" border="1">
+                                       <tr>
+                                       <td style=" color: #E7F2F9 !important;   width:100%; border:none; text-align:left; background-color:#13242e;">Filters 
+                                           </td>
+                                       </tr>
+                                  </table>
+                                  </div>
+                                     
+                                     
+                                     
+                                     <div style=" text-align:left;   border-width:thin;  border-color:#13242e; z-index: 100;left : 0px; vertical-align:middle; border-style:groove; position: absolute; top: 335px;width:99%; height:36px;">
+                                  <table style=" width:100%; height:28px;">
+                                  <tr>
+                                  <td style=" width:130px;">
+                                  
+                                  <asp:CheckBox ID="enableFiltersCheckBox" runat="server" Font-Size="13px" Text="Enable Filters" 
+                                                   AutoPostBack="True" oncheckedchanged="enableFiltersCheckBox_CheckedChanged" 
+                                                   />
+                                  </td >
+                                          <td >
+                                                      <table>
+                                                      <tr>
+                                                      <td style=" font-size:13px; padding-right:5px;">
+                                                      SiteCode
+                                                      </td>
+                                                      <td>
+                                                      <asp:DropDownList ID="siteCodeDropDownList" runat="server" Width="170px" 
                                                      AutoPostBack="True" 
                                                      onselectedindexchanged="siteCodeDropDownList_SelectedIndexChanged">
                                                  </asp:DropDownList>
-                                          </td>
-                                          <td style=" font-size:11px;">Variablecode
+                                                      </td>
+                                                      </tr>
+                                                      </table>
                                           </td>
                                           <td>
-                                          <asp:DropDownList ID="variableCodeDropDownList" runat="server" Width="170px" 
+                                          
+                                                        <table>
+                                                      <tr>
+                                                      <td style=" font-size:13px; padding-right:5px;">
+                                                      VariableCode
+                                                      </td>
+                                                      <td>
+                                                      <asp:DropDownList ID="variableCodeDropDownList" runat="server" Width="170px" 
                                                      AutoPostBack="True" 
                                                      onselectedindexchanged="variableCodeDropDownList_SelectedIndexChanged">
                                                  </asp:DropDownList>
-                                          </td>
+                                                      </td>
+                                                      </tr>
+                                                      </table>
                                           
-                                                 
-                                          <td>
-                                          <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
-                                                     onclick="resetOdmInfoButton_Click" />
                                           </td>
-                                          </tr>
-                                          </table>
-                                                 
-                                                 
-                                                 
-                                                 
-                                                     </div>
+                                  <td>
+                                  <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
+                                          onclick="resetOdmInfoButton_Click" />
+                                  </td>
+                                  </tr>
+                                  </table>
+                                  
+                                  </div>
                                      
-                                     <div class="info-block"  style="z-index:100; height:370px; border-style:groove; width:100%; left: 0px; position:absolute; top: 300px; overflow: auto">
+                                     
+                                   
+                                     
+                                     <div class="info-block"  style="z-index:100; height:450px; border-style:groove; width:99%; left: 0px; position:absolute; top: 380px; overflow: auto">
                                         
                                          <asp:GridView ID="odmInfoGridView" runat="server" Font-Size="X-Small" 
                                              onrowcreated="odmInfoGridView_RowCreated" onload="odmInfoGridView_Load" 

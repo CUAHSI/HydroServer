@@ -113,13 +113,13 @@ namespace HydroAdmin {
         protected global::System.Web.UI.WebControls.TextBox citation;
         
         /// <summary>
-        /// recordCount control.
+        /// enableFiltersCheckBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label recordCount;
+        protected global::System.Web.UI.WebControls.CheckBox enableFiltersCheckBox;
         
         /// <summary>
         /// siteCodeDropDownList control.

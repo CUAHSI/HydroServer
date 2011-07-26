@@ -44,7 +44,31 @@ namespace DBLayer
                 myConnection.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = myConnection;
-                string queryString = "select usergroupid from UserGroupResourceConsumer where ResourceConsumerId =" + userId + ";";
+                string queryString = "select ug.UserGroupId, ug.name,ug.datecreated,ugo.ResourceConsumerName as GroupOwner from UserGroup ug inner join ResourceConsumer ugo on ugo.ResourceConsumerId=ug.OwnerId where ug.UserGroupId in(  select ugb.UserGroupId from UserGroupResourceConsumer ugb where ugb.ResourceConsumerId ="+userId+");";
+                cmd.CommandText = queryString;
+                SqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+                myConnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+            return dt;
+        }
+
+        public DataTable GetUserGroupNotSelectedList(int userId)
+        {
+            DataTable dt = new DataTable();
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "select ug.UserGroupId, ug.name,ug.datecreated,ugo.ResourceConsumerName as GroupOwner from UserGroup ug inner join ResourceConsumer ugo on ugo.ResourceConsumerId=ug.OwnerId where ug.UserGroupId not in(  select ugb.UserGroupId from UserGroupResourceConsumer ugb where ugb.ResourceConsumerId =" + userId + ");";
                 cmd.CommandText = queryString;
                 SqlDataReader reader = cmd.ExecuteReader();
                 dt.Load(reader);
@@ -97,6 +121,58 @@ namespace DBLayer
             {
                 Console.WriteLine("this is not successful :" + e.Message.ToString());
             }
+        }
+
+        public List<string> GetAllGroupsList()
+        {
+            List<string> allGroups = new List<string>();
+            DataTable dt = new DataTable();
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "select name from UserGroup;";
+                cmd.CommandText = queryString;
+                SqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+                foreach(DataRow row in dt.Rows)
+                {
+                    allGroups.Add(row["name"].ToString());
+                }
+                myConnection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+            return allGroups;
+
+        }
+
+        public DataTable GetGroupInfo(string groupName)
+        {
+            DataTable dt = new DataTable();
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "select ug.UserGroupId as id, ug.name as name,rc.ResourceConsumerName as owner,DateCreated as datecreated from UserGroup ug inner join ResourceConsumer rc on ug.OwnerId=rc.ResourceConsumerId  where Name='" + groupName + "';";
+                cmd.CommandText = queryString;
+                SqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+                myConnection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+            return dt;
         }
      }
 
