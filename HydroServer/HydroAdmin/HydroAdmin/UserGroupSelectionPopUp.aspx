@@ -21,11 +21,11 @@
         </asp:GridView>
     </div >
     <div style = " z-index: 100; text-align:left; border-color:White;  left:0px; position: absolute; top: 455px;width:98%; height:30px;">
-        <asp:Button ID="groupAddButton" Width="70px" runat="server" Text="Add" 
+        <asp:Button ID="groupAddButton" Width="70px" runat="server" Text="Apply" 
             onclick="groupAddButton_Click" />
-        <asp:Button ID="groupRemoveButton" Width="70px"  runat="server" Text="Remove" 
+        <asp:Button ID="groupRemoveButton" Width="70px"  runat="server" Text="Apply" 
             onclick="groupRemoveButton_Click" />
-        <asp:Button ID="cancelActionButton" Width="70px"  runat="server" Text="Cancel" 
+        <asp:Button ID="cancelActionButton" Width="70px"  runat="server" Text="OK" 
             onclick="cancelActionButton_Click" />
     </div>
     

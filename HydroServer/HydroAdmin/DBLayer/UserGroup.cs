@@ -174,6 +174,53 @@ namespace DBLayer
             }
             return dt;
         }
+
+        public void AddGroup(string GroupName, int ownerId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConnection;
+                string queryString = "insert into UserGroup values('"+GroupName+"','"+System.DateTime.UtcNow.ToString()+"',"+ownerId+");";
+                cmd.CommandText = queryString;
+                cmd.ExecuteNonQuery();
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+        }
+
+        public void DeleteGroup(int GroupId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SecurityDb"].ConnectionString;
+            SqlConnection myConnection = new SqlConnection(connectionString);
+            SqlConnection myConnectionGroup = new SqlConnection(connectionString);
+            try
+            {
+                myConnection.Open();
+                myConnectionGroup.Open();
+                SqlCommand cmd = new SqlCommand();
+                SqlCommand cmdGroup = new SqlCommand();
+                cmd.Connection = myConnection;
+                cmdGroup.Connection = myConnectionGroup;
+                string queryString = "delete from UserGroupResourceConsumer where UserGroupId = " + GroupId + ";";
+                string queryStringGroup = "delete from UserGroup where UserGroupId= " + GroupId + ";";
+                cmd.CommandText = queryString;
+                cmdGroup.CommandText = queryStringGroup;
+                cmd.ExecuteNonQuery();
+                cmdGroup.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("this is not successful :" + e.Message.ToString());
+            }
+        }
      }
 
 }

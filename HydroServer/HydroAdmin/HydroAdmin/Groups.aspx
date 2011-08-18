@@ -97,20 +97,26 @@
                                                runat="server" Width="395px" BorderColor="#404040" Height="25px"></asp:TextBox></td>
                                        </tr>
                                        <tr><td class="contactDept">Owner</td><td class="value">
-                                           <asp:TextBox ID="owner" runat="server" Width="395px" BorderColor="#404040" 
-                                               Height="25px"></asp:TextBox></td>
+                                           <asp:DropDownList ID="GroupOwnerDropDownList" Width="395px" runat="server">
+                                           </asp:DropDownList></td>
                                        </tr>
-                                       <tr><td class="contactDept">DateCreated</td><td class="value"><asp:TextBox ID="dateCreated" 
+                                       <tr><td class="contactDept">DateCreated</td><td class="value">
+                                           
+                                           <asp:TextBox ID="dateCreated" 
                                                runat="server" Width="395px" BorderColor="#404040" Height="25px"></asp:TextBox></td>
                                        </tr>
                                        </table>
                                  </div>
                                  <div style = " z-index: 100; text-align:right; left : 255px; position: absolute; top: 180px;width:66%; height:30px">
-                                     <asp:Button ID="newGroupButton" width="70px" runat="server" Text="New" />
-                                     <asp:Button ID="addGroupButton" width="70px" runat="server" Text="Add" />
+                                     <asp:Button ID="groupDeleteButton" width="70px" runat="server" 
+                                         onclick="groupDeleteButton_Click" Text="Delete" />
+                                     <asp:Button ID="newGroupButton" width="70px" runat="server" Text="New" 
+                                         onclick="newGroupButton_Click" />
+                                     <asp:Button ID="addGroupButton"  width="70px" runat="server" Text="Add" 
+                                         onclick="addGroupButton_Click" />
                                  </div>
                                  
-                                 <div style = " z-index: 100;  left:240px; position: absolute; top: 200px;width:68%; height:25px">
+                                 <div style = " z-index: 100;  left:240px; position: absolute; top: 200px; width:68%; height:25px">
                                     <table style=" width:100%; background-color:#13242e; height: 25px" border="1">
                                        <tr>
                                        <td style=" color: #E7F2F9 !important;   width:100%; border:none; text-align:center; background-color:#13242e;">User Participation List</td>

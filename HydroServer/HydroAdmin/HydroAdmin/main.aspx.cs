@@ -126,10 +126,19 @@ namespace HydroAdmin
 
         protected void siteCodeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            timeSeriesTable = (DataTable)ViewState["mydata"];
+            TimeSeriesResources tmResObj = new TimeSeriesResources();
+            if (odmList.Items.Count > 0)
+            {
+                timeSeriesTable = tmResObj.GetTimeSeriesResources(odmList.Items[odmList.Items.Count - 1].ToString());
+            }
+
+
+
+
+            //timeSeriesTable = (DataTable)ViewState["mydata"];
             DataTable dt = new DataTable();
             dt = timeSeriesTable;
-            ViewState["mydata"] = dt;
+            //ViewState["mydata"] = dt;
             for (int i = 0; i < timeSeriesTable.Rows.Count; i++)
             {
                 DataRow row = timeSeriesTable.Rows[i];
@@ -139,11 +148,18 @@ namespace HydroAdmin
                     timeSeriesTable.Rows[i].Delete();
                 }
             }
-            //timeSeriesTable.AcceptChanges();
+            timeSeriesTable.AcceptChanges();
             odmInfoGridView.DataSource = timeSeriesTable;
             odmInfoGridView.DataBind();
-            timeSeriesTable.RejectChanges();
-
+            ViewState["mydata"] = timeSeriesTable;
+            //timeSeriesTable.RejectChanges();
+            List<string> variableCodeListObj = new List<string>();
+            foreach (DataRow row in timeSeriesTable.Rows)
+            {
+                variableCodeListObj.Add(row["variablecode"].ToString());
+            }
+            variableCodeDropDownList.DataSource = variableCodeListObj.Distinct().ToList();
+            variableCodeDropDownList.DataBind();
 
 
             //timeSeriesTable = (DataTable)ViewState["mydata"];
@@ -444,15 +460,39 @@ namespace HydroAdmin
             if (enableFiltersCheckBox.Checked)
             {
                 siteCodeDropDownList.Enabled = true;
-                variableCodeDropDownList.Enabled = true;
+                //variableCodeDropDownList.Enabled = true;
                 resetOdmInfoButton.Enabled = true;
+                timeSeriesTable = (DataTable)ViewState["mydata"];
+                odmInfoGridView.DataSource = timeSeriesTable;
+                odmInfoGridView.DataBind();
             }
             else
             {
                 siteCodeDropDownList.Enabled = false;
                 variableCodeDropDownList.Enabled = false;
+                enableVariableCodeFilter.Checked = false;
                 resetOdmInfoButton.Enabled = false;
+                TimeSeriesResources tmResObj = new TimeSeriesResources();
+                if (odmList.Items.Count > 0)
+                {
+                    timeSeriesTable = tmResObj.GetTimeSeriesResources(odmList.Items[odmList.Items.Count - 1].ToString());
+                }
+                odmInfoGridView.DataSource = timeSeriesTable;
+                odmInfoGridView.DataBind();
+            }
 
+            
+        }
+
+        protected void enableVariableCodeFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            if (enableVariableCodeFilter.Checked)
+            {
+                variableCodeDropDownList.Enabled = true;
+            }
+            else
+            {
+                variableCodeDropDownList.Enabled = false;
             }
 
             timeSeriesTable = (DataTable)ViewState["mydata"];

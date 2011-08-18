@@ -150,52 +150,23 @@
                                      
                                      
                                      <div style=" text-align:left;   border-width:thin;  border-color:#13242e; z-index: 100;left : 0px; vertical-align:middle; border-style:groove; position: absolute; top: 335px;width:99%; height:36px;">
-                                  <table style=" width:100%; height:28px;">
-                                  <tr>
-                                  <td style=" width:130px;">
-                                  
-                                  <asp:CheckBox ID="enableFiltersCheckBox" runat="server" Font-Size="13px" Text="Enable Filters" 
+                                  <asp:CheckBox ID="enableFiltersCheckBox" runat="server" Font-Size="13px" Text="SiteCode Filter" 
                                                    AutoPostBack="True" oncheckedchanged="enableFiltersCheckBox_CheckedChanged" 
                                                    />
-                                  </td >
-                                          <td >
-                                                      <table>
-                                                      <tr>
-                                                      <td style=" font-size:13px; padding-right:5px;">
-                                                      SiteCode
-                                                      </td>
-                                                      <td>
-                                                      <asp:DropDownList ID="siteCodeDropDownList" runat="server" Width="170px" 
+                                                   <asp:DropDownList ID="siteCodeDropDownList" runat="server" Width="130px" 
                                                      AutoPostBack="True" 
                                                      onselectedindexchanged="siteCodeDropDownList_SelectedIndexChanged">
                                                  </asp:DropDownList>
-                                                      </td>
-                                                      </tr>
-                                                      </table>
-                                          </td>
-                                          <td>
-                                          
-                                                        <table>
-                                                      <tr>
-                                                      <td style=" font-size:13px; padding-right:5px;">
-                                                      VariableCode
-                                                      </td>
-                                                      <td>
-                                                      <asp:DropDownList ID="variableCodeDropDownList" runat="server" Width="170px" 
+                                                 <asp:CheckBox ID="enableVariableCodeFilter" runat="server" 
+                                             Font-Size="13px" Text="VariableCode Filter" 
+                                                   AutoPostBack="True" oncheckedchanged="enableVariableCodeFilter_CheckedChanged" 
+                                                   />
+                                                   <asp:DropDownList ID="variableCodeDropDownList" runat="server" Width="170px" 
                                                      AutoPostBack="True" 
                                                      onselectedindexchanged="variableCodeDropDownList_SelectedIndexChanged">
                                                  </asp:DropDownList>
-                                                      </td>
-                                                      </tr>
-                                                      </table>
-                                          
-                                          </td>
-                                  <td>
-                                  <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
+                                                 <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
                                           onclick="resetOdmInfoButton_Click" />
-                                  </td>
-                                  </tr>
-                                  </table>
                                   
                                   </div>
                                      

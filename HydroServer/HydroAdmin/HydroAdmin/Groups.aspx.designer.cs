@@ -50,13 +50,13 @@ namespace HydroAdmin {
         protected global::System.Web.UI.WebControls.TextBox name;
         
         /// <summary>
-        /// owner control.
+        /// GroupOwnerDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox owner;
+        protected global::System.Web.UI.WebControls.DropDownList GroupOwnerDropDownList;
         
         /// <summary>
         /// dateCreated control.
@@ -66,6 +66,15 @@ namespace HydroAdmin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox dateCreated;
+        
+        /// <summary>
+        /// groupDeleteButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button groupDeleteButton;
         
         /// <summary>
         /// newGroupButton control.
