@@ -20,7 +20,7 @@ Public Class Installer1
     System.Collections.IDictionary)
 
         MyBase.Commit(savedState)
-        System.Diagnostics.Process.Start("http://www.microsoft.com")
+        'System.Diagnostics.Process.Start("http://www.microsoft.com")
 
         'SetEnvVariable()
     End Sub

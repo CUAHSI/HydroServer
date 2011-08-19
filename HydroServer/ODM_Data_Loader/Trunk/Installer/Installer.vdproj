@@ -304,7 +304,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_12724304E84C44138C422D3B5374C205"
                     {
-                    "Name" = "8:Cuahsi His"
+                    "Name" = "8:CUAHSI HIS"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -330,16 +330,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM DL 1.1.5"
-        "ProductCode" = "8:{BDE49BA4-0F70-4905-807E-5CB2B105B8A7}"
-        "PackageCode" = "8:{8AF6580E-4CEA-4A7D-8AC5-2B814A4B01C4}"
+        "ProductName" = "8:ODM Data Loader 1.1.5.1"
+        "ProductCode" = "8:{89485118-C31A-482C-BE04-4F2FBDA62C26}"
+        "PackageCode" = "8:{6EF71990-CB33-4C63-AF06-B6E1C2A46A18}"
         "UpgradeCode" = "8:{B3619D6E-AE69-4E35-AFF4-8B2BD9D950AB}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.4"
-        "Manufacturer" = "8:Cuahsi His"
+        "ProductVersion" = "8:1.1.5"
+        "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-0502"
         "ARPHELPLINK" = "8:http:\\\\his.cuahsi.org"
         "Title" = "8:Installer"
@@ -453,7 +453,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9213E13D767B44D796AF23F19B940C8E"
             {
-            "Name" = "8:ODM DL 1.1.5 Wizard"
+            "Name" = "8:ODM DL 1.1.5.1 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -467,7 +467,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9624BB8BCC3C440296CE884FE0D59120"
             {
-            "Name" = "8:ODM DL 1.1.5 Wizard"
+            "Name" = "8:ODM DL 1.1.5.1 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -481,7 +481,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C15D35F33E0047CD812979750CBD340D"
             {
-            "Name" = "8:ODM DL 1.1.5"
+            "Name" = "8:ODM DL 1.1.5.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -495,7 +495,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D0AC355D76CE4AD6BFC427EB4518972D"
             {
-            "Name" = "8:ODM DL 1.1.5"
+            "Name" = "8:ODM DL 1.1.5.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
