@@ -89,7 +89,7 @@
                                     
                                     
                                     <div class="infolist-block" style="z-index: 100; height:250px; border-style:groove; left: 0px; position: absolute; top: 31px">
-                                    <asp:ListBox ID="odmList"  runat="server" Height="210px" Width="225px" 
+                                    <asp:ListBox ID="odmList"  runat="server" Height="245px" Width="225px" 
                                             BackColor="#E7F2F9" 
                                             ForeColor="Black" AutoPostBack="True" 
                                             onselectedindexchanged="odmList_SelectedIndexChanged" 
@@ -165,8 +165,6 @@
                                                      AutoPostBack="True" 
                                                      onselectedindexchanged="variableCodeDropDownList_SelectedIndexChanged">
                                                  </asp:DropDownList>
-                                                 <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
-                                          onclick="resetOdmInfoButton_Click" />
                                   
                                   </div>
                                      

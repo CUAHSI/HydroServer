@@ -19,7 +19,7 @@ namespace HydroAdmin
             {
                 siteCodeDropDownList.Enabled = false;
                 variableCodeDropDownList.Enabled = false;
-                resetOdmInfoButton.Enabled = false;
+                
                 ODMDatabaseListLoad();
             }
         }
@@ -461,7 +461,7 @@ namespace HydroAdmin
             {
                 siteCodeDropDownList.Enabled = true;
                 //variableCodeDropDownList.Enabled = true;
-                resetOdmInfoButton.Enabled = true;
+               
                 timeSeriesTable = (DataTable)ViewState["mydata"];
                 odmInfoGridView.DataSource = timeSeriesTable;
                 odmInfoGridView.DataBind();
@@ -471,7 +471,7 @@ namespace HydroAdmin
                 siteCodeDropDownList.Enabled = false;
                 variableCodeDropDownList.Enabled = false;
                 enableVariableCodeFilter.Checked = false;
-                resetOdmInfoButton.Enabled = false;
+              
                 TimeSeriesResources tmResObj = new TimeSeriesResources();
                 if (odmList.Items.Count > 0)
                 {
