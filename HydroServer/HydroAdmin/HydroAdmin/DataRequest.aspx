@@ -47,6 +47,9 @@
                 			<a href="users.aspx" ><span class="l"></span><span class="r"></span><span class="t">Users</span></a>                			
                 		</li>		
                 		<li>
+                			<a href="Groups.aspx" ><span class="l"></span><span class="r"></span><span class="t">Groups</span></a>                			
+                		</li>
+                		<li>
                 			<a href="#" class=" active"><span class="l"></span><span class="r"></span><span class="t">Data Request</span></a>                			
                 		</li>	
                 		<li>

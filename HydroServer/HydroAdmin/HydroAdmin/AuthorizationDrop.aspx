@@ -159,8 +159,7 @@
                                                      AutoPostBack="True" 
                                                      onselectedindexchanged="variableCodeDropDownList_SelectedIndexChanged">
                                                  </asp:DropDownList>
-                                                 <asp:Button ID="resetOdmInfoButton" runat="server" Text="Reset" 
-                                          onclick="resetOdmInfoButton_Click" />
+                                                 
                                   
                                   </div>
                                   

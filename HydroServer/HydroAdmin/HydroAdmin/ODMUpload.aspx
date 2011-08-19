@@ -46,6 +46,9 @@
                 			<a href="users.aspx" ><span class="l"></span><span class="r"></span><span class="t">Users</span></a>                			
                 		</li>		
                 		<li>
+                			<a href="Groups.aspx" ><span class="l"></span><span class="r"></span><span class="t">Groups</span></a>                			
+                		</li>
+                		<li>
                 			<a href="DataRequest.aspx"><span class="l"></span><span class="r"></span><span class="t">Data Request</span></a>                			
                 		</li>	
                 		<li>
@@ -98,12 +101,12 @@
                                      
                                        </table>
                                  </div>
-                                       <div style="z-index:100; text-align:right; width:515px; height:20px;left: 240px; position:absolute; top: 275px;">
+                                       <div style="z-index:100; text-align:right; width:515px; height:20px;left: 240px; position:absolute; top: 320px;">
                                            <asp:CheckBox ID="automatedDOICheckBox" runat="server" Font-Size="Small" 
-                                               Text="Automated DOI" AutoPostBack="True" 
+                                               Text="Automated Identifiers" AutoPostBack="True" 
                                                oncheckedchanged="automatedDOICheckBox_CheckedChanged" />
                                                <asp:CheckBox ID="customDOICheckBox" runat="server" AutoPostBack="True"  Font-Size="Small" 
-                                               Text="Custom DOI" oncheckedchanged="customDOICheckBox_CheckedChanged" />
+                                               Text="Custom Identifiers" oncheckedchanged="customDOICheckBox_CheckedChanged" />
                                        <asp:Button ID="Button1" runat="server" Text="Cancel" Height="20px" 
                                                onclick="Button1_Click" Width="50px" />
                                        <asp:Button ID="Button2" runat="server" Text="Load" Height="20px" 
@@ -124,7 +127,10 @@
                     <div class="art-Footer-inner" style="left: 0px; top: -4px">
                         
                         <div class="art-Footer-text">
-                            <p align="right"><a href="#" >Contact Usund" style="left: 4px; bottom: -80px"></div>
+                            <p align="right"><a href="#" >Contact Us</a></p>
+                        </div>
+                    </div>
+                    <div class="art-Footer-background" style="left: 4px; bottom: -80px"></div>
                 </div>
         		<div class="cleared"></div>
             </div>

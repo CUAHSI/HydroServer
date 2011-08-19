@@ -22,7 +22,7 @@ namespace HydroAdmin
             {
                 siteCodeDropDownList.Enabled = false;
                 variableCodeDropDownList.Enabled = false;
-                resetOdmInfoButton.Enabled = false;
+               
                 DbList_Load();
                 userInfo_Load();
                 userCheckBox.Checked = true;
@@ -590,11 +590,12 @@ namespace HydroAdmin
 
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
+            AccessDisplay();
             if (enableFiltersCheckBox.Checked)
             {
                 siteCodeDropDownList.Enabled = true;
                 //variableCodeDropDownList.Enabled = true;
-                resetOdmInfoButton.Enabled = true;
+               
                 timeSeriesTable = (DataTable)ViewState["mydata"];
                 odmInfoGridView.DataSource = timeSeriesTable;
                 odmInfoGridView.DataBind();
@@ -603,7 +604,7 @@ namespace HydroAdmin
             {
                 siteCodeDropDownList.Enabled = false;
                 variableCodeDropDownList.Enabled = false;
-                resetOdmInfoButton.Enabled = false;
+               
                 TimeSeriesResources tmResObj = new TimeSeriesResources();
                 if (DbListBox.Items.Count > 0)
                 {
@@ -715,7 +716,7 @@ namespace HydroAdmin
             {
                 siteCodeDropDownList.Enabled = true;
                 //variableCodeDropDownList.Enabled = true;
-                resetOdmInfoButton.Enabled = true;
+               
                 timeSeriesTable = (DataTable)ViewState["mydata"];
                 odmInfoGridView.DataSource = timeSeriesTable;
                 odmInfoGridView.DataBind();
@@ -725,7 +726,7 @@ namespace HydroAdmin
                 siteCodeDropDownList.Enabled = false;
                 variableCodeDropDownList.Enabled = false;
                 enableVariableCodeFilter.Checked = false;
-                resetOdmInfoButton.Enabled = false;
+                
                 TimeSeriesResources tmResObj = new TimeSeriesResources();
                 if (DbListBox.Items.Count > 0)
                 {
