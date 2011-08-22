@@ -26,7 +26,7 @@ vbCrLf & _
 "The ODM Data Loader application and its software manual are based upon work supported by the National Science Foundation under Grants No. 03-26064, and 06-10075.  Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation. ")> 
 <Assembly: AssemblyCompany("Utah State University")> 
 <Assembly: AssemblyProduct("ODM DL 1.1.5.1")> 
-<Assembly: AssemblyCopyright("Copyright © 2008, Utah State University")> 
+<Assembly: AssemblyCopyright("Copyright © 2011, Utah State University")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
