@@ -8,7 +8,7 @@ Module modCommon
     Public writer As System.IO.StreamWriter
     'Public path As String = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
     'move config file out of the programfiles directory
-    Public dirPath As String = Split(System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath), "ODMLoader", , CompareMethod.Text)(0) & "DataLoader\1.1.5"
+    Public dirPath As String = Split(System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath), "ODMLoader", , CompareMethod.Text)(0) & "DataLoader\1.1.5.1"
     Public LogPath As String = dirPath & "\" & "log.txt"
 
 

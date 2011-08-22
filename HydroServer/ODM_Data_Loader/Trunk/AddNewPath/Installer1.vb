@@ -15,27 +15,9 @@ Public Class Installer1
 
     End Sub
 
-    <Security.Permissions.SecurityPermission(Security.Permissions.SecurityAction.Demand)> _
-  Public Overrides Sub Commit(ByVal savedState As  _
-    System.Collections.IDictionary)
-
-        MyBase.Commit(savedState)
-        'System.Diagnostics.Process.Start("http://www.microsoft.com")
-
-        'SetEnvVariable()
-    End Sub
-
     Protected Overrides Sub OnAfterInstall(ByVal savedState As System.Collections.IDictionary)
         MyBase.OnAfterInstall(savedState)
         SetEnvVariable()
-    End Sub
-
-
-    Public Overrides Sub Install(ByVal stateSaver As System.Collections.IDictionary)
-        MyBase.Install(stateSaver)
-
-        'SetEnvVariable()
-        'SetEnvVariable()
     End Sub
 
     Public Overrides Sub Uninstall(ByVal savedState As System.Collections.IDictionary)
