@@ -29,7 +29,7 @@ vbcrlf & _
 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("ODM Tools")> 
-<Assembly: AssemblyCopyright("Copyright 2007, Utah State University")> 
+<Assembly: AssemblyCopyright("Copyright 2011, Utah State University")> 
 <Assembly: AssemblyTrademark("")> 
 <Assembly: CLSCompliant(True)> 
 
@@ -46,6 +46,6 @@ vbcrlf & _
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("1.1.2")> 
+<Assembly: AssemblyVersion("1.1.2.1")> 
 
-<Assembly: AssemblyFileVersionAttribute("1.1.2")> 
+<Assembly: AssemblyFileVersionAttribute("1.1.2.1")> 
