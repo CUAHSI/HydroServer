@@ -1,7 +1,7 @@
 Public Class Capabilities
     '1.3.0
     'http://maps.usu.edu/ArcGIS/services/BearRiver/Administrative/MapServer/WMSServer?SERVICE=WMS&REQUEST=GetCapabilities
-    '1.1.2
+    '1.1.2.1
     'http://columbo.nrlssc.navy.mil/ogcwms/servlet/WMSServlet/Salt_Lake_City_UT_Maps.wms?SERVICE=WMS&REQUEST=GetCapabilities
 
     Private m_url As String
