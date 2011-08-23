@@ -398,6 +398,7 @@ Class clsDataValues
 
                 'DataValue
                 'If (m_ViewTable.Columns.IndexOf(file_DataValues_DataValue) >= 0) Then
+                'Dim dval As Double = CType(fileRow.Item(file_DataValues_DataValue), Double)
                 If (fileRow.Item(file_DataValues_DataValue).ToString <> "") AndAlso IsNumeric(fileRow.Item(file_DataValues_DataValue)) Then
                     tempRow.Item(db_fld_DataValue) = fileRow.Item(file_DataValues_DataValue)
                 Else
