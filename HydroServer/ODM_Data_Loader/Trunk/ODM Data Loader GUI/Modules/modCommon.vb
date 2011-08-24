@@ -8,7 +8,7 @@ Module modCommon
     Public writer As System.IO.StreamWriter
     'Public path As String = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
     'move config file out of the programfiles directory
-    Public dirPath As String = Split(System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath), "ODMLoader", , CompareMethod.Text)(0) & "DataLoader\1.1.5.1"
+    Public dirPath As String = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
     Public LogPath As String = dirPath & "\" & "log.txt"
 
 
@@ -114,7 +114,9 @@ Module modCommon
         resultstr.Append(Now.ToLongDateString & " " & Now.ToLongTimeString & vbCrLf & "The update was completed." & vbCrLf)
 
         For Each c As KeyValuePair(Of String, Integer) In _clsTableCount
-            resultstr.AppendLine(c.Value & " rows committed to " & c.Key & " Table")
+            If c.Value > 0 Then
+                resultstr.AppendLine(c.Value & " rows committed to " & c.Key & " Table")
+            End If
         Next
 
         'resultstr.Append(".")

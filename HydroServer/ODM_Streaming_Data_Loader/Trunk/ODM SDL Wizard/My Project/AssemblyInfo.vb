@@ -22,8 +22,8 @@ vbCrLf & _
 "Kim Screuders, System Administrator, Utah Water Research Laboratory, Utah State University, Logan, UT" & vbCrLf & _
 vbCrLf & _
 "The ODM Streaming Data Loader application and its software manual are based upon work supported by the National Science Foundation under Grants No. 03-26064, and 06-10075.  Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation. ")> 
-<Assembly: AssemblyCompany("Utah State University")> 
-<Assembly: AssemblyProduct("ODM SDL 1.1.2.1")> 
+<Assembly: AssemblyCompany("CUAHSI")> 
+<Assembly: AssemblyProduct("ODM SDL 1.1.2.2")> 
 <Assembly: AssemblyCopyright("Copyright © 2008, Utah State University")> 
 <Assembly: AssemblyTrademark("")> 
 
@@ -43,7 +43,7 @@ vbCrLf & _
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.1.2.1")> 
-<Assembly: AssemblyFileVersion("1.1.2.1")> 
+<Assembly: AssemblyVersion("1.1.2.2")> 
+<Assembly: AssemblyFileVersion("1.1.2.2")> 
 
 <Assembly: NeutralReSourcesLanguageAttribute("en-US")> 

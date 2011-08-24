@@ -27,7 +27,7 @@ vbcrlf & _
 vbcrlf & _
 "Parts of the ODM Tools application were modeled after programs developed by United States Geological Survey (USGS) personnel for the Panola Mountain Experimental Watershed.  Brent Aulenbach of USGS is acknowledged for his contribution to this work.")> 
 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyCompany("CUAHSI")> 
 <Assembly: AssemblyProduct("ODM Tools")> 
 <Assembly: AssemblyCopyright("Copyright 2011, Utah State University")> 
 <Assembly: AssemblyTrademark("")> 
@@ -46,6 +46,6 @@ vbcrlf & _
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("1.1.2.1")> 
+<Assembly: AssemblyVersion("1.1.2.2")> 
 
-<Assembly: AssemblyFileVersionAttribute("1.1.2.1")> 
+<Assembly: AssemblyFileVersionAttribute("1.1.2.2")> 

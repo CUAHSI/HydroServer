@@ -330,7 +330,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Data Loader 1.1.5.1"
+        "ProductName" = "8:ODM Data Loader 1.1.5.2"
         "ProductCode" = "8:{89485118-C31A-482C-BE04-4F2FBDA62C26}"
         "PackageCode" = "8:{6EF71990-CB33-4C63-AF06-B6E1C2A46A18}"
         "UpgradeCode" = "8:{B3619D6E-AE69-4E35-AFF4-8B2BD9D950AB}"
@@ -342,7 +342,7 @@
         "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-7176"
         "ARPHELPLINK" = "8:http:\\\\his.cuahsi.org"
-        "Title" = "8:Installer"
+        "Title" = "8:ODMDataLoaderInstaller"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Utah Water Research Laboratory"
         "Keywords" = "8:"
@@ -453,7 +453,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9213E13D767B44D796AF23F19B940C8E"
             {
-            "Name" = "8:ODM DL 1.1.5.1 Wizard"
+            "Name" = "8:ODM DL 1.1.5.2 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -467,7 +467,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9624BB8BCC3C440296CE884FE0D59120"
             {
-            "Name" = "8:ODM DL 1.1.5.1 Wizard"
+            "Name" = "8:ODM DL 1.1.5.2 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -481,7 +481,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C15D35F33E0047CD812979750CBD340D"
             {
-            "Name" = "8:ODM DL 1.1.5.1"
+            "Name" = "8:ODM DL 1.1.5.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -495,7 +495,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D0AC355D76CE4AD6BFC427EB4518972D"
             {
-            "Name" = "8:ODM DL 1.1.5.1"
+            "Name" = "8:ODM DL 1.1.5.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

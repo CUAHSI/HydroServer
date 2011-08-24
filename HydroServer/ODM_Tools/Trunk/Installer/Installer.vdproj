@@ -21,13 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_519321FB9338DF3A60F38BBEA703E873"
-        "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_66FE7536FD7F82B77585A22963A85E73"
+        "MsmKey" = "8:_680F3A28CB9BE77A24B6BE094F08E55B"
         "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,8 +33,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_829F452A043DE571DAD7D0CF11B55D0C"
+        "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9DECBE44F4CA42BF9963F203DF5AF3E2"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AEE0F07F243335B3769E60CCA80F7E12"
+        "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -57,12 +63,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F2942E2DEA9C7FC479ADB5347D488492"
-        "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
         "MsmSig" = "8:_UNDEFINED"
@@ -70,19 +70,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F2942E2DEA9C7FC479ADB5347D488492"
+        "OwnerKey" = "8:_680F3A28CB9BE77A24B6BE094F08E55B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_66FE7536FD7F82B77585A22963A85E73"
+        "OwnerKey" = "8:_AEE0F07F243335B3769E60CCA80F7E12"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_519321FB9338DF3A60F38BBEA703E873"
+        "OwnerKey" = "8:_829F452A043DE571DAD7D0CF11B55D0C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -216,20 +216,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_519321FB9338DF3A60F38BBEA703E873"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_680F3A28CB9BE77A24B6BE094F08E55B"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ODM CVUpdate, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.5.23687, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_519321FB9338DF3A60F38BBEA703E873"
+                    "_680F3A28CB9BE77A24B6BE094F08E55B"
                     {
-                    "Name" = "8:ODM CVUpdate.dll"
+                    "Name" = "8:ZedGraph.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:ODM CVUpdate.dll"
+            "SourcePath" = "8:ZedGraph.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_97128F5AB98D422E9F644FDABBDE73ED"
@@ -247,20 +247,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_66FE7536FD7F82B77585A22963A85E73"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_829F452A043DE571DAD7D0CF11B55D0C"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:VBEnumerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ODM CVUpdate, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_66FE7536FD7F82B77585A22963A85E73"
+                    "_829F452A043DE571DAD7D0CF11B55D0C"
                     {
-                    "Name" = "8:VBEnumerator.dll"
+                    "Name" = "8:ODM CVUpdate.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:VBEnumerator.dll"
+            "SourcePath" = "8:ODM CVUpdate.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_97128F5AB98D422E9F644FDABBDE73ED"
@@ -298,6 +298,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AEE0F07F243335B3769E60CCA80F7E12"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:VBEnumerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_AEE0F07F243335B3769E60CCA80F7E12"
+                    {
+                    "Name" = "8:VBEnumerator.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:VBEnumerator.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_97128F5AB98D422E9F644FDABBDE73ED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9394ACA0C924EC49576CBD74B2F3B1B"
             {
             "SourcePath" = "8:lic.rtf"
@@ -316,37 +347,6 @@
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F2942E2DEA9C7FC479ADB5347D488492"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ZedGraph, Version=5.1.5.23687, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F2942E2DEA9C7FC479ADB5347D488492"
-                    {
-                    "Name" = "8:ZedGraph.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ZedGraph.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_97128F5AB98D422E9F644FDABBDE73ED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -415,19 +415,19 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Tools 1.1.2.1"
+        "ProductName" = "8:ODM Tools 1.1.2.2"
         "ProductCode" = "8:{5C11EDFC-18B1-493D-B035-C3E661E9DD5A}"
         "PackageCode" = "8:{FDE25D23-484A-44CC-9E01-816D933719C7}"
         "UpgradeCode" = "8:{4EC09388-349A-41C5-B07C-EA75B3B0261F}"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.1.2"
         "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-7176"
         "ARPHELPLINK" = "8:http://his.cuahsi.org/"
-        "Title" = "8:ODM Tools 1.1.2.1"
+        "Title" = "8:ODM Tools 1.1.2.2"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Utah Water Research Laboratory"
         "Keywords" = "8:"
@@ -538,7 +538,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3F7029EEDE394B45B36C4864B9785BEE"
             {
-            "Name" = "8:ODM Tools 1.1.2.1"
+            "Name" = "8:ODM Tools 1.1.2.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -552,7 +552,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A9375652B899460D8928822F7DF2D5FF"
             {
-            "Name" = "8:ODM Tools 1.1.2.1"
+            "Name" = "8:ODM Tools 1.1.2.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
