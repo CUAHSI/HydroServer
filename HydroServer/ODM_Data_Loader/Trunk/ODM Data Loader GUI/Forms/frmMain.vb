@@ -23,16 +23,9 @@ Public Class frmMain
             My.Settings.DateFormat = My.Application.Culture.DateTimeFormat.ShortDatePattern
         End If
 
-        'LogPath = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location) & "\Log.txt"
-        'LogPath = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath) & "\Log.txt"
-        'original Logpath Stephanie 'LogPath = System.IO.Path.GetDirectoryName(Me.GetType.Assembly.Location) & "\Log.txt"
         dirPath = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
-        Dim section As String()
-        section = Split(dirPath, "ODMLoader", , CompareMethod.Text)
-        'tempdir = section(0) & section(1) '& "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
-        dirPath = section(0) & "DataLoader\1.1.5"
+        Dim LogPath As String = dirPath & "\" & "log.txt"
         IO.Directory.CreateDirectory(dirPath)
-        LogPath = dirPath + "\Log.txt"
 
 
         For i As Integer = 0 To (My.Application.CommandLineArgs.Count - 1)
@@ -224,7 +217,13 @@ Public Class frmMain
                 ShowUpdate(_clsTableCount)
                 ResetForm()
             Else
-                MsgBox("There was an error committing this file to the database." & vbCrLf & "Please read the log file to determine where the error occurred." & vbCrLf & "No data was committed to the database.", MsgBoxStyle.Critical, "Error Committing Data")
+                ' MsgBox("There was an error committing this file to the database." & vbCrLf & "Please read the log file to determine where the error occurred." & vbCrLf & "No data was committed to the database.", MsgBoxStyle.Critical, "Error Committing Data")
+                Dim answer As MsgBoxResult = MsgBox("There was an error committing this file to the database." & vbCrLf & "No data was committed to the database." & vbCrLf & "Please read the log file to determine where the error occurred, would you like to open the log file now?", MsgBoxStyle.YesNo, "Error Committing Data")
+                If (answer = MsgBoxResult.Yes) Then
+                    Dim Proc As New System.Diagnostics.Process
+                    Proc.StartInfo.FileName = LogPath
+                    Proc.Start()
+                End If
                 lblLoadingType.Text = "Error committing this file."
                 table = New DataTable("ERROR")
                 dgvSites.DataSource = table

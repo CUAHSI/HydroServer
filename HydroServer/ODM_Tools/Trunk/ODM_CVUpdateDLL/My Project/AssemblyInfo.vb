@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("CVUpdate")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Utah State University")> 
+<Assembly: AssemblyCompany("CUAHSI")> 
 <Assembly: AssemblyProduct("CVUpdate")> 
 <Assembly: AssemblyCopyright("Copyright © 2008, Utah State University")> 
 <Assembly: AssemblyTrademark("")> 

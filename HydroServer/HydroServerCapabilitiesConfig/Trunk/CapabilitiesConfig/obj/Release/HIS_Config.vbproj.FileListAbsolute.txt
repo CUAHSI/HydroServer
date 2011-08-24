@@ -211,3 +211,37 @@ C:\DEV\ODM\HydroServer1-4-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\C
 C:\DEV\ODM\HydroServer1-4-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.vbproj.GenerateResource.Cache
 C:\DEV\ODM\HydroServer1-4-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS Server Capabilities Database.exe.manifest
 C:\DEV\ODM\HydroServer1-4-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS Server Capabilities Database.application
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\Microsoft.SqlServer.ConnectionInfo.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\Microsoft.SqlServer.Smo.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\Microsoft.SqlServer.SmoEnum.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\Microsoft.SqlServer.BatchParser.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\ResolveAssemblyReference.cache
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.AccessDB.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.AddContact.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.AddDatabase.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.AddMap.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.AddMapServer.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.AddMetadata.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.AddRegionMap.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.AddMap_Full.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.Form1.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.frmAbout.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.MapPreview.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.Resources.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.SelectDatabaseServer.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.SelectMapServer.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.SelectRegion.resources
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HIS_Config.vbproj.GenerateResource.Cache
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\HydroServer Capabilities Database.exe.config
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\HydroServer Capabilities Database.exe.manifest
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\HydroServer Capabilities Database.application
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\HydroServer Capabilities Database.exe
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\HydroServer Capabilities Database.XmlSerializers.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\HydroServer Capabilities Database.pdb
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\HydroServer Capabilities Database.xml
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.exe.manifest
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.application
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.exe
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.xml
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.pdb
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.XmlSerializers.dll
