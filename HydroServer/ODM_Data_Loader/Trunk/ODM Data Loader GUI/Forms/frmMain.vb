@@ -304,17 +304,23 @@ Public Class frmMain
                 file = tempFile.GetTableType
                 tempFile = Nothing
                 LogUpdate("You are loading """ & file.MyType & """")
-                Dim rows As Integer
-                'Dim tc As New clsTableCount
+                'Dim rows As Integer
+                Dim tc As New clsTableCount
                 ' tc.Add(New counts(db_tbl_ISOMetadata, count))
                 'Return count
                 'Return tcDim rows As Integer
+                Dim resultstr As New System.Text.StringBuilder
+
+                tc = file.CommitTable()
+                For Each c As KeyValuePair(Of String, Integer) In tc
+                    If c.Value > 0 Then
+                        resultstr.AppendLine(c.Value & " rows committed to " & c.Key & " Table")
+                    End If
+                Next
 
 
-                rows = file.CommitTable()(0)
-
-                If (rows > 0) Then
-                    LogUpdate("Committed " & rows & " rows to the database.")
+                If (tc.Count > 0) Then
+                    LogUpdate(resultstr.ToString())
                 Else
                     LogError("No Data Commited to the database")
                 End If
