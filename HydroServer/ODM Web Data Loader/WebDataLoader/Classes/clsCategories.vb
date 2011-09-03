@@ -223,18 +223,21 @@ Class clsCategories
             If Not (Variables Is Nothing) Then
                 Variables.Clear()
             End If
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Categories.ValidateTable(connect, trans)<br> " & ex.Message)
         End Try
         Return New DataTable("ERROR")
     End Function
 
+
+    ' 6/21/11 SR
     ''' <summary>
     ''' 
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
         'Dim scope As New Transactions.TransactionScope
+
         Dim count As Integer = 0
 
         'Using scope
@@ -247,7 +250,9 @@ Class clsCategories
             GC.Collect()
 
             If count > 0 Then
-
+#If DEBUG Then
+                MsgBox("Trans.commit")
+#End If
                 trans.Commit()
             Else
                 Throw New Exception("An Error Occurred. Rolling back database transaction.")
@@ -256,11 +261,17 @@ Class clsCategories
             Throw ExEr
         Catch ex As Exception
             'LogError(ex)
+#If DEBUG Then
+            MsgBox("Trans.rollback")
+#End If
             trans.Rollback()
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Error Committing Samples<br> " & ex.Message)
         End Try
         connect.Close()
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Categories, count)
+        'Return count
+        Return tc
     End Function
 
     ''' <summary>
@@ -270,13 +281,72 @@ Class clsCategories
     ''' <param name="trans"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
         Dim count As Integer = 0
 
         count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Categories)
         GC.Collect()
-
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Categories, count)
+        'Return count
+        Return tc
     End Function
+
+    ' 6/21/11 SR
+    '    ''' <summary>
+    '    ''' 
+    '    ''' </summary>
+    '    ''' <returns></returns>
+    '    ''' <remarks></remarks>
+    '    Public Overrides Function CommitTable() As Integer
+    '        'Dim scope As New Transactions.TransactionScope
+    '        Dim count As Integer = 0
+
+    '        'Using scope
+    '        Dim connect As New System.Data.SqlClient.SqlConnection(m_Connection.ConnectionString)
+    '        connect.Open()
+    '        Dim trans As SqlClient.SqlTransaction = connect.BeginTransaction(Data.IsolationLevel.ReadCommitted, "this is a test")
+
+    '        Try
+    '            count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Categories)
+    '            GC.Collect()
+
+    '            If count > 0 Then
+    '#If DEBUG Then
+    '                MsgBox("Trans.commit")
+    '#End If
+    '                trans.Commit()
+    '            Else
+    '                Throw New Exception("An Error Occurred. Rolling back database transaction.")
+    '            End If
+    '        Catch ExEr As ExitError
+    '            Throw ExEr
+    '        Catch ex As Exception
+    '            LogError(ex)
+    '#If DEBUG Then
+    '            MsgBox("Trans.rollback")
+    '#End If
+    '            trans.Rollback()
+    '            Throw New ExitError("Error Committing Samples")
+    '        End Try
+    '        connect.Close()
+    '        Return count
+    '    End Function
+
+    '    ''' <summary>
+    '    ''' 
+    '    ''' </summary>
+    '    ''' <param name="connect"></param>
+    '    ''' <param name="trans"></param>
+    '    ''' <returns></returns>
+    '    ''' <remarks></remarks>
+    '    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    '        Dim count As Integer = 0
+
+    '        count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Categories)
+    '        GC.Collect()
+
+    '        Return count
+    '    End Function
 
 End Class

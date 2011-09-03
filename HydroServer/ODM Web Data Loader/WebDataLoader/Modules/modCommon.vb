@@ -8,7 +8,7 @@ Module modCommon
 
 #Region " Error Reporting Functionality "
     Public writer As System.IO.StreamWriter
-    Public LogPath As String = "log.txt"
+
 
     Public Sub LogError(ByVal message As String, Optional ByVal err As Exception = Nothing)
         'Writes an error message to the log file.  Including the message from the exception.
@@ -43,7 +43,7 @@ Module modCommon
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            MsgBox("An error occurred writing the error message to the log file." & vbCrLf & "Error: " & ex.Message & vbCrLf & vbCrLf & "Original Error Message: " & message)
+            MsgBox("An error occurred writing the error message to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Error Message: " & message)
         End Try
     End Sub
 
@@ -77,7 +77,7 @@ Module modCommon
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            MsgBox("An error occurred writing the error message to the log file." & vbCrLf & "Error: " & ex.Message & vbCrLf & vbCrLf & "Original Error Message: " & err.Message)
+            MsgBox("An error occurred writing the error message to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Error Message: " & err.Message)
         End Try
     End Sub
 
@@ -99,17 +99,10 @@ Module modCommon
             Throw ExEr
         Catch ex As Exception
             'LogError("Unable to update log file." & vbCrLf & ex.Message, ex)
-            MsgBox("An error occurred writing the completion comment to the log file." & vbCrLf & "Error: " & ex.Message & vbCrLf & vbCrLf & "Original Completion Comment: " & comment)
+            MsgBox("An error occurred writing the completion comment to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Completion Comment: " & comment)
         End Try
     End Sub
 
-    Public Sub ShowUpdate(ByVal rows As Integer, Optional ByVal tableName As String = "the database")
-        ''LogUpdate("The update was completed." & vbCrLf & rows & " rows committed to " & tableName & ".")
-        If Not (CommandLine) Then
-            'Msgbox(Now.ToLongDateString & " " & Now.ToLongTimeString & vbCrLf & "The update was completed." & vbCrLf & rows & " rows committed to " & tableName & ".", MsgboxStyle.Information, "Update was successful!")
-            'WebDataLoader.lblStatus.Text = Now.ToLongDateString & " " & Now.ToLongTimeString & ", The update was completed. " & (rows / 2) & " rows committed to " & tableName & "."
-        End If
-    End Sub
 
 #End Region
 

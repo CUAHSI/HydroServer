@@ -58,3 +58,11 @@ C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.Framework
 C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\ResolveAssemblyReference.cache
 C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.dll
 C:\Dev\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.pdb
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.USU.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.USU.pdb
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.Framework.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServer Website\HydroServer.USU\bin\System.Web.Mvc.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServer Website\HydroServer.USU\bin\HydroServer.Framework.pdb
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\ResolveAssemblyReference.cache
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.dll
+C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServer Website\HydroServer.USU\obj\Debug\HydroServer.USU.pdb

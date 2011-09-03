@@ -181,12 +181,15 @@ Class clsFile
         Return Me
     End Function
 
-    Public Overridable Function CommitTable() As Integer
-        Return ""
+    'Public Overridable Function CommitTable() As Integer
+    Public Overridable Function CommitTable() As clsTableCount
+        Return Nothing
         'Return m_Connection.UpdateTable(ValidateTable(m_ViewTable), "SELECT * FROM" & db_tblTableName)
     End Function
-    Public Overridable Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
-        Return ""
+    'Public Overridable Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overridable Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
+
+        Return Nothing
         'Return m_Connection.UpdateTable(ValidateTable(m_ViewTable), "SELECT * FROM" & db_tblTableName)
     End Function
 
@@ -219,8 +222,8 @@ Class clsFile
             If (m_FilePath.StartsWith("http:\\") Or m_FilePath.StartsWith("ftp:\\")) Then
                 Dim myWebClient As New Net.WebClient()
                 Dim tempPath As String
-                tempPath = System.IO.Path.GetTempPath & "ODMSDL"
-                ''LogUpdate(vbTab & vbTab & "Getting Data from Website..." & vbCrLf & "From: " & m_FilePath & vbCrLf & "To: " & tempPath & "\DataImport.txt")
+                tempPath = System.IO.Path.GetTempPath & "ODMWDL"
+                '''LogUpdate(vbTab & vbTab & "Getting Data from Website..." & vbCrLf & "From: " & m_FilePath & vbCrLf & "To: " & tempPath & "\DataImport.txt")
                 Try
                     If Not (System.IO.Directory.Exists(tempPath)) Then
                         System.IO.Directory.CreateDirectory(tempPath)
@@ -238,7 +241,7 @@ Class clsFile
                     ''LogError("Error Downloading Data From Website", ex)
                     m_ViewTable = New DataTable("ERROR")
                 End Try
-                ''LogUpdate(vbTab & vbTab & "...Finished Getting Data")
+                '''LogUpdate(vbTab & vbTab & "...Finished Getting Data")
             Else
                 'If System.IO.File.Exists(m_FilePath) Then
                 fullPath = m_FilePath
@@ -255,7 +258,7 @@ Class clsFile
                 m_ViewTable = New DataTable("ERROR")
             End If
 
-            '''LogUpdate(vbTab & vbTab & "Opening " & fullPath & " ...")
+            ''''LogUpdate(vbTab & vbTab & "Opening " & fullPath & " ...")
             Try
                 If fullPath.EndsWith("xls") Or fullPath.EndsWith("xlsx") Or fullPath.EndsWith("xlsb") Then
                     LoadExcel()
@@ -320,7 +323,7 @@ Class clsFile
                     table.AcceptChanges()
                     reader.Close()
                     m_ViewTable = table
-                    '''LogUpdate(vbTab & vbTab & fullPath & " Opened.")
+                    ''''LogUpdate(vbTab & vbTab & fullPath & " Opened.")
                 End If
             Catch ExEr As ExitError
                 Throw ExEr
@@ -420,7 +423,7 @@ Class clsFile
                 Next column
             Catch ex As Exception
                 'LogError("The sheet with the data must have the same name as the file (" & shortName & ") or be named sheet1.")
-                Throw New ExitError("clsFile.LoadExcell()")
+                Throw New ExitError("clsFile.LoadExcell()<br> " & ex.Message)
             End Try
         End Try
 

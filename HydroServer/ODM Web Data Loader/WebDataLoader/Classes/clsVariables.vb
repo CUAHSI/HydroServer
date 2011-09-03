@@ -50,10 +50,10 @@ Class clsVariables
 #End Region
 
 #Region " File Field Constants "
-    Public Const file_Variables As String = "variables"
-    Public Const file_Variables_VariableCode As String = "variablecode"             'R
-    Public Const file_Variables_VariableName As String = "variablename"             'R
-    Public Const file_Variables_Speciation As String = "speciation"                 'R
+    Public Const file_Variables As String = "Variables"
+    Public Const file_Variables_VariableCode As String = "VariableCode"             'R
+    Public Const file_Variables_VariableName As String = "VariableName"             'R
+    Public Const file_Variables_Speciation As String = "Speciation"                 'R
 #Region " Variable Units Columns "
     Public Const file_Variables_VariableUnitsID As String = "variableunitsid"       'R
     Public Const file_Variables_VariableUnitsName As String = "variableunitsname"   'A
@@ -94,9 +94,9 @@ Class clsVariables
     End Sub
 
     Protected Overrides Function ValidateTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction) As Data.DataTable
-        Dim valid as new datatable
+        Dim valid As New datatable
         'Declare all of your CVs Here
-        Dim Units, VariableName, Speciation, SampleMedium, ValueType, DataType, GeneralCategory as new datatable
+        Dim Units, VariableName, Speciation, SampleMedium, ValueType, DataType, GeneralCategory As New datatable
         Dim i As Integer
         Dim fileRows() As DataRow
 
@@ -365,7 +365,7 @@ Class clsVariables
             Throw ExEr
         Catch ex As Exception
             'Log: ERROR
-            'LogError(ex)
+            LogError(ex)
             If Not (valid Is Nothing) Then
                 valid.Clear()
             End If
@@ -390,13 +390,13 @@ Class clsVariables
             If Not (GeneralCategory Is Nothing) Then
                 GeneralCategory.Clear()
             End If
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Variables.ValidateTable(connect, trans)<br> " & ex.Message)
         End Try
 
         Return New DataTable("ERROR")
     End Function
 
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
         'Dim scope As New Transactions.TransactionScope
         Dim count As Integer = 0
 
@@ -409,7 +409,9 @@ Class clsVariables
 
             GC.Collect()
             If (count > 0) Then
-
+#If DEBUG Then
+                MsgBox("Trans.commit")
+#End If
                 trans.Commit()
             Else
                 Throw New Exception("An Error Occurred. Rolling back database transaction.")
@@ -417,22 +419,30 @@ Class clsVariables
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            'LogError(ex)
-
+            LogError(ex)
+#If DEBUG Then
+            MsgBox("Trans.rollback")
+#End If
             trans.Rollback()
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Error Committing Samples<br> " & ex.Message)
         End Try
         connect.Close()
         connect.Close()
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Variables, count)
+        'Return count
+        Return tc
     End Function
 
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
         Dim count As Integer = 0
 
         count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Variables)
         GC.Collect()
 
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Variables, count)
+        'Return count
+        Return tc
     End Function
 End Class

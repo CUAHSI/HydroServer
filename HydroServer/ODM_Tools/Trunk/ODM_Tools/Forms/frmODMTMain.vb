@@ -531,8 +531,6 @@ Public Class frmODMTools
         Me.lblEditSite = New System.Windows.Forms.Label
         Me.lblEditVariable = New System.Windows.Forms.Label
         Me.cboxEditSite = New System.Windows.Forms.ComboBox
-        'Me.btnEditDataViewSelected = New System.Windows.Forms.Button
-        'Me.btnEditDataViewAll = New System.Windows.Forms.Button
         Me.btnEditDataFlag = New System.Windows.Forms.Button
         Me.gboxEditFilter = New System.Windows.Forms.GroupBox
         Me.rbtnEditDFDate = New System.Windows.Forms.RadioButton
@@ -1883,9 +1881,9 @@ Public Class frmODMTools
         'gboxPointOptions
         '
         Me.gboxPointOptions.Controls.Add(Me.GroupBox1)
-        Me.gboxPointOptions.Location = New System.Drawing.Point(12, 33)
+        Me.gboxPointOptions.Location = New System.Drawing.Point(8, 33)
         Me.gboxPointOptions.Name = "gboxPointOptions"
-        Me.gboxPointOptions.Size = New System.Drawing.Size(200, 69)
+        Me.gboxPointOptions.Size = New System.Drawing.Size(207, 69)
         Me.gboxPointOptions.TabIndex = 16
         Me.gboxPointOptions.TabStop = False
         Me.gboxPointOptions.Text = "Point Settings"
@@ -1893,9 +1891,9 @@ Public Class frmODMTools
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.nudPointSize)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 20)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 19)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(188, 43)
+        Me.GroupBox1.Size = New System.Drawing.Size(188, 44)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Point Size"
@@ -1914,9 +1912,9 @@ Public Class frmODMTools
         '
         Me.gboxHistPlotOptions.Controls.Add(Me.ckboxHistSetNumBins)
         Me.gboxHistPlotOptions.Controls.Add(Me.gboxHPNumBarSettings)
-        Me.gboxHistPlotOptions.Location = New System.Drawing.Point(7, 190)
+        Me.gboxHistPlotOptions.Location = New System.Drawing.Point(9, 177)
         Me.gboxHistPlotOptions.Name = "gboxHistPlotOptions"
-        Me.gboxHistPlotOptions.Size = New System.Drawing.Size(208, 104)
+        Me.gboxHistPlotOptions.Size = New System.Drawing.Size(208, 115)
         Me.gboxHistPlotOptions.TabIndex = 15
         Me.gboxHistPlotOptions.TabStop = False
         Me.gboxHistPlotOptions.Text = "Histogram  Plot"
@@ -1925,7 +1923,7 @@ Public Class frmODMTools
         '
         Me.ckboxHistSetNumBins.Checked = True
         Me.ckboxHistSetNumBins.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckboxHistSetNumBins.Location = New System.Drawing.Point(10, 14)
+        Me.ckboxHistSetNumBins.Location = New System.Drawing.Point(8, 19)
         Me.ckboxHistSetNumBins.Name = "ckboxHistSetNumBins"
         Me.ckboxHistSetNumBins.Size = New System.Drawing.Size(192, 16)
         Me.ckboxHistSetNumBins.TabIndex = 0
@@ -1938,9 +1936,9 @@ Public Class frmODMTools
         Me.gboxHPNumBarSettings.Controls.Add(Me.rbtnHPDiscreteBreakVals)
         Me.gboxHPNumBarSettings.Controls.Add(Me.tboxHPNumBins)
         Me.gboxHPNumBarSettings.Controls.Add(Me.lblHPNumBins)
-        Me.gboxHPNumBarSettings.Location = New System.Drawing.Point(4, 28)
+        Me.gboxHPNumBarSettings.Location = New System.Drawing.Point(4, 36)
         Me.gboxHPNumBarSettings.Name = "gboxHPNumBarSettings"
-        Me.gboxHPNumBarSettings.Size = New System.Drawing.Size(200, 68)
+        Me.gboxHPNumBarSettings.Size = New System.Drawing.Size(200, 71)
         Me.gboxHPNumBarSettings.TabIndex = 1
         Me.gboxHPNumBarSettings.TabStop = False
         '
@@ -1993,9 +1991,9 @@ Public Class frmODMTools
         'gboxBoxPlotOptions
         '
         Me.gboxBoxPlotOptions.Controls.Add(Me.gboxBPPlotType)
-        Me.gboxBoxPlotOptions.Location = New System.Drawing.Point(8, 298)
+        Me.gboxBoxPlotOptions.Location = New System.Drawing.Point(9, 298)
         Me.gboxBoxPlotOptions.Name = "gboxBoxPlotOptions"
-        Me.gboxBoxPlotOptions.Size = New System.Drawing.Size(208, 88)
+        Me.gboxBoxPlotOptions.Size = New System.Drawing.Size(208, 92)
         Me.gboxBoxPlotOptions.TabIndex = 3
         Me.gboxBoxPlotOptions.TabStop = False
         Me.gboxBoxPlotOptions.Text = "Box/Whisker Plot"
@@ -2007,7 +2005,7 @@ Public Class frmODMTools
         Me.gboxBPPlotType.Controls.Add(Me.rbtnBPMonthly)
         Me.gboxBPPlotType.Controls.Add(Me.rbtnBPYearly)
         Me.gboxBPPlotType.Controls.Add(Me.rbtnBPSeasonal)
-        Me.gboxBPPlotType.Location = New System.Drawing.Point(4, 13)
+        Me.gboxBPPlotType.Location = New System.Drawing.Point(4, 19)
         Me.gboxBPPlotType.Name = "gboxBPPlotType"
         Me.gboxBPPlotType.Size = New System.Drawing.Size(200, 69)
         Me.gboxBPPlotType.TabIndex = 13
@@ -2060,7 +2058,7 @@ Public Class frmODMTools
         'gboxTSPlotOptions
         '
         Me.gboxTSPlotOptions.Controls.Add(Me.gboxTSPlotType)
-        Me.gboxTSPlotOptions.Location = New System.Drawing.Point(8, 119)
+        Me.gboxTSPlotOptions.Location = New System.Drawing.Point(8, 108)
         Me.gboxTSPlotOptions.Name = "gboxTSPlotOptions"
         Me.gboxTSPlotOptions.Size = New System.Drawing.Size(208, 63)
         Me.gboxTSPlotOptions.TabIndex = 0
@@ -2569,8 +2567,6 @@ Public Class frmODMTools
         '
         'splitpnlEdit_SelectData.Panel2
         '
-        'Me.splitpnlEdit_SelectData.Panel2.Controls.Add(Me.btnEditDataViewSelected)
-        'Me.splitpnlEdit_SelectData.Panel2.Controls.Add(Me.btnEditDataViewAll)
         Me.splitpnlEdit_SelectData.Panel2.Controls.Add(Me.btnEditDataFlag)
         Me.splitpnlEdit_SelectData.Panel2.Controls.Add(Me.gboxEditFilter)
         Me.splitpnlEdit_SelectData.Panel2.Controls.Add(Me.btnEditDataInterpolate)
@@ -2746,24 +2742,6 @@ Public Class frmODMTools
         Me.cboxEditSite.Name = "cboxEditSite"
         Me.cboxEditSite.Size = New System.Drawing.Size(471, 21)
         Me.cboxEditSite.TabIndex = 4
-        ''
-        ''btnEditDataViewSelected
-        ''
-        'Me.btnEditDataViewSelected.Location = New System.Drawing.Point(82, 33)
-        'Me.btnEditDataViewSelected.Name = "btnEditDataViewSelected"
-        'Me.btnEditDataViewSelected.Size = New System.Drawing.Size(85, 23)
-        'Me.btnEditDataViewSelected.TabIndex = 14
-        'Me.btnEditDataViewSelected.Text = "View Selected"
-        'Me.btnEditDataViewSelected.UseVisualStyleBackColor = True
-        ''
-        ''btnEditDataViewAll
-        ''
-        'Me.btnEditDataViewAll.Location = New System.Drawing.Point(4, 33)
-        'Me.btnEditDataViewAll.Name = "btnEditDataViewAll"
-        'Me.btnEditDataViewAll.Size = New System.Drawing.Size(75, 23)
-        'Me.btnEditDataViewAll.TabIndex = 13
-        'Me.btnEditDataViewAll.Text = "View All"
-        'Me.btnEditDataViewAll.UseVisualStyleBackColor = True
         '
         'btnEditDataFlag
         '
@@ -9262,7 +9240,7 @@ Public Class frmODMTools
             'gPane.YAxis.Scale.MinGrace = 0.025
             'gPane.YAxis.Scale.MajorStep = 50
             'Title
-            While (GetStringLen(site, gPane.Title.FontSpec.GetFont(gPane.CalcScaleFactor)) > zg5TimeSeries.Width)
+            While (GetStringLen(site, gPane.Title.FontSpec.GetFont(gPane.CalcScaleFactor)) > zg5TimeSeries.Width - 400)
                 site = GraphTitleBreaks(site)
             End While
 
@@ -9708,9 +9686,16 @@ Public Class frmODMTools
                             '8. enable everything
                             gboxEditFilter.Enabled = True
                             SetEditTableBtnsEnabled(True)
-                            dgvEditTable.ReadOnly = False
+                            'dgvEditTable.ReadOnly = False
                             'dgvEditTable.ReadOnly = True
                             'dgvEditTable.Columns("DataValue").ReadOnly = False
+                            For Each dc As DataGridViewColumn In dgvEditTable.Columns
+                                If dc.Name = "DataValue" Then
+                                    dc.ReadOnly = False
+                                Else
+                                    dc.ReadOnly = True
+                                End If
+                            Next
                             '9. Load the Date Range for the selected data series from the Series Catalog Table
                             If Not (LoadEditDataFilterDateRange()) Then
                                 'NOTE: errors occurred while loading the Date Range, disable Date Filter Area
@@ -11711,11 +11696,18 @@ Public Class frmODMTools
             dgvEditTable.DataSource = m_EditData
 
             '4. make sure user can only edit DataValue column
-            dgvEditTable.ReadOnly = True
-            dgvEditTable.Columns("DataValue").ReadOnly = False
+            For Each dc As DataGridViewColumn In dgvEditTable.Columns
+                If dc.Name = "DataValue" Then
+                    dc.ReadOnly = False
+                Else
+                    dc.ReadOnly = True
+                End If
+            Next
+            'dgvEditTable.ReadOnly = True
+            'dgvEditTable.Columns("DataValue").ReadOnly = False
 
 
-           
+
             '5. make sure nothing is selected yet
             dgvEditTable.ClearSelection()
             '6. Release resources
@@ -13253,7 +13245,16 @@ Public Class frmODMTools
             If IsNumeric(qcLevelCode) Then
                 If (CInt(qcLevelCode) <> 0) Then
                     SetEditTableBtnsEnabled(True)
-                    dgvEditTable.ReadOnly = False
+                    'dgvEditTable.ReadOnly = False
+                    For Each dc As DataGridViewColumn In dgvEditTable.Columns
+                        If dc.Name = "DataValue" Then
+                            dc.ReadOnly = False
+                        Else
+                            dc.ReadOnly = True
+                        End If
+                    Next
+                    'dgvEditTable.ReadOnly = True
+                    'dgvEditTable.Columns("DataValue").ReadOnly = False
                 Else
                     'raw data -> protect it
                     SetEditTableBtnsEnabled(False)

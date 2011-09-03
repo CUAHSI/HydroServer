@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Simple Wizard")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("Utah State University")> 
-<Assembly: AssemblyProduct("ODM DL 1.1.5 Simple Wizard")> 
+<Assembly: AssemblyProduct("ODM DL 1.1.5.3 Simple Wizard")> 
 <Assembly: AssemblyCopyright("Copyright © 2008, Utah State University")> 
 <Assembly: AssemblyTrademark("")> 
 
@@ -32,7 +32,7 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.1.5.0")> 
-<Assembly: AssemblyFileVersion("1.1.5.0")> 
+<Assembly: AssemblyVersion("1.1.5.3")> 
+<Assembly: AssemblyFileVersion("1.1.5.3")> 
 
 <Assembly: NeutralResourcesLanguageAttribute("en-US")> 

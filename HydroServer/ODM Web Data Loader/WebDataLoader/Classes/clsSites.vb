@@ -95,9 +95,9 @@ Class clsSites
     End Sub
 
     Protected Overrides Function ValidateTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction) As Data.DataTable
-        Dim valid as new datatable
+        Dim valid As New datatable
         'Declare all of your CVs Here
-        Dim SpatialReferences, VerticalDatum as new datatable
+        Dim SpatialReferences, VerticalDatum As New datatable
         Dim i As Integer
         Dim fileRows() As DataRow
 
@@ -285,8 +285,8 @@ Class clsSites
 
                     If IsNumeric(fileRow.Item(file_Sites_LocalX)) Then
                         If IsNumeric(fileRow.Item(file_Sites_LocalY)) Then
-                            tempRow.Item(db_fld_LocalY) = Val(fileRow.Item(file_Sites_LocalX))
-                            tempRow.Item(db_fld_LocalX) = Val(fileRow.Item(file_Sites_LocalY))
+                            tempRow.Item(db_fld_LocalY) = Val(fileRow.Item(file_Sites_LocalY))
+                            tempRow.Item(db_fld_LocalX) = Val(fileRow.Item(file_Sites_LocalX))
                         Else
                             Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & db_fld_LocalY & " must be numeric.")
                         End If
@@ -390,12 +390,12 @@ Class clsSites
             If Not (VerticalDatum Is Nothing) Then
                 VerticalDatum.Clear()
             End If
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Sites.ValidateTable(connect, trans)<br> " & ex.Message)
         End Try
         Return New DataTable("ERROR")
     End Function
 
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
         'Dim scope As New Transactions.TransactionScope
         Dim count As Integer = 0
 
@@ -408,6 +408,9 @@ Class clsSites
 
             GC.Collect()
             If (count > 0) Then
+#If DEBUG Then
+                MsgBox("Trans.commit")
+#End If
                 trans.Commit()
             Else
                 Throw New Exception("An Error Occurred. Rolling back database transaction.")
@@ -415,22 +418,30 @@ Class clsSites
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            'LogError(ex)
-
+            ' LogError(ex)
+#If DEBUG Then
+            MsgBox("Trans.rollback")
+#End If
             trans.Rollback()
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Error Committing Samples<br> " & ex.Message)
         End Try
         connect.Close()
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Sites, count)
+        'Return count
+        Return tc
     End Function
 
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
         Dim count As Integer = 0
 
         count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Sites)
         GC.Collect()
 
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Sites, count)
+        'Return count
+        Return tc
     End Function
 
 End Class

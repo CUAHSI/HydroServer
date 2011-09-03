@@ -96,23 +96,25 @@ Partial Public Class WebDataLoader
     Protected Sub btnCommit_click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCommit.Click
         'btnOpen.Enabled = False
         Try
-            Dim commit As String = ""
+            'Dim commit As String = ""
+            Dim commit As clsTableCount
             lblstatus.Text = "Committing file to database. This may take a while."
             Dim tempFile As clsFile = _file
             _file = tempFile.GetTableType
             tempFile = Nothing
             commit = _file.CommitTable()
-
-            lblstatus.Text = commit
+            Session("Saved") = commit
+            lblstatus.Text = "Rows Commited"
             'lblstatus.Text = "Successful committed file."
-            If (commit = "") Then
-                MsgBox("There was an error committing this file to the database." & vbCrLf & "Please read the log file to determine where the error occurred." & vbCrLf & "No data was committed to the database.", MsgBoxStyle.Critical, "Error Committing Data")
+            If (commit.Count = 0) Then
+                MsgBox("There was an error committing this file to the database.<br>Please read the log file to determine where the error occurred.<br>No data was committed to the database.", MsgBoxStyle.Critical, "Error Committing Data")
                 lblstatus.Text = "There was an error committing this file to the database."
             End If
             btnCommit.Visible = False
             btnCancel.Visible = False
             btnUpload.Visible = True
             fuOpenFilePath.Visible = True
+            Response.Redirect("ConfirmationPage.aspx")
         Catch ex As Exception
             ''LogError("Error Committing " & _file.MyType & " File", ex)
             lblstatus.Text = ex.Message
@@ -124,24 +126,22 @@ Partial Public Class WebDataLoader
 
     Private Sub FileLoaded()
         Try
-            If (CommandLine) Then
-
-            Else
-                Dim tempFile As clsFile = _file
-                _file = tempFile.GetTableType
-                tempFile = Nothing
-                lblstatus.Text = "You are loading " & _file.MyType
-                table = _file.ViewTable
+            
+            Dim tempFile As clsFile = _file
+            _file = tempFile.GetTableType
+            tempFile = Nothing
+            lblstatus.Text = "You are loading " & _file.MyType
+            table = _file.ViewTable
 
 
-                dgvData.AutoGenerateColumns = True
-                dgvData.DataSource = table
-                'If (table.Rows.Count > 0) Then
-                '    btnUpload.Enabled = True
-                'End If
-                AllowClicks(True)
-                fuOpenFilePath.Enabled = True
-            End If
+            dgvData.AutoGenerateColumns = True
+            dgvData.DataSource = table
+            'If (table.Rows.Count > 0) Then
+            '    btnUpload.Enabled = True
+            'End If
+            AllowClicks(True)
+            fuOpenFilePath.Enabled = True
+
         Catch ex As Exception
             If (CommandLine) Then
 

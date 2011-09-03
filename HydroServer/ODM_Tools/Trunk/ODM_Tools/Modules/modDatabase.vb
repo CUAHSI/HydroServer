@@ -1095,7 +1095,9 @@ Module modDatabase
         Dim valuesDT As Data.DataTable 'the datatable of Values retrieved from the database for the given Data series -> Return Value
         Try
             '1. Validate Data
-            If (siteID <= 0) OrElse (varID <= 0) OrElse (methodID <= 0) OrElse (sourceID <= 0) Then
+            'If (siteID <= 0) OrElse (varID <= 0) OrElse (methodID < 0) OrElse (sourceID <= 0) Then
+            If Not (IsNumeric(siteID) OrElse IsNumeric(varID) OrElse IsNumeric(methodID) OrElse IsNumeric(sourceID)) Then
+
                 'Exit, cannot create table -> invalid parameters
                 Exit Try
             End If
