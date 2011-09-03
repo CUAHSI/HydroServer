@@ -47,7 +47,7 @@ Class clsGroupDescriptions
     End Sub
 
     Protected Overrides Function ValidateTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction) As Data.DataTable
-        Dim valid as new datatable
+        Dim valid As New datatable
         Dim i As Integer
         Dim fileRows() As DataRow
 
@@ -134,12 +134,12 @@ Class clsGroupDescriptions
             If Not (valid Is Nothing) Then
                 valid.Clear()
             End If
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("GroupDescriptions.ValidateTable(connect, trans)<br> " & ex.Message)
         End Try
         Return New DataTable("ERROR")
     End Function
 
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
         'Dim scope As New Transactions.TransactionScope
         Dim count As Integer = 0
 
@@ -152,7 +152,9 @@ Class clsGroupDescriptions
 
             GC.Collect()
             If (count > 0) Then
-
+#If DEBUG Then
+                MsgBox("Trans.commit")
+#End If
                 trans.Commit()
             Else
                 Throw New Exception("An Error Occurred. Rolling back database transaction.")
@@ -161,20 +163,28 @@ Class clsGroupDescriptions
             Throw ExEr
         Catch ex As Exception
             'LogError(ex)
-
+#If DEBUG Then
+            MsgBox("Trans.rollback")
+#End If
             trans.Rollback()
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Error Committing Samples<br> " & ex.Message)
         End Try
         connect.Close()
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_GroupDescriptions, count)
+        'Return count
+        Return tc
     End Function
 
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
         Dim count As Integer = 0
 
         count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_GroupDescriptions)
         GC.Collect()
 
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_GroupDescriptions, count)
+        'Return count
+        Return tc
     End Function
 End Class

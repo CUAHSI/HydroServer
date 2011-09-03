@@ -557,7 +557,7 @@ Class clsConnection
             Else
                 'LogError("Error in UpdateTable()" & vbCr & "Message = " & ex.Message, ex)
             End If
-            Throw New ExitError("clsConnection.UpdateTable(conn, trans, table, query)")
+            Throw New ExitError(ex.Message) '"clsConnection.UpdateTable(conn, trans, table, query)")
             Return -1
         End Try
 

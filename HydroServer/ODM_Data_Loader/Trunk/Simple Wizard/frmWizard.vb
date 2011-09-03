@@ -794,7 +794,7 @@ Public Class frmWizard
             m_Path_Batch = System.IO.Path.GetTempPath & "temp.bat"
         End If
         If (m_Path_Log = "") Then
-            m_Path_Log = m_Path_Batch.Substring(0, m_Path_Batch.LastIndexOf(".")) & ".text"
+            m_Path_Log = m_Path_Batch.Substring(0, m_Path_Batch.LastIndexOf(".")) & ".txt"
         End If
         Try
             writer = New System.IO.StreamWriter(m_Path_Batch)

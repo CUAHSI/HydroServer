@@ -54,8 +54,8 @@ Class clsGroups
     End Sub
 
     Protected Overrides Function ValidateTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction) As Data.DataTable
-        Dim valid as new datatable
-        Dim GroupDescriptions as new datatable
+        Dim valid As New datatable
+        Dim GroupDescriptions As New datatable
         Dim i As Integer
         Dim fileRows() As DataRow
 
@@ -96,7 +96,7 @@ Class clsGroups
             Try
                 valid.Constraints.Add("AllUnique", cols, False)
             Catch ex As Exception
-                'LogError("Groups should be unique, but not all of the Groups in your database are unique." & vbCrLf & "Duplicate rows will be allowed for updates into this Groups table.")
+                LogError("Groups should be unique, but not all of the Groups in your database are unique.<br>Duplicate rows will be allowed for updates into this Groups table.")
             End Try
 
             For i = 0 To (fileRows.Length - 1)
@@ -157,19 +157,19 @@ Class clsGroups
             Throw ExEr
         Catch ex As Exception
             'Log: ERROR
-            'LogError(ex)
+            LogError(ex)
             If Not (valid Is Nothing) Then
                 valid.Clear()
             End If
             If Not (GroupDescriptions Is Nothing) Then
                 GroupDescriptions.Clear()
             End If
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Groups.ValidateTable(connect, trans)<br> " & ex.Message)
         End Try
         Return New DataTable("ERROR")
     End Function
 
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
         'Dim scope As New Transactions.TransactionScope
         Dim count As Integer = 0
 
@@ -182,7 +182,9 @@ Class clsGroups
 
             GC.Collect()
             If (count > 0) Then
-
+#If DEBUG Then
+                MsgBox("Trans.commit")
+#End If
                 trans.Commit()
             Else
                 Throw New Exception("An Error Occurred. Rolling back database transaction.")
@@ -190,21 +192,29 @@ Class clsGroups
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            'LogError(ex)
-
+            LogError(ex)
+#If DEBUG Then
+            MsgBox("Trans.rollback")
+#End If
             trans.Rollback()
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Error Committing Samples<br> " & ex.Message)
         End Try
         connect.Close()
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Groups, count)
+        'Return count
+        Return tc
     End Function
 
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
         Dim count As Integer = 0
 
         count = m_Connection.UpdateTable(connect, trans, ValidateTable(connect, trans), "SELECT * FROM " & db_tbl_Groups)
         GC.Collect()
 
-        Return count
+        Dim tc As New clsTableCount
+        tc.Add(db_tbl_Groups, count)
+        'Return count
+        Return tc
     End Function
 End Class

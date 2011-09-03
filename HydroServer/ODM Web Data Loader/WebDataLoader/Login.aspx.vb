@@ -7,9 +7,10 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If Page.IsPostBack  Then
-            btnConnect_Click
-        End If
+        'If Page.IsPostBack Then
+
+        '    'btnConnect_Click()
+        'End If
         
         txtPassword.TextMode = TextBoxMode.Password
         Session.Clear()
@@ -23,14 +24,14 @@
 
             'checks for blank fields
             If txtDatabaseName.Text = "" Then
-                lblstatus.Text = "Please enter a database name." & vbCrLf & "No Database Name"
-                ''LogError("Please enter a database name." & vbCrLf & "No Database Name")
+                lblstatus.Text = "Please enter a database name.<br>No Database Name"
+                ''LogError("Please enter a database name.<br>No Database Name")
             ElseIf (txtUserID.Text = "") Then '(Not chbSQLTrusted.Checked) AndAlso (txtSQLUID.Text = "")
-                lblstatus.Text = "Please enter a User Name." & vbCrLf & "No Username"
-                ''LogError("Please enter a User Name." & vbCrLf & "No Username")
+                lblstatus.Text = "Please enter a User Name.<br>No Username"
+                ''LogError("Please enter a User Name.<br>No Username")
             ElseIf (txtPassword.Text = "") Then '(Not chbSQLTrusted.Checked) AndAlso (txtSQLPWD.Text = "")
-                lblstatus.Text = "Please enter a Password." & vbCrLf & "No Password"
-                ''LogError("Please enter a Password." & vbCrLf & "No Password")
+                lblstatus.Text = "Please enter a Password.<br>No Password"
+                ''LogError("Please enter a Password.<br>No Password")
             Else
                 m_ConnSettings = New clsConnection(txtServerAddress.Text, txtDatabaseName.Text, 1, False, txtUserID.Text, txtPassword.Text) '(,,,chbSQLTrusted.checked,,)
                 If m_ConnSettings.TestDBConnection() Then
@@ -42,7 +43,7 @@
                     'Check for Known Errors
                 Else
                     m_ConnectionTested = False
-                    lblstatus.Text = "Cannot connect to the specified server." & vbCrLf & "Please change the server name or use a different login."
+                    lblstatus.Text = "Cannot connect to the specified server.<br>Please change the server name or use a different login."
 
                     ''LogError("Cannot connect to the specified server." & vbCrLf & "Please change the server name or use a different login.")
                 End If
@@ -60,11 +61,11 @@
 
         'checks for blank fields
         If txtDatabaseName.Text = "" Then
-            lblstatus.Text = "Please enter a database name." & vbCrLf & "No Database Name"
+            lblstatus.Text = "Please enter a database name.<br>No Database Name"
         ElseIf (txtUserID.Text = "") Then
-            lblstatus.Text = "Please enter a User Name." & vbCrLf & "No Username"
+            lblstatus.Text = "Please enter a User Name.<br>No Username"
         ElseIf (txtPassword.Text = "") Then
-            lblstatus.Text = "Please enter a Password." & vbCrLf & "No Password"
+            lblstatus.Text = "Please enter a Password.<br>No Password"
         Else
             m_ConnSettings = New clsConnection(txtServerAddress.Text, txtDatabaseName.Text, 1, False, txtUserID.Text, txtPassword.Text) '(,,,chbSQLTrusted.checked,,)
             If m_ConnSettings.TestDBConnection() Then
@@ -79,7 +80,7 @@
                 Response.Redirect("WebDataLoader.aspx")
 
             Else
-                lblstatus.Text = "Cannot connect to the specified server." & vbCrLf & "Please change the server name or use a different login."
+                lblstatus.Text = "Cannot connect to the specified server.<br>Please change the server name or use a different login."
             End If
         End If
 

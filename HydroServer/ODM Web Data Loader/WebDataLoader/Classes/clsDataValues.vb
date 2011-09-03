@@ -1,4 +1,7 @@
-Imports System.Data
+Imports System.Data.Common
+Imports System.Linq
+Imports System.Collections
+Imports System.Collections.Generic
 
 Class clsDataValues
     Inherits clsFile
@@ -289,6 +292,7 @@ Class clsDataValues
     End Sub
 
     Public Sub New(ByVal m_viewtable As clsFile)
+
         MyBase.new(m_viewtable)
         MyType = "DataValues"
     End Sub
@@ -394,13 +398,17 @@ Class clsDataValues
                 'Required columns
                 '----------------
                 'ValueID
-                tempRow.Item(db_fld_ValueID) = i
+                'tempRow.Item(db_fld_ValueID) = i
 
                 'DataValue
                 'If (m_ViewTable.Columns.IndexOf(file_DataValues_DataValue) >= 0) Then
-                'Dim dval As Double = CType(fileRow.Item(file_DataValues_DataValue), Double)
-                If (fileRow.Item(file_DataValues_DataValue).ToString <> "") AndAlso IsNumeric(fileRow.Item(file_DataValues_DataValue)) Then
-                    tempRow.Item(db_fld_DataValue) = fileRow.Item(file_DataValues_DataValue)
+                Dim Value As Object = fileRow.Item(file_DataValues_DataValue)
+                Dim numVal As Double = CDbl(Value)
+                ' If (fileRow.Item(file_DataValues_DataValue).ToString <> "") AndAlso IsNumeric(fileRow.Item(file_DataValues_DataValue).ToString().Trim()) Then
+                If (fileRow.Item(file_DataValues_DataValue).ToString <> "") Then
+                    If IsNumeric(fileRow.Item(file_DataValues_DataValue)) Then
+                        tempRow.Item(db_fld_DataValue) = fileRow.Item(file_DataValues_DataValue)
+                    End If
                 Else
                     Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & file_DataValues_DataValue & " cannot be NULL and must be numeric.")
                 End If
@@ -645,7 +653,8 @@ Class clsDataValues
                     'They are trying to load DataValues using a description of a QualityControlLevel, so first check to see if it already exists in the QuaityControlLevels table
                     Dim QualityControlLevelCode As String
                     QualityControlLevelCode = System.Text.RegularExpressions.Regex.Replace(fileRow.Item(file_DataValues_QualityControlLevelCode), "[\t\r\v\f\n]", "")
-                    Dim QualityControlLevelDefinition = System.Text.RegularExpressions.Regex.Replace(fileRow.Item(file_DataValues_Definition), "[\t\r\v\f\n]", "")
+                    Dim QualityControlLevelDefinition
+                    QualityControlLevelDefinition = System.Text.RegularExpressions.Regex.Replace(fileRow.Item(file_DataValues_Definition), "[\t\r\v\f\n]", "")
 
                     If (System.Text.RegularExpressions.Regex.Matches(QualityControlLevelCode, "[\t\r\v\f\n]").Count() = 0) Then
                         If (System.Text.RegularExpressions.Regex.Matches(QualityControlLevelDefinition, "[\t\r\v\f\n]").Count() = 0) Then
@@ -799,9 +808,9 @@ Class clsDataValues
                     valid.Rows.Add(tempRow)
                 Catch ex As Exception
                     If (ex.Message.StartsWith("Column") And ex.Message.EndsWith("is already present.")) Then
-                        Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & " is a duplicate of a previous row." & vbCrLf & ex.Message, ex)
+                        Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & " is a duplicate of a previous row.<br> " & ex.Message, ex)
                     Else
-                        Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & " contained an error." & vbCrLf & ex.Message, ex)
+                        Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & " contained an error.<br> " & ex.Message, ex)
                     End If
                 End Try
 
@@ -858,16 +867,18 @@ Class clsDataValues
             If Not (CensorCodes Is Nothing) Then
                 CensorCodes.Clear()
             End If
-            Throw New ExitError(ex.Message)
+            Throw New ExitError(ex.Message) '"DataValues.ValidateTable(connect, trans)")
         End Try
         Return New DataTable("ERROR")
     End Function
 
-    Public Overrides Function CommitTable() As Integer
+    Public Overrides Function CommitTable() As clsTableCount
+
+        Dim _tc As New clsTableCount
 
         'Dim scope As New Transactions.TransactionScope
-        Dim count As Integer = 0
-        Dim otherCount As Integer = 0
+        'Dim count As Integer = 0
+        'Dim otherCount As Integer = 0
 
         'Using scope
         Dim connect As New System.Data.SqlClient.SqlConnection(m_Connection.ConnectionString)
@@ -875,294 +886,29 @@ Class clsDataValues
         Dim trans As SqlClient.SqlTransaction = connect.BeginTransaction(Data.IsolationLevel.ReadCommitted, "this is a test")
 
         Try
-            'Methods
-            If (m_ViewTable.Columns.IndexOf(clsMethods.file_Methods_MethodDescription) >= 0) Then
-                Dim fields() As String = {clsMethods.file_Methods_MethodDescription}
-                If (m_ViewTable.Columns.IndexOf(clsMethods.file_Methods_MethodLink) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsMethods.file_Methods_MethodLink
-                End If
-                ''LogUpdate("Finding New Methods")
-                Dim dMethods As DataTable = SelectDistinct(m_ViewTable, fields)
-                Dim newMethods As New clsMethods(m_Connection, dMethods)
-                count = newMethods.CommitTable(connect, trans)
-                If (count > 0) Then
-                    otherCount += count
-                    ''LogUpdate(count & " rows committed to Methods")
-                End If
-            End If
-
-            'OffsetTypes
-            If (m_ViewTable.Columns.IndexOf(clsOffsetTypes.file_OffsetTypes_OffsetDescription) >= 0) Then
-                Dim fields() As String = {clsOffsetTypes.file_OffsetTypes_OffsetDescription}
-                If (m_ViewTable.Columns.IndexOf(clsOffsetTypes.file_OffsetTypes_OffsetUnitsID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsOffsetTypes.file_OffsetTypes_OffsetUnitsID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsOffsetTypes.file_OffsetTypes_OffsetUnitsName) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsOffsetTypes.file_OffsetTypes_OffsetUnitsName
-                End If
-                ''LogUpdate("Finding New OffsetTypes")
-                Dim dOffsetTypes As DataTable = SelectDistinct(m_ViewTable, fields)
-                Dim newOffsetTypes As New clsOffsetTypes(m_Connection, dOffsetTypes)
-                count = newOffsetTypes.CommitTable(connect, trans)
-                If (count > 0) Then
-                    otherCount += count
-                    ''LogUpdate(count & " rows committed to OffsetTypes")
-                End If
-            End If
-
-            'Qualifiers
-            If (m_ViewTable.Columns.IndexOf(clsQualifiers.file_Qualifiers_QualifierDescription) >= 0) Then
-                Dim fields() As String = {clsQualifiers.file_Qualifiers_QualifierDescription}
-                If (m_ViewTable.Columns.IndexOf(clsQualifiers.file_Qualifiers_QualifierCode) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsQualifiers.file_Qualifiers_QualifierCode
-                End If
-                ''LogUpdate("Finding New Qualifiers")
-                Dim dQualifiers As DataTable = SelectDistinct(m_ViewTable, fields)
-                Dim newQualifiers As New clsQualifiers(m_Connection, dQualifiers)
-                count = newQualifiers.CommitTable(connect, trans)
-                If (count > 0) Then
-                    otherCount += count
-                    ''LogUpdate(count & " rows committed to Qualifiers")
-                End If
-            End If
-
-            'QualityControlLevels
-            If (m_ViewTable.Columns.IndexOf(clsQualityControlLevels.file_QualityControlLevels_Definition) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsQualityControlLevels.file_QualityControlLevels_Explanation) >= 0) Then
-                Dim fields() As String = {clsQualityControlLevels.file_QualityControlLevels_Definition, clsQualityControlLevels.file_QualityControlLevels_Explanation}
-                If (m_ViewTable.Columns.IndexOf(clsQualityControlLevels.file_QualityControlLevels_QualityControlLevelCode) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsQualityControlLevels.file_QualityControlLevels_QualityControlLevelCode
-                End If
-                ''LogUpdate("Finding New QualityControlLevels")
-                Dim dQualityControlLevels As DataTable = SelectDistinct(m_ViewTable, fields)
-                Dim newQualityControlLevels As New clsQualityControlLevels(m_Connection, dQualityControlLevels)
-                count = newQualityControlLevels.CommitTable(connect, trans)
-                If (count > 0) Then
-                    otherCount += count
-                    ''LogUpdate(count & " rows committed to QualityControlLevels")
-                End If
-            End If
-
-            'Samples
-            If (m_ViewTable.Columns.IndexOf(clsSamples.file_Samples_SampleType) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSamples.file_Samples_LabSampleCode) >= 0) Then
-                Dim fields() As String = {clsSamples.file_Samples_SampleType, clsSamples.file_Samples_LabSampleCode}
-                If (m_ViewTable.Columns.IndexOf(clsSamples.file_Samples_LabMethodID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSamples.file_Samples_LabMethodID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSamples.file_Samples_LabName) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSamples.file_Samples_LabName
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSamples.file_Samples_LabOrganization) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSamples.file_Samples_LabOrganization
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSamples.file_Samples_LabMethodName) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSamples.file_Samples_LabMethodName
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSamples.file_Samples_LabMethodDescription) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSamples.file_Samples_LabMethodDescription
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSamples.file_Samples_LabMethodLink) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSamples.file_Samples_LabMethodLink
-                End If
-                ''LogUpdate("Finding New Samples")
-                Dim dSamples As DataTable = SelectDistinct(m_ViewTable, fields)
-                Dim newSamples As New clsSamples(m_Connection, dSamples)
-                count = newSamples.CommitTable(connect, trans)
-                If (count > 0) Then
-                    otherCount += count
-                    ''LogUpdate(count & " rows committed to Samples")
-                End If
-            End If
-
-            'Sites
-            If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_SiteCode) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_SiteName) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_Latitude) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_Longitude) >= 0) Then
-                Dim fields() As String = {clsSites.file_Sites_SiteCode, clsSites.file_Sites_SiteName, clsSites.file_Sites_Latitude, clsSites.file_Sites_Longitude}
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LatLongDatumID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_LatLongDatumID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LatLongDatumSRSID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_LatLongDatumSRSID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LatLongDatumSRSName) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_LatLongDatumSRSName
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_Elevation_m) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_Elevation_m
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_VerticalDatum) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_VerticalDatum
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LocalX) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_LocalX
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LocalY) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_LocalY
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LocalProjectionID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_LocalProjectionID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LocalProjectionSRSID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_LocalProjectionSRSID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LocalProjectionSRSName) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_LocalProjectionSRSName
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_PosAccuracy_m) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_PosAccuracy_m
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_SiteState) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_SiteState
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_County) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_County
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_Comments) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSites.file_Sites_Comments
-                End If
-                ''LogUpdate("Finding New Sites")
-                Dim dSites As DataTable = SelectDistinct(m_ViewTable, fields)
-                Dim newSites As New clsSites(m_Connection, dSites)
-                count = newSites.CommitTable(connect, trans)
-                If (count > 0) Then
-                    otherCount += count
-                    ''LogUpdate(count & " rows committed to Sites")
-                End If
-            End If
-
-            'Sources
-            If (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_Organization) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_SourceDescription) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_ContactName) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_Phone) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_Email) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_Address) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_City) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_SourceState) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_Zipcode) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_Citation) >= 0) Then
-                Dim fields() As String = {clsSources.file_Sources_Organization, clsSources.file_Sources_SourceDescription, clsSources.file_Sources_ContactName, clsSources.file_Sources_Phone, clsSources.file_Sources_Email, clsSources.file_Sources_Address, clsSources.file_Sources_City, clsSources.file_Sources_SourceState, clsSources.file_Sources_Zipcode, clsSources.file_Sources_Citation}
-                If (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_SourceLink) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSources.file_Sources_SourceLink
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_MetadataID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSources.file_Sources_MetadataID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_TopicCategory) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSources.file_Sources_TopicCategory
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_Title) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSources.file_Sources_Title
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_Abstract) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSources.file_Sources_Abstract
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_ProfileVersion) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSources.file_Sources_ProfileVersion
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsSources.file_Sources_MetadataLink) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsSources.file_Sources_MetadataLink
-                End If
-                ''LogUpdate("Finding New Sources")
-                Dim dSources As DataTable = SelectDistinct(m_ViewTable, fields)
-                Dim newSources As New clsSources(m_Connection, dSources)
-                count = newSources.CommitTable(connect, trans)
-                If (count > 0) Then
-                    otherCount += count
-                    ''LogUpdate(count & " rows committed to Sources")
-                End If
-            End If
-
-            'Variables
-            If (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_VariableCode) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_VariableName) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_Speciation) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_SampleMedium) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_ValueType) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_IsRegular) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_TimeSupport) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_DataType) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_GeneralCategory) >= 0) AndAlso (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_NoDataValue) >= 0) Then
-                Dim fields() As String = {clsVariables.file_Variables_VariableCode, clsVariables.file_Variables_VariableName, clsVariables.file_Variables_Speciation, clsVariables.file_Variables_SampleMedium, clsVariables.file_Variables_ValueType, clsVariables.file_Variables_IsRegular, clsVariables.file_Variables_TimeSupport, clsVariables.file_Variables_DataType, clsVariables.file_Variables_GeneralCategory, clsVariables.file_Variables_NoDataValue}
-                If (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_VariableUnitsID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsVariables.file_Variables_VariableUnitsID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_VariableUnitsName) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsVariables.file_Variables_VariableUnitsName
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_TimeUnitsID) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsVariables.file_Variables_TimeUnitsID
-                End If
-                If (m_ViewTable.Columns.IndexOf(clsVariables.file_Variables_TimeUnitsName) >= 0) Then
-                    Array.Resize(fields, fields.Length + 1)
-                    fields(fields.Length - 1) = clsVariables.file_Variables_TimeUnitsName
-                End If
-
-                Dim dVariables As DataTable = SelectDistinct(m_ViewTable, fields)
-                Dim newVariables As New clsVariables(m_Connection, dVariables)
-                count = newVariables.CommitTable(connect, trans)
-                If (count > 0) Then
-                    otherCount += count
-                    ''LogUpdate(count & " rows committed to Variables")
-                End If
-            End If
-
-            ''LogUpdate("Finding New DataValues")
-            Dim DV As DataTable = ValidateTable(connect, trans)
-            count = m_Connection.UpdateTable(connect, trans, DV, "SELECT * FROM " & db_tbl_DataValues)
-            If (count > 0) Then
-                otherCount += count
-                ''LogUpdate(count & " rows committed to DataValues")
-            Else
-                Throw New Exception("No Valid DataValues")
-            End If
-            ''LogUpdate("Updating Series Catalog")
-            count = UpdateSeriesCatalogTable(connect, trans, DV)
-            If (count > 0) Then
-                otherCount += count
-                ''LogUpdate(count & " rows committed to SeriesCatalog")
-            End If
-            GC.Collect()
-            If (count > 0) AndAlso ((otherCount - count) > 0) Then
-
-                trans.Commit()
-            Else
-                Throw New Exception("An Error Occurred. Rolling back database transaction.")
-            End If
+            _tc = CommitTable(connect, trans)
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            ''LogError(ex)
-
-
+            'LogError(ex)
+#If DEBUG Then
+            MsgBox("Trans.rollback")
+#End If
             trans.Rollback()
-
-            Throw New ExitError(ex.Message)
+            Throw New ExitError("Error Committing Samples <br> " & ex.Message)
         End Try
         connect.Close()
-        Return count
+        'Return otherCount
+        Return _tc
+        'Return count
+
+
     End Function
 
-    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As Integer
-        Dim count As Integer = 0
-        Dim othercount As Integer
+    Public Overrides Function CommitTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction) As clsTableCount
 
+        Dim _tc As New clsTableCount
+        Dim count As New Integer
         'Methods
         If (m_ViewTable.Columns.IndexOf(clsMethods.file_Methods_MethodDescription) >= 0) Then
             Dim fields() As String = {clsMethods.file_Methods_MethodDescription}
@@ -1173,10 +919,10 @@ Class clsDataValues
             ''LogUpdate("Finding New Methods")
             Dim dMethods As DataTable = SelectDistinct(m_ViewTable, fields)
             Dim newMethods As New clsMethods(m_Connection, dMethods)
-            count = newMethods.CommitTable(connect, trans)
-            If (count > 0) Then
-                othercount += count
-                ''LogUpdate(count & " rows committed to Methods")
+            _tc.AddTable(newMethods.CommitTable(connect, trans))
+            If (_tc(db_tbl_Methods) > 0) Then
+                'otherCount += count
+                ''LogUpdate(_tc(db_tbl_Methods) & " rows committed to Methods")
             End If
         End If
 
@@ -1194,10 +940,10 @@ Class clsDataValues
             ''LogUpdate("Finding New OffsetTypes")
             Dim dOffsetTypes As DataTable = SelectDistinct(m_ViewTable, fields)
             Dim newOffsetTypes As New clsOffsetTypes(m_Connection, dOffsetTypes)
-            count = newOffsetTypes.CommitTable(connect, trans)
-            If (count > 0) Then
-                othercount += count
-                ''LogUpdate(count & " rows committed to OffsetTypes")
+            _tc.AddTable(newOffsetTypes.CommitTable(connect, trans))
+            If (_tc(db_tbl_OffsetTypes) > 0) Then
+                'otherCount += count
+                ''LogUpdate(_tc(db_tbl_OffsetTypes) & " rows committed to OffsetTypes")
             End If
         End If
 
@@ -1211,10 +957,10 @@ Class clsDataValues
             ''LogUpdate("Finding New Qualifiers")
             Dim dQualifiers As DataTable = SelectDistinct(m_ViewTable, fields)
             Dim newQualifiers As New clsQualifiers(m_Connection, dQualifiers)
-            count = newQualifiers.CommitTable(connect, trans)
-            If (count > 0) Then
-                othercount += count
-                ''LogUpdate(count & " rows committed to Qualifiers")
+            _tc.AddTable(newQualifiers.CommitTable(connect, trans))
+            If (_tc(db_tbl_Qualifiers) > 0) Then
+                'otherCount += count
+                ''LogUpdate(_tc(db_tbl_Qualifiers) & " rows committed to Qualifiers")
             End If
         End If
 
@@ -1228,10 +974,10 @@ Class clsDataValues
             ''LogUpdate("Finding New QualityControlLevels")
             Dim dQualityControlLevels As DataTable = SelectDistinct(m_ViewTable, fields)
             Dim newQualityControlLevels As New clsQualityControlLevels(m_Connection, dQualityControlLevels)
-            count = newQualityControlLevels.CommitTable(connect, trans)
-            If (count > 0) Then
-                othercount += count
-                ''LogUpdate(count & " rows committed to QualityControlLevels")
+            _tc.AddTable(newQualityControlLevels.CommitTable(connect, trans))
+            If (_tc(db_tbl_QualityControlLevels) > 0) Then
+                'otherCount += count
+                ''LogUpdate(_tc(db_tbl_QualityControlLevels) & " rows committed to QualityControlLevels")
             End If
         End If
 
@@ -1265,10 +1011,10 @@ Class clsDataValues
             ''LogUpdate("Finding New Samples")
             Dim dSamples As DataTable = SelectDistinct(m_ViewTable, fields)
             Dim newSamples As New clsSamples(m_Connection, dSamples)
-            count = newSamples.CommitTable(connect, trans)
-            If (count > 0) Then
-                othercount += count
-                ''LogUpdate(count & " rows committed to Samples")
+            _tc.AddTable(newSamples.CommitTable(connect, trans))
+            If (_tc(db_tbl_Samples) > 0) Then
+                ' otherCount += count
+                ''LogUpdate(_tc(db_tbl_Samples) & " rows committed to Samples")
             End If
         End If
 
@@ -1331,13 +1077,13 @@ Class clsDataValues
                 Array.Resize(fields, fields.Length + 1)
                 fields(fields.Length - 1) = clsSites.file_Sites_Comments
             End If
-            ''LogUpdate("Finding New Sites")
+            'LogUpdate("Finding New Sites")
             Dim dSites As DataTable = SelectDistinct(m_ViewTable, fields)
             Dim newSites As New clsSites(m_Connection, dSites)
-            count = newSites.CommitTable(connect, trans)
-            If (count > 0) Then
-                othercount += count
-                ''LogUpdate(count & " rows committed to Sites")
+            _tc.AddTable(newSites.CommitTable(connect, trans))
+            If (_tc(db_tbl_Sites) > 0) Then
+                'otherCount += count
+                'LogUpdate(_tc(db_tbl_Sites) & " rows committed to Sites")
             End If
         End If
 
@@ -1372,13 +1118,13 @@ Class clsDataValues
                 Array.Resize(fields, fields.Length + 1)
                 fields(fields.Length - 1) = clsSources.file_Sources_MetadataLink
             End If
-            ''LogUpdate("Finding New Sources")
+            'LogUpdate("Finding New Sources")
             Dim dSources As DataTable = SelectDistinct(m_ViewTable, fields)
             Dim newSources As New clsSources(m_Connection, dSources)
-            count = newSources.CommitTable(connect, trans)
-            If (count > 0) Then
-                othercount += count
-                ''LogUpdate(count & " rows committed to Sources")
+            _tc.AddTable(newSources.CommitTable(connect, trans))
+            If (_tc(db_tbl_Sources) > 0) Then
+                'otherCount += count
+                'LogUpdate(_tc(db_tbl_Sources) & " rows committed to Sources")
             End If
         End If
 
@@ -1401,34 +1147,222 @@ Class clsDataValues
                 Array.Resize(fields, fields.Length + 1)
                 fields(fields.Length - 1) = clsVariables.file_Variables_TimeUnitsName
             End If
-            ''LogUpdate("Finding New Variables")
+
             Dim dVariables As DataTable = SelectDistinct(m_ViewTable, fields)
             Dim newVariables As New clsVariables(m_Connection, dVariables)
-            count = newVariables.CommitTable(connect, trans)
-            If (count > 0) Then
-                othercount += count
-                ''LogUpdate(count & " rows committed to Variables")
+            _tc.AddTable(newVariables.CommitTable(connect, trans))
+            If (_tc(db_tbl_Variables) > 0) Then
+                'otherCount += count
+                'LogUpdate(_tc(db_tbl_Variables) & " rows committed to Variables")
             End If
         End If
 
+        'LogUpdate("Finding New DataValues")
         Dim DV As DataTable = ValidateTable(connect, trans)
-        count = m_Connection.UpdateTable(connect, trans, DV, "SELECT * FROM " & db_tbl_DataValues)
-        If (count > 0) Then
-            othercount += count
+        _tc.Add(db_tbl_DataValues, m_Connection.UpdateTable(connect, trans, DV, "SELECT * FROM " & db_tbl_DataValues))
+        If (_tc(db_tbl_DataValues) > 0) Then
+            'otherCount += count
+            'LogUpdate(_tc(db_tbl_DataValues) & " rows committed to DataValues")
         Else
             Throw New Exception("No Valid DataValues")
         End If
-        Dim count2 = UpdateSeriesCatalogTable(connect, trans, DV)
-
-        If (count2 >= 0) Then
-            othercount += count2
-            ''LogUpdate(count2 & " rows committed to SeriesCatalog")
-        Else
-            Throw New Exception("Error Committing SeriesCatalog")
+        'LogUpdate("Updating Series Catalog")
+        _tc.Add(db_tbl_SeriesCatalog, UpdateSeriesCatalogTable(connect, trans, DV))
+        If (_tc(db_tbl_SeriesCatalog) > 0) Then
+            'otherCount += count
+            'LogUpdate(_tc(db_tbl_SeriesCatalog) & " rows committed to SeriesCatalog")
         End If
         GC.Collect()
+        Dim otherCount As Integer = getTotalRows(_tc)
+        If (_tc(db_tbl_SeriesCatalog) > 0) AndAlso ((otherCount - _tc(db_tbl_SeriesCatalog)) > 0) Then
+#If DEBUG Then
+            MsgBox("Trans.commit")
+#End If
+            trans.Commit()
+            Return _tc
+        Else
+            Throw New Exception("An Error Occurred. Rolling back database transaction.")
+        End If
+
+    End Function
+    Private Function getTotalRows(ByVal _clsTableCount As clsTableCount) As Integer
+        Dim count As Integer = 0
+        For Each c As KeyValuePair(Of String, Integer) In _clsTableCount
+            If (c.Value > 0) Then
+                count += c.Value
+            End If
+        Next
         Return count
     End Function
+    'Protected Function UpdateSeriesCatalogTableNewest(ByVal connect As SqlClient.SqlConnection, ByRef trans As System.Data.SqlClient.SqlTransaction, ByVal valid As DataTable) As Integer
+    '    Dim SC As DataTable
+    '    Dim Fields() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
+    '    Dim NumToUpdate = 0
+    '    'Dim SeriesToUpdate As DataTable = SelectDistinct(valid, Fields)
+    '    Dim SeriesToUpdate As Object
+    '    Dim valDT2 As IEnumerable(Of DataRow) = New VBEnumerator.EnumerableDataRows(Of DataRow)(valid.Rows)
+    '    SeriesToUpdate = _
+    '                    From series In valDT2 _
+    '                    Where 1 = 1 _
+    '                    Group series By sID = series.Item("SiteID"), vID = series.Item("VariableID"), mID = series.Item("MethodID"), soID = series.Item("SourceID"), qID = series.Item("QualityControlLevelID") _
+    '                    Into ValueCount = Count(CType(series.Item("DataValue"), Double)), EndDate = Max(CType(series.Item("LocalDateTime"), DateTime)), StartDate = Min(CType(series.Item("LocalDateTime"), DateTime)), Group
+
+    '    'NumToUpdate = SeriesToUpdate.Rows.Count
+    '    Dim SiteWhere As String = db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
+    '    Dim VariableWhere As String = db_fld_VariableID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_VariableID)))) & ")"
+    '    Dim MethodWhere As String = db_fld_MethodID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_MethodID)))) & ")"
+    '    Dim SourceWhere As String = db_fld_SourceID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SourceID)))) & ")"
+    '    Dim QCLWhere As String = db_fld_QualityControlLevelID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_QualityControlLevelID)))) & ")"
+    '    Dim SCSelect As String = "Select * From SeriesCatalog"
+    '    Dim SCDVWhere = " Where " & SiteWhere & " AND " & VariableWhere & " AND " & MethodWhere & " AND " & SourceWhere & " AND " & QCLWhere
+
+    '    SC = m_Connection.OpenTable(connect, trans, "SeriesCatalog", SCSelect & SCDVWhere)
+    '    If (SeriesToUpdate.Rows.Count > 0) Then
+    '        'For i As Integer = 0 To SeriesToUpdate.Rows.Count - 1
+    '        For Each Rows As Object In SeriesToUpdate
+    '            Dim result As DataRow = Rows.Group(0)
+    '            'Dim newRow As DataRow = SC.NewRow
+    '            Dim SiteID As Integer = result.Item(db_fld_SCSiteID)
+    '            Dim VariableID As Integer = result.Item(db_fld_SCVarID)
+    '            Dim MethodID As Integer = result.Item(db_fld_SCMethodID)
+    '            Dim SourceID As Integer = result.Item(db_fld_SCSourceID)
+    '            Dim QualityControlLevelID As Integer = result.Item(db_fld_SCQCLevelID)
+    '            Dim rownum As Integer = 0
+    '            Dim Updated() As DataRow = SC.Select("(" & db_fld_SiteID & " = " & SiteID & ") AND (" & db_fld_VariableID & " = " & VariableID & ") AND (" & db_fld_MethodID & " = " & MethodID & ") AND (" & db_fld_SourceID & " = " & SourceID & ") AND (" & db_fld_QQualityControlLevelID & " = " & QualityControlLevelID & ")")
+
+    '            If (Updated.Length = 1) Then
+    '                'if a series is found then update it 
+    '                'Dim dvData As DataRow = Get_SCData_From_DV(connect, trans, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID)
+    '                If (Updated(0).Item(db_fld_SCBeginDT) < result.Item(db_fld_SCBeginDT)) Then
+    '                    Updated(0).Item(db_fld_SCBeginDT) = result.Item(db_fld_SCBeginDT)
+    '                    Updated(0).Item(db_fld_SCBeginDTUTC) = result.Item(db_fld_SCBeginDT).Add(New TimeSpan(-Updated(0).Item(db_fld_UTCOffset), 0, 0))
+    '                End If
+    '                If Updated(0).Item(db_fld_SCEndDT > result.Item(db_fld_SCEndDT)) Then
+    '                    Updated(0).Item(db_fld_SCEndDT) = result.Item(db_fld_SCBeginDT)
+    '                    Updated(0).Item(db_fld_SCEndDTUTC) = result.Item(db_fld_SCEndDTUTC).Add(New TimeSpan(-Updated(0).Item(db_fld_UTCOffset), 0, 0))
+    '                End If
+    '                Updated(0).Item(db_fld_SCValueCount) = Updated(0).Item(db_fld_SCValueCount) + result.Item(db_fld_SCValueCount)
+    '                Updated(0).SetModified()
+
+    '            Else
+    '                rownum += 1
+    '                'if new series is found create a new data row and add it to the table
+    '                Dim SCQuery As String = "SELECT " & rownum & " As SeriesID, dv.SiteID, s.SiteCode, s.SiteName, dv.VariableID, v.VariableCode, " _
+    '                   & "v.VariableName, v.Speciation, v.VariableUnitsID, u.UnitsName AS VariableUnitsName, v.SampleMedium, " _
+    '                   & "v.ValueType, v.TimeSupport, v.TimeUnitsID, u1.UnitsName AS TimeUnitsName, v.DataType, " _
+    '                   & "v.GeneralCategory, dv.MethodID, m.MethodDescription, dv.SourceID, so.Organization, " _
+    '                   & "so.SourceDescription, so.Citation, dv.QualityControlLevelID, qc.QualityControlLevelCode, " _
+    '                   & "MIN(dv.LocalDateTime) AS BeginDateTime, MAX(dv.LocalDateTime) AS EndDateTime, " _
+    '                   & "MIN(dv.DateTimeUTC) AS BeginDateTimeUTC, MAX(dv.DateTimeUTC) AS EndDateTimeUTC, " _
+    '                   & "COUNT(dv.DataValue) AS ValueCount  " _
+    '                   & "FROM DataValues as dv " _
+    '                   & "INNER JOIN dbo.Sites s ON dv.SiteID = s.SiteID " _
+    '                   & "INNER JOIN dbo.Variables v ON dv.VariableID = v.VariableID " _
+    '                   & "INNER JOIN dbo.Units u ON v.VariableUnitsID = u.UnitsID " _
+    '                   & "INNER JOIN dbo.Methods m ON dv.MethodID = m.MethodID " _
+    '                   & "INNER JOIN dbo.Units u1 ON v.TimeUnitsID = u1.UnitsID " _
+    '                   & "INNER JOIN dbo.Sources so ON dv.SourceID = so.SourceID " _
+    '                   & "INNER JOIN dbo.QualityControlLevels qc ON dv.QualityControlLevelID = qc.QualityControlLevelID " _
+    '                   & "Where dv.SiteID =" & SiteID & " AND dv.VariableID=" & VariableID & " And dv.MethodID=" & MethodID _
+    '                   & " AND dv.SourceID =" & SourceID & " And dv.QualityControlLevelID =" & QualityControlLevelID _
+    '                   & " GROUP BY   dv.SiteID, s.SiteCode, s.SiteName, dv.VariableID, v.VariableCode, v.VariableName, v.Speciation, " _
+    '                   & "v.VariableUnitsID, u.UnitsName, v.SampleMedium, v.ValueType, v.TimeSupport, v.TimeUnitsID, u1.UnitsName, " _
+    '                   & "v.DataType, v.GeneralCategory, dv.MethodID, m.MethodDescription, dv.SourceID, so.Organization, " _
+    '                   & "so.SourceDescription, so.Citation, dv.QualityControlLevelID, qc.QualityControlLevelCode "
+    '                SC.ImportRow(m_Connection.OpenTable(connect, trans, "SeriesCatalog", SCQuery).Rows(0))
+    '                SC.Rows(SC.Rows.Count - 1).SetAdded()
+    '            End If
+    '        Next
+
+    '        Dim count As Integer = m_Connection.UpdateTable(connect, trans, SC, SCSelect) '& SCDVWhere)
+    '        If (count = NumToUpdate) Then
+    '            Return count
+    '        Else
+    '            Throw New Exception("Only " & count & " out of " & NumToUpdate & " rows found.")
+    '        End If
+    '    Else
+    '        Throw New Exception("Error Checking DataValues for SeriesCatalog Update")
+    '    End If
+    'End Function
+    'Protected Function UpdateSeriesCatalogTableNew(ByVal connect As SqlClient.SqlConnection, ByRef trans As System.Data.SqlClient.SqlTransaction, ByVal valid As DataTable) As Integer
+    '    Dim SC As DataTable
+    '    Dim Fields() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
+    '    Dim NumToUpdate = 0
+    '    Dim SeriesToUpdate As DataTable = SelectDistinct(valid, Fields)
+
+    '    NumToUpdate = SeriesToUpdate.Rows.Count
+    '    Dim SiteWhere As String = db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
+    '    Dim VariableWhere As String = db_fld_VariableID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_VariableID)))) & ")"
+    '    Dim MethodWhere As String = db_fld_MethodID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_MethodID)))) & ")"
+    '    Dim SourceWhere As String = db_fld_SourceID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SourceID)))) & ")"
+    '    Dim QCLWhere As String = db_fld_QualityControlLevelID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_QualityControlLevelID)))) & ")"
+    '    Dim SCSelect As String = "Select * From SeriesCatalog"
+    '    Dim SCDVWhere = " Where " & SiteWhere & " AND " & VariableWhere & " AND " & MethodWhere & " AND " & SourceWhere & " AND " & QCLWhere
+
+    '    SC = m_Connection.OpenTable(connect, trans, "SeriesCatalog", SCSelect & SCDVWhere)
+    '    If (SeriesToUpdate.Rows.Count > 0) Then
+    '        For i As Integer = 0 To SeriesToUpdate.Rows.Count - 1
+
+    '            'Dim newRow As DataRow = SC.NewRow
+    '            Dim SiteID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCSiteID)
+    '            Dim VariableID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCVarID)
+    '            Dim MethodID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCMethodID)
+    '            Dim SourceID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCSourceID)
+    '            Dim QualityControlLevelID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCQCLevelID)
+    '            Dim rownum As Integer = 0
+    '            Dim Updated() As DataRow = SC.Select("(" & db_fld_SiteID & " = " & SiteID & ") AND (" & db_fld_VariableID & " = " & VariableID & ") AND (" & db_fld_MethodID & " = " & MethodID & ") AND (" & db_fld_SourceID & " = " & SourceID & ") AND (" & db_fld_QQualityControlLevelID & " = " & QualityControlLevelID & ")")
+
+    '            If (Updated.Length = 1) Then
+    '                'if a series is found then update it 
+    '                Dim dvData As DataRow = Get_SCData_From_DV(connect, trans, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID)
+    '                Updated(0).Item(db_fld_SCBeginDT) = dvData.Item(db_fld_SCBeginDT)
+    '                Updated(0).Item(db_fld_SCEndDT) = dvData.Item(db_fld_SCEndDT)
+    '                Updated(0).Item(db_fld_SCBeginDTUTC) = dvData.Item(db_fld_SCBeginDTUTC)
+    '                Updated(0).Item(db_fld_SCEndDTUTC) = dvData.Item(db_fld_SCEndDTUTC)
+    '                Updated(0).Item(db_fld_SCValueCount) = dvData.Item(db_fld_SCValueCount)
+    '                Updated(0).SetModified()
+
+    '            Else
+    '                rownum += 1
+    '                'if new series is found create a new data row and add it to the table
+    '                Dim SCQuery As String = "SELECT " & rownum & " As SeriesID, dv.SiteID, s.SiteCode, s.SiteName, dv.VariableID, v.VariableCode, " _
+    '                   & "v.VariableName, v.Speciation, v.VariableUnitsID, u.UnitsName AS VariableUnitsName, v.SampleMedium, " _
+    '                   & "v.ValueType, v.TimeSupport, v.TimeUnitsID, u1.UnitsName AS TimeUnitsName, v.DataType, " _
+    '                   & "v.GeneralCategory, dv.MethodID, m.MethodDescription, dv.SourceID, so.Organization, " _
+    '                   & "so.SourceDescription, so.Citation, dv.QualityControlLevelID, qc.QualityControlLevelCode, " _
+    '                   & "MIN(dv.LocalDateTime) AS BeginDateTime, MAX(dv.LocalDateTime) AS EndDateTime, " _
+    '                   & "MIN(dv.DateTimeUTC) AS BeginDateTimeUTC, MAX(dv.DateTimeUTC) AS EndDateTimeUTC, " _
+    '                   & "COUNT(dv.DataValue) AS ValueCount  " _
+    '                   & "FROM DataValues as dv " _
+    '                   & "INNER JOIN dbo.Sites s ON dv.SiteID = s.SiteID " _
+    '                   & "INNER JOIN dbo.Variables v ON dv.VariableID = v.VariableID " _
+    '                   & "INNER JOIN dbo.Units u ON v.VariableUnitsID = u.UnitsID " _
+    '                   & "INNER JOIN dbo.Methods m ON dv.MethodID = m.MethodID " _
+    '                   & "INNER JOIN dbo.Units u1 ON v.TimeUnitsID = u1.UnitsID " _
+    '                   & "INNER JOIN dbo.Sources so ON dv.SourceID = so.SourceID " _
+    '                   & "INNER JOIN dbo.QualityControlLevels qc ON dv.QualityControlLevelID = qc.QualityControlLevelID " _
+    '                   & "Where dv.SiteID =" & SiteID & " AND dv.VariableID=" & VariableID & " And dv.MethodID=" & MethodID _
+    '                   & " AND dv.SourceID =" & SourceID & " And dv.QualityControlLevelID =" & QualityControlLevelID _
+    '                   & " GROUP BY   dv.SiteID, s.SiteCode, s.SiteName, dv.VariableID, v.VariableCode, v.VariableName, v.Speciation, " _
+    '                   & "v.VariableUnitsID, u.UnitsName, v.SampleMedium, v.ValueType, v.TimeSupport, v.TimeUnitsID, u1.UnitsName, " _
+    '                   & "v.DataType, v.GeneralCategory, dv.MethodID, m.MethodDescription, dv.SourceID, so.Organization, " _
+    '                   & "so.SourceDescription, so.Citation, dv.QualityControlLevelID, qc.QualityControlLevelCode "
+    '                SC.ImportRow(m_Connection.OpenTable(connect, trans, "SeriesCatalog", SCQuery).Rows(0))
+    '                SC.Rows(SC.Rows.Count - 1).SetAdded()
+    '            End If
+    '        Next
+
+    '        Dim count As Integer = m_Connection.UpdateTable(connect, trans, SC, SCSelect) '& SCDVWhere)
+    '        If (count = NumToUpdate) Then
+    '            Return count
+    '        Else
+    '            Throw New Exception("Only " & count & " out of " & NumToUpdate & " rows found.")
+    '        End If
+    '    Else
+    '        Throw New Exception("Error Checking DataValues for SeriesCatalog Update")
+    '    End If
+    'End Function
+
 
     Protected Function UpdateSeriesCatalogTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction, ByVal valid As DataTable) As Integer
         Dim Fields() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
@@ -1462,6 +1396,9 @@ Class clsDataValues
         NumToUpdate = SeriesToUpdate.Rows.Count
         If (SeriesToUpdate.Rows.Count > 0) Then
             'Set All of the Query Parts
+            'SeriesToUpdate.Columns.Cast(Of String)().ToArray()
+            Dim SiteWhere2 As String = " WHERE " & db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
+
             SiteWhere = " WHERE " & db_fld_SiteID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_SiteID))
             VariableWhere = " WHERE " & db_fld_VariableID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_VariableID))
             MethodWhere = " WHERE " & db_fld_MethodID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_MethodID))
@@ -1528,7 +1465,7 @@ Class clsDataValues
                         newRow.Item(db_fld_SCSiteCode) = TestRows(0).Item(db_fld_SiteCode)
                         newRow.Item(db_fld_SCSiteName) = TestRows(0).Item(db_fld_SiteName)
                     Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Site Information.")
+                        Throw New Exception("Error Updating Series Catalog Table.<br>Missing Site Information.")
                     End If
                     TestRows = Variables.Select(db_fld_VariableID & " = " & VariableID)
                     If (TestRows.Length = 1) Then
@@ -1546,14 +1483,14 @@ Class clsDataValues
                         newRow.Item(db_fld_SCDataType) = TestRows(0).Item(db_fld_DataType)
                         newRow.Item(db_fld_SCGenCat) = TestRows(0).Item(db_fld_GeneralCategory)
                     Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Variable Information.")
+                        Throw New Exception("Error Updating Series Catalog Table.<br>Missing Variable Information.")
                     End If
                     TestRows = Methods.Select(db_fld_MethodID & " = " & MethodID)
                     If (TestRows.Length = 1) Then
                         newRow.Item(db_fld_SCMethodID) = MethodID
                         newRow.Item(db_fld_SCMethodDesc) = TestRows(0).Item(db_fld_MethodDescription)
                     Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Method Information.")
+                        Throw New Exception("Error Updating Series Catalog Table.<br>Missing Method Information.")
                     End If
                     TestRows = Sources.Select(db_fld_SourceID & " = " & SourceID)
                     If (TestRows.Length = 1) Then
@@ -1562,14 +1499,14 @@ Class clsDataValues
                         newRow.Item(db_fld_SCSourceDesc) = TestRows(0).Item(db_fld_SourceDescription)
                         newRow.Item(db_fld_SCCitation) = TestRows(0).Item(db_fld_Citation)
                     Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Source Information.")
+                        Throw New Exception("Error Updating Series Catalog Table.<br>Missing Source Information.")
                     End If
                     TestRows = QualityControlLevels.Select(db_fld_QualityControlLevelID & " = " & QualityControlLevelID)
                     If (TestRows.Length = 1) Then
                         newRow.Item(db_fld_SCQCLevelID) = QualityControlLevelID
                         newRow.Item(db_fld_SCQCLevelCode) = TestRows(0).Item(db_fld_QualityControlLevelCode)
                     Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing QualityControlLevel Information.")
+                        Throw New Exception("Error Updating Series Catalog Table.<br>Missing QualityControlLevel Information.")
                     End If
                     Dim TestRow As DataRow = Get_SCData_From_DV(connect, trans, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID)
                     If Not (TestRow Is Nothing) Then
@@ -1579,7 +1516,7 @@ Class clsDataValues
                         newRow.Item(db_fld_SCEndDTUTC) = TestRow.Item(db_fld_SCEndDTUTC)
                         newRow.Item(db_fld_SCValueCount) = TestRow.Item(db_fld_SCValueCount)
                     Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing DataValue Information.")
+                        Throw New Exception("Error Updating Series Catalog Table.<br>Missing DataValue Information.")
                     End If
                     SC.Rows.Add(newRow)
                 Next i
@@ -1596,7 +1533,6 @@ Class clsDataValues
 
     End Function
 
-
     Private Function Get_SCData_From_DV(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction, ByVal siteID As String, ByVal variableID As String, ByVal methodID As String, ByVal sourceID As String, ByVal qualitycontrollevelID As String) As DataRow
         Dim newRow As DataRow = Nothing
         Dim DV As New DataTable
@@ -1604,11 +1540,11 @@ Class clsDataValues
         Dim SCDVWhere As String
         Dim DVGroupBy As String = " GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID"
 
-        SCDVWhere = " WHERE ((" & db_fld_SiteID & " = " & m_Connection.FormatStringForQuery(siteID) & ") AND (" & _
-        db_fld_VariableID & " = " & m_Connection.FormatStringForQuery(variableID) & ") AND (" & _
-        db_fld_MethodID & " = " & m_Connection.FormatStringForQuery(methodID) & ") AND (" & _
-        db_fld_SourceID & " = " & m_Connection.FormatStringForQuery(sourceID) & ") AND (" & _
-        db_fld_QualityControlLevelID & " = " & m_Connection.FormatStringForQuery(qualitycontrollevelID) & "))"
+        SCDVWhere = " WHERE ((" & db_fld_SiteID & " = " & siteID & ") AND (" & _
+        db_fld_VariableID & " = " & variableID & ") AND (" & _
+        db_fld_MethodID & " = " & methodID & ") AND (" & _
+        db_fld_SourceID & " = " & sourceID & ") AND (" & _
+        db_fld_QualityControlLevelID & " = " & qualitycontrollevelID & "))"
 
         DV = m_Connection.OpenTable(connect, trans, "DataValues", DVSelect & SCDVWhere & DVGroupBy)
         If DV.Rows.Count = 1 Then

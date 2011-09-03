@@ -82,10 +82,10 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebDataLoader.aspx" />
+    <Content Include="ConfirmationPage.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\clsCategories.vb" />
@@ -104,14 +104,8 @@
     <Compile Include="Classes\clsSamples.vb" />
     <Compile Include="Classes\clsSites.vb" />
     <Compile Include="Classes\clsSources.vb" />
+    <Compile Include="Classes\clsTableCount.vb" />
     <Compile Include="Classes\clsVariables.vb" />
-    <Compile Include="Default.aspx.vb">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.designer.vb">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Login.aspx.designer.vb">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
@@ -147,6 +141,13 @@
       <DependentUpon>WebDataLoader.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ConfirmationPage.aspx.designer.vb">
+      <DependentUpon>ConfirmationPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmationPage.aspx.vb">
+      <DependentUpon>ConfirmationPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -157,6 +158,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Themes\Default\Default.css" />
+    <Content Include="Images\HydroServer.png" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
