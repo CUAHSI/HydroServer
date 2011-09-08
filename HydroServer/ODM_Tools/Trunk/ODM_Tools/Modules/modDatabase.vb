@@ -1096,7 +1096,7 @@ Module modDatabase
         Try
             '1. Validate Data
             'If (siteID <= 0) OrElse (varID <= 0) OrElse (methodID < 0) OrElse (sourceID <= 0) Then
-            If Not (IsNumeric(siteID) OrElse IsNumeric(varID) OrElse IsNumeric(methodID) OrElse IsNumeric(sourceID)) Then
+            If Not IsNumeric(siteID) OrElse Not IsNumeric(varID) OrElse Not IsNumeric(methodID) OrElse Not IsNumeric(sourceID) Then
 
                 'Exit, cannot create table -> invalid parameters
                 Exit Try

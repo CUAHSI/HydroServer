@@ -2572,7 +2572,7 @@ Public Class frmDeriveNewDataSeries
             '2. get ID's to validate if can create new Data Series
             varID = GetVariableIDFromDB(varCode, varName, speciation, varUnitsID, sampleMed, valueType, timeSupport, tsUnitsID, dataType, genCategory)
             'make sure have a valid VariableID
-            If IsNumeric(varID) < 0 Then
+            If Not IsNumeric(varID) Then
                 'If varID < 0 Then
                 'NOTE: due to changes in the DB for ODM1.1 Schema, a duplicate Variable Code cannot be created, so variableID must exist already!!
                 'isRegular = GetVarIsRegularFromDB(m_DSFromIDs.VariableID)
@@ -2630,9 +2630,9 @@ Public Class frmDeriveNewDataSeries
 
             '5. see if need to create a new Method ID
             'validate ID
-            If IsNumeric(methodID) Then 'no ID was found -> create the Method in the Database
+            If Not IsNumeric(methodID) Then 'no ID was found -> create the Method in the Database
                 methodID = CreateNewMethodInDB(methodDesc)
-                If IsNumeric(methodID) Then
+                If Not IsNumeric(methodID) Then
                     MsgBox("Unable to create the Method for this Data Series: Cannot continue!", MsgBoxStyle.Exclamation)
                     'return false
                     Exit Try
