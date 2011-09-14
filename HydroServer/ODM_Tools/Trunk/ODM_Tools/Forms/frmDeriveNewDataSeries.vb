@@ -2802,7 +2802,7 @@ Public Class frmDeriveNewDataSeries
                 'add it to the dataTable
                 'addDT.Rows.Add(newRow)
                 numCreated += 1
-                If i Mod numVals_percent = 0 AndAlso i <> 0 Then
+                If numVals_percent <> 0 AndAlso i Mod numVals_percent = 0 AndAlso i <> 0 Then
                     'update progress bar
                     g_FProgress.pbarProgress.Value += 10 '80 / (numVals / numVals_percent) '10
                     g_FProgress.pbarProgress.Refresh()

@@ -46,6 +46,6 @@ vbcrlf & _
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("1.1.2.4")> 
+<Assembly: AssemblyVersion("1.1.2.5")> 
 
-<Assembly: AssemblyFileVersionAttribute("1.1.2.4")> 
+<Assembly: AssemblyFileVersionAttribute("1.1.2.5")> 

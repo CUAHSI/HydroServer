@@ -9240,7 +9240,7 @@ Public Class frmODMTools
             'gPane.YAxis.Scale.MinGrace = 0.025
             'gPane.YAxis.Scale.MajorStep = 50
             'Title
-            While (GetStringLen(site, gPane.Title.FontSpec.GetFont(gPane.CalcScaleFactor)) > zg5TimeSeries.Width - 400)
+            While (GetStringLen(site, gPane.Title.FontSpec.GetFont(gPane.CalcScaleFactor)) > zg5TimeSeries.Width)
                 site = GraphTitleBreaks(site)
             End While
 
