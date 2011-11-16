@@ -3,7 +3,6 @@
 Partial Public Class WebDataLoader
     Inherits System.Web.UI.Page
 
-
     Private table As New DataTable
     Private WithEvents _file As clsFile
     Private connect As clsConnection
@@ -60,11 +59,11 @@ Partial Public Class WebDataLoader
 
                 lblstatus.Text = "Uploading file to server. This may take a while."
 
-                UploadThisFile(fuOpenFilePath)
+                Dim filePath As String = UploadThisFile(fuOpenFilePath)
                 lblstatus.Text = "File Uploaded"
 
-                _file = New clsFile(connect, "C:/temp/" + System.IO.Path.GetFileName(fuOpenFilePath.PostedFile.FileName).ToString)
-                Session("FilePath") = "C:/temp/" + System.IO.Path.GetFileName(fuOpenFilePath.PostedFile.FileName).ToString
+                _file = New clsFile(connect, filePath)
+                Session("FilePath") = filePath
 
                 dgvData.Enabled = True
 
@@ -116,7 +115,7 @@ Partial Public Class WebDataLoader
             fuOpenFilePath.Visible = True
             Response.Redirect("ConfirmationPage.aspx")
         Catch ex As Exception
-            ''LogError("Error Committing " & _file.MyType & " File", ex)
+            LogError("Error Committing " & _file.MyType & " File", ex)
             lblstatus.Text = ex.Message
             btnCommit.Enabled = False
         End Try
@@ -126,7 +125,7 @@ Partial Public Class WebDataLoader
 
     Private Sub FileLoaded()
         Try
-            
+
             Dim tempFile As clsFile = _file
             _file = tempFile.GetTableType
             tempFile = Nothing
@@ -153,24 +152,30 @@ Partial Public Class WebDataLoader
         dgvData.Enabled = value
     End Sub
 
-    Protected Sub UploadThisFile(ByVal upload As FileUpload)
+    Protected Function UploadThisFile(ByVal upload As FileUpload) As String
+        Dim theFileName As String = Nothing
         If upload.HasFile Then
             If Not Directory.Exists("C:/temp/") Then
                 Directory.CreateDirectory("C:/temp/")
             End If
-            Dim theFileName As String = ("C:/temp/" + upload.FileName)
+            theFileName = ("C:/temp/" + upload.FileName)
             If File.Exists(theFileName) Then
                 File.Delete(theFileName)
             End If
             upload.SaveAs(theFileName)
         End If
+        Return theFileName
+    End Function
+
+
+    Public Shared Sub WriteError(ByVal text As String)
+        Dim Web As WebDataLoader = New WebDataLoader
+        Web.lblstatus.Text = text
     End Sub
-
-
     Public Sub err(ByVal text As String)
+
         lblstatus.Text = text
     End Sub
-
     Private Sub dgvData_RowCreated(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles dgvData.RowCreated
         'e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#ccaaaa';")
         If e.Row.RowIndex = 0 Then

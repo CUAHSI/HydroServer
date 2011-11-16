@@ -15,9 +15,11 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <StartArguments>-server (local) -db OD -user sa -password nlcd34GIS -file "c:\users\jeff\desktop\test files\sites\sites.csv"</StartArguments>
+    <StartArguments>
+    </StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <StartArguments>-server (local) -db OD -user sa -password nlcd34GIS -file "c:\users\jeff\desktop\test files\sites\sites.csv"</StartArguments>
+    <StartArguments>
+    </StartArguments>
   </PropertyGroup>
 </Project>

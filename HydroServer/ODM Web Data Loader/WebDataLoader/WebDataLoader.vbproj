@@ -106,6 +106,13 @@
     <Compile Include="Classes\clsSources.vb" />
     <Compile Include="Classes\clsTableCount.vb" />
     <Compile Include="Classes\clsVariables.vb" />
+    <Compile Include="Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Login.aspx.designer.vb">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
@@ -159,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\Default\Default.css" />
+    <Content Include="Default.aspx" />
     <Content Include="Images\HydroServer.png" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

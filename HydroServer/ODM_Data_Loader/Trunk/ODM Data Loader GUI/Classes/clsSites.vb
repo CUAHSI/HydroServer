@@ -117,7 +117,13 @@ Class clsSites
             VerticalDatum = m_Connection.OpenTable(connect, trans, db_tbl_VerticalDatumCV, "SELECT * FROM " & db_tbl_VerticalDatumCV)
 
             If (m_ViewTable.Columns.IndexOf(file_Sites_SiteCode) >= 0) Then
-                fileRows = m_ViewTable.Select(file_Sites_SiteCode & " IS NOT NULL AND " & file_Sites_SiteCode & " <> ''", file_Sites_SiteCode & " ASC")
+                Dim query As String = ""
+                If (m_ViewTable.Columns(file_Sites_SiteCode).DataType Is System.Type.GetType("System.String")) Then
+                    query = file_Sites_SiteCode & " IS NOT NULL AND " & file_Sites_SiteCode & "<> ''"
+                Else
+                    query = file_Sites_SiteCode & " IS NOT NULL AND " & file_Sites_SiteCode & "<> 0"
+                End If
+                fileRows = m_ViewTable.Select(query, file_Sites_SiteCode & " ASC")
                 If (m_ThrowFileOnNulls) Then
                     If (fileRows.Length < m_ViewTable.Rows.Count) Then
                         Throw New Exception(file_Sites_SiteCode & " cannot be NULL.")
