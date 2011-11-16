@@ -1,9 +1,11 @@
 Imports Microsoft.VisualBasic
-Imports System.data
+Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Collections.Specialized
+Imports System
+Imports System.Configuration
 
-    Public Class DatabaseFunctions
+Public Class DatabaseFunctions
     Public Structure ODMDatabase
         Public DisplayName As String
         Public DisplayOrder As String
@@ -478,7 +480,7 @@ Imports System.Collections.Specialized
     Public Sub New()
         m_connectionString = ConfigurationManager.ConnectionStrings("CapabilitiesDatabase").ConnectionString
         Dim regionName As String = ConfigurationManager.AppSettings("DefaultRegion")
-        m_regionID = getRegionID(regionName)
+        m_regionID = GetRegionID(regionName)
     End Sub
 
     Public Sub New(ByVal Region As String)

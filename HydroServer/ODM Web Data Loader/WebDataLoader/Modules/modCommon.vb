@@ -1,5 +1,5 @@
 Imports System.Data
-
+Imports WebDataLoader.WebDataLoader
 Module modCommon
     Public CommandLine As Boolean = False
 
@@ -7,22 +7,22 @@ Module modCommon
     Public Declare Function FreeConsole Lib "kernel32.dll" () As Boolean
 
 #Region " Error Reporting Functionality "
-    Public writer As System.IO.StreamWriter
+    'Public writer As System.IO.StreamWriter
 
 
     Public Sub LogError(ByVal message As String, Optional ByVal err As Exception = Nothing)
         'Writes an error message to the log file.  Including the message from the exception.
         Try
             Console.WriteLine()
-            writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
+            'writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Console.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
-            writer.WriteLine(message)
+            'writer.WriteLine(message)
             Console.WriteLine(message)
             If Not (err Is Nothing) Then
-                writer.WriteLine("Error Message: " & err.Message)
+                'writer.WriteLine("Error Message: " & err.Message)
                 Console.WriteLine("Error Message: " & err.Message)
 #If DEBUG Then
-                writer.WriteLine("Stack Trace: " & err.StackTrace) 'Testing Only!
+                'writer.WriteLine("Stack Trace: " & err.StackTrace) 'Testing Only!
                 Console.WriteLine("Stack Trace: " & err.StackTrace) 'Testing Only!
 #End If
             End If
@@ -37,13 +37,14 @@ Module modCommon
                     text = text & vbCrLf & "Stack Trace: " & err.StackTrace 'Testing Only!
 #End If
                 End If
-                MsgBox(text, MsgBoxStyle.Critical, "Error!")
+                WriteError(text)
+                ' MsgBox(text, MsgBoxStyle.Critical, "Error!")
             End If
-            writer.Flush()
+            ' writer.Flush()
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            MsgBox("An error occurred writing the error message to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Error Message: " & message)
+            'MsgBox("An error occurred writing the error message to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Error Message: " & message)
         End Try
     End Sub
 
@@ -51,13 +52,13 @@ Module modCommon
         'Writes an error message to the log file.  Including the message from the exception.
         Try
             Console.WriteLine()
-            writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
+            ' writer.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Console.WriteLine("ERROR @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             If Not (err Is Nothing) Then
-                writer.WriteLine(err.Message)
+                ' writer.WriteLine(err.Message)
                 Console.WriteLine(err.Message)
 #If DEBUG Then
-                writer.WriteLine("Stack Trace: " & err.StackTrace) 'Testing Only!
+                'writer.WriteLine("Stack Trace: " & err.StackTrace) 'Testing Only!
                 Console.WriteLine("Stack Trace: " & err.StackTrace) 'Testing Only!
 #End If
             End If
@@ -71,13 +72,14 @@ Module modCommon
                     text = text & vbCrLf & "Stack Trace: " & err.StackTrace 'Testing Only!
 #End If
                 End If
-                MsgBox(text, MsgBoxStyle.Critical, "Error!")
+                WriteError(err.Message)
+                'MsgBox(text, MsgBoxStyle.Critical, "Error!")
             End If
-            writer.Flush()
+            'writer.Flush()
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            MsgBox("An error occurred writing the error message to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Error Message: " & err.Message)
+            'MsgBox("An error occurred writing the error message to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Error Message: " & err.Message)
         End Try
     End Sub
 
@@ -88,18 +90,18 @@ Module modCommon
 
             'Writer.WriteLine(Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Console.WriteLine()
-            writer.WriteLine("Log @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
+            'writer.WriteLine("Log @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
             Console.WriteLine("Log @ " & Now.ToLongDateString & vbTab & Now.ToLongTimeString)
-            writer.WriteLine(comment)
+            'writer.WriteLine(comment)
             Console.WriteLine(comment)
-            writer.WriteLine()
+            'writer.WriteLine()
             'Writer.Close()
-            writer.Flush()
+            'writer.Flush()
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
-            'LogError("Unable to update log file." & vbCrLf & ex.Message, ex)
-            MsgBox("An error occurred writing the completion comment to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Completion Comment: " & comment)
+            LogError("Unable to update log file." & vbCrLf & ex.Message, ex)
+            'MsgBox("An error occurred writing the completion comment to the log file.<br>Error: " & ex.Message & vbCrLf & vbCrLf & "Original Completion Comment: " & comment)
         End Try
     End Sub
 

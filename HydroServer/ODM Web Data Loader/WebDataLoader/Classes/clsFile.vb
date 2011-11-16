@@ -71,8 +71,8 @@ Class clsFile
         Dim LastSlash As Integer
         Dim lastPeriod As Integer
         Dim shortName As String = "file"
-        If (m_FilePath.Contains("\") AndAlso m_FilePath.Contains(".")) Then
-            LastSlash = m_FilePath.LastIndexOf("\") + 1
+        If (m_FilePath.Contains("/") AndAlso m_FilePath.Contains(".")) Then
+            LastSlash = m_FilePath.LastIndexOf("/") + 1
             lastPeriod = m_FilePath.LastIndexOf(".")
             If (lastPeriod > LastSlash) Then
                 shortName = m_FilePath.Substring(LastSlash, lastPeriod - LastSlash)
@@ -209,21 +209,19 @@ Class clsFile
         Dim LastSlash As Integer
         Dim lastPeriod As Integer
         Dim shortName As String = "file"
-        If (m_FilePath.Contains("\") AndAlso m_FilePath.Contains(".")) Then
-            LastSlash = m_FilePath.LastIndexOf("\") + 1
+        If (m_FilePath.Contains("/") AndAlso m_FilePath.Contains(".")) Then
+            LastSlash = m_FilePath.LastIndexOf("/") + 1
             lastPeriod = m_FilePath.LastIndexOf(".")
             If (lastPeriod > LastSlash) Then
                 shortName = m_FilePath.Substring(LastSlash, lastPeriod - LastSlash)
             End If
         End If
         Dim table As New DataTable(shortName)
-        'Dim table As New DataTable(m_FilePath.Substring((m_FilePath.LastIndexOf("\") + 1), m_FilePath.Length - (m_FilePath.LastIndexOf("\") + 1)))
         Try
             If (m_FilePath.StartsWith("http:\\") Or m_FilePath.StartsWith("ftp:\\")) Then
                 Dim myWebClient As New Net.WebClient()
                 Dim tempPath As String
                 tempPath = System.IO.Path.GetTempPath & "ODMWDL"
-                '''LogUpdate(vbTab & vbTab & "Getting Data from Website..." & vbCrLf & "From: " & m_FilePath & vbCrLf & "To: " & tempPath & "\DataImport.txt")
                 Try
                     If Not (System.IO.Directory.Exists(tempPath)) Then
                         System.IO.Directory.CreateDirectory(tempPath)
@@ -232,16 +230,16 @@ Class clsFile
                     If System.IO.File.Exists(tempPath & "\DataImport.txt") Then
                         fullPath = tempPath & "\DataImport.txt"
                     Else
-                        ''LogError("Error downloading Table." & vbCrLf & tempPath)
+
                         m_ViewTable = New DataTable("ERROR")
                     End If
                 Catch ExEr As ExitError
                     Throw ExEr
                 Catch ex As Exception
-                    ''LogError("Error Downloading Data From Website", ex)
+
                     m_ViewTable = New DataTable("ERROR")
                 End Try
-                '''LogUpdate(vbTab & vbTab & "...Finished Getting Data")
+
             Else
                 'If System.IO.File.Exists(m_FilePath) Then
                 fullPath = m_FilePath
@@ -261,7 +259,8 @@ Class clsFile
             ''''LogUpdate(vbTab & vbTab & "Opening " & fullPath & " ...")
             Try
                 If fullPath.EndsWith("xls") Or fullPath.EndsWith("xlsx") Or fullPath.EndsWith("xlsb") Then
-                    LoadExcel()
+                    'LoadExcel()
+                    LogError("Cannot Load an Excel file. Please select a .csv file.", New Exception("Cannot Load Excel file"))
                     'm_ViewTable = LoadExcel(path)
                 Else
 
@@ -278,7 +277,7 @@ Class clsFile
                             delimiter = ","
                         End If
                     Else
-                        LoadExcel()
+                        'LoadExcel()
                         Exit Try
                     End If
                     Dim columns() As String
@@ -328,7 +327,7 @@ Class clsFile
             Catch ExEr As ExitError
                 Throw ExEr
             Catch ex As Exception
-                ''LogError("Error Loading " & fullPath & " .", ex)
+                LogError("Error Loading " & fullPath & " .", ex)
                 m_ViewTable = New DataTable
             End Try
 
@@ -336,21 +335,21 @@ Class clsFile
             If Not (reader Is Nothing) Then
                 reader.Close()
             End If
-            ''LogError("Error Loading File: " & m_FilePath & " .", ex)
-            LoadExcel()
+            LogError("Error Loading File: " & m_FilePath & " .", ex)
+            'LoadExcel()
         Catch ex As System.Net.WebException
             If Not (reader Is Nothing) Then
                 reader.Close()
             End If
-            ''LogError("Unable to Connect to Web File: " & m_FilePath & " .", ex)
+            LogError("Unable to Connect to Web File: " & m_FilePath & " .", ex)
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
             If Not (reader Is Nothing) Then
                 reader.Close()
             End If
-            ''LogError("Error Loading File: " & m_FilePath & " .", ex)
-            LoadExcel()
+            LogError("Error Loading File: " & m_FilePath & " .", ex)
+            'LoadExcel()
         End Try
 
         RaiseEvent FileLoadFinished()
@@ -382,79 +381,79 @@ Class clsFile
     '    Return False
     'End Function
 
-    Private Sub LoadExcel()
-        Dim MyConnection As System.Data.OleDb.OleDbConnection
-        Dim LastSlash As Integer
-        Dim lastPeriod As Integer
-        Dim shortName As String = "file"
-        If (m_FilePath.Contains("\") AndAlso m_FilePath.Contains(".")) Then
-            LastSlash = m_FilePath.LastIndexOf("\") + 1
-            lastPeriod = m_FilePath.LastIndexOf(".")
-            If (lastPeriod > LastSlash) Then
-                shortName = m_FilePath.Substring(LastSlash, lastPeriod - LastSlash)
-            End If
-        End If
-        Dim table As New DataTable(shortName)
-        Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
-        MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.Jet.OLEDB.4.0; data source='" & m_FilePath & "'; " & "Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'")
-        Try
-            MyConnection.Open()
-        Catch ex As Exception
+    'Private Sub LoadExcel()
+    '    Dim MyConnection As System.Data.OleDb.OleDbConnection
+    '    Dim LastSlash As Integer
+    '    Dim lastPeriod As Integer
+    '    Dim shortName As String = "file"
+    '    If (m_FilePath.Contains("/") AndAlso m_FilePath.Contains(".")) Then
+    '        LastSlash = m_FilePath.LastIndexOf("/") + 1
+    '        lastPeriod = m_FilePath.LastIndexOf(".")
+    '        If (lastPeriod > LastSlash) Then
+    '            shortName = m_FilePath.Substring(LastSlash, lastPeriod - LastSlash)
+    '        End If
+    '    End If
+    '    Dim table As New DataTable(shortName)
+    '    Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
+    '    MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.Jet.OLEDB.4.0; data source='" & m_FilePath & "'; " & "Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'")
+    '    Try
+    '        MyConnection.Open()
+    '    Catch ex As Exception
 
-        End Try
-        ' Select the data from the workbook.
-        Try
-            FileLoadPercent = 20
-            MyCommand = New System.Data.OleDb.OleDbDataAdapter("select * from [" & shortName & "$]", MyConnection)
-            MyCommand.Fill(table)
-            For Each column As Data.DataColumn In table.Columns
-                If column.ColumnName.Contains(" ") Then
-                    column.ColumnName = column.ColumnName.Replace(" ", "")
-                End If
-            Next column
-        Catch err As OleDb.OleDbException
-            Try
-                MyCommand = New System.Data.OleDb.OleDbDataAdapter("select * from [sheet1$]", MyConnection)
-                MyCommand.Fill(table)
-                For Each column As Data.DataColumn In table.Columns
-                    If column.ColumnName.Contains(" ") Then
-                        column.ColumnName = column.ColumnName.Replace(" ", "")
-                    End If
-                Next column
-            Catch ex As Exception
-                'LogError("The sheet with the data must have the same name as the file (" & shortName & ") or be named sheet1.")
-                Throw New ExitError("clsFile.LoadExcell()<br> " & ex.Message)
-            End Try
-        End Try
+    '    End Try
+    '    ' Select the data from the workbook.
+    '    Try
+    '        FileLoadPercent = 20
+    '        MyCommand = New System.Data.OleDb.OleDbDataAdapter("select * from [" & shortName & "$]", MyConnection)
+    '        MyCommand.Fill(table)
+    '        For Each column As Data.DataColumn In table.Columns
+    '            If column.ColumnName.Contains(" ") Then
+    '                column.ColumnName = column.ColumnName.Replace(" ", "")
+    '            End If
+    '        Next column
+    '    Catch err As OleDb.OleDbException
+    '        Try
+    '            MyCommand = New System.Data.OleDb.OleDbDataAdapter("select * from [sheet1$]", MyConnection)
+    '            MyCommand.Fill(table)
+    '            For Each column As Data.DataColumn In table.Columns
+    '                If column.ColumnName.Contains(" ") Then
+    '                    column.ColumnName = column.ColumnName.Replace(" ", "")
+    '                End If
+    '            Next column
+    '        Catch ex As Exception
+    '            'LogError("The sheet with the data must have the same name as the file (" & shortName & ") or be named sheet1.")
+    '            Throw New ExitError("clsFile.LoadExcell()<br> " & ex.Message)
+    '        End Try
+    '    End Try
 
-        MyConnection.Close()
+    '    MyConnection.Close()
 
-        'TODO: See if this reads data correctly...
-        'Try
-        '    Dim rs As New ADODB.Recordset
-        '    Dim sconn As String
-        '    Dim conn As New ADODB.Connection()
-        '    rs.CursorLocation = ADODB.CursorLocationEnum.adUseClient
-        '    rs.CursorType = ADODB.CursorTypeEnum.adOpenKeyset
-        '    rs.LockType = ADODB.LockTypeEnum.adLockBatchOptimistic
-        '    sconn = "DRIVER=Microsoft Excel Driver (*.xls);DBQ='" & m_FilePath & "'"
-        '    conn.ConnectionString = sconn
-        '    conn.Open()
-        'Catch ex As Exception
-        '    Msgbox(ex.StackTrace)
-        'End Try
+    '    'TODO: See if this reads data correctly...
+    '    'Try
+    '    '    Dim rs As New ADODB.Recordset
+    '    '    Dim sconn As String
+    '    '    Dim conn As New ADODB.Connection()
+    '    '    rs.CursorLocation = ADODB.CursorLocationEnum.adUseClient
+    '    '    rs.CursorType = ADODB.CursorTypeEnum.adOpenKeyset
+    '    '    rs.LockType = ADODB.LockTypeEnum.adLockBatchOptimistic
+    '    '    sconn = "DRIVER=Microsoft Excel Driver (*.xls);DBQ='" & m_FilePath & "'"
+    '    '    conn.ConnectionString = sconn
+    '    '    conn.Open()
+    '    'Catch ex As Exception
+    '    '    Msgbox(ex.StackTrace)
+    '    'End Try
 
-        If (table Is Nothing) AndAlso (table.Rows.Count = 0) Then
-            m_ViewTable = New DataTable("ERROR")
-        Else
-            m_ViewTable = table
-        End If
+    '    If (table Is Nothing) AndAlso (table.Rows.Count = 0) Then
+    '        m_ViewTable = New DataTable("ERROR")
+    '    Else
+    '        m_ViewTable = table
+    '    End If
 
 
-        'Catch ex As Exception
-        '    MyConnection.Close()
-        '    m_ViewTable = New DataTable("ERROR")
-        'End Try
-    End Sub
+    '    'Catch ex As Exception
+    '    '    MyConnection.Close()
+    '    '    m_ViewTable = New DataTable("ERROR")
+    '    'End Try
+    'End Sub
 
 End Class

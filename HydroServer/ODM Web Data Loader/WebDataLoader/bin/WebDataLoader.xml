@@ -6,7 +6,23 @@ WebDataLoader
 </name>
 </assembly>
 <members>
-<member name="F:WebDataLoader.WebDataLoader.Head1">
+<member name="F:WebDataLoader._Default.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader._Default.WDL1">
+	<summary>
+WDL1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Head1">
 	<summary>
 Head1 control.
 </summary>

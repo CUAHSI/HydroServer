@@ -328,6 +328,7 @@ Class clsDataValues
             If (valid Is Nothing) OrElse (valid.Rows.Count > 0) Then
                 Throw New Exception("Error Getting Database Schema")
             End If
+            valid.Columns(db_fld_DataValue).DataType = System.Type.GetType("System.String")
 
             'Load all of the CV and other related tables here
             Sites = m_Connection.OpenTable(connect, trans, db_tbl_Sites, "SELECT * FROM " & db_tbl_Sites)
@@ -387,7 +388,8 @@ Class clsDataValues
             Try
                 valid.Constraints.Add("AllUnique", cols, False)
             Catch ex As Exception
-                'LogError("Sources should be unique, but not all of the Sources in your database are unique." & vbCrLf & "Duplicate rows will be allowed for updates into this Sources table.")
+                LogError("Sources should be unique, but not all of the Sources in your database are unique." & vbCrLf & "Duplicate rows will be allowed for updates into this Sources table.")
+
             End Try
 
             For i = 0 To (fileRows.Length - 1)
@@ -401,14 +403,10 @@ Class clsDataValues
                 'tempRow.Item(db_fld_ValueID) = i
 
                 'DataValue
-                'If (m_ViewTable.Columns.IndexOf(file_DataValues_DataValue) >= 0) Then
-                Dim Value As Object = fileRow.Item(file_DataValues_DataValue)
-                Dim numVal As Double = CDbl(Value)
-                ' If (fileRow.Item(file_DataValues_DataValue).ToString <> "") AndAlso IsNumeric(fileRow.Item(file_DataValues_DataValue).ToString().Trim()) Then
-                If (fileRow.Item(file_DataValues_DataValue).ToString <> "") Then
-                    If IsNumeric(fileRow.Item(file_DataValues_DataValue)) Then
-                        tempRow.Item(db_fld_DataValue) = fileRow.Item(file_DataValues_DataValue)
-                    End If
+
+
+                If (fileRow.Item(file_DataValues_DataValue).ToString <> "") AndAlso IsNumeric(fileRow.Item(file_DataValues_DataValue).ToString()) Then
+                    tempRow.Item(db_fld_DataValue) = fileRow.Item(file_DataValues_DataValue)
                 Else
                     Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & file_DataValues_DataValue & " cannot be NULL and must be numeric.")
                 End If

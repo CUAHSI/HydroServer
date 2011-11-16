@@ -7,11 +7,10 @@
           </StartPageUrl>
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
-          <SilverlightDebugging>False</SilverlightDebugging>
           <NativeDebugging>False</NativeDebugging>
           <SQLDebugging>False</SQLDebugging>
           <PublishCopyOption>RunFiles</PublishCopyOption>
-          <PublishTargetLocation>C:\Users\Ravi Vegiraju\Desktop\hydro on sand\</PublishTargetLocation>
+          <PublishTargetLocation>C:\DEV\ODM\HydroServer8-23-2011\HydroServer\Release\HydroServer Website\</PublishTargetLocation>
           <PublishDeleteAllFiles>False</PublishDeleteAllFiles>
           <PublishCopyAppData>False</PublishCopyAppData>
           <ExternalProgram>
