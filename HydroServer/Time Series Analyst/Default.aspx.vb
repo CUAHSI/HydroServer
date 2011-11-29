@@ -860,16 +860,18 @@ Partial Class RootDefault
             objSummary.Message("Error Occured in Default.ddlVars_SelectedIndexChanged" & vbCrLf & ex.Message, ex)
         End Try
     End Sub
-
+    Dim dtFormat As String = Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.ToString()
     Protected Sub SetBeginEndDates()
+
         Dim MinMaxDT As Data.DataTable = OpenODMTable("SELECT MIN(" & db_fld_SCBeginDT & ") as MinDT, MAX(" & db_fld_SCEndDT & ") as MaxDT FROM " & db_tbl_SeriesCatalog & " WHERE (" & db_fld_SeriesId & "='" & gvSelected.SelectedValue & "') GROUP BY " & db_fld_SeriesId, Session("Database"))
         If (MinMaxDT Is Nothing) OrElse (MinMaxDT.Rows.Count < 1) Then
-            beginDatePicker.Text = Today.AddYears(-1).Date().ToString("mm/dd/yyyy")
-            endDatePicker.Text = Today.Date.ToString("mm/dd/yyyy")
+            beginDatePicker.Text = Today.AddYears(-1).Date().ToString(dtFormat)
+            endDatePicker.Text = Today.Date.ToString(dtFormat)
         Else
-            beginDatePicker.Text = CDate(MinMaxDT.Rows(0).Item("MinDT")).AddDays(-1).ToString("MM/dd/yyyy")
-            endDatePicker.Text = CDate(MinMaxDT.Rows(0).Item("MaxDT")).AddDays(1).ToString("MM/dd/yyyy")
+            beginDatePicker.Text = CDate(MinMaxDT.Rows(0).Item("MinDT")).AddDays(-1).ToString(dtFormat)
+            endDatePicker.Text = CDate(MinMaxDT.Rows(0).Item("MaxDT")).AddDays(1).ToString(dtFormat)
         End If
+
     End Sub
 
 End Class
