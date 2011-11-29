@@ -34,8 +34,8 @@
 		//-->
     </script>
 	<script type="text/javascript" language="javascript">
-		$(function() {$("#beginDatePicker").datepicker({showOn: 'button', buttonImage: 'images/calendar.gif', buttonImageOnly: true, changeMonth: true, changeYear: true, duration: ''});});
-		$(function() {$("#endDatePicker").datepicker({showOn: 'button', buttonImage: 'images/calendar.gif', buttonImageOnly: true, changeMonth: true, changeYear: true, duration: ''});});
+	    $(function() { $("#beginDatePicker").datepicker({ showOn: 'button', buttonImage: 'images/calendar.gif', buttonImageOnly: true, changeMonth: true, changeYear: true, duration: '', timeFormat: dtFormat }); });
+	    $(function() { $("#endDatePicker").datepicker({ showOn: 'button', buttonImage: 'images/calendar.gif', buttonImageOnly: true, changeMonth: true, changeYear: true, duration: '', timeFormat: dtFormat }); });
 	</script>
 </head>
 <body id="body" runat="server">
@@ -184,7 +184,7 @@
 								Begin&nbsp;Date:
 							</td>
 							<td>
-								<asp:Textbox ID="beginDatePicker" runat="server" Font-Size="8pt" SkinID="beginDatePicker" Width="75px"/>
+								<asp:Textbox ID="beginDatePicker" runat="server" Font-Size="8pt" SkinID="beginDatePicker" Width="76px"/>
 							</td>
 						</tr>
 						<tr>
