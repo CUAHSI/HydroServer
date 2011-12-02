@@ -860,7 +860,7 @@ Partial Class RootDefault
             objSummary.Message("Error Occured in Default.ddlVars_SelectedIndexChanged" & vbCrLf & ex.Message, ex)
         End Try
     End Sub
-    Dim dtFormat As String = Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.ToString()
+    Protected dtFormat As String = Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.ToString()
     Protected Sub SetBeginEndDates()
 
         Dim MinMaxDT As Data.DataTable = OpenODMTable("SELECT MIN(" & db_fld_SCBeginDT & ") as MinDT, MAX(" & db_fld_SCEndDT & ") as MaxDT FROM " & db_tbl_SeriesCatalog & " WHERE (" & db_fld_SeriesId & "='" & gvSelected.SelectedValue & "') GROUP BY " & db_fld_SeriesId, Session("Database"))

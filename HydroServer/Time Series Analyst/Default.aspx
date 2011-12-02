@@ -34,8 +34,10 @@
 		//-->
     </script>
 	<script type="text/javascript" language="javascript">
-	    $(function() { $("#beginDatePicker").datepicker({ showOn: 'button', buttonImage: 'images/calendar.gif', buttonImageOnly: true, changeMonth: true, changeYear: true, duration: '', timeFormat: dtFormat }); });
-	    $(function() { $("#endDatePicker").datepicker({ showOn: 'button', buttonImage: 'images/calendar.gif', buttonImageOnly: true, changeMonth: true, changeYear: true, duration: '', timeFormat: dtFormat }); });
+	    var dtForm = '<%= dtFormat %>';
+
+	    $(function() { $("#beginDatePicker").datepicker({ showOn: 'button', buttonImage: 'images/calendar.gif', buttonImageOnly: true, changeMonth: true, changeYear: true, duration: '', dateFormat: dtForm}); });
+	    $(function() { $("#endDatePicker").datepicker({ showOn: 'button', buttonImage: 'images/calendar.gif', buttonImageOnly: true, changeMonth: true, changeYear: true, duration: '', dateFormat: dtForm }); });
 	</script>
 </head>
 <body id="body" runat="server">
