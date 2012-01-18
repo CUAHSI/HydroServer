@@ -33,12 +33,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_829F452A043DE571DAD7D0CF11B55D0C"
-        "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9DECBE44F4CA42BF9963F203DF5AF3E2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -63,6 +57,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EF96D235A18AB91DB573A5442A4797EF"
+        "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BA683F70B84D468F80CCE09DFDBBB392"
         "MsmSig" = "8:_UNDEFINED"
@@ -82,7 +82,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_829F452A043DE571DAD7D0CF11B55D0C"
+        "OwnerKey" = "8:_EF96D235A18AB91DB573A5442A4797EF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -247,37 +247,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_829F452A043DE571DAD7D0CF11B55D0C"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ODM CVUpdate, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_829F452A043DE571DAD7D0CF11B55D0C"
-                    {
-                    "Name" = "8:ODM CVUpdate.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ODM CVUpdate.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_97128F5AB98D422E9F644FDABBDE73ED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9DECBE44F4CA42BF9963F203DF5AF3E2"
             {
             "SourcePath" = "8:lic.txt"
@@ -349,6 +318,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EF96D235A18AB91DB573A5442A4797EF"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ODM CVUpdate, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_EF96D235A18AB91DB573A5442A4797EF"
+                    {
+                    "Name" = "8:ODM CVUpdate.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ODM CVUpdate.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_97128F5AB98D422E9F644FDABBDE73ED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -415,7 +415,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Tools 1.1.2.5"
+        "ProductName" = "8:ODM Tools 1.1.2.6"
         "ProductCode" = "8:{5C11EDFC-18B1-493D-B035-C3E661E9DD5A}"
         "PackageCode" = "8:{FDE25D23-484A-44CC-9E01-816D933719C7}"
         "UpgradeCode" = "8:{4EC09388-349A-41C5-B07C-EA75B3B0261F}"
@@ -427,7 +427,7 @@
         "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-7176"
         "ARPHELPLINK" = "8:http://his.cuahsi.org/"
-        "Title" = "8:ODM Tools 1.1.2.5"
+        "Title" = "8:ODM Tools 1.1.2.6"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Utah Water Research Laboratory"
         "Keywords" = "8:"
