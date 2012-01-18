@@ -538,7 +538,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3F7029EEDE394B45B36C4864B9785BEE"
             {
-            "Name" = "8:ODM Tools 1.1.2.5"
+            "Name" = "8:ODM Tools 1.1.2.6"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -552,7 +552,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A9375652B899460D8928822F7DF2D5FF"
             {
-            "Name" = "8:ODM Tools 1.1.2.5"
+            "Name" = "8:ODM Tools 1.1.2.6"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
