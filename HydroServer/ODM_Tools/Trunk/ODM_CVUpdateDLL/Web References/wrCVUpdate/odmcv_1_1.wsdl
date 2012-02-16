@@ -122,6 +122,16 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetSiteTypeCV">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSiteTypeCVResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteTypeCVResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetCensorCodeCVSoapIn">
@@ -196,6 +206,12 @@
   <wsdl:message name="GetSpeciationCVSoapOut">
     <wsdl:part name="parameters" element="tns:GetSpeciationCVResponse" />
   </wsdl:message>
+  <wsdl:message name="GetSiteTypeCVSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteTypeCV" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteTypeCVSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteTypeCVResponse" />
+  </wsdl:message>
   <wsdl:portType name="ODMCVServiceSoap">
     <wsdl:operation name="GetCensorCodeCV">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This method returns a string (formatted as XML) with all of the items in the CensorCode Controlled Vocabulary.</wsdl:documentation>
@@ -256,6 +272,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This method returns a string (formatted as XML) with all of the items in the Speciation Controlled Vocabulary.</wsdl:documentation>
       <wsdl:input message="tns:GetSpeciationCVSoapIn" />
       <wsdl:output message="tns:GetSpeciationCVSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteTypeCV">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This method returns a string (formatted as XML) with all of the items in the SiteType Controlled Vocabulary.</wsdl:documentation>
+      <wsdl:input message="tns:GetSiteTypeCVSoapIn" />
+      <wsdl:output message="tns:GetSiteTypeCVSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ODMCVServiceSoap" type="tns:ODMCVServiceSoap">
@@ -361,6 +382,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetSpeciationCV">
       <soap:operation soapAction="http://his.cuahsi.org/his/1.1/ws/GetSpeciationCV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteTypeCV">
+      <soap:operation soapAction="http://his.cuahsi.org/his/1.1/ws/GetSiteTypeCV" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -479,13 +509,22 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetSiteTypeCV">
+      <soap12:operation soapAction="http://his.cuahsi.org/his/1.1/ws/GetSiteTypeCV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ODMCVService">
     <wsdl:port name="ODMCVServiceSoap" binding="tns:ODMCVServiceSoap">
-      <soap:address location="http://his.cuahsi.org/odmcv_1_1/odmcv_1_1.asmx" />
+      <soap:address location="http://localhost:20947/ODMCV_1_1/ODMCV_1_1.asmx" />
     </wsdl:port>
     <wsdl:port name="ODMCVServiceSoap12" binding="tns:ODMCVServiceSoap12">
-      <soap12:address location="http://his.cuahsi.org/odmcv_1_1/odmcv_1_1.asmx" />
+      <soap12:address location="http://localhost:20947/ODMCV_1_1/ODMCV_1_1.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

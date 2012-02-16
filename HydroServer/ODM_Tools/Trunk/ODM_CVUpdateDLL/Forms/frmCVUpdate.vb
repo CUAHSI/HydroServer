@@ -29,7 +29,9 @@ Public Class frmCVUpdate
                 MsgBox(ErrorMsg)
                 Close()
             End If
-
+            If My.Settings.ODMVersion = "1.1.1" Then
+                ucMergeAll.addSiteType()
+            End If
             ucMergeAll.LoadInitial()
         End If
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://his.cuahsi.org/odmcv_1_1/odmcv_1_1.asmx?wsdl" filename="odmcv_1_1.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://his.cuahsi.org/odmcv_1_1/odmcv_1_1.asmx?disco" filename="odmcv_1_1.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://localhost:20947/ODMCV_1_1/ODMCV_1_1.asmx?disco" filename="ODMCV_1_1.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost:20947/ODMCV_1_1/ODMCV_1_1.asmx?wsdl" filename="ODMCV_1_1.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>

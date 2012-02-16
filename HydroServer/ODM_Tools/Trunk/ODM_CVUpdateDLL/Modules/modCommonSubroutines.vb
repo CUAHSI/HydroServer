@@ -24,6 +24,7 @@ Module CommonSubroutines
         Speciation = 9
         SpatialRef = 10
         Unit = 11
+        SiteType = 12
     End Enum
 
     Public Sub ShowError(ByVal errorMessage As String, Optional ByVal err As Exception = Nothing, Optional ByVal style As MsgBoxStyle = MsgBoxStyle.Critical)

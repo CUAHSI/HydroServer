@@ -2509,6 +2509,7 @@ Public Class frmDeriveNewDataSeries
         Dim site As String 'string version of the site (Code - Name), used to get infor to update the Series Catalog table for the new Data Series -> value from tboxSite
         Dim siteCode As String 'Site Code of site value, used to update the Series Catalog table for the new Data Series
         Dim siteName As String 'Site Name of site value, used to update the Series Catalog table for the new Data Series
+        Dim siteType As String
         Dim variable As String 'string version of the variable (Code - Name), used to see if need to create a new Variable in the Data and/or to update the Series Catalog table for the new Data Series -> value from tboxVariable
         Dim varID As Integer 'VariableID for the variable
         Dim varCode As String 'Variable Code of the variable value, used to create/update a new Variable/SeriesCatalog table for the new Data Series
@@ -2681,6 +2682,7 @@ Public Class frmDeriveNewDataSeries
             site = tboxDSSite.Text
             siteCode = Split(site, " - ")(0)
             siteName = Split(site, " - ")(1)
+            siteType = site
             sourceDesc = tboxSourceDesc.Text
             organization = tboxSourceOrg.Text
             citation = tboxSourceCitation.Text
@@ -2690,7 +2692,7 @@ Public Class frmDeriveNewDataSeries
             If (dsID > 0) Then
                 UpdateSeriesCatalogAfterEdits(dsID, beginDate, endDate, beginDateUTC, endDateUTC, valueCount)
             Else
-                seriesID = CreateNewDataSeriesInDB(siteID, siteCode, siteName, varID, varCode, varName, speciation, varUnitsID, varUnitsName, sampleMed, valueType, timeSupport, tsUnitsID, tsUnitsName, dataType, genCategory, methodID, methodDesc, sourceID, sourceDesc, organization, citation, qclevelID, qclevel_Code, beginDate, endDate, beginDateUTC, endDateUTC, valueCount)
+                seriesID = CreateNewDataSeriesInDB(siteID, siteCode, siteName, siteType, varID, varCode, varName, speciation, varUnitsID, varUnitsName, sampleMed, valueType, timeSupport, tsUnitsID, tsUnitsName, dataType, genCategory, methodID, methodDesc, sourceID, sourceDesc, organization, citation, qclevelID, qclevel_Code, beginDate, endDate, beginDateUTC, endDateUTC, valueCount)
                 'make sure a valid seriesID was found/created
                 If seriesID > 0 Then
                     m_NewSeriesID = seriesID
