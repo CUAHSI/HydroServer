@@ -1,0 +1,264 @@
+/* General */
+body {
+	background-color: #EEEEEE;
+}
+body, td, p {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: Black;
+}
+table {
+	border-collapse: collapse;
+}
+table#gvSelected {
+	border-collapse: separate;
+}
+
+/* Sections */
+div#mainMenu {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	
+	border-bottom: solid 1px White;
+	padding: 0px 2px 0px 2px;
+}
+div#tabbedGraphs {
+	position: absolute;
+	top: 32px;
+	left: 8px;
+	width: 515px;
+}
+div#tabbedOptions {
+	position: absolute;
+	top: 32px;
+	left: 531px;
+	width: 240px;
+}
+div#controlPanel 
+{
+	position: absolute;
+	top: 465px;
+	left: 8px;
+	width: 760px;
+	display: block; 
+	float: none; 
+	background-color: transparent;
+}
+
+/* Main Menu */
+td.menu {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: Black;
+	text-decoration: none;
+	padding: 4px 8px 4px 8px;
+	height: 22px;
+	cursor: hand;
+}
+td.activeMenu {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: White;
+	text-decoration: none;
+	background-color: #316AC5;
+	padding: 4px 8px 4px 8px;
+	height: 22px;
+	cursor: hand;
+}
+div.menuItem {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: Black;
+	padding: 2px 20px 2px 8px;
+	cursor: hand;
+}
+div.menuItemOver {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: White;
+	background-color: #316AC5;
+	padding: 2px 20px 2px 8px;
+	cursor: hand;
+}
+div.menuItemDisabled {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: #ACA899;
+	padding: 2px 20px 2px 8px;
+}
+table.separator {
+	width: 90px;
+	height: 1px;
+	background-color: #ACA899;
+	margin: 2px 0px 2px 0px;
+}
+div#fileMenu {
+	position: absolute;
+	top: 22px;
+	left: 2px;
+	background-color: White;
+	border: solid 1px #ACA899;
+	padding: 4px 4px 4px 4px;
+	visibility: hidden;
+}
+div#graphMenu {
+	position: absolute;
+	top: 22px;
+	left: 34px;
+	background-color: White;
+	border: solid 1px #ACA899;
+	padding: 4px 4px 4px 4px;
+	visibility: hidden;
+}
+div#dataMenu {
+	position: absolute;
+	top: 22px;
+	left: 80px;
+	background-color: White;
+	border: solid 1px #ACA899;
+	padding: 4px 4px 4px 4px;
+	visibility: hidden;
+}
+
+/* Tabs */
+div.activeTab {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: Black;
+	text-decoration: none;
+	width: 60px;
+	padding: 5px 6px 5px 6px;
+	border-top: solid 2px White;
+	border-right: solid 2px #ACA899;
+	border-bottom: 0px;
+	border-left: solid 2px White;
+	cursor: hand;
+	text-align:center;
+}
+div.inactiveTab {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: Black;
+	text-decoration: none;
+	background-color: #E6E6E6;
+	width: 60px;
+	padding: 2px 6px 2px 6px;
+	border-top: solid 1px White;
+	border-right: outset 1px;
+	border-bottom: solid 2px White;
+	border-left: solid 1px White;
+	cursor: hand;
+	text-align:center;
+}
+table#graphTable {
+	border-top: 0px;
+	border-right: solid 2px #ACA899;
+	border-bottom: solid 2px #ACA899;
+	border-left: solid 2px White;
+	width: 515px;
+	height: 400px;
+}
+td#graphCell {
+	text-align: center;
+	vertical-align: baseline;
+	background-image: url(images/loading.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+table#optionsTable {
+	border-top: 0px;
+	border-right: solid 2px #ACA899;
+	border-bottom: solid 2px #ACA899;
+	border-left: solid 2px White;
+	width: 240px;
+	height: 400px;
+}
+td#optionsCell {
+	padding: 0px 10px 10px 10px;
+	vertical-align:top
+}
+div.tabLine {
+	border-bottom: solid 2px White;
+}
+
+/* Groups */
+table#outerTable {
+	border: groove 2px;
+	border-collapse: separate;
+	color: White;
+	width: 100%;
+	height: 350px;
+}
+table.groupTable {
+	border: groove 2px;
+	border-collapse: separate;
+	color: White;
+}
+td.groupCell {
+	padding: 6px 6px 6px 6px;
+}
+div.groupLabel {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	color: Black;
+	
+	background-color: #EEEEEE;
+	padding: 0px 5px 0px 5px;
+	position: relative;
+	top: 6px;
+	left: 8px;
+}
+
+/* Forms */
+input.numericalInput {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 13px;
+	width: 70px;
+	text-align: right;
+}
+td.inputLabel {
+	text-align: right;
+	padding: 5px 10px 5px 0px;
+}
+select#cboSite {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	width: 385px;
+}
+select#cboVariable {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	width: 385px;
+}
+.formElement {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 13px;
+}
+
+/* Links */
+a {
+	text-decoration: none;
+}
+
+/* Error */
+.error {
+	font-family: Arial, Helvetica, Sans-Serif;
+	/*font-size: 15px;*/
+	font-weight: bold;
+	text-transform: uppercase;
+	color: Red;
+	/*letter-spacing: 2px;*/
+	padding-top: 10px;
+	position: absolute;
+	display: block;
+	width: 200px;
+}
+
+/* CenterLine */
+.CenterLine 
+{
+	position: absolute;
+}
+

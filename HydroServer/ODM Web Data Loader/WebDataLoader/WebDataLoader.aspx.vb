@@ -113,6 +113,7 @@ Partial Public Class WebDataLoader
             btnCancel.Visible = False
             btnUpload.Visible = True
             fuOpenFilePath.Visible = True
+            Session("TableCount") = commit
             Response.Redirect("ConfirmationPage.aspx")
         Catch ex As Exception
             LogError("Error Committing " & _file.MyType & " File", ex)

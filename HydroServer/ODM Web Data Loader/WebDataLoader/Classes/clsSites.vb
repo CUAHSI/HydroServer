@@ -9,6 +9,7 @@ Class clsSites
     Public Const db_fld_SiteID As String = "SiteID" 'M Integer: Primary Key -> Unique ID for each Sites entry
     Public Const db_fld_SiteCode As String = "SiteCode" 'M String: 50 -> Code used by organization that collects the data
     Public Const db_fld_SiteName As String = "SiteName" 'M String: 255 -> Full name of sampling location
+    Public Const db_fld_SiteType As String = "SiteType"
     Public Const db_fld_Latitude As String = "Latitude" 'M Double -> Latitude in degrees w/ Decimals
     Public Const db_fld_Longitude As String = "Longitude" 'M Double -> Longitude in degrees w/ Decimals
     Public Const db_fld_LatLongDatumID As String = "LatLongDatumID" 'M Integer -> Linked to SpatialReferences.SpatialReferenceID
@@ -37,6 +38,7 @@ Class clsSites
 
     'table names
     Public Const db_tbl_VerticalDatumCV As String = "VerticalDatumCV"
+    Public Const db_tbl_SiteType As String = "SiteTypeCV"
 
     'fields
     Public Const db_fld_CV_Term As String = "Term"
@@ -50,6 +52,7 @@ Class clsSites
     Public Const file_Sites As String = "sites"
     Public Const file_Sites_SiteCode As String = "sitecode"                            'R
     Public Const file_Sites_SiteName As String = "sitename"                            'R
+    Public Const file_Sites_SiteType As String = "sitetype"
     Public Const file_Sites_Latitude As String = "latitude"                            'R
     Public Const file_Sites_Longitude As String = "longitude"                          'R
 #Region " LatLongDatum Columns                                             'R"
@@ -97,7 +100,7 @@ Class clsSites
     Protected Overrides Function ValidateTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction) As Data.DataTable
         Dim valid As New datatable
         'Declare all of your CVs Here
-        Dim SpatialReferences, VerticalDatum As New datatable
+        Dim SpatialReferences, VerticalDatum, SiteType As New DataTable
         Dim i As Integer
         Dim fileRows() As DataRow
 
@@ -115,6 +118,9 @@ Class clsSites
             'Load all of the CV and other related tables here
             SpatialReferences = m_Connection.OpenTable(connect, trans, db_tbl_SpatialReferences, "SELECT * FROM " & db_tbl_SpatialReferences)
             VerticalDatum = m_Connection.OpenTable(connect, trans, db_tbl_VerticalDatumCV, "SELECT * FROM " & db_tbl_VerticalDatumCV)
+            If (My.Settings.ODMVersion = "1.1.1") Then
+                SiteType = m_Connection.OpenTable(connect, trans, db_tbl_SiteType, "SELECT * FROM " & db_tbl_SiteType)
+            End If
 
             If (m_ViewTable.Columns.IndexOf(file_Sites_SiteCode) >= 0) Then
                 fileRows = m_ViewTable.Select(file_Sites_SiteCode & " IS NOT NULL AND " & file_Sites_SiteCode & " <> ''", file_Sites_SiteCode & " ASC")
@@ -356,6 +362,18 @@ Class clsSites
                 If (m_ViewTable.Columns.IndexOf(file_Sites_Comments) >= 0) AndAlso ((fileRow.Item(file_Sites_Comments).ToString <> "")) Then
                     tempRow.Item(db_fld_Comments) = fileRow.Item(file_Sites_Comments)
                 End If
+
+                'SiteType - CV field
+                If (My.Settings.ODMVersion = "1.1.1") Then
+                    If (m_ViewTable.Columns.IndexOf(file_Sites_SiteType) >= 0) AndAlso (fileRow.Item(file_Sites_SiteType).ToString <> "") Then
+                        If (SiteType.Select(db_fld_CV_Term & " = '" & Replace(fileRow.Item(file_Sites_SiteType), "'", "''") & "'").Length > 0) Then
+                            tempRow.Item(db_fld_SiteType) = fileRow.Item(file_Sites_SiteType)
+                        Else
+                            Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & "Unable to find the specified " & file_Sites_SiteType & " in the SiteTypeCV table.")
+                        End If
+                    End If
+                End If
+
 
                 ''TODO: PUT THIS BACK??
                 'If RowExists(tempRow, valid) Then

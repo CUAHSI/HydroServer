@@ -52,6 +52,8 @@ Partial Class frmNewSite
         Me.flpButtons = New System.Windows.Forms.FlowLayoutPanel
         Me.btnOK = New System.Windows.Forms.Button
         Me.btnCancel = New System.Windows.Forms.Button
+        Me.lblSiteType = New System.Windows.Forms.Label
+        Me.cboSiteType = New System.Windows.Forms.ComboBox
         Me.grpRequired.SuspendLayout()
         Me.grpOptional.SuspendLayout()
         Me.flpButtons.SuspendLayout()
@@ -181,6 +183,8 @@ Partial Class frmNewSite
         '
         'grpOptional
         '
+        Me.grpOptional.Controls.Add(Me.lblSiteType)
+        Me.grpOptional.Controls.Add(Me.cboSiteType)
         Me.grpOptional.Controls.Add(Me.lblElevation_m)
         Me.grpOptional.Controls.Add(Me.txtElevation_m)
         Me.grpOptional.Controls.Add(Me.lblVerticalDatum)
@@ -202,7 +206,7 @@ Partial Class frmNewSite
         Me.grpOptional.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grpOptional.Location = New System.Drawing.Point(0, 256)
         Me.grpOptional.Name = "grpOptional"
-        Me.grpOptional.Size = New System.Drawing.Size(300, 260)
+        Me.grpOptional.Size = New System.Drawing.Size(300, 304)
         Me.grpOptional.TabIndex = 1
         Me.grpOptional.TabStop = False
         Me.grpOptional.Text = "Optional"
@@ -389,7 +393,7 @@ Partial Class frmNewSite
         Me.flpButtons.Controls.Add(Me.btnCancel)
         Me.flpButtons.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.flpButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.flpButtons.Location = New System.Drawing.Point(0, 516)
+        Me.flpButtons.Location = New System.Drawing.Point(0, 560)
         Me.flpButtons.Name = "flpButtons"
         Me.flpButtons.Size = New System.Drawing.Size(300, 31)
         Me.flpButtons.TabIndex = 2
@@ -416,12 +420,34 @@ Partial Class frmNewSite
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'lblSiteType
+        '
+        Me.lblSiteType.AutoSize = True
+        Me.lblSiteType.Enabled = False
+        Me.lblSiteType.Location = New System.Drawing.Point(6, 251)
+        Me.lblSiteType.Name = "lblSiteType"
+        Me.lblSiteType.Size = New System.Drawing.Size(52, 13)
+        Me.lblSiteType.TabIndex = 18
+        Me.lblSiteType.Text = "Site Type"
+        '
+        'cboSiteType
+        '
+        Me.cboSiteType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboSiteType.DropDownWidth = 264
+        Me.cboSiteType.Enabled = False
+        Me.cboSiteType.FormattingEnabled = True
+        Me.cboSiteType.Location = New System.Drawing.Point(21, 267)
+        Me.cboSiteType.MaxDropDownItems = 10
+        Me.cboSiteType.Name = "cboSiteType"
+        Me.cboSiteType.Size = New System.Drawing.Size(264, 21)
+        Me.cboSiteType.TabIndex = 19
+        '
         'frmNewSite
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(300, 547)
+        Me.ClientSize = New System.Drawing.Size(300, 591)
         Me.ControlBox = False
         Me.Controls.Add(Me.grpOptional)
         Me.Controls.Add(Me.grpRequired)
@@ -473,4 +499,6 @@ Partial Class frmNewSite
     Friend WithEvents txtLocalY As System.Windows.Forms.TextBox
     Friend WithEvents txtLocalX As System.Windows.Forms.TextBox
     Friend WithEvents txtElevation_m As System.Windows.Forms.TextBox
+    Friend WithEvents lblSiteType As System.Windows.Forms.Label
+    Friend WithEvents cboSiteType As System.Windows.Forms.ComboBox
 End Class

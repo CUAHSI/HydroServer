@@ -201,6 +201,7 @@ Module modDB
     Public Const db_fld_SiteState As String = "State" 'O String: 50 -> Name of state in which the sampling station is located
     Public Const db_fld_SiteCounty As String = "County" 'O String: 50 -> Name of County in which the sampling station is located
     Public Const db_fld_SiteComments As String = "Comments" 'O String: 500 -> Comments related to the site
+    Public Const db_fld_SiteType As String = "SiteType"
 #End Region
 
 #Region "Sources"
@@ -273,6 +274,7 @@ Module modDB
     Public Const db_tbl_ValueTypeCV As String = "ValueTypeCV"
     Public Const db_tbl_VariableNameCV As String = "VariableNameCV"
     Public Const db_tbl_VerticalDatumCV As String = "VerticalDatumCV"
+    Public Const db_tbl_SiteTypeCV As String = "SiteTypeCV"
 
     'fields
     Public Const db_fld_CV_Term As String = "Term"
@@ -677,6 +679,38 @@ Module modDB
 
         Return VariableNames
     End Function
+    ''' <summary>
+    ''' Retrieves Site type CV from the Database.  Returns SiteType CV in a string Array.
+    ''' </summary>
+    ''' <param name="e_settings">the connection settings to the database</param>
+    ''' <returns>SiteTypeCV in a string Array</returns>
+    ''' <remarks></remarks>
+    Public Function GetSiteType(ByVal e_settings As clsConnectionSettings) As String()
+        '
+        Dim sql As String
+        Dim table As DataTable
+        Dim i As Integer
+        Dim SiteType(0) As String
+
+        Try
+
+            sql = "SELECT * FROM " & db_tbl_SiteTypeCV & " ORDER BY " & db_fld_CV_Term
+
+            table = OpenTable("SiteType", sql, e_settings)
+
+            If Not (table Is Nothing) Then
+                ReDim SiteType(table.Rows.Count - 1)
+                For i = 0 To (table.Rows.Count - 1)
+                    SiteType(i) = table.Rows(i).Item(db_fld_CV_Term)
+                Next
+            End If
+        Catch ex As Exception
+            ShowError(ex)
+        End Try
+        Return SiteType
+    End Function
+
+
 
     ''' <summary>
     ''' Retrieves Variable Names from the Database.  Returns Variable Names in a String Array.

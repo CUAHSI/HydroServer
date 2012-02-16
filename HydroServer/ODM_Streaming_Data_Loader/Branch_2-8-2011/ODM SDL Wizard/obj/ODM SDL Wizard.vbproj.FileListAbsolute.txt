@@ -1,0 +1,69 @@
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\bin\Debug\Configuration Wizard.exe.config
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\bin\Debug\Configuration Wizard.exe
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\bin\Debug\Configuration Wizard.pdb
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\bin\Debug\Configuration Wizard.xml
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.ucSelectRow.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewQCL.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmAbout.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewSeries.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmAddNewFile.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewISOMetadata.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewMethod.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewOffsetType.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewSite.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewSource.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewVariable.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmODMSDLWizard.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.Resources.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.ucDBConnection.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\ODM SDL Wizard.vbproj.GenerateResource.Cache
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\Configuration Wizard.exe
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\Configuration Wizard.xml
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Debug\Configuration Wizard.pdb
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\bin\Release\Configuration Wizard.exe.config
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\bin\Release\Configuration Wizard.exe
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\bin\Release\Configuration Wizard.pdb
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\bin\Release\Configuration Wizard.xml
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ResolveAssemblyReference.cache
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.ucSelectRow.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmNewQCL.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmAbout.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmNewSeries.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmAddNewFile.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmNewISOMetadata.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmNewMethod.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmNewOffsetType.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmNewSite.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmNewSource.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmNewVariable.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.frmODMSDLWizard.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.Resources.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODMSDLConfigWiz.ucDBConnection.resources
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\ODM SDL Wizard.vbproj.GenerateResource.Cache
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\Configuration Wizard.exe
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\Configuration Wizard.xml
+C:\Users\JCullen\Documents\Projects\HydroServer\ODMSDL App\ODM SDL Wizard\obj\Release\Configuration Wizard.pdb
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\bin\Debug\Configuration Wizard.exe.config
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\bin\Debug\Configuration Wizard.exe
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\bin\Debug\Configuration Wizard.pdb
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\bin\Debug\Configuration Wizard.xml
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ResolveAssemblyReference.cache
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.ucSelectRow.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewQCL.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmAbout.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewSeries.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmAddNewFile.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewISOMetadata.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewMethod.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewOffsetType.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewSite.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewSource.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewVariable.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmODMSDLWizard.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.Resources.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.ucDBConnection.resources
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\ODM SDL Wizard.vbproj.GenerateResource.Cache
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\Configuration Wizard.exe
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\Configuration Wizard.xml
+C:\DEV\ODM\hydroserver\HydroServer\ODM Streaming Data Loader\ODM SDL Wizard\obj\Debug\Configuration Wizard.pdb

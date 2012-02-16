@@ -1,0 +1,147 @@
+Imports ZedGraph
+Imports System.Drawing
+Imports System.data
+
+Partial Class Graphs_ZGCorrelation
+    Inherits System.Web.UI.UserControl
+    Public Shared m_XData As Data.DataTable
+    Public Shared m_YData As Data.DataTable
+    Public Shared m_XTitle As String
+    Public Shared m_YTitle As String
+    Public Shared m_Options As PlotOptions
+    Private m_half As Boolean = False
+    Const adjust As Double = 0.025
+
+    Public Property Width() As Integer
+        Get
+            Return CorrelationPlot.Width
+        End Get
+        Set(ByVal value As Integer)
+            CorrelationPlot.Width = value
+        End Set
+    End Property
+    Public Property Height() As Integer
+        Get
+            Return CorrelationPlot.Height
+        End Get
+        Set(ByVal value As Integer)
+            CorrelationPlot.Height = value
+        End Set
+    End Property
+
+    Public Sub Plot(ByVal X_Series As DataTable, ByVal Y_Series As DataTable, ByRef objOptions As PlotOptions) ', ByVal e_StdDev As Double) ', Optional ByVal e_StdDev As Double = 0))
+        If Not (m_XData Is Nothing) Then
+            m_XData.Clear()
+            Clear()
+        End If
+        If Not (m_YData Is Nothing) Then
+            m_YData.Clear()
+            Clear()
+        End If
+
+        m_XData = X_Series.Copy
+        m_YData = Y_Series.Copy
+        m_XTitle = X_Series.TableName
+        m_YTitle = Y_Series.TableName
+
+        m_Options = objOptions
+        m_half = False
+        CorrelationPlot.AxisChanged = True
+    End Sub
+
+    Public Sub ClearHalf()
+        If Not (m_XData Is Nothing) Then
+            m_XData.Clear()
+        End If
+        If Not (m_YData Is Nothing) Then
+            m_YData.Clear()
+        End If
+        m_half = True
+        CorrelationPlot.AxisChanged = True
+    End Sub
+
+    Public Sub Replot(ByVal options As PlotOptions)
+        m_Options = options
+        CorrelationPlot.AxisChanged = True
+    End Sub
+
+    Public Sub Clear()
+        If Not (m_XData Is Nothing) Then
+            m_XData.Clear()
+        End If
+        If Not (m_YData Is Nothing) Then
+            m_YData.Clear()
+        End If
+        m_half = False
+        CorrelationPlot.AxisChanged = True
+    End Sub
+
+    Protected Sub CorrelationPlot_RenderGraph(ByVal g As System.Drawing.Graphics, ByVal pane As ZedGraph.MasterPane) Handles CorrelationPlot.RenderGraph
+        Try
+            If (m_XData Is Nothing) OrElse (m_XData.Rows.Count < 1) OrElse (m_YData Is Nothing) OrElse (m_YData.Rows.Count < 1) Then
+                'If (Not m_XData Is Nothing) AndAlso (m_XData.Rows.Count > 0) AndAlso (Not m_YData Is Nothing) AndAlso (m_YData.Rows.Count > 0) Then
+                CorrelationPlot.CurveList.Clear()
+                Dim gPane As ZedGraph.GraphPane = pane(0)
+                If m_half Then
+                    gPane.Title.Text = "Must Select 2 Valid Data Series"
+                Else
+                    gPane.Title.Text = "No Data to Plot"
+                End If
+                gPane.XAxis.Scale.Min = 0
+                gPane.XAxis.Scale.Max = 10
+                gPane.XAxis.Title.Text = ""
+                gPane.XAxis.Type = AxisType.Linear
+                gPane.YAxis.Scale.Min = 0
+                gPane.YAxis.Scale.Max = 10
+                gPane.YAxis.Title.Text = ""
+                gPane.YAxis.Type = AxisType.Linear
+            Else
+                Dim gPane As ZedGraph.GraphPane
+
+                '1. set the Graph Pane, graphics object
+                gPane = pane(0)
+
+                Dim x As Integer
+                Dim currPnt As ZedGraph.PointPair
+                Dim line As New ZedGraph.LineItem("This is a test")
+                'Dim XVals() As DataRow
+                Dim YVals() As DataRow
+                gPane.Title.Text = "X= " & m_XData.TableName & " -vs- Y= " & m_YData.TableName & vbCrLf & _
+                    "With X.Time = Y.Time + " & m_Options.CorrelationOffset.ToString
+
+                Dim maxX, minX, minY, maxY, rangeX, rangeY As Double
+                minX = CDbl(m_XData.Compute("MIN(DataValue)", ""))
+                maxX = CDbl(m_XData.Compute("MAX(DataValue)", ""))
+                minY = CDbl(m_YData.Compute("MIN(DataValue)", ""))
+                maxY = CDbl(m_YData.Compute("MAX(DataValue)", ""))
+                rangeX = maxX - minX
+                rangeY = maxY - minY
+                gPane.XAxis.Scale.Min = minX - (adjust * rangeX)
+                gPane.XAxis.Scale.Max = maxX + (adjust * rangeX)
+                gPane.YAxis.Scale.Min = minY - (adjust * rangeY)
+                gPane.YAxis.Scale.Max = maxY + (adjust * rangeY)
+
+                For x = 0 To (m_XData.Rows.Count - 1)
+                    YVals = m_YData.Select("LocalDateTime = '" & CDate(m_XData.Rows(x).Item("LocalDateTime")).Add(m_Options.CorrelationOffset) & "'")
+                    If (Not (YVals Is Nothing)) And (YVals.Length > 0) Then
+                        currPnt = New ZedGraph.PointPair(CDbl(m_XData.Rows(x).Item("DataValue")), CDbl(YVals(0).Item("DataValue")), m_XData.Rows(x).Item("LocalDateTime").ToString)
+                        line.AddPoint(currPnt)
+                    End If
+                Next x
+
+                gPane.CurveList.Add(line)
+
+                'TODO: FILL IN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                'draw the plot
+                gPane.XAxis.IsVisible = True
+                gPane.YAxis.IsVisible = True
+
+                pane.AxisChange(g)
+            End If
+        Catch ex As Exception
+            MsgBox("")
+        End Try
+    End Sub
+
+End Class

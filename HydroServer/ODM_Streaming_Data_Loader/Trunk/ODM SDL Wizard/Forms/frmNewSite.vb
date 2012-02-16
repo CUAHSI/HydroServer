@@ -34,6 +34,11 @@ Public Class frmNewSite
     ''' <remarks></remarks>
     Dim defaultVertDatum As Integer
     ''' <summary>
+    ''' The default Site Type
+    ''' </summary>
+    ''' <remarks></remarks>
+    Dim defaultSiteType As Integer
+    ''' <summary>
     ''' The default Local Projection ID
     ''' </summary>
     ''' <remarks></remarks>
@@ -89,9 +94,24 @@ Public Class frmNewSite
     ''' <remarks></remarks>
     Private Sub frmNewSite_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            Dim temp() As String 'Temporary string array to store Vertical Datum
+            Dim temp(), SiteType() As String 'Temporary string array to store Vertical Datum
             Dim tempTable As DataTable 'Temporary datatable to store SpatialReferences
             Dim i As Integer 'Counter Variable
+
+            If (My.Settings.ODMVersion = "1.1.1") Then
+                lblSiteType.Visible = True
+                cboSiteType.Visible = True
+                SiteType = GetSiteType(m_connSettings)
+                cboSiteType.Items.Add(db_expr_None)
+                cboSiteType.Items.AddRange(SiteType)
+                defaultSiteType = 0
+
+                lblSiteType.Enabled = True
+                cboSiteType.Enabled = True
+            Else
+            lblSiteType.Visible = False
+            cboSiteType.Visible = False
+            End If
 
             Sites = OpenTable("Sites", sqlQuery, m_connSettings)
 
@@ -148,53 +168,59 @@ Public Class frmNewSite
                                         newSite.Item(db_fld_SiteState) = txtState.Text
                                         newSite.Item(db_fld_SiteCounty) = txtCounty.Text
                                         newSite.Item(db_fld_SiteComments) = txtComments.Text
+                                        If (My.Settings.ODMVersion = "1.1.1") Then
+                                            If (cboSiteType.SelectedItem = "") Or (cboSiteType.SelectedItem = db_expr_None) Then
+                                                newSite.Item(db_fld_SiteType) = DBNull.Value
+                                            Else
+                                                newSite.Item(db_fld_SiteType) = cboSiteType.SelectedValue
+                                            End If
+                                        End If
+                                            If txtElevation_m.Text = "" Then
+                                                newSite.Item(db_fld_SiteElev_m) = DBNull.Value
+                                            Else
+                                                newSite.Item(db_fld_SiteElev_m) = Val(txtElevation_m.Text)
+                                            End If
+                                            If txtLocalX.Text = "" Then
+                                                newSite.Item(db_fld_SiteLocX) = DBNull.Value
+                                            Else
+                                                newSite.Item(db_fld_SiteLocX) = Val(txtLocalX.Text)
+                                            End If
+                                            If txtLocalY.Text = "" Then
+                                                newSite.Item(db_fld_SiteLocY) = DBNull.Value
+                                            Else
+                                                newSite.Item(db_fld_SiteLocY) = Val(txtLocalY.Text)
+                                            End If
+                                            If txtPosAccuracy.Text = "" Then
+                                                newSite.Item(db_fld_SitePosAccuracy_m) = DBNull.Value
+                                            Else
+                                                newSite.Item(db_fld_SitePosAccuracy_m) = Val(txtPosAccuracy.Text)
+                                            End If
+                                            If (cboLocalProjection.SelectedIndex < 0) Then
+                                                newSite.Item(db_fld_SiteLocProjID) = DBNull.Value
+                                            Else
+                                                newSite.Item(db_fld_SiteLocProjID) = cboLocalProjection.SelectedValue
+                                            End If
+                                            If (cboVerticalDatum.SelectedItem = "") Or (cboVerticalDatum.SelectedItem = db_expr_None) Then
+                                                newSite.Item(db_fld_SiteVertDatum) = DBNull.Value
+                                            Else
+                                                newSite.Item(db_fld_SiteVertDatum) = cboVerticalDatum.SelectedItem
+                                            End If
+                                            Sites.Rows.Add(newSite)
 
-                                        If txtElevation_m.Text = "" Then
-                                            newSite.Item(db_fld_SiteElev_m) = DBNull.Value
-                                        Else
-                                            newSite.Item(db_fld_SiteElev_m) = Val(txtElevation_m.Text)
-                                        End If
-                                        If txtLocalX.Text = "" Then
-                                            newSite.Item(db_fld_SiteLocX) = DBNull.Value
-                                        Else
-                                            newSite.Item(db_fld_SiteLocX) = Val(txtLocalX.Text)
-                                        End If
-                                        If txtLocalY.Text = "" Then
-                                            newSite.Item(db_fld_SiteLocY) = DBNull.Value
-                                        Else
-                                            newSite.Item(db_fld_SiteLocY) = Val(txtLocalY.Text)
-                                        End If
-                                        If txtPosAccuracy.Text = "" Then
-                                            newSite.Item(db_fld_SitePosAccuracy_m) = DBNull.Value
-                                        Else
-                                            newSite.Item(db_fld_SitePosAccuracy_m) = Val(txtPosAccuracy.Text)
-                                        End If
-                                        If (cboLocalProjection.SelectedIndex < 0) Then
-                                            newSite.Item(db_fld_SiteLocProjID) = DBNull.Value
-                                        Else
-                                            newSite.Item(db_fld_SiteLocProjID) = cboLocalProjection.SelectedValue
-                                        End If
-                                        If (cboVerticalDatum.SelectedItem = "") Or (cboVerticalDatum.SelectedItem = db_expr_None) Then
-                                            newSite.Item(db_fld_SiteVertDatum) = DBNull.Value
-                                        Else
-                                            newSite.Item(db_fld_SiteVertDatum) = cboVerticalDatum.SelectedItem
-                                        End If
-                                        Sites.Rows.Add(newSite)
+                                            CommitTable(Sites, sqlQuery, m_connSettings)
+                                            Dim newSites() As DataRow = Sites.Select(db_fld_SiteCode & " = '" & FormatForDB(txtSiteCode.Text) & "'")
+                                            If newSites.Length = 1 Then
+                                                NewID = newSites(0).Item(db_fld_SiteID)
+                                                Me.DialogResult = Windows.Forms.DialogResult.OK
+                                            Else
+                                                NewID = -99
+                                                ShowError("Unable to retrieve the new Site from the database.")
+                                            End If
 
-                                        CommitTable(Sites, sqlQuery, m_connSettings)
-                                        Dim newSites() As DataRow = Sites.Select(db_fld_SiteCode & " = '" & FormatForDB(txtSiteCode.Text) & "'")
-                                        If newSites.Length = 1 Then
-                                            NewID = newSites(0).Item(db_fld_SiteID)
                                             Me.DialogResult = Windows.Forms.DialogResult.OK
                                         Else
-                                            NewID = -99
-                                            ShowError("Unable to retrieve the new Site from the database.")
+                                            ShowError("Positional Accuracy must be a number.")
                                         End If
-
-                                        Me.DialogResult = Windows.Forms.DialogResult.OK
-                                    Else
-                                        ShowError("Positional Accuracy must be a number.")
-                                    End If
                                 Else
                                     ShowError("LocalY must be a number.")
                                 End If
@@ -339,6 +365,7 @@ Public Class frmNewSite
     Private Sub ComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboLatLongDatum.SelectedIndexChanged, cboVerticalDatum.SelectedIndexChanged, cboLocalProjection.SelectedIndexChanged
         btnOK.Enabled = isDone()
     End Sub
+
     ''' <summary>
     ''' Enables/Disables certain fields if their prerequisites are not complete/valid
     ''' </summary>
@@ -347,6 +374,7 @@ Public Class frmNewSite
         Try
             lblVerticalDatum.Enabled = (txtElevation_m.Text <> "")
             cboVerticalDatum.Enabled = (txtElevation_m.Text <> "")
+            
 
             lblLocalProjection.Enabled = ((txtLocalX.Text <> "") Or (txtLocalY.Text <> ""))
             cboLocalProjection.Enabled = ((txtLocalX.Text <> "") Or (txtLocalY.Text <> ""))
@@ -392,4 +420,5 @@ Public Class frmNewSite
 
 #End Region
 
+   
 End Class

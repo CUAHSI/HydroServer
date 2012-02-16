@@ -18,6 +18,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <StartAction>Project</StartAction>
     <StartProgram>C:\DEV\ODM\HydroServer6-20-2011\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\Configuration Wizard.exe</StartProgram>
-    <StartArguments>-s 2</StartArguments>
+    <StartArguments>-s 1</StartArguments>
   </PropertyGroup>
 </Project>
