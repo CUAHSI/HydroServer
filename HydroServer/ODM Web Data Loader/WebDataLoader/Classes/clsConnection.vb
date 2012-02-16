@@ -564,6 +564,24 @@ Class clsConnection
         'return the number of rows updated
         Return count
     End Function
+    Public Function getODMVersion() As String
+        'If Not (m_ConnStr = "") Then
+        If m_DBName = "" Or m_ServerAddress = "" Then
+            Return ""
+        Else
+
+            Dim testConn As New SqlClient.SqlConnection(m_ConnStr)
+            testConn.Open()
+            'Create an sql command that accesses all tables and a field within the series catalog table
+            Dim sql1 As String = "SELECT MAX(VersionNumber) as CurrentVersion FROM ODMVersion"
+            Dim VersTable As New SqlClient.SqlDataAdapter(sql1, testConn)
+            Dim Table As New DataTable
+            VersTable.Fill(Table)
+            testConn.Close()
+            testConn.Dispose()
+            Return Table.Rows(0).Item("CurrentVersion").ToString()
+        End If
+    End Function
 
     Public Function TestDBConnection() As Boolean
         'Used to test a databse connection
@@ -598,6 +616,7 @@ Class clsConnection
                 testConn.Dispose()
 
                 If (Table.Rows.Count = 1) Then
+
                     If (Table.Rows(0).Item("CurrentVersion").ToString.StartsWith("1.1")) Then
                         Return True
                     Else

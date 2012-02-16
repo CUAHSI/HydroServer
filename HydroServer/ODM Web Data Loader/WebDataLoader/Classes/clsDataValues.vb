@@ -36,6 +36,7 @@ Class clsDataValues
     Public Const db_fld_SSiteID As String = "SiteID" 'M Integer: Primary Key -> Unique ID for each Sites entry
     Public Const db_fld_SiteCode As String = "SiteCode" 'M String: 50 -> Code used by organization that collects the data
     Public Const db_fld_SiteName As String = "SiteName" 'M String: 255 -> Full name of sampling location
+    Public Const db_fld_SiteType As String = "SiteType"
     Public Const db_fld_Latitude As String = "Latitude" 'M Double -> Latitude in degrees w/ Decimals
     Public Const db_fld_Longitude As String = "Longitude" 'M Double -> Longitude in degrees w/ Decimals
     Public Const db_fld_LatLongDatumID As String = "LatLongDatumID" 'M Integer -> Linked to SpatialReferences.SpatialReferenceID
@@ -166,6 +167,7 @@ Class clsDataValues
     Public Const db_fld_SCSiteID As String = "SiteID" 'P Integer -> Linked to Sites.SiteID
     Public Const db_fld_SCSiteCode As String = "SiteCode" 'P String: 50 -> Site Identifier used by organization that collects the data
     Public Const db_fld_SCSiteName As String = "SiteName" 'P String: 255 -> Full text name of sampling location
+    Public Const db_fld_SCSiteType As String = "SiteType"
     Public Const db_fld_SCVarID As String = "VariableID" 'P Integer -> Linked to Variables.VariableID
     Public Const db_fld_SCVarCode As String = "VariableCode" 'P String: 50 -> Variable identifier used by the organization that collects the data
     Public Const db_fld_SCVarName As String = "VariableName" 'P String: 255 -> Name of the variable from the variables table
@@ -1368,7 +1370,13 @@ Class clsDataValues
         Const db_expr_TimeUnitsName As String = "TimeUnitsName"
 
         Dim SCSelect As String = "SELECT * FROM SeriesCatalog"
-        Dim SiteSelect As String = "SELECT SiteID, SiteCode, SiteName FROM Sites"
+
+        Dim SiteSelect As String
+        If (My.Settings.ODMVersion = "1.1.1") Then
+            SiteSelect = "SELECT SiteID, SiteCode, SiteName, SiteType FROM Sites"
+        Else
+            SiteSelect = "SELECT SiteID, SiteCode, SiteName FROM Sites"
+        End If
         Dim VariableSelect As String = "SELECT VariableID, VariableCode, VariableName, Speciation, VariableUnitsID, VariableUnits.UnitsName AS VariableUnitsName, SampleMedium, ValueType, IsRegular, TimeSupport, TimeUnitsID, TimeUnits.UnitsName AS TimeUnitsName, DataType, GeneralCategory FROM Variables LEFT OUTER JOIN Units AS VariableUnits ON Variables.VariableUnitsID = VariableUnits.UnitsID LEFT OUTER JOIN Units AS TimeUnits ON Variables.TimeUnitsID = TimeUnits.UnitsID "
         Dim MethodSelect As String = "SELECT MethodID, MethodDescription FROM Methods"
         Dim SourceSelect As String = "SELECT SourceID, Organization, SourceDescription, Citation FROM Sources"
@@ -1462,6 +1470,9 @@ Class clsDataValues
                         newRow.Item(db_fld_SCSiteID) = SiteID
                         newRow.Item(db_fld_SCSiteCode) = TestRows(0).Item(db_fld_SiteCode)
                         newRow.Item(db_fld_SCSiteName) = TestRows(0).Item(db_fld_SiteName)
+                        If (My.Settings.ODMVersion = "1.1.1") Then
+                            newRow.Item(db_fld_SCSiteType) = TestRows(0).Item(db_fld_SiteType)
+                        End If
                     Else
                         Throw New Exception("Error Updating Series Catalog Table.<br>Missing Site Information.")
                     End If

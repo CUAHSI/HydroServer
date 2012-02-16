@@ -181,6 +181,7 @@ Module modDB
     Public Const db_fld_SCBeginDTUTC As String = "BeginDateTimeUTC" 'P DateTime -> The First UTC Date
     Public Const db_fld_SCEndDTUTC As String = "EndDateTimeUTC" 'P DateTime -> The Last UTC Date
     Public Const db_fld_SCValueCount As String = "ValueCount" 'P Integer -> The number of vaues in the series (SiteID & VariableID)
+    Public Const db_fld_SCSiteType As String = "SiteType"
 #End Region
 
 #Region "Sites"
@@ -189,6 +190,7 @@ Module modDB
     Public Const db_fld_SiteID As String = "SiteID" 'M Integer: Primary Key -> Unique ID for each Sites entry
     Public Const db_fld_SiteCode As String = "SiteCode" 'O String: 50 -> Code used by organization that collects the data
     Public Const db_fld_SiteName As String = "SiteName" 'O String: 255 -> Full name of sampling location
+    Public Const db_fld_SiteType As String = "SiteType"
     Public Const db_fld_SiteLat As String = "Latitude" 'M Double -> Latitude in degrees w/ Decimals
     Public Const db_fld_SiteLong As String = "Longitude" 'M Double -> Longitude in degrees w/ Decimals
     Public Const db_fld_SiteLatLongDatumID As String = "LatLongDatumID" 'M Integer -> Linked to SpatialReferences.SpatialReferenceID
@@ -273,6 +275,7 @@ Module modDB
     Public Const db_tbl_ValueTypeCV As String = "ValueTypeCV"
     Public Const db_tbl_VariableNameCV As String = "VariableNameCV"
     Public Const db_tbl_VerticalDatumCV As String = "VerticalDatumCV"
+    Public Const db_tbl_SiteTypeCV As String = "SiteTypeCV"
 
     'fields
     Public Const db_fld_CV_Term As String = "Term"
@@ -417,7 +420,7 @@ Module modDB
             Dim BeginUtcDT As DateTime = GetFirstUTCDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
             Dim EndUtcDT As DateTime = GetLastUTCDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
             Dim ValueCount As Integer = GetDataCount(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
-
+            sql = ""
             sql = "INSERT INTO " & db_tbl_SeriesCatalog & _
             " (" & db_fld_SCSiteID & ", " & db_fld_SCSiteCode & ", " & _
                     db_fld_SCSiteName & ", " & db_fld_SCVarID & ", " & db_fld_SCVarCode & ", " & _
@@ -432,8 +435,13 @@ Module modDB
                     db_fld_SCQCLevelID & ", " & _
                     db_fld_SCQCLevelCode & ", " & _
                     db_fld_SCBeginDT & ", " & db_fld_SCEndDT & ", " & _
-                    db_fld_SCBeginDTUTC & ", " & db_fld_SCEndDTUTC & ", " & db_fld_SCValueCount & ")" & _
-            " VALUES ( '" & _
+                    db_fld_SCBeginDTUTC & ", " & db_fld_SCEndDTUTC & ", " & db_fld_SCValueCount
+            If (My.Settings.ODMVersion = "1.1.1") Then
+                sql &= ", " & db_fld_SCSiteType
+            End If
+
+            sql &= ")" & _
+                   " VALUES ( '" & _
                    siteID & "', '" & _
                    FormatForDB(siteInfo.Item(db_fld_SiteCode)) & "', '" & _
                    FormatForDB(siteInfo.Item(db_fld_SiteName)) & "', '" & _
@@ -459,7 +467,11 @@ Module modDB
                    qcLevelID & "', '" & _
                    FormatForDB(qclevelInfo.Item(db_fld_QCLQCLevelCode)) & "', '" & _
                    BeginDT & "', '" & EndDT & "', '" & _
-                   BeginUtcDT & "', '" & EndUtcDT & "', '" & ValueCount & "')"
+                   BeginUtcDT & "', '" & EndUtcDT & "', '" & ValueCount
+            If (My.Settings.ODMVersion = "1.1.1") Then
+                sql &= "', '" & FormatForDB(siteInfo.Item(db_fld_SiteType))
+            End If
+            sql &= "')"
 
             Dim Connection As New SqlClient.SqlConnection(e_settings.ConnectionString)
             Connection.Open()
@@ -812,8 +824,13 @@ Module modDB
         Dim table As New DataTable
         Try
             Dim sql As String = "SELECT " & _
-            db_fld_SiteCode & ", " & db_fld_SiteName & _
-            " FROM " & db_tbl_Sites & _
+            db_fld_SiteCode & ", " & db_fld_SiteName
+
+            If (My.Settings.ODMVersion = "1.1.1") Then
+                sql &= ", " & db_fld_SiteType
+            End If
+
+            sql &= " FROM " & db_tbl_Sites & _
             " WHERE " & db_tbl_Sites & "." & db_fld_SiteID & " = '" & siteID & "'"
 
             table = OpenTable("SiteInfo", sql, e_settings)

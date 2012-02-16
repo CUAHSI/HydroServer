@@ -6,7 +6,7 @@ WebDataLoader
 </name>
 </assembly>
 <members>
-<member name="F:WebDataLoader._Default.form1">
+<member name="F:WebDataLoader.ConfirmationPage.form1">
 	<summary>
 form1 control.
 </summary>
@@ -14,23 +14,7 @@ form1 control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
-</member><member name="F:WebDataLoader._Default.WDL1">
-	<summary>
-WDL1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.Head1">
-	<summary>
-Head1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.Image1">
+</member><member name="F:WebDataLoader.ConfirmationPage.Image1">
 	<summary>
 Image1 control.
 </summary>
@@ -38,128 +22,7 @@ Image1 control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.form1">
-	<summary>
-form1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.Label1">
-	<summary>
-Label1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.fuOpenFilePath">
-	<summary>
-fuOpenFilePath control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.btnUpload">
-	<summary>
-btnUpload control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.btnCommit">
-	<summary>
-btnCommit control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.btnCancel">
-	<summary>
-btnCancel control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.lblstatus">
-	<summary>
-lblstatus control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.Panel1">
-	<summary>
-Panel1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.dgvData">
-	<summary>
-dgvData control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.tabledata">
-	<summary>
-tabledata control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="P:WebDataLoader.My.MyWebExtension.Computer">
-	<summary>
- Returns information about the host computer.
- </summary>
-</member><member name="P:WebDataLoader.My.MyWebExtension.User">
-	<summary>
- Returns information for the current Web user.
- </summary>
-</member><member name="P:WebDataLoader.My.MyWebExtension.Request">
-	<summary>
- Returns Request object.
- </summary>
-</member><member name="P:WebDataLoader.My.MyWebExtension.Response">
-	<summary>
- Returns Response object.
- </summary>
-</member><member name="P:WebDataLoader.My.MyWebExtension.Log">
-	<summary>
- Returns the Asp log object.
- </summary>
-</member><member name="T:WebDataLoader.My.MyWebExtension">
-	<summary>
- Module used to define the properties that are available in the My Namespace for Web projects.
- </summary>
-	<remarks></remarks>
-</member><member name="F:WebDataLoader.WebForm1.form1">
-	<summary>
-form1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebForm1.Image1">
-	<summary>
-Image1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebForm1.lblFilesSaved">
+</member><member name="F:WebDataLoader.ConfirmationPage.lblFilesSaved">
 	<summary>
 lblFilesSaved control.
 </summary>
@@ -167,7 +30,7 @@ lblFilesSaved control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
-</member><member name="F:WebDataLoader.WebForm1.btnNewFile">
+</member><member name="F:WebDataLoader.ConfirmationPage.btnNewFile">
 	<summary>
 btnNewFile control.
 </summary>
@@ -175,7 +38,7 @@ btnNewFile control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
-</member><member name="F:WebDataLoader.WebForm1.btnNewDB">
+</member><member name="F:WebDataLoader.ConfirmationPage.btnNewDB">
 	<summary>
 btnNewDB control.
 </summary>
@@ -295,6 +158,127 @@ lblstatus control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
+</member><member name="P:WebDataLoader.My.MyWebExtension.Computer">
+	<summary>
+ Returns information about the host computer.
+ </summary>
+</member><member name="P:WebDataLoader.My.MyWebExtension.User">
+	<summary>
+ Returns information for the current Web user.
+ </summary>
+</member><member name="P:WebDataLoader.My.MyWebExtension.Request">
+	<summary>
+ Returns Request object.
+ </summary>
+</member><member name="P:WebDataLoader.My.MyWebExtension.Response">
+	<summary>
+ Returns Response object.
+ </summary>
+</member><member name="P:WebDataLoader.My.MyWebExtension.Log">
+	<summary>
+ Returns the Asp log object.
+ </summary>
+</member><member name="T:WebDataLoader.My.MyWebExtension">
+	<summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Head1">
+	<summary>
+Head1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Image1">
+	<summary>
+Image1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Label1">
+	<summary>
+Label1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.fuOpenFilePath">
+	<summary>
+fuOpenFilePath control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.btnUpload">
+	<summary>
+btnUpload control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.btnCommit">
+	<summary>
+btnCommit control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.btnCancel">
+	<summary>
+btnCancel control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.lblstatus">
+	<summary>
+lblstatus control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Panel1">
+	<summary>
+Panel1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.dgvData">
+	<summary>
+dgvData control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.tabledata">
+	<summary>
+tabledata control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
 </member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection)">
 	<summary>
  Create a blank categories file with a connection to the database
@@ -346,6 +330,22 @@ To modify move field declaration from designer file to code-behind file.
  Class to read a Categories file and submit it to a database
  </summary>
 	<remarks></remarks>
+</member><member name="F:WebDataLoader._Default.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader._Default.WDL1">
+	<summary>
+WDL1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
 </member>
 </members>
 </doc>
