@@ -157,7 +157,7 @@ Partial Class ucCVMerge
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cboCVType, Me.btnRefreshWeb, Me.btnRefreshLocal, Me.btnUpdateLocal, Me.btnFixRow, Me.btnApply, Me.btnFinished})
         Me.ToolStrip1.Location = New System.Drawing.Point(3, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(597, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(630, 25)
         Me.ToolStrip1.TabIndex = 3
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -173,7 +173,7 @@ Partial Class ucCVMerge
         Me.btnRefreshWeb.Image = CType(resources.GetObject("btnRefreshWeb.Image"), System.Drawing.Image)
         Me.btnRefreshWeb.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnRefreshWeb.Name = "btnRefreshWeb"
-        Me.btnRefreshWeb.Size = New System.Drawing.Size(76, 22)
+        Me.btnRefreshWeb.Size = New System.Drawing.Size(81, 22)
         Me.btnRefreshWeb.Text = "Master CV"
         '
         'btnRefreshLocal
@@ -181,7 +181,7 @@ Partial Class ucCVMerge
         Me.btnRefreshLocal.Image = CType(resources.GetObject("btnRefreshLocal.Image"), System.Drawing.Image)
         Me.btnRefreshLocal.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnRefreshLocal.Name = "btnRefreshLocal"
-        Me.btnRefreshLocal.Size = New System.Drawing.Size(67, 22)
+        Me.btnRefreshLocal.Size = New System.Drawing.Size(73, 22)
         Me.btnRefreshLocal.Text = "Local CV"
         '
         'btnUpdateLocal
@@ -189,7 +189,7 @@ Partial Class ucCVMerge
         Me.btnUpdateLocal.Image = CType(resources.GetObject("btnUpdateLocal.Image"), System.Drawing.Image)
         Me.btnUpdateLocal.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnUpdateLocal.Name = "btnUpdateLocal"
-        Me.btnUpdateLocal.Size = New System.Drawing.Size(105, 22)
+        Me.btnUpdateLocal.Size = New System.Drawing.Size(114, 22)
         Me.btnUpdateLocal.Text = "Update Local CV"
         '
         'btnFixRow
@@ -197,7 +197,7 @@ Partial Class ucCVMerge
         Me.btnFixRow.Image = CType(resources.GetObject("btnFixRow.Image"), System.Drawing.Image)
         Me.btnFixRow.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnFixRow.Name = "btnFixRow"
-        Me.btnFixRow.Size = New System.Drawing.Size(65, 22)
+        Me.btnFixRow.Size = New System.Drawing.Size(67, 22)
         Me.btnFixRow.Text = "Fix Row"
         Me.btnFixRow.Visible = False
         '
@@ -206,7 +206,7 @@ Partial Class ucCVMerge
         Me.btnApply.Image = CType(resources.GetObject("btnApply.Image"), System.Drawing.Image)
         Me.btnApply.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnApply.Name = "btnApply"
-        Me.btnApply.Size = New System.Drawing.Size(54, 22)
+        Me.btnApply.Size = New System.Drawing.Size(58, 22)
         Me.btnApply.Text = "Apply"
         Me.btnApply.Visible = False
         '
@@ -215,7 +215,7 @@ Partial Class ucCVMerge
         Me.btnFinished.Image = CType(resources.GetObject("btnFinished.Image"), System.Drawing.Image)
         Me.btnFinished.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnFinished.Name = "btnFinished"
-        Me.btnFinished.Size = New System.Drawing.Size(66, 22)
+        Me.btnFinished.Size = New System.Drawing.Size(71, 22)
         Me.btnFinished.Text = "Finished"
         '
         'tscControls

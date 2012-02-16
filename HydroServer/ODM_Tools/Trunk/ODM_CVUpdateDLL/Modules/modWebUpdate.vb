@@ -59,7 +59,7 @@ Module modWebUpdate
                 Return table
             End If
         Catch ex As Exception
-            ShowError("An error occurred reading the Web Servive.", ex)
+            ShowError("An error occurred reading the Web Service.", ex)
         End Try
         'An error occurred
         Return Nothing

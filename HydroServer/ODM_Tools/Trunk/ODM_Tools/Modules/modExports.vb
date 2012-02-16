@@ -45,7 +45,8 @@ Module Exports
 
 	'DataSeries >> SiteInformation element
 	Const xml_meta_Site_Code As String = "SiteCode"
-	Const xml_meta_Site_Name As String = "SiteName"
+    Const xml_meta_Site_Name As String = "SiteName"
+    Const xml_meta_Site_Type As String = "SiteType"
     Const xml_meta_Site_Geo As String = "GeographicCoordinates"  'Child element
     Const xml_meta_Site_Local As String = "LocalCoordinates"  'Child element
 	Const xml_meta_Site_State As String = "State"
@@ -171,123 +172,126 @@ Module Exports
          db_tbl_ISOMetaData & "." & db_fld_IMDProfileVs & ", " & _
          db_tbl_ISOMetaData & "." & db_fld_IMDMetaLink & ", " & _
          db_tbl_Sites & "." & db_fld_SiteCode & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteName & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteLat & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteLong & ", " & _
-         db_expr_Geo & "." & db_fld_SRSRSID & " AS " & db_expr_Geo_SRSID & ", " & _
-         db_expr_Geo & "." & db_fld_SRSRSName & " AS " & db_expr_Geo_SRSName & ", " & _
-         db_expr_Geo & "." & db_fld_SRIsGeo & " AS " & db_expr_Geo_IsGeo & ", " & _
-         db_expr_Geo & "." & db_fld_SRNotes & " AS " & db_expr_Geo_Notes & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteVertDatum & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteLocX & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteLocY & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteElev_m & ", " & _
-         db_tbl_Sites & "." & db_fld_SitePosAccuracy_m & ", " & _
-         db_expr_Local & "." & db_fld_SRSRSID & " AS " & db_expr_Local_SRSID & ", " & _
-         db_expr_Local & "." & db_fld_SRSRSName & " AS " & db_expr_Local_SRSName & ", " & _
-         db_expr_Local & "." & db_fld_SRIsGeo & " AS " & db_expr_Local_IsGeo & ", " & _
-         db_expr_Local & "." & db_fld_SRNotes & " AS " & db_expr_Local_Notes & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteState & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteCounty & ", " & _
-         db_tbl_Sites & "." & db_fld_SiteComments & ", " & _
-         db_tbl_Variables & "." & db_fld_VarCode & ", " & _
-         db_tbl_Variables & "." & db_fld_VarName & ", " & _
-         db_expr_VarUnits & "." & db_fld_UnitsName & " AS " & db_expr_VarUnits_Name & ", " & _
-         db_expr_VarUnits & "." & db_fld_UnitsType & " AS " & db_expr_VarUnits_Type & ", " & _
-         db_expr_VarUnits & "." & db_fld_UnitsAbrv & " AS " & db_expr_VarUnits_Abbr & ", " & _
-         db_tbl_Variables & "." & db_fld_VarTimeSupport & ", " & _
-         db_expr_TimeUnits & "." & db_fld_UnitsName & " AS " & db_expr_TimeUnits_Name & ", " & _
-         db_expr_TimeUnits & "." & db_fld_UnitsType & " AS " & db_expr_TimeUnits_Type & ", " & _
-         db_expr_TimeUnits & "." & db_fld_UnitsAbrv & " AS " & db_expr_TimeUnits_Abbr & ", " & _
-         db_tbl_Variables & "." & db_fld_VarSampleMed & ", " & _
-         db_tbl_Variables & "." & db_fld_VarValueType & ", " & _
-         db_tbl_Variables & "." & db_fld_VarIsRegular & ", " & _
-         db_tbl_SeriesCatalog & "." & db_fld_SCBeginDT & ", " & _
-         db_tbl_SeriesCatalog & "." & db_fld_SCEndDT & ", " & _
-         db_tbl_SeriesCatalog & "." & db_fld_SCBeginDTUTC & ", " & _
-         db_tbl_SeriesCatalog & "." & db_fld_SCEndDTUTC & ", " & _
-         db_tbl_SeriesCatalog & "." & db_fld_SCValueCount & ", " & _
-         db_tbl_Variables & "." & db_fld_VarDataType & ", " & _
-         db_tbl_Variables & "." & db_fld_VarSpeciation & ", " & _
-         db_tbl_Variables & "." & db_fld_VarGenCat & ", " & _
-         db_tbl_Variables & "." & db_fld_VarNoDataVal & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcOrg & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcDesc & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcLink & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcContactName & " AS " & db_expr_contact_Name & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcPhone & " AS " & db_expr_contact_Phone & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcEmail & " AS " & db_expr_contact_Email & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcAddress & " AS " & db_expr_contact_Address & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcCity & " AS " & db_expr_contact_City & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcState & " AS " & db_expr_contact_State & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcZip & " AS " & db_expr_contact_Zip & ", " & _
-         db_tbl_Sources & "." & db_fld_SrcCitation & ", " & _
-         db_tbl_OffsetTypes & "." & db_fld_OTDesc & ", " & _
-         db_expr_OffsetUnits & "." & db_fld_UnitsName & " AS " & db_expr_OffsetUnits_Name & ", " & _
-         db_expr_OffsetUnits & "." & db_fld_UnitsType & " AS " & db_expr_OffsetUnits_Type & ", " & _
-         db_expr_OffsetUnits & "." & db_fld_UnitsAbrv & " AS " & db_expr_OffsetUnits_Abbr & ", " & _
-         db_tbl_Methods & "." & db_fld_MethDesc & ", " & _
-         db_tbl_Methods & "." & db_fld_MethLink & ", " & _
-         db_tbl_QCLevels & "." & db_fld_QCLQCLevel & ", " & _
-         db_tbl_QCLevels & "." & db_fld_QCLCode & ", " & _
-         db_tbl_QCLevels & "." & db_fld_QCLDefinition & ", " & _
-         db_tbl_QCLevels & "." & db_fld_QCLExplanation
+         db_tbl_Sites & "." & db_fld_SiteName & ", "
+        If My.Settings.ODMVersion = "1.1.1" Then
+            sql &= db_tbl_Sites & "." & db_fld_SiteType & ", "
+        End If
+            sql &= db_tbl_Sites & "." & db_fld_SiteLat & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteLong & ", " & _
+             db_expr_Geo & "." & db_fld_SRSRSID & " AS " & db_expr_Geo_SRSID & ", " & _
+             db_expr_Geo & "." & db_fld_SRSRSName & " AS " & db_expr_Geo_SRSName & ", " & _
+             db_expr_Geo & "." & db_fld_SRIsGeo & " AS " & db_expr_Geo_IsGeo & ", " & _
+             db_expr_Geo & "." & db_fld_SRNotes & " AS " & db_expr_Geo_Notes & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteVertDatum & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteLocX & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteLocY & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteElev_m & ", " & _
+             db_tbl_Sites & "." & db_fld_SitePosAccuracy_m & ", " & _
+             db_expr_Local & "." & db_fld_SRSRSID & " AS " & db_expr_Local_SRSID & ", " & _
+             db_expr_Local & "." & db_fld_SRSRSName & " AS " & db_expr_Local_SRSName & ", " & _
+             db_expr_Local & "." & db_fld_SRIsGeo & " AS " & db_expr_Local_IsGeo & ", " & _
+             db_expr_Local & "." & db_fld_SRNotes & " AS " & db_expr_Local_Notes & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteState & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteCounty & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteComments & ", " & _
+             db_tbl_Variables & "." & db_fld_VarCode & ", " & _
+             db_tbl_Variables & "." & db_fld_VarName & ", " & _
+             db_expr_VarUnits & "." & db_fld_UnitsName & " AS " & db_expr_VarUnits_Name & ", " & _
+             db_expr_VarUnits & "." & db_fld_UnitsType & " AS " & db_expr_VarUnits_Type & ", " & _
+             db_expr_VarUnits & "." & db_fld_UnitsAbrv & " AS " & db_expr_VarUnits_Abbr & ", " & _
+             db_tbl_Variables & "." & db_fld_VarTimeSupport & ", " & _
+             db_expr_TimeUnits & "." & db_fld_UnitsName & " AS " & db_expr_TimeUnits_Name & ", " & _
+             db_expr_TimeUnits & "." & db_fld_UnitsType & " AS " & db_expr_TimeUnits_Type & ", " & _
+             db_expr_TimeUnits & "." & db_fld_UnitsAbrv & " AS " & db_expr_TimeUnits_Abbr & ", " & _
+             db_tbl_Variables & "." & db_fld_VarSampleMed & ", " & _
+             db_tbl_Variables & "." & db_fld_VarValueType & ", " & _
+             db_tbl_Variables & "." & db_fld_VarIsRegular & ", " & _
+             db_tbl_SeriesCatalog & "." & db_fld_SCBeginDT & ", " & _
+             db_tbl_SeriesCatalog & "." & db_fld_SCEndDT & ", " & _
+             db_tbl_SeriesCatalog & "." & db_fld_SCBeginDTUTC & ", " & _
+             db_tbl_SeriesCatalog & "." & db_fld_SCEndDTUTC & ", " & _
+             db_tbl_SeriesCatalog & "." & db_fld_SCValueCount & ", " & _
+             db_tbl_Variables & "." & db_fld_VarDataType & ", " & _
+             db_tbl_Variables & "." & db_fld_VarSpeciation & ", " & _
+             db_tbl_Variables & "." & db_fld_VarGenCat & ", " & _
+             db_tbl_Variables & "." & db_fld_VarNoDataVal & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcOrg & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcDesc & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcLink & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcContactName & " AS " & db_expr_contact_Name & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcPhone & " AS " & db_expr_contact_Phone & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcEmail & " AS " & db_expr_contact_Email & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcAddress & " AS " & db_expr_contact_Address & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcCity & " AS " & db_expr_contact_City & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcState & " AS " & db_expr_contact_State & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcZip & " AS " & db_expr_contact_Zip & ", " & _
+             db_tbl_Sources & "." & db_fld_SrcCitation & ", " & _
+             db_tbl_OffsetTypes & "." & db_fld_OTDesc & ", " & _
+             db_expr_OffsetUnits & "." & db_fld_UnitsName & " AS " & db_expr_OffsetUnits_Name & ", " & _
+             db_expr_OffsetUnits & "." & db_fld_UnitsType & " AS " & db_expr_OffsetUnits_Type & ", " & _
+             db_expr_OffsetUnits & "." & db_fld_UnitsAbrv & " AS " & db_expr_OffsetUnits_Abbr & ", " & _
+             db_tbl_Methods & "." & db_fld_MethDesc & ", " & _
+             db_tbl_Methods & "." & db_fld_MethLink & ", " & _
+             db_tbl_QCLevels & "." & db_fld_QCLQCLevel & ", " & _
+             db_tbl_QCLevels & "." & db_fld_QCLCode & ", " & _
+             db_tbl_QCLevels & "." & db_fld_QCLDefinition & ", " & _
+             db_tbl_QCLevels & "." & db_fld_QCLExplanation
 
-        'FROM statement
-        sql = sql & " FROM " & _
-            db_tbl_SeriesCatalog & " LEFT OUTER JOIN " & _
-            db_tbl_Sites & " ON " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCSiteID & " = " & _
-            db_tbl_Sites & "." & db_fld_SiteID & " LEFT OUTER JOIN " & _
-            db_tbl_SpatialRefs & " AS " & db_expr_Geo & " ON " & _
-            db_expr_Geo & "." & db_fld_SRID & " = " & _
-            db_tbl_Sites & "." & db_fld_SiteLatLongDatumID & " LEFT OUTER JOIN " & _
-            db_tbl_SpatialRefs & " AS " & db_expr_Local & " ON " & _
-            db_expr_Local & "." & db_fld_SRID & " = " & _
-            db_tbl_Sites & "." & db_fld_SiteLocProjID & " LEFT OUTER JOIN " & _
-            db_tbl_Variables & " ON " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCVarID & " = " & _
-            db_tbl_Variables & "." & db_fld_VarID & " LEFT OUTER JOIN " & _
-            db_tbl_Units & " AS " & db_expr_VarUnits & " ON " & _
-            db_expr_VarUnits & "." & db_fld_UnitsID & " = " & _
-            db_tbl_Variables & "." & db_fld_VarUnitsID & " LEFT OUTER JOIN " & _
-            db_tbl_Units & " AS " & db_expr_TimeUnits & " ON " & _
-            db_tbl_Variables & "." & db_fld_VarTimeUnitsID & " = " & _
-            db_expr_TimeUnits & "." & db_fld_UnitsID & " LEFT OUTER JOIN " & _
-            db_tbl_QCLevels & " ON " & _
-            db_tbl_QCLevels & "." & db_fld_QCLQCLevel & " = " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCQCLevel & " LEFT OUTER JOIN " & _
-            db_tbl_Methods & " ON " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCMethodID & " = " & _
-            db_tbl_Methods & "." & db_fld_MethID & " LEFT OUTER JOIN " & _
-            db_tbl_Sources & " ON " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCSourceID & " = " & _
-            db_tbl_Sources & "." & db_fld_SrcID & " LEFT OUTER JOIN " & _
-            db_tbl_ISOMetaData & " ON " & _
-            db_tbl_ISOMetaData & "." & db_fld_IMDMetaID & " = " & _
-            db_tbl_Sources & "." & db_fld_SrcMetaID & " LEFT OUTER JOIN " & _
-            db_tbl_DataValues & " ON " & _
-            db_tbl_DataValues & "." & db_fld_ValSiteID & " = " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCSiteID & " AND " & _
-            db_tbl_DataValues & "." & db_fld_ValVarID & " = " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCVarID & " AND " & _
-            db_tbl_DataValues & "." & db_fld_ValMethodID & " = " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCMethodID & " AND " & _
-            db_tbl_DataValues & "." & db_fld_ValSourceID & " = " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCSourceID & " AND " & _
-            db_tbl_DataValues & "." & db_fld_ValQCLevel & " = " & _
-            db_tbl_SeriesCatalog & "." & db_fld_SCQCLevel & " LEFT OUTER JOIN " & _
-            db_tbl_OffsetTypes & " ON " & _
-            db_tbl_OffsetTypes & "." & db_fld_OTID & " = " & _
-            db_tbl_DataValues & "." & db_fld_ValOffsetTypeID & " LEFT OUTER JOIN " & _
-            db_tbl_Units & " AS " & db_expr_OffsetUnits & " ON " & _
-            db_expr_OffsetUnits & "." & db_fld_UnitsID & " = " & _
-            db_tbl_OffsetTypes & "." & db_fld_OTUnitsID
+            'FROM statement
+            sql = sql & " FROM " & _
+                db_tbl_SeriesCatalog & " LEFT OUTER JOIN " & _
+                db_tbl_Sites & " ON " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCSiteID & " = " & _
+                db_tbl_Sites & "." & db_fld_SiteID & " LEFT OUTER JOIN " & _
+                db_tbl_SpatialRefs & " AS " & db_expr_Geo & " ON " & _
+                db_expr_Geo & "." & db_fld_SRID & " = " & _
+                db_tbl_Sites & "." & db_fld_SiteLatLongDatumID & " LEFT OUTER JOIN " & _
+                db_tbl_SpatialRefs & " AS " & db_expr_Local & " ON " & _
+                db_expr_Local & "." & db_fld_SRID & " = " & _
+                db_tbl_Sites & "." & db_fld_SiteLocProjID & " LEFT OUTER JOIN " & _
+                db_tbl_Variables & " ON " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCVarID & " = " & _
+                db_tbl_Variables & "." & db_fld_VarID & " LEFT OUTER JOIN " & _
+                db_tbl_Units & " AS " & db_expr_VarUnits & " ON " & _
+                db_expr_VarUnits & "." & db_fld_UnitsID & " = " & _
+                db_tbl_Variables & "." & db_fld_VarUnitsID & " LEFT OUTER JOIN " & _
+                db_tbl_Units & " AS " & db_expr_TimeUnits & " ON " & _
+                db_tbl_Variables & "." & db_fld_VarTimeUnitsID & " = " & _
+                db_expr_TimeUnits & "." & db_fld_UnitsID & " LEFT OUTER JOIN " & _
+                db_tbl_QCLevels & " ON " & _
+                db_tbl_QCLevels & "." & db_fld_QCLQCLevel & " = " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCQCLevel & " LEFT OUTER JOIN " & _
+                db_tbl_Methods & " ON " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCMethodID & " = " & _
+                db_tbl_Methods & "." & db_fld_MethID & " LEFT OUTER JOIN " & _
+                db_tbl_Sources & " ON " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCSourceID & " = " & _
+                db_tbl_Sources & "." & db_fld_SrcID & " LEFT OUTER JOIN " & _
+                db_tbl_ISOMetaData & " ON " & _
+                db_tbl_ISOMetaData & "." & db_fld_IMDMetaID & " = " & _
+                db_tbl_Sources & "." & db_fld_SrcMetaID & " LEFT OUTER JOIN " & _
+                db_tbl_DataValues & " ON " & _
+                db_tbl_DataValues & "." & db_fld_ValSiteID & " = " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCSiteID & " AND " & _
+                db_tbl_DataValues & "." & db_fld_ValVarID & " = " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCVarID & " AND " & _
+                db_tbl_DataValues & "." & db_fld_ValMethodID & " = " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCMethodID & " AND " & _
+                db_tbl_DataValues & "." & db_fld_ValSourceID & " = " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCSourceID & " AND " & _
+                db_tbl_DataValues & "." & db_fld_ValQCLevel & " = " & _
+                db_tbl_SeriesCatalog & "." & db_fld_SCQCLevel & " LEFT OUTER JOIN " & _
+                db_tbl_OffsetTypes & " ON " & _
+                db_tbl_OffsetTypes & "." & db_fld_OTID & " = " & _
+                db_tbl_DataValues & "." & db_fld_ValOffsetTypeID & " LEFT OUTER JOIN " & _
+                db_tbl_Units & " AS " & db_expr_OffsetUnits & " ON " & _
+                db_expr_OffsetUnits & "." & db_fld_UnitsID & " = " & _
+                db_tbl_OffsetTypes & "." & db_fld_OTUnitsID
 
-        'Write the WHERE statement
-        sql = sql & " WHERE (" & db_tbl_SeriesCatalog & "." & db_fld_SCSeriesID & " = " & e_SeriesID & ") "
+            'Write the WHERE statement
+            sql = sql & " WHERE (" & db_tbl_SeriesCatalog & "." & db_fld_SCSeriesID & " = " & e_SeriesID & ") "
 
-        Return sql
+            Return sql
     End Function
 
 	Public Function CreateMetadataOffsetQuery(ByVal e_SeriesID As String) As String
@@ -504,8 +508,11 @@ Module Exports
         'Include the Site information
         If g_CurrOptions.ExportSite Then
             sql = sql & ", " & _
-             db_tbl_Sites & "." & db_fld_SiteName & ", " & _
-             db_tbl_Sites & "." & db_fld_SiteLat & ", " & _
+             db_tbl_Sites & "." & db_fld_SiteName & ", "
+            If My.Settings.ODMVersion = "1.1.1" Then
+                sql &= db_tbl_Sites & "." & db_fld_SiteType & ", "
+            End If
+                sql = sql & db_tbl_Sites & "." & db_fld_SiteLat & ", " & _
              db_tbl_Sites & "." & db_fld_SiteLong & ", " & _
              db_tbl_SpatialRefs & "." & db_fld_SRSRSName
         End If
@@ -747,7 +754,9 @@ Module Exports
                             writer.WriteStartElement(xml_meta_DS_Site) 'DataSeries >> SiteInformation Element
                             writer.WriteElementString(xml_meta_Site_Code, series.Rows(0).Item(db_fld_SiteCode).ToString)
                             writer.WriteElementString(xml_meta_Site_Name, series.Rows(0).Item(db_fld_SiteName).ToString)
-
+                            If My.Settings.ODMVersion = "1.1.1" Then
+                                writer.WriteElementString(xml_meta_Site_Type, series.Rows(0).Item(db_fld_SiteType).ToString)
+                            End If
                             writer.WriteStartElement(xml_meta_Site_Geo) 'SiteInformation >> GeographicCoordinates Element
                             writer.WriteElementString(xml_meta_Geo_Lat, series.Rows(0).Item(db_fld_SiteLat).ToString)
                             writer.WriteElementString(xml_meta_Geo_Lon, series.Rows(0).Item(db_fld_SiteLong).ToString)
@@ -978,6 +987,9 @@ Module Exports
                 writer.Write(db_fld_SiteCode & delimiter)
                 If g_CurrOptions.ExportSite Then 'OPTIONAL
                     writer.Write(db_fld_SiteName & delimiter)
+                    If My.Settings.ODMVersion = "1.1.1" Then
+                        writer.Write(db_fld_SiteType & delimiter)
+                    End If
                     writer.Write(db_fld_SiteLat & delimiter)
                     writer.Write(db_fld_SiteLong & delimiter)
                     writer.Write(db_fld_SRSRSName & delimiter)
@@ -1014,25 +1026,28 @@ Module Exports
                 End If
                 writer.Write(db_fld_ValSampleID & vbCrLf)
 
-                For i = 0 To QueryTable.Rows.Count - 1
+                For i = 0 To queryTable.Rows.Count - 1
                     'Write each line of data, placing commas in between each value in the same row
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_SCSeriesID) & delimiter)
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_ValID) & delimiter)
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_ValValue) & delimiter)
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_ValAccuracyStdDev) & delimiter)
-                    writer.Write(CDate(QueryTable.Rows(i).Item(db_fld_ValDateTime)).ToString & delimiter)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_SCSeriesID) & delimiter)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_ValID) & delimiter)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_ValValue) & delimiter)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_ValAccuracyStdDev) & delimiter)
+                    writer.Write(CDate(queryTable.Rows(i).Item(db_fld_ValDateTime)).ToString & delimiter)
                     If g_CurrOptions.ExportTime Then 'OPTIONAL
-                        writer.Write(CDate(QueryTable.Rows(i).Item(db_fld_ValUTCDateTime)).ToString & delimiter)
-                        writer.Write(QueryTable.Rows(i).Item(db_fld_ValUTCOffset) & delimiter)
+                        writer.Write(CDate(queryTable.Rows(i).Item(db_fld_ValUTCDateTime)).ToString & delimiter)
+                        writer.Write(queryTable.Rows(i).Item(db_fld_ValUTCOffset) & delimiter)
                     End If
-                    writer.Write("""" & QueryTable.Rows(i).Item(db_fld_SiteCode) & """" & delimiter)
+                    writer.Write("""" & queryTable.Rows(i).Item(db_fld_SiteCode) & """" & delimiter)
                     If g_CurrOptions.ExportSite Then 'OPTIONAL
-                        writer.Write("""" & QueryTable.Rows(i).Item(db_fld_SiteName) & """" & delimiter)
-                        writer.Write(QueryTable.Rows(i).Item(db_fld_SiteLat) & delimiter)
-                        writer.Write(QueryTable.Rows(i).Item(db_fld_SiteLong) & delimiter)
-                        writer.Write("""" & QueryTable.Rows(i).Item(db_fld_SRSRSName) & """" & delimiter)
+                        writer.Write("""" & queryTable.Rows(i).Item(db_fld_SiteName) & """" & delimiter)
+                        If My.Settings.ODMVersion = "1.1.1" Then
+                            writer.Write("""" & queryTable.Rows(i).Item(db_fld_SiteType) & """" & delimiter)
+                        End If
+                        writer.Write(queryTable.Rows(i).Item(db_fld_SiteLat) & delimiter)
+                        writer.Write(queryTable.Rows(i).Item(db_fld_SiteLong) & delimiter)
+                        writer.Write("""" & queryTable.Rows(i).Item(db_fld_SRSRSName) & """" & delimiter)
                     End If
-                    writer.Write("""" & QueryTable.Rows(i).Item(db_fld_VarCode) & """" & delimiter)
+                    writer.Write("""" & queryTable.Rows(i).Item(db_fld_VarCode) & """" & delimiter)
                     If g_CurrOptions.ExportVariable Then 'OPTIONAL
                         writer.Write("""" & queryTable.Rows(i).Item(db_fld_VarName) & """" & delimiter)
                         writer.Write("""" & queryTable.Rows(i).Item(db_fld_VarSpeciation) & """" & delimiter)
@@ -1040,20 +1055,20 @@ Module Exports
                         writer.Write("""" & queryTable.Rows(i).Item(db_expr_VarUnits_Abbr) & """" & delimiter)
                         writer.Write("""" & queryTable.Rows(i).Item(db_fld_VarSampleMed) & """" & delimiter)
                     End If
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_ValOffsetValue) & delimiter)
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_ValOffsetTypeID) & delimiter)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_ValOffsetValue) & delimiter)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_ValOffsetTypeID) & delimiter)
                     If g_CurrOptions.ExportOffset Then 'OPTIONAL
-                        writer.Write("""" & QueryTable.Rows(i).Item(db_fld_OTDesc) & """" & delimiter)
-                        writer.Write("""" & QueryTable.Rows(i).Item(db_expr_OffsetUnits_Name) & """" & delimiter)
+                        writer.Write("""" & queryTable.Rows(i).Item(db_fld_OTDesc) & """" & delimiter)
+                        writer.Write("""" & queryTable.Rows(i).Item(db_expr_OffsetUnits_Name) & """" & delimiter)
                     End If
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_ValCensorCode) & delimiter)
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_ValQualifierID) & delimiter)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_ValCensorCode) & delimiter)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_ValQualifierID) & delimiter)
                     If g_CurrOptions.ExportQualifier Then 'OPTIONAL
-                        writer.Write("""" & QueryTable.Rows(i).Item(db_fld_QlfyCode) & """" & delimiter)
-                        writer.Write("""" & QueryTable.Rows(i).Item(db_fld_QlfyDesc) & """" & delimiter)
+                        writer.Write("""" & queryTable.Rows(i).Item(db_fld_QlfyCode) & """" & delimiter)
+                        writer.Write("""" & queryTable.Rows(i).Item(db_fld_QlfyDesc) & """" & delimiter)
                     End If
                     If g_CurrOptions.ExportSource Then 'OPTIONAL
-                        writer.Write("""" & QueryTable.Rows(i).Item(db_fld_SrcOrg) & """" & delimiter)
+                        writer.Write("""" & queryTable.Rows(i).Item(db_fld_SrcOrg) & """" & delimiter)
                         writer.Write("""" & queryTable.Rows(i).Item(db_fld_SrcDesc) & """" & delimiter)
                         writer.Write("""" & queryTable.Rows(i).Item(db_fld_SrcCitation) & """" & delimiter)
                     End If
@@ -1062,7 +1077,7 @@ Module Exports
                         writer.Write("""" & queryTable.Rows(i).Item(db_fld_QCLDefinition) & """" & delimiter)
                         writer.Write("""" & queryTable.Rows(i).Item(db_fld_QCLExplanation) & """" & delimiter)
                     End If
-                    writer.Write(QueryTable.Rows(i).Item(db_fld_ValSampleID) & vbCrLf)
+                    writer.Write(queryTable.Rows(i).Item(db_fld_ValSampleID) & vbCrLf)
                 Next i
             Else
                 'StreamWriter did not create the file correctly

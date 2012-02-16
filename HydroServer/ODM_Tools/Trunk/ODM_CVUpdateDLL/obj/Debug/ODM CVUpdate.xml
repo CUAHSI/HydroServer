@@ -6,7 +6,20 @@ ODMCVUpdate
 </name>
 </assembly>
 <members>
-<member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.#ctor">
+<member name="P:ODM_CVUpdate.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:ODM_CVUpdate.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:ODM_CVUpdate.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.#ctor">
 	<remarks/>
 </member><member name="E:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetCensorCodeCVCompleted">
 	<remarks/>
@@ -31,6 +44,8 @@ ODMCVUpdate
 </member><member name="E:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetUnitsCompleted">
 	<remarks/>
 </member><member name="E:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSpeciationCVCompleted">
+	<remarks/>
+</member><member name="E:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSiteTypeCVCompleted">
 	<remarks/>
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetCensorCodeCV">
 	<remarks/>
@@ -103,6 +118,12 @@ ODMCVUpdate
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSpeciationCVAsync">
 	<remarks/>
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSpeciationCVAsync(System.Object)">
+	<remarks/>
+</member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSiteTypeCV">
+	<remarks/>
+</member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSiteTypeCVAsync">
+	<remarks/>
+</member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSiteTypeCVAsync(System.Object)">
 	<remarks/>
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.CancelAsync(System.Object)">
 	<remarks/>
@@ -180,19 +201,12 @@ ODMCVUpdate
 	<remarks/>
 </member><member name="T:ODM_CVUpdate.wrCVUpdate.GetSpeciationCVCompletedEventArgs">
 	<remarks/>
-</member><member name="P:ODM_CVUpdate.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:ODM_CVUpdate.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:ODM_CVUpdate.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
+</member><member name="T:ODM_CVUpdate.wrCVUpdate.GetSiteTypeCVCompletedEventHandler">
+	<remarks/>
+</member><member name="P:ODM_CVUpdate.wrCVUpdate.GetSiteTypeCVCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:ODM_CVUpdate.wrCVUpdate.GetSiteTypeCVCompletedEventArgs">
+	<remarks/>
 </member>
 </members>
 </doc>

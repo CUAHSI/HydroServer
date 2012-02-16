@@ -191,6 +191,7 @@ Module modDatabase
     Public Const db_fld_SCSiteID As String = "SiteID" 'P Integer -> Linked to Sites.SiteID
     Public Const db_fld_SCSiteCode As String = "SiteCode" 'P String: 50 -> Site Identifier used by organization that collects the data
     Public Const db_fld_SCSiteName As String = "SiteName" 'P String: 255 -> Full text name of sampling location
+    Public Const db_fld_SCSiteType As String = "SiteType"
     Public Const db_fld_SCVarID As String = "VariableID" 'P Integer -> Linked to Variables.VariableID
     Public Const db_fld_SCVarCode As String = "VariableCode" 'P String: 50 -> Variable identifier used by the organization that collects the data
     Public Const db_fld_SCVarName As String = "VariableName" 'P String: 255 -> Name of the variable from the variables table
@@ -223,6 +224,7 @@ Module modDatabase
     Public Const db_fld_SiteID As String = "SiteID" 'M Integer: Primary Key -> Unique ID for each Sites entry
     Public Const db_fld_SiteCode As String = "SiteCode" 'O String: 50 -> Code used by organization that collects the data
     Public Const db_fld_SiteName As String = "SiteName" 'O String: 255 -> Full name of sampling location
+    Public Const db_fld_SiteType As String = "SiteType"
     Public Const db_fld_SiteLat As String = "Latitude" 'M Double -> Latitude in degrees w/ Decimals
     Public Const db_fld_SiteLong As String = "Longitude" 'M Double -> Longitude in degrees w/ Decimals
     Public Const db_fld_SiteLatLongDatumID As String = "LatLongDatumID" 'M Integer -> Linked to SpatialReferences.SpatialReferenceID
@@ -316,6 +318,7 @@ Module modDatabase
     Public Const db_tbl_SampleTypeCV As String = "SampleTypeCV"
     Public Const db_tbl_VerticalDatumCV As String = "VerticalDatumCV"
     Public Const db_tbl_SpeciationCV As String = "SpeciationCV"
+    Public Const db_tbl_SiteTypeCV As String = "SiteTypeCV"
 
     'fields
     Public Const db_fld_CV_Term As String = "Term"

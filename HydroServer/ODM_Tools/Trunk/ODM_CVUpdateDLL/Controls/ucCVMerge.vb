@@ -7,6 +7,9 @@
 '*           Neither the name of the Utah State University nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 'THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
+
+'http://his.cuahsi.org/odmcv_1_1/odmcv_1_1.asmx
 Public Class ucCVMerge
 
 #Region " Member Variables "
@@ -69,6 +72,8 @@ Public Class ucCVMerge
                     cboCVType.SelectedIndex = 10
                 Case CVType.Unit
                     cboCVType.SelectedIndex = 11
+                Case CVType.SiteType
+                    cboCVType.SelectedIndex = 12
                 Case Else
                     cboCVType.SelectedIndex = 0
             End Select
@@ -114,7 +119,16 @@ Public Class ucCVMerge
 #End Region
 
 #Region " Functions "
-
+    'Sub New()
+    '    If My.Settings.ODMVersion = "1.1.1" Then
+    '        Me.cboCVType.Items.AddRange(New Object() {"Site Type CV"})
+    '    End If
+    'End Sub
+    Public Sub addSiteType()
+        If My.Settings.ODMVersion = "1.1.1" Then
+            Me.cboCVType.Items.AddRange(New Object() {"Site Type CV"})
+        End If
+    End Sub
     Public Function LoadInitial() As Boolean
         If (Not localLoaded) And (Not webLoaded) And (Not (g_CurrConnSettings Is Nothing)) Then
             Me.Cursor = Cursors.WaitCursor
@@ -189,6 +203,8 @@ Public Class ucCVMerge
                 tempTable = XMLStringtoTable(connect.GetSpatialReferences, True, True)
             Case CVType.Unit
                 tempTable = XMLStringtoTable(connect.GetUnits, True)
+            Case CVType.SiteType
+                tempTable = XMLStringtoTable(connect.GetSiteTypeCV)
         End Select
         'If type = CVType.QCLevel Then
         '    tempTable.Columns(0).ColumnName = db_fld_QCLQCLevel
@@ -543,6 +559,11 @@ Public Class ucCVMerge
                 " FROM " & strTableName & " LEFT JOIN " & _
                 db_tbl_Variables & " ON " & _
                 db_tbl_Variables & "." & db_fld_VarName & " = "
+            Case CVType.SiteType
+                sql = "SELECT COUNT(" & db_tbl_Sites & "." & db_fld_SiteType & ") AS " & db_expr_Uses1 & _
+                " FROM " & strTableName & " LEFT JOIN " & _
+                db_tbl_Sites & " ON " & _
+                db_tbl_Sites & "." & db_fld_SiteType & " = "
             Case CVType.VerticalDatum
                 sql = "SELECT COUNT(" & db_tbl_Sites & "." & db_fld_SiteID & ") AS " & db_expr_Uses1 & _
                 " FROM " & strTableName & " LEFT JOIN " & _
@@ -723,6 +744,15 @@ Public Class ucCVMerge
                         sql = "UPDATE " & db_tbl_Variables & " SET " & db_fld_VarTimeUnitsID & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_UnitsID) & "' WHERE (" & db_fld_VarTimeUnitsID & " = '" & fixedData.Rows(i).Item(db_fld_UnitsID) & "')"
                         command = New SqlClient.SqlCommand(sql, connection, trans)
                         command.ExecuteScalar()
+                    Case CVType.SiteType
+                        ''update series catalog, sites
+                        sql = "UPDATE " & db_tbl_SeriesCatalog & " SET " & db_fld_SCSiteType & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_UnitsID) & "' WHERE (" & db_fld_SCSiteType & " = '" & fixedData.Rows(i).Item(db_fld_SiteType) & "')"
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
+                        command.ExecuteScalar()
+                        sql = "UPDATE " & db_tbl_Sites & " SET " & db_fld_SiteType & " = '" & localData.Rows(fixedData.Rows(i).Item(expr_NewID)).Item(db_fld_UnitsID) & "' WHERE (" & db_fld_SiteType & " = '" & fixedData.Rows(i).Item(db_fld_SiteType) & "')"
+                        command = New SqlClient.SqlCommand(sql, connection, trans)
+                        command.ExecuteScalar()
+                        
                     Case Else
                         Return True
                 End Select
@@ -1098,6 +1128,9 @@ Public Class ucCVMerge
             Case 11
                 strTableName = db_tbl_Units
                 type = CVType.Unit
+            Case 12
+                strTableName = db_tbl_SiteTypeCV
+                type = CVType.SiteType
         End Select
         webData = New DataTable
         localData = New DataTable
@@ -1181,4 +1214,5 @@ Public Class ucCVMerge
 
 #End Region
 
+   
 End Class

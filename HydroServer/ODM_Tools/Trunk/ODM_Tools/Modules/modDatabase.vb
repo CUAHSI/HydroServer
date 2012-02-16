@@ -195,6 +195,7 @@ Module modDatabase
     Public Const db_fld_SCSiteID As String = "SiteID" 'P Integer -> Linked to Sites.SiteID
     Public Const db_fld_SCSiteCode As String = "SiteCode" 'P String: 50 -> Site Identifier used by organization that collects the data
     Public Const db_fld_SCSiteName As String = "SiteName" 'P String: 255 -> Full text name of sampling location
+    Public Const db_fld_SCSiteType As String = "SiteType"
     Public Const db_fld_SCVarID As String = "VariableID" 'P Integer -> Linked to Variables.VariableID
     Public Const db_fld_SCVarCode As String = "VariableCode" 'P String: 50 -> Variable identifier used by the organization that collects the data
     Public Const db_fld_SCVarName As String = "VariableName" 'P String: 255 -> Name of the variable from the variables table
@@ -241,6 +242,7 @@ Module modDatabase
     Public Const db_fld_SiteState As String = "State" 'O String: 50 -> Name of state in which the sampling station is located
     Public Const db_fld_SiteCounty As String = "County" 'O String: 50 -> Name of County in which the sampling station is located
     Public Const db_fld_SiteComments As String = "Comments" 'O String: 500 -> Comments related to the site
+    Public Const db_fld_SiteType As String = "SiteType"
 #End Region
 
 #Region " Sources "
@@ -312,6 +314,7 @@ Module modDatabase
     Public Const db_tbl_ODMVersion As String = "ODMVersion"
     Public Const db_fld_ODMVersionNumber As String = "VersionNumber"
     Public Const db_const_Version As String = "1.1"
+    Public Const db_const_Version2 As String = "1.1.1"
 #End Region
 
 #End Region
@@ -329,6 +332,7 @@ Module modDatabase
     Public Const db_tbl_SampleTypeCV As String = "SampleTypeCV"
     Public Const db_tbl_VerticalDatumCV As String = "VerticalDatumCV"
     Public Const db_tbl_SpeciationCV As String = "SpeciationCV"
+    Public Const db_tbl_SiteTypeCV As String = "SiteTypeCV"
 
     'fields
     Public Const db_fld_CV_Term As String = "Term"
@@ -508,10 +512,10 @@ Module modDatabase
                 'Test the connection
                 Dim temp As New SqlClient.SqlCommand(sql, testConn) '  OleDb.OleDbCommand(sql, testConn) 'Command to test the DB with
                 Dim maxVersion As String = temp.ExecuteScalar
-                If maxVersion <> db_const_Version Then
+                If maxVersion <> db_const_Version AndAlso maxVersion <> db_const_Version2 Then
                     Throw New Exception("Database Version Incorrect." & vbCrLf & _
                     "This is an ODM Version " & maxVersion & " database." & vbCrLf & _
-                    "This application requires an ODM Version " & db_const_Version & " database.")
+                    "This application requires an ODM Version " & db_const_Version & " or " & db_const_Version2 & " database.")
                 End If
 
                 testConn.Close()
@@ -1996,7 +2000,7 @@ Module modDatabase
         Return qualifierID
     End Function
 
-    Public Function CreateNewDataSeriesInDB(ByVal siteID As Integer, ByVal siteCode As String, ByVal siteName As String, ByVal varID As Integer, ByVal varCode As String, ByVal varName As String, ByVal speciation As String, ByVal varUnitsID As Integer, ByVal varUnitsName As String, ByVal sampleMed As String, ByVal valueType As String, ByVal timeSupport As Double, ByVal tsUnitsID As Integer, ByVal tsUnitsName As String, ByVal dataType As String, ByVal genCategory As String, ByVal methodID As Integer, ByVal methodDesc As String, ByVal sourceID As Integer, ByVal sourceDesc As String, ByVal organization As String, ByVal citation As String, ByVal qclevelID As Integer, ByVal qclevelCode As String, ByVal beginDate As DateTime, ByVal endDate As DateTime, ByVal beginDateUTC As DateTime, ByVal endDateUTC As DateTime, ByVal valueCount As Integer) As Integer
+    Public Function CreateNewDataSeriesInDB(ByVal siteID As Integer, ByVal siteCode As String, ByVal siteName As String, ByVal siteType As String, ByVal varID As Integer, ByVal varCode As String, ByVal varName As String, ByVal speciation As String, ByVal varUnitsID As Integer, ByVal varUnitsName As String, ByVal sampleMed As String, ByVal valueType As String, ByVal timeSupport As Double, ByVal tsUnitsID As Integer, ByVal tsUnitsName As String, ByVal dataType As String, ByVal genCategory As String, ByVal methodID As Integer, ByVal methodDesc As String, ByVal sourceID As Integer, ByVal sourceDesc As String, ByVal organization As String, ByVal citation As String, ByVal qclevelID As Integer, ByVal qclevelCode As String, ByVal beginDate As DateTime, ByVal endDate As DateTime, ByVal beginDateUTC As DateTime, ByVal endDateUTC As DateTime, ByVal valueCount As Integer) As Integer
         'Creates a new DataSeries with the given information
         'Inputs:  siteID -> the SiteID for the new Data Series to create
         '         siteCode -> the SiteCode for the new Data series to create
@@ -2065,6 +2069,7 @@ Module modDatabase
             newRow.Item(db_fld_SCSiteID) = siteID
             newRow.Item(db_fld_SCSiteCode) = siteCode
             newRow.Item(db_fld_SCSiteName) = siteName
+            newRow.Item(db_fld_SCSiteType) = siteType
             newRow.Item(db_fld_SCVarID) = varID
             newRow.Item(db_fld_SCVarCode) = varCode
             newRow.Item(db_fld_SCVarName) = varName

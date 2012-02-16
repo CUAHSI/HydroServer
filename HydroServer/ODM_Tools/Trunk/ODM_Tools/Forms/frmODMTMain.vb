@@ -164,7 +164,8 @@ Public Class frmODMTools
 	Friend WithEvents lvcolVisVarUnits As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolVisValueType As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolVisSampleMedium As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisGenCategory As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisGenCategory As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisSiteType As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolVisUTCDateRange As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolVisValueCount As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolVisLocalDateRange As System.Windows.Forms.ColumnHeader
@@ -186,7 +187,8 @@ Public Class frmODMTools
 	Friend WithEvents tabpgEdit As System.Windows.Forms.TabPage
 	Friend WithEvents gboxEditDataSel As System.Windows.Forms.GroupBox
 	Friend WithEvents lvEditDataSeries As System.Windows.Forms.ListView
-	Friend WithEvents lvcolEditGenCategory As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditGenCategory As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditSiteType As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolEditVarUnits As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolEditTimeSupport As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvcolEditTimeUnits As System.Windows.Forms.ColumnHeader
@@ -259,7 +261,8 @@ Public Class frmODMTools
 	Friend WithEvents num_qryObs As System.Windows.Forms.NumericUpDown
 	Friend WithEvents lbl_qryTimeEnd As System.Windows.Forms.Label
 	Friend WithEvents chb_qrySrc As System.Windows.Forms.CheckBox
-	Friend WithEvents col_qrySiteCodeName As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qrySiteCodeName As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qrySiteType As System.Windows.Forms.ColumnHeader
 	Friend WithEvents col_qryVarCodeName As System.Windows.Forms.ColumnHeader
 	Friend WithEvents col_qryVarUnits As System.Windows.Forms.ColumnHeader
 	Friend WithEvents col_qryGenCat As System.Windows.Forms.ColumnHeader
@@ -310,6 +313,9 @@ Public Class frmODMTools
     Friend WithEvents gboxPointOptions As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents nudPointSize As System.Windows.Forms.NumericUpDown
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents lbx_qrySiteType As System.Windows.Forms.ListBox
+    Friend WithEvents chb_qrySiteType As System.Windows.Forms.CheckBox
     'Friend WithEvents zg5EditPlot As ODM_Tools.cTimeSeriesPlot
     Friend WithEvents lblEditDFDGTimePeriod As System.Windows.Forms.Label
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
@@ -332,11 +338,13 @@ Public Class frmODMTools
         Me.mnuitmHelpAbout = New System.Windows.Forms.MenuItem
         Me.tabctlODMTools = New System.Windows.Forms.TabControl
         Me.tabpgQuery = New System.Windows.Forms.TabPage
+        Me.chb_qryMethod = New System.Windows.Forms.CheckBox
+        Me.chb_qryVar = New System.Windows.Forms.CheckBox
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.txt_qryMethod = New System.Windows.Forms.TextBox
         Me.btn_qryMetaExport = New System.Windows.Forms.Button
         Me.btn_qryExecute = New System.Windows.Forms.Button
         Me.btn_qryDataExport = New System.Windows.Forms.Button
-        Me.chb_qrySrc = New System.Windows.Forms.CheckBox
-        Me.chb_qryVar = New System.Windows.Forms.CheckBox
         Me.grp_qryVars = New System.Windows.Forms.GroupBox
         Me.lbx_qryVars = New System.Windows.Forms.ListBox
         Me.txt_qryVarCode = New System.Windows.Forms.TextBox
@@ -348,6 +356,7 @@ Public Class frmODMTools
         Me.rdo_qryVarOR = New System.Windows.Forms.RadioButton
         Me.rdo_qryVarAND = New System.Windows.Forms.RadioButton
         Me.chb_qrySite = New System.Windows.Forms.CheckBox
+        Me.chb_qrySrc = New System.Windows.Forms.CheckBox
         Me.grp_qrySites = New System.Windows.Forms.GroupBox
         Me.lbx_qrySites = New System.Windows.Forms.ListBox
         Me.txt_qrySiteCode = New System.Windows.Forms.TextBox
@@ -367,9 +376,10 @@ Public Class frmODMTools
         Me.rdo_qrySrcOR = New System.Windows.Forms.RadioButton
         Me.rdo_qrySrcAND = New System.Windows.Forms.RadioButton
         Me.grp_qryOther = New System.Windows.Forms.GroupBox
+        Me.lbx_qrySiteType = New System.Windows.Forms.ListBox
+        Me.chb_qrySiteType = New System.Windows.Forms.CheckBox
         Me.dtp_qryTimeBegin = New System.Windows.Forms.DateTimePicker
         Me.dtp_qryTimeEnd = New System.Windows.Forms.DateTimePicker
-        Me.txt_qryMethod = New System.Windows.Forms.TextBox
         Me.lbx_qryQCLevel = New System.Windows.Forms.ListBox
         Me.lbx_qryDataType = New System.Windows.Forms.ListBox
         Me.lbx_qryValType = New System.Windows.Forms.ListBox
@@ -379,7 +389,6 @@ Public Class frmODMTools
         Me.chb_qryNumObs = New System.Windows.Forms.CheckBox
         Me.chb_qryDate = New System.Windows.Forms.CheckBox
         Me.lbl_qryTimeEnd = New System.Windows.Forms.Label
-        Me.chb_qryMethod = New System.Windows.Forms.CheckBox
         Me.chb_qryQCLevel = New System.Windows.Forms.CheckBox
         Me.chb_qryDataType = New System.Windows.Forms.CheckBox
         Me.chb_qryValType = New System.Windows.Forms.CheckBox
@@ -391,6 +400,7 @@ Public Class frmODMTools
         Me.rdo_qryNumObsL = New System.Windows.Forms.RadioButton
         Me.lv_qryResults = New System.Windows.Forms.ListView
         Me.col_qrySiteCodeName = New System.Windows.Forms.ColumnHeader
+        Me.col_qrySiteType = New System.Windows.Forms.ColumnHeader
         Me.col_qryVarCodeName = New System.Windows.Forms.ColumnHeader
         Me.col_qrySpeciation = New System.Windows.Forms.ColumnHeader
         Me.col_qryVarUnits = New System.Windows.Forms.ColumnHeader
@@ -472,6 +482,7 @@ Public Class frmODMTools
         Me.lblStartDate = New System.Windows.Forms.Label
         Me.gboxVisDataSel = New System.Windows.Forms.GroupBox
         Me.lvVisDataSeries = New System.Windows.Forms.ListView
+        Me.lvcolVisSiteType = New System.Windows.Forms.ColumnHeader
         Me.lvcolVisGenCategory = New System.Windows.Forms.ColumnHeader
         Me.lvcolVisSpeciation = New System.Windows.Forms.ColumnHeader
         Me.lvcolVisVarUnits = New System.Windows.Forms.ColumnHeader
@@ -510,6 +521,7 @@ Public Class frmODMTools
         Me.splitpnlEdit_SelectData = New System.Windows.Forms.SplitContainer
         Me.gboxEditDataSel = New System.Windows.Forms.GroupBox
         Me.lvEditDataSeries = New System.Windows.Forms.ListView
+        Me.lvcolEditSiteType = New System.Windows.Forms.ColumnHeader
         Me.lvcolEditGenCategory = New System.Windows.Forms.ColumnHeader
         Me.lvcolEditSpeciation = New System.Windows.Forms.ColumnHeader
         Me.lvcolEditVarUnits = New System.Windows.Forms.ColumnHeader
@@ -579,6 +591,7 @@ Public Class frmODMTools
         Me.ttipEdit = New System.Windows.Forms.ToolTip(Me.components)
         Me.tabctlODMTools.SuspendLayout()
         Me.tabpgQuery.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.grp_qryVars.SuspendLayout()
         Me.grp_qryVarSelect.SuspendLayout()
         Me.grp_qrySites.SuspendLayout()
@@ -706,35 +719,80 @@ Public Class frmODMTools
         Me.tabctlODMTools.Location = New System.Drawing.Point(0, 0)
         Me.tabctlODMTools.Name = "tabctlODMTools"
         Me.tabctlODMTools.SelectedIndex = 0
-        Me.tabctlODMTools.Size = New System.Drawing.Size(901, 563)
+        Me.tabctlODMTools.Size = New System.Drawing.Size(897, 632)
         Me.tabctlODMTools.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabctlODMTools.TabIndex = 0
         '
         'tabpgQuery
         '
+        Me.tabpgQuery.Controls.Add(Me.chb_qryMethod)
+        Me.tabpgQuery.Controls.Add(Me.chb_qryVar)
+        Me.tabpgQuery.Controls.Add(Me.GroupBox2)
         Me.tabpgQuery.Controls.Add(Me.btn_qryMetaExport)
         Me.tabpgQuery.Controls.Add(Me.btn_qryExecute)
         Me.tabpgQuery.Controls.Add(Me.btn_qryDataExport)
-        Me.tabpgQuery.Controls.Add(Me.chb_qrySrc)
-        Me.tabpgQuery.Controls.Add(Me.chb_qryVar)
         Me.tabpgQuery.Controls.Add(Me.grp_qryVars)
         Me.tabpgQuery.Controls.Add(Me.chb_qrySite)
+        Me.tabpgQuery.Controls.Add(Me.chb_qrySrc)
         Me.tabpgQuery.Controls.Add(Me.grp_qrySites)
         Me.tabpgQuery.Controls.Add(Me.grp_qrySources)
         Me.tabpgQuery.Controls.Add(Me.grp_qryOther)
         Me.tabpgQuery.Controls.Add(Me.lv_qryResults)
         Me.tabpgQuery.Location = New System.Drawing.Point(4, 22)
         Me.tabpgQuery.Name = "tabpgQuery"
-        Me.tabpgQuery.Size = New System.Drawing.Size(893, 537)
+        Me.tabpgQuery.Size = New System.Drawing.Size(889, 606)
         Me.tabpgQuery.TabIndex = 0
         Me.tabpgQuery.Text = "Query"
         Me.tabpgQuery.UseVisualStyleBackColor = True
+        '
+        'chb_qryMethod
+        '
+        Me.chb_qryMethod.AutoSize = True
+        Me.chb_qryMethod.Location = New System.Drawing.Point(16, 395)
+        Me.chb_qryMethod.Name = "chb_qryMethod"
+        Me.chb_qryMethod.Size = New System.Drawing.Size(77, 17)
+        Me.chb_qryMethod.TabIndex = 10
+        Me.chb_qryMethod.Text = "Method (; )"
+        '
+        'chb_qryVar
+        '
+        Me.chb_qryVar.AutoSize = True
+        Me.chb_qryVar.BackColor = System.Drawing.Color.Transparent
+        Me.chb_qryVar.Location = New System.Drawing.Point(16, 110)
+        Me.chb_qryVar.Name = "chb_qryVar"
+        Me.chb_qryVar.Size = New System.Drawing.Size(109, 17)
+        Me.chb_qryVar.TabIndex = 2
+        Me.chb_qryVar.Text = "Query by Variable"
+        Me.chb_qryVar.UseVisualStyleBackColor = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.txt_qryMethod)
+        Me.GroupBox2.Enabled = False
+        Me.GroupBox2.Location = New System.Drawing.Point(8, 396)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(297, 59)
+        Me.GroupBox2.TabIndex = 11
+        Me.GroupBox2.TabStop = False
+        '
+        'txt_qryMethod
+        '
+        Me.txt_qryMethod.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txt_qryMethod.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txt_qryMethod.Enabled = False
+        Me.txt_qryMethod.Location = New System.Drawing.Point(23, 24)
+        Me.txt_qryMethod.MaxLength = 1000
+        Me.txt_qryMethod.Name = "txt_qryMethod"
+        Me.txt_qryMethod.Size = New System.Drawing.Size(265, 20)
+        Me.txt_qryMethod.TabIndex = 11
         '
         'btn_qryMetaExport
         '
         Me.btn_qryMetaExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_qryMetaExport.Enabled = False
-        Me.btn_qryMetaExport.Location = New System.Drawing.Point(441, 510)
+        Me.btn_qryMetaExport.Location = New System.Drawing.Point(437, 579)
         Me.btn_qryMetaExport.Name = "btn_qryMetaExport"
         Me.btn_qryMetaExport.Size = New System.Drawing.Size(144, 24)
         Me.btn_qryMetaExport.TabIndex = 9
@@ -744,7 +802,7 @@ Public Class frmODMTools
         '
         Me.btn_qryExecute.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_qryExecute.Enabled = False
-        Me.btn_qryExecute.Location = New System.Drawing.Point(741, 510)
+        Me.btn_qryExecute.Location = New System.Drawing.Point(737, 579)
         Me.btn_qryExecute.Name = "btn_qryExecute"
         Me.btn_qryExecute.Size = New System.Drawing.Size(144, 24)
         Me.btn_qryExecute.TabIndex = 7
@@ -754,33 +812,11 @@ Public Class frmODMTools
         '
         Me.btn_qryDataExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_qryDataExport.Enabled = False
-        Me.btn_qryDataExport.Location = New System.Drawing.Point(591, 510)
+        Me.btn_qryDataExport.Location = New System.Drawing.Point(587, 579)
         Me.btn_qryDataExport.Name = "btn_qryDataExport"
         Me.btn_qryDataExport.Size = New System.Drawing.Size(144, 24)
         Me.btn_qryDataExport.TabIndex = 10
         Me.btn_qryDataExport.Text = "Export Checked &Data"
-        '
-        'chb_qrySrc
-        '
-        Me.chb_qrySrc.AutoSize = True
-        Me.chb_qrySrc.BackColor = System.Drawing.Color.Transparent
-        Me.chb_qrySrc.Location = New System.Drawing.Point(16, 226)
-        Me.chb_qrySrc.Name = "chb_qrySrc"
-        Me.chb_qrySrc.Size = New System.Drawing.Size(105, 17)
-        Me.chb_qrySrc.TabIndex = 4
-        Me.chb_qrySrc.Text = "Query by Source"
-        Me.chb_qrySrc.UseVisualStyleBackColor = False
-        '
-        'chb_qryVar
-        '
-        Me.chb_qryVar.AutoSize = True
-        Me.chb_qryVar.BackColor = System.Drawing.Color.Transparent
-        Me.chb_qryVar.Location = New System.Drawing.Point(16, 116)
-        Me.chb_qryVar.Name = "chb_qryVar"
-        Me.chb_qryVar.Size = New System.Drawing.Size(109, 17)
-        Me.chb_qryVar.TabIndex = 2
-        Me.chb_qryVar.Text = "Query by Variable"
-        Me.chb_qryVar.UseVisualStyleBackColor = False
         '
         'grp_qryVars
         '
@@ -794,9 +830,9 @@ Public Class frmODMTools
         Me.grp_qryVars.Controls.Add(Me.rdo_qryVarList)
         Me.grp_qryVars.Controls.Add(Me.grp_qryVarSelect)
         Me.grp_qryVars.Enabled = False
-        Me.grp_qryVars.Location = New System.Drawing.Point(8, 116)
+        Me.grp_qryVars.Location = New System.Drawing.Point(8, 113)
         Me.grp_qryVars.Name = "grp_qryVars"
-        Me.grp_qryVars.Size = New System.Drawing.Size(877, 109)
+        Me.grp_qryVars.Size = New System.Drawing.Size(873, 109)
         Me.grp_qryVars.TabIndex = 3
         Me.grp_qryVars.TabStop = False
         '
@@ -809,7 +845,7 @@ Public Class frmODMTools
         Me.lbx_qryVars.Location = New System.Drawing.Point(24, 32)
         Me.lbx_qryVars.Name = "lbx_qryVars"
         Me.lbx_qryVars.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lbx_qryVars.Size = New System.Drawing.Size(485, 69)
+        Me.lbx_qryVars.Size = New System.Drawing.Size(481, 69)
         Me.lbx_qryVars.TabIndex = 1
         '
         'txt_qryVarCode
@@ -818,7 +854,7 @@ Public Class frmODMTools
         Me.txt_qryVarCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txt_qryVarCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txt_qryVarCode.Enabled = False
-        Me.txt_qryVarCode.Location = New System.Drawing.Point(533, 72)
+        Me.txt_qryVarCode.Location = New System.Drawing.Point(529, 72)
         Me.txt_qryVarCode.MaxLength = 1000
         Me.txt_qryVarCode.Name = "txt_qryVarCode"
         Me.txt_qryVarCode.Size = New System.Drawing.Size(256, 20)
@@ -830,7 +866,7 @@ Public Class frmODMTools
         Me.txt_qryVarName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txt_qryVarName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txt_qryVarName.Enabled = False
-        Me.txt_qryVarName.Location = New System.Drawing.Point(533, 32)
+        Me.txt_qryVarName.Location = New System.Drawing.Point(529, 32)
         Me.txt_qryVarName.MaxLength = 1000
         Me.txt_qryVarName.Name = "txt_qryVarName"
         Me.txt_qryVarName.Size = New System.Drawing.Size(256, 20)
@@ -840,7 +876,7 @@ Public Class frmODMTools
         '
         Me.rdo_qryVarCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdo_qryVarCode.AutoSize = True
-        Me.rdo_qryVarCode.Location = New System.Drawing.Point(515, 55)
+        Me.rdo_qryVarCode.Location = New System.Drawing.Point(511, 55)
         Me.rdo_qryVarCode.Name = "rdo_qryVarCode"
         Me.rdo_qryVarCode.Size = New System.Drawing.Size(136, 17)
         Me.rdo_qryVarCode.TabIndex = 4
@@ -850,7 +886,7 @@ Public Class frmODMTools
         '
         Me.rdo_qryVarName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdo_qryVarName.AutoSize = True
-        Me.rdo_qryVarName.Location = New System.Drawing.Point(515, 15)
+        Me.rdo_qryVarName.Location = New System.Drawing.Point(511, 15)
         Me.rdo_qryVarName.Name = "rdo_qryVarName"
         Me.rdo_qryVarName.Size = New System.Drawing.Size(139, 17)
         Me.rdo_qryVarName.TabIndex = 2
@@ -872,7 +908,7 @@ Public Class frmODMTools
         Me.grp_qryVarSelect.Controls.Add(Me.rdo_qryVarOR)
         Me.grp_qryVarSelect.Controls.Add(Me.rdo_qryVarAND)
         Me.grp_qryVarSelect.Enabled = False
-        Me.grp_qryVarSelect.Location = New System.Drawing.Point(797, 8)
+        Me.grp_qryVarSelect.Location = New System.Drawing.Point(793, 8)
         Me.grp_qryVarSelect.Name = "grp_qryVarSelect"
         Me.grp_qryVarSelect.Size = New System.Drawing.Size(74, 95)
         Me.grp_qryVarSelect.TabIndex = 6
@@ -910,6 +946,17 @@ Public Class frmODMTools
         Me.chb_qrySite.Text = "Query by Site"
         Me.chb_qrySite.UseVisualStyleBackColor = False
         '
+        'chb_qrySrc
+        '
+        Me.chb_qrySrc.AutoSize = True
+        Me.chb_qrySrc.BackColor = System.Drawing.Color.Transparent
+        Me.chb_qrySrc.Location = New System.Drawing.Point(16, 225)
+        Me.chb_qrySrc.Name = "chb_qrySrc"
+        Me.chb_qrySrc.Size = New System.Drawing.Size(105, 17)
+        Me.chb_qrySrc.TabIndex = 4
+        Me.chb_qrySrc.Text = "Query by Source"
+        Me.chb_qrySrc.UseVisualStyleBackColor = False
+        '
         'grp_qrySites
         '
         Me.grp_qrySites.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -924,7 +971,7 @@ Public Class frmODMTools
         Me.grp_qrySites.Enabled = False
         Me.grp_qrySites.Location = New System.Drawing.Point(8, 8)
         Me.grp_qrySites.Name = "grp_qrySites"
-        Me.grp_qrySites.Size = New System.Drawing.Size(877, 108)
+        Me.grp_qrySites.Size = New System.Drawing.Size(873, 99)
         Me.grp_qrySites.TabIndex = 1
         Me.grp_qrySites.TabStop = False
         '
@@ -937,7 +984,7 @@ Public Class frmODMTools
         Me.lbx_qrySites.Location = New System.Drawing.Point(24, 32)
         Me.lbx_qrySites.Name = "lbx_qrySites"
         Me.lbx_qrySites.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lbx_qrySites.Size = New System.Drawing.Size(485, 69)
+        Me.lbx_qrySites.Size = New System.Drawing.Size(481, 56)
         Me.lbx_qrySites.TabIndex = 1
         '
         'txt_qrySiteCode
@@ -946,7 +993,7 @@ Public Class frmODMTools
         Me.txt_qrySiteCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txt_qrySiteCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txt_qrySiteCode.Enabled = False
-        Me.txt_qrySiteCode.Location = New System.Drawing.Point(533, 72)
+        Me.txt_qrySiteCode.Location = New System.Drawing.Point(529, 72)
         Me.txt_qrySiteCode.MaxLength = 1000
         Me.txt_qrySiteCode.Name = "txt_qrySiteCode"
         Me.txt_qrySiteCode.Size = New System.Drawing.Size(256, 20)
@@ -958,7 +1005,7 @@ Public Class frmODMTools
         Me.txt_qrySiteName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txt_qrySiteName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txt_qrySiteName.Enabled = False
-        Me.txt_qrySiteName.Location = New System.Drawing.Point(533, 32)
+        Me.txt_qrySiteName.Location = New System.Drawing.Point(529, 32)
         Me.txt_qrySiteName.MaxLength = 1000
         Me.txt_qrySiteName.Name = "txt_qrySiteName"
         Me.txt_qrySiteName.Size = New System.Drawing.Size(256, 20)
@@ -968,7 +1015,7 @@ Public Class frmODMTools
         '
         Me.rdo_qrySiteCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdo_qrySiteCode.AutoSize = True
-        Me.rdo_qrySiteCode.Location = New System.Drawing.Point(515, 55)
+        Me.rdo_qrySiteCode.Location = New System.Drawing.Point(511, 55)
         Me.rdo_qrySiteCode.Name = "rdo_qrySiteCode"
         Me.rdo_qrySiteCode.Size = New System.Drawing.Size(116, 17)
         Me.rdo_qrySiteCode.TabIndex = 4
@@ -978,7 +1025,7 @@ Public Class frmODMTools
         '
         Me.rdo_qrySiteName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdo_qrySiteName.AutoSize = True
-        Me.rdo_qrySiteName.Location = New System.Drawing.Point(515, 15)
+        Me.rdo_qrySiteName.Location = New System.Drawing.Point(511, 15)
         Me.rdo_qrySiteName.Name = "rdo_qrySiteName"
         Me.rdo_qrySiteName.Size = New System.Drawing.Size(119, 17)
         Me.rdo_qrySiteName.TabIndex = 2
@@ -1000,9 +1047,9 @@ Public Class frmODMTools
         Me.grp_qrySiteSelect.Controls.Add(Me.rdo_qrySiteAND)
         Me.grp_qrySiteSelect.Controls.Add(Me.rdo_qrySiteOR)
         Me.grp_qrySiteSelect.Enabled = False
-        Me.grp_qrySiteSelect.Location = New System.Drawing.Point(797, 8)
+        Me.grp_qrySiteSelect.Location = New System.Drawing.Point(793, 8)
         Me.grp_qrySiteSelect.Name = "grp_qrySiteSelect"
-        Me.grp_qrySiteSelect.Size = New System.Drawing.Size(74, 94)
+        Me.grp_qrySiteSelect.Size = New System.Drawing.Size(74, 85)
         Me.grp_qrySiteSelect.TabIndex = 6
         Me.grp_qrySiteSelect.TabStop = False
         Me.grp_qrySiteSelect.Text = "Multiple Entries (; )"
@@ -1037,9 +1084,9 @@ Public Class frmODMTools
         Me.grp_qrySources.Controls.Add(Me.rdo_qrySrcOrg)
         Me.grp_qrySources.Controls.Add(Me.grp_qrySrcSelect)
         Me.grp_qrySources.Enabled = False
-        Me.grp_qrySources.Location = New System.Drawing.Point(8, 226)
+        Me.grp_qrySources.Location = New System.Drawing.Point(8, 228)
         Me.grp_qrySources.Name = "grp_qrySources"
-        Me.grp_qrySources.Size = New System.Drawing.Size(301, 178)
+        Me.grp_qrySources.Size = New System.Drawing.Size(297, 162)
         Me.grp_qrySources.TabIndex = 5
         Me.grp_qrySources.TabStop = False
         '
@@ -1050,11 +1097,11 @@ Public Class frmODMTools
         Me.txt_qrySrcDesc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txt_qrySrcDesc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txt_qrySrcDesc.Enabled = False
-        Me.txt_qrySrcDesc.Location = New System.Drawing.Point(23, 91)
+        Me.txt_qrySrcDesc.Location = New System.Drawing.Point(23, 83)
         Me.txt_qrySrcDesc.MaxLength = 1000
         Me.txt_qrySrcDesc.Name = "txt_qrySrcDesc"
         Me.txt_qrySrcDesc.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_qrySrcDesc.Size = New System.Drawing.Size(269, 20)
+        Me.txt_qrySrcDesc.Size = New System.Drawing.Size(265, 20)
         Me.txt_qrySrcDesc.TabIndex = 3
         '
         'txt_qrySrcOrg
@@ -1064,17 +1111,17 @@ Public Class frmODMTools
         Me.txt_qrySrcOrg.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txt_qrySrcOrg.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txt_qrySrcOrg.Enabled = False
-        Me.txt_qrySrcOrg.Location = New System.Drawing.Point(23, 32)
+        Me.txt_qrySrcOrg.Location = New System.Drawing.Point(24, 39)
         Me.txt_qrySrcOrg.MaxLength = 1000
         Me.txt_qrySrcOrg.Name = "txt_qrySrcOrg"
         Me.txt_qrySrcOrg.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_qrySrcOrg.Size = New System.Drawing.Size(269, 20)
+        Me.txt_qrySrcOrg.Size = New System.Drawing.Size(265, 20)
         Me.txt_qrySrcOrg.TabIndex = 1
         '
         'rdo_qrySrcDesc
         '
         Me.rdo_qrySrcDesc.AutoSize = True
-        Me.rdo_qrySrcDesc.Location = New System.Drawing.Point(8, 68)
+        Me.rdo_qrySrcDesc.Location = New System.Drawing.Point(8, 62)
         Me.rdo_qrySrcDesc.Name = "rdo_qrySrcDesc"
         Me.rdo_qrySrcDesc.Size = New System.Drawing.Size(130, 17)
         Me.rdo_qrySrcDesc.TabIndex = 2
@@ -1083,7 +1130,7 @@ Public Class frmODMTools
         'rdo_qrySrcOrg
         '
         Me.rdo_qrySrcOrg.AutoSize = True
-        Me.rdo_qrySrcOrg.Location = New System.Drawing.Point(8, 15)
+        Me.rdo_qrySrcOrg.Location = New System.Drawing.Point(8, 19)
         Me.rdo_qrySrcOrg.Name = "rdo_qrySrcOrg"
         Me.rdo_qrySrcOrg.Size = New System.Drawing.Size(99, 17)
         Me.rdo_qrySrcOrg.TabIndex = 0
@@ -1095,9 +1142,9 @@ Public Class frmODMTools
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grp_qrySrcSelect.Controls.Add(Me.rdo_qrySrcOR)
         Me.grp_qrySrcSelect.Controls.Add(Me.rdo_qrySrcAND)
-        Me.grp_qrySrcSelect.Location = New System.Drawing.Point(8, 122)
+        Me.grp_qrySrcSelect.Location = New System.Drawing.Point(8, 106)
         Me.grp_qrySrcSelect.Name = "grp_qrySrcSelect"
-        Me.grp_qrySrcSelect.Size = New System.Drawing.Size(287, 50)
+        Me.grp_qrySrcSelect.Size = New System.Drawing.Size(283, 50)
         Me.grp_qrySrcSelect.TabIndex = 4
         Me.grp_qrySrcSelect.TabStop = False
         Me.grp_qrySrcSelect.Text = "Multiple Entries (; )"
@@ -1127,9 +1174,10 @@ Public Class frmODMTools
         'grp_qryOther
         '
         Me.grp_qryOther.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp_qryOther.Controls.Add(Me.lbx_qrySiteType)
+        Me.grp_qryOther.Controls.Add(Me.chb_qrySiteType)
         Me.grp_qryOther.Controls.Add(Me.dtp_qryTimeBegin)
         Me.grp_qryOther.Controls.Add(Me.dtp_qryTimeEnd)
-        Me.grp_qryOther.Controls.Add(Me.txt_qryMethod)
         Me.grp_qryOther.Controls.Add(Me.lbx_qryQCLevel)
         Me.grp_qryOther.Controls.Add(Me.lbx_qryDataType)
         Me.grp_qryOther.Controls.Add(Me.lbx_qryValType)
@@ -1139,19 +1187,38 @@ Public Class frmODMTools
         Me.grp_qryOther.Controls.Add(Me.chb_qryNumObs)
         Me.grp_qryOther.Controls.Add(Me.chb_qryDate)
         Me.grp_qryOther.Controls.Add(Me.lbl_qryTimeEnd)
-        Me.grp_qryOther.Controls.Add(Me.chb_qryMethod)
         Me.grp_qryOther.Controls.Add(Me.chb_qryQCLevel)
         Me.grp_qryOther.Controls.Add(Me.chb_qryDataType)
         Me.grp_qryOther.Controls.Add(Me.chb_qryValType)
         Me.grp_qryOther.Controls.Add(Me.chb_qrySampleMed)
         Me.grp_qryOther.Controls.Add(Me.chb_qryGenCat)
         Me.grp_qryOther.Controls.Add(Me.grp_qryNumObs)
-        Me.grp_qryOther.Location = New System.Drawing.Point(315, 226)
+        Me.grp_qryOther.Location = New System.Drawing.Point(311, 228)
         Me.grp_qryOther.Name = "grp_qryOther"
-        Me.grp_qryOther.Size = New System.Drawing.Size(570, 178)
+        Me.grp_qryOther.Size = New System.Drawing.Size(570, 226)
         Me.grp_qryOther.TabIndex = 6
         Me.grp_qryOther.TabStop = False
         Me.grp_qryOther.Text = "Other Query Options"
+        '
+        'lbx_qrySiteType
+        '
+        Me.lbx_qrySiteType.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lbx_qrySiteType.Enabled = False
+        Me.lbx_qrySiteType.HorizontalScrollbar = True
+        Me.lbx_qrySiteType.Location = New System.Drawing.Point(317, 140)
+        Me.lbx_qrySiteType.Name = "lbx_qrySiteType"
+        Me.lbx_qrySiteType.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lbx_qrySiteType.Size = New System.Drawing.Size(124, 82)
+        Me.lbx_qrySiteType.TabIndex = 20
+        '
+        'chb_qrySiteType
+        '
+        Me.chb_qrySiteType.AutoSize = True
+        Me.chb_qrySiteType.Location = New System.Drawing.Point(301, 124)
+        Me.chb_qrySiteType.Name = "chb_qrySiteType"
+        Me.chb_qrySiteType.Size = New System.Drawing.Size(71, 17)
+        Me.chb_qrySiteType.TabIndex = 19
+        Me.chb_qrySiteType.Text = "Site Type"
         '
         'dtp_qryTimeBegin
         '
@@ -1159,10 +1226,10 @@ Public Class frmODMTools
         Me.dtp_qryTimeBegin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
         Me.dtp_qryTimeBegin.Enabled = False
         Me.dtp_qryTimeBegin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtp_qryTimeBegin.Location = New System.Drawing.Point(467, 83)
+        Me.dtp_qryTimeBegin.Location = New System.Drawing.Point(446, 153)
         Me.dtp_qryTimeBegin.MaxDate = New Date(3006, 12, 31, 0, 0, 0, 0)
         Me.dtp_qryTimeBegin.Name = "dtp_qryTimeBegin"
-        Me.dtp_qryTimeBegin.Size = New System.Drawing.Size(94, 20)
+        Me.dtp_qryTimeBegin.Size = New System.Drawing.Size(115, 20)
         Me.dtp_qryTimeBegin.TabIndex = 16
         Me.dtp_qryTimeBegin.Value = New Date(2007, 1, 5, 0, 0, 0, 0)
         '
@@ -1172,23 +1239,12 @@ Public Class frmODMTools
         Me.dtp_qryTimeEnd.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
         Me.dtp_qryTimeEnd.Enabled = False
         Me.dtp_qryTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtp_qryTimeEnd.Location = New System.Drawing.Point(467, 107)
+        Me.dtp_qryTimeEnd.Location = New System.Drawing.Point(446, 195)
         Me.dtp_qryTimeEnd.MaxDate = New Date(3006, 12, 31, 0, 0, 0, 0)
         Me.dtp_qryTimeEnd.Name = "dtp_qryTimeEnd"
-        Me.dtp_qryTimeEnd.Size = New System.Drawing.Size(94, 20)
+        Me.dtp_qryTimeEnd.Size = New System.Drawing.Size(115, 20)
         Me.dtp_qryTimeEnd.TabIndex = 18
         Me.dtp_qryTimeEnd.Value = New Date(2007, 1, 5, 0, 0, 0, 0)
-        '
-        'txt_qryMethod
-        '
-        Me.txt_qryMethod.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txt_qryMethod.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txt_qryMethod.Enabled = False
-        Me.txt_qryMethod.Location = New System.Drawing.Point(317, 149)
-        Me.txt_qryMethod.MaxLength = 1000
-        Me.txt_qryMethod.Name = "txt_qryMethod"
-        Me.txt_qryMethod.Size = New System.Drawing.Size(244, 20)
-        Me.txt_qryMethod.TabIndex = 11
         '
         'lbx_qryQCLevel
         '
@@ -1198,17 +1254,17 @@ Public Class frmODMTools
         Me.lbx_qryQCLevel.Location = New System.Drawing.Point(317, 32)
         Me.lbx_qryQCLevel.Name = "lbx_qryQCLevel"
         Me.lbx_qryQCLevel.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lbx_qryQCLevel.Size = New System.Drawing.Size(112, 95)
+        Me.lbx_qryQCLevel.Size = New System.Drawing.Size(124, 82)
         Me.lbx_qryQCLevel.TabIndex = 9
         '
         'lbx_qryDataType
         '
         Me.lbx_qryDataType.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lbx_qryDataType.Enabled = False
-        Me.lbx_qryDataType.Location = New System.Drawing.Point(170, 113)
+        Me.lbx_qryDataType.Location = New System.Drawing.Point(170, 141)
         Me.lbx_qryDataType.Name = "lbx_qryDataType"
         Me.lbx_qryDataType.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lbx_qryDataType.Size = New System.Drawing.Size(124, 56)
+        Me.lbx_qryDataType.Size = New System.Drawing.Size(124, 82)
         Me.lbx_qryDataType.TabIndex = 7
         '
         'lbx_qryValType
@@ -1218,17 +1274,17 @@ Public Class frmODMTools
         Me.lbx_qryValType.Location = New System.Drawing.Point(170, 32)
         Me.lbx_qryValType.Name = "lbx_qryValType"
         Me.lbx_qryValType.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lbx_qryValType.Size = New System.Drawing.Size(124, 56)
+        Me.lbx_qryValType.Size = New System.Drawing.Size(124, 82)
         Me.lbx_qryValType.TabIndex = 5
         '
         'lbx_qrySampleMed
         '
         Me.lbx_qrySampleMed.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lbx_qrySampleMed.Enabled = False
-        Me.lbx_qrySampleMed.Location = New System.Drawing.Point(24, 113)
+        Me.lbx_qrySampleMed.Location = New System.Drawing.Point(22, 140)
         Me.lbx_qrySampleMed.Name = "lbx_qrySampleMed"
         Me.lbx_qrySampleMed.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lbx_qrySampleMed.Size = New System.Drawing.Size(124, 56)
+        Me.lbx_qrySampleMed.Size = New System.Drawing.Size(124, 82)
         Me.lbx_qrySampleMed.TabIndex = 3
         '
         'lbx_qryGenCat
@@ -1238,18 +1294,18 @@ Public Class frmODMTools
         Me.lbx_qryGenCat.Location = New System.Drawing.Point(24, 32)
         Me.lbx_qryGenCat.Name = "lbx_qryGenCat"
         Me.lbx_qryGenCat.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lbx_qryGenCat.Size = New System.Drawing.Size(124, 56)
+        Me.lbx_qryGenCat.Size = New System.Drawing.Size(124, 82)
         Me.lbx_qryGenCat.TabIndex = 1
         '
         'lbl_qryTimeBegin
         '
         Me.lbl_qryTimeBegin.Enabled = False
-        Me.lbl_qryTimeBegin.Location = New System.Drawing.Point(422, 83)
+        Me.lbl_qryTimeBegin.Location = New System.Drawing.Point(443, 129)
         Me.lbl_qryTimeBegin.Name = "lbl_qryTimeBegin"
-        Me.lbl_qryTimeBegin.Size = New System.Drawing.Size(45, 20)
+        Me.lbl_qryTimeBegin.Size = New System.Drawing.Size(85, 20)
         Me.lbl_qryTimeBegin.TabIndex = 15
-        Me.lbl_qryTimeBegin.Text = "begin:"
-        Me.lbl_qryTimeBegin.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lbl_qryTimeBegin.Text = "Begin Date:"
+        Me.lbl_qryTimeBegin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'chb_qryNumObs
         '
@@ -1263,7 +1319,7 @@ Public Class frmODMTools
         'chb_qryDate
         '
         Me.chb_qryDate.AutoSize = True
-        Me.chb_qryDate.Location = New System.Drawing.Point(451, 67)
+        Me.chb_qryDate.Location = New System.Drawing.Point(446, 114)
         Me.chb_qryDate.Name = "chb_qryDate"
         Me.chb_qryDate.Size = New System.Drawing.Size(82, 17)
         Me.chb_qryDate.TabIndex = 14
@@ -1272,21 +1328,12 @@ Public Class frmODMTools
         'lbl_qryTimeEnd
         '
         Me.lbl_qryTimeEnd.Enabled = False
-        Me.lbl_qryTimeEnd.Location = New System.Drawing.Point(425, 107)
+        Me.lbl_qryTimeEnd.Location = New System.Drawing.Point(443, 172)
         Me.lbl_qryTimeEnd.Name = "lbl_qryTimeEnd"
-        Me.lbl_qryTimeEnd.Size = New System.Drawing.Size(42, 20)
+        Me.lbl_qryTimeEnd.Size = New System.Drawing.Size(55, 20)
         Me.lbl_qryTimeEnd.TabIndex = 17
-        Me.lbl_qryTimeEnd.Text = "end:"
-        Me.lbl_qryTimeEnd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'chb_qryMethod
-        '
-        Me.chb_qryMethod.AutoSize = True
-        Me.chb_qryMethod.Location = New System.Drawing.Point(301, 133)
-        Me.chb_qryMethod.Name = "chb_qryMethod"
-        Me.chb_qryMethod.Size = New System.Drawing.Size(77, 17)
-        Me.chb_qryMethod.TabIndex = 10
-        Me.chb_qryMethod.Text = "Method (; )"
+        Me.lbl_qryTimeEnd.Text = "End Date:"
+        Me.lbl_qryTimeEnd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'chb_qryQCLevel
         '
@@ -1300,7 +1347,7 @@ Public Class frmODMTools
         'chb_qryDataType
         '
         Me.chb_qryDataType.AutoSize = True
-        Me.chb_qryDataType.Location = New System.Drawing.Point(154, 97)
+        Me.chb_qryDataType.Location = New System.Drawing.Point(154, 125)
         Me.chb_qryDataType.Name = "chb_qryDataType"
         Me.chb_qryDataType.Size = New System.Drawing.Size(76, 17)
         Me.chb_qryDataType.TabIndex = 6
@@ -1318,7 +1365,7 @@ Public Class frmODMTools
         'chb_qrySampleMed
         '
         Me.chb_qrySampleMed.AutoSize = True
-        Me.chb_qrySampleMed.Location = New System.Drawing.Point(8, 97)
+        Me.chb_qrySampleMed.Location = New System.Drawing.Point(6, 124)
         Me.chb_qrySampleMed.Name = "chb_qrySampleMed"
         Me.chb_qrySampleMed.Size = New System.Drawing.Size(101, 17)
         Me.chb_qrySampleMed.TabIndex = 2
@@ -1341,13 +1388,13 @@ Public Class frmODMTools
         Me.grp_qryNumObs.Enabled = False
         Me.grp_qryNumObs.Location = New System.Drawing.Point(446, 32)
         Me.grp_qryNumObs.Name = "grp_qryNumObs"
-        Me.grp_qryNumObs.Size = New System.Drawing.Size(118, 34)
+        Me.grp_qryNumObs.Size = New System.Drawing.Size(118, 54)
         Me.grp_qryNumObs.TabIndex = 13
         '
         'rdo_qryNumObsG
         '
         Me.rdo_qryNumObsG.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdo_qryNumObsG.Location = New System.Drawing.Point(11, 1)
+        Me.rdo_qryNumObsG.Location = New System.Drawing.Point(8, 9)
         Me.rdo_qryNumObsG.Name = "rdo_qryNumObsG"
         Me.rdo_qryNumObsG.Size = New System.Drawing.Size(30, 15)
         Me.rdo_qryNumObsG.TabIndex = 0
@@ -1357,18 +1404,18 @@ Public Class frmODMTools
         '
         Me.num_qryObs.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.num_qryObs.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.num_qryObs.Location = New System.Drawing.Point(44, 0)
+        Me.num_qryObs.Location = New System.Drawing.Point(58, 16)
         Me.num_qryObs.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.num_qryObs.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.num_qryObs.Name = "num_qryObs"
-        Me.num_qryObs.Size = New System.Drawing.Size(71, 20)
+        Me.num_qryObs.Size = New System.Drawing.Size(55, 20)
         Me.num_qryObs.TabIndex = 1
         Me.num_qryObs.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'rdo_qryNumObsL
         '
         Me.rdo_qryNumObsL.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdo_qryNumObsL.Location = New System.Drawing.Point(11, 18)
+        Me.rdo_qryNumObsL.Location = New System.Drawing.Point(9, 32)
         Me.rdo_qryNumObsL.Name = "rdo_qryNumObsL"
         Me.rdo_qryNumObsL.Size = New System.Drawing.Size(41, 15)
         Me.rdo_qryNumObsL.TabIndex = 2
@@ -1383,17 +1430,17 @@ Public Class frmODMTools
         Me.lv_qryResults.AutoArrange = False
         Me.lv_qryResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lv_qryResults.CheckBoxes = True
-        Me.lv_qryResults.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.col_qrySiteCodeName, Me.col_qryVarCodeName, Me.col_qrySpeciation, Me.col_qryVarUnits, Me.col_qryGenCat, Me.col_qryValType, Me.col_qrySampleMed, Me.col_qryDataType, Me.col_qryQCLevel, Me.col_qryMethodDesc, Me.col_qryNumObs, Me.col_qryDateTime, Me.col_qryOrg, Me.col_qrySrcDesc, Me.col_qryCitation, Me.col_qryTimeSupport, Me.col_qryTimeSupportUnits})
+        Me.lv_qryResults.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.col_qrySiteCodeName, Me.col_qrySiteType, Me.col_qryVarCodeName, Me.col_qrySpeciation, Me.col_qryVarUnits, Me.col_qryGenCat, Me.col_qryValType, Me.col_qrySampleMed, Me.col_qryDataType, Me.col_qryQCLevel, Me.col_qryMethodDesc, Me.col_qryNumObs, Me.col_qryDateTime, Me.col_qryOrg, Me.col_qrySrcDesc, Me.col_qryCitation, Me.col_qryTimeSupport, Me.col_qryTimeSupportUnits})
         Me.lv_qryResults.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lv_qryResults.Enabled = False
         Me.lv_qryResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lv_qryResults.FullRowSelect = True
         Me.lv_qryResults.GridLines = True
         Me.lv_qryResults.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.lv_qryResults.Location = New System.Drawing.Point(8, 410)
+        Me.lv_qryResults.Location = New System.Drawing.Point(8, 456)
         Me.lv_qryResults.MultiSelect = False
         Me.lv_qryResults.Name = "lv_qryResults"
-        Me.lv_qryResults.Size = New System.Drawing.Size(877, 94)
+        Me.lv_qryResults.Size = New System.Drawing.Size(878, 117)
         Me.lv_qryResults.TabIndex = 8
         Me.lv_qryResults.UseCompatibleStateImageBehavior = False
         Me.lv_qryResults.View = System.Windows.Forms.View.Details
@@ -1402,6 +1449,11 @@ Public Class frmODMTools
         '
         Me.col_qrySiteCodeName.Text = "Site"
         Me.col_qrySiteCodeName.Width = 50
+        '
+        'col_qrySiteType
+        '
+        Me.col_qrySiteType.Text = "Site Type"
+        Me.col_qrySiteType.Width = 50
         '
         'col_qryVarCodeName
         '
@@ -1468,7 +1520,7 @@ Public Class frmODMTools
         'col_qrySrcDesc
         '
         Me.col_qrySrcDesc.Text = "Source Description"
-        Me.col_qrySrcDesc.Width = 50
+        Me.col_qrySrcDesc.Width = 51
         '
         'col_qryCitation
         '
@@ -1494,7 +1546,7 @@ Public Class frmODMTools
         Me.tabpgVisualize.Controls.Add(Me.tabctlPlots)
         Me.tabpgVisualize.Location = New System.Drawing.Point(4, 22)
         Me.tabpgVisualize.Name = "tabpgVisualize"
-        Me.tabpgVisualize.Size = New System.Drawing.Size(893, 537)
+        Me.tabpgVisualize.Size = New System.Drawing.Size(889, 606)
         Me.tabpgVisualize.TabIndex = 1
         Me.tabpgVisualize.Text = "Visualize"
         Me.tabpgVisualize.UseVisualStyleBackColor = True
@@ -1502,7 +1554,7 @@ Public Class frmODMTools
         'btnPlot
         '
         Me.btnPlot.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnPlot.Location = New System.Drawing.Point(669, 509)
+        Me.btnPlot.Location = New System.Drawing.Point(665, 578)
         Me.btnPlot.Name = "btnPlot"
         Me.btnPlot.Size = New System.Drawing.Size(208, 24)
         Me.btnPlot.TabIndex = 2
@@ -1514,10 +1566,10 @@ Public Class frmODMTools
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tabctlPlotOptions.Controls.Add(Me.tabpgSummary)
         Me.tabctlPlotOptions.Controls.Add(Me.tabpgOptions)
-        Me.tabctlPlotOptions.Location = New System.Drawing.Point(657, 8)
+        Me.tabctlPlotOptions.Location = New System.Drawing.Point(653, 8)
         Me.tabctlPlotOptions.Name = "tabctlPlotOptions"
         Me.tabctlPlotOptions.SelectedIndex = 0
-        Me.tabctlPlotOptions.Size = New System.Drawing.Size(232, 419)
+        Me.tabctlPlotOptions.Size = New System.Drawing.Size(232, 488)
         Me.tabctlPlotOptions.TabIndex = 6
         '
         'tabpgSummary
@@ -1527,7 +1579,7 @@ Public Class frmODMTools
         Me.tabpgSummary.Controls.Add(Me.ckboxUseCensoredData)
         Me.tabpgSummary.Location = New System.Drawing.Point(4, 22)
         Me.tabpgSummary.Name = "tabpgSummary"
-        Me.tabpgSummary.Size = New System.Drawing.Size(224, 393)
+        Me.tabpgSummary.Size = New System.Drawing.Size(224, 462)
         Me.tabpgSummary.TabIndex = 0
         Me.tabpgSummary.Text = "Summary"
         '
@@ -1874,7 +1926,7 @@ Public Class frmODMTools
         Me.tabpgOptions.Controls.Add(Me.gboxTSPlotOptions)
         Me.tabpgOptions.Location = New System.Drawing.Point(4, 22)
         Me.tabpgOptions.Name = "tabpgOptions"
-        Me.tabpgOptions.Size = New System.Drawing.Size(224, 393)
+        Me.tabpgOptions.Size = New System.Drawing.Size(224, 462)
         Me.tabpgOptions.TabIndex = 1
         Me.tabpgOptions.Text = "Plot Options"
         '
@@ -2108,7 +2160,7 @@ Public Class frmODMTools
         Me.gboxDateInfo.Controls.Add(Me.dtpVisStartDate)
         Me.gboxDateInfo.Controls.Add(Me.lblEndDate)
         Me.gboxDateInfo.Controls.Add(Me.lblStartDate)
-        Me.gboxDateInfo.Location = New System.Drawing.Point(657, 432)
+        Me.gboxDateInfo.Location = New System.Drawing.Point(653, 501)
         Me.gboxDateInfo.Name = "gboxDateInfo"
         Me.gboxDateInfo.Size = New System.Drawing.Size(232, 72)
         Me.gboxDateInfo.TabIndex = 2
@@ -2163,9 +2215,9 @@ Public Class frmODMTools
         Me.gboxVisDataSel.Controls.Add(Me.lblVisSite)
         Me.gboxVisDataSel.Controls.Add(Me.lblVisVariable)
         Me.gboxVisDataSel.Controls.Add(Me.cboxVisSite)
-        Me.gboxVisDataSel.Location = New System.Drawing.Point(8, 347)
+        Me.gboxVisDataSel.Location = New System.Drawing.Point(8, 416)
         Me.gboxVisDataSel.Name = "gboxVisDataSel"
-        Me.gboxVisDataSel.Size = New System.Drawing.Size(645, 188)
+        Me.gboxVisDataSel.Size = New System.Drawing.Size(641, 188)
         Me.gboxVisDataSel.TabIndex = 1
         Me.gboxVisDataSel.TabStop = False
         Me.gboxVisDataSel.Text = "Data To Visualize"
@@ -2175,17 +2227,22 @@ Public Class frmODMTools
         Me.lvVisDataSeries.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvVisDataSeries.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.lvcolVisGenCategory, Me.lvcolVisSpeciation, Me.lvcolVisVarUnits, Me.lvcolVisTimeSupport, Me.lvcolVisTimeUnits, Me.lvcolVisSampleMedium, Me.lvcolVisValueType, Me.lvcolVisDataType, Me.lvcolVisQCLevel, Me.lvcolVisMethod, Me.lvcolVisOrganization, Me.lvcolVisSourceDesc, Me.lvcolVisCitation, Me.lvcolVisLocalDateRange, Me.lvcolVisUTCDateRange, Me.lvcolVisValueCount})
+        Me.lvVisDataSeries.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.lvcolVisSiteType, Me.lvcolVisGenCategory, Me.lvcolVisSpeciation, Me.lvcolVisVarUnits, Me.lvcolVisTimeSupport, Me.lvcolVisTimeUnits, Me.lvcolVisSampleMedium, Me.lvcolVisValueType, Me.lvcolVisDataType, Me.lvcolVisQCLevel, Me.lvcolVisMethod, Me.lvcolVisOrganization, Me.lvcolVisSourceDesc, Me.lvcolVisCitation, Me.lvcolVisLocalDateRange, Me.lvcolVisUTCDateRange, Me.lvcolVisValueCount})
         Me.lvVisDataSeries.FullRowSelect = True
         Me.lvVisDataSeries.GridLines = True
         Me.lvVisDataSeries.HideSelection = False
         Me.lvVisDataSeries.Location = New System.Drawing.Point(6, 89)
         Me.lvVisDataSeries.MultiSelect = False
         Me.lvVisDataSeries.Name = "lvVisDataSeries"
-        Me.lvVisDataSeries.Size = New System.Drawing.Size(629, 94)
+        Me.lvVisDataSeries.Size = New System.Drawing.Size(625, 94)
         Me.lvVisDataSeries.TabIndex = 9
         Me.lvVisDataSeries.UseCompatibleStateImageBehavior = False
         Me.lvVisDataSeries.View = System.Windows.Forms.View.Details
+        '
+        'lvcolVisSiteType
+        '
+        Me.lvcolVisSiteType.Text = "Site Type"
+        Me.lvcolVisSiteType.Width = 75
         '
         'lvcolVisGenCategory
         '
@@ -2287,7 +2344,7 @@ Public Class frmODMTools
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cboxVisVariable.Location = New System.Drawing.Point(58, 44)
         Me.cboxVisVariable.Name = "cboxVisVariable"
-        Me.cboxVisVariable.Size = New System.Drawing.Size(579, 21)
+        Me.cboxVisVariable.Size = New System.Drawing.Size(575, 21)
         Me.cboxVisVariable.TabIndex = 0
         '
         'lblVisSite
@@ -2313,7 +2370,7 @@ Public Class frmODMTools
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cboxVisSite.Location = New System.Drawing.Point(40, 16)
         Me.cboxVisSite.Name = "cboxVisSite"
-        Me.cboxVisSite.Size = New System.Drawing.Size(597, 21)
+        Me.cboxVisSite.Size = New System.Drawing.Size(593, 21)
         Me.cboxVisSite.TabIndex = 4
         '
         'tabctlPlots
@@ -2328,7 +2385,7 @@ Public Class frmODMTools
         Me.tabctlPlots.Location = New System.Drawing.Point(8, 8)
         Me.tabctlPlots.Name = "tabctlPlots"
         Me.tabctlPlots.SelectedIndex = 0
-        Me.tabctlPlots.Size = New System.Drawing.Size(645, 339)
+        Me.tabctlPlots.Size = New System.Drawing.Size(641, 408)
         Me.tabctlPlots.TabIndex = 8
         '
         'tabpgTimeSeries
@@ -2336,7 +2393,7 @@ Public Class frmODMTools
         Me.tabpgTimeSeries.Controls.Add(Me.zg5TimeSeries)
         Me.tabpgTimeSeries.Location = New System.Drawing.Point(4, 22)
         Me.tabpgTimeSeries.Name = "tabpgTimeSeries"
-        Me.tabpgTimeSeries.Size = New System.Drawing.Size(637, 313)
+        Me.tabpgTimeSeries.Size = New System.Drawing.Size(633, 382)
         Me.tabpgTimeSeries.TabIndex = 0
         Me.tabpgTimeSeries.Text = "Time Series"
         '
@@ -2355,7 +2412,7 @@ Public Class frmODMTools
         Me.zg5TimeSeries.ScrollMinX = 0
         Me.zg5TimeSeries.ScrollMinY = 0
         Me.zg5TimeSeries.ScrollMinY2 = 0
-        Me.zg5TimeSeries.Size = New System.Drawing.Size(637, 313)
+        Me.zg5TimeSeries.Size = New System.Drawing.Size(633, 382)
         Me.zg5TimeSeries.TabIndex = 0
         '
         'tabpgProbability
@@ -2363,7 +2420,7 @@ Public Class frmODMTools
         Me.tabpgProbability.Controls.Add(Me.zg5Probability)
         Me.tabpgProbability.Location = New System.Drawing.Point(4, 22)
         Me.tabpgProbability.Name = "tabpgProbability"
-        Me.tabpgProbability.Size = New System.Drawing.Size(637, 313)
+        Me.tabpgProbability.Size = New System.Drawing.Size(633, 382)
         Me.tabpgProbability.TabIndex = 0
         Me.tabpgProbability.Text = "Probability"
         '
@@ -2382,7 +2439,7 @@ Public Class frmODMTools
         Me.zg5Probability.ScrollMinX = 0
         Me.zg5Probability.ScrollMinY = 0
         Me.zg5Probability.ScrollMinY2 = 0
-        Me.zg5Probability.Size = New System.Drawing.Size(637, 313)
+        Me.zg5Probability.Size = New System.Drawing.Size(633, 382)
         Me.zg5Probability.TabIndex = 1
         '
         'tabpgHistogram
@@ -2390,7 +2447,7 @@ Public Class frmODMTools
         Me.tabpgHistogram.Controls.Add(Me.zg5Histogram)
         Me.tabpgHistogram.Location = New System.Drawing.Point(4, 22)
         Me.tabpgHistogram.Name = "tabpgHistogram"
-        Me.tabpgHistogram.Size = New System.Drawing.Size(637, 313)
+        Me.tabpgHistogram.Size = New System.Drawing.Size(633, 382)
         Me.tabpgHistogram.TabIndex = 0
         Me.tabpgHistogram.Text = "Histogram"
         '
@@ -2410,7 +2467,7 @@ Public Class frmODMTools
         Me.zg5Histogram.ScrollMinX = 0
         Me.zg5Histogram.ScrollMinY = 0
         Me.zg5Histogram.ScrollMinY2 = 0
-        Me.zg5Histogram.Size = New System.Drawing.Size(637, 313)
+        Me.zg5Histogram.Size = New System.Drawing.Size(633, 382)
         Me.zg5Histogram.TabIndex = 2
         '
         'tabpgBoxPlot
@@ -2418,7 +2475,7 @@ Public Class frmODMTools
         Me.tabpgBoxPlot.Controls.Add(Me.zg5BoxPlot)
         Me.tabpgBoxPlot.Location = New System.Drawing.Point(4, 22)
         Me.tabpgBoxPlot.Name = "tabpgBoxPlot"
-        Me.tabpgBoxPlot.Size = New System.Drawing.Size(637, 313)
+        Me.tabpgBoxPlot.Size = New System.Drawing.Size(633, 382)
         Me.tabpgBoxPlot.TabIndex = 0
         Me.tabpgBoxPlot.Text = "Box/Whisker"
         '
@@ -2437,7 +2494,7 @@ Public Class frmODMTools
         Me.zg5BoxPlot.ScrollMinX = 0
         Me.zg5BoxPlot.ScrollMinY = 0
         Me.zg5BoxPlot.ScrollMinY2 = 0
-        Me.zg5BoxPlot.Size = New System.Drawing.Size(637, 313)
+        Me.zg5BoxPlot.Size = New System.Drawing.Size(633, 382)
         Me.zg5BoxPlot.TabIndex = 2
         '
         'tabpgEdit
@@ -2445,7 +2502,7 @@ Public Class frmODMTools
         Me.tabpgEdit.Controls.Add(Me.splitpnlEditPg)
         Me.tabpgEdit.Location = New System.Drawing.Point(4, 22)
         Me.tabpgEdit.Name = "tabpgEdit"
-        Me.tabpgEdit.Size = New System.Drawing.Size(893, 537)
+        Me.tabpgEdit.Size = New System.Drawing.Size(889, 606)
         Me.tabpgEdit.TabIndex = 2
         Me.tabpgEdit.Text = "Edit"
         Me.tabpgEdit.UseVisualStyleBackColor = True
@@ -2467,8 +2524,8 @@ Public Class frmODMTools
         '
         Me.splitpnlEditPg.Panel2.Controls.Add(Me.splitpnlEdit_SelectData)
         Me.splitpnlEditPg.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.splitpnlEditPg.Size = New System.Drawing.Size(893, 537)
-        Me.splitpnlEditPg.SplitterDistance = 272
+        Me.splitpnlEditPg.Size = New System.Drawing.Size(889, 606)
+        Me.splitpnlEditPg.SplitterDistance = 341
         Me.splitpnlEditPg.TabIndex = 0
         '
         'splitpnlEdit_PlotData
@@ -2489,8 +2546,8 @@ Public Class frmODMTools
         Me.splitpnlEdit_PlotData.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.splitpnlEdit_PlotData.Panel2.Controls.Add(Me.dgvEditTable)
         Me.splitpnlEdit_PlotData.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.splitpnlEdit_PlotData.Size = New System.Drawing.Size(893, 272)
-        Me.splitpnlEdit_PlotData.SplitterDistance = 520
+        Me.splitpnlEdit_PlotData.Size = New System.Drawing.Size(889, 341)
+        Me.splitpnlEdit_PlotData.SplitterDistance = 517
         Me.splitpnlEdit_PlotData.TabIndex = 3
         '
         'zg5EditPlot
@@ -2509,7 +2566,7 @@ Public Class frmODMTools
         Me.zg5EditPlot.ScrollMinX = 0
         Me.zg5EditPlot.ScrollMinY = 0
         Me.zg5EditPlot.ScrollMinY2 = 0
-        Me.zg5EditPlot.Size = New System.Drawing.Size(516, 268)
+        Me.zg5EditPlot.Size = New System.Drawing.Size(513, 337)
         Me.zg5EditPlot.TabIndex = 2
         '
         'dgvEditTable
@@ -2550,7 +2607,7 @@ Public Class frmODMTools
         Me.dgvEditTable.RowHeadersWidth = 20
         Me.dgvEditTable.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgvEditTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvEditTable.Size = New System.Drawing.Size(365, 268)
+        Me.dgvEditTable.Size = New System.Drawing.Size(364, 337)
         Me.dgvEditTable.TabIndex = 0
         '
         'splitpnlEdit_SelectData
@@ -2577,8 +2634,8 @@ Public Class frmODMTools
         Me.splitpnlEdit_SelectData.Panel2.Controls.Add(Me.btnEditApplyChanges)
         Me.splitpnlEdit_SelectData.Panel2.Controls.Add(Me.btnEditDataDeriveNewDS)
         Me.splitpnlEdit_SelectData.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.splitpnlEdit_SelectData.Size = New System.Drawing.Size(893, 261)
-        Me.splitpnlEdit_SelectData.SplitterDistance = 519
+        Me.splitpnlEdit_SelectData.Size = New System.Drawing.Size(889, 261)
+        Me.splitpnlEdit_SelectData.SplitterDistance = 515
         Me.splitpnlEdit_SelectData.TabIndex = 0
         '
         'gboxEditDataSel
@@ -2592,7 +2649,7 @@ Public Class frmODMTools
         Me.gboxEditDataSel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gboxEditDataSel.Location = New System.Drawing.Point(0, 0)
         Me.gboxEditDataSel.Name = "gboxEditDataSel"
-        Me.gboxEditDataSel.Size = New System.Drawing.Size(519, 261)
+        Me.gboxEditDataSel.Size = New System.Drawing.Size(515, 261)
         Me.gboxEditDataSel.TabIndex = 2
         Me.gboxEditDataSel.TabStop = False
         Me.gboxEditDataSel.Text = "Data To Plot"
@@ -2602,17 +2659,22 @@ Public Class frmODMTools
         Me.lvEditDataSeries.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvEditDataSeries.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.lvcolEditGenCategory, Me.lvcolEditSpeciation, Me.lvcolEditVarUnits, Me.lvcolEditTimeSupport, Me.lvcolEditTimeUnits, Me.lvcolEditSampleMedium, Me.lvcolEditValueType, Me.lvcolEditDataType, Me.lvcolEditQCLevel, Me.lvcolEditMethod, Me.lvcolEditOrganization, Me.lvcolEditSourceDesc, Me.lvcolEditCitation, Me.lvcolEditLocalDateRange, Me.lvcolEditUTCDateRange, Me.lvcolEditValueCount})
+        Me.lvEditDataSeries.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.lvcolEditSiteType, Me.lvcolEditGenCategory, Me.lvcolEditSpeciation, Me.lvcolEditVarUnits, Me.lvcolEditTimeSupport, Me.lvcolEditTimeUnits, Me.lvcolEditSampleMedium, Me.lvcolEditValueType, Me.lvcolEditDataType, Me.lvcolEditQCLevel, Me.lvcolEditMethod, Me.lvcolEditOrganization, Me.lvcolEditSourceDesc, Me.lvcolEditCitation, Me.lvcolEditLocalDateRange, Me.lvcolEditUTCDateRange, Me.lvcolEditValueCount})
         Me.lvEditDataSeries.FullRowSelect = True
         Me.lvEditDataSeries.GridLines = True
         Me.lvEditDataSeries.HideSelection = False
         Me.lvEditDataSeries.Location = New System.Drawing.Point(8, 88)
         Me.lvEditDataSeries.MultiSelect = False
         Me.lvEditDataSeries.Name = "lvEditDataSeries"
-        Me.lvEditDataSeries.Size = New System.Drawing.Size(505, 173)
+        Me.lvEditDataSeries.Size = New System.Drawing.Size(501, 173)
         Me.lvEditDataSeries.TabIndex = 9
         Me.lvEditDataSeries.UseCompatibleStateImageBehavior = False
         Me.lvEditDataSeries.View = System.Windows.Forms.View.Details
+        '
+        'lvcolEditSiteType
+        '
+        Me.lvcolEditSiteType.Text = "Site Type"
+        Me.lvcolEditSiteType.Width = 75
         '
         'lvcolEditGenCategory
         '
@@ -2714,7 +2776,7 @@ Public Class frmODMTools
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cboxEditVariable.Location = New System.Drawing.Point(58, 44)
         Me.cboxEditVariable.Name = "cboxEditVariable"
-        Me.cboxEditVariable.Size = New System.Drawing.Size(453, 21)
+        Me.cboxEditVariable.Size = New System.Drawing.Size(449, 21)
         Me.cboxEditVariable.TabIndex = 0
         '
         'lblEditSite
@@ -2740,7 +2802,7 @@ Public Class frmODMTools
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cboxEditSite.Location = New System.Drawing.Point(40, 16)
         Me.cboxEditSite.Name = "cboxEditSite"
-        Me.cboxEditSite.Size = New System.Drawing.Size(471, 21)
+        Me.cboxEditSite.Size = New System.Drawing.Size(467, 21)
         Me.cboxEditSite.TabIndex = 4
         '
         'btnEditDataFlag
@@ -3160,7 +3222,7 @@ Public Class frmODMTools
         'frmODMTools
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
-        Me.ClientSize = New System.Drawing.Size(901, 563)
+        Me.ClientSize = New System.Drawing.Size(897, 632)
         Me.Controls.Add(Me.tabctlODMTools)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Menu = Me.mnuMain
@@ -3170,6 +3232,8 @@ Public Class frmODMTools
         Me.tabctlODMTools.ResumeLayout(False)
         Me.tabpgQuery.ResumeLayout(False)
         Me.tabpgQuery.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.grp_qryVars.ResumeLayout(False)
         Me.grp_qryVars.PerformLayout()
         Me.grp_qryVarSelect.ResumeLayout(False)
@@ -3781,33 +3845,49 @@ Public Class frmODMTools
 				lbx_qryDataType.Items.Add(otherCVs(x))
 			Next
 
-			'Load the list of QC Levels
-			LoadQCLevels()
-			''NOTE: Per changes to ODM1.1 Schema, now loading info from database
-			''lbx_qryQCLevel.Items.Clear()
-			''For x = 0 To db_val_QCLDef_Level.GetLength(1) - 1
-			''	lbx_qryQCLevel.Items.Add(db_val_QCLDef_Level(0, x) & " - " & db_val_QCLDef_Level(1, x))
-			''Next
+            If My.Settings.ODMVersion = "1.1.1" Then
+                'Load the list of Site Types
+                otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCSiteType)
+                lbx_qrySiteType.Items.Clear()
+                For x = 0 To otherCVs.Length - 1
+                    lbx_qrySiteType.Items.Add(otherCVs(x))
+                Next
+                lbx_qrySiteType.Visible = True
+                chb_qrySiteType.Visible = True
+            Else
+                lbx_qrySiteType.Visible = False
+                chb_qrySiteType.Checked = False
+                chb_qrySiteType.Visible = False
+            End If
 
-			'Reset Listviews
-			lv_qryResults.Items.Clear()
+            'Load the list of QC Levels
+            LoadQCLevels()
+            ''NOTE: Per changes to ODM1.1 Schema, now loading info from database
+            ''lbx_qryQCLevel.Items.Clear()
+            ''For x = 0 To db_val_QCLDef_Level.GetLength(1) - 1
+            ''	lbx_qryQCLevel.Items.Add(db_val_QCLDef_Level(0, x) & " - " & db_val_QCLDef_Level(1, x))
+            ''Next
 
-			'Reset Checkboxes
-			chb_qrySite.Checked = False
-			chb_qryVar.Checked = False
-			chb_qrySrc.Checked = False
-			chb_qryGenCat.Checked = False
-			chb_qrySampleMed.Checked = False
-			chb_qryValType.Checked = False
-			chb_qryDataType.Checked = False
-			chb_qryQCLevel.Checked = False
-			chb_qryMethod.Checked = False
-			chb_qryNumObs.Checked = False
-			chb_qryDate.Checked = False
+            'Reset Listviews
+            lv_qryResults.Items.Clear()
 
-		Catch ex As Exception
-			ShowError("Error Loading Query Selection Values", ex)
-		End Try
+            'Reset Checkboxes
+            chb_qrySite.Checked = False
+            chb_qryVar.Checked = False
+            chb_qrySrc.Checked = False
+            chb_qryGenCat.Checked = False
+            chb_qrySampleMed.Checked = False
+            chb_qryValType.Checked = False
+            chb_qryDataType.Checked = False
+            chb_qryQCLevel.Checked = False
+            chb_qryMethod.Checked = False
+            chb_qryNumObs.Checked = False
+            chb_qryDate.Checked = False
+            chb_qrySiteType.Checked = False
+
+        Catch ex As Exception
+            ShowError("Error Loading Query Selection Values", ex)
+        End Try
 	End Sub
 
 	Private Sub lv_qryResults_AutoSizeColumns(Optional ByVal includeData As Boolean = False)
@@ -3818,9 +3898,15 @@ Public Class frmODMTools
 		Const HeaderResize As Integer = -2 'Constant for resizing listview columns by the header
 		Const DataResize As Integer = -1 'Constant for resizing listview columns by the bigest text within the column
 
-		For x = 0 To lv_qryResults.Columns.Count - 1
-			lv_qryResults.Columns(x).Width = HeaderResize 'Resize the columns
-		Next
+        For x = 0 To lv_qryResults.Columns.Count - 1
+            Dim name As String = lv_qryResults.Columns(x).Text
+            If (Not My.Settings.ODMVersion = "1.1.1") AndAlso name = "Site Type" Then
+                lv_qryResults.Columns(x).Width = 0
+            Else
+                lv_qryResults.Columns(x).Width = HeaderResize 'Resize the columns
+            End If
+
+        Next
 
 		If includeData Then
 			Dim columnWidth As Double 'Size of the header
@@ -4027,6 +4113,13 @@ Public Class frmODMTools
         End If
     End Sub
 
+    Private Sub chb_qrySiteType_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chb_qrySiteType.CheckedChanged
+        lbx_qrySiteType.Enabled = chb_qrySiteType.Checked
+        If Not chb_qrySiteType.Checked Then
+            lbx_qrySiteType.SelectedItem() = Nothing 'Clears the selection
+        End If
+    End Sub
+
 #Region " Source "
 
     Private Sub chb_qrySrc_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chb_qrySrc.CheckedChanged
@@ -4078,6 +4171,7 @@ Public Class frmODMTools
     Private Sub chb_qryMethod_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chb_qryMethod.CheckedChanged
         'Enables/Disables Method
         txt_qryMethod.Enabled = chb_qryMethod.Checked
+        GroupBox2.Enabled = chb_qryMethod.Checked
         If Not chb_qryMethod.Checked Then
             txt_qryMethod.Text = ""
         End If
@@ -4172,6 +4266,7 @@ Public Class frmODMTools
         (lbx_qryValType.SelectedItems.Count > 0) OrElse _
         (lbx_qryDataType.SelectedItems.Count > 0) OrElse _
         (lbx_qryQCLevel.SelectedItems.Count > 0) OrElse _
+        (lbx_qrySiteType.SelectedItems.Count > 0) OrElse _
         (txt_qrySiteName.Text.Length > 0) OrElse _
         (txt_qrySiteCode.Text.Length > 0) OrElse _
         (txt_qryVarName.Text.Length > 0) OrElse _
@@ -4202,7 +4297,10 @@ Public Class frmODMTools
 	Private Sub lbx_qrySampleMed_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qrySampleMed.SelectedIndexChanged
 		'Sample Medium changed, validate
 		AnyValid()
-	End Sub
+    End Sub
+    Private Sub lbx_qrySiteType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qrySiteType.SelectedIndexChanged
+        AnyValid()
+    End Sub
 
 	Private Sub lbx_qryValType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryValType.SelectedIndexChanged
 		'Value Type changed, validate
@@ -4420,6 +4518,12 @@ Public Class frmODMTools
                 'add the valid series to lv_qryResults
                 m_qrySeriesID(i) = Val(queryTable.Rows(i).Item(db_fld_SCSeriesID))  'Series ID
                 lvItem = lv_qryResults.Items.Add(queryTable.Rows(i).Item(db_fld_SCSiteCode) & " - " & queryTable.Rows(i).Item(db_fld_SCSiteName)) 'Site Code - Site Name
+                If My.Settings.ODMVersion = "1.1.1" Then
+                    lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SiteType)) ' Site Type
+                Else
+                    lvItem.SubItems.Add("")
+                End If
+
                 lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCVarCode) & " - " & queryTable.Rows(i).Item(db_fld_SCVarName)) 'Variable Code - Variable Name
                 lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCSpeciation)) 'Speciation
                 lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SCVarUnitsName)) 'Variable Units Name
@@ -4899,7 +5003,34 @@ Public Class frmODMTools
 				ElseIf numCodes = 1 Then
 					sql = sql & "(" & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(0), " - ")(0) & "') "
 				End If
-			End If
+            End If
+
+            'Include Selected Site Types
+            If chb_qrySiteType.Checked And My.Settings.ODMVersion = "1.1.1" Then
+                If Not firstCommand Then
+                    sql = sql & "AND "
+                Else
+                    firstCommand = False
+                End If
+                Dim numParams As Integer 'the number of Variables selected to qualify the query by
+                numParams = lbx_qrySiteType.SelectedItems.Count
+                If numParams <= 0 Then
+                    ShowError("There were no Site Types selected to Query by." & vbCrLf & "Please select at least one SiteType from the list")
+                    Return ""
+                ElseIf numParams = 1 Then
+                    sql = sql & "(" & db_fld_SCSiteType & " = '" & lbx_qrySiteType.SelectedItems.Item(0) & "') "
+                Else
+                    For i = 0 To numParams - 1
+                        If i = numParams - 1 Then
+                            sql = sql & db_fld_SCSiteType & " = '" & lbx_qrySiteType.SelectedItems.Item(i) & "') "
+                        ElseIf i = 0 Then
+                            sql = sql & "(" & db_fld_SCSiteType & " = '" & lbx_qrySiteType.SelectedItems.Item(i) & "' OR "
+                        Else
+                            sql = sql & db_fld_SCSiteType & " = '" & lbx_qrySiteType.SelectedItems.Item(i) & "' OR "
+                        End If
+                    Next
+                End If
+            End If
 
 			'Search Specified Time Period
 			If chb_qryDate.Checked Then
@@ -4992,12 +5123,12 @@ Public Class frmODMTools
 						Case 1
 							dataExport = New frmDataExport(queryString, dFileName, exportSeriesID, ",")
 						Case 2
-							DataExport = New frmDataExport(QueryString, dFileName, exportSeriesID, vbTab)
+                            dataExport = New frmDataExport(queryString, dFileName, exportSeriesID, vbTab)
 						Case Else
-							DataExport = New frmDataExport(QueryString, dFileName, exportSeriesID, ";")
+                            dataExport = New frmDataExport(queryString, dFileName, exportSeriesID, ";")
 					End Select
 					'Open the DataExport progress window
-					Select Case DataExport.ShowDialog()
+                    Select Case dataExport.ShowDialog()
                         Case Windows.Forms.DialogResult.Yes
                             If Not (g_CurrOptions.MetadataExport) Then
                                 MsgBox("Export Complete", MsgBoxStyle.Information, "ODM Tools")
@@ -6233,7 +6364,8 @@ Public Class frmODMTools
         Dim sourceDesc As String
 		Dim qcLevelCode As String
 		Dim qcLevelDef As String
-		Dim speciation As String
+        Dim speciation As String
+        Dim siteType As String
 		Dim citation As String
         Try
             '1. clear out any old data 
@@ -6272,6 +6404,14 @@ Public Class frmODMTools
                     methodID = dataSeriesDT.Rows(i).Item(db_fld_SCMethodID)
                     qcLevelID = dataSeriesDT.Rows(i).Item(db_fld_SCQCLevel)
                     sourceID = dataSeriesDT.Rows(i).Item(db_fld_SCSourceID)
+                    If My.Settings.ODMVersion = "1.1.1" Then
+                        If Not (dataSeriesDT.Rows(i).Item(db_fld_SCSiteType) Is DBNull.Value) Then
+                            siteType = dataSeriesDT.Rows(i).Item(db_fld_SCSiteType)
+                        Else
+                            siteType = " "
+                        End If
+                    End If
+
                     If Not (dataSeriesDT.Rows(i).Item(db_fld_SCVarUnitsName) Is DBNull.Value) Then
                         varUnits = dataSeriesDT.Rows(i).Item(db_fld_SCVarUnitsName)
                     Else
@@ -6377,9 +6517,12 @@ Public Class frmODMTools
                     'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
 
                     'create the new listview item
-                    lvItem = New ListViewItem(genCategory)
+                    lvItem = New ListViewItem(siteType)
+                    
+
 
                     'add the rest of the items to lvItem
+                    lvItem.SubItems.Add(genCategory)
                     lvItem.SubItems.Add(speciation)
                     lvItem.SubItems.Add(varUnits)
                     lvItem.SubItems.Add(timeSupport)
@@ -6409,12 +6552,17 @@ Public Class frmODMTools
                     currVisIDs.QCLevelID = qcLevelID
                     currVisIDs.SourceID = sourceID
                     m_VisualizeIDs.Add(currVisIDs)
+                    
                 End If
             Next i
 
             '4. adjust the column widths for values
             For i = 0 To lvVisDataSeries.Columns.Count - 1
-                lvVisDataSeries.Columns(i).Width = GetVisDataSeriesColWidth(i)
+                If Not My.Settings.ODMVersion = "1.1.1" And lvVisDataSeries.Columns(i).Text = "Site Type" Then
+                    lvVisDataSeries.Columns(i).Width = 0
+                Else
+                    lvVisDataSeries.Columns(i).Width = GetVisDataSeriesColWidth(i)
+                End If
             Next i
             'redraw the list view
             lvVisDataSeries.Update()
@@ -6443,7 +6591,7 @@ Public Class frmODMTools
         'Outputs: Boolean -> Tracks if successfully loaded the Date Range for the selected Data Series -> values are in selected lvVisDataSeries item          
         Dim startDate As Date = Date.Today
         Dim endDate As Date = Date.Today
-        Dim dateIndex As Integer = 13
+        Dim dateIndex As Integer = 14
         'NOTE: Colums for lvVisData Series:
 		'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
         Try
@@ -10814,19 +10962,19 @@ Public Class frmODMTools
         'Dim methodDesc As String
         'NOTE: Colums for lvEditData Series:
 
-        'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
-        Dim varUnitsID As Integer = 2
-        Dim sampleMedID As Integer = 5
-        Dim genCatID As Integer = 0
-        Dim tsValueID As Integer = 3
-        Dim tsUnitsID As Integer = 4
-        Dim valueTypeID As Integer = 6
-        Dim dataTypeID As Integer = 7
-        Dim orgID As Integer = 10
-        Dim sourceDescID As Integer = 11
-        'Dim methodDescID As Integer = 9
-        Dim speciationID As Integer = 1
-        Dim citationID As Integer = 12
+        'SiteType, General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
+        Dim varUnitsID As Integer = 3
+        Dim sampleMedID As Integer = 6
+        Dim genCatID As Integer = 1
+        Dim tsValueID As Integer = 4
+        Dim tsUnitsID As Integer = 5
+        Dim valueTypeID As Integer = 7
+        Dim dataTypeID As Integer = 8
+        Dim orgID As Integer = 11
+        Dim sourceDescID As Integer = 12
+        'Dim methodDescID As Integer = 10
+        Dim speciationID As Integer = 2
+        Dim citationID As Integer = 13
         Dim speciation As String
         Dim citation As String
         Try
@@ -11179,6 +11327,7 @@ Public Class frmODMTools
         Dim currEditIDs As clsDataSeriesIDs 'the clsVisualizeIDs item to add the current set of SiteID, VariableID values to m_VisualizeIDs
         Dim seriesID As Integer
         Dim siteID As Integer 'the SiteID value retrieved from the database -> added to lvVisDataSeries
+        Dim siteType As String
         Dim varID As Integer 'the VariableID value retrieved from the database -> added to lvVisDataSeries
         Dim methodID As Integer
         Dim methodDesc As String
@@ -11295,6 +11444,13 @@ Public Class frmODMTools
                     Else
                         valueCount = db_BadID
                     End If
+                    If My.Settings.ODMVersion = "1.1.1" Then
+                        If Not (dataSeriesDT.Rows(i).Item(db_fld_SCSiteType) Is DBNull.Value) Then
+                            siteType = dataSeriesDT.Rows(i).Item(db_fld_SCSiteType)
+                        Else
+                            siteType = " "
+                        End If
+                    End If
                     If Not (dataSeriesDT.Rows(i).Item(db_fld_SCMethodDesc) Is DBNull.Value) Then
                         methodDesc = dataSeriesDT.Rows(i).Item(db_fld_SCMethodDesc)
                     Else
@@ -11332,9 +11488,10 @@ Public Class frmODMTools
                     'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description,Citation, Local Date Range, UTC Date Range, Value Count
 
                     'create the new listview item
-                    lvItem = New ListViewItem(genCategory)
+                    lvItem = New ListViewItem(siteType)
 
                     'add the rest of the items to lvItem
+                    lvItem.SubItems.Add(genCategory)
                     lvItem.SubItems.Add(speciation)
                     lvItem.SubItems.Add(varUnits)
                     lvItem.SubItems.Add(timeSupport)
@@ -11351,6 +11508,7 @@ Public Class frmODMTools
                     'lvItem.SubItems.Add(utcOffset)
                     lvItem.SubItems.Add(beginDateUTC.ToString & " - " & endDateUTC.ToString)
                     lvItem.SubItems.Add(valueCount)
+
 
                     'add the listview item to lvEditDataSeries
                     lvEditDataSeries.Items.Add(lvItem)
@@ -11369,7 +11527,11 @@ Public Class frmODMTools
 
             '4. adjust the column widths for values
             For i = 0 To lvEditDataSeries.Columns.Count - 1
-                lvEditDataSeries.Columns(i).Width = GetEditDataSeriesColWidth(i)
+                If Not My.Settings.ODMVersion = "1.1.1" And lvEditDataSeries.Columns(i).Text = "Site Type" Then
+                    lvEditDataSeries.Columns(i).Width = 0
+                Else
+                    lvEditDataSeries.Columns(i).Width = GetEditDataSeriesColWidth(i)
+                End If
             Next i
             'redraw the list view
             lvEditDataSeries.Update()
@@ -11479,7 +11641,7 @@ Public Class frmODMTools
         'Outputs: Boolean -> Tracks if successfully loaded the Date Range for the selected Data Series -> values are in selected lvVisDataSeries item          
         Dim startDate As Date = Date.Today
         Dim endDate As Date = Date.Today
-        Dim dateIndex As Integer = 13
+        Dim dateIndex As Integer = 14
         'NOTE: Colums for lvEditData Series:
         'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
         Try
@@ -13360,4 +13522,6 @@ Public Class frmODMTools
     End Sub
 
 
+ 
+   
 End Class
