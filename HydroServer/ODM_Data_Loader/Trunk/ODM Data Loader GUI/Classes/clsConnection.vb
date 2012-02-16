@@ -278,6 +278,7 @@ Class clsConnection
     Public Const db_fld_SCBeginDTUTC As String = "BeginDateTimeUTC" 'P DateTime -> The First UTC Date
     Public Const db_fld_SCEndDTUTC As String = "EndDateTimeUTC" 'P DateTime -> The Last UTC Date
     Public Const db_fld_SCValueCount As String = "ValueCount" 'P Integer -> The number of vaues in the series (SiteID & VariableID)
+    Public Const db_fld_SCSiteType As String = "SiteType"
 #End Region
 
     '#Region " Sites "
@@ -413,6 +414,18 @@ Class clsConnection
 
         'Regenerate the connection string
         SetConnectionString()
+        If Not (m_ConnStr = "") Then
+            Dim testConn As New SqlClient.SqlConnection(m_ConnStr)
+            testConn.Open()
+            'Create an sql command that accesses all tables and a field within the series catalog table
+            Dim sql1 As String = "SELECT MAX(VersionNumber) as CurrentVersion FROM ODMVersion"
+            Dim VersTable As New SqlClient.SqlDataAdapter(sql1, testConn)
+            Dim Table As New DataTable
+            VersTable.Fill(Table)
+            testConn.Close()
+            testConn.Dispose()
+            My.Settings.ODMVersion = (Table.Rows(0).Item("CurrentVersion").ToString())
+        End If
     End Sub
 
     Public Function IncrementTimeout() As Boolean
