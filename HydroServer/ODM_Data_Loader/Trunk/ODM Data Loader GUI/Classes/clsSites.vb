@@ -21,6 +21,7 @@ Class clsSites
     Public Const db_fld_State As String = "State" 'O String: 255 -> Name of state in which the sampling station is located
     Public Const db_fld_County As String = "County" 'O String: 255 -> Name of County in which the sampling station is located
     Public Const db_fld_Comments As String = "Comments" 'O String: MAX -> Comments related to the site
+    Public Const db_fld_SiteType As String = "SiteType"
 #End Region
 
 #Region " SpatialReferences "
@@ -37,6 +38,7 @@ Class clsSites
 
     'table names
     Public Const db_tbl_VerticalDatumCV As String = "VerticalDatumCV"
+    Public Const db_tbl_SiteType As String = "SiteTypeCV"
 
     'fields
     Public Const db_fld_CV_Term As String = "Term"
@@ -70,6 +72,7 @@ Class clsSites
     Public Const file_Sites_SiteState As String = "sitestate"                          'O
     Public Const file_Sites_County As String = "county"                                'O
     Public Const file_Sites_Comments As String = "comments"                            'O
+    Public Const file_Sites_SiteType As String = "sitetype"
 #End Region
 
     Public Sub New(ByVal e_Connection As clsConnection)
@@ -97,7 +100,7 @@ Class clsSites
     Protected Overrides Function ValidateTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction) As Data.DataTable
         Dim valid as new datatable
         'Declare all of your CVs Here
-        Dim SpatialReferences, VerticalDatum as new datatable
+        Dim SpatialReferences, VerticalDatum, SiteType As New DataTable
         Dim i As Integer
         Dim fileRows() As DataRow
 
@@ -115,6 +118,10 @@ Class clsSites
             'Load all of the CV and other related tables here
             SpatialReferences = m_Connection.OpenTable(connect, trans, db_tbl_SpatialReferences, "SELECT * FROM " & db_tbl_SpatialReferences)
             VerticalDatum = m_Connection.OpenTable(connect, trans, db_tbl_VerticalDatumCV, "SELECT * FROM " & db_tbl_VerticalDatumCV)
+            If (My.Settings.ODMVersion = "1.1.1") Then
+                SiteType = m_Connection.OpenTable(connect, trans, db_tbl_SiteType, "SELECT * FROM " & db_tbl_SiteType)
+            End If
+
 
             If (m_ViewTable.Columns.IndexOf(file_Sites_SiteCode) >= 0) Then
                 Dim query As String = ""
@@ -362,6 +369,20 @@ Class clsSites
                 If (m_ViewTable.Columns.IndexOf(file_Sites_Comments) >= 0) AndAlso ((fileRow.Item(file_Sites_Comments).ToString <> "")) Then
                     tempRow.Item(db_fld_Comments) = fileRow.Item(file_Sites_Comments)
                 End If
+
+
+                'SiteType - CV field
+                If (My.Settings.ODMVersion = "1.1.1") Then
+                    If (m_ViewTable.Columns.IndexOf(file_Sites_SiteType) >= 0) AndAlso (fileRow.Item(file_Sites_SiteType).ToString <> "") Then
+                        If (SiteType.Select(db_fld_CV_Term & " = '" & Replace(fileRow.Item(file_Sites_SiteType), "'", "''") & "'").Length > 0) Then
+                            tempRow.Item(db_fld_SiteType) = fileRow.Item(file_Sites_SiteType)
+                        Else
+                            Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & "Unable to find the specified " & file_Sites_SiteType & " in the SiteTypeCV table.")
+                        End If
+                    End If
+                End If
+
+
 
                 ''TODO: PUT THIS BACK??
                 'If RowExists(tempRow, valid) Then
