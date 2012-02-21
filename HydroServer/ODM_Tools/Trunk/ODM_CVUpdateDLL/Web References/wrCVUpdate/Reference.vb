@@ -62,7 +62,7 @@ Namespace wrCVUpdate
         '''<remarks/>
         Public Sub New()
             MyBase.New
-            Me.Url = Global.ODM_CVUpdate.My.MySettings.Default.CVUpdate_ODMCV
+            Me.Url = "http://his.cuahsi.org/ODMCV_1_1/ODMCV_1_1.asmx"
             If (Me.IsLocalFileSystemWebService(Me.Url) = true) Then
                 Me.UseDefaultCredentials = true
                 Me.useDefaultCredentialsSetExplicitly = false

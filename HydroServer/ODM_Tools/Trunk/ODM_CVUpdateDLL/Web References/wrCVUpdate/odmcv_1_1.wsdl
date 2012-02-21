@@ -521,10 +521,10 @@
   </wsdl:binding>
   <wsdl:service name="ODMCVService">
     <wsdl:port name="ODMCVServiceSoap" binding="tns:ODMCVServiceSoap">
-      <soap:address location="http://localhost:20947/ODMCV_1_1/ODMCV_1_1.asmx" />
+      <soap:address location="http://his.cuahsi.org/ODMCV_1_1/ODMCV_1_1.asmx" />
     </wsdl:port>
     <wsdl:port name="ODMCVServiceSoap12" binding="tns:ODMCVServiceSoap12">
-      <soap12:address location="http://localhost:20947/ODMCV_1_1/ODMCV_1_1.asmx" />
+      <soap12:address location="http://his.cuahsi.org/ODMCV_1_1/ODMCV_1_1.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

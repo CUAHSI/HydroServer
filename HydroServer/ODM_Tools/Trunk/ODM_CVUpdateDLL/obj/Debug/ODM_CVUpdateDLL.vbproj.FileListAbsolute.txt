@@ -110,3 +110,17 @@ C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\D
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM CVUpdate.dll
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM CVUpdate.xml
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM CVUpdate.pdb
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\bin\Debug\ODM CVUpdate.dll.config
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\bin\Debug\ODM CVUpdate.dll
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\bin\Debug\ODM CVUpdate.pdb
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\bin\Debug\ODM CVUpdate.xml
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM_CVUpdate.ucCVMerge.resources
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM_CVUpdate.frmQuickUpdate.resources
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM_CVUpdate.frmFixRow.resources
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM_CVUpdate.frmCVUpdate.resources
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM_CVUpdate.Resources.resources
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM_CVUpdateDLL.vbproj.GenerateResource.Cache
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM CVUpdate.dll
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM CVUpdate.xml
+C:\Dev\HydroServer\HydroServer\ODM_Tools\Trunk\ODM_CVUpdateDLL\obj\Debug\ODM CVUpdate.pdb

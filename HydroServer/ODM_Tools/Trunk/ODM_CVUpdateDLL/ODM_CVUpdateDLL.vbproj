@@ -167,10 +167,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:20947/ODMCV_1_1/ODMCV_1_1.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
+    <WebReferenceUrl Include="http://his.cuahsi.org/ODMCV_1_1/ODMCV_1_1.asmx">
+      <UrlBehavior>Static</UrlBehavior>
       <RelPath>Web References\wrCVUpdate\</RelPath>
-      <UpdateFromURL>http://localhost:20947/ODMCV_1_1/ODMCV_1_1.asmx</UpdateFromURL>
+      <UpdateFromURL>http://his.cuahsi.org/ODMCV_1_1/ODMCV_1_1.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
