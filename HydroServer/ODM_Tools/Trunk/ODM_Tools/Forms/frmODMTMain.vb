@@ -779,6 +779,8 @@ Public Class frmODMTools
         '
         'txt_qryMethod
         '
+        Me.txt_qryMethod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt_qryMethod.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txt_qryMethod.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txt_qryMethod.Enabled = False
@@ -4518,7 +4520,7 @@ Public Class frmODMTools
                 'add the valid series to lv_qryResults
                 m_qrySeriesID(i) = Val(queryTable.Rows(i).Item(db_fld_SCSeriesID))  'Series ID
                 lvItem = lv_qryResults.Items.Add(queryTable.Rows(i).Item(db_fld_SCSiteCode) & " - " & queryTable.Rows(i).Item(db_fld_SCSiteName)) 'Site Code - Site Name
-                If My.Settings.ODMVersion = "1.1.1" Then
+                If My.Settings.ODMVersion = "1.1.1" AndAlso Not (queryTable.Rows(i).Item(db_fld_SiteType) Is DBNull.Value) Then
                     lvItem.SubItems.Add(queryTable.Rows(i).Item(db_fld_SiteType)) ' Site Type
                 Else
                     lvItem.SubItems.Add("")
