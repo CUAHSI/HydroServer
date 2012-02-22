@@ -1111,7 +1111,12 @@ Module Exports
         Dim values(cvTable.Rows.Count - 1) As String
         For x = 0 To cvTable.Rows.Count - 1
             'add the Variable1 name,code to cbVariable1,m_VariableCode1
-            values(x) = (cvTable.Rows(x).Item(FieldName))
+            If (cvTable.Rows(x).Item(fieldName) Is DBNull.Value) Then
+                values(x) = ""
+            Else
+                values(x) = (cvTable.Rows(x).Item(fieldName))
+            End If
+
         Next
 
         'release resources
