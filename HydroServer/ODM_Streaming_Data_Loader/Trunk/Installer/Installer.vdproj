@@ -302,7 +302,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM SDL 1.1.2.2"
+        "ProductName" = "8:ODM SDL 1.1.2.3"
         "ProductCode" = "8:{6C877CD9-C964-474C-8B77-4B524AED7CCB}"
         "PackageCode" = "8:{B982DA07-B775-4607-989F-B5835CDB98C2}"
         "UpgradeCode" = "8:{6B08017E-AD38-42B0-B00D-4687FFE19E00}"
@@ -314,7 +314,7 @@
         "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-2946"
         "ARPHELPLINK" = "8:http://his.cuahsi.org/"
-        "Title" = "8:ODM SDL 1.1.2.2"
+        "Title" = "8:ODM SDL 1.1.2.3"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Utah Water Research Laboratory"
         "Keywords" = "8:"
@@ -425,7 +425,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_34B60CC20B8D4B3CABE5435C3E8BBCE1"
             {
-            "Name" = "8:Setup ODM SDL 1.1.2.2"
+            "Name" = "8:Setup ODM SDL 1.1.2.3"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -439,7 +439,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_36532C5F686C46B3A271FD547F456B4C"
             {
-            "Name" = "8:Run ODM SDL 1.1.2.2"
+            "Name" = "8:Run ODM SDL 1.1.2.3"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -453,7 +453,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B896CC68B4864EF5AC2C9E1B9CE1EC63"
             {
-            "Name" = "8:ODM SDL 1.1.2.2 Config Wizard"
+            "Name" = "8:ODM SDL 1.1.2.3 Config Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -467,7 +467,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C97F4FA16B3D42158BDB2E6ED56AFF98"
             {
-            "Name" = "8:ODM SDL 1.1.2.2 Execute"
+            "Name" = "8:ODM SDL 1.1.2.3 Execute"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1030,7 +1030,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_72BFEA09DBB3431CA5FE08FDC52FE75D"
             {
-            "SourcePath" = "8:..\\ODM SDL\\obj\\Release\\ODMSDL.exe"
+            "SourcePath" = "8:..\\ODM SDL\\obj\\Debug\\ODMSDL.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0B97927DD3F04DE5B023B96B7C4C3008"
@@ -1058,7 +1058,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9F65458A75F14BEEB6DC608D9CE68061"
             {
-            "SourcePath" = "8:..\\ODM SDL Wizard\\obj\\Release\\Configuration Wizard.exe"
+            "SourcePath" = "8:..\\ODM SDL Wizard\\obj\\Debug\\Configuration Wizard.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0B97927DD3F04DE5B023B96B7C4C3008"

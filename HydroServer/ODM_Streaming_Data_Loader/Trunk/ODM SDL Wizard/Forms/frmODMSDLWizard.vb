@@ -66,7 +66,7 @@ Public Class frmODMSDLWizard
             Dim tempdir As String
             tempdir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
             Dim section As String() = Split(tempdir, "Configuration", , CompareMethod.Text)
-            g_Config_Dir = section(0) & "StreamingDataLoader\1.1.2.2\"
+            g_Config_Dir = section(0) & "StreamingDataLoader\1.1.2.3\"
             IO.Directory.CreateDirectory(g_Config_Dir)
             'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)
             'config.SaveAs(g_EXE_Dir)

@@ -2682,7 +2682,11 @@ Public Class frmDeriveNewDataSeries
             site = tboxDSSite.Text
             siteCode = Split(site, " - ")(0)
             siteName = Split(site, " - ")(1)
-            siteType = site
+            If My.Settings.ODMVersion = "1.1.1" Then
+                Dim q As String = "Select SiteType From Sites Where SiteCode= '" & siteCode & "'"
+                Dim dt As DataTable = OpenTable("SiteType", q, g_CurrConnSettings)
+                siteType = dt.Rows(0).Item(db_fld_SiteType).ToString()
+            End If
             sourceDesc = tboxSourceDesc.Text
             organization = tboxSourceOrg.Text
             citation = tboxSourceCitation.Text
@@ -2692,7 +2696,11 @@ Public Class frmDeriveNewDataSeries
             If (dsID > 0) Then
                 UpdateSeriesCatalogAfterEdits(dsID, beginDate, endDate, beginDateUTC, endDateUTC, valueCount)
             Else
-                seriesID = CreateNewDataSeriesInDB(siteID, siteCode, siteName, siteType, varID, varCode, varName, speciation, varUnitsID, varUnitsName, sampleMed, valueType, timeSupport, tsUnitsID, tsUnitsName, dataType, genCategory, methodID, methodDesc, sourceID, sourceDesc, organization, citation, qclevelID, qclevel_Code, beginDate, endDate, beginDateUTC, endDateUTC, valueCount)
+                If My.Settings.ODMVersion = "1.1.1" Then
+                    seriesID = CreateNewDataSeriesInDB(siteID, siteCode, siteName, siteType, varID, varCode, varName, speciation, varUnitsID, varUnitsName, sampleMed, valueType, timeSupport, tsUnitsID, tsUnitsName, dataType, genCategory, methodID, methodDesc, sourceID, sourceDesc, organization, citation, qclevelID, qclevel_Code, beginDate, endDate, beginDateUTC, endDateUTC, valueCount)
+                Else
+                    seriesID = CreateNewDataSeriesInDB(siteID, siteCode, siteName, "", varID, varCode, varName, speciation, varUnitsID, varUnitsName, sampleMed, valueType, timeSupport, tsUnitsID, tsUnitsName, dataType, genCategory, methodID, methodDesc, sourceID, sourceDesc, organization, citation, qclevelID, qclevel_Code, beginDate, endDate, beginDateUTC, endDateUTC, valueCount)
+                End If
                 'make sure a valid seriesID was found/created
                 If seriesID > 0 Then
                     m_NewSeriesID = seriesID

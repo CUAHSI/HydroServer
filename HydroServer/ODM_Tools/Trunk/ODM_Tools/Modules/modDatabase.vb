@@ -2069,7 +2069,9 @@ Module modDatabase
             newRow.Item(db_fld_SCSiteID) = siteID
             newRow.Item(db_fld_SCSiteCode) = siteCode
             newRow.Item(db_fld_SCSiteName) = siteName
-            newRow.Item(db_fld_SCSiteType) = siteType
+            If My.Settings.ODMVersion = "1.1.1" Then
+                newRow.Item(db_fld_SCSiteType) = siteType
+            End If
             newRow.Item(db_fld_SCVarID) = varID
             newRow.Item(db_fld_SCVarCode) = varCode
             newRow.Item(db_fld_SCVarName) = varName
