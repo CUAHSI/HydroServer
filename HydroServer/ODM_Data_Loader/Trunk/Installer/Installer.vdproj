@@ -330,15 +330,15 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Data Loader 1.1.5.3"
-        "ProductCode" = "8:{89485118-C31A-482C-BE04-4F2FBDA62C26}"
-        "PackageCode" = "8:{010B5043-3770-4295-9D1C-513C15DBE77F}"
+        "ProductName" = "8:ODM Data Loader 1.1.6.0"
+        "ProductCode" = "8:{0173AB53-D576-421D-A123-CD666EC1B0A1}"
+        "PackageCode" = "8:{B3C724A4-67B5-4447-AD87-025E79E72C2B}"
         "UpgradeCode" = "8:{B3619D6E-AE69-4E35-AFF4-8B2BD9D950AB}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.5"
+        "ProductVersion" = "8:1.1.6"
         "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-7176"
         "ARPHELPLINK" = "8:http:\\\\his.cuahsi.org"
@@ -453,7 +453,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9213E13D767B44D796AF23F19B940C8E"
             {
-            "Name" = "8:ODM DL 1.1.5.3 Wizard"
+            "Name" = "8:ODM DL 1.1.6 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -467,7 +467,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9624BB8BCC3C440296CE884FE0D59120"
             {
-            "Name" = "8:ODM DL 1.1.5.3 Wizard"
+            "Name" = "8:ODM DL 1.1.6 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -481,7 +481,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C15D35F33E0047CD812979750CBD340D"
             {
-            "Name" = "8:ODM DL 1.1.5.3"
+            "Name" = "8:ODM DL 1.1.6"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -495,7 +495,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D0AC355D76CE4AD6BFC427EB4518972D"
             {
-            "Name" = "8:ODM DL 1.1.5.3"
+            "Name" = "8:ODM DL 1.1.6"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1030,7 +1030,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_73027A305D3941F49B7FD02D1B2EA4D0"
             {
-            "SourcePath" = "8:..\\AddNewPath\\obj\\Release\\AddNewPath.dll"
+            "SourcePath" = "8:..\\AddNewPath\\obj\\Debug\\AddNewPath.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B8707195AA241168E9AF02920B35157"
@@ -1058,7 +1058,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DB56D9B9C47B4CA3B25F9DD6FDD5F19C"
             {
-            "SourcePath" = "8:..\\ODM Data Loader GUI\\obj\\Release\\ODMLoader.exe"
+            "SourcePath" = "8:..\\ODM Data Loader GUI\\obj\\Debug\\ODMLoader.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B8707195AA241168E9AF02920B35157"
@@ -1114,7 +1114,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EE5A2179B82A425781E05E7B82A430D7"
             {
-            "SourcePath" = "8:..\\Simple Wizard\\obj\\Release\\Simple Wizard.exe"
+            "SourcePath" = "8:..\\Simple Wizard\\obj\\Debug\\Simple Wizard.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B8707195AA241168E9AF02920B35157"

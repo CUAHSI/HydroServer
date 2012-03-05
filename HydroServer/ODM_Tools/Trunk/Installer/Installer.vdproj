@@ -415,15 +415,15 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Tools 1.1.2.7"
-        "ProductCode" = "8:{5C11EDFC-18B1-493D-B035-C3E661E9DD5A}"
-        "PackageCode" = "8:{FDE25D23-484A-44CC-9E01-816D933719C7}"
+        "ProductName" = "8:ODM Tools 1.1.3"
+        "ProductCode" = "8:{DFE5C6F1-1994-42CD-B222-61769F75FD79}"
+        "PackageCode" = "8:{F1F8F309-0476-493E-A5FD-E9865B4C15BF}"
         "UpgradeCode" = "8:{4EC09388-349A-41C5-B07C-EA75B3B0261F}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.2"
+        "ProductVersion" = "8:1.1.3"
         "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-7176"
         "ARPHELPLINK" = "8:http://his.cuahsi.org/"
@@ -538,7 +538,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3F7029EEDE394B45B36C4864B9785BEE"
             {
-            "Name" = "8:ODM Tools 1.1.2.7"
+            "Name" = "8:ODM Tools 1.1.3"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -552,7 +552,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A9375652B899460D8928822F7DF2D5FF"
             {
-            "Name" = "8:ODM Tools 1.1.2.7"
+            "Name" = "8:ODM Tools 1.1.3"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

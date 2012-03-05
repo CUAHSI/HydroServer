@@ -53,7 +53,7 @@ Public Class Installer1
                     If Not delstr(j) Is Nothing Then
                         objMgmt("VariableValue") = objMgmt("VariableValue") + delstr(j) + ";"
                     End If
-                Next
+                Next j
 
                 'If objMgmt("VariableValue").ToString.Substring(objMgmt("VariableValue").ToString.Length - 1) = ";" Then
                 '    objMgmt("VariableValue") = objMgmt("VariableValue") + Trim(Me.Context.Parameters("targ") + "ODMLoader.exe") + ";"
@@ -65,7 +65,7 @@ Public Class Installer1
                 ' MessageBox.Show("Path Added Successfully")
                 Exit Sub
             End If
-        Next
+        Next objMgmt
 
     End Sub
     Private Sub SetEnvVariable()

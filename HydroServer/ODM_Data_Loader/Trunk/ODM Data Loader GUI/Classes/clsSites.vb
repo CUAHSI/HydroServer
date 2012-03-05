@@ -123,7 +123,7 @@ Class clsSites
             End If
 
 
-            If (m_ViewTable.Columns.IndexOf(file_Sites_SiteCode) >= 0) Then
+           If (m_ViewTable.Columns.IndexOf(file_Sites_SiteCode) >= 0) Then
                 Dim query As String = ""
                 If (m_ViewTable.Columns(file_Sites_SiteCode).DataType Is System.Type.GetType("System.String")) Then
                     query = file_Sites_SiteCode & " IS NOT NULL AND " & file_Sites_SiteCode & "<> ''"
@@ -171,6 +171,8 @@ Class clsSites
                 End If
 
                 'SiteName
+                Dim ind As Integer = m_ViewTable.Columns.IndexOf(file_Sites_SiteName)
+
                 If (m_ViewTable.Columns.IndexOf(file_Sites_SiteName) >= 0) Then
                     If (fileRow.Item(file_Sites_SiteName).ToString <> "") Then
                         Dim temp As String
@@ -373,6 +375,8 @@ Class clsSites
 
                 'SiteType - CV field
                 If (My.Settings.ODMVersion = "1.1.1") Then
+                    Dim index As Integer = m_ViewTable.Columns.IndexOf(file_Sites_SiteType)
+                    'Dim value As String = fileRow.Item(file_Sites_SiteType).ToString
                     If (m_ViewTable.Columns.IndexOf(file_Sites_SiteType) >= 0) AndAlso (fileRow.Item(file_Sites_SiteType).ToString <> "") Then
                         If (SiteType.Select(db_fld_CV_Term & " = '" & Replace(fileRow.Item(file_Sites_SiteType), "'", "''") & "'").Length > 0) Then
                             tempRow.Item(db_fld_SiteType) = fileRow.Item(file_Sites_SiteType)
@@ -381,6 +385,29 @@ Class clsSites
                         End If
                     End If
                 End If
+
+
+                'SiteType - CV field
+                'If (My.Settings.ODMVersion = "1.1.1") Then
+                '    If (m_ViewTable.Columns.IndexOf(file_Sites_SiteType) >= 0) AndAlso (fileRow.Item(file_Sites_SiteType).ToString <> "") Then
+                '        Dim UnitRows() As DataRow = SiteType.Select(db_fld_SiteType & " = '" & Val(fileRow.Item(file_Sites_SiteType)) & "'")
+                '        If (UnitRows.Length > 0) Then
+                '            tempRow.Item(db_fld_SiteType) = fileRow.Item(file_Sites_SiteType)
+                '        Else
+                '            Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & "Unable to find the specified " & file_Sites_SiteType & " in the Units table.")
+                '        End If
+                '    ElseIf (m_ViewTable.Columns.IndexOf(file_Sites_SiteType) >= 0) AndAlso (fileRow.Item(file_Sites_SiteType).ToString <> "") Then
+                '        Dim UnitRows() As DataRow = SiteType.Select(db_fld_SiteType & " = '" & Replace(fileRow.Item(file_Sites_SiteType), "'", "''") & "'")
+                '        If (UnitRows.Length > 0) Then
+                '            tempRow.Item(db_fld_SiteType) = Val(UnitRows(UnitRows.Length - 1).Item(db_fld_SiteType))
+                '        Else
+                '            Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & "Unable to find the specified " & file_Sites_SiteType & " in the Units table.")
+                '        End If
+                '    Else
+                '        Throw New Exception("Unable to find the SiteType information.  You must specify the SiteType.")
+                '    End If
+
+                'End If
 
 
 

@@ -118,7 +118,7 @@ Class clsSites
             'Load all of the CV and other related tables here
             SpatialReferences = m_Connection.OpenTable(connect, trans, db_tbl_SpatialReferences, "SELECT * FROM " & db_tbl_SpatialReferences)
             VerticalDatum = m_Connection.OpenTable(connect, trans, db_tbl_VerticalDatumCV, "SELECT * FROM " & db_tbl_VerticalDatumCV)
-            If (My.Settings.ODMVersion = "1.1.1") Then
+            If (m_Connection.getODMVersion = "1.1.1") Then
                 SiteType = m_Connection.OpenTable(connect, trans, db_tbl_SiteType, "SELECT * FROM " & db_tbl_SiteType)
             End If
 
@@ -364,7 +364,7 @@ Class clsSites
                 End If
 
                 'SiteType - CV field
-                If (My.Settings.ODMVersion = "1.1.1") Then
+                If (m_Connection.getODMVersion = "1.1.1") Then
                     If (m_ViewTable.Columns.IndexOf(file_Sites_SiteType) >= 0) AndAlso (fileRow.Item(file_Sites_SiteType).ToString <> "") Then
                         If (SiteType.Select(db_fld_CV_Term & " = '" & Replace(fileRow.Item(file_Sites_SiteType), "'", "''") & "'").Length > 0) Then
                             tempRow.Item(db_fld_SiteType) = fileRow.Item(file_Sites_SiteType)

@@ -12,6 +12,7 @@
     End Sub
 
     Protected Sub btnNewFile_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNewFile.Click
+        Session("FilePath") = Nothing
         Session("TableCount") = Nothing
         Response.Redirect("WebDataLoader.aspx")
     End Sub
