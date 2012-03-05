@@ -1023,6 +1023,12 @@ Class clsDataValues
                 Array.Resize(fields, fields.Length + 1)
                 fields(fields.Length - 1) = clsSites.file_Sites_LatLongDatumID
             End If
+            If (My.Settings.ODMVersion = "1.1.1") Then
+                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_SiteType) >= 0) Then
+                    Array.Resize(fields, fields.Length + 1)
+                    fields(fields.Length - 1) = clsSites.file_Sites_SiteType
+                End If
+            End If
             If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LatLongDatumSRSID) >= 0) Then
                 Array.Resize(fields, fields.Length + 1)
                 fields(fields.Length - 1) = clsSites.file_Sites_LatLongDatumSRSID

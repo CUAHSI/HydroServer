@@ -34,3 +34,12 @@ C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM Web Data Loader\WebDataLoader\obj
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.dll
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.xml
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.pdb
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\bin\WebDataLoader.dll
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\bin\WebDataLoader.pdb
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\bin\WebDataLoader.xml
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\obj\Debug\ResolveAssemblyReference.cache
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.Resources.resources
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.vbproj.GenerateResource.Cache
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.dll
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.xml
+C:\DEV\ODM\New folder\ODM Web Data Loader\WebDataLoader\obj\Debug\WebDataLoader.pdb

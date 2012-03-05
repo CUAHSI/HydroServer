@@ -1029,6 +1029,12 @@ Class clsDataValues
                 Array.Resize(fields, fields.Length + 1)
                 fields(fields.Length - 1) = clsSites.file_Sites_LatLongDatumSRSID
             End If
+            If (m_Connection.getODMVersion = "1.1.1") Then
+                If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_SiteType) >= 0) Then
+                    Array.Resize(fields, fields.Length + 1)
+                    fields(fields.Length - 1) = clsSites.file_Sites_SiteType
+                End If
+            End If
             If (m_ViewTable.Columns.IndexOf(clsSites.file_Sites_LatLongDatumSRSName) >= 0) Then
                 Array.Resize(fields, fields.Length + 1)
                 fields(fields.Length - 1) = clsSites.file_Sites_LatLongDatumSRSName
@@ -1372,7 +1378,7 @@ Class clsDataValues
         Dim SCSelect As String = "SELECT * FROM SeriesCatalog"
 
         Dim SiteSelect As String
-        If (My.Settings.ODMVersion = "1.1.1") Then
+        If (m_Connection.getODMVersion = "1.1.1") Then
             SiteSelect = "SELECT SiteID, SiteCode, SiteName, SiteType FROM Sites"
         Else
             SiteSelect = "SELECT SiteID, SiteCode, SiteName FROM Sites"
@@ -1470,7 +1476,7 @@ Class clsDataValues
                         newRow.Item(db_fld_SCSiteID) = SiteID
                         newRow.Item(db_fld_SCSiteCode) = TestRows(0).Item(db_fld_SiteCode)
                         newRow.Item(db_fld_SCSiteName) = TestRows(0).Item(db_fld_SiteName)
-                        If (My.Settings.ODMVersion = "1.1.1") Then
+                        If (m_Connection.getODMVersion = "1.1.1") Then
                             newRow.Item(db_fld_SCSiteType) = TestRows(0).Item(db_fld_SiteType)
                         End If
                     Else

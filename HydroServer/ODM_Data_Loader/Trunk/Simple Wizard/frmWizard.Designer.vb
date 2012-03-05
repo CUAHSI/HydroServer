@@ -78,7 +78,7 @@ Partial Class frmWizard
         Me.txtFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFilePath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtFilePath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem
+        '        Me.txtFilePath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem
         Me.txtFilePath.Location = New System.Drawing.Point(13, 29)
         Me.txtFilePath.Name = "txtFilePath"
         Me.txtFilePath.Size = New System.Drawing.Size(264, 20)
@@ -172,8 +172,8 @@ Partial Class frmWizard
         '
         Me.txtBatPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtBatPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtBatPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem
+        'Me.txtBatPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        '        Me.txtBatPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem
         Me.txtBatPath.Location = New System.Drawing.Point(13, 26)
         Me.txtBatPath.Name = "txtBatPath"
         Me.txtBatPath.Size = New System.Drawing.Size(300, 20)
@@ -234,8 +234,8 @@ Partial Class frmWizard
         '
         Me.txtLinkPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLinkPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtLinkPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem
+        '        Me.txtLinkPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        '        Me.txtLinkPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem
         Me.txtLinkPath.Location = New System.Drawing.Point(6, 42)
         Me.txtLinkPath.Name = "txtLinkPath"
         Me.txtLinkPath.Size = New System.Drawing.Size(288, 20)
@@ -432,8 +432,8 @@ Partial Class frmWizard
         '
         Me.txtLogPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLogPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtLogPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem
+        '        Me.txtLogPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        '        Me.txtLogPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem
         Me.txtLogPath.Location = New System.Drawing.Point(12, 68)
         Me.txtLogPath.Name = "txtLogPath"
         Me.txtLogPath.Size = New System.Drawing.Size(300, 20)

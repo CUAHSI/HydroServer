@@ -465,9 +465,8 @@ Module modDB
                    FormatForDB(sourceInfo.Item(db_fld_SrcDesc)) & "', '" & _
                    FormatForDB(sourceInfo.Item(db_fld_SrcCitation)) & "', '" & _
                    qcLevelID & "', '" & _
-                   FormatForDB(qclevelInfo.Item(db_fld_QCLQCLevelCode)) & "', '" & _
-                   BeginDT & "', '" & EndDT & "', '" & _
-                   BeginUtcDT & "', '" & EndUtcDT & "', '" & ValueCount
+                   FormatForDB(qclevelInfo.Item(db_fld_QCLQCLevelCode)) & "', " & _
+                   "@BeginDT, @EndDT, @BeginUtcDT, @EndUtcDT" & ", '" & ValueCount
             If (My.Settings.ODMVersion = "1.1.1") Then
                 sql &= "', '" & FormatForDB(siteInfo.Item(db_fld_SiteType))
             End If
@@ -478,6 +477,14 @@ Module modDB
 
             'Run the query
             Dim update As New SqlClient.SqlCommand(sql, Connection)
+            update.Parameters.Add(New SqlParameter("@BeginDT", SqlDbType.DateTime))
+            update.Parameters("@BeginDT").Value = BeginDT
+            update.Parameters.Add(New SqlParameter("@EndDT", SqlDbType.DateTime))
+            update.Parameters("@EndDT").Value = EndDT
+            update.Parameters.Add(New SqlParameter("@BeginUtcDT", SqlDbType.DateTime))
+            update.Parameters("@BeginUtcDT").Value = BeginUtcDT
+            update.Parameters.Add(New SqlParameter("@EndUtcDT", SqlDbType.DateTime))
+            update.Parameters("@EndUtcDT").Value = EndUtcDT
             Dim temp As Object
             temp = update.ExecuteScalar()
 
@@ -1150,14 +1157,22 @@ Module modDB
             dataCount = GetDataCount(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
 
             sql = "UPDATE " & db_tbl_SeriesCatalog & _
-            " SET " & db_fld_SCBeginDT & " = '" & first & "', " & db_fld_SCEndDT & " = '" & last & "', " & db_fld_SCBeginDTUTC & " = '" & firstUTC & "', " & db_fld_SCEndDTUTC & " = '" & lastUTC & "', " & db_fld_SCValueCount & " = '" & dataCount & "'" & _
+            " SET " & db_fld_SCBeginDT & " = " & "@first" & ", " & db_fld_SCEndDT & " = " & "@last" & ", " & db_fld_SCBeginDTUTC & " = " & "@firstUTC" & ", " & db_fld_SCEndDTUTC & " = " & "@lastUTC" & ", " & db_fld_SCValueCount & " = '" & dataCount & "'" & _
             " WHERE (" & db_fld_SCSiteID & " = " & siteID & ") AND (" & db_fld_SCVarID & " = " & varID & ") AND (" & db_fld_SCMethodID & " = " & methodID & ") AND (" & db_fld_SCSourceID & " = " & sourceID & ") AND (" & db_fld_SCQCLevelID & " = " & qcLevelID & ")"
 
             Dim Connection As New SqlClient.SqlConnection(e_settings.ConnectionString)
             Connection.Open()
 
-            'Test the connection
+            'Set the query parameters
             Dim update As New SqlClient.SqlCommand(sql, Connection)
+            update.Parameters.Add(New SqlParameter("@first", SqlDbType.DateTime))
+            update.Parameters("@first").Value = first
+            update.Parameters.Add(New SqlParameter("@last", SqlDbType.DateTime))
+            update.Parameters("@last").Value = last
+            update.Parameters.Add(New SqlParameter("@firstUTC", SqlDbType.DateTime))
+            update.Parameters("@firstUTC").Value = firstUTC
+            update.Parameters.Add(New SqlParameter("@lastUTC", SqlDbType.DateTime))
+            update.Parameters("@lastUTC").Value = lastUTC
             'Dim temp As Object
             'temp = update.executescalar
             update.ExecuteScalar()

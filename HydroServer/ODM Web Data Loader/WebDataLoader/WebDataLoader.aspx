@@ -17,8 +17,10 @@
                 <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
             </p>
             <p><asp:Label ID="lblstatus" runat="server" ForeColor="Red"></asp:Label></p>
-            <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Height="500px" >
-                <asp:GridView ID="dgvData" runat="server" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" HorizontalAlign="Left">
+            <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Height="500px" 
+                BorderColor="#999999" BorderStyle="Outset" >
+                <asp:GridView ID="dgvData" runat="server" BackColor="White" BorderColor="Gray" 
+                    BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" HorizontalAlign="Left">
                     <RowStyle BackColor="white" ForeColor="#003399" />
                     <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
                     <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
