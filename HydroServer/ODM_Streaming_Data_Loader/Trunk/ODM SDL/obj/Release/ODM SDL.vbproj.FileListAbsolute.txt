@@ -53,3 +53,14 @@ C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM S
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.exe
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.xml
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.pdb
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.exe.config
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.exe
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.pdb
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.xml
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ResolveAssemblyReference.cache
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.frmODMSDL.resources
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.Resources.resources
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODM SDL.vbproj.GenerateResource.Cache
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.exe
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.xml
+C:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.pdb
