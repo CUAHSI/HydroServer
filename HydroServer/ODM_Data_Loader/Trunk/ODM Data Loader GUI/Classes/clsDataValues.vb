@@ -332,6 +332,8 @@ Class clsDataValues
                 Throw New Exception("Error Getting Database Schema")
             End If
 
+           
+
             'Load all of the CV and other related tables here
             Sites = m_Connection.OpenTable(connect, trans, db_tbl_Sites, "SELECT * FROM " & db_tbl_Sites)
             Variables = m_Connection.OpenTable(connect, trans, db_tbl_Variables, "SELECT * FROM " & db_tbl_Variables)
@@ -1160,10 +1162,19 @@ Class clsDataValues
                 LogUpdate(_tc(db_tbl_Variables) & " rows committed to Variables")
             End If
         End If
-
+        
         LogUpdate("Finding New DataValues")
         Dim DV As DataTable = ValidateTable(connect, trans)
-        _tc.Add(db_tbl_DataValues, m_Connection.UpdateTable(connect, trans, DV, "SELECT * FROM " & db_tbl_DataValues))
+
+        Dim FieldsDV() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
+        Dim SeriesToUpdate As DataTable = SelectDistinct(DV, FieldsDV)
+        Dim SiteWhere As String = " WHERE " & db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
+        Dim VariableWhere As String = " AND " & db_fld_VariableID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_VariableID)))) & ")"
+        Dim MethodWhere As String = " AND " & db_fld_MethodID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_MethodID)))) & ")"
+        Dim SourceWhere As String = " AND " & db_fld_SourceID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SourceID)))) & ")"
+        Dim QCLWhere As String = " AND " & db_fld_QualityControlLevelID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_QualityControlLevelID)))) & ")"
+
+        _tc.Add(db_tbl_DataValues, m_Connection.UpdateTable(connect, trans, DV, "SELECT * FROM " & db_tbl_DataValues & SiteWhere & VariableWhere & MethodWhere & SourceWhere & QCLWhere))
         If (_tc(db_tbl_DataValues) > 0) Then
             'otherCount += count
             LogUpdate(_tc(db_tbl_DataValues) & " rows committed to DataValues")
@@ -1189,6 +1200,7 @@ Class clsDataValues
         End If
 
     End Function
+
     Private Function getTotalRows(ByVal _clsTableCount As clsTableCount) As Integer
         Dim count As Integer = 0
         For Each c As KeyValuePair(Of String, Integer) In _clsTableCount
@@ -1198,6 +1210,7 @@ Class clsDataValues
         Next
         Return count
     End Function
+
     'Protected Function UpdateSeriesCatalogTableNewest(ByVal connect As SqlClient.SqlConnection, ByRef trans As System.Data.SqlClient.SqlTransaction, ByVal valid As DataTable) As Integer
     '    Dim SC As DataTable
     '    Dim Fields() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
@@ -1288,6 +1301,11 @@ Class clsDataValues
     '        Throw New Exception("Error Checking DataValues for SeriesCatalog Update")
     '    End If
     'End Function
+
+
+
+
+
     'Protected Function UpdateSeriesCatalogTableNew(ByVal connect As SqlClient.SqlConnection, ByRef trans As System.Data.SqlClient.SqlTransaction, ByVal valid As DataTable) As Integer
     '    Dim SC As DataTable
     '    Dim Fields() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
@@ -1308,11 +1326,11 @@ Class clsDataValues
     '        For i As Integer = 0 To SeriesToUpdate.Rows.Count - 1
 
     '            'Dim newRow As DataRow = SC.NewRow
-    '            Dim SiteID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCSiteID)
-    '            Dim VariableID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCVarID)
-    '            Dim MethodID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCMethodID)
-    '            Dim SourceID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCSourceID)
-    '            Dim QualityControlLevelID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCQCLevelID)
+    '            Dim SiteID As Integer = row.Item(db_fld_SCSiteID)
+    '            Dim VariableID As Integer = row.Item(db_fld_SCVarID)
+    '            Dim MethodID As Integer = row.Item(db_fld_SCMethodID)
+    '            Dim SourceID As Integer = row.Item(db_fld_SCSourceID)
+    '            Dim QualityControlLevelID As Integer = row.Item(db_fld_SCQCLevelID)
     '            Dim rownum As Integer = 0
     '            Dim Updated() As DataRow = SC.Select("(" & db_fld_SiteID & " = " & SiteID & ") AND (" & db_fld_VariableID & " = " & VariableID & ") AND (" & db_fld_MethodID & " = " & MethodID & ") AND (" & db_fld_SourceID & " = " & SourceID & ") AND (" & db_fld_QQualityControlLevelID & " = " & QualityControlLevelID & ")")
 
@@ -1366,185 +1384,330 @@ Class clsDataValues
     '        Throw New Exception("Error Checking DataValues for SeriesCatalog Update")
     '    End If
     'End Function
-
-
     Protected Function UpdateSeriesCatalogTable(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction, ByVal valid As DataTable) As Integer
         Dim Fields() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
         Const db_expr_VarUnitsName As String = "VariableUnitsName"
         Const db_expr_TimeUnitsName As String = "TimeUnitsName"
 
-        Dim SCSelect As String = "SELECT * FROM SeriesCatalog"
+        Dim SCSelect As String = "SELECT * FROM SeriesCatalog "
         Dim SiteSelect As String
         If (My.Settings.ODMVersion = "1.1.1") Then
-            SiteSelect = "SELECT SiteID, SiteCode, SiteName, SiteType FROM Sites"
+            SiteSelect = "SELECT SiteID, SiteCode, SiteName, SiteType FROM Sites "
         Else
-            SiteSelect = "SELECT SiteID, SiteCode, SiteName FROM Sites"
+            SiteSelect = "SELECT SiteID, SiteCode, SiteName FROM Sites "
         End If
         Dim VariableSelect As String = "SELECT VariableID, VariableCode, VariableName, Speciation, VariableUnitsID, VariableUnits.UnitsName AS VariableUnitsName, SampleMedium, ValueType, IsRegular, TimeSupport, TimeUnitsID, TimeUnits.UnitsName AS TimeUnitsName, DataType, GeneralCategory FROM Variables LEFT OUTER JOIN Units AS VariableUnits ON Variables.VariableUnitsID = VariableUnits.UnitsID LEFT OUTER JOIN Units AS TimeUnits ON Variables.TimeUnitsID = TimeUnits.UnitsID "
-        Dim MethodSelect As String = "SELECT MethodID, MethodDescription FROM Methods"
-        Dim SourceSelect As String = "SELECT SourceID, Organization, SourceDescription, Citation FROM Sources"
-        Dim QualityControlLevelSelect As String = "SELECT QualityControlLevelID, QualityControlLevelCode FROM QualityControlLevels"
-        Dim SiteWhere As String
-        Dim VariableWhere As String
-        Dim MethodWhere As String
-        Dim SourceWhere As String
-        Dim QualityControlLevelWhere As String
+        Dim MethodSelect As String = "SELECT MethodID, MethodDescription FROM Methods "
+        Dim SourceSelect As String = "SELECT SourceID, Organization, SourceDescription, Citation FROM Sources "
+        Dim QualityControlLevelSelect As String = "SELECT QualityControlLevelID, QualityControlLevelCode FROM QualityControlLevels "
 
-        Dim SC As New DataTable
-        Dim Sites As New DataTable
-        Dim Variables As New DataTable
-        Dim Methods As New DataTable
-        Dim Sources As New DataTable
-        Dim QualityControlLevels As New DataTable
+        Dim SCTemp As New DataTable
         Dim SeriesToUpdate As New DataTable
-
-        Dim i As Integer
         Dim NumToUpdate As Integer
 
         SeriesToUpdate = SelectDistinct(valid, Fields)
+        Dim SC As DataTable = m_Connection.OpenTable(connect, trans, "Series Catalog", SCSelect & "Where SiteID = -9999999")
         NumToUpdate = SeriesToUpdate.Rows.Count
-        If (SeriesToUpdate.Rows.Count > 0) Then
-            'Set All of the Query Parts
-            'SeriesToUpdate.Columns.Cast(Of String)().ToArray()
-            Dim SiteWhere2 As String = " WHERE " & db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
+        Dim SiteWhere As String = " WHERE " & db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
+        Dim VariableWhere As String = " WHERE " & db_fld_VariableID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_VariableID)))) & ")"
+        Dim MethodWhere As String = " WHERE " & db_fld_MethodID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_MethodID)))) & ")"
+        Dim SourceWhere As String = " WHERE " & db_fld_SourceID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SourceID)))) & ")"
+        Dim QCLWhere As String = " WHERE " & db_fld_QualityControlLevelID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_QualityControlLevelID)))) & ")"
 
-            SiteWhere = " WHERE " & db_fld_SiteID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_SiteID))
-            VariableWhere = " WHERE " & db_fld_VariableID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_VariableID))
-            MethodWhere = " WHERE " & db_fld_MethodID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_MethodID))
-            SourceWhere = " WHERE " & db_fld_SourceID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_SourceID))
-            QualityControlLevelWhere = " WHERE " & db_fld_QualityControlLevelID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_QualityControlLevelID))
-            For i = 1 To (SeriesToUpdate.Rows.Count - 1)
-                SiteWhere &= ", " & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(i).Item(db_fld_SiteID))
-                VariableWhere &= ", " & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(i).Item(db_fld_VariableID))
-                MethodWhere &= ", " & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(i).Item(db_fld_MethodID))
-                SourceWhere &= ", " & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(i).Item(db_fld_SourceID))
-                QualityControlLevelWhere &= ", " & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(i).Item(db_fld_QualityControlLevelID))
-            Next i
-            SiteWhere &= ")"
-            VariableWhere &= ")"
-            MethodWhere &= ")"
-            SourceWhere &= ")"
-            QualityControlLevelWhere &= ")"
+        Dim Variables As DataTable = m_Connection.OpenTable(connect, trans, "Variables", VariableSelect & VariableWhere)
+        Dim Methods As DataTable = m_Connection.OpenTable(connect, trans, "Methods", MethodSelect & MethodWhere)
+        Dim Sources As DataTable = m_Connection.OpenTable(connect, trans, "Sources", SourceSelect & SourceWhere)
+        Dim QualityControlLevels As DataTable = m_Connection.OpenTable(connect, trans, "QualityControlLevels", QualityControlLevelSelect & QCLWhere)
+        Dim Sites As DataTable = m_Connection.OpenTable(connect, trans, "Sites", SiteSelect & SiteWhere)
 
-            SC = m_Connection.OpenTable(connect, trans, "SeriesCatalog", SCSelect) '& SCDVWhere)
+        For Each row As DataRow In SeriesToUpdate.Rows
 
+            Dim SCWhere As String = String.Format(" WHERE {0} = '{1}' AND {2} = '{3}' AND {4} = '{5}'  AND {6} = '{7}' AND {8} = '{9}'", db_fld_SiteID, row.Item(db_fld_SiteID), db_fld_VariableID, row.Item(db_fld_VariableID), db_fld_MethodID, row.Item(db_fld_MethodID), db_fld_SourceID, row.Item(db_fld_SourceID), db_fld_QualityControlLevelID, row.Item(db_fld_QualityControlLevelID))
+            SCTemp = m_Connection.OpenTable(connect, trans, "Series Catalog", SCSelect & SCWhere)
+            If SCTemp.Rows.Count > 1 Then
+                'Update Row
+                Dim dvData As DataRow = Get_SCData_From_DV(connect, trans, row.Item(db_fld_SiteID), row.Item(db_fld_VariableID), row.Item(db_fld_MethodID), row.Item(db_fld_SourceID), row.Item(db_fld_QualityControlLevelID))
+                'Dim SCUpdate = String.Format("UPDATE Series Catalog SET {0} = {1}, {2} = {3}, {4} = {5}, {6} = {7}, {8} = {9}", db_fld_SCBeginDT, dvData.Item(db_fld_SCBeginDT), db_fld_SCEndDT, dvData.Item(db_fld_SCEndDT), db_fld_SCBeginDTUTC, dvData.Item(db_fld_SCBeginDTUTC), db_fld_SCEndDTUTC, dvData.Item(db_fld_SCEndDTUTC), db_fld_SCValueCount, dvData.Item(db_fld_SCValueCount))
+                'm_Connection.OpenTable(connect, trans, "", SCUpdate & SCWhere)
 
-            For i = 0 To (SC.Rows.Count - 1)
-                Dim SiteID As Integer = SC.Rows(i).Item(db_fld_SCSiteID)
-                Dim VariableID As Integer = SC.Rows(i).Item(db_fld_SCVarID)
-                Dim MethodID As Integer = SC.Rows(i).Item(db_fld_SCMethodID)
-                Dim SourceID As Integer = SC.Rows(i).Item(db_fld_SCSourceID)
-                Dim QualityControlLevelID As Integer = SC.Rows(i).Item(db_fld_SCQCLevelID)
-
-                Dim dvData As DataRow = Get_SCData_From_DV(connect, trans, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID)
-                Dim Updated() As DataRow = SeriesToUpdate.Select("(" & db_fld_SiteID & " = " & SiteID & ") AND (" & db_fld_VariableID & " = " & VariableID & ") AND (" & db_fld_MethodID & " = " & MethodID & ") AND (" & db_fld_SourceID & " = " & SourceID & ") AND (" & db_fld_QQualityControlLevelID & " = " & QualityControlLevelID & ")")
-
-                If (Updated.Length = 1) Then
-                    SC.Rows(i).Item(db_fld_SCBeginDT) = dvData.Item(db_fld_SCBeginDT)
-                    SC.Rows(i).Item(db_fld_SCEndDT) = dvData.Item(db_fld_SCEndDT)
-                    SC.Rows(i).Item(db_fld_SCBeginDTUTC) = dvData.Item(db_fld_SCBeginDTUTC)
-                    SC.Rows(i).Item(db_fld_SCEndDTUTC) = dvData.Item(db_fld_SCEndDTUTC)
-                    SC.Rows(i).Item(db_fld_SCValueCount) = dvData.Item(db_fld_SCValueCount)
-                    SeriesToUpdate.Rows.Remove(Updated(0))
-                Else
-                    'Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing DataValue Information.")
-                End If
-            Next i
-            If SeriesToUpdate.Rows.Count > 0 Then
-
-                Variables = m_Connection.OpenTable(connect, trans, "Variables", VariableSelect & VariableWhere)
-                Methods = m_Connection.OpenTable(connect, trans, "Methods", MethodSelect & MethodWhere)
-                Sources = m_Connection.OpenTable(connect, trans, "Sources", SourceSelect & SourceWhere)
-                QualityControlLevels = m_Connection.OpenTable(connect, trans, "QualityControlLevels", QualityControlLevelSelect & QualityControlLevelWhere)
-                Sites = m_Connection.OpenTable(connect, trans, "Sites", SiteSelect & SiteWhere)
-
-                For i = 0 To (SeriesToUpdate.Rows.Count - 1)
-                    Dim newRow As DataRow = SC.NewRow
-                    Dim SiteID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCSiteID)
-                    Dim VariableID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCVarID)
-                    Dim MethodID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCMethodID)
-                    Dim SourceID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCSourceID)
-                    Dim QualityControlLevelID As Integer = SeriesToUpdate.Rows(i).Item(db_fld_SCQCLevelID)
-                    Dim TestRows() As DataRow
-
-                    newRow.Item(db_fld_SCSeriesID) = i
-                    TestRows = Sites.Select(db_fld_SiteID & " = " & SiteID)
-                    If (TestRows.Length = 1) Then
-                        newRow.Item(db_fld_SCSiteID) = SiteID
-                        newRow.Item(db_fld_SCSiteCode) = TestRows(0).Item(db_fld_SiteCode)
-                        newRow.Item(db_fld_SCSiteName) = TestRows(0).Item(db_fld_SiteName)
-                        If (My.Settings.ODMVersion = "1.1.1") Then
-                            newRow.Item(db_fld_SCSiteType) = TestRows(0).Item(db_fld_SiteType)
-                        End If
-                    Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Site Information.")
-                    End If
-                    TestRows = Variables.Select(db_fld_VariableID & " = " & VariableID)
-                    If (TestRows.Length = 1) Then
-                        newRow.Item(db_fld_SCVarID) = VariableID
-                        newRow.Item(db_fld_SCVarCode) = TestRows(0).Item(db_fld_VariableCode)
-                        newRow.Item(db_fld_SCVarName) = TestRows(0).Item(db_fld_VariableName)
-                        newRow.Item(db_fld_SCSpec) = TestRows(0).Item(db_fld_Speciation)
-                        newRow.Item(db_fld_SCVarUnitsID) = TestRows(0).Item(db_fld_VariableUnitsID)
-                        newRow.Item(db_fld_SCVarUnitsName) = TestRows(0).Item(db_expr_VarUnitsName)
-                        newRow.Item(db_fld_SCSampleMed) = TestRows(0).Item(db_fld_SampleMedium)
-                        newRow.Item(db_fld_SCValueType) = TestRows(0).Item(db_fld_ValueType)
-                        newRow.Item(db_fld_SCTimeSupport) = TestRows(0).Item(db_fld_TimeSupport)
-                        newRow.Item(db_fld_SCTimeUnitsID) = TestRows(0).Item(db_fld_TimeUnitsID)
-                        newRow.Item(db_fld_SCTimeUnitsName) = TestRows(0).Item(db_expr_TimeUnitsName)
-                        newRow.Item(db_fld_SCDataType) = TestRows(0).Item(db_fld_DataType)
-                        newRow.Item(db_fld_SCGenCat) = TestRows(0).Item(db_fld_GeneralCategory)
-
-                    Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Variable Information.")
-                    End If
-                    TestRows = Methods.Select(db_fld_MethodID & " = " & MethodID)
-                    If (TestRows.Length = 1) Then
-                        newRow.Item(db_fld_SCMethodID) = MethodID
-                        newRow.Item(db_fld_SCMethodDesc) = TestRows(0).Item(db_fld_MethodDescription)
-                    Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Method Information.")
-                    End If
-                    TestRows = Sources.Select(db_fld_SourceID & " = " & SourceID)
-                    If (TestRows.Length = 1) Then
-                        newRow.Item(db_fld_SCSourceID) = SourceID
-                        newRow.Item(db_fld_SCOrganization) = TestRows(0).Item(db_fld_Organization)
-                        newRow.Item(db_fld_SCSourceDesc) = TestRows(0).Item(db_fld_SourceDescription)
-                        newRow.Item(db_fld_SCCitation) = TestRows(0).Item(db_fld_Citation)
-                    Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Source Information.")
-                    End If
-                    TestRows = QualityControlLevels.Select(db_fld_QualityControlLevelID & " = " & QualityControlLevelID)
-                    If (TestRows.Length = 1) Then
-                        newRow.Item(db_fld_SCQCLevelID) = QualityControlLevelID
-                        newRow.Item(db_fld_SCQCLevelCode) = TestRows(0).Item(db_fld_QualityControlLevelCode)
-                    Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing QualityControlLevel Information.")
-                    End If
-                    Dim TestRow As DataRow = Get_SCData_From_DV(connect, trans, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID)
-                    If Not (TestRow Is Nothing) Then
-                        newRow.Item(db_fld_SCBeginDT) = TestRow.Item(db_fld_SCBeginDT)
-                        newRow.Item(db_fld_SCEndDT) = TestRow.Item(db_fld_SCEndDT)
-                        newRow.Item(db_fld_SCBeginDTUTC) = TestRow.Item(db_fld_SCBeginDTUTC)
-                        newRow.Item(db_fld_SCEndDTUTC) = TestRow.Item(db_fld_SCEndDTUTC)
-                        newRow.Item(db_fld_SCValueCount) = TestRow.Item(db_fld_SCValueCount)
-                    Else
-                        Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing DataValue Information.")
-                    End If
-                    SC.Rows.Add(newRow)
-                Next i
-            End If
-            Dim count As Integer = m_Connection.UpdateTable(connect, trans, SC, SCSelect) '& SCDVWhere)
-            If (count = NumToUpdate) Then
-                Return count
+                SCTemp.Rows(1).Item(db_fld_SCBeginDT) = dvData.Item(db_fld_SCBeginDT)
+                SCTemp.Rows(1).Item(db_fld_SCEndDT) = dvData.Item(db_fld_SCEndDT)
+                SCTemp.Rows(1).Item(db_fld_SCBeginDTUTC) = dvData.Item(db_fld_SCBeginDTUTC)
+                SCTemp.Rows(1).Item(db_fld_SCEndDTUTC) = dvData.Item(db_fld_SCEndDTUTC)
+                SCTemp.Rows(1).Item(db_fld_SCValueCount) = dvData.Item(db_fld_SCValueCount)
+                SC.Rows.Add(SCTemp)
             Else
-                Throw New Exception("Only " & count & " out of " & NumToUpdate & " rows found.")
-            End If
-        Else
-            Throw New Exception("Error Checking DataValues for SeriesCatalog Update")
-        End If
+                'insert row
+                ' Dim SCInsert As String = " INSERT INTO SeriesCatalog VALUES([SiteID],[SiteCode],[SiteName],[VariableID],[VariableCode],[VariableName],[Speciation],[VariableUnitsID],[VariableUnitsName],[SampleMedium],[ValueType],[TimeSupport],[TimeUnitsID],[TimeUnitsName],[DataType],[GeneralCategory],[MethodID],[MethodDescription],[SourceID],[Organization],[SourceDescription],[Citation],[QualityControlLevelID],[QualityControlLevelCode],[BeginDateTime],[EndDateTime],[BeginDateTimeUTC],[EndDateTimeUTC] ,[ValueCount])"
+                Dim newRow As DataRow = SC.NewRow
+                Dim SiteID As Integer = row.Item(db_fld_SCSiteID)
+                Dim VariableID As Integer = row.Item(db_fld_SCVarID)
+                Dim MethodID As Integer = row.Item(db_fld_SCMethodID)
+                Dim SourceID As Integer = row.Item(db_fld_SCSourceID)
+                Dim QualityControlLevelID As Integer = row.Item(db_fld_SCQCLevelID)
+                Dim TestRows() As DataRow
 
+                newRow.Item(db_fld_SCSeriesID) = DBNull.Value
+                TestRows = Sites.Select(db_fld_SiteID & " = " & SiteID)
+                If (TestRows.Length = 1) Then
+                    newRow.Item(db_fld_SCSiteID) = SiteID
+                    newRow.Item(db_fld_SCSiteCode) = TestRows(0).Item(db_fld_SiteCode)
+                    newRow.Item(db_fld_SCSiteName) = TestRows(0).Item(db_fld_SiteName)
+                    If (My.Settings.ODMVersion = "1.1.1") Then
+                        newRow.Item(db_fld_SCSiteType) = TestRows(0).Item(db_fld_SiteType)
+                    End If
+                Else
+                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Site Information.")
+                End If
+
+                TestRows = Variables.Select(db_fld_VariableID & " = " & VariableID)
+                If (TestRows.Length = 1) Then
+                    newRow.Item(db_fld_SCVarID) = VariableID
+                    newRow.Item(db_fld_SCVarCode) = TestRows(0).Item(db_fld_VariableCode)
+                    newRow.Item(db_fld_SCVarName) = TestRows(0).Item(db_fld_VariableName)
+                    newRow.Item(db_fld_SCSpec) = TestRows(0).Item(db_fld_Speciation)
+                    newRow.Item(db_fld_SCVarUnitsID) = TestRows(0).Item(db_fld_VariableUnitsID)
+                    newRow.Item(db_fld_SCVarUnitsName) = TestRows(0).Item(db_expr_VarUnitsName)
+                    newRow.Item(db_fld_SCSampleMed) = TestRows(0).Item(db_fld_SampleMedium)
+                    newRow.Item(db_fld_SCValueType) = TestRows(0).Item(db_fld_ValueType)
+                    newRow.Item(db_fld_SCTimeSupport) = TestRows(0).Item(db_fld_TimeSupport)
+                    newRow.Item(db_fld_SCTimeUnitsID) = TestRows(0).Item(db_fld_TimeUnitsID)
+                    newRow.Item(db_fld_SCTimeUnitsName) = TestRows(0).Item(db_expr_TimeUnitsName)
+                    newRow.Item(db_fld_SCDataType) = TestRows(0).Item(db_fld_DataType)
+                    newRow.Item(db_fld_SCGenCat) = TestRows(0).Item(db_fld_GeneralCategory)
+                Else
+                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Variable Information.")
+                End If
+
+                TestRows = Methods.Select(db_fld_MethodID & " = " & MethodID)
+                If (TestRows.Length = 1) Then
+                    newRow.Item(db_fld_SCMethodID) = MethodID
+                    newRow.Item(db_fld_SCMethodDesc) = TestRows(0).Item(db_fld_MethodDescription)
+                Else
+                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Method Information.")
+                End If
+                TestRows = Sources.Select(db_fld_SourceID & " = " & SourceID)
+                If (TestRows.Length = 1) Then
+                    newRow.Item(db_fld_SCSourceID) = SourceID
+                    newRow.Item(db_fld_SCOrganization) = TestRows(0).Item(db_fld_Organization)
+                    newRow.Item(db_fld_SCSourceDesc) = TestRows(0).Item(db_fld_SourceDescription)
+                    newRow.Item(db_fld_SCCitation) = TestRows(0).Item(db_fld_Citation)
+                Else
+                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Source Information.")
+                End If
+                TestRows = QualityControlLevels.Select(db_fld_QualityControlLevelID & " = " & QualityControlLevelID)
+                If (TestRows.Length = 1) Then
+                    newRow.Item(db_fld_SCQCLevelID) = QualityControlLevelID
+                    newRow.Item(db_fld_SCQCLevelCode) = TestRows(0).Item(db_fld_QualityControlLevelCode)
+                Else
+                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing QualityControlLevel Information.")
+                End If
+                Dim TestRow As DataRow = Get_SCData_From_DV(connect, trans, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID)
+                If Not (TestRow Is Nothing) Then
+                    newRow.Item(db_fld_SCBeginDT) = TestRow.Item(db_fld_SCBeginDT)
+                    newRow.Item(db_fld_SCEndDT) = TestRow.Item(db_fld_SCEndDT)
+                    newRow.Item(db_fld_SCBeginDTUTC) = TestRow.Item(db_fld_SCBeginDTUTC)
+                    newRow.Item(db_fld_SCEndDTUTC) = TestRow.Item(db_fld_SCEndDTUTC)
+                    newRow.Item(db_fld_SCValueCount) = TestRow.Item(db_fld_SCValueCount)
+                Else
+                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing DataValue Information.")
+                End If
+                SC.Rows.Add(newRow)
+
+            End If
+        Next
+
+        Dim count As Integer = m_Connection.UpdateTable(connect, trans, SC, SCSelect) '& SCDVWhere)
+        If (count = NumToUpdate) Then
+            Return count
+        Else
+            Throw New Exception("Only " & count & " out of " & NumToUpdate & " rows found.")
+        End If
+        '    Else
+        '        Throw New Exception("Error Checking DataValues for SeriesCatalog Update")
+
+        '    End If
     End Function
+
+
+
+    'Protected Function UpdateSeriesCatalogTableold(ByVal connect As SqlClient.SqlConnection, ByVal trans As System.Data.SqlClient.SqlTransaction, ByVal valid As DataTable) As Integer
+    '    Dim Fields() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
+    '    Const db_expr_VarUnitsName As String = "VariableUnitsName"
+    '    Const db_expr_TimeUnitsName As String = "TimeUnitsName"
+
+    '    Dim SCSelect As String = "SELECT * FROM SeriesCatalog"
+    '    Dim SiteSelect As String
+    '    If (My.Settings.ODMVersion = "1.1.1") Then
+    '        SiteSelect = "SELECT SiteID, SiteCode, SiteName, SiteType FROM Sites"
+    '    Else
+    '        SiteSelect = "SELECT SiteID, SiteCode, SiteName FROM Sites"
+    '    End If
+    '    Dim VariableSelect As String = "SELECT VariableID, VariableCode, VariableName, Speciation, VariableUnitsID, VariableUnits.UnitsName AS VariableUnitsName, SampleMedium, ValueType, IsRegular, TimeSupport, TimeUnitsID, TimeUnits.UnitsName AS TimeUnitsName, DataType, GeneralCategory FROM Variables LEFT OUTER JOIN Units AS VariableUnits ON Variables.VariableUnitsID = VariableUnits.UnitsID LEFT OUTER JOIN Units AS TimeUnits ON Variables.TimeUnitsID = TimeUnits.UnitsID "
+    '    Dim MethodSelect As String = "SELECT MethodID, MethodDescription FROM Methods"
+    '    Dim SourceSelect As String = "SELECT SourceID, Organization, SourceDescription, Citation FROM Sources"
+    '    Dim QualityControlLevelSelect As String = "SELECT QualityControlLevelID, QualityControlLevelCode FROM QualityControlLevels"
+    '    Dim SiteWhere As String
+    '    Dim VariableWhere As String
+    '    Dim MethodWhere As String
+    '    Dim SourceWhere As String
+    '    Dim QualityControlLevelWhere As String
+
+    '    Dim SC As New DataTable
+    '    Dim Sites As New DataTable
+    '    Dim Variables As New DataTable
+    '    Dim Methods As New DataTable
+    '    Dim Sources As New DataTable
+    '    Dim QualityControlLevels As New DataTable
+    '    Dim SeriesToUpdate As New DataTable
+
+    '    Dim i As Integer
+    '    Dim NumToUpdate As Integer
+
+    '    SeriesToUpdate = SelectDistinct(valid, Fields)
+    '    NumToUpdate = SeriesToUpdate.Rows.Count
+    '    If (SeriesToUpdate.Rows.Count > 0) Then
+    '        'Set All of the Query Parts
+    '        'SeriesToUpdate.Columns.Cast(Of String)().ToArray()
+    '        Dim SiteWhere2 As String = " WHERE " & db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
+
+    '        SiteWhere = " WHERE " & db_fld_SiteID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_SiteID))
+    '        VariableWhere = " WHERE " & db_fld_VariableID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_VariableID))
+    '        MethodWhere = " WHERE " & db_fld_MethodID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_MethodID))
+    '        SourceWhere = " WHERE " & db_fld_SourceID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_SourceID))
+    '        QualityControlLevelWhere = " WHERE " & db_fld_QualityControlLevelID & " IN (" & m_Connection.FormatStringForQuery(SeriesToUpdate.Rows(0).Item(db_fld_QualityControlLevelID))
+    '        For i = 1 To (SeriesToUpdate.Rows.Count - 1)
+    '            SiteWhere &= ", " & m_Connection.FormatStringForQuery(row.Item(db_fld_SiteID))
+    '            VariableWhere &= ", " & m_Connection.FormatStringForQuery(row.Item(db_fld_VariableID))
+    '            MethodWhere &= ", " & m_Connection.FormatStringForQuery(row.Item(db_fld_MethodID))
+    '            SourceWhere &= ", " & m_Connection.FormatStringForQuery(row.Item(db_fld_SourceID))
+    '            QualityControlLevelWhere &= ", " & m_Connection.FormatStringForQuery(row.Item(db_fld_QualityControlLevelID))
+    '        Next i
+    '        SiteWhere &= ")"
+    '        VariableWhere &= ")"
+    '        MethodWhere &= ")"
+    '        SourceWhere &= ")"
+    '        QualityControlLevelWhere &= ")"
+
+    '        SC = m_Connection.OpenTable(connect, trans, "SeriesCatalog", SCSelect) '& SCDVWhere)
+
+
+    '        For i = 0 To (SC.Rows.Count - 1)
+    '            Dim SiteID As Integer = SC.Rows(i).Item(db_fld_SCSiteID)
+    '            Dim VariableID As Integer = SC.Rows(i).Item(db_fld_SCVarID)
+    '            Dim MethodID As Integer = SC.Rows(i).Item(db_fld_SCMethodID)
+    '            Dim SourceID As Integer = SC.Rows(i).Item(db_fld_SCSourceID)
+    '            Dim QualityControlLevelID As Integer = SC.Rows(i).Item(db_fld_SCQCLevelID)
+
+    '            Dim dvData As DataRow = Get_SCData_From_DV(connect, trans, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID)
+    '            Dim Updated() As DataRow = SeriesToUpdate.Select("(" & db_fld_SiteID & " = " & SiteID & ") AND (" & db_fld_VariableID & " = " & VariableID & ") AND (" & db_fld_MethodID & " = " & MethodID & ") AND (" & db_fld_SourceID & " = " & SourceID & ") AND (" & db_fld_QQualityControlLevelID & " = " & QualityControlLevelID & ")")
+
+    '            If (Updated.Length = 1) Then
+    '                SC.Rows(i).Item(db_fld_SCBeginDT) = dvData.Item(db_fld_SCBeginDT)
+    '                SC.Rows(i).Item(db_fld_SCEndDT) = dvData.Item(db_fld_SCEndDT)
+    '                SC.Rows(i).Item(db_fld_SCBeginDTUTC) = dvData.Item(db_fld_SCBeginDTUTC)
+    '                SC.Rows(i).Item(db_fld_SCEndDTUTC) = dvData.Item(db_fld_SCEndDTUTC)
+    '                SC.Rows(i).Item(db_fld_SCValueCount) = dvData.Item(db_fld_SCValueCount)
+    '                SeriesToUpdate.Rows.Remove(Updated(0))
+    '            Else
+    '                'Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing DataValue Information.")
+    '            End If
+    '        Next i
+    '        If SeriesToUpdate.Rows.Count > 0 Then
+
+    '            Variables = m_Connection.OpenTable(connect, trans, "Variables", VariableSelect & VariableWhere)
+    '            Methods = m_Connection.OpenTable(connect, trans, "Methods", MethodSelect & MethodWhere)
+    '            Sources = m_Connection.OpenTable(connect, trans, "Sources", SourceSelect & SourceWhere)
+    '            QualityControlLevels = m_Connection.OpenTable(connect, trans, "QualityControlLevels", QualityControlLevelSelect & QualityControlLevelWhere)
+    '            Sites = m_Connection.OpenTable(connect, trans, "Sites", SiteSelect & SiteWhere)
+
+    '            For i = 0 To (SeriesToUpdate.Rows.Count - 1)
+    '                Dim newRow As DataRow = SC.NewRow
+    '                Dim SiteID As Integer = row.Item(db_fld_SCSiteID)
+    '                Dim VariableID As Integer = row.Item(db_fld_SCVarID)
+    '                Dim MethodID As Integer = row.Item(db_fld_SCMethodID)
+    '                Dim SourceID As Integer = row.Item(db_fld_SCSourceID)
+    '                Dim QualityControlLevelID As Integer = row.Item(db_fld_SCQCLevelID)
+    '                Dim TestRows() As DataRow
+
+    '                newRow.Item(db_fld_SCSeriesID) = i
+    '                TestRows = Sites.Select(db_fld_SiteID & " = " & SiteID)
+    '                If (TestRows.Length = 1) Then
+    '                    newRow.Item(db_fld_SCSiteID) = SiteID
+    '                    newRow.Item(db_fld_SCSiteCode) = TestRows(0).Item(db_fld_SiteCode)
+    '                    newRow.Item(db_fld_SCSiteName) = TestRows(0).Item(db_fld_SiteName)
+    '                    If (My.Settings.ODMVersion = "1.1.1") Then
+    '                        newRow.Item(db_fld_SCSiteType) = TestRows(0).Item(db_fld_SiteType)
+    '                    End If
+    '                Else
+    '                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Site Information.")
+    '                End If
+    '                TestRows = Variables.Select(db_fld_VariableID & " = " & VariableID)
+    '                If (TestRows.Length = 1) Then
+    '                    newRow.Item(db_fld_SCVarID) = VariableID
+    '                    newRow.Item(db_fld_SCVarCode) = TestRows(0).Item(db_fld_VariableCode)
+    '                    newRow.Item(db_fld_SCVarName) = TestRows(0).Item(db_fld_VariableName)
+    '                    newRow.Item(db_fld_SCSpec) = TestRows(0).Item(db_fld_Speciation)
+    '                    newRow.Item(db_fld_SCVarUnitsID) = TestRows(0).Item(db_fld_VariableUnitsID)
+    '                    newRow.Item(db_fld_SCVarUnitsName) = TestRows(0).Item(db_expr_VarUnitsName)
+    '                    newRow.Item(db_fld_SCSampleMed) = TestRows(0).Item(db_fld_SampleMedium)
+    '                    newRow.Item(db_fld_SCValueType) = TestRows(0).Item(db_fld_ValueType)
+    '                    newRow.Item(db_fld_SCTimeSupport) = TestRows(0).Item(db_fld_TimeSupport)
+    '                    newRow.Item(db_fld_SCTimeUnitsID) = TestRows(0).Item(db_fld_TimeUnitsID)
+    '                    newRow.Item(db_fld_SCTimeUnitsName) = TestRows(0).Item(db_expr_TimeUnitsName)
+    '                    newRow.Item(db_fld_SCDataType) = TestRows(0).Item(db_fld_DataType)
+    '                    newRow.Item(db_fld_SCGenCat) = TestRows(0).Item(db_fld_GeneralCategory)
+
+    '                Else
+    '                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Variable Information.")
+    '                End If
+    '                TestRows = Methods.Select(db_fld_MethodID & " = " & MethodID)
+    '                If (TestRows.Length = 1) Then
+    '                    newRow.Item(db_fld_SCMethodID) = MethodID
+    '                    newRow.Item(db_fld_SCMethodDesc) = TestRows(0).Item(db_fld_MethodDescription)
+    '                Else
+    '                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Method Information.")
+    '                End If
+    '                TestRows = Sources.Select(db_fld_SourceID & " = " & SourceID)
+    '                If (TestRows.Length = 1) Then
+    '                    newRow.Item(db_fld_SCSourceID) = SourceID
+    '                    newRow.Item(db_fld_SCOrganization) = TestRows(0).Item(db_fld_Organization)
+    '                    newRow.Item(db_fld_SCSourceDesc) = TestRows(0).Item(db_fld_SourceDescription)
+    '                    newRow.Item(db_fld_SCCitation) = TestRows(0).Item(db_fld_Citation)
+    '                Else
+    '                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing Source Information.")
+    '                End If
+    '                TestRows = QualityControlLevels.Select(db_fld_QualityControlLevelID & " = " & QualityControlLevelID)
+    '                If (TestRows.Length = 1) Then
+    '                    newRow.Item(db_fld_SCQCLevelID) = QualityControlLevelID
+    '                    newRow.Item(db_fld_SCQCLevelCode) = TestRows(0).Item(db_fld_QualityControlLevelCode)
+    '                Else
+    '                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing QualityControlLevel Information.")
+    '                End If
+    '                Dim TestRow As DataRow = Get_SCData_From_DV(connect, trans, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID)
+    '                If Not (TestRow Is Nothing) Then
+    '                    newRow.Item(db_fld_SCBeginDT) = TestRow.Item(db_fld_SCBeginDT)
+    '                    newRow.Item(db_fld_SCEndDT) = TestRow.Item(db_fld_SCEndDT)
+    '                    newRow.Item(db_fld_SCBeginDTUTC) = TestRow.Item(db_fld_SCBeginDTUTC)
+    '                    newRow.Item(db_fld_SCEndDTUTC) = TestRow.Item(db_fld_SCEndDTUTC)
+    '                    newRow.Item(db_fld_SCValueCount) = TestRow.Item(db_fld_SCValueCount)
+    '                Else
+    '                    Throw New Exception("Error Updating Series Catalog Table." & vbCrLf & "Missing DataValue Information.")
+    '                End If
+    '                SC.Rows.Add(newRow)
+    '            Next i
+    '        End If
+    '        Dim count As Integer = m_Connection.UpdateTable(connect, trans, SC, SCSelect) '& SCDVWhere)
+    '        If (count = NumToUpdate) Then
+    '            Return count
+    '        Else
+    '            Throw New Exception("Only " & count & " out of " & NumToUpdate & " rows found.")
+    '        End If
+    '    Else
+    '        Throw New Exception("Error Checking DataValues for SeriesCatalog Update")
+    '    End If
+
+    'End Function
 
     Private Function Get_SCData_From_DV(ByVal connect As SqlClient.SqlConnection, ByVal trans As SqlClient.SqlTransaction, ByVal siteID As String, ByVal variableID As String, ByVal methodID As String, ByVal sourceID As String, ByVal qualitycontrollevelID As String) As DataRow
         Dim newRow As DataRow = Nothing

@@ -6,7 +6,20 @@ ODMLoader
 </name>
 </assembly>
 <members>
-<member name="M:ODM_Data_Loader_GUI.clsCategories.#ctor(ODM_Data_Loader_GUI.clsConnection)">
+<member name="P:ODM_Data_Loader_GUI.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:ODM_Data_Loader_GUI.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:ODM_Data_Loader_GUI.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:ODM_Data_Loader_GUI.clsCategories.#ctor(ODM_Data_Loader_GUI.clsConnection)">
 	<summary>
  Create a blank categories file with a connection to the database
  </summary>
@@ -57,19 +70,6 @@ ODMLoader
  Class to read a Categories file and submit it to a database
  </summary>
 	<remarks></remarks>
-</member><member name="P:ODM_Data_Loader_GUI.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:ODM_Data_Loader_GUI.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:ODM_Data_Loader_GUI.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
 </member>
 </members>
 </doc>
