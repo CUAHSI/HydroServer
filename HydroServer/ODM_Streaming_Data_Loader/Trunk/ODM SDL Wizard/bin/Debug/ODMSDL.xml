@@ -19,300 +19,6 @@ ODMSDL
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.
 </summary>
-</member><member name="F:ODMSDL.frmODMSDL.m_SpecificFiles">
-	<summary>
- Tracks whether to update specific files or everything based on the schedule.
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.frmODMSDL.frmODMSDL_Load(System.Object,System.EventArgs)">
-	<summary>
- Determines which type of update to run based on command line arguments
- </summary>
-	<param name="sender"></param>
-	<param name="e"></param>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.frmODMSDL.Import">
-	<summary>
- Loads data based on the pre-defined schedule.
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.frmODMSDL.Import(System.Int32[])">
-	<summary>
- Loads data based on the ID in the Config.xml file.  Ignores the schedule
- </summary>
-	<param name="IDs"></param>
-	<remarks></remarks>
-</member><member name="T:ODMSDL.frmODMSDL">
-	<summary>
- Performs the actual Loading of data into the database.  Is always hidden, but places an icon in the task bar.
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.modEncryption.Entropy">
-	<summary>
- Used to protect the integrity of Encrypted Data
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.modEncryption.Decrypt(System.String,System.Byte)">
-	<summary>
- Decrypts data that has been encrypted by the ODM SDL Config Wizard.
- </summary>
-	<param name="data">The data to decrypt</param>
-	<param name="padding">Whether the data should be padded</param>
-	<returns>The decrypted data</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.modEncryption.DecryptInMemoryData(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)">
-	<summary>
- Decrypts Data
- </summary>
-	<param name="Data">The data to decrypt as an array of Bytes</param>
-	<param name="Scope">the MemoryProtecitonScope used to encrypt the data</param>
-	<returns>Decrypted data as an array of Bytes</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.modFile.LoadFile(System.Boolean,System.String,System.Int32,System.Int32,System.String)">
-	<summary>
- Loads a comma delimited text file into a datatable.  Can specify which row Column Headers begin on.  Can specify which row Data begins on, must be after column header row.
- </summary>
-	<param name="isWeb">Is path a URL?</param>
-	<param name="path">The filepath / URL to the data</param>
-	<param name="headerRow">Which row the column headers are on (starting at 1, 0 means no headers)</param>
-	<param name="dataRow">Which row the data starts on (starting at 1, must be greater than headerRow)</param>
-	<param name="delimiter">the delimiter to split the file by</param>
-	<returns>Returns the data as a DataTable, each row is a line of text in the file</returns>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsUTCDT.m_LocalDT">
-	<summary>
- The Local Date and Time
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsUTCDT.m_UTCDT">
-	<summary>
- The UTC Date and Time
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsUTCDT.m_UTCOffset">
-	<summary>
- The Offset Between Local and UTC Date and Time (Local - UTC)
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsUTCDT.m_UseDST">
-	<summary>
- Whether this DT uses Daylight Saving Time
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsUTCDT.m_isDST">
-	<summary>
- Whether it is Daylight Saving Time at this specific Date and Time
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsUTCDT.m_isFileSOI">
-	<summary>
- Whether the record was measured at the start of the specified interval
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsUTCDT.m_isDatabaseSOI">
-	<summary>
- Whether the record should be STORED as the start of the specified interval
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsUTCDT.m_IntervalLength">
-	<summary>
- The length of the interval used for 'Start of Interval' - 'End of Interval' conversions
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsUTCDT.#ctor(System.String,System.Int32,System.Boolean,ODMSDL.clsUTCDT,System.Boolean,System.Boolean,System.String)">
-	<summary>
- Used to convert Local Time to UTC Time when a different Timezone is required.  
- </summary>
-	<param name="e_LocalDT">The Local Time of the measurement</param>
-	<param name="e_TimeZone">The Timezone of the Measurement</param>
-	<param name="e_UseDST">Whether the conversion should include Daylight Saving Time</param>
-	<param name="e_LastValue">The last Time recorded, used to determine Daylight Saving Time transitions</param>
-	<param name="FileSOI">Whether the time was recorded at Start of the Interval</param>
-	<param name="DatabaseSOI">Whether the time should be saved as the Start of the Interval</param>
-	<param name="Interval">The length of the Interval</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsUTCDT.#ctor(System.String,System.Boolean,System.Boolean,System.Boolean,System.String)">
-	<summary>
- Used to convert UTC Time to Local Time when the local timezone is required.
- </summary>
-	<param name="e_UTCDT">The UTC Time of the measurement</param>
-	<param name="e_UseDST">Whether the conversion should include Daylight Saving Time</param>
-	<param name="FileSOI">Whether the time was recorded at Start of the Interval</param>
-	<param name="DatabaseSOI">Whether the time should be saved as the Start of the Interval</param>
-	<param name="Interval">The length of the Interval</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsUTCDT.#ctor(System.String,System.String,System.Boolean,System.Boolean,System.String)">
-	<summary>
- Used to calculate the UTC Offset when Local and UTC times are given.
- </summary>
-	<param name="e_LocalDT">The Local Time of the measurement</param>
-	<param name="e_UTCDT">The UTC Time of the measurement</param>
-	<param name="FileSOI">Whether the time was recorded at Start of the Interval</param>
-	<param name="DatabaseSOI">Whether the time should be saved as the Start of the Interval</param>
-	<param name="Interval">The length of the Interval</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsUTCDT.#ctor">
-	<summary>
- Used to create a default object
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsUTCDT.CalcUTCDT(ODMSDL.clsUTCDT,System.Int32)">
-	<summary>
- Calculates the UTC DateTime based on the Last DateTime and the TimeZone.
- If using DST, also includes UTC in the calculation.
- </summary>
-	<param name="e_LastValue">The last recorded time record used to determine DST in dataloggers (which don't always propperly adjust for DST).</param>
-	<param name="e_TimeZone">The timezone or UTC Offset of the record</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsUTCDT.CalcLocalDT">
-	<summary>
- Calculates the Local DateTime and UTC Offset based on the UTC DateTime.
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsUTCDT.CalcUTCOffset">
-	<summary>
- Calculates the UTC Offset based on the Local DateTime and UTC DateTime
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsUTCDT.getLocalDT">
-	<summary>
- Returns the Local DateTime (after Interval and DST calculations)
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsUTCDT.getUTCDT">
-	<summary>
- Returns the UTC DateTime (after Interval and DST calculations)
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsUTCDT.getUTCOffset">
-	<summary>
- Returns the UTC Offset  (after DST calculations)
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDL.clsUTCDT">
-	<summary>
- Object for Storing DateTime values with different TimeZones and DST Settings
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsConnectionSettings.m_ServerAddress">
-	<summary>
- The network address of the server
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsConnectionSettings.m_DBName">
-	<summary>
- The Name of the Database
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsConnectionSettings.m_Trusted">
-	<summary>
- True if using Windows Authentication
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsConnectionSettings.m_UserID">
-	<summary>
- User Name for the connection
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsConnectionSettings.m_Password">
-	<summary>
- Password of the connection
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsConnectionSettings.m_Timeout">
-	<summary>
- Timeout of the connection
- </summary>
-	<remarks></remarks>
-</member><member name="F:ODMSDL.clsConnectionSettings.m_ConnStr">
-	<summary>
- The actual connection string used by the DB connection
- </summary>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsConnectionSettings.#ctor(System.String,System.String,System.Int32,System.Boolean,System.String,System.String)">
-	<summary>
- Create a new set of connection settings with the specified parameters (if any are specified)
- </summary>
-	<param name="e_ServerAddress">[IP Address]\[Instance Name] or [Server Name]\[Instance Name] for Named Instances such as SQLExpress
- or just use [IP Address] or [Server Name] for Unnamed Instances.</param>
-	<param name="e_DBName">Name of the database to connect to.</param>
-	<param name="e_Timeout">How long the connection should stay open before timeout.</param>
-	<param name="e_Trusted">Whether the connection uses Windows Authentication.</param>
-	<param name="e_UserID">The Username for the Database Server</param>
-	<param name="e_Password">The Password for the Database Server</param>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsConnectionSettings.IncrementTimeout">
-	<summary>
- Increases the Timeout setting by 1 as long as it is less than or equal to 15
- Then regenerates the conntection string
- </summary>
-	<returns>Returns True if m_timeout is not too high</returns>
-	<remarks></remarks>
-</member><member name="M:ODMSDL.clsConnectionSettings.SetConnectionString">
-	<summary>
- Generates a connection string for use in accessing a database
- </summary>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsConnectionSettings.ServerAddress">
-	<summary>
- Returns the Server Address
- </summary>
-	<value></value>
-	<returns>Formated as [IP] or [IP]\[Instance] or [Server Name] or [Server Name]\[Instance]</returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsConnectionSettings.DBName">
-	<summary>
- returns the Database Name value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsConnectionSettings.Trusted">
-	<summary>
- returns the Trusted Connection value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsConnectionSettings.UserID">
-	<summary>
- returns the User ID value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsConnectionSettings.Password">
-	<summary>
- returns the User Password value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsConnectionSettings.Timeout">
-	<summary>
- returns the Timeout value for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ODMSDL.clsConnectionSettings.ConnectionString">
-	<summary>
- returns the Connection String created for the connection
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:ODMSDL.clsConnectionSettings">
-	<summary>
- Object for storing all nessecary data to create a Database Connection String
- </summary>
-	<remarks></remarks>
 </member><member name="F:ODMSDL.modDB.db_expr_Count">
 	<summary>
  The name of a generated column in the 'Update Series Catalog Table' queries
@@ -514,6 +220,176 @@ ODMSDL
 	<param name="qcLevelID">The QualityControlLevelID of the Data Series in the Series Catalog to update</param>
 	<param name="e_settings">The Connection Settings to the database</param>
 	<remarks></remarks>
+</member><member name="F:ODMSDL.frmODMSDL.m_SpecificFiles">
+	<summary>
+ Tracks whether to update specific files or everything based on the schedule.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.frmODMSDL.frmODMSDL_Load(System.Object,System.EventArgs)">
+	<summary>
+ Determines which type of update to run based on command line arguments
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.frmODMSDL.Import">
+	<summary>
+ Loads data based on the pre-defined schedule.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.frmODMSDL.Import(System.Int32[])">
+	<summary>
+ Loads data based on the ID in the Config.xml file.  Ignores the schedule
+ </summary>
+	<param name="IDs"></param>
+	<remarks></remarks>
+</member><member name="T:ODMSDL.frmODMSDL">
+	<summary>
+ Performs the actual Loading of data into the database.  Is always hidden, but places an icon in the task bar.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsUTCDT.m_LocalDT">
+	<summary>
+ The Local Date and Time
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsUTCDT.m_UTCDT">
+	<summary>
+ The UTC Date and Time
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsUTCDT.m_UTCOffset">
+	<summary>
+ The Offset Between Local and UTC Date and Time (Local - UTC)
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsUTCDT.m_UseDST">
+	<summary>
+ Whether this DT uses Daylight Saving Time
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsUTCDT.m_isDST">
+	<summary>
+ Whether it is Daylight Saving Time at this specific Date and Time
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsUTCDT.m_isFileSOI">
+	<summary>
+ Whether the record was measured at the start of the specified interval
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsUTCDT.m_isDatabaseSOI">
+	<summary>
+ Whether the record should be STORED as the start of the specified interval
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsUTCDT.m_IntervalLength">
+	<summary>
+ The length of the interval used for 'Start of Interval' - 'End of Interval' conversions
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsUTCDT.#ctor(System.String,System.Int32,System.Boolean,ODMSDL.clsUTCDT,System.Boolean,System.Boolean,System.String)">
+	<summary>
+ Used to convert Local Time to UTC Time when a different Timezone is required.  
+ </summary>
+	<param name="e_LocalDT">The Local Time of the measurement</param>
+	<param name="e_TimeZone">The Timezone of the Measurement</param>
+	<param name="e_UseDST">Whether the conversion should include Daylight Saving Time</param>
+	<param name="e_LastValue">The last Time recorded, used to determine Daylight Saving Time transitions</param>
+	<param name="FileSOI">Whether the time was recorded at Start of the Interval</param>
+	<param name="DatabaseSOI">Whether the time should be saved as the Start of the Interval</param>
+	<param name="Interval">The length of the Interval</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsUTCDT.#ctor(System.String,System.Boolean,System.Boolean,System.Boolean,System.String)">
+	<summary>
+ Used to convert UTC Time to Local Time when the local timezone is required.
+ </summary>
+	<param name="e_UTCDT">The UTC Time of the measurement</param>
+	<param name="e_UseDST">Whether the conversion should include Daylight Saving Time</param>
+	<param name="FileSOI">Whether the time was recorded at Start of the Interval</param>
+	<param name="DatabaseSOI">Whether the time should be saved as the Start of the Interval</param>
+	<param name="Interval">The length of the Interval</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsUTCDT.#ctor(System.String,System.String,System.Boolean,System.Boolean,System.String)">
+	<summary>
+ Used to calculate the UTC Offset when Local and UTC times are given.
+ </summary>
+	<param name="e_LocalDT">The Local Time of the measurement</param>
+	<param name="e_UTCDT">The UTC Time of the measurement</param>
+	<param name="FileSOI">Whether the time was recorded at Start of the Interval</param>
+	<param name="DatabaseSOI">Whether the time should be saved as the Start of the Interval</param>
+	<param name="Interval">The length of the Interval</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsUTCDT.#ctor">
+	<summary>
+ Used to create a default object
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsUTCDT.CalcUTCDT(ODMSDL.clsUTCDT,System.Int32)">
+	<summary>
+ Calculates the UTC DateTime based on the Last DateTime and the TimeZone.
+ If using DST, also includes UTC in the calculation.
+ </summary>
+	<param name="e_LastValue">The last recorded time record used to determine DST in dataloggers (which don't always propperly adjust for DST).</param>
+	<param name="e_TimeZone">The timezone or UTC Offset of the record</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsUTCDT.CalcLocalDT">
+	<summary>
+ Calculates the Local DateTime and UTC Offset based on the UTC DateTime.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsUTCDT.CalcUTCOffset">
+	<summary>
+ Calculates the UTC Offset based on the Local DateTime and UTC DateTime
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsUTCDT.getLocalDT">
+	<summary>
+ Returns the Local DateTime (after Interval and DST calculations)
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsUTCDT.getUTCDT">
+	<summary>
+ Returns the UTC DateTime (after Interval and DST calculations)
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsUTCDT.getUTCOffset">
+	<summary>
+ Returns the UTC Offset  (after DST calculations)
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDL.clsUTCDT">
+	<summary>
+ Object for Storing DateTime values with different TimeZones and DST Settings
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.modEncryption.Entropy">
+	<summary>
+ Used to protect the integrity of Encrypted Data
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.modEncryption.Decrypt(System.String,System.Byte)">
+	<summary>
+ Decrypts data that has been encrypted by the ODM SDL Config Wizard.
+ </summary>
+	<param name="data">The data to decrypt</param>
+	<param name="padding">Whether the data should be padded</param>
+	<returns>The decrypted data</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.modEncryption.DecryptInMemoryData(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)">
+	<summary>
+ Decrypts Data
+ </summary>
+	<param name="Data">The data to decrypt as an array of Bytes</param>
+	<param name="Scope">the MemoryProtecitonScope used to encrypt the data</param>
+	<returns>Decrypted data as an array of Bytes</returns>
+	<remarks></remarks>
 </member><member name="F:ODMSDL.Common.g_EXE_Dir">
 	<summary>
  The filepath of the folder where the executables are located.  
@@ -560,6 +436,130 @@ ODMSDL
 	<param name="line">a line of text from the file</param>
 	<param name="delimiter">usually ',' for CSV files</param>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsConnectionSettings.m_ServerAddress">
+	<summary>
+ The network address of the server
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsConnectionSettings.m_DBName">
+	<summary>
+ The Name of the Database
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsConnectionSettings.m_Trusted">
+	<summary>
+ True if using Windows Authentication
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsConnectionSettings.m_UserID">
+	<summary>
+ User Name for the connection
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsConnectionSettings.m_Password">
+	<summary>
+ Password of the connection
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsConnectionSettings.m_Timeout">
+	<summary>
+ Timeout of the connection
+ </summary>
+	<remarks></remarks>
+</member><member name="F:ODMSDL.clsConnectionSettings.m_ConnStr">
+	<summary>
+ The actual connection string used by the DB connection
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsConnectionSettings.#ctor(System.String,System.String,System.Int32,System.Boolean,System.String,System.String)">
+	<summary>
+ Create a new set of connection settings with the specified parameters (if any are specified)
+ </summary>
+	<param name="e_ServerAddress">[IP Address]\[Instance Name] or [Server Name]\[Instance Name] for Named Instances such as SQLExpress
+ or just use [IP Address] or [Server Name] for Unnamed Instances.</param>
+	<param name="e_DBName">Name of the database to connect to.</param>
+	<param name="e_Timeout">How long the connection should stay open before timeout.</param>
+	<param name="e_Trusted">Whether the connection uses Windows Authentication.</param>
+	<param name="e_UserID">The Username for the Database Server</param>
+	<param name="e_Password">The Password for the Database Server</param>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsConnectionSettings.IncrementTimeout">
+	<summary>
+ Increases the Timeout setting by 1 as long as it is less than or equal to 15
+ Then regenerates the conntection string
+ </summary>
+	<returns>Returns True if m_timeout is not too high</returns>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.clsConnectionSettings.SetConnectionString">
+	<summary>
+ Generates a connection string for use in accessing a database
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsConnectionSettings.ServerAddress">
+	<summary>
+ Returns the Server Address
+ </summary>
+	<value></value>
+	<returns>Formated as [IP] or [IP]\[Instance] or [Server Name] or [Server Name]\[Instance]</returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsConnectionSettings.DBName">
+	<summary>
+ returns the Database Name value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsConnectionSettings.Trusted">
+	<summary>
+ returns the Trusted Connection value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsConnectionSettings.UserID">
+	<summary>
+ returns the User ID value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsConnectionSettings.Password">
+	<summary>
+ returns the User Password value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsConnectionSettings.Timeout">
+	<summary>
+ returns the Timeout value for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:ODMSDL.clsConnectionSettings.ConnectionString">
+	<summary>
+ returns the Connection String created for the connection
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:ODMSDL.clsConnectionSettings">
+	<summary>
+ Object for storing all nessecary data to create a Database Connection String
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ODMSDL.modFile.LoadFile(System.Boolean,System.String,System.Int32,System.Int32,System.String)">
+	<summary>
+ Loads a comma delimited text file into a datatable.  Can specify which row Column Headers begin on.  Can specify which row Data begins on, must be after column header row.
+ </summary>
+	<param name="isWeb">Is path a URL?</param>
+	<param name="path">The filepath / URL to the data</param>
+	<param name="headerRow">Which row the column headers are on (starting at 1, 0 means no headers)</param>
+	<param name="dataRow">Which row the data starts on (starting at 1, must be greater than headerRow)</param>
+	<param name="delimiter">the delimiter to split the file by</param>
+	<returns>Returns the data as a DataTable, each row is a line of text in the file</returns>
 	<remarks></remarks>
 </member>
 </members>

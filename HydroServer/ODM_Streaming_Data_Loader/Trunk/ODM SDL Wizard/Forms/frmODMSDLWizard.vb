@@ -1,4 +1,5 @@
 Imports System.Configuration
+Imports System.Threading
 
 'ODM Streaming Data Loader
 'Created by Utah State University
@@ -189,6 +190,12 @@ Public Class frmODMSDLWizard
             proc = Process.Start(path, IDs)
             tmrProc.Start()
             RunningUpdate = True
+            While Not proc.HasExited
+                Thread.Sleep(50)
+            End While
+
+            RunningUpdate = False
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowError(ex)
             Me.Close()
