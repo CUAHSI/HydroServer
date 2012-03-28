@@ -545,7 +545,13 @@ Class clsConnection
             If (table.Columns(0).ColumnName.EndsWith("ID")) And (table.Columns(0).ColumnName <> "GroupID") And (table.Columns(0).ColumnName <> "DerivedFromID") Then
                 Dim insert As SqlClient.SqlCommand = commandBuilder.GetInsertCommand
                 Dim update As SqlClient.SqlCommand = commandBuilder.GetUpdateCommand
-                Dim text As String = query & " WHERE " & table.Columns(0).ColumnName & " = @@Identity"
+                Dim text As String
+                If query.Contains("WHERE") Then
+                    text = query & " AND " & table.Columns(0).ColumnName & " = @@Identity"
+                Else
+                    text = query & " WHERE " & table.Columns(0).ColumnName & " = @@Identity"
+                End If
+
                 commandBuilder.Dispose()
                 updateAdapter.InsertCommand = insert
                 updateAdapter.InsertCommand.CommandText &= text
@@ -566,17 +572,17 @@ Class clsConnection
                 updateAdapter.Fill(table)
             End If
 
-            'updateAdapter.ContinueUpdateOnError = False
-            ''update the database
-            'count = updateAdapter.Update(table)
+                'updateAdapter.ContinueUpdateOnError = False
+                ''update the database
+                'count = updateAdapter.Update(table)
 
-            'table.Rows.Clear()
+                'table.Rows.Clear()
 
-            'updateAdapter.Fill(table)
+                'updateAdapter.Fill(table)
 
-            If (count <= 0) Then
-                Return -1
-            End If
+                If (count <= 0) Then
+                    Return -1
+                End If
 
         Catch ExEr As ExitError
             Throw ExEr

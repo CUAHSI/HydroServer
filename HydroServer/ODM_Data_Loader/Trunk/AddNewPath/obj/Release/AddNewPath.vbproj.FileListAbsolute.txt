@@ -16,3 +16,12 @@ C:\DEV\ODM\HydroServer8-23-2011\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj
 C:\DEV\ODM\HydroServer8-23-2011\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\AddNewPath.dll
 C:\DEV\ODM\HydroServer8-23-2011\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\AddNewPath.xml
 C:\DEV\ODM\HydroServer8-23-2011\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\AddNewPath.pdb
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\bin\Release\AddNewPath.dll
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\bin\Release\AddNewPath.pdb
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\bin\Release\AddNewPath.xml
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\ResolveAssemblyReference.cache
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\AddNewPath.Resources.resources
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\AddNewPath.vbproj.GenerateResource.Cache
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\AddNewPath.dll
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\AddNewPath.xml
+C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\AddNewPath\obj\Release\AddNewPath.pdb
