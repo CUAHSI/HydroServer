@@ -872,6 +872,17 @@ Class clsDataValues
         Return New DataTable("ERROR")
     End Function
 
+    Private Function writeSelect(ByVal dc As DataColumnCollection, ByVal vals As String()) As String
+        Dim strselect As String
+        Dim i As Integer = 0
+        'For Each dc As DataColumn In dcs
+        strselect = dc(i).ColumnName & " = '" & vals(i + 1) & "' "
+        For i = 1 To dc.Count - 1
+            strselect &= "AND " & dc(i).ColumnName & " = '" & vals(i + 1) & "' "
+        Next i
+        Return strselect
+    End Function
+
     Public Overrides Function CommitTable() As clsTableCount
 
         Dim _tc As New clsTableCount
@@ -887,6 +898,20 @@ Class clsDataValues
 
         Try
             _tc = CommitTable(connect, trans)
+        Catch SqlEr As SqlClient.SqlException
+            '"Violation of UNIQUE KEY constraint 'UNIQUE_DataValues'. Cannot insert duplicate key in object 'dbo.DataValues'. The duplicate key value is (3.2, <NULL>, Aug 24 1997 10:15AM, -5, Aug 24 1997  3:15PM, 13, 1, <NULL>, <NULL>, nc, <NULL>, 0, 1, <NULL>, <NULL>, 1). The statement has been terminated."
+            'Dim sep() As Char = {",", "(", ")"}
+            'Dim vals() As String = SqlEr.Message.Split(sep)
+            'Dim strSelect = writeSelect(m_ViewTable.Columns, vals)
+            'Dim foundRow() = m_ViewTable.Select("DataValue = " & vals(1) & " AND LocalDateTime = '" & vals(3) & "'")
+            'Dim rowIndex As Integer
+            'For Each row As DataRow In foundRow
+            '    rowIndex = m_ViewTable.Rows.IndexOf(row) 'RowIndex will be index of row in datatable
+            'Next
+
+            'Dim newMsg As String = "Duplicate Row present . #" & rowIndex
+            Dim newMsg As String = "Duplicate Row present ."
+            LogError(newMsg)
         Catch ExEr As ExitError
             Throw ExEr
         Catch ex As Exception
@@ -1166,20 +1191,21 @@ Class clsDataValues
         LogUpdate("Finding New DataValues")
         Dim DV As DataTable = ValidateTable(connect, trans)
 
-        Dim FieldsDV() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
-        Dim SeriesToUpdate As DataTable = SelectDistinct(DV, FieldsDV)
-        Dim SiteWhere As String = " WHERE " & db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
-        Dim VariableWhere As String = " AND " & db_fld_VariableID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_VariableID)))) & ")"
-        Dim MethodWhere As String = " AND " & db_fld_MethodID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_MethodID)))) & ")"
-        Dim SourceWhere As String = " AND " & db_fld_SourceID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SourceID)))) & ")"
-        Dim QCLWhere As String = " AND " & db_fld_QualityControlLevelID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_QualityControlLevelID)))) & ")"
+        'Dim FieldsDV() As String = {db_fld_SiteID, db_fld_VariableID, db_fld_MethodID, db_fld_SourceID, db_fld_QualityControlLevelID}
+        'Dim SeriesToUpdate As DataTable = SelectDistinct(DV, FieldsDV)
+        'Dim SiteWhere As String = " WHERE " & db_fld_SiteID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SiteID)))) & ")"
+        'Dim VariableWhere As String = " AND " & db_fld_VariableID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_VariableID)))) & ")"
+        'Dim MethodWhere As String = " AND " & db_fld_MethodID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_MethodID)))) & ")"
+        'Dim SourceWhere As String = " AND " & db_fld_SourceID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_SourceID)))) & ")"
+        'Dim QCLWhere As String = " AND " & db_fld_QualityControlLevelID & " IN (" & String.Join(",", Array.ConvertAll(Of DataRow, String)(SeriesToUpdate.Select(), New Converter(Of DataRow, String)(Function(row) row(db_fld_QualityControlLevelID)))) & ")"
 
-        _tc.Add(db_tbl_DataValues, m_Connection.UpdateTable(connect, trans, DV, "SELECT * FROM " & db_tbl_DataValues & SiteWhere & VariableWhere & MethodWhere & SourceWhere & QCLWhere))
+        '_tc.Add(db_tbl_DataValues, m_Connection.UpdateTable(connect, trans, DV, "SELECT * FROM " & db_tbl_DataValues & SiteWhere & VariableWhere & MethodWhere & SourceWhere & QCLWhere))
+        _tc.Add(db_tbl_DataValues, m_Connection.insertBulk(connect, trans, DV))
         If (_tc(db_tbl_DataValues) > 0) Then
             'otherCount += count
             LogUpdate(_tc(db_tbl_DataValues) & " rows committed to DataValues")
-        Else
-            Throw New Exception("No Valid DataValues")
+            'Else
+            '    Throw New Exception("No Valid DataValues")
         End If
         LogUpdate("Updating Series Catalog")
         _tc.Add(db_tbl_SeriesCatalog, UpdateSeriesCatalogTable(connect, trans, DV))
@@ -1189,14 +1215,16 @@ Class clsDataValues
         End If
         GC.Collect()
         Dim otherCount As Integer = getTotalRows(_tc)
-        If (_tc(db_tbl_SeriesCatalog) > 0) AndAlso ((otherCount - _tc(db_tbl_SeriesCatalog)) > 0) Then
+        If (_tc(db_tbl_DataValues) > 0 AndAlso _tc(db_tbl_SeriesCatalog) > 0) AndAlso ((otherCount - _tc(db_tbl_SeriesCatalog)) > 0) Then
 #If DEBUG Then
             MsgBox("Trans.commit")
 #End If
+
             trans.Commit()
             Return _tc
+        
         Else
-            Throw New Exception("An Error Occurred. Rolling back database transaction.")
+        Throw New Exception("An Error Occurred. Rolling back database transaction.")
         End If
 
     End Function
