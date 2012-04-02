@@ -544,9 +544,18 @@ Class clsConnection
             commandBuilder = New SqlClient.SqlCommandBuilder(updateAdapter)
             If (table.Columns(0).ColumnName.EndsWith("ID")) And (table.Columns(0).ColumnName <> "GroupID") And (table.Columns(0).ColumnName <> "DerivedFromID") Then
                 Dim insert As SqlClient.SqlCommand = commandBuilder.GetInsertCommand
-                Dim update As SqlClient.SqlCommand = commandBuilder.GetUpdateCommand
+                Dim update As SqlClient.SqlCommand
+                Try
+                    update = commandBuilder.GetUpdateCommand
+                Catch
+                    If table.TableName.Contains("Categories") Then
+                        update = New SqlClient.SqlCommand("UPDATE [Categories] SET [VariableID] = @p1, [DataValue] = @p2, [CategoryDescription] = @p3WHERE (([Categories] = @p16) AND (DataValue = @p17) AND ([CategoryDescription] = @p18)", conn, trans)
+                    End If
+                End Try
+
+
                 Dim text As String
-                If query.Contains("WHERE") Then
+                If query.ToLower().Contains("where") Then
                     text = query & " AND " & table.Columns(0).ColumnName & " = @@Identity"
                 Else
                     text = query & " WHERE " & table.Columns(0).ColumnName & " = @@Identity"
@@ -689,6 +698,22 @@ Class clsConnection
 
         Return formatted
     End Function
+
+    Public Function insertBulk(ByVal conn As SqlClient.SqlConnection, ByVal trans As SqlTransaction, ByVal data As DataTable) As String
+
+        Dim bc As SqlBulkCopy = New SqlBulkCopy(conn, SqlBulkCopyOptions.CheckConstraints, trans)
+
+        bc.BatchSize = 1000
+        bc.DestinationTableName = data.TableName
+        Try
+            bc.WriteToServer(data)
+            Return data.Rows.Count()
+        Catch ex As Exception
+            Throw ex
+        End Try
+        Return -1
+    End Function
+
 
 #End Region
 
