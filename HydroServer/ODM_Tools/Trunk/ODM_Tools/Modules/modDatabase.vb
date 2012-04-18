@@ -426,6 +426,45 @@ Module modDatabase
 
     End Function
 
+    'Public Function OpenTable(ByVal tableName As String, ByVal sqlQuery As String, ByRef settings As clsConnectionSettings) As DataTable
+    Public Function OpenTable(ByVal tableName As String, ByVal sqlQuery As SqlClient.SqlCommand) As DataTable
+
+        'Returns a dataTable of the query data.
+        'Inputs:  tablename -> name of the table
+        '         SqlQuery -> sql Query to retreive the data with
+        '         connString -> the connection String for the database to connect to, to retreive the data from
+        'Outputs: the dataTable of data retreived from the database using SqlQuery
+        'create a flow table
+        Dim table As New System.Data.DataTable(tableName) 'the table of data to return
+        Dim dataAdapter As SqlClient.SqlDataAdapter ' OleDb.OleDbDataAdapter 'the dataAdapter to fill the table
+        Try
+            'connect to the Database
+
+            dataAdapter = New SqlClient.SqlDataAdapter(sqlQuery) 'New OleDb.OleDbDataAdapter(sqlQuery, settings.ConnectionString)
+            'get the table from the database
+            dataAdapter.Fill(table)
+            dataAdapter = Nothing
+            Return table
+        Catch ex As System.Exception
+            table = Nothing
+            dataAdapter = Nothing
+            'if the connection timed out, increment the timeout and resave the settings. then try to open the table again.
+            If LCase(ex.Message).Contains("timeout") Then
+                If g_CurrConnSettings.IncrementTimeout() Then
+                    My.Settings.Timeout = g_CurrConnSettings.Timeout
+                    My.Settings.Save()
+                    Return OpenTable(tableName, sqlQuery)
+                Else
+                    ShowError("Connection timed out.")
+                End If
+            Else
+                ShowError("An Error occurred while opening the Table = " & tableName & vbCrLf & "Message = " & ex.Message, ex)
+            End If
+        End Try
+
+        Return Nothing
+    End Function
+
     Public Function OpenTable(ByVal tableName As String, ByVal sqlQuery As String, ByRef settings As clsConnectionSettings) As DataTable
         'Returns a dataTable of the query data.
         'Inputs:  tablename -> name of the table
@@ -437,8 +476,8 @@ Module modDatabase
         Dim dataAdapter As SqlClient.SqlDataAdapter ' OleDb.OleDbDataAdapter 'the dataAdapter to fill the table
         Try
             'connect to the Database
-            dataAdapter = New SqlClient.SqlDataAdapter(sqlQuery, settings.ConnectionString) 'New OleDb.OleDbDataAdapter(sqlQuery, settings.ConnectionString)
 
+            dataAdapter = New SqlClient.SqlDataAdapter(sqlQuery, settings.ConnectionString) 'New OleDb.OleDbDataAdapter(sqlQuery, settings.ConnectionString)
             'get the table from the database
             dataAdapter.Fill(table)
             dataAdapter = Nothing
@@ -462,6 +501,8 @@ Module modDatabase
 
         Return Nothing
     End Function
+
+
 
     Public Function UpdateTable(ByVal dataTable As System.Data.DataTable, ByVal query As String, ByVal connectionString As String) As Boolean
         'this function updates the database after new rows have been added to or existing rows have been edited in the dataTable
@@ -759,7 +800,7 @@ Module modDatabase
         End Try
         Return unitsID
     End Function
-    
+
     Public Function GetVariableIDFromDB(ByVal varCode As String, ByVal varName As String, ByVal speciation As String, ByVal varUnitsID As Integer, ByVal sampleMed As String, ByVal valueType As String, ByVal timeSupport As Double, ByVal tsUnitsID As Integer, ByVal dataType As String, ByVal genCategory As String) As Integer
         'Retrieves the Variable ID from the database for the given variable
         'Inputs:  varCode -> the Variable Code to get the ID for

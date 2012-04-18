@@ -6,7 +6,32 @@ WebDataLoader
 </name>
 </assembly>
 <members>
-<member name="F:WebDataLoader.ConfirmationPage.form1">
+<member name="P:WebDataLoader.My.MyWebExtension.Computer">
+	<summary>
+ Returns information about the host computer.
+ </summary>
+</member><member name="P:WebDataLoader.My.MyWebExtension.User">
+	<summary>
+ Returns information for the current Web user.
+ </summary>
+</member><member name="P:WebDataLoader.My.MyWebExtension.Request">
+	<summary>
+ Returns Request object.
+ </summary>
+</member><member name="P:WebDataLoader.My.MyWebExtension.Response">
+	<summary>
+ Returns Response object.
+ </summary>
+</member><member name="P:WebDataLoader.My.MyWebExtension.Log">
+	<summary>
+ Returns the Asp log object.
+ </summary>
+</member><member name="T:WebDataLoader.My.MyWebExtension">
+	<summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:WebDataLoader.ConfirmationPage.form1">
 	<summary>
 form1 control.
 </summary>
@@ -41,6 +66,161 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="F:WebDataLoader.ConfirmationPage.btnNewDB">
 	<summary>
 btnNewDB control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection)">
+	<summary>
+ Create a blank categories file with a connection to the database
+ </summary>
+	<param name="e_Connection">the connection to the database</param>
+	<remarks></remarks>
+</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection,System.String)">
+	<summary>
+ Create a categories file from a local file at the given filepath
+ </summary>
+	<param name="e_Connection">the connection to the database</param>
+	<param name="filePath">the path to the file</param>
+	<remarks></remarks>
+</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsFile)">
+	<summary>
+ Create a categories file from a clsFile
+ </summary>
+	<param name="e_file">The clsFile used to determine the type of file</param>
+	<remarks></remarks>
+</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection,System.Data.DataTable,System.Boolean)">
+	<summary>
+ Create a categories file with a connection to the database
+ </summary>
+	<param name="e_Connection">the connection to the database</param>
+	<param name="m_viewtable"></param>
+	<param name="e_ThrowFileOnError"></param>
+	<remarks></remarks>
+</member><member name="M:WebDataLoader.clsCategories.ValidateTable(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction)">
+	<summary>
+	</summary>
+	<param name="connect"></param>
+	<param name="trans"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:WebDataLoader.clsCategories.CommitTable">
+	<summary>
+	</summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:WebDataLoader.clsCategories.CommitTable(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction)">
+	<summary>
+	</summary>
+	<param name="connect"></param>
+	<param name="trans"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:WebDataLoader.clsCategories">
+	<summary>
+ Class to read a Categories file and submit it to a database
+ </summary>
+	<remarks></remarks>
+</member><member name="F:WebDataLoader._Default.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Head1">
+	<summary>
+Head1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Image1">
+	<summary>
+Image1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Label1">
+	<summary>
+Label1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.fuOpenFilePath">
+	<summary>
+fuOpenFilePath control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.btnUpload">
+	<summary>
+btnUpload control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.btnCommit">
+	<summary>
+btnCommit control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.btnCancel">
+	<summary>
+btnCancel control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.lblstatus">
+	<summary>
+lblstatus control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.Panel1">
+	<summary>
+Panel1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.dgvData">
+	<summary>
+dgvData control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:WebDataLoader.WebDataLoader.tabledata">
+	<summary>
+tabledata control.
 </summary>
 	<remarks>
 Auto-generated field.
@@ -153,186 +333,6 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="F:WebDataLoader.Login.lblstatus">
 	<summary>
 lblstatus control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection)">
-	<summary>
- Create a blank categories file with a connection to the database
- </summary>
-	<param name="e_Connection">the connection to the database</param>
-	<remarks></remarks>
-</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection,System.String)">
-	<summary>
- Create a categories file from a local file at the given filepath
- </summary>
-	<param name="e_Connection">the connection to the database</param>
-	<param name="filePath">the path to the file</param>
-	<remarks></remarks>
-</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsFile)">
-	<summary>
- Create a categories file from a clsFile
- </summary>
-	<param name="e_file">The clsFile used to determine the type of file</param>
-	<remarks></remarks>
-</member><member name="M:WebDataLoader.clsCategories.#ctor(WebDataLoader.clsConnection,System.Data.DataTable,System.Boolean)">
-	<summary>
- Create a categories file with a connection to the database
- </summary>
-	<param name="e_Connection">the connection to the database</param>
-	<param name="m_viewtable"></param>
-	<param name="e_ThrowFileOnError"></param>
-	<remarks></remarks>
-</member><member name="M:WebDataLoader.clsCategories.ValidateTable(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction)">
-	<summary>
-	</summary>
-	<param name="connect"></param>
-	<param name="trans"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:WebDataLoader.clsCategories.CommitTable">
-	<summary>
-	</summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:WebDataLoader.clsCategories.CommitTable(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction)">
-	<summary>
-	</summary>
-	<param name="connect"></param>
-	<param name="trans"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:WebDataLoader.clsCategories">
-	<summary>
- Class to read a Categories file and submit it to a database
- </summary>
-	<remarks></remarks>
-</member><member name="F:WebDataLoader._Default.form1">
-	<summary>
-form1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="P:WebDataLoader.My.MyWebExtension.Computer">
-	<summary>
- Returns information about the host computer.
- </summary>
-</member><member name="P:WebDataLoader.My.MyWebExtension.User">
-	<summary>
- Returns information for the current Web user.
- </summary>
-</member><member name="P:WebDataLoader.My.MyWebExtension.Request">
-	<summary>
- Returns Request object.
- </summary>
-</member><member name="P:WebDataLoader.My.MyWebExtension.Response">
-	<summary>
- Returns Response object.
- </summary>
-</member><member name="P:WebDataLoader.My.MyWebExtension.Log">
-	<summary>
- Returns the Asp log object.
- </summary>
-</member><member name="T:WebDataLoader.My.MyWebExtension">
-	<summary>
- Module used to define the properties that are available in the My Namespace for Web projects.
- </summary>
-	<remarks></remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.Head1">
-	<summary>
-Head1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.Image1">
-	<summary>
-Image1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.form1">
-	<summary>
-form1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.Label1">
-	<summary>
-Label1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.fuOpenFilePath">
-	<summary>
-fuOpenFilePath control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.btnUpload">
-	<summary>
-btnUpload control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.btnCommit">
-	<summary>
-btnCommit control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.btnCancel">
-	<summary>
-btnCancel control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.lblstatus">
-	<summary>
-lblstatus control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.Panel1">
-	<summary>
-Panel1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.dgvData">
-	<summary>
-dgvData control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:WebDataLoader.WebDataLoader.tabledata">
-	<summary>
-tabledata control.
 </summary>
 	<remarks>
 Auto-generated field.

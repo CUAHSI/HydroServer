@@ -10,7 +10,7 @@
 		<table>
 		<!--div-->
 			<tr>
-				<td class="groupCell">Summary statistics for datasets that have censored data are calculated using robust methods described in <a href="http://water.usgs.gov/pubs/twri/twri4a3/" target="_blank">Helsel and Hirsch (2002)</a>.  The summary statstics presented are subject to the following constraints:</td>
+				<td class="groupCell">Summary statistics for datasets that have censored data are calculated using robust methods described in <a href="http://water.usgs.gov/pubs/twri/twri4a3/" target="_blank">Helsel and Hirsch (2002)</a>.  The summary statistics presented are subject to the following constraints:</td>
 			</tr>
 			<tr>
 				<td class="groupCell">

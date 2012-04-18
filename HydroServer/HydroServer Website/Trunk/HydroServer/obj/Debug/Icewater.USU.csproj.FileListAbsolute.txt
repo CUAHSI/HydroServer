@@ -1,0 +1,7 @@
+C:\Dev\Icewater.Framework\Icewater.USU\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Icewater.Framework\Icewater.USU\bin\Icewater.USU.dll
+C:\Dev\Icewater.Framework\Icewater.USU\bin\Icewater.USU.pdb
+C:\Dev\Icewater.Framework\Icewater.USU\bin\Icewater.Framework.dll
+C:\Dev\Icewater.Framework\Icewater.USU\bin\Icewater.Framework.pdb
+C:\Dev\Icewater.Framework\Icewater.USU\obj\Debug\Icewater.USU.dll
+C:\Dev\Icewater.Framework\Icewater.USU\obj\Debug\Icewater.USU.pdb

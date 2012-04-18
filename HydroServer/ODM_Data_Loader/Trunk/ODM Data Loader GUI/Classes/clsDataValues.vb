@@ -1,6 +1,5 @@
 Imports System.Data.Common
 Imports System.Linq
-Imports VBEnumerator
 Imports System.Collections
 Imports System.Collections.Generic
 
@@ -235,7 +234,8 @@ Class clsDataValues
     Public Const file_DataValues_CensorCode As String = "censorcode"                        'R
 #Region " Qualifier Columns "
     Public Const file_DataValues_QualifierID As String = "qualifierid"                      'O
-    Public Const file_DataValues_QualifierDescription As String = "qualifierdescription"    'A
+    Public Const file_DataValues_QualifierDescription As String = "qualifierdescription"
+    Public Const file_DataValues_QualifierCode As String = "qualifiercode"     'A
 #End Region
 #Region " Method Columns "
     Public Const file_DataValues_MethodID As String = "methodid"                            'R
@@ -753,6 +753,15 @@ Class clsDataValues
                     Else
                         Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & "Unable to find Valid Qualifier information.")
                     End If
+                    'ElseIf (m_ViewTable.Columns.IndexOf(file_DataValues_QualifierCode) >= 0) AndAlso (fileRow.Item(file_DataValues_QualifierCode).ToString <> "") Then
+                    '    'They are trying to load DataValues with the description of a Qualifier, so check first to see if the Qualifier already exists in the Qualifiers table
+                    '    CVRows = Qualifiers.Select(db_fld_QualifierCode & " = '" & Replace(fileRow.Item(file_DataValues_QualifierCode), "'", "''") & "'")
+                    '    If (CVRows.Length > 0) Then
+                    '        'The Qualifier already exists in the Qualifiers table
+                    '        tempRow.Item(db_fld_QualifierID) = Val(CVRows(CVRows.Length - 1).Item(db_fld_QQualifierID))
+                    '    Else
+                    '        Throw New Exception("ROW # " & (m_ViewTable.Rows.IndexOf(fileRow) + 1) & ": " & "Unable to find Valid Qualifier information.")
+                    '    End If
                 End If
 
                 'SampleID
@@ -899,18 +908,26 @@ Class clsDataValues
         Try
             _tc = CommitTable(connect, trans)
         Catch SqlEr As SqlClient.SqlException
-            '"Violation of UNIQUE KEY constraint 'UNIQUE_DataValues'. Cannot insert duplicate key in object 'dbo.DataValues'. The duplicate key value is (3.2, <NULL>, Aug 24 1997 10:15AM, -5, Aug 24 1997  3:15PM, 13, 1, <NULL>, <NULL>, nc, <NULL>, 0, 1, <NULL>, <NULL>, 1). The statement has been terminated."
-            'Dim sep() As Char = {",", "(", ")"}
-            'Dim vals() As String = SqlEr.Message.Split(sep)
-            'Dim strSelect = writeSelect(m_ViewTable.Columns, vals)
-            'Dim foundRow() = m_ViewTable.Select("DataValue = " & vals(1) & " AND LocalDateTime = '" & vals(3) & "'")
-            'Dim rowIndex As Integer
-            'For Each row As DataRow In foundRow
-            '    rowIndex = m_ViewTable.Rows.IndexOf(row) 'RowIndex will be index of row in datatable
-            'Next
+            
+            Dim newMsg As String
+            If SqlEr.Message.Contains("UNIQUE KEY constraint") Then
+                '"Violation of UNIQUE KEY constraint 'UNIQUE_DataValues'. Cannot insert duplicate key in object 'dbo.DataValues'. The duplicate key value is (3.2, <NULL>, Aug 24 1997 10:15AM, -5, Aug 24 1997  3:15PM, 13, 1, <NULL>, <NULL>, nc, <NULL>, 0, 1, <NULL>, <NULL>, 1). The statement has been terminated."
+                'Dim sep() As Char = {",", "(", ")"}
+                'Dim vals() As String = SqlEr.Message.Split(sep)
+                'Dim strSelect = writeSelect(m_ViewTable.Columns, vals)
+                'Dim foundRow() = m_ViewTable.Select("DataValue = " & vals(1) & " AND LocalDateTime = '" & vals(3) & "'")
+                'Dim rowIndex As Integer
+                'For Each row As DataRow In foundRow
+                '    rowIndex = m_ViewTable.Rows.IndexOf(row) 'RowIndex will be index of row in datatable
+                'Next
+                'Dim newMsg As String = "Duplicate Row present . #" & rowIndex
 
-            'Dim newMsg As String = "Duplicate Row present . #" & rowIndex
-            Dim newMsg As String = "Duplicate Row present ."
+
+                'if table has column "Variable Code" search for code using id
+                'if table has column "Site Code" search for code using id
+                newMsg = "Duplicate Row present ."
+
+            End If
             LogError(newMsg)
         Catch ExEr As ExitError
             Throw ExEr
