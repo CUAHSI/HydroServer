@@ -38,6 +38,7 @@ Module modWebUpdate
                 Next
                 If hasID Then
                     table.Columns(0).DataType = System.Type.GetType("System.Int32")
+                    table.Columns(1).ColumnName = "Name"
                 End If
                 If hasBool Then
                     table.Columns(3).DataType = System.Type.GetType("System.Boolean")
@@ -56,6 +57,9 @@ Module modWebUpdate
                         End If
                     Next
                 Next
+                If hasID Then
+                    table.DefaultView.Sort = "Name ASC"
+                End If
                 Return table
             End If
         Catch ex As Exception

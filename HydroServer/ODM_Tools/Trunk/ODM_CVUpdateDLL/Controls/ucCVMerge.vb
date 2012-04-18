@@ -140,6 +140,9 @@ Public Class ucCVMerge
                 dgvLocal.DataSource = localData
                 For i = 0 To (dgvWeb.Columns.Count - 1)
                     dgvWeb.Columns(i).MinimumWidth = 50
+                    If dgvWeb.Columns(i).Name.Contains("ID") Then
+                        dgvWeb.Columns(i).Visible = False
+                    End If
                 Next i
                 dgvWeb.Columns(dgvWeb.Columns.Count - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                 dgvLocal.Columns(dgvLocal.Columns.Count - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -149,6 +152,9 @@ Public Class ucCVMerge
                     dgvLocal.Columns(i).MinimumWidth = 50
                     If dgvWeb.Columns.Count > i Then
                         dgvLocal.Columns(i).Width = dgvWeb.Columns(i).Width
+                        If dgvLocal.Columns(i).Name.Contains("ID") Then
+                            dgvLocal.Columns(i).Visible = False
+                        End If
                     End If
                 Next i
                 dgvLocal.AutoResizeRows()
@@ -237,7 +243,8 @@ Public Class ucCVMerge
             Case CVType.SpatialRef
                 sql &= db_fld_SRID
             Case CVType.Unit
-                sql &= db_fld_UnitsID
+                'sql &= db_fld_UnitsID
+                sql &= db_fld_UnitsName
             Case Else
                 sql &= db_fld_CV_Term
         End Select
@@ -647,7 +654,8 @@ Public Class ucCVMerge
             Case CVType.SpatialRef
                 sql &= strTableName & "." & db_fld_SRID
             Case CVType.Unit
-                sql &= strTableName & "." & db_fld_UnitsID
+                'sql &= strTableName & "." & db_fld_UnitsID
+                sql &= strTableName & "." & db_fld_UnitsName
             Case Else
                 sql &= strTableName & "." & db_fld_CV_Term
         End Select
@@ -891,6 +899,9 @@ Public Class ucCVMerge
         dgvWeb.DataSource = webData
         For i = 0 To (dgvWeb.Columns.Count - 1)
             dgvWeb.Columns(i).MinimumWidth = 50
+            If dgvWeb.Columns(i).Name.Contains("ID") Then
+                dgvWeb.Columns(i).Visible = False
+            End If
         Next i
         webLoaded = True
         dgvWeb.Columns(dgvWeb.Columns.Count - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill

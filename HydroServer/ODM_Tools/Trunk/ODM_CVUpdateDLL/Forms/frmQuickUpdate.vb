@@ -167,7 +167,8 @@ Public Class frmQuickUpdate
             Case CVType.SpatialRef
                 sql &= db_fld_SRID
             Case CVType.Unit
-                sql &= db_fld_UnitsID
+                'sql &= db_fld_UnitsID
+                sql &= db_fld_UnitsName
             Case Else
                 sql &= db_fld_CV_Term
         End Select
@@ -877,7 +878,8 @@ Public Class frmQuickUpdate
             Case CVType.SpatialRef
                 sql &= strTableName & "." & db_fld_SRID
             Case CVType.Unit
-                sql &= strTableName & "." & db_fld_UnitsID
+                'sql &= strTableName & "." & db_fld_UnitsID
+                sql &= strTableName & "." & db_fld_UnitsName
             Case Else
                 sql &= strTableName & "." & db_fld_CV_Term
         End Select
