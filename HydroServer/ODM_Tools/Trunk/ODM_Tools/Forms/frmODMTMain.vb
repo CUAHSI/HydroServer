@@ -1,6 +1,8 @@
 Imports ZedGraph
 Imports System.Text
 Imports System.Collections.Generic
+Imports System.Data.SqlClient
+
 'ODM Tools
 'Copyright (c) 2007, Utah State University
 'All rights reserved.
@@ -22,274 +24,274 @@ Public Class frmODMTools
 
 #Region " Windows Form Designer generated code "
 
-	Public Sub New()
-		MyBase.New()
+    Public Sub New()
+        MyBase.New()
 
-		'This call is required by the Windows Form Designer.
-		InitializeComponent()
+        'This call is required by the Windows Form Designer.
+        InitializeComponent()
 
-		'Add any initialization after the InitializeComponent() call
+        'Add any initialization after the InitializeComponent() call
 
-	End Sub
+    End Sub
 
-	'Form overrides dispose to clean up the component list.
-	Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
-		If disposing Then
-			If Not (components Is Nothing) Then
-				components.Dispose()
-			End If
-		End If
-		MyBase.Dispose(disposing)
-	End Sub
+    'Form overrides dispose to clean up the component list.
+    Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing Then
+            If Not (components Is Nothing) Then
+                components.Dispose()
+            End If
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
 
-	'Required by the Windows Form Designer
-	Private components As System.ComponentModel.IContainer
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
 
-	'NOTE: The following procedure is required by the Windows Form Designer
-	'It can be modified using the Windows Form Designer.  
-	'Do not modify it using the code editor.
-	Friend WithEvents chb_qryGenCat As System.Windows.Forms.CheckBox
-	Friend WithEvents lbx_qryGenCat As System.Windows.Forms.ListBox
-	Friend WithEvents txt_qryVarName As System.Windows.Forms.TextBox
-	Friend WithEvents lbx_qrySites As System.Windows.Forms.ListBox
-	Friend WithEvents txt_qrySiteName As System.Windows.Forms.TextBox
-	Friend WithEvents chb_qryVar As System.Windows.Forms.CheckBox
-	Friend WithEvents chb_qrySite As System.Windows.Forms.CheckBox
-	Friend WithEvents rdo_qrySiteList As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qryVarList As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qryVarName As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qrySiteName As System.Windows.Forms.RadioButton
-	Friend WithEvents grp_qryOther As System.Windows.Forms.GroupBox
-	Friend WithEvents rdo_qryVarCode As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qrySiteCode As System.Windows.Forms.RadioButton
-	Friend WithEvents txt_qryVarCode As System.Windows.Forms.TextBox
-	Friend WithEvents txt_qrySiteCode As System.Windows.Forms.TextBox
-	Friend WithEvents tabctlODMTools As System.Windows.Forms.TabControl
-	Friend WithEvents gboxVisDataSel As System.Windows.Forms.GroupBox
-	Friend WithEvents gboxDateInfo As System.Windows.Forms.GroupBox
-	Friend WithEvents tabctlPlots As System.Windows.Forms.TabControl
-	Friend WithEvents tabpgTimeSeries As System.Windows.Forms.TabPage
-	Friend WithEvents tabpgProbability As System.Windows.Forms.TabPage
-	Friend WithEvents tabpgHistogram As System.Windows.Forms.TabPage
-	Friend WithEvents grp_qrySiteSelect As System.Windows.Forms.GroupBox
-	Friend WithEvents grp_qryVarSelect As System.Windows.Forms.GroupBox
-	Friend WithEvents tabctlPlotOptions As System.Windows.Forms.TabControl
-	Friend WithEvents btnPlot As System.Windows.Forms.Button
-	Friend WithEvents tabpgBoxPlot As System.Windows.Forms.TabPage
-	Friend WithEvents lblEndDate As System.Windows.Forms.Label
-	Friend WithEvents lblStartDate As System.Windows.Forms.Label
-	Friend WithEvents tabpgSummary As System.Windows.Forms.TabPage
-	Friend WithEvents tabpgOptions As System.Windows.Forms.TabPage
-	Friend WithEvents dtpVisStartDate As System.Windows.Forms.DateTimePicker
-	Friend WithEvents dtpVisEndDate As System.Windows.Forms.DateTimePicker
-	Friend WithEvents gboxStatistics As System.Windows.Forms.GroupBox
-	Friend WithEvents gboxDivider As System.Windows.Forms.GroupBox
-	Friend WithEvents tboxNumObs As System.Windows.Forms.TextBox
-	Friend WithEvents lblNumObs As System.Windows.Forms.Label
-	Friend WithEvents lblNumCensoredObs As System.Windows.Forms.Label
-	Friend WithEvents tboxNumCensoredObs As System.Windows.Forms.TextBox
-	Friend WithEvents lblStdDev As System.Windows.Forms.Label
-	Friend WithEvents lblMax As System.Windows.Forms.Label
-	Friend WithEvents lblCoeffVar As System.Windows.Forms.Label
-	Friend WithEvents tboxGeoMean As System.Windows.Forms.TextBox
-	Friend WithEvents lblAMean As System.Windows.Forms.Label
-	Friend WithEvents tboxAMean As System.Windows.Forms.TextBox
-	Friend WithEvents lblGeoMean As System.Windows.Forms.Label
-	Friend WithEvents tboxCoeffVar As System.Windows.Forms.TextBox
-	Friend WithEvents tboxMin As System.Windows.Forms.TextBox
-	Friend WithEvents tboxMax As System.Windows.Forms.TextBox
-	Friend WithEvents tboxStdDev As System.Windows.Forms.TextBox
-	Friend WithEvents lblMin As System.Windows.Forms.Label
-	Friend WithEvents tbox90Perc As System.Windows.Forms.TextBox
-	Friend WithEvents tbox75Perc As System.Windows.Forms.TextBox
-	Friend WithEvents tbox50Perc As System.Windows.Forms.TextBox
-	Friend WithEvents lbl90Perc As System.Windows.Forms.Label
-	Friend WithEvents lbl75Perc As System.Windows.Forms.Label
-	Friend WithEvents tbox10Perc As System.Windows.Forms.TextBox
-	Friend WithEvents tbox25Perc As System.Windows.Forms.TextBox
-	Friend WithEvents lbl50Perc As System.Windows.Forms.Label
-	Friend WithEvents lbl25Perc As System.Windows.Forms.Label
-	Friend WithEvents lbl10Perc As System.Windows.Forms.Label
-	Friend WithEvents lblPercentiles As System.Windows.Forms.Label
-	Friend WithEvents gboxTSPlotType As System.Windows.Forms.GroupBox
-	Friend WithEvents lbx_qryVars As System.Windows.Forms.ListBox
-	Friend WithEvents chb_qryValType As System.Windows.Forms.CheckBox
-	Friend WithEvents chb_qrySampleMed As System.Windows.Forms.CheckBox
-	Friend WithEvents lbx_qryValType As System.Windows.Forms.ListBox
-	Friend WithEvents lbx_qrySampleMed As System.Windows.Forms.ListBox
-	Friend WithEvents grp_qryVars As System.Windows.Forms.GroupBox
-	Friend WithEvents rdo_qryVarOR As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qryVarAND As System.Windows.Forms.RadioButton
-	Friend WithEvents grp_qrySites As System.Windows.Forms.GroupBox
-	Friend WithEvents rdo_qrySiteAND As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qrySiteOR As System.Windows.Forms.RadioButton
-	Friend WithEvents mnuitmFile As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuFileExit As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuitmEdit As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuEditDBConnect As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuitmTools As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuQDRCPlot As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuQDRCLine1 As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuQDRCSingleExport As System.Windows.Forms.MenuItem
-	Friend WithEvents btn_qryExecute As System.Windows.Forms.Button
-	Friend WithEvents lv_qryResults As System.Windows.Forms.ListView
-	Friend WithEvents gboxTSPlotOptions As System.Windows.Forms.GroupBox
-	Friend WithEvents rbtnTSLine As System.Windows.Forms.RadioButton
-	Friend WithEvents rbtnTSBoth As System.Windows.Forms.RadioButton
-	Friend WithEvents rbtnTSPoint As System.Windows.Forms.RadioButton
-	Friend WithEvents gboxBoxPlotOptions As System.Windows.Forms.GroupBox
-	Friend WithEvents gboxBPPlotType As System.Windows.Forms.GroupBox
-	Friend WithEvents rbtnBPMonthly As System.Windows.Forms.RadioButton
-	Friend WithEvents rbtnBPYearly As System.Windows.Forms.RadioButton
-	Friend WithEvents rbtnBPSeasonal As System.Windows.Forms.RadioButton
-	Friend WithEvents rbtnBPOverall As System.Windows.Forms.RadioButton
-	Friend WithEvents tabpgQuery As System.Windows.Forms.TabPage
-	Friend WithEvents tabpgVisualize As System.Windows.Forms.TabPage
-	Friend WithEvents btnAxisOptions As System.Windows.Forms.Button
-	Friend WithEvents mnuMain As System.Windows.Forms.MainMenu
-	Friend WithEvents cmnuQueryDataRightClick As System.Windows.Forms.ContextMenu
-	Friend WithEvents sfdExportMyDB As System.Windows.Forms.SaveFileDialog
-	Friend WithEvents tabpQuery As System.Windows.Forms.TabPage
-	Friend WithEvents mnuQDRCExportMeta As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuQDRCViewMeta As System.Windows.Forms.MenuItem
-	Friend WithEvents cboxVisVariable As System.Windows.Forms.ComboBox
-	Friend WithEvents lblVisSite As System.Windows.Forms.Label
-	Friend WithEvents lblVisVariable As System.Windows.Forms.Label
-	Friend WithEvents cboxVisSite As System.Windows.Forms.ComboBox
-	Friend WithEvents lvVisDataSeries As System.Windows.Forms.ListView
-	Friend WithEvents lblVisDataSeries As System.Windows.Forms.Label
-	Friend WithEvents lvcolVisDataType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisTimeUnits As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisTimeSupport As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisVarUnits As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisValueType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisSampleMedium As System.Windows.Forms.ColumnHeader
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    Friend WithEvents chb_qryGenCat As System.Windows.Forms.CheckBox
+    Friend WithEvents lbx_qryGenCat As System.Windows.Forms.ListBox
+    Friend WithEvents txt_qryVarName As System.Windows.Forms.TextBox
+    Friend WithEvents lbx_qrySites As System.Windows.Forms.ListBox
+    Friend WithEvents txt_qrySiteName As System.Windows.Forms.TextBox
+    Friend WithEvents chb_qryVar As System.Windows.Forms.CheckBox
+    Friend WithEvents chb_qrySite As System.Windows.Forms.CheckBox
+    Friend WithEvents rdo_qrySiteList As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qryVarList As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qryVarName As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qrySiteName As System.Windows.Forms.RadioButton
+    Friend WithEvents grp_qryOther As System.Windows.Forms.GroupBox
+    Friend WithEvents rdo_qryVarCode As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qrySiteCode As System.Windows.Forms.RadioButton
+    Friend WithEvents txt_qryVarCode As System.Windows.Forms.TextBox
+    Friend WithEvents txt_qrySiteCode As System.Windows.Forms.TextBox
+    Friend WithEvents tabctlODMTools As System.Windows.Forms.TabControl
+    Friend WithEvents gboxVisDataSel As System.Windows.Forms.GroupBox
+    Friend WithEvents gboxDateInfo As System.Windows.Forms.GroupBox
+    Friend WithEvents tabctlPlots As System.Windows.Forms.TabControl
+    Friend WithEvents tabpgTimeSeries As System.Windows.Forms.TabPage
+    Friend WithEvents tabpgProbability As System.Windows.Forms.TabPage
+    Friend WithEvents tabpgHistogram As System.Windows.Forms.TabPage
+    Friend WithEvents grp_qrySiteSelect As System.Windows.Forms.GroupBox
+    Friend WithEvents grp_qryVarSelect As System.Windows.Forms.GroupBox
+    Friend WithEvents tabctlPlotOptions As System.Windows.Forms.TabControl
+    Friend WithEvents btnPlot As System.Windows.Forms.Button
+    Friend WithEvents tabpgBoxPlot As System.Windows.Forms.TabPage
+    Friend WithEvents lblEndDate As System.Windows.Forms.Label
+    Friend WithEvents lblStartDate As System.Windows.Forms.Label
+    Friend WithEvents tabpgSummary As System.Windows.Forms.TabPage
+    Friend WithEvents tabpgOptions As System.Windows.Forms.TabPage
+    Friend WithEvents dtpVisStartDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpVisEndDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents gboxStatistics As System.Windows.Forms.GroupBox
+    Friend WithEvents gboxDivider As System.Windows.Forms.GroupBox
+    Friend WithEvents tboxNumObs As System.Windows.Forms.TextBox
+    Friend WithEvents lblNumObs As System.Windows.Forms.Label
+    Friend WithEvents lblNumCensoredObs As System.Windows.Forms.Label
+    Friend WithEvents tboxNumCensoredObs As System.Windows.Forms.TextBox
+    Friend WithEvents lblStdDev As System.Windows.Forms.Label
+    Friend WithEvents lblMax As System.Windows.Forms.Label
+    Friend WithEvents lblCoeffVar As System.Windows.Forms.Label
+    Friend WithEvents tboxGeoMean As System.Windows.Forms.TextBox
+    Friend WithEvents lblAMean As System.Windows.Forms.Label
+    Friend WithEvents tboxAMean As System.Windows.Forms.TextBox
+    Friend WithEvents lblGeoMean As System.Windows.Forms.Label
+    Friend WithEvents tboxCoeffVar As System.Windows.Forms.TextBox
+    Friend WithEvents tboxMin As System.Windows.Forms.TextBox
+    Friend WithEvents tboxMax As System.Windows.Forms.TextBox
+    Friend WithEvents tboxStdDev As System.Windows.Forms.TextBox
+    Friend WithEvents lblMin As System.Windows.Forms.Label
+    Friend WithEvents tbox90Perc As System.Windows.Forms.TextBox
+    Friend WithEvents tbox75Perc As System.Windows.Forms.TextBox
+    Friend WithEvents tbox50Perc As System.Windows.Forms.TextBox
+    Friend WithEvents lbl90Perc As System.Windows.Forms.Label
+    Friend WithEvents lbl75Perc As System.Windows.Forms.Label
+    Friend WithEvents tbox10Perc As System.Windows.Forms.TextBox
+    Friend WithEvents tbox25Perc As System.Windows.Forms.TextBox
+    Friend WithEvents lbl50Perc As System.Windows.Forms.Label
+    Friend WithEvents lbl25Perc As System.Windows.Forms.Label
+    Friend WithEvents lbl10Perc As System.Windows.Forms.Label
+    Friend WithEvents lblPercentiles As System.Windows.Forms.Label
+    Friend WithEvents gboxTSPlotType As System.Windows.Forms.GroupBox
+    Friend WithEvents lbx_qryVars As System.Windows.Forms.ListBox
+    Friend WithEvents chb_qryValType As System.Windows.Forms.CheckBox
+    Friend WithEvents chb_qrySampleMed As System.Windows.Forms.CheckBox
+    Friend WithEvents lbx_qryValType As System.Windows.Forms.ListBox
+    Friend WithEvents lbx_qrySampleMed As System.Windows.Forms.ListBox
+    Friend WithEvents grp_qryVars As System.Windows.Forms.GroupBox
+    Friend WithEvents rdo_qryVarOR As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qryVarAND As System.Windows.Forms.RadioButton
+    Friend WithEvents grp_qrySites As System.Windows.Forms.GroupBox
+    Friend WithEvents rdo_qrySiteAND As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qrySiteOR As System.Windows.Forms.RadioButton
+    Friend WithEvents mnuitmFile As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuFileExit As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuitmEdit As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuEditDBConnect As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuitmTools As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuQDRCPlot As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuQDRCLine1 As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuQDRCSingleExport As System.Windows.Forms.MenuItem
+    Friend WithEvents btn_qryExecute As System.Windows.Forms.Button
+    Friend WithEvents lv_qryResults As System.Windows.Forms.ListView
+    Friend WithEvents gboxTSPlotOptions As System.Windows.Forms.GroupBox
+    Friend WithEvents rbtnTSLine As System.Windows.Forms.RadioButton
+    Friend WithEvents rbtnTSBoth As System.Windows.Forms.RadioButton
+    Friend WithEvents rbtnTSPoint As System.Windows.Forms.RadioButton
+    Friend WithEvents gboxBoxPlotOptions As System.Windows.Forms.GroupBox
+    Friend WithEvents gboxBPPlotType As System.Windows.Forms.GroupBox
+    Friend WithEvents rbtnBPMonthly As System.Windows.Forms.RadioButton
+    Friend WithEvents rbtnBPYearly As System.Windows.Forms.RadioButton
+    Friend WithEvents rbtnBPSeasonal As System.Windows.Forms.RadioButton
+    Friend WithEvents rbtnBPOverall As System.Windows.Forms.RadioButton
+    Friend WithEvents tabpgQuery As System.Windows.Forms.TabPage
+    Friend WithEvents tabpgVisualize As System.Windows.Forms.TabPage
+    Friend WithEvents btnAxisOptions As System.Windows.Forms.Button
+    Friend WithEvents mnuMain As System.Windows.Forms.MainMenu
+    Friend WithEvents cmnuQueryDataRightClick As System.Windows.Forms.ContextMenu
+    Friend WithEvents sfdExportMyDB As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents tabpQuery As System.Windows.Forms.TabPage
+    Friend WithEvents mnuQDRCExportMeta As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuQDRCViewMeta As System.Windows.Forms.MenuItem
+    Friend WithEvents cboxVisVariable As System.Windows.Forms.ComboBox
+    Friend WithEvents lblVisSite As System.Windows.Forms.Label
+    Friend WithEvents lblVisVariable As System.Windows.Forms.Label
+    Friend WithEvents cboxVisSite As System.Windows.Forms.ComboBox
+    Friend WithEvents lvVisDataSeries As System.Windows.Forms.ListView
+    Friend WithEvents lblVisDataSeries As System.Windows.Forms.Label
+    Friend WithEvents lvcolVisDataType As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisTimeUnits As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisTimeSupport As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisVarUnits As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisValueType As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisSampleMedium As System.Windows.Forms.ColumnHeader
     Friend WithEvents lvcolVisGenCategory As System.Windows.Forms.ColumnHeader
     Friend WithEvents lvcolVisSiteType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisUTCDateRange As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisValueCount As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisLocalDateRange As System.Windows.Forms.ColumnHeader
-	Friend WithEvents sfdExportMetadata As System.Windows.Forms.SaveFileDialog
-	Friend WithEvents lbx_qryDataType As System.Windows.Forms.ListBox
-	Friend WithEvents chb_qryDataType As System.Windows.Forms.CheckBox
-	Friend WithEvents DataGridTextBoxColumn1 As System.Windows.Forms.DataGridTextBoxColumn
-	Friend WithEvents MenuItem1 As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuQDRCSelectSingle As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuQDRCSelectAll As System.Windows.Forms.MenuItem
-	Friend WithEvents btn_qryDataExport As System.Windows.Forms.Button
-	Friend WithEvents btn_qryMetaExport As System.Windows.Forms.Button
-	Friend WithEvents mnuQDRCSelectNone As System.Windows.Forms.MenuItem
-	Friend WithEvents ckboxUseCensoredData As System.Windows.Forms.CheckBox
+    Friend WithEvents lvcolVisUTCDateRange As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisValueCount As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisLocalDateRange As System.Windows.Forms.ColumnHeader
+    Friend WithEvents sfdExportMetadata As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents lbx_qryDataType As System.Windows.Forms.ListBox
+    Friend WithEvents chb_qryDataType As System.Windows.Forms.CheckBox
+    Friend WithEvents DataGridTextBoxColumn1 As System.Windows.Forms.DataGridTextBoxColumn
+    Friend WithEvents MenuItem1 As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuQDRCSelectSingle As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuQDRCSelectAll As System.Windows.Forms.MenuItem
+    Friend WithEvents btn_qryDataExport As System.Windows.Forms.Button
+    Friend WithEvents btn_qryMetaExport As System.Windows.Forms.Button
+    Friend WithEvents mnuQDRCSelectNone As System.Windows.Forms.MenuItem
+    Friend WithEvents ckboxUseCensoredData As System.Windows.Forms.CheckBox
     Friend WithEvents zg5TimeSeries As ZedGraph.ZedGraphControl
-	Friend WithEvents zg5Probability As ZedGraph.ZedGraphControl
-	Friend WithEvents zg5Histogram As ZedGraph.ZedGraphControl
-	Friend WithEvents zg5BoxPlot As ZedGraph.ZedGraphControl
-	Friend WithEvents tabpgEdit As System.Windows.Forms.TabPage
-	Friend WithEvents gboxEditDataSel As System.Windows.Forms.GroupBox
-	Friend WithEvents lvEditDataSeries As System.Windows.Forms.ListView
+    Friend WithEvents zg5Probability As ZedGraph.ZedGraphControl
+    Friend WithEvents zg5Histogram As ZedGraph.ZedGraphControl
+    Friend WithEvents zg5BoxPlot As ZedGraph.ZedGraphControl
+    Friend WithEvents tabpgEdit As System.Windows.Forms.TabPage
+    Friend WithEvents gboxEditDataSel As System.Windows.Forms.GroupBox
+    Friend WithEvents lvEditDataSeries As System.Windows.Forms.ListView
     Friend WithEvents lvcolEditGenCategory As System.Windows.Forms.ColumnHeader
     Friend WithEvents lvcolEditSiteType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditVarUnits As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditTimeSupport As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditTimeUnits As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditSampleMedium As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditValueType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditDataType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditLocalDateRange As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditUTCDateRange As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditValueCount As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lblEditDataSeries As System.Windows.Forms.Label
-	Friend WithEvents cboxEditVariable As System.Windows.Forms.ComboBox
-	Friend WithEvents lblEditSite As System.Windows.Forms.Label
-	Friend WithEvents lblEditVariable As System.Windows.Forms.Label
-	Friend WithEvents cboxEditSite As System.Windows.Forms.ComboBox
-	Friend WithEvents btnBPViewDesc As System.Windows.Forms.Button
+    Friend WithEvents lvcolEditVarUnits As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditTimeSupport As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditTimeUnits As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditSampleMedium As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditValueType As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditDataType As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditLocalDateRange As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditUTCDateRange As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditValueCount As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lblEditDataSeries As System.Windows.Forms.Label
+    Friend WithEvents cboxEditVariable As System.Windows.Forms.ComboBox
+    Friend WithEvents lblEditSite As System.Windows.Forms.Label
+    Friend WithEvents lblEditVariable As System.Windows.Forms.Label
+    Friend WithEvents cboxEditSite As System.Windows.Forms.ComboBox
+    Friend WithEvents btnBPViewDesc As System.Windows.Forms.Button
     Friend WithEvents splitpnlEdit_PlotData As System.Windows.Forms.SplitContainer
     Friend WithEvents splitpnlEditPg As System.Windows.Forms.SplitContainer
     Friend WithEvents splitpnlEdit_SelectData As System.Windows.Forms.SplitContainer
     Friend WithEvents btnEditRestoreDefaults As System.Windows.Forms.Button
-	Friend WithEvents btnEditApplyChanges As System.Windows.Forms.Button
-	Friend WithEvents dgvEditTable As System.Windows.Forms.DataGridView
-	Friend WithEvents btnEditDataAdjust As System.Windows.Forms.Button
-	Friend WithEvents btnEditDataAdd As System.Windows.Forms.Button
-	Friend WithEvents btnEditDataRemove As System.Windows.Forms.Button
-	Friend WithEvents btnEditDataFlag As System.Windows.Forms.Button
-	Friend WithEvents btnEditDataInterpolate As System.Windows.Forms.Button
-	Friend WithEvents gboxEditFilter As System.Windows.Forms.GroupBox
-	Friend WithEvents rbtnEditDFValueThreshold As System.Windows.Forms.RadioButton
-	Friend WithEvents gboxEditDFValueThreshold As System.Windows.Forms.GroupBox
-	Friend WithEvents tboxEditDFVTLess As System.Windows.Forms.TextBox
-	Friend WithEvents ckboxEditDFVTLess As System.Windows.Forms.CheckBox
-	Friend WithEvents tboxEditDFVTGreater As System.Windows.Forms.TextBox
-	Friend WithEvents ckboxEditDFVTGreater As System.Windows.Forms.CheckBox
-	Friend WithEvents rbtnEditDFDataGap As System.Windows.Forms.RadioButton
-	Friend WithEvents gboxEditDFDataGaps As System.Windows.Forms.GroupBox
-	Friend WithEvents rbtnEditDFDate As System.Windows.Forms.RadioButton
-	Friend WithEvents btnEditDFApplyFilter As System.Windows.Forms.Button
-	Friend WithEvents btnEditDFClearSel As System.Windows.Forms.Button
-	Friend WithEvents tboxEditDFVTChange As System.Windows.Forms.TextBox
-	Friend WithEvents rbtnEditDFVTChange As System.Windows.Forms.RadioButton
-	Friend WithEvents gboxEditDFDate As System.Windows.Forms.GroupBox
-	Friend WithEvents dtpEditDFDAfter As System.Windows.Forms.DateTimePicker
-	Friend WithEvents dtpEditDFDBefore As System.Windows.Forms.DateTimePicker
-	Friend WithEvents ckboxEditDFDAfter As System.Windows.Forms.CheckBox
-	Friend WithEvents ckboxEditDFDBefore As System.Windows.Forms.CheckBox
-	Friend WithEvents btnEditDataDeriveNewDS As System.Windows.Forms.Button
-	Friend WithEvents lvcolVisQCLevel As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisMethod As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditQCLevel As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditMethod As System.Windows.Forms.ColumnHeader
-	Friend WithEvents ttipEdit As System.Windows.Forms.ToolTip
-	Friend WithEvents txt_qryMethod As System.Windows.Forms.TextBox
-	Friend WithEvents chb_qryQCLevel As System.Windows.Forms.CheckBox
-	Friend WithEvents lbx_qryQCLevel As System.Windows.Forms.ListBox
-	Friend WithEvents chb_qryMethod As System.Windows.Forms.CheckBox
-	Friend WithEvents grp_qrySources As System.Windows.Forms.GroupBox
-	Friend WithEvents rdo_qrySrcDesc As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qrySrcOrg As System.Windows.Forms.RadioButton
-	Friend WithEvents txt_qrySrcDesc As System.Windows.Forms.TextBox
-	Friend WithEvents txt_qrySrcOrg As System.Windows.Forms.TextBox
-	Friend WithEvents lvcolEditOrganization As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolEditSourceDesc As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisOrganization As System.Windows.Forms.ColumnHeader
-	Friend WithEvents lvcolVisSourceDesc As System.Windows.Forms.ColumnHeader
-	Friend WithEvents dtp_qryTimeBegin As System.Windows.Forms.DateTimePicker
-	Friend WithEvents lbl_qryTimeBegin As System.Windows.Forms.Label
-	Friend WithEvents dtp_qryTimeEnd As System.Windows.Forms.DateTimePicker
-	Friend WithEvents chb_qryNumObs As System.Windows.Forms.CheckBox
-	Friend WithEvents chb_qryDate As System.Windows.Forms.CheckBox
-	Friend WithEvents num_qryObs As System.Windows.Forms.NumericUpDown
-	Friend WithEvents lbl_qryTimeEnd As System.Windows.Forms.Label
-	Friend WithEvents chb_qrySrc As System.Windows.Forms.CheckBox
+    Friend WithEvents btnEditApplyChanges As System.Windows.Forms.Button
+    Friend WithEvents dgvEditTable As System.Windows.Forms.DataGridView
+    Friend WithEvents btnEditDataAdjust As System.Windows.Forms.Button
+    Friend WithEvents btnEditDataAdd As System.Windows.Forms.Button
+    Friend WithEvents btnEditDataRemove As System.Windows.Forms.Button
+    Friend WithEvents btnEditDataFlag As System.Windows.Forms.Button
+    Friend WithEvents btnEditDataInterpolate As System.Windows.Forms.Button
+    Friend WithEvents gboxEditFilter As System.Windows.Forms.GroupBox
+    Friend WithEvents rbtnEditDFValueThreshold As System.Windows.Forms.RadioButton
+    Friend WithEvents gboxEditDFValueThreshold As System.Windows.Forms.GroupBox
+    Friend WithEvents tboxEditDFVTLess As System.Windows.Forms.TextBox
+    Friend WithEvents ckboxEditDFVTLess As System.Windows.Forms.CheckBox
+    Friend WithEvents tboxEditDFVTGreater As System.Windows.Forms.TextBox
+    Friend WithEvents ckboxEditDFVTGreater As System.Windows.Forms.CheckBox
+    Friend WithEvents rbtnEditDFDataGap As System.Windows.Forms.RadioButton
+    Friend WithEvents gboxEditDFDataGaps As System.Windows.Forms.GroupBox
+    Friend WithEvents rbtnEditDFDate As System.Windows.Forms.RadioButton
+    Friend WithEvents btnEditDFApplyFilter As System.Windows.Forms.Button
+    Friend WithEvents btnEditDFClearSel As System.Windows.Forms.Button
+    Friend WithEvents tboxEditDFVTChange As System.Windows.Forms.TextBox
+    Friend WithEvents rbtnEditDFVTChange As System.Windows.Forms.RadioButton
+    Friend WithEvents gboxEditDFDate As System.Windows.Forms.GroupBox
+    Friend WithEvents dtpEditDFDAfter As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpEditDFDBefore As System.Windows.Forms.DateTimePicker
+    Friend WithEvents ckboxEditDFDAfter As System.Windows.Forms.CheckBox
+    Friend WithEvents ckboxEditDFDBefore As System.Windows.Forms.CheckBox
+    Friend WithEvents btnEditDataDeriveNewDS As System.Windows.Forms.Button
+    Friend WithEvents lvcolVisQCLevel As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisMethod As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditQCLevel As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditMethod As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ttipEdit As System.Windows.Forms.ToolTip
+    Friend WithEvents txt_qryMethod As System.Windows.Forms.TextBox
+    Friend WithEvents chb_qryQCLevel As System.Windows.Forms.CheckBox
+    Friend WithEvents lbx_qryQCLevel As System.Windows.Forms.ListBox
+    Friend WithEvents chb_qryMethod As System.Windows.Forms.CheckBox
+    Friend WithEvents grp_qrySources As System.Windows.Forms.GroupBox
+    Friend WithEvents rdo_qrySrcDesc As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qrySrcOrg As System.Windows.Forms.RadioButton
+    Friend WithEvents txt_qrySrcDesc As System.Windows.Forms.TextBox
+    Friend WithEvents txt_qrySrcOrg As System.Windows.Forms.TextBox
+    Friend WithEvents lvcolEditOrganization As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolEditSourceDesc As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisOrganization As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lvcolVisSourceDesc As System.Windows.Forms.ColumnHeader
+    Friend WithEvents dtp_qryTimeBegin As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lbl_qryTimeBegin As System.Windows.Forms.Label
+    Friend WithEvents dtp_qryTimeEnd As System.Windows.Forms.DateTimePicker
+    Friend WithEvents chb_qryNumObs As System.Windows.Forms.CheckBox
+    Friend WithEvents chb_qryDate As System.Windows.Forms.CheckBox
+    Friend WithEvents num_qryObs As System.Windows.Forms.NumericUpDown
+    Friend WithEvents lbl_qryTimeEnd As System.Windows.Forms.Label
+    Friend WithEvents chb_qrySrc As System.Windows.Forms.CheckBox
     Friend WithEvents col_qrySiteCodeName As System.Windows.Forms.ColumnHeader
     Friend WithEvents col_qrySiteType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryVarCodeName As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryVarUnits As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryGenCat As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryValType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qrySampleMed As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryDataType As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryQCLevel As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryMethodDesc As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryNumObs As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryDateTime As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryOrg As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qrySrcDesc As System.Windows.Forms.ColumnHeader
-	Friend WithEvents col_qryTimeSupport As System.Windows.Forms.ColumnHeader
-	Friend WithEvents grp_qrySrcSelect As System.Windows.Forms.GroupBox
-	Friend WithEvents rdo_qrySrcOR As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qrySrcAND As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qryNumObsL As System.Windows.Forms.RadioButton
-	Friend WithEvents rdo_qryNumObsG As System.Windows.Forms.RadioButton
-	Friend WithEvents grp_qryNumObs As System.Windows.Forms.Panel
-	Friend WithEvents mnuQDRCEdit As System.Windows.Forms.MenuItem
-	Friend WithEvents col_qryTimeSupportUnits As System.Windows.Forms.ColumnHeader
-	Friend WithEvents MenuItem3 As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuitmHelp As System.Windows.Forms.MenuItem
-	Friend WithEvents mnuitmHelpAbout As System.Windows.Forms.MenuItem
-	Friend WithEvents tboxEditDFDGValue As System.Windows.Forms.TextBox
-	Friend WithEvents lblEditDFDGValue As System.Windows.Forms.Label
-	Friend WithEvents cboxEditDFDGTimePeriod As System.Windows.Forms.ComboBox
+    Friend WithEvents col_qryVarCodeName As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryVarUnits As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryGenCat As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryValType As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qrySampleMed As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryDataType As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryQCLevel As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryMethodDesc As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryNumObs As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryDateTime As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryOrg As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qrySrcDesc As System.Windows.Forms.ColumnHeader
+    Friend WithEvents col_qryTimeSupport As System.Windows.Forms.ColumnHeader
+    Friend WithEvents grp_qrySrcSelect As System.Windows.Forms.GroupBox
+    Friend WithEvents rdo_qrySrcOR As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qrySrcAND As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qryNumObsL As System.Windows.Forms.RadioButton
+    Friend WithEvents rdo_qryNumObsG As System.Windows.Forms.RadioButton
+    Friend WithEvents grp_qryNumObs As System.Windows.Forms.Panel
+    Friend WithEvents mnuQDRCEdit As System.Windows.Forms.MenuItem
+    Friend WithEvents col_qryTimeSupportUnits As System.Windows.Forms.ColumnHeader
+    Friend WithEvents MenuItem3 As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuitmHelp As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuitmHelpAbout As System.Windows.Forms.MenuItem
+    Friend WithEvents tboxEditDFDGValue As System.Windows.Forms.TextBox
+    Friend WithEvents lblEditDFDGValue As System.Windows.Forms.Label
+    Friend WithEvents cboxEditDFDGTimePeriod As System.Windows.Forms.ComboBox
     Friend WithEvents mnuToolsReloadQuery As System.Windows.Forms.MenuItem
     Friend WithEvents mnuToolsIntCVUpdate As System.Windows.Forms.MenuItem
     Friend WithEvents mnuToolsOptions As System.Windows.Forms.MenuItem
@@ -3749,103 +3751,103 @@ Public Class frmODMTools
 
 #Region " Query Tab: Setup "
 
-	Private Sub LoadQCLevels()
-		'This function Loads the Quality Control Levels from the database
-		'Inputs:  None
-		'Outputs: None
-		Dim query As String
-		Dim qcLevelDT As DataTable
-		Dim i As Integer
-		Dim qcLevel_Code As String
-		Dim qcLevel_Def As String
-		Try
-			'1. clear out any old data
-			lbx_qryQCLevel.Items.Clear()
+    Private Sub LoadQCLevels()
+        'This function Loads the Quality Control Levels from the database
+        'Inputs:  None
+        'Outputs: None
+        Dim query As String
+        Dim qcLevelDT As DataTable
+        Dim i As Integer
+        Dim qcLevel_Code As String
+        Dim qcLevel_Def As String
+        Try
+            '1. clear out any old data
+            lbx_qryQCLevel.Items.Clear()
 
-			'2. Add the QC Levels 
-			query = "SELECT DISTINCT " & db_fld_QCLQCLevel & ", " & db_fld_QCLCode & ", " & db_fld_QCLDefinition & " FROM " & db_tbl_QCLevels & " ORDER BY " & db_fld_QCLQCLevel
-			qcLevelDT = OpenTable("qryQCLevels", query, g_CurrConnSettings)
-			'validate data
-			If Not (qcLevelDT Is Nothing) AndAlso qcLevelDT.Rows.Count > 0 Then
-				'2. load variables into lbx_qryQCLevel
-				For i = 0 To qcLevelDT.Rows.Count - 1
-					If Not (qcLevelDT.Rows(i).Item(db_fld_QCLCode) Is DBNull.Value) Then
-						qcLevel_Code = qcLevelDT.Rows(i).Item(db_fld_QCLCode)
-					Else
-						qcLevel_Code = " "
-					End If
-					If Not (qcLevelDT.Rows(i).Item(db_fld_QCLDefinition) Is DBNull.Value) Then
-						qcLevel_Def = qcLevelDT.Rows(i).Item(db_fld_QCLDefinition)
-					Else
-						qcLevel_Def = " "
-					End If
-					lbx_qryQCLevel.Items.Add(qcLevel_Code & " - " & qcLevel_Def)
-				Next i
-			End If
+            '2. Add the QC Levels 
+            query = "SELECT DISTINCT " & db_fld_QCLQCLevel & ", " & db_fld_QCLCode & ", " & db_fld_QCLDefinition & " FROM " & db_tbl_QCLevels & " ORDER BY " & db_fld_QCLQCLevel
+            qcLevelDT = OpenTable("qryQCLevels", query, g_CurrConnSettings)
+            'validate data
+            If Not (qcLevelDT Is Nothing) AndAlso qcLevelDT.Rows.Count > 0 Then
+                '2. load variables into lbx_qryQCLevel
+                For i = 0 To qcLevelDT.Rows.Count - 1
+                    If Not (qcLevelDT.Rows(i).Item(db_fld_QCLCode) Is DBNull.Value) Then
+                        qcLevel_Code = qcLevelDT.Rows(i).Item(db_fld_QCLCode)
+                    Else
+                        qcLevel_Code = " "
+                    End If
+                    If Not (qcLevelDT.Rows(i).Item(db_fld_QCLDefinition) Is DBNull.Value) Then
+                        qcLevel_Def = qcLevelDT.Rows(i).Item(db_fld_QCLDefinition)
+                    Else
+                        qcLevel_Def = " "
+                    End If
+                    lbx_qryQCLevel.Items.Add(qcLevel_Code & " - " & qcLevel_Def)
+                Next i
+            End If
 
-			'3. Release resources
-			If Not (qcLevelDT Is Nothing) Then
-				qcLevelDT.Dispose()
-				qcLevelDT = Nothing
-			End If
-		Catch ex As Exception
-			ShowError("An Error occurred while loading the QC Levels." & vbCrLf & "Message = " & ex.Message, ex)
-		End Try
-	End Sub
+            '3. Release resources
+            If Not (qcLevelDT Is Nothing) Then
+                qcLevelDT.Dispose()
+                qcLevelDT = Nothing
+            End If
+        Catch ex As Exception
+            ShowError("An Error occurred while loading the QC Levels." & vbCrLf & "Message = " & ex.Message, ex)
+        End Try
+    End Sub
 
-	Private Sub ResetQueryPage()
-		'Resets the Query Page to it's default values.  Used when Data Source is changed
-		'Outputs: Clears all data from Query Page
-		Dim x As Integer 'counter
-		Dim sFieldNames() As String = {db_fld_SCSiteCode, db_fld_SCSiteName}	'The field names used for lbx_qrySites
-		Dim vFieldNames() As String = {db_fld_SCVarCode, db_fld_SCVarName}	'The field names used for lbx_qryVars
-		Dim cv(,) As String	'Used to store the matrix of sitecodes/sitenames, and variablecodes/variableNames
-		Dim otherCVs() As String 'Used to store all of the other listbox items
+    Private Sub ResetQueryPage()
+        'Resets the Query Page to it's default values.  Used when Data Source is changed
+        'Outputs: Clears all data from Query Page
+        Dim x As Integer 'counter
+        Dim sFieldNames() As String = {db_fld_SCSiteCode, db_fld_SCSiteName}    'The field names used for lbx_qrySites
+        Dim vFieldNames() As String = {db_fld_SCVarCode, db_fld_SCVarName}  'The field names used for lbx_qryVars
+        Dim cv(,) As String 'Used to store the matrix of sitecodes/sitenames, and variablecodes/variableNames
+        Dim otherCVs() As String 'Used to store all of the other listbox items
 
-		Try
-			'Load the list of sites
-			cv = LoadDataList(db_tbl_SeriesCatalog, sFieldNames)
-			lbx_qrySites.Items.Clear()
-			For x = 0 To cv.GetUpperBound(1)
-				lbx_qrySites.Items.Add(cv(0, x) & " - " & cv(1, x))
-			Next
+        Try
+            'Load the list of sites
+            cv = LoadDataList(db_tbl_SeriesCatalog, sFieldNames)
+            lbx_qrySites.Items.Clear()
+            For x = 0 To cv.GetUpperBound(1)
+                lbx_qrySites.Items.Add(cv(0, x) & " - " & cv(1, x))
+            Next
 
-			'Load the list of Variables
-			'otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_VarName)
-			cv = LoadDataList(db_tbl_SeriesCatalog, vFieldNames)
-			lbx_qryVars.Items.Clear()
-			For x = 0 To cv.GetUpperBound(1)
-				'lbx_qryVars.Items.Add(otherCVs(x))
-				lbx_qryVars.Items.Add(cv(0, x) & " - " & cv(1, x))
-			Next
+            'Load the list of Variables
+            'otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_VarName)
+            cv = LoadDataList(db_tbl_SeriesCatalog, vFieldNames)
+            lbx_qryVars.Items.Clear()
+            For x = 0 To cv.GetUpperBound(1)
+                'lbx_qryVars.Items.Add(otherCVs(x))
+                lbx_qryVars.Items.Add(cv(0, x) & " - " & cv(1, x))
+            Next
 
-			'Load the list of General Categories
-			otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCGenCat)
-			lbx_qryGenCat.Items.Clear()
-			For x = 0 To otherCVs.Length - 1
-				lbx_qryGenCat.Items.Add(otherCVs(x))
-			Next
+            'Load the list of General Categories
+            otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCGenCat)
+            lbx_qryGenCat.Items.Clear()
+            For x = 0 To otherCVs.Length - 1
+                lbx_qryGenCat.Items.Add(otherCVs(x))
+            Next
 
-			'Load the list of Sample Mediums
-			otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCSampleMed)
-			lbx_qrySampleMed.Items.Clear()
-			For x = 0 To otherCVs.Length - 1
-				lbx_qrySampleMed.Items.Add(otherCVs(x))
-			Next
+            'Load the list of Sample Mediums
+            otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCSampleMed)
+            lbx_qrySampleMed.Items.Clear()
+            For x = 0 To otherCVs.Length - 1
+                lbx_qrySampleMed.Items.Add(otherCVs(x))
+            Next
 
-			'Load the list of Value Types
-			otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCValueType)
-			lbx_qryValType.Items.Clear()
-			For x = 0 To otherCVs.Length - 1
-				lbx_qryValType.Items.Add(otherCVs(x))
-			Next
+            'Load the list of Value Types
+            otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCValueType)
+            lbx_qryValType.Items.Clear()
+            For x = 0 To otherCVs.Length - 1
+                lbx_qryValType.Items.Add(otherCVs(x))
+            Next
 
-			'Load the list of Data Types
-			otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCDataType)
-			lbx_qryDataType.Items.Clear()
-			For x = 0 To otherCVs.Length - 1
-				lbx_qryDataType.Items.Add(otherCVs(x))
-			Next
+            'Load the list of Data Types
+            otherCVs = LoadDataList(db_tbl_SeriesCatalog, db_fld_SCDataType)
+            lbx_qryDataType.Items.Clear()
+            For x = 0 To otherCVs.Length - 1
+                lbx_qryDataType.Items.Add(otherCVs(x))
+            Next
 
             If My.Settings.ODMVersion = "1.1.1" Then
                 'Load the list of Site Types
@@ -3890,15 +3892,15 @@ Public Class frmODMTools
         Catch ex As Exception
             ShowError("Error Loading Query Selection Values", ex)
         End Try
-	End Sub
+    End Sub
 
-	Private Sub lv_qryResults_AutoSizeColumns(Optional ByVal includeData As Boolean = False)
-		'Autosizes the Columns of lv_qryResults
-		'Inputs: includeData -> Boolean True if resize should include data or only headers.
-		'Outputs: Resizes the columns of lv_qryResults
-		Dim x, y As Integer	'Counters
-		Const HeaderResize As Integer = -2 'Constant for resizing listview columns by the header
-		Const DataResize As Integer = -1 'Constant for resizing listview columns by the bigest text within the column
+    Private Sub lv_qryResults_AutoSizeColumns(Optional ByVal includeData As Boolean = False)
+        'Autosizes the Columns of lv_qryResults
+        'Inputs: includeData -> Boolean True if resize should include data or only headers.
+        'Outputs: Resizes the columns of lv_qryResults
+        Dim x, y As Integer 'Counters
+        Const HeaderResize As Integer = -2 'Constant for resizing listview columns by the header
+        Const DataResize As Integer = -1 'Constant for resizing listview columns by the bigest text within the column
 
         For x = 0 To lv_qryResults.Columns.Count - 1
             Dim name As String = lv_qryResults.Columns(x).Text
@@ -3910,31 +3912,31 @@ Public Class frmODMTools
 
         Next
 
-		If includeData Then
-			Dim columnWidth As Double 'Size of the header
-			Dim dataWidth As Double	'Size of the data
-			For y = 0 To lv_qryResults.Columns.Count - 1
-				'Sets column width for each column
-				columnWidth = GetStringLen(lv_qryResults.Columns(y).Text())
-				For x = 0 To lv_qryResults.Items.Count - 1
-					'Sets datawidth for each data within each column
-					dataWidth = GetStringLen(lv_qryResults.Items(x).SubItems(y).Text())
-					If dataWidth > columnWidth Then
-						'Resize the columns based on the width of the text within the column
-						lv_qryResults.Columns(y).Width = DataResize
-					End If
-				Next
-			Next
-		End If
+        If includeData Then
+            Dim columnWidth As Double 'Size of the header
+            Dim dataWidth As Double 'Size of the data
+            For y = 0 To lv_qryResults.Columns.Count - 1
+                'Sets column width for each column
+                columnWidth = GetStringLen(lv_qryResults.Columns(y).Text())
+                For x = 0 To lv_qryResults.Items.Count - 1
+                    'Sets datawidth for each data within each column
+                    dataWidth = GetStringLen(lv_qryResults.Items(x).SubItems(y).Text())
+                    If dataWidth > columnWidth Then
+                        'Resize the columns based on the width of the text within the column
+                        lv_qryResults.Columns(y).Width = DataResize
+                    End If
+                Next
+            Next
+        End If
 
-	End Sub
+    End Sub
 
 #End Region
 
 #Region " Query Tab: Context Menus "
 
-	'ODMTools >> QueryTab >> QueryResults >> ContextMenu
-	Private Sub cmnuQueryDataRightClick_Popup(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmnuQueryDataRightClick.Popup
+    'ODMTools >> QueryTab >> QueryResults >> ContextMenu
+    Private Sub cmnuQueryDataRightClick_Popup(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmnuQueryDataRightClick.Popup
         'Sets menu options for cmnuQDRC
         If lv_qryResults.SelectedItems.Count > 0 Then
             'If anything is selected and that item is checked, set the menu to "Remove", else set the menu to "Select"
@@ -3948,30 +3950,30 @@ Public Class frmODMTools
             'If more than 0 are checked, enable SelectNone
             mnuQDRCSelectNone.Enabled = (lv_qryResults.CheckedItems.Count > 0)
         End If
-	End Sub
+    End Sub
 
-	Private Sub mnuQDRCSelectSingle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCSelectSingle.Click
+    Private Sub mnuQDRCSelectSingle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCSelectSingle.Click
         'Toggles the check of the currently selected object
-		lv_qryResults.SelectedItems(0).Checked = Not lv_qryResults.SelectedItems(0).Checked
-	End Sub
+        lv_qryResults.SelectedItems(0).Checked = Not lv_qryResults.SelectedItems(0).Checked
+    End Sub
 
-	Private Sub mnuQDRCSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCSelectAll.Click
+    Private Sub mnuQDRCSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCSelectAll.Click
         'Sequentially Checks all items in the Query Results listview 
         'Outputs: Checks all items in lv_qryresults
         Dim i As Integer 'Counter
-		For i = 0 To lv_qryResults.Items.Count - 1
-			lv_qryResults.Items(i).Checked = True
-		Next
-	End Sub
+        For i = 0 To lv_qryResults.Items.Count - 1
+            lv_qryResults.Items(i).Checked = True
+        Next
+    End Sub
 
-	Private Sub mnuQDRCSelectNone_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCSelectNone.Click
+    Private Sub mnuQDRCSelectNone_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCSelectNone.Click
         'Sequentially UNChecks all items in the Query Results listview
         'Outputs: Unchecks all items in lv_qryresults
         Dim i As Integer 'Counter
-		For i = 0 To lv_qryResults.Items.Count - 1
-			lv_qryResults.Items(i).Checked = False
-		Next
-	End Sub
+        For i = 0 To lv_qryResults.Items.Count - 1
+            lv_qryResults.Items(i).Checked = False
+        Next
+    End Sub
 
 #End Region
 
@@ -4280,188 +4282,188 @@ Public Class frmODMTools
         (dtp_qryTimeBegin.Enabled AndAlso dtp_qryTimeEnd.Enabled AndAlso dtp_qryTimeEnd.Value >= dtp_qryTimeBegin.Value))
     End Sub
 
-	'Uses Regex and RegularExpressionPatern Constants to validate the data.
-	Private Sub lbx_qrySites_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qrySites.SelectedIndexChanged
-		'Sites changes, validate
-		AnyValid()
-	End Sub
+    'Uses Regex and RegularExpressionPatern Constants to validate the data.
+    Private Sub lbx_qrySites_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qrySites.SelectedIndexChanged
+        'Sites changes, validate
+        AnyValid()
+    End Sub
 
-	Private Sub lbx_qryVars_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryVars.SelectedIndexChanged
-		'Variables changed, validate
-		AnyValid()
-	End Sub
+    Private Sub lbx_qryVars_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryVars.SelectedIndexChanged
+        'Variables changed, validate
+        AnyValid()
+    End Sub
 
-	Private Sub lbx_qryGenCat_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryGenCat.SelectedIndexChanged
-		'General Category changed, validate
-		AnyValid()
-	End Sub
+    Private Sub lbx_qryGenCat_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryGenCat.SelectedIndexChanged
+        'General Category changed, validate
+        AnyValid()
+    End Sub
 
-	Private Sub lbx_qrySampleMed_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qrySampleMed.SelectedIndexChanged
-		'Sample Medium changed, validate
-		AnyValid()
+    Private Sub lbx_qrySampleMed_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qrySampleMed.SelectedIndexChanged
+        'Sample Medium changed, validate
+        AnyValid()
     End Sub
     Private Sub lbx_qrySiteType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qrySiteType.SelectedIndexChanged
         AnyValid()
     End Sub
 
-	Private Sub lbx_qryValType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryValType.SelectedIndexChanged
-		'Value Type changed, validate
-		AnyValid()
-	End Sub
+    Private Sub lbx_qryValType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryValType.SelectedIndexChanged
+        'Value Type changed, validate
+        AnyValid()
+    End Sub
 
-	Private Sub lbx_qryDataType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryDataType.SelectedIndexChanged
-		'Data Type changed, validate
-		AnyValid()
-	End Sub
+    Private Sub lbx_qryDataType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryDataType.SelectedIndexChanged
+        'Data Type changed, validate
+        AnyValid()
+    End Sub
 
-	Private Sub lbx_qryQCLevel_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryQCLevel.SelectedIndexChanged
-		'QC Level changed, validate
-		AnyValid()
-	End Sub
+    Private Sub lbx_qryQCLevel_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbx_qryQCLevel.SelectedIndexChanged
+        'QC Level changed, validate
+        AnyValid()
+    End Sub
 
-	Private Sub num_qryObsMin_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles num_qryObs.ValueChanged
-		'min #Obs changes, validate
-		AnyValid()
-	End Sub
+    Private Sub num_qryObsMin_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles num_qryObs.ValueChanged
+        'min #Obs changes, validate
+        AnyValid()
+    End Sub
 
-	Private Sub num_qryObsMax_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-		'max #Obs changes, validate
-		AnyValid()
-	End Sub
+    Private Sub num_qryObsMax_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        'max #Obs changes, validate
+        AnyValid()
+    End Sub
 
-	Private Sub dtp_qryTimeBegin_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtp_qryTimeBegin.ValueChanged
-		'Begin Time changed, validate
-		AnyValid()
-		If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
-			'showerror("The Beginning Date must be after the Ending Date")
-		End If
-	End Sub
+    Private Sub dtp_qryTimeBegin_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtp_qryTimeBegin.ValueChanged
+        'Begin Time changed, validate
+        AnyValid()
+        If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
+            'showerror("The Beginning Date must be after the Ending Date")
+        End If
+    End Sub
 
-	Private Sub dtp_qryTimeEnd_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtp_qryTimeEnd.ValueChanged
-		'end time changed, validate
-		AnyValid()
-		If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
-			'showerror("The Ending Date must be after the Beginning Date")
-		End If
-	End Sub
+    Private Sub dtp_qryTimeEnd_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtp_qryTimeEnd.ValueChanged
+        'end time changed, validate
+        AnyValid()
+        If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
+            'showerror("The Ending Date must be after the Beginning Date")
+        End If
+    End Sub
 
-	Private Sub txt_qryMethod_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qryMethod.TextChanged
-		'Method Changed, validate
-		If Not ValidQueryText(txt_qryMethod.Text) Then
-			Dim writePos As Integer	'Holds the current position of the cursor
-			writePos = txt_qryMethod.SelectionStart	'Track the current cursor position
-			'Remove any invalid characters
-			txt_qryMethod.Text = System.Text.RegularExpressions.Regex.Replace(txt_qryMethod.Text, g_RegularExpressionPatern, "")
-			txt_qryMethod.Select(writePos - 1, 0)	'Return the cursor to it's original position
-		End If
-		AnyValid()
-	End Sub
+    Private Sub txt_qryMethod_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qryMethod.TextChanged
+        'Method Changed, validate
+        If Not ValidQueryText(txt_qryMethod.Text) Then
+            Dim writePos As Integer 'Holds the current position of the cursor
+            writePos = txt_qryMethod.SelectionStart 'Track the current cursor position
+            'Remove any invalid characters
+            txt_qryMethod.Text = System.Text.RegularExpressions.Regex.Replace(txt_qryMethod.Text, g_RegularExpressionPatern, "")
+            txt_qryMethod.Select(writePos - 1, 0)   'Return the cursor to it's original position
+        End If
+        AnyValid()
+    End Sub
 
-	Private Sub txt_qrySrcOrg_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qrySrcOrg.TextChanged
-		'Source Organization changes, validate
-		If Not ValidQueryText(txt_qrySrcOrg.Text) Then
-			Dim writePos As Integer	'Hold the current position of the cursor
-			writePos = txt_qrySrcOrg.SelectionStart	'Track the current cursor position
-			'Remove any invalid characters
-			txt_qrySrcOrg.Text = System.Text.RegularExpressions.Regex.Replace(txt_qrySrcOrg.Text, g_RegularExpressionPatern, "")
-			txt_qrySrcOrg.Select(writePos - 1, 0)	'Return the cursor to it's original position
-		End If
-		AnyValid()
-	End Sub
+    Private Sub txt_qrySrcOrg_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qrySrcOrg.TextChanged
+        'Source Organization changes, validate
+        If Not ValidQueryText(txt_qrySrcOrg.Text) Then
+            Dim writePos As Integer 'Hold the current position of the cursor
+            writePos = txt_qrySrcOrg.SelectionStart 'Track the current cursor position
+            'Remove any invalid characters
+            txt_qrySrcOrg.Text = System.Text.RegularExpressions.Regex.Replace(txt_qrySrcOrg.Text, g_RegularExpressionPatern, "")
+            txt_qrySrcOrg.Select(writePos - 1, 0)   'Return the cursor to it's original position
+        End If
+        AnyValid()
+    End Sub
 
-	Private Sub txt_qrySrcDesc_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qrySrcDesc.TextChanged
-		'Source Description changed, validate
-		If Not ValidQueryText(txt_qrySrcOrg.Text) Then
-			Dim writePos As Integer	'Hold the current position of the cursor
-			writePos = txt_qrySrcDesc.SelectionStart	'Track the current cursor position
-			'Remove any invalid characters
-			txt_qrySrcDesc.Text = System.Text.RegularExpressions.Regex.Replace(txt_qrySrcDesc.Text, g_RegularExpressionPatern, "")
-			txt_qrySrcDesc.Select(writePos - 1, 0)	'Return the cursor to it's original position
-		End If
-		AnyValid()
-	End Sub
+    Private Sub txt_qrySrcDesc_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qrySrcDesc.TextChanged
+        'Source Description changed, validate
+        If Not ValidQueryText(txt_qrySrcOrg.Text) Then
+            Dim writePos As Integer 'Hold the current position of the cursor
+            writePos = txt_qrySrcDesc.SelectionStart    'Track the current cursor position
+            'Remove any invalid characters
+            txt_qrySrcDesc.Text = System.Text.RegularExpressions.Regex.Replace(txt_qrySrcDesc.Text, g_RegularExpressionPatern, "")
+            txt_qrySrcDesc.Select(writePos - 1, 0)  'Return the cursor to it's original position
+        End If
+        AnyValid()
+    End Sub
 
-	Private Sub txt_qrySiteName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qrySiteName.TextChanged
-		'Site Name Changed, validate
-		If Not ValidQueryText(txt_qrySiteName.Text) Then
-			Dim writePos As Integer	'Hold the current position of the cursor
-			writePos = txt_qrySiteName.SelectionStart 'Track the current cursor position
-			'Remove any invalid characters
-			txt_qrySiteName.Text = System.Text.RegularExpressions.Regex.Replace(txt_qrySiteName.Text, g_RegularExpressionPatern, "")
-			txt_qrySiteName.Select(writePos - 1, 0)	'Return the cursor to it's original position
-		End If
-		AnyValid()
-	End Sub
+    Private Sub txt_qrySiteName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qrySiteName.TextChanged
+        'Site Name Changed, validate
+        If Not ValidQueryText(txt_qrySiteName.Text) Then
+            Dim writePos As Integer 'Hold the current position of the cursor
+            writePos = txt_qrySiteName.SelectionStart 'Track the current cursor position
+            'Remove any invalid characters
+            txt_qrySiteName.Text = System.Text.RegularExpressions.Regex.Replace(txt_qrySiteName.Text, g_RegularExpressionPatern, "")
+            txt_qrySiteName.Select(writePos - 1, 0) 'Return the cursor to it's original position
+        End If
+        AnyValid()
+    End Sub
 
-	Private Sub txt_qryVarName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qryVarName.TextChanged
-		'variable name changes, validate
-		If Not ValidQueryText(txt_qryVarName.Text) Then
-			Dim writePos As Integer	'Hold the current position of the cursor
-			writePos = txt_qryVarName.SelectionStart 'Track the current cursor position
-			'Remove any invalid characters
-			txt_qryVarName.Text = System.Text.RegularExpressions.Regex.Replace(txt_qryVarName.Text, g_RegularExpressionPatern, "")
-			txt_qryVarName.Select(writePos - 1, 0) 'Return the cursor to it's original position
-		End If
-		AnyValid()
-	End Sub
+    Private Sub txt_qryVarName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qryVarName.TextChanged
+        'variable name changes, validate
+        If Not ValidQueryText(txt_qryVarName.Text) Then
+            Dim writePos As Integer 'Hold the current position of the cursor
+            writePos = txt_qryVarName.SelectionStart 'Track the current cursor position
+            'Remove any invalid characters
+            txt_qryVarName.Text = System.Text.RegularExpressions.Regex.Replace(txt_qryVarName.Text, g_RegularExpressionPatern, "")
+            txt_qryVarName.Select(writePos - 1, 0) 'Return the cursor to it's original position
+        End If
+        AnyValid()
+    End Sub
 
-	Private Sub txt_qrySiteCode_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qrySiteCode.TextChanged
-		'site code changed, validate
-		If Not ValidQueryText(txt_qrySiteCode.Text) Then
-			Dim writePos As Integer	'Hold the current position of the cursor
-			writePos = txt_qrySiteCode.SelectionStart 'Track the current cursor position
-			'Remove any invalid characters
-			txt_qrySiteCode.Text = System.Text.RegularExpressions.Regex.Replace(txt_qrySiteCode.Text, g_RegularExpressionPatern, "")
-			txt_qrySiteCode.Select(writePos - 1, 0)	'Return the cursor to it's original position
-		End If
-		AnyValid()
-	End Sub
+    Private Sub txt_qrySiteCode_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qrySiteCode.TextChanged
+        'site code changed, validate
+        If Not ValidQueryText(txt_qrySiteCode.Text) Then
+            Dim writePos As Integer 'Hold the current position of the cursor
+            writePos = txt_qrySiteCode.SelectionStart 'Track the current cursor position
+            'Remove any invalid characters
+            txt_qrySiteCode.Text = System.Text.RegularExpressions.Regex.Replace(txt_qrySiteCode.Text, g_RegularExpressionPatern, "")
+            txt_qrySiteCode.Select(writePos - 1, 0) 'Return the cursor to it's original position
+        End If
+        AnyValid()
+    End Sub
 
-	Private Sub txt_qryVarCode_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qryVarCode.TextChanged
-		'variable code changed, validate
-		If Not ValidQueryText(txt_qryVarCode.Text) Then
-			Dim writePos As Integer	'Hold the current position of the cursor
-			writePos = txt_qryVarCode.SelectionStart 'Track the current cursor position
-			'Remove any invalid characters
-			txt_qryVarCode.Text = System.Text.RegularExpressions.Regex.Replace(txt_qryVarCode.Text, g_RegularExpressionPatern, "")
-			txt_qryVarCode.Select(writePos - 1, 0) 'Return the cursor to it's original position
-		End If
-		AnyValid()
-	End Sub
+    Private Sub txt_qryVarCode_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_qryVarCode.TextChanged
+        'variable code changed, validate
+        If Not ValidQueryText(txt_qryVarCode.Text) Then
+            Dim writePos As Integer 'Hold the current position of the cursor
+            writePos = txt_qryVarCode.SelectionStart 'Track the current cursor position
+            'Remove any invalid characters
+            txt_qryVarCode.Text = System.Text.RegularExpressions.Regex.Replace(txt_qryVarCode.Text, g_RegularExpressionPatern, "")
+            txt_qryVarCode.Select(writePos - 1, 0) 'Return the cursor to it's original position
+        End If
+        AnyValid()
+    End Sub
 
-	Private Sub dtp_qryDateBegin_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-		'Makes sure the beginning date is before the ending date, validate
-		dtp_qryTimeEnd.MinDate = dtp_qryTimeBegin.Value
-		If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
-			dtp_qryTimeBegin.Value = dtp_qryTimeEnd.Value
-		End If
-		AnyValid()
-	End Sub
+    Private Sub dtp_qryDateBegin_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        'Makes sure the beginning date is before the ending date, validate
+        dtp_qryTimeEnd.MinDate = dtp_qryTimeBegin.Value
+        If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
+            dtp_qryTimeBegin.Value = dtp_qryTimeEnd.Value
+        End If
+        AnyValid()
+    End Sub
 
-	Private Sub dtp_qryDateEnd_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-		'Makes sure the beginning date is after the ending date, validate
-		dtp_qryTimeBegin.MaxDate = dtp_qryTimeEnd.Value
-		If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
-			dtp_qryTimeEnd.Value = dtp_qryTimeBegin.Value
-		End If
-		AnyValid()
-	End Sub
+    Private Sub dtp_qryDateEnd_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        'Makes sure the beginning date is after the ending date, validate
+        dtp_qryTimeBegin.MaxDate = dtp_qryTimeEnd.Value
+        If dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
+            dtp_qryTimeEnd.Value = dtp_qryTimeBegin.Value
+        End If
+        AnyValid()
+    End Sub
 
 #End Region
 
 #Region " Query Tab: Database Query Functions "
 
-	Private Sub cmdExecuteQuery_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_qryExecute.Click
-		'Executes the query, calling createcustomquery() and opentable() when clicked
-		'this function validates selected data, Creates a set of stations the match the criteria set from the selected database
-		'Input:     the inputs are standard for form events
-		'Output:    Displays the results of the query to a listview control
+    Private Sub cmdExecuteQuery_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_qryExecute.Click
+        'Executes the query, calling createcustomquery() and opentable() when clicked
+        'this function validates selected data, Creates a set of stations the match the criteria set from the selected database
+        'Input:     the inputs are standard for form events
+        'Output:    Displays the results of the query to a listview control
 
-		Dim sql As String 'the SQL Query to pull the station names from the database
+        Dim sql As String 'the SQL Query to pull the station names from the database
         Dim queryTable As DataTable 'the datatable of final stations
-		Dim i As Integer 'counter
+        Dim i As Integer 'counter
 
-		'If a radio button is checked and the inputed text is invalid, display a message and exit the sub.
+        'If a radio button is checked and the inputed text is invalid, display a message and exit the sub.
         If chb_qryDate.Checked AndAlso dtp_qryTimeBegin.Value > dtp_qryTimeEnd.Value Then
             ShowError("Please Enter A Valid Date Range")
             Exit Sub
@@ -4588,423 +4590,423 @@ Public Class frmODMTools
         End Try
         'change the cursor back to the default
         Me.Cursor = System.Windows.Forms.Cursors.Default
-	End Sub
+    End Sub
 
-	Private Function CreateCustomQuery() As String
-		'Creates the SQL Query to retreived stations from the selected database based on selected criteria in the Database Query Tab
-		'Inputs:  None
-		'Outputs: String -> the created SQL Query
-		Dim sql As String 'the SQL query to create
-		Dim i As Integer 'counter
+    Private Function CreateCustomQuery() As String
+        'Creates the SQL Query to retreived stations from the selected database based on selected criteria in the Database Query Tab
+        'Inputs:  None
+        'Outputs: String -> the created SQL Query
+        Dim sql As String 'the SQL query to create
+        Dim i As Integer 'counter
         Dim firstCommand As Boolean = True 'Is this the first command to be written?
-		Try
-			'set basic query -> get SiteCode, SiteName, VariableCode, VariableName, BeginDateTime, EndDateTime, GeneralCategory, ValueCount, SampleMedium, ValueType
-			sql = "SELECT * FROM " _
-			  & db_tbl_SeriesCatalog & " WHERE "
+        Try
+            'set basic query -> get SiteCode, SiteName, VariableCode, VariableName, BeginDateTime, EndDateTime, GeneralCategory, ValueCount, SampleMedium, ValueType
+            sql = "SELECT * FROM " _
+              & db_tbl_SeriesCatalog & " WHERE "
 
-			'see what check boxes are checked -> creates the WHERE Clause
+            'see what check boxes are checked -> creates the WHERE Clause
 
-			'Search for Similar Site Codes
-			If rdo_qrySiteCode.Checked Then
-				If Not FirstCommand Then
-					sql = sql & " AND "
-				Else
-					FirstCommand = False
-				End If
+            'Search for Similar Site Codes
+            If rdo_qrySiteCode.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & " AND "
+                Else
+                    FirstCommand = False
+                End If
 
-				Dim compareVal As String 'the site code comparison value to qualify the station name by
-				compareVal = FixSQL(txt_qrySiteCode.Text)
-				If compareVal = "" Then
-					ShowError("No Site Code Entered." & vbCrLf & "Please enter a Site Code to query by.")
-					Return ""
-				Else
-					If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
+                Dim compareVal As String 'the site code comparison value to qualify the station name by
+                compareVal = FixSQL(txt_qrySiteCode.Text)
+                If compareVal = "" Then
+                    ShowError("No Site Code Entered." & vbCrLf & "Please enter a Site Code to query by.")
+                    Return ""
+                Else
+                    If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
                         Dim splitEntries As Array 'Holds the separate query entries
-						splitEntries = SplitMultipleEntries(compareVal)
-						For i = 0 To splitEntries.Length - 1
-							If i = splitEntries.Length - 1 Then
-								sql = sql & db_fld_SCSiteCode & " LIKE '%" & splitEntries(i) & "%') "
-							ElseIf i = 0 Then
-								sql = sql & "(" & db_fld_SCSiteCode & " LIKE '%" & splitEntries(i) & "%' " & m_qrySiteSelectionMethod & " "
-							Else
-								sql = sql & db_fld_SCSiteCode & " LIKE '%" & splitEntries(i) & "%' " & m_qrySiteSelectionMethod & " "
-							End If
-						Next
-					Else
-						sql = sql & "(" & db_fld_SCSiteCode & " LIKE '%" & compareVal & "%') "
-					End If
-				End If
-			End If
-			'Search for Similar Site Names
-			If rdo_qrySiteName.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim compareVal As String 'the site name comparison value to qualify the station name by
-				compareVal = FixSQL(txt_qrySiteName.Text)
-				If compareVal = "" Then
-					ShowError("No Site Name Entered." & vbCrLf & "Please enter a Site Name to query by.")
-					Return ""
-				Else
-					If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
+                        splitEntries = SplitMultipleEntries(compareVal)
+                        For i = 0 To splitEntries.Length - 1
+                            If i = splitEntries.Length - 1 Then
+                                sql = sql & db_fld_SCSiteCode & " LIKE '%" & splitEntries(i) & "%') "
+                            ElseIf i = 0 Then
+                                sql = sql & "(" & db_fld_SCSiteCode & " LIKE '%" & splitEntries(i) & "%' " & m_qrySiteSelectionMethod & " "
+                            Else
+                                sql = sql & db_fld_SCSiteCode & " LIKE '%" & splitEntries(i) & "%' " & m_qrySiteSelectionMethod & " "
+                            End If
+                        Next
+                    Else
+                        sql = sql & "(" & db_fld_SCSiteCode & " LIKE '%" & compareVal & "%') "
+                    End If
+                End If
+            End If
+            'Search for Similar Site Names
+            If rdo_qrySiteName.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim compareVal As String 'the site name comparison value to qualify the station name by
+                compareVal = FixSQL(txt_qrySiteName.Text)
+                If compareVal = "" Then
+                    ShowError("No Site Name Entered." & vbCrLf & "Please enter a Site Name to query by.")
+                    Return ""
+                Else
+                    If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
                         Dim splitEntries As Array 'Holds the separate query entries
-						splitEntries = SplitMultipleEntries(compareVal)
-						For i = 0 To splitEntries.Length - 1
-							If i = splitEntries.Length - 1 Then
-								sql = sql & db_fld_SCSiteName & " LIKE '%" & splitEntries(i) & "%') "
-							ElseIf i = 0 Then
-								sql = sql & "(" & db_fld_SCSiteName & " LIKE '%" & splitEntries(i) & "%' " & m_qrySiteSelectionMethod & " "
-							Else
-								sql = sql & db_fld_SCSiteName & " LIKE '%" & splitEntries(i) & "%' " & m_qrySiteSelectionMethod & " "
-							End If
-						Next
-					Else
-						sql = sql & "(" & db_fld_SCSiteName & " LIKE '%" & compareVal & "%') "
-					End If
-				End If
-			End If
-			'Search for Similar Var Codes
-			If rdo_qryVarCode.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim compareVal As String 'the variable code comparison value to qualify the station name by
-				compareVal = FixSQL(txt_qryVarCode.Text)
-				If compareVal = "" Then
-					ShowError("No Variable Code Entered." & vbCrLf & "Please enter a Variable Code to query by.")
-					Return ""
-				Else
-					If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
+                        splitEntries = SplitMultipleEntries(compareVal)
+                        For i = 0 To splitEntries.Length - 1
+                            If i = splitEntries.Length - 1 Then
+                                sql = sql & db_fld_SCSiteName & " LIKE '%" & splitEntries(i) & "%') "
+                            ElseIf i = 0 Then
+                                sql = sql & "(" & db_fld_SCSiteName & " LIKE '%" & splitEntries(i) & "%' " & m_qrySiteSelectionMethod & " "
+                            Else
+                                sql = sql & db_fld_SCSiteName & " LIKE '%" & splitEntries(i) & "%' " & m_qrySiteSelectionMethod & " "
+                            End If
+                        Next
+                    Else
+                        sql = sql & "(" & db_fld_SCSiteName & " LIKE '%" & compareVal & "%') "
+                    End If
+                End If
+            End If
+            'Search for Similar Var Codes
+            If rdo_qryVarCode.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim compareVal As String 'the variable code comparison value to qualify the station name by
+                compareVal = FixSQL(txt_qryVarCode.Text)
+                If compareVal = "" Then
+                    ShowError("No Variable Code Entered." & vbCrLf & "Please enter a Variable Code to query by.")
+                    Return ""
+                Else
+                    If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
                         Dim splitEntries As Array 'Holds the separate query entries
-						splitEntries = SplitMultipleEntries(compareVal)
-						For i = 0 To splitEntries.Length - 1
-							If i = splitEntries.Length - 1 Then
-								sql = sql & db_fld_SCVarCode & " LIKE '%" & splitEntries(i) & "%') "
-							ElseIf i = 0 Then
-								sql = sql & "(" & db_fld_SCVarCode & " LIKE '%" & splitEntries(i) & "%' " & m_qryVariableSelectionMethod & " "
-							Else
-								sql = sql & db_fld_SCVarCode & " LIKE '%" & splitEntries(i) & "%' " & m_qryVariableSelectionMethod & " "
-							End If
-						Next
-					Else
-						sql = sql & "(" & db_fld_SCVarCode & " LIKE '%" & compareVal & "%') "
-					End If
-				End If
-			End If
-			'Search for Similar Var Names
-			If rdo_qryVarName.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim compareVal As String 'the variable name comparison value to qualify the station name by
-				compareVal = FixSQL(txt_qryVarName.Text)
-				If compareVal = "" Then
-					ShowError("No Variable Name Entered." & vbCrLf & "Please enter a Variable Name to query by.")
-					Return ""
-				Else
-					compareVal = Replace(compareVal, "'", "''")
-					If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
+                        splitEntries = SplitMultipleEntries(compareVal)
+                        For i = 0 To splitEntries.Length - 1
+                            If i = splitEntries.Length - 1 Then
+                                sql = sql & db_fld_SCVarCode & " LIKE '%" & splitEntries(i) & "%') "
+                            ElseIf i = 0 Then
+                                sql = sql & "(" & db_fld_SCVarCode & " LIKE '%" & splitEntries(i) & "%' " & m_qryVariableSelectionMethod & " "
+                            Else
+                                sql = sql & db_fld_SCVarCode & " LIKE '%" & splitEntries(i) & "%' " & m_qryVariableSelectionMethod & " "
+                            End If
+                        Next
+                    Else
+                        sql = sql & "(" & db_fld_SCVarCode & " LIKE '%" & compareVal & "%') "
+                    End If
+                End If
+            End If
+            'Search for Similar Var Names
+            If rdo_qryVarName.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim compareVal As String 'the variable name comparison value to qualify the station name by
+                compareVal = FixSQL(txt_qryVarName.Text)
+                If compareVal = "" Then
+                    ShowError("No Variable Name Entered." & vbCrLf & "Please enter a Variable Name to query by.")
+                    Return ""
+                Else
+                    compareVal = Replace(compareVal, "'", "''")
+                    If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
                         Dim splitEntries As Array 'Holds the separate query entries
-						splitEntries = SplitMultipleEntries(compareVal)
-						For i = 0 To splitEntries.Length - 1
-							If i = splitEntries.Length - 1 Then
-								sql = sql & db_fld_SCVarName & " LIKE '%" & splitEntries(i) & "%') "
-							ElseIf i = 0 Then
-								sql = sql & "(" & db_fld_SCVarName & " LIKE '%" & splitEntries(i) & "%' " & m_qryVariableSelectionMethod & " "
-							Else
-								sql = sql & db_fld_SCVarName & " LIKE '%" & splitEntries(i) & "%' " & m_qryVariableSelectionMethod & " "
-							End If
-						Next
-					Else
-						sql = sql & "(" & db_fld_SCVarName & " LIKE '%" & compareVal & "%') "
-					End If
-				End If
-			End If
-			'Search for Similar Methods
-			If chb_qryMethod.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim compareVal As String 'the Method comparison value to qualify the station name by
-				compareVal = FixSQL(txt_qryMethod.Text)
-				If compareVal = "" Then
-					ShowError("No Method Entered." & vbCrLf & "Please enter a Method to query by.")
-					Return ""
-				Else
-					compareVal = Replace(compareVal, "'", "''")
-					If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
+                        splitEntries = SplitMultipleEntries(compareVal)
+                        For i = 0 To splitEntries.Length - 1
+                            If i = splitEntries.Length - 1 Then
+                                sql = sql & db_fld_SCVarName & " LIKE '%" & splitEntries(i) & "%') "
+                            ElseIf i = 0 Then
+                                sql = sql & "(" & db_fld_SCVarName & " LIKE '%" & splitEntries(i) & "%' " & m_qryVariableSelectionMethod & " "
+                            Else
+                                sql = sql & db_fld_SCVarName & " LIKE '%" & splitEntries(i) & "%' " & m_qryVariableSelectionMethod & " "
+                            End If
+                        Next
+                    Else
+                        sql = sql & "(" & db_fld_SCVarName & " LIKE '%" & compareVal & "%') "
+                    End If
+                End If
+            End If
+            'Search for Similar Methods
+            If chb_qryMethod.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim compareVal As String 'the Method comparison value to qualify the station name by
+                compareVal = FixSQL(txt_qryMethod.Text)
+                If compareVal = "" Then
+                    ShowError("No Method Entered." & vbCrLf & "Please enter a Method to query by.")
+                    Return ""
+                Else
+                    compareVal = Replace(compareVal, "'", "''")
+                    If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
                         Dim splitEntries As Array 'Holds the separate query entries
-						splitEntries = SplitMultipleEntries(compareVal)
-						For i = 0 To splitEntries.Length - 1
-							If i = splitEntries.Length - 1 Then
-								sql = sql & db_fld_SCMethodDesc & " LIKE '%" & splitEntries(i) & "%') "
-							ElseIf i = 0 Then
-								sql = sql & "(" & db_fld_SCMethodDesc & " LIKE '%" & splitEntries(i) & "%' " & m_qryOtherSelectionMethod & " "
-							Else
-								sql = sql & db_fld_SCMethodDesc & " LIKE '%" & splitEntries(i) & "%' " & m_qryOtherSelectionMethod & " "
-							End If
-						Next
-					Else
-						sql = sql & "(" & db_fld_SCMethodDesc & " LIKE '%" & compareVal & "%') "
-					End If
-				End If
-			End If
-			'Search for Similar Organizations
-			If rdo_qrySrcOrg.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim compareVal As String 'the variable name comparison value to qualify the station name by
-				compareVal = FixSQL(txt_qrySrcOrg.Text)
-				If compareVal = "" Then
-					ShowError("No Organization Entered." & vbCrLf & "Please enter a Organization to query by.")
-					Return ""
-				Else
-					compareVal = Replace(compareVal, "'", "''")
-					If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
+                        splitEntries = SplitMultipleEntries(compareVal)
+                        For i = 0 To splitEntries.Length - 1
+                            If i = splitEntries.Length - 1 Then
+                                sql = sql & db_fld_SCMethodDesc & " LIKE '%" & splitEntries(i) & "%') "
+                            ElseIf i = 0 Then
+                                sql = sql & "(" & db_fld_SCMethodDesc & " LIKE '%" & splitEntries(i) & "%' " & m_qryOtherSelectionMethod & " "
+                            Else
+                                sql = sql & db_fld_SCMethodDesc & " LIKE '%" & splitEntries(i) & "%' " & m_qryOtherSelectionMethod & " "
+                            End If
+                        Next
+                    Else
+                        sql = sql & "(" & db_fld_SCMethodDesc & " LIKE '%" & compareVal & "%') "
+                    End If
+                End If
+            End If
+            'Search for Similar Organizations
+            If rdo_qrySrcOrg.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim compareVal As String 'the variable name comparison value to qualify the station name by
+                compareVal = FixSQL(txt_qrySrcOrg.Text)
+                If compareVal = "" Then
+                    ShowError("No Organization Entered." & vbCrLf & "Please enter a Organization to query by.")
+                    Return ""
+                Else
+                    compareVal = Replace(compareVal, "'", "''")
+                    If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
                         Dim splitEntries As Array 'Holds the separate query entries
-						splitEntries = SplitMultipleEntries(compareVal)
-						For i = 0 To splitEntries.Length - 1
-							If i = splitEntries.Length - 1 Then
-								sql = sql & db_fld_SCOrganization & " LIKE '%" & splitEntries(i) & "%') "
-							ElseIf i = 0 Then
-								sql = sql & "(" & db_fld_SCOrganization & " LIKE '%" & splitEntries(i) & "%' " & m_qrySourceSelectionMethod & " "
-							Else
-								sql = sql & db_fld_SCOrganization & " LIKE '%" & splitEntries(i) & "%' " & m_qrySourceSelectionMethod & " "
-							End If
-						Next
-					Else
-						sql = sql & "(" & db_fld_SCOrganization & " LIKE '%" & compareVal & "%') "
-					End If
-				End If
-			End If
-			'Search for Similar Source Description
-			If rdo_qrySrcDesc.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim compareVal As String 'the variable name comparison value to qualify the station name by
-				compareVal = FixSQL(txt_qrySrcDesc.Text)
-				If compareVal = "" Then
-					ShowError("No Source Entered." & vbCrLf & "Please enter a Source to query by.")
-					Return ""
-				Else
-					compareVal = Replace(compareVal, "'", "''")
-					If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
+                        splitEntries = SplitMultipleEntries(compareVal)
+                        For i = 0 To splitEntries.Length - 1
+                            If i = splitEntries.Length - 1 Then
+                                sql = sql & db_fld_SCOrganization & " LIKE '%" & splitEntries(i) & "%') "
+                            ElseIf i = 0 Then
+                                sql = sql & "(" & db_fld_SCOrganization & " LIKE '%" & splitEntries(i) & "%' " & m_qrySourceSelectionMethod & " "
+                            Else
+                                sql = sql & db_fld_SCOrganization & " LIKE '%" & splitEntries(i) & "%' " & m_qrySourceSelectionMethod & " "
+                            End If
+                        Next
+                    Else
+                        sql = sql & "(" & db_fld_SCOrganization & " LIKE '%" & compareVal & "%') "
+                    End If
+                End If
+            End If
+            'Search for Similar Source Description
+            If rdo_qrySrcDesc.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim compareVal As String 'the variable name comparison value to qualify the station name by
+                compareVal = FixSQL(txt_qrySrcDesc.Text)
+                If compareVal = "" Then
+                    ShowError("No Source Entered." & vbCrLf & "Please enter a Source to query by.")
+                    Return ""
+                Else
+                    compareVal = Replace(compareVal, "'", "''")
+                    If System.Text.RegularExpressions.Regex.Matches(compareVal, "; ").Count() > 0 Then
                         Dim splitEntries As Array 'Holds the separate query entries
-						splitEntries = SplitMultipleEntries(compareVal)
-						For i = 0 To splitEntries.Length - 1
-							If i = splitEntries.Length - 1 Then
-								sql = sql & db_fld_SCSourceDesc & " LIKE '%" & splitEntries(i) & "%') "
-							ElseIf i = 0 Then
-								sql = sql & "(" & db_fld_SCSourceDesc & " LIKE '%" & splitEntries(i) & "%' " & m_qrySourceSelectionMethod & " "
-							Else
-								sql = sql & db_fld_SCSourceDesc & " LIKE '%" & splitEntries(i) & "%' " & m_qrySourceSelectionMethod & " "
-							End If
-						Next
-					Else
-						sql = sql & "(" & db_fld_SCSourceDesc & " LIKE '%" & compareVal & "%') "
-					End If
-				End If
-			End If
+                        splitEntries = SplitMultipleEntries(compareVal)
+                        For i = 0 To splitEntries.Length - 1
+                            If i = splitEntries.Length - 1 Then
+                                sql = sql & db_fld_SCSourceDesc & " LIKE '%" & splitEntries(i) & "%') "
+                            ElseIf i = 0 Then
+                                sql = sql & "(" & db_fld_SCSourceDesc & " LIKE '%" & splitEntries(i) & "%' " & m_qrySourceSelectionMethod & " "
+                            Else
+                                sql = sql & db_fld_SCSourceDesc & " LIKE '%" & splitEntries(i) & "%' " & m_qrySourceSelectionMethod & " "
+                            End If
+                        Next
+                    Else
+                        sql = sql & "(" & db_fld_SCSourceDesc & " LIKE '%" & compareVal & "%') "
+                    End If
+                End If
+            End If
 
-			'Include Selected Sites
-			If rdo_qrySiteList.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim numParams As Integer	'the number of selected Agency Codes to qualify the query by
-				numParams = lbx_qrySites.SelectedItems.Count
-				If numParams <= 0 Then
-					ShowError("There were no Sites selected to Query by." & vbCr & "Please select at least one Site from the list")
-					Return ""
-				End If
-				If numParams > 1 Then
-					For i = 0 To numParams - 1
-						If i = 0 Then 'if this is the first one
-							sql = sql & "((" & db_fld_SCSiteCode & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCSiteName & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(1)) & "') OR "
-						ElseIf i = numParams - 1 Then 'if this is the last one
-							sql = sql & "(" & db_fld_SCSiteCode & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCSiteName & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(1)) & "'))"
-						Else
-							sql = sql & "(" & db_fld_SCSiteCode & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCSiteName & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(1)) & "') OR "
-						End If
-					Next
-				ElseIf numParams = 1 Then
-					sql = sql & "(" & db_fld_SCSiteCode & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(0), " - ")(0)) & "' AND " & db_fld_SCSiteName & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(0), " - ")(1)) & "') "
-				End If
-			End If
-			'Include Selected Variables
-			If rdo_qryVarList.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim numParams As Integer 'the number of Variables selected to qualify the query by
-				numParams = lbx_qryVars.SelectedItems.Count
-				If numParams <= 0 Then
-					ShowError("There were no Vars selected to Query by." & vbCr & "Please select at least one Var from the list")
-					Return ""
-				End If
-				If numParams > 1 Then
-					For i = 0 To numParams - 1
-						If i = 0 Then 'if this is the first one
-							sql = sql & "((" & db_fld_SCVarCode & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCVarName & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(1)) & "') OR "
-						ElseIf i = numParams - 1 Then 'if this is the last one
-							sql = sql & "(" & db_fld_SCVarCode & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCVarName & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(1)) & "'))"
-						Else
-							sql = sql & "(" & db_fld_SCVarCode & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCVarName & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(1)) & "') OR "
-						End If
-					Next
-				ElseIf numParams = 1 Then
-					sql = sql & "(" & db_fld_SCVarCode & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(0), " - ")(0)) & "' AND " & db_fld_SCVarName & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(0), " - ")(1)) & "') "
-				End If
-			End If
-			'Include Selected Categories
-			If chb_qryGenCat.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim numCategories As Integer 'the number of selected Agency Codes to qualify the query by
-				numCategories = lbx_qryGenCat.SelectedItems.Count
-				If numCategories <= 0 Then
-					ShowError("There were no Categories selected to Query by." & vbCrLf & "Please select at least one Category from the list")
-					Return ""
-				End If
-				If numCategories > 1 Then
-					For i = 0 To numCategories - 1
-						If i = 0 Then 'if this is the first one
-							sql = sql & "(" & db_fld_SCGenCat & " = '" & lbx_qryGenCat.SelectedItems(i) & "' OR "
-						ElseIf i = numCategories - 1 Then 'if this is the last one
-							sql = sql & db_fld_SCGenCat & " = '" & lbx_qryGenCat.SelectedItems(i) & "') "
-						Else
-							sql = sql & db_fld_SCGenCat & " = '" & lbx_qryGenCat.SelectedItems(i) & "' OR "
-						End If
-					Next
-				ElseIf numCategories = 1 Then
-					sql = sql & "(" & db_fld_SCGenCat & " = '" & lbx_qryGenCat.SelectedItems(0) & "') "
-				End If
-			End If
-			'Include Selected Value Types
-			If chb_qryValType.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim numParams As Integer 'the number of Variables selected to qualify the query by
-				numParams = lbx_qryValType.SelectedItems.Count
-				If numParams <= 0 Then
-					ShowError("There were no Variables selected to Query by." & vbCrLf & "Please select at least one Variable from the list")
-					Return ""
-				ElseIf numParams = 1 Then
-					sql = sql & "(" & db_fld_SCValueType & " = '" & lbx_qryValType.SelectedItems.Item(0) & "') "
-				Else
-					For i = 0 To numParams - 1
-						If i = numParams - 1 Then
-							sql = sql & db_fld_SCValueType & " = '" & lbx_qryValType.SelectedItems.Item(i) & "') "
-						ElseIf i = 0 Then
-							sql = sql & "(" & db_fld_SCValueType & " = '" & lbx_qryValType.SelectedItems.Item(i) & "' OR "
-						Else
-							sql = sql & db_fld_SCValueType & " = '" & lbx_qryValType.SelectedItems.Item(i) & "' OR "
-						End If
-					Next
-				End If
-			End If
-			'Include Selected Sample Mediums
-			If chb_qrySampleMed.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim numParams As Integer 'the number of Sample Mediums selected to qualify the query by
-				numParams = lbx_qrySampleMed.SelectedItems.Count
-				If numParams <= 0 Then
-					ShowError("There were no Sample Medium selected to Query by." & vbCrLf & "Please select at least one Variable from the list")
-					Return ""
-				ElseIf numParams = 1 Then
-					sql = sql & "(" & db_fld_SCSampleMed & " = '" & lbx_qrySampleMed.SelectedItems.Item(0) & "') "
-				Else
-					For i = 0 To numParams - 1
-						If i = numParams - 1 Then
-							sql = sql & db_fld_SCSampleMed & " = '" & lbx_qrySampleMed.SelectedItems.Item(i) & "') "
-						ElseIf i = 0 Then
-							sql = sql & "(" & db_fld_SCSampleMed & " = '" & lbx_qrySampleMed.SelectedItems.Item(i) & "' OR "
-						Else
-							sql = sql & db_fld_SCSampleMed & " = '" & lbx_qrySampleMed.SelectedItems.Item(i) & "' OR "
-						End If
-					Next
-				End If
-			End If
-			'Include Selected Data Types 
-			If chb_qryDataType.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim numParams As Integer 'the number of Data Types selected to qualify the query by
-				numParams = lbx_qryDataType.SelectedItems.Count
-				If numParams <= 0 Then
-					ShowError("There were no Data Types selected to Query by." & vbCrLf & "Please select at least one Variable from the list")
-					Return ""
-				ElseIf numParams = 1 Then
-					sql = sql & "(" & db_fld_SCDataType & " = '" & lbx_qryDataType.SelectedItems.Item(0) & "') "
-				Else
-					For i = 0 To numParams - 1
-						If i = numParams - 1 Then
-							sql = sql & db_fld_SCDataType & " = '" & lbx_qryDataType.SelectedItems.Item(i) & "') "
-						ElseIf i = 0 Then
-							sql = sql & "(" & db_fld_SCDataType & " = '" & lbx_qryDataType.SelectedItems.Item(i) & "' OR "
-						Else
-							sql = sql & db_fld_SCDataType & " = '" & lbx_qryDataType.SelectedItems.Item(i) & "' OR "
-						End If
-					Next
-				End If
-			End If
-			'Include Selected QCLevels
-			If chb_qryQCLevel.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim numCodes As Integer	'the number of selected Agency Codes to qualify the query by
-				numCodes = lbx_qryQCLevel.SelectedItems.Count
-				If numCodes <= 0 Then
-					ShowError("There were no QC Levels selected to Query by." & vbCrLf & "Please select at least one QC Level from the list.")
-					Return ""
-				End If
-				If numCodes > 1 Then
-					For i = 0 To numCodes - 1
-						If i = 0 Then 'if this is the first one
-							sql = sql & "(" & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(i), " - ")(0) & "' OR "
-						ElseIf i = numCodes - 1 Then 'if this is the last one
-							sql = sql & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(i), " - ")(0) & "') "
-						Else
-							sql = sql & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(i), " - ")(0) & "' OR "
-						End If
-					Next
-				ElseIf numCodes = 1 Then
-					sql = sql & "(" & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(0), " - ")(0) & "') "
-				End If
+            'Include Selected Sites
+            If rdo_qrySiteList.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim numParams As Integer    'the number of selected Agency Codes to qualify the query by
+                numParams = lbx_qrySites.SelectedItems.Count
+                If numParams <= 0 Then
+                    ShowError("There were no Sites selected to Query by." & vbCr & "Please select at least one Site from the list")
+                    Return ""
+                End If
+                If numParams > 1 Then
+                    For i = 0 To numParams - 1
+                        If i = 0 Then 'if this is the first one
+                            sql = sql & "((" & db_fld_SCSiteCode & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCSiteName & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(1)) & "') OR "
+                        ElseIf i = numParams - 1 Then 'if this is the last one
+                            sql = sql & "(" & db_fld_SCSiteCode & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCSiteName & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(1)) & "'))"
+                        Else
+                            sql = sql & "(" & db_fld_SCSiteCode & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCSiteName & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(i), " - ")(1)) & "') OR "
+                        End If
+                    Next
+                ElseIf numParams = 1 Then
+                    sql = sql & "(" & db_fld_SCSiteCode & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(0), " - ")(0)) & "' AND " & db_fld_SCSiteName & " = '" & FixSQL(Split(lbx_qrySites.SelectedItems.Item(0), " - ")(1)) & "') "
+                End If
+            End If
+            'Include Selected Variables
+            If rdo_qryVarList.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim numParams As Integer 'the number of Variables selected to qualify the query by
+                numParams = lbx_qryVars.SelectedItems.Count
+                If numParams <= 0 Then
+                    ShowError("There were no Vars selected to Query by." & vbCr & "Please select at least one Var from the list")
+                    Return ""
+                End If
+                If numParams > 1 Then
+                    For i = 0 To numParams - 1
+                        If i = 0 Then 'if this is the first one
+                            sql = sql & "((" & db_fld_SCVarCode & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCVarName & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(1)) & "') OR "
+                        ElseIf i = numParams - 1 Then 'if this is the last one
+                            sql = sql & "(" & db_fld_SCVarCode & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCVarName & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(1)) & "'))"
+                        Else
+                            sql = sql & "(" & db_fld_SCVarCode & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(0)) & "' AND " & db_fld_SCVarName & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(i), " - ")(1)) & "') OR "
+                        End If
+                    Next
+                ElseIf numParams = 1 Then
+                    sql = sql & "(" & db_fld_SCVarCode & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(0), " - ")(0)) & "' AND " & db_fld_SCVarName & " = '" & FixSQL(Split(lbx_qryVars.SelectedItems.Item(0), " - ")(1)) & "') "
+                End If
+            End If
+            'Include Selected Categories
+            If chb_qryGenCat.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim numCategories As Integer 'the number of selected Agency Codes to qualify the query by
+                numCategories = lbx_qryGenCat.SelectedItems.Count
+                If numCategories <= 0 Then
+                    ShowError("There were no Categories selected to Query by." & vbCrLf & "Please select at least one Category from the list")
+                    Return ""
+                End If
+                If numCategories > 1 Then
+                    For i = 0 To numCategories - 1
+                        If i = 0 Then 'if this is the first one
+                            sql = sql & "(" & db_fld_SCGenCat & " = '" & lbx_qryGenCat.SelectedItems(i) & "' OR "
+                        ElseIf i = numCategories - 1 Then 'if this is the last one
+                            sql = sql & db_fld_SCGenCat & " = '" & lbx_qryGenCat.SelectedItems(i) & "') "
+                        Else
+                            sql = sql & db_fld_SCGenCat & " = '" & lbx_qryGenCat.SelectedItems(i) & "' OR "
+                        End If
+                    Next
+                ElseIf numCategories = 1 Then
+                    sql = sql & "(" & db_fld_SCGenCat & " = '" & lbx_qryGenCat.SelectedItems(0) & "') "
+                End If
+            End If
+            'Include Selected Value Types
+            If chb_qryValType.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim numParams As Integer 'the number of Variables selected to qualify the query by
+                numParams = lbx_qryValType.SelectedItems.Count
+                If numParams <= 0 Then
+                    ShowError("There were no Variables selected to Query by." & vbCrLf & "Please select at least one Variable from the list")
+                    Return ""
+                ElseIf numParams = 1 Then
+                    sql = sql & "(" & db_fld_SCValueType & " = '" & lbx_qryValType.SelectedItems.Item(0) & "') "
+                Else
+                    For i = 0 To numParams - 1
+                        If i = numParams - 1 Then
+                            sql = sql & db_fld_SCValueType & " = '" & lbx_qryValType.SelectedItems.Item(i) & "') "
+                        ElseIf i = 0 Then
+                            sql = sql & "(" & db_fld_SCValueType & " = '" & lbx_qryValType.SelectedItems.Item(i) & "' OR "
+                        Else
+                            sql = sql & db_fld_SCValueType & " = '" & lbx_qryValType.SelectedItems.Item(i) & "' OR "
+                        End If
+                    Next
+                End If
+            End If
+            'Include Selected Sample Mediums
+            If chb_qrySampleMed.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim numParams As Integer 'the number of Sample Mediums selected to qualify the query by
+                numParams = lbx_qrySampleMed.SelectedItems.Count
+                If numParams <= 0 Then
+                    ShowError("There were no Sample Medium selected to Query by." & vbCrLf & "Please select at least one Variable from the list")
+                    Return ""
+                ElseIf numParams = 1 Then
+                    sql = sql & "(" & db_fld_SCSampleMed & " = '" & lbx_qrySampleMed.SelectedItems.Item(0) & "') "
+                Else
+                    For i = 0 To numParams - 1
+                        If i = numParams - 1 Then
+                            sql = sql & db_fld_SCSampleMed & " = '" & lbx_qrySampleMed.SelectedItems.Item(i) & "') "
+                        ElseIf i = 0 Then
+                            sql = sql & "(" & db_fld_SCSampleMed & " = '" & lbx_qrySampleMed.SelectedItems.Item(i) & "' OR "
+                        Else
+                            sql = sql & db_fld_SCSampleMed & " = '" & lbx_qrySampleMed.SelectedItems.Item(i) & "' OR "
+                        End If
+                    Next
+                End If
+            End If
+            'Include Selected Data Types 
+            If chb_qryDataType.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim numParams As Integer 'the number of Data Types selected to qualify the query by
+                numParams = lbx_qryDataType.SelectedItems.Count
+                If numParams <= 0 Then
+                    ShowError("There were no Data Types selected to Query by." & vbCrLf & "Please select at least one Variable from the list")
+                    Return ""
+                ElseIf numParams = 1 Then
+                    sql = sql & "(" & db_fld_SCDataType & " = '" & lbx_qryDataType.SelectedItems.Item(0) & "') "
+                Else
+                    For i = 0 To numParams - 1
+                        If i = numParams - 1 Then
+                            sql = sql & db_fld_SCDataType & " = '" & lbx_qryDataType.SelectedItems.Item(i) & "') "
+                        ElseIf i = 0 Then
+                            sql = sql & "(" & db_fld_SCDataType & " = '" & lbx_qryDataType.SelectedItems.Item(i) & "' OR "
+                        Else
+                            sql = sql & db_fld_SCDataType & " = '" & lbx_qryDataType.SelectedItems.Item(i) & "' OR "
+                        End If
+                    Next
+                End If
+            End If
+            'Include Selected QCLevels
+            If chb_qryQCLevel.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim numCodes As Integer 'the number of selected Agency Codes to qualify the query by
+                numCodes = lbx_qryQCLevel.SelectedItems.Count
+                If numCodes <= 0 Then
+                    ShowError("There were no QC Levels selected to Query by." & vbCrLf & "Please select at least one QC Level from the list.")
+                    Return ""
+                End If
+                If numCodes > 1 Then
+                    For i = 0 To numCodes - 1
+                        If i = 0 Then 'if this is the first one
+                            sql = sql & "(" & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(i), " - ")(0) & "' OR "
+                        ElseIf i = numCodes - 1 Then 'if this is the last one
+                            sql = sql & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(i), " - ")(0) & "') "
+                        Else
+                            sql = sql & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(i), " - ")(0) & "' OR "
+                        End If
+                    Next
+                ElseIf numCodes = 1 Then
+                    sql = sql & "(" & db_fld_SCQCLevel & " = '" & Split(lbx_qryQCLevel.SelectedItems.Item(0), " - ")(0) & "') "
+                End If
             End If
 
             'Include Selected Site Types
@@ -5034,102 +5036,102 @@ Public Class frmODMTools
                 End If
             End If
 
-			'Search Specified Time Period
-			If chb_qryDate.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				'get the values
-				Dim max As Date	'the "To" Date value selected by the user
-				Dim min As Date	'the "From" Date value selected by the user
-				min = dtp_qryTimeBegin.Value
-				max = dtp_qryTimeEnd.Value.AddDays(1)
+            'Search Specified Time Period
+            If chb_qryDate.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                'get the values
+                Dim max As Date 'the "To" Date value selected by the user
+                Dim min As Date 'the "From" Date value selected by the user
+                min = dtp_qryTimeBegin.Value
+                max = dtp_qryTimeEnd.Value.AddDays(1)
 
-				'set the date values in sql
+                'set the date values in sql
                 sql = sql & "(" & db_fld_SCBeginDT & " Between '" & min & "'And '" & max & "' OR " & db_fld_SCEndDT & " Between '" & min & "'And '" & max & "') "
-			End If
-			'Search for Matching Number of Observations
-			If chb_qryNumObs.Checked Then
-				If Not FirstCommand Then
-					sql = sql & "AND "
-				Else
-					FirstCommand = False
-				End If
-				Dim val As Integer 'the max Number of Observations comparison value to qualify the series by
-				val = num_qryObs.Value
-				If val < 0 Or val < 0 Then
-					ShowError("Invalid Number of Observations Entered." & vbCrLf & "Please enter positive number of observations to query by.")
-					Return ""
-				Else
-					sql = sql & "(" & db_fld_SCValueCount & m_qryNumObsMethod & val & ") "
-				End If
-			End If
+            End If
+            'Search for Matching Number of Observations
+            If chb_qryNumObs.Checked Then
+                If Not FirstCommand Then
+                    sql = sql & "AND "
+                Else
+                    FirstCommand = False
+                End If
+                Dim val As Integer 'the max Number of Observations comparison value to qualify the series by
+                val = num_qryObs.Value
+                If val < 0 Or val < 0 Then
+                    ShowError("Invalid Number of Observations Entered." & vbCrLf & "Please enter positive number of observations to query by.")
+                    Return ""
+                Else
+                    sql = sql & "(" & db_fld_SCValueCount & m_qryNumObsMethod & val & ") "
+                End If
+            End If
 
-			sql = sql & " ORDER BY " & db_tbl_SeriesCatalog & "." & db_fld_SCSiteCode & ", " & _
-			   db_tbl_SeriesCatalog & "." & db_fld_SCSiteName & ", " & _
-			   db_tbl_SeriesCatalog & "." & db_fld_SCVarCode & ", " & _
-			   db_tbl_SeriesCatalog & "." & db_fld_SCVarName & ", " & _
-			   db_tbl_SeriesCatalog & "." & db_fld_SCQCLevel
+            sql = sql & " ORDER BY " & db_tbl_SeriesCatalog & "." & db_fld_SCSiteCode & ", " & _
+               db_tbl_SeriesCatalog & "." & db_fld_SCSiteName & ", " & _
+               db_tbl_SeriesCatalog & "." & db_fld_SCVarCode & ", " & _
+               db_tbl_SeriesCatalog & "." & db_fld_SCVarName & ", " & _
+               db_tbl_SeriesCatalog & "." & db_fld_SCQCLevel
 
-			'return created query
-			If FirstCommand Then
-				ShowError("No Query Parameters Were Selected" & vbCrLf & "Please Select at Least One Query Parameter")
-				Return ""
-			End If
-			Return sql
-		Catch ex As Exception
+            'return created query
+            If FirstCommand Then
+                ShowError("No Query Parameters Were Selected" & vbCrLf & "Please Select at Least One Query Parameter")
+                Return ""
+            End If
+            Return sql
+        Catch ex As Exception
             ShowError("An Error occurred while creating the Query." & vbCrLf & "Message = " & ex.Message, ex)
-			Return ""
-		End Try
-	End Function
+            Return ""
+        End Try
+    End Function
 
 #End Region
 
 #Region " Query Tab: Export Functions "
 
-	Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_qryDataExport.Click
-		'Exports the database files to a MyDB comma delimited table
-		'Input:     Standard Form Inputs
-		'Output:    Saves the queried data to a ComaDelimitedFile
+    Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_qryDataExport.Click
+        'Exports the database files to a MyDB comma delimited table
+        'Input:     Standard Form Inputs
+        'Output:    Saves the queried data to a ComaDelimitedFile
 
         Dim i As Integer 'Counter Variable
-		If lv_qryResults.CheckedItems.Count < 1 Then
-			'Nothing was selected
-			ShowError("Please select at least one item to export")
-		Else
-			Dim exportSeriesID(lv_qryResults.CheckedItems.Count - 1) As Integer	'An array used to store the series IDs of the selected items
+        If lv_qryResults.CheckedItems.Count < 1 Then
+            'Nothing was selected
+            ShowError("Please select at least one item to export")
+        Else
+            Dim exportSeriesID(lv_qryResults.CheckedItems.Count - 1) As Integer 'An array used to store the series IDs of the selected items
 
-			'Reset the File Dialog to a generic filename
-			sfdExportMyDB.FileName = "MyDB"
-			If sfdExportMyDB.ShowDialog = Windows.Forms.DialogResult.OK Then
-				Me.Refresh() 'Reload the form after the dialog box closes
-				Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+            'Reset the File Dialog to a generic filename
+            sfdExportMyDB.FileName = "MyDB"
+            If sfdExportMyDB.ShowDialog = Windows.Forms.DialogResult.OK Then
+                Me.Refresh() 'Reload the form after the dialog box closes
+                Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
                 Dim queryString As String 'The string used to export the data
                 Dim dFileName As String 'The filename to save the data
                 Dim mFileName As String 'The filename to save the metadata
                 Dim dataExport As frmDataExport 'The Data Export Progresss Form
                 Dim metaExport As frmMetadataExport 'The Metadata Progress Form
-				dFileName = sfdExportMyDB.FileName
-				Try
-					'Copy all of the selected series' IDs to exportSeriesID
-					For i = 0 To lv_qryResults.CheckedItems.Count - 1
-						exportSeriesID(i) = m_qrySeriesID(lv_qryResults.CheckedIndices(i))
-					Next
+                dFileName = sfdExportMyDB.FileName
+                Try
+                    'Copy all of the selected series' IDs to exportSeriesID
+                    For i = 0 To lv_qryResults.CheckedItems.Count - 1
+                        exportSeriesID(i) = m_qrySeriesID(lv_qryResults.CheckedIndices(i))
+                    Next
 
-					'Generate a query string for the selected series IDs
-					QueryString = CreateExportQuery(exportSeriesID)
-					'Create the correct dataExport progress window
-					Select Case sfdExportMyDB.FilterIndex
-						Case 1
-							dataExport = New frmDataExport(queryString, dFileName, exportSeriesID, ",")
-						Case 2
+                    'Generate a query string for the selected series IDs
+                    QueryString = CreateExportQuery(exportSeriesID)
+                    'Create the correct dataExport progress window
+                    Select Case sfdExportMyDB.FilterIndex
+                        Case 1
+                            dataExport = New frmDataExport(queryString, dFileName, exportSeriesID, ",")
+                        Case 2
                             dataExport = New frmDataExport(queryString, dFileName, exportSeriesID, vbTab)
-						Case Else
+                        Case Else
                             dataExport = New frmDataExport(queryString, dFileName, exportSeriesID, ";")
-					End Select
-					'Open the DataExport progress window
+                    End Select
+                    'Open the DataExport progress window
                     Select Case dataExport.ShowDialog()
                         Case Windows.Forms.DialogResult.Yes
                             If Not (g_CurrOptions.MetadataExport) Then
@@ -5141,7 +5143,7 @@ Public Class frmODMTools
                             ShowError("Export Failed")
                     End Select
 
-					'If also exporting metadata ...
+                    'If also exporting metadata ...
                     If g_CurrOptions.MetadataExport Then
                         'sfdExportMetadata.FileName = Split(dFileName, ".")(0) 'Defaults to the filename before the first .
                         'If sfdExportMetadata.ShowDialog = Windows.Forms.DialogResult.OK Then
@@ -5164,304 +5166,304 @@ Public Class frmODMTools
                         'End If
                     End If
 
-				Catch ex As Exception
+                Catch ex As Exception
                     'MsgBox(ex.Message)'TESTING ONLY!!!!!
                 End Try
-			End If
-		End If
-		'Set the cursor back to normal
-		Me.Cursor = System.Windows.Forms.Cursors.Default
-	End Sub
+            End If
+        End If
+        'Set the cursor back to normal
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+    End Sub
 
-	Private Sub btn_qryMetaExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_qryMetaExport.Click
-		'Exports the metadat to a xml file
-		'Input:     Standard Form Inputs
-		'Output:    Saves the queried data to a ComaDelimitedFile
+    Private Sub btn_qryMetaExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_qryMetaExport.Click
+        'Exports the metadat to a xml file
+        'Input:     Standard Form Inputs
+        'Output:    Saves the queried data to a ComaDelimitedFile
         Dim mFilename As String 'The filename to save the metadata
         Dim metaExport As frmMetadataExport 'The Metadata Progress Form
         Dim i As Integer 'Counter Variable
-		If lv_qryResults.CheckedItems.Count < 1 Then
-			ShowError("Please select at least one item to export")
-		Else
+        If lv_qryResults.CheckedItems.Count < 1 Then
+            ShowError("Please select at least one item to export")
+        Else
             Dim exportSeriesID(lv_qryResults.CheckedItems.Count - 1) As Integer 'Array of series IDs to export
-			For i = 0 To lv_qryResults.CheckedItems.Count - 1
-				exportSeriesID(i) = m_qrySeriesID(lv_qryResults.CheckedIndices(i))
-			Next
-			'Sets the default filename
-			sfdExportMetadata.FileName = "Metadata"
-			If sfdExportMetadata.ShowDialog = Windows.Forms.DialogResult.OK Then
-				mFilename = sfdExportMetadata.FileName
-				'Create the correct dataExport progress window
-				MetaExport = New frmMetadataExport(mFilename, exportSeriesID)
-				'Open the DataExport progress window
-				Select Case MetaExport.ShowDialog()
-					Case Windows.Forms.DialogResult.Yes
+            For i = 0 To lv_qryResults.CheckedItems.Count - 1
+                exportSeriesID(i) = m_qrySeriesID(lv_qryResults.CheckedIndices(i))
+            Next
+            'Sets the default filename
+            sfdExportMetadata.FileName = "Metadata"
+            If sfdExportMetadata.ShowDialog = Windows.Forms.DialogResult.OK Then
+                mFilename = sfdExportMetadata.FileName
+                'Create the correct dataExport progress window
+                MetaExport = New frmMetadataExport(mFilename, exportSeriesID)
+                'Open the DataExport progress window
+                Select Case MetaExport.ShowDialog()
+                    Case Windows.Forms.DialogResult.Yes
                         MsgBox("Metadata Export Complete", MsgBoxStyle.Information, "ODM Tools")
-					Case Windows.Forms.DialogResult.Cancel
+                    Case Windows.Forms.DialogResult.Cancel
 
-					Case Else
-						'ShowError("Metadata Export Failed") 'TESTING ONLY!!
-				End Select
-			End If
-		End If
-		'Set the cursor back to default
-		Me.Cursor = System.Windows.Forms.Cursors.Default
-	End Sub
+                    Case Else
+                        'ShowError("Metadata Export Failed") 'TESTING ONLY!!
+                End Select
+            End If
+        End If
+        'Set the cursor back to default
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+    End Sub
 
-	Private Sub mnuQDRCSingleExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCSingleExport.Click
-		'Exports the database files to a MyDB comma delimited table
-		'Input:     Standard Form Inputs
-		'Output:    Saves the queried data to a ComaDelimitedFile
+    Private Sub mnuQDRCSingleExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCSingleExport.Click
+        'Exports the database files to a MyDB comma delimited table
+        'Input:     Standard Form Inputs
+        'Output:    Saves the queried data to a ComaDelimitedFile
 
-		If lv_qryResults.SelectedItems.Count < 1 Then
-			'Nothing was selected
-			ShowError("Please select at least one item to export")
-		Else
-			Dim exportSeriesID(0) As Integer	'An array used to store the series IDs of the selected items
+        If lv_qryResults.SelectedItems.Count < 1 Then
+            'Nothing was selected
+            ShowError("Please select at least one item to export")
+        Else
+            Dim exportSeriesID(0) As Integer    'An array used to store the series IDs of the selected items
 
-			'Reset the File Dialog to a generic filename
-			sfdExportMyDB.FileName = "MyDB"
-			If sfdExportMyDB.ShowDialog = Windows.Forms.DialogResult.OK Then
-				Me.Refresh() 'Reload the form after the dialog box closes
-				Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+            'Reset the File Dialog to a generic filename
+            sfdExportMyDB.FileName = "MyDB"
+            If sfdExportMyDB.ShowDialog = Windows.Forms.DialogResult.OK Then
+                Me.Refresh() 'Reload the form after the dialog box closes
+                Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
                 Dim queryString As String 'Query used to export the data
                 Dim dFileName As String 'File name to store the data
                 Dim mFileName As String 'File name to store the metadata
                 Dim dataExport As frmDataExport 'Data Export Progress Form
                 Dim metaExport As frmMetadataExport 'Metadata progress form
-				dFileName = sfdExportMyDB.FileName
-				Try
-					exportSeriesID(0) = m_qrySeriesID(lv_qryResults.SelectedIndices(0))
+                dFileName = sfdExportMyDB.FileName
+                Try
+                    exportSeriesID(0) = m_qrySeriesID(lv_qryResults.SelectedIndices(0))
 
-					'Generate a query string for the selected series IDs
-					QueryString = CreateExportQuery(exportSeriesID)
-					'Create the correct dataExport progress window
-					Select Case sfdExportMyDB.FilterIndex
-						Case 1
-							DataExport = New frmDataExport(QueryString, dFileName, exportSeriesID, ",")
-						Case 2
-							DataExport = New frmDataExport(QueryString, dFileName, exportSeriesID, vbTab)
-						Case Else
-							DataExport = New frmDataExport(QueryString, dFileName, exportSeriesID, ";")
-					End Select
-					'Open the DataExport progress window
-					Select Case DataExport.ShowDialog()
-						Case Windows.Forms.DialogResult.Yes
+                    'Generate a query string for the selected series IDs
+                    QueryString = CreateExportQuery(exportSeriesID)
+                    'Create the correct dataExport progress window
+                    Select Case sfdExportMyDB.FilterIndex
+                        Case 1
+                            DataExport = New frmDataExport(QueryString, dFileName, exportSeriesID, ",")
+                        Case 2
+                            DataExport = New frmDataExport(QueryString, dFileName, exportSeriesID, vbTab)
+                        Case Else
+                            DataExport = New frmDataExport(QueryString, dFileName, exportSeriesID, ";")
+                    End Select
+                    'Open the DataExport progress window
+                    Select Case DataExport.ShowDialog()
+                        Case Windows.Forms.DialogResult.Yes
                             MsgBox("Data Export Complete", MsgBoxStyle.Information, "ODM Tools")
-						Case Windows.Forms.DialogResult.Cancel
+                        Case Windows.Forms.DialogResult.Cancel
 
-						Case Else
-							ShowError("Data Export Failed")
-					End Select
+                        Case Else
+                            ShowError("Data Export Failed")
+                    End Select
 
-					'If also exporting metadata ...
-					If g_CurrOptions.MetadataExport = True Then
-						sfdExportMetadata.FileName = Split(dFileName, ".", 1)(0) 'Defaults to the filename before the first .
-						If sfdExportMetadata.ShowDialog = Windows.Forms.DialogResult.OK Then
-							mFileName = sfdExportMetadata.FileName
-							'Create the correct dataExport progress window
-							MetaExport = New frmMetadataExport(mFileName, exportSeriesID)
-							'Open the DataExport progress window
-							Select Case MetaExport.ShowDialog()
-								Case Windows.Forms.DialogResult.Yes
+                    'If also exporting metadata ...
+                    If g_CurrOptions.MetadataExport = True Then
+                        sfdExportMetadata.FileName = Split(dFileName, ".", 1)(0) 'Defaults to the filename before the first .
+                        If sfdExportMetadata.ShowDialog = Windows.Forms.DialogResult.OK Then
+                            mFileName = sfdExportMetadata.FileName
+                            'Create the correct dataExport progress window
+                            MetaExport = New frmMetadataExport(mFileName, exportSeriesID)
+                            'Open the DataExport progress window
+                            Select Case MetaExport.ShowDialog()
+                                Case Windows.Forms.DialogResult.Yes
                                     MsgBox("Metadata Export Complete", MsgBoxStyle.Information, "ODM Tools")
-								Case Windows.Forms.DialogResult.Cancel
+                                Case Windows.Forms.DialogResult.Cancel
 
-								Case Else
-									ShowError("Metadata Export Failed")
-							End Select
-						End If
-					End If
-				Catch ex As Exception
-					'MsgBox(ex.Message)'TESTING ONLY!!!!!
-				End Try
-			End If
-		End If
-		'Set the cursor back to normal
-		Me.Cursor = System.Windows.Forms.Cursors.Default
-	End Sub
+                                Case Else
+                                    ShowError("Metadata Export Failed")
+                            End Select
+                        End If
+                    End If
+                Catch ex As Exception
+                    'MsgBox(ex.Message)'TESTING ONLY!!!!!
+                End Try
+            End If
+        End If
+        'Set the cursor back to normal
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+    End Sub
 
-	Private Sub mnuQDRCExportMeta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCExportMeta.Click
+    Private Sub mnuQDRCExportMeta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCExportMeta.Click
         'Exports the Metadata for a single DataSeries to an xml file
         'Outputs: Writes Metadata for a single DataSeries
-		Dim exportSeriesID(0) As Integer	'The ID of the DataSeries to export metadata for
+        Dim exportSeriesID(0) As Integer    'The ID of the DataSeries to export metadata for
         Dim mFilename As String 'Filename to save the metadata
         Dim metaExport As frmMetadataExport 'Metadata progress form
-		If lv_qryResults.SelectedItems.Count <> 1 Then
-			ShowError("Please select only one item to export")
-		Else
-			exportSeriesID(0) = m_qrySeriesID(lv_qryResults.SelectedIndices(0))
-			sfdExportMetadata.FileName = "Metadata"
-			If sfdExportMetadata.ShowDialog = Windows.Forms.DialogResult.OK Then
-				mFileName = sfdExportMetadata.FileName
-				'Create the correct dataExport progress window
-				MetaExport = New frmMetadataExport(mFileName, exportSeriesID)
-				'Open the DataExport progress window
-				Select Case MetaExport.ShowDialog()
-					Case Windows.Forms.DialogResult.Yes
+        If lv_qryResults.SelectedItems.Count <> 1 Then
+            ShowError("Please select only one item to export")
+        Else
+            exportSeriesID(0) = m_qrySeriesID(lv_qryResults.SelectedIndices(0))
+            sfdExportMetadata.FileName = "Metadata"
+            If sfdExportMetadata.ShowDialog = Windows.Forms.DialogResult.OK Then
+                mFileName = sfdExportMetadata.FileName
+                'Create the correct dataExport progress window
+                MetaExport = New frmMetadataExport(mFileName, exportSeriesID)
+                'Open the DataExport progress window
+                Select Case MetaExport.ShowDialog()
+                    Case Windows.Forms.DialogResult.Yes
                         MsgBox("Metadata Export Complete", MsgBoxStyle.Information, "ODM Tools")
-					Case Windows.Forms.DialogResult.Cancel
+                    Case Windows.Forms.DialogResult.Cancel
 
-					Case Else
-						ShowError("Metadata Export Failed")
-				End Select
-			End If
-		End If
-		Me.Cursor = System.Windows.Forms.Cursors.Default
-	End Sub
+                    Case Else
+                        ShowError("Metadata Export Failed")
+                End Select
+            End If
+        End If
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+    End Sub
 
-	Private Sub mnuQDRCViewMeta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCViewMeta.Click
-		'Exports the metadata for a single data series to a temporary xml file then opens it in the default xml viewer
+    Private Sub mnuQDRCViewMeta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCViewMeta.Click
+        'Exports the metadata for a single data series to a temporary xml file then opens it in the default xml viewer
         'Outputs: Opens XML Browser to read Metadata
         Dim seriesID(0) As Integer 'The series ID to export
 
-		If lv_qryResults.SelectedItems.Count <> 1 Then
-			ShowError("Please select only one item to export")
-		Else
-			seriesID(0) = m_qrySeriesID(lv_qryResults.SelectedIndices(0))
+        If lv_qryResults.SelectedItems.Count <> 1 Then
+            ShowError("Please select only one item to export")
+        Else
+            seriesID(0) = m_qrySeriesID(lv_qryResults.SelectedIndices(0))
 
-			ViewMetadata(seriesID)
-		End If
-	End Sub
+            ViewMetadata(seriesID)
+        End If
+    End Sub
 
 #End Region
 
 #Region " Query Tab: Plot selected Data Series "
 
-	Private Sub lv_qryResults_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lv_qryResults.DoubleClick
+    Private Sub lv_qryResults_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lv_qryResults.DoubleClick
         'When an Item in the listview is double clicked, item is plotted on the plot tab
         'Outputs: Plots selected item on plot tab
-		tabctlODMTools.SelectedTab = tabpgVisualize
-		Me.Refresh()
+        tabctlODMTools.SelectedTab = tabpgVisualize
+        Me.Refresh()
         Dim i As Integer 'counter variable
 
-		'1. Select the selected value's site in cboxVisSite
-		'For i = cboxVisSite.Items.Count - 1 To 0 Step -1
-		'	If cboxVisSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text & " - " & lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
-		'		cboxVisSite.SelectedIndex = i
-		'	End If
-		'Next
-		'NOTE: Made to match mnuQDRCPlot/Edit functionality
-		For i = cboxVisSite.Items.Count - 1 To 0 Step -1
-			If cboxVisSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text) Then
-				cboxVisSite.SelectedIndex = i
-			End If
-		Next
+        '1. Select the selected value's site in cboxVisSite
+        'For i = cboxVisSite.Items.Count - 1 To 0 Step -1
+        '	If cboxVisSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text & " - " & lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
+        '		cboxVisSite.SelectedIndex = i
+        '	End If
+        'Next
+        'NOTE: Made to match mnuQDRCPlot/Edit functionality
+        For i = cboxVisSite.Items.Count - 1 To 0 Step -1
+            If cboxVisSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text) Then
+                cboxVisSite.SelectedIndex = i
+            End If
+        Next
 
-		'2. Select the selected value's variable in cboxVisVariable
-		'For i = cboxVisVariable.Items.Count - 1 To 0 Step -1
-		'	If cboxVisVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(2).Text & " - " & lv_qryResults.SelectedItems(0).SubItems(3).Text) Then
-		'		cboxVisVariable.SelectedIndex = i
-		'	End If
-		'Next
-		'NOTE: Made to match mnuQDRCPlot/Edit functionality
-		For i = cboxVisVariable.Items.Count - 1 To 0 Step -1
-			If cboxVisVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
-				cboxVisVariable.SelectedIndex = i
-			End If
-		Next
+        '2. Select the selected value's variable in cboxVisVariable
+        'For i = cboxVisVariable.Items.Count - 1 To 0 Step -1
+        '	If cboxVisVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(2).Text & " - " & lv_qryResults.SelectedItems(0).SubItems(3).Text) Then
+        '		cboxVisVariable.SelectedIndex = i
+        '	End If
+        'Next
+        'NOTE: Made to match mnuQDRCPlot/Edit functionality
+        For i = cboxVisVariable.Items.Count - 1 To 0 Step -1
+            If cboxVisVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
+                cboxVisVariable.SelectedIndex = i
+            End If
+        Next
 
-		'3. Select the selected specific data series in 
-		'For i = lvVisDataSeries.Items.Count - 1 To 0 Step -1
-		'	If (lvVisDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) And (lvVisDataSeries.Items.Item(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) And (lvVisDataSeries.Items.Item(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) And (lvVisDataSeries.Items.Item(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) And (lvVisDataSeries.Items.Item(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(8).Text) Then
-		'		lvVisDataSeries.Select()
-		'		lvVisDataSeries.Items(i).Selected = True
-		'	End If
-		'Next
-		'NOTE: Made to match mnuQDRCPlot/Edit functionality
-		For i = lvVisDataSeries.Items.Count - 1 To 0 Step -1
-			If (lvVisDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(3).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(2).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(2).Text = lv_qryResults.SelectedItems(0).SubItems(13).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(3).Text = lv_qryResults.SelectedItems(0).SubItems(14).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(4).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(6).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(7).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(8).Text = lv_qryResults.SelectedItems(0).SubItems(8).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(11).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(10).Text = lv_qryResults.SelectedItems(0).SubItems(12).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(11).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(13).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) Then
+        '3. Select the selected specific data series in 
+        'For i = lvVisDataSeries.Items.Count - 1 To 0 Step -1
+        '	If (lvVisDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) And (lvVisDataSeries.Items.Item(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) And (lvVisDataSeries.Items.Item(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) And (lvVisDataSeries.Items.Item(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) And (lvVisDataSeries.Items.Item(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(8).Text) Then
+        '		lvVisDataSeries.Select()
+        '		lvVisDataSeries.Items(i).Selected = True
+        '	End If
+        'Next
+        'NOTE: Made to match mnuQDRCPlot/Edit functionality
+        For i = lvVisDataSeries.Items.Count - 1 To 0 Step -1
+            If (lvVisDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(3).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(2).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(2).Text = lv_qryResults.SelectedItems(0).SubItems(13).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(3).Text = lv_qryResults.SelectedItems(0).SubItems(14).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(4).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(6).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(7).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(8).Text = lv_qryResults.SelectedItems(0).SubItems(8).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(11).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(10).Text = lv_qryResults.SelectedItems(0).SubItems(12).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(11).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(13).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) Then
 
-				lvVisDataSeries.Select()
-				lvVisDataSeries.Items(i).Selected = True
-			End If
-		Next
+                lvVisDataSeries.Select()
+                lvVisDataSeries.Items(i).Selected = True
+            End If
+        Next
 
-		btnPlot.PerformClick()
-	End Sub
+        btnPlot.PerformClick()
+    End Sub
 
-	Private Sub mnuQDRCPlot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCPlot.Click
+    Private Sub mnuQDRCPlot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCPlot.Click
         'When Plot is selected from mnuQDRC, item is plotted on the plot tab
         'Outputs: Plots selected item on plot tab
-		tabctlODMTools.SelectedTab = tabpgVisualize
-		Me.Refresh()
+        tabctlODMTools.SelectedTab = tabpgVisualize
+        Me.Refresh()
         Dim i As Integer 'counter variable
 
-		'1. Select the selected value's site in cboxVisSite
-		For i = cboxVisSite.Items.Count - 1 To 0 Step -1
-			If cboxVisSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text) Then
-				cboxVisSite.SelectedIndex = i
-			End If
-		Next
+        '1. Select the selected value's site in cboxVisSite
+        For i = cboxVisSite.Items.Count - 1 To 0 Step -1
+            If cboxVisSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text) Then
+                cboxVisSite.SelectedIndex = i
+            End If
+        Next
 
-		'2. Select the selected value's variable in cboxVisVariable
-		For i = cboxVisVariable.Items.Count - 1 To 0 Step -1
-			If cboxVisVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
-				cboxVisVariable.SelectedIndex = i
-			End If
-		Next
+        '2. Select the selected value's variable in cboxVisVariable
+        For i = cboxVisVariable.Items.Count - 1 To 0 Step -1
+            If cboxVisVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
+                cboxVisVariable.SelectedIndex = i
+            End If
+        Next
 
-		'3. Select the selected specific data series in 
-		For i = lvVisDataSeries.Items.Count - 1 To 0 Step -1
-			If (lvVisDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(3).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(2).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(2).Text = lv_qryResults.SelectedItems(0).SubItems(13).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(3).Text = lv_qryResults.SelectedItems(0).SubItems(14).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(4).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(6).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(7).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(8).Text = lv_qryResults.SelectedItems(0).SubItems(8).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(11).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(10).Text = lv_qryResults.SelectedItems(0).SubItems(12).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(11).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) AndAlso _
-			   (lvVisDataSeries.Items.Item(i).SubItems(13).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) Then
+        '3. Select the selected specific data series in 
+        For i = lvVisDataSeries.Items.Count - 1 To 0 Step -1
+            If (lvVisDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(3).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(2).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(2).Text = lv_qryResults.SelectedItems(0).SubItems(13).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(3).Text = lv_qryResults.SelectedItems(0).SubItems(14).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(4).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(6).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(7).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(8).Text = lv_qryResults.SelectedItems(0).SubItems(8).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(11).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(10).Text = lv_qryResults.SelectedItems(0).SubItems(12).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(11).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(13).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) Then
 
-				lvVisDataSeries.Select()
-				lvVisDataSeries.Items(i).Selected = True
-			End If
-		Next
+                lvVisDataSeries.Select()
+                lvVisDataSeries.Items(i).Selected = True
+            End If
+        Next
 
-		btnPlot.PerformClick()
-	End Sub
+        btnPlot.PerformClick()
+    End Sub
 
-	Private Sub mnuQDRCEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCEdit.Click
+    Private Sub mnuQDRCEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuQDRCEdit.Click
         'When Plot is selected from mnuQDRC, item is selected on the edit tab
         'Outputs: Selects Specified item on edit tab
-		tabctlODMTools.SelectedTab = tabpgEdit
-		Me.Refresh()
+        tabctlODMTools.SelectedTab = tabpgEdit
+        Me.Refresh()
         Dim i As Integer 'counter variable
 
-		If m_IsEditTabEnabled Then
+        If m_IsEditTabEnabled Then
 
-			'1. Select the selected value's site in cboxEditSite
-			For i = cboxEditSite.Items.Count - 1 To 0 Step -1
-				If cboxEditSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text) Then
-					cboxEditSite.SelectedIndex = i
-				End If
-			Next
+            '1. Select the selected value's site in cboxEditSite
+            For i = cboxEditSite.Items.Count - 1 To 0 Step -1
+                If cboxEditSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text) Then
+                    cboxEditSite.SelectedIndex = i
+                End If
+            Next
 
-			'2. Select the selected value's variable in cboxEditVariable
-			For i = cboxEditVariable.Items.Count - 1 To 0 Step -1
-				If cboxEditVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
-					cboxEditVariable.SelectedIndex = i
-				End If
-			Next
+            '2. Select the selected value's variable in cboxEditVariable
+            For i = cboxEditVariable.Items.Count - 1 To 0 Step -1
+                If cboxEditVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
+                    cboxEditVariable.SelectedIndex = i
+                End If
+            Next
 
-			'3. Select the selected specific data series in 
-			For i = lvEditDataSeries.Items.Count - 1 To 0 Step -1
+            '3. Select the selected specific data series in 
+            For i = lvEditDataSeries.Items.Count - 1 To 0 Step -1
                 If (lvEditDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
                     (lvEditDataSeries.Items(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(2).Text) AndAlso _
                     (lvEditDataSeries.Items(i).SubItems(2).Text = lv_qryResults.SelectedItems(0).SubItems(3).Text) AndAlso _
@@ -5481,8 +5483,8 @@ Public Class frmODMTools
                     lvEditDataSeries.Items(i).Selected = True
                 End If
             Next
-		End If
-	End Sub
+        End If
+    End Sub
 
 #End Region
 
@@ -5861,7 +5863,7 @@ Public Class frmODMTools
         Dim varUnitsIndex As Integer = 2
         gboxPointOptions.Enabled = True
         'NOTE: Colums for lvVisData Series:
-		'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
+        'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
         Try
             '1. change cursor = hourglass
             Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
@@ -6040,7 +6042,7 @@ Public Class frmODMTools
 
 #Region " Histogram Options "
 
-    Private Sub ckboxHistSetNumBins_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) 
+    Private Sub ckboxHistSetNumBins_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             If (ckboxHistSetNumBins.Checked) Then
                 'enable the settings
@@ -6063,7 +6065,7 @@ Public Class frmODMTools
         End Try
     End Sub
 
-    Private Sub tboxHPNumBins_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) 
+    Private Sub tboxHPNumBins_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         'Catch the "enter" key press -> validate me
         Select Case e.KeyChar
             Case vbCr, vbCrLf, vbLf
@@ -6075,7 +6077,7 @@ Public Class frmODMTools
         End Select
     End Sub
 
-    Private Sub tboxHPNumBins_Validated(ByVal sender As Object, ByVal e As System.EventArgs) 
+    Private Sub tboxHPNumBins_Validated(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim val As Double
         'Validate the value, if valid then update the plot
         If Not (m_VisEditNumbBinsValidated) Then
@@ -6114,7 +6116,7 @@ Public Class frmODMTools
         End If
     End Sub
 
-    Private Sub rbtnHPDiscreteBreakVals_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) 
+    Private Sub rbtnHPDiscreteBreakVals_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'only do this if the visualize tab is already loaded
         If rbtnHPDiscreteBreakVals.Checked = True Then
             If (m_IsPlotCurrent_Histogram) Then
@@ -6127,7 +6129,7 @@ Public Class frmODMTools
         End If
     End Sub
 
-    Private Sub rbtnHPExactNumBins_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) 
+    Private Sub rbtnHPExactNumBins_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'only do this if the visualize tab is already loaded
         If rbtnHPExactNumBins.Checked = True Then
             If (m_IsPlotCurrent_Histogram) Then
@@ -6354,7 +6356,7 @@ Public Class frmODMTools
         Dim beginDateUTC As DateTime
         Dim endDateUTC As DateTime
         Dim valueCount As Integer 'the ValueCount value retrieved from the database -> added to lvVisDataSeries
-		Dim currVisIDs As clsDataSeriesIDs 'the clsVisualizeIDs item to add the current set of SiteID, VariableID values to m_VisualizeIDs
+        Dim currVisIDs As clsDataSeriesIDs 'the clsVisualizeIDs item to add the current set of SiteID, VariableID values to m_VisualizeIDs
         Dim seriesID As Integer
         Dim siteID As Integer 'the SiteID value retrieved from the database -> added to lvVisDataSeries
         Dim varID As Integer 'the VariableID value retrieved from the database -> added to lvVisDataSeries
@@ -6364,11 +6366,11 @@ Public Class frmODMTools
         Dim sourceID As Integer
         Dim organization As String
         Dim sourceDesc As String
-		Dim qcLevelCode As String
-		Dim qcLevelDef As String
+        Dim qcLevelCode As String
+        Dim qcLevelDef As String
         Dim speciation As String
         Dim siteType As String
-		Dim citation As String
+        Dim citation As String
         Try
             '1. clear out any old data 
             lvVisDataSeries.Items.Clear()
@@ -6520,7 +6522,7 @@ Public Class frmODMTools
 
                     'create the new listview item
                     lvItem = New ListViewItem(siteType)
-                    
+
 
 
                     'add the rest of the items to lvItem
@@ -6554,7 +6556,7 @@ Public Class frmODMTools
                     currVisIDs.QCLevelID = qcLevelID
                     currVisIDs.SourceID = sourceID
                     m_VisualizeIDs.Add(currVisIDs)
-                    
+
                 End If
             Next i
 
@@ -6595,7 +6597,7 @@ Public Class frmODMTools
         Dim endDate As Date = Date.Today
         Dim dateIndex As Integer = 14
         'NOTE: Colums for lvVisData Series:
-		'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
+        'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
         Try
             '1. make sure have a valid selected item
             If lvVisDataSeries.SelectedItems.Count <= 0 Then
@@ -6683,10 +6685,22 @@ Public Class frmODMTools
 
             '3. create the query
             noDataVal = GetVarNoDataValueFromDB(dataSeriesIDs.VariableID)
-            query = "SELECT *,Month(" & db_fld_ValDateTime & ") as " & db_outFld_ValDTMonth & ",Year(" & db_fld_ValDateTime & ") as " & db_outFld_ValDTYear & " FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & dataSeriesIDs.MethodID & " AND " & db_fld_ValQCLevel & " = " & dataSeriesIDs.QCLevelID & " AND " & db_fld_ValSiteID & " = " & dataSeriesIDs.SiteID & " AND " & db_fld_ValVarID & " = " & dataSeriesIDs.VariableID & " AND " & db_fld_ValSourceID & " = " & dataSeriesIDs.SourceID & " AND " & db_fld_ValDateTime & " >= " & FormatDateForQueryFromDB(startDate) & " AND " & db_fld_ValDateTime & " <= " & FormatDateForQueryFromDB(endDate) & " AND " & db_fld_ValValue & " <> '" & noDataVal & "') ORDER BY " & db_fld_ValValue
 
+
+            'query = "SELECT *,Month(" & db_fld_ValDateTime & ") as " & db_outFld_ValDTMonth & ",Year(" & db_fld_ValDateTime & ") as " & db_outFld_ValDTYear & " FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & dataSeriesIDs.MethodID & " AND " & db_fld_ValQCLevel & " = " & dataSeriesIDs.QCLevelID & " AND " & db_fld_ValSiteID & " = " & dataSeriesIDs.SiteID & " AND " & db_fld_ValVarID & " = " & dataSeriesIDs.VariableID & " AND " & db_fld_ValSourceID & " = " & dataSeriesIDs.SourceID & " AND " & db_fld_ValDateTime & " >= " & FormatDateForQueryFromDB(startDate) & " AND " & db_fld_ValDateTime & " <= " & FormatDateForQueryFromDB(endDate) & " AND " & db_fld_ValValue & " <> '" & noDataVal & "') ORDER BY " & db_fld_ValValue
+            query = "SELECT *,Month(" & db_fld_ValDateTime & ") as " & db_outFld_ValDTMonth & ",Year(" & db_fld_ValDateTime & ") as " & db_outFld_ValDTYear & " FROM " & db_tbl_DataValues & " WHERE (" & db_fld_ValMethodID & " = " & dataSeriesIDs.MethodID & " AND " & db_fld_ValQCLevel & " = " & dataSeriesIDs.QCLevelID & " AND " & db_fld_ValSiteID & " = " & dataSeriesIDs.SiteID & " AND " & db_fld_ValVarID & " = " & dataSeriesIDs.VariableID & " AND " & db_fld_ValSourceID & " = " & dataSeriesIDs.SourceID & " AND " & db_fld_ValDateTime & " >= @BeginDT AND " & db_fld_ValDateTime & " <= @EndDT AND " & db_fld_ValValue & " <> '" & noDataVal & "') ORDER BY " & db_fld_ValValue
+
+
+            Dim conn As New SqlClient.SqlConnection(g_CurrConnSettings.ConnectionString)
+            Dim selectquery As New SqlClient.SqlCommand(query, conn)
+            selectquery.Parameters.Add(New SqlParameter("@BeginDT", SqlDbType.DateTime))
+            selectquery.Parameters("@BeginDT").Value = startDate
+            selectquery.Parameters.Add(New SqlParameter("@EndDT", SqlDbType.DateTime))
+            selectquery.Parameters("@EndDT").Value = endDate
+
+           
             '4. Open the table
-            m_VisPlotData = OpenTable("CurrentPlotData", query, g_CurrConnSettings)
+            m_VisPlotData = OpenTable("CurrentPlotData", selectquery)
             'MsgBox("DONE")
         Catch ex As Exception
             'show an error message
@@ -8792,11 +8806,27 @@ Public Class frmODMTools
             Dim temp As Double
             temp = m_VisPlotData.Compute("Max (" & db_fld_ValValue & ")", "")
             'maxRow = m_VisPlotData.Select(db_fld_ValValue & " = " & temp, db_fld_ValCensorCode & " ASC")(0)
-            maxRow = m_VisPlotData.Select(db_fld_ValValue & " >= " & temp - 0.0000000000001 & " AND " & db_fld_ValCensorCode & "='nc'", db_fld_ValValue & " ASC")(0)
+
+
+            Dim tempVal As String
+            If (temp <> 0) Then
+                tempVal = (Format(temp, "#.#################################") - 0.0000000000001).ToString().Replace(",", ".")
+            Else
+                tempVal = (temp - 0.0000000000001).ToString()
+            End If
+            Dim selects As String = db_fld_ValValue & " >= " & tempVal & " AND " & db_fld_ValCensorCode & "='nc'"
+
+            maxRow = m_VisPlotData.Select(selects, db_fld_ValValue & " ASC")(0)
             max = CDbl(temp)
             temp = m_VisPlotData.Compute("Min (" & db_fld_ValValue & ")", "")
             'minRow = m_VisPlotData.Select(db_fld_ValValue & " < = " & temp + 0.0000000000001, db_fld_ValCensorCode & " ASC AND " & db_fld_ValValue & " Desc")(0) 'get just the first row returned
-            minRow = m_VisPlotData.Select(db_fld_ValValue & " < = " & temp + 0.0000000000001 & " AND " & db_fld_ValCensorCode & "='nc'", db_fld_ValValue & " DESC")(0) 'get just the first row returned
+            If (temp <> 0) Then
+                tempVal = (Format(temp, "#.#################################") + 0.0000000000001).ToString().Replace(",", ".")
+            Else
+                tempVal = (temp + 0.0000000000001).ToString()
+            End If
+
+            minRow = m_VisPlotData.Select(db_fld_ValValue & " < = " & tempVal & " AND " & db_fld_ValCensorCode & "='nc'", db_fld_ValValue & " DESC")(0) 'get just the first row returned
             min = CDbl(temp)
 
             'check to make sure we can caculate the censored data
@@ -8852,14 +8882,14 @@ Public Class frmODMTools
                         dev = System.Math.Sqrt(Math.Abs(var))
                     End If
                 End If
-                
+
                 'calculate the geometric mean
                 Dim sum As Double = 0 'the sum so far of the Log10(Value) (the log base 10 of value) -> used to calculate the geometric mean
                 'rows = table.Select(db_fld_ValValue & " > 0", db_fld_ValValue & " ASC")
                 rows = table.Select("", db_fld_ValValue & " ASC")
                 Dim sign As Integer = 1
                 For i = 0 To rows.Length() - 1
-                   
+
                     If rows(i)(db_fld_ValValue) = 0 Then
                         sum += Math.Log(1, 2)
                     Else

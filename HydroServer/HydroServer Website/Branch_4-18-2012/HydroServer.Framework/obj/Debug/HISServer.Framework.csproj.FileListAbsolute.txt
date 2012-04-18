@@ -1,0 +1,5 @@
+C:\Dev\HISServer.Framework\HISServer.Framework\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\HISServer.Framework\HISServer.Framework\bin\HISServer.Framework.dll
+C:\Dev\HISServer.Framework\HISServer.Framework\bin\HISServer.Framework.pdb
+C:\Dev\HISServer.Framework\HISServer.Framework\obj\Debug\HISServer.Framework.dll
+C:\Dev\HISServer.Framework\HISServer.Framework\obj\Debug\HISServer.Framework.pdb

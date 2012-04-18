@@ -573,7 +573,7 @@ Class clsConnection
                 count = updateAdapter.Update(table)
             Else
                 updateAdapter.ContinueUpdateOnError = False
-                'update the database
+                'update the database 
                 count = updateAdapter.Update(table)
 
                 table.Rows.Clear()

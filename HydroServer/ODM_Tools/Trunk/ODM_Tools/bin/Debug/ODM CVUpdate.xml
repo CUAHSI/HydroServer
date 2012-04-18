@@ -6,7 +6,20 @@ ODMCVUpdate
 </name>
 </assembly>
 <members>
-<member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.#ctor">
+<member name="P:ODM_CVUpdate.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:ODM_CVUpdate.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:ODM_CVUpdate.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.#ctor">
 	<remarks/>
 </member><member name="E:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetCensorCodeCVCompleted">
 	<remarks/>
@@ -194,19 +207,6 @@ ODMCVUpdate
 	<remarks/>
 </member><member name="T:ODM_CVUpdate.wrCVUpdate.GetSiteTypeCVCompletedEventArgs">
 	<remarks/>
-</member><member name="P:ODM_CVUpdate.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:ODM_CVUpdate.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:ODM_CVUpdate.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
 </member>
 </members>
 </doc>

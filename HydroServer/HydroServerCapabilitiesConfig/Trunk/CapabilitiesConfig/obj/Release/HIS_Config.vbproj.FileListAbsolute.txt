@@ -245,3 +245,4 @@ C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\
 C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.xml
 C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.pdb
 C:\DEV\ODM\HydroServer8-23-2011\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\obj\Release\HydroServer Capabilities Database.XmlSerializers.dll
+C:\DEV\ODM\HydroServer\HydroServerCapabilitiesConfig\Trunk\CapabilitiesConfig\bin\Release\HydroServer Capabilities Database.exe.config

@@ -32,6 +32,8 @@ ODMCVUpdate
 	<remarks/>
 </member><member name="E:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSpeciationCVCompleted">
 	<remarks/>
+</member><member name="E:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSiteTypeCVCompleted">
+	<remarks/>
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetCensorCodeCV">
 	<remarks/>
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetCensorCodeCVAsync">
@@ -103,6 +105,12 @@ ODMCVUpdate
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSpeciationCVAsync">
 	<remarks/>
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSpeciationCVAsync(System.Object)">
+	<remarks/>
+</member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSiteTypeCV">
+	<remarks/>
+</member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSiteTypeCVAsync">
+	<remarks/>
+</member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.GetSiteTypeCVAsync(System.Object)">
 	<remarks/>
 </member><member name="M:ODM_CVUpdate.wrCVUpdate.ODMCVService.CancelAsync(System.Object)">
 	<remarks/>
@@ -179,6 +187,12 @@ ODMCVUpdate
 </member><member name="P:ODM_CVUpdate.wrCVUpdate.GetSpeciationCVCompletedEventArgs.Result">
 	<remarks/>
 </member><member name="T:ODM_CVUpdate.wrCVUpdate.GetSpeciationCVCompletedEventArgs">
+	<remarks/>
+</member><member name="T:ODM_CVUpdate.wrCVUpdate.GetSiteTypeCVCompletedEventHandler">
+	<remarks/>
+</member><member name="P:ODM_CVUpdate.wrCVUpdate.GetSiteTypeCVCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:ODM_CVUpdate.wrCVUpdate.GetSiteTypeCVCompletedEventArgs">
 	<remarks/>
 </member><member name="P:ODM_CVUpdate.My.Resources.Resources.ResourceManager">
 	<summary>

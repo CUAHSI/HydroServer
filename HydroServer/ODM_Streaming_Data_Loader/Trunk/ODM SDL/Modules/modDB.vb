@@ -437,7 +437,9 @@ Module modDB
                     db_fld_SCBeginDT & ", " & db_fld_SCEndDT & ", " & _
                     db_fld_SCBeginDTUTC & ", " & db_fld_SCEndDTUTC & ", " & db_fld_SCValueCount
             If (My.Settings.ODMVersion = "1.1.1") Then
-                sql &= ", " & db_fld_SCSiteType
+                If Not (siteInfo.Item(db_fld_SiteType) Is DBNull.Value) Then
+                    sql &= ", " & db_fld_SCSiteType
+                End If
             End If
 
             sql &= ")" & _
@@ -468,7 +470,9 @@ Module modDB
                    FormatForDB(qclevelInfo.Item(db_fld_QCLQCLevelCode)) & "', " & _
                    "@BeginDT, @EndDT, @BeginUtcDT, @EndUtcDT" & ", '" & ValueCount
             If (My.Settings.ODMVersion = "1.1.1") Then
-                sql &= "', '" & FormatForDB(siteInfo.Item(db_fld_SiteType))
+                If Not (siteInfo.Item(db_fld_SiteType) Is DBNull.Value) Then
+                    sql &= "', '" & FormatForDB(siteInfo.Item(db_fld_SiteType))
+                End If
             End If
             sql &= "')"
 
