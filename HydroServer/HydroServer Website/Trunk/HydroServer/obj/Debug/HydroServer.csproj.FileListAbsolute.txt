@@ -4,3 +4,9 @@ C:\DEV\ODM\New HydroserverWebsite\HydroServer\bin\HydroServer.dll
 C:\DEV\ODM\New HydroserverWebsite\HydroServer\bin\HydroServer.pdb
 C:\DEV\ODM\New HydroserverWebsite\HydroServer\obj\Debug\HydroServer.dll
 C:\DEV\ODM\New HydroserverWebsite\HydroServer\obj\Debug\HydroServer.pdb
+C:\DEV\ODM\HydroServer\HydroServer Website\Trunk\HydroServer\bin\Hydroserver.dll
+C:\DEV\ODM\HydroServer\HydroServer Website\Trunk\HydroServer\bin\Hydroserver.pdb
+C:\DEV\ODM\HydroServer\HydroServer Website\Trunk\HydroServer\bin\System.Web.Mvc.xml
+C:\DEV\ODM\HydroServer\HydroServer Website\Trunk\HydroServer\obj\Debug\ResolveAssemblyReference.cache
+C:\DEV\ODM\HydroServer\HydroServer Website\Trunk\HydroServer\obj\Debug\Hydroserver.dll
+C:\DEV\ODM\HydroServer\HydroServer Website\Trunk\HydroServer\obj\Debug\Hydroserver.pdb

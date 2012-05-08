@@ -39,6 +39,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DesktopBuildPackageLocation>obj\Release\Package\HydroserverWebsite_1.1.3.3.zip</DesktopBuildPackageLocation>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -146,7 +152,7 @@
     <Content Include="Content\icewatercentral.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="HISServer.Publish.xml" />
+    <Content Include="Hydroserver.Publish.xml" />
     <Content Include="Scripts\jquery ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Scripts\jquery ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Scripts\jquery ui\images\ui-bg_flat_10_000000_40x100.png" />
@@ -184,6 +190,7 @@
     <EmbeddedResource Include="Views\Home\Index.aspx" />
     <EmbeddedResource Include="Views\Home\Error.aspx" />
     <Content Include="Views\Web.config" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Thumbs.db" />
@@ -197,7 +204,7 @@
       <LastGenOutput>ODMDb.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Web.config" />
+    <Content Include="testWeb.config" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\Site.Master" />
   </ItemGroup>
