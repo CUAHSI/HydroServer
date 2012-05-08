@@ -635,7 +635,7 @@ Class clsConnection
 
                 If (Table.Rows.Count = 1) Then
 
-                    If (Table.Rows(0).Item("CurrentVersion").ToString.StartsWith("1.1")) Then
+                    If (Table.Rows(0).Item("CurrentVersion").ToString.StartsWith("1.1.1")) Then
                         Return True
                     Else
                         'LogError("This program is only compatible with ODM 1.1 Databases.  You have an ODM " & Table.Rows(0).Item("VersionNumber").ToString & " Database")

@@ -330,7 +330,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Data Loader 1.1.6.0"
+        "ProductName" = "8:ODM Data Loader 1.1.6.1"
         "ProductCode" = "8:{0173AB53-D576-421D-A123-CD666EC1B0A1}"
         "PackageCode" = "8:{B3C724A4-67B5-4447-AD87-025E79E72C2B}"
         "UpgradeCode" = "8:{B3619D6E-AE69-4E35-AFF4-8B2BD9D950AB}"
@@ -453,7 +453,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9213E13D767B44D796AF23F19B940C8E"
             {
-            "Name" = "8:ODM DL 1.1.6 Wizard"
+            "Name" = "8:ODM DL 1.1.6.1 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -481,7 +481,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C15D35F33E0047CD812979750CBD340D"
             {
-            "Name" = "8:ODM DL 1.1.6"
+            "Name" = "8:ODM DL 1.1.6.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -495,7 +495,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D0AC355D76CE4AD6BFC427EB4518972D"
             {
-            "Name" = "8:ODM DL 1.1.6"
+            "Name" = "8:ODM DL 1.1.6.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

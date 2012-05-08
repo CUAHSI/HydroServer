@@ -302,7 +302,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM SDL 1.1.3"
+        "ProductName" = "8:ODM SDL 1.1.3.1"
         "ProductCode" = "8:{F74EC279-BE8F-4370-A02F-7070FA4C3404}"
         "PackageCode" = "8:{DC791134-4357-4EF2-AD7D-135A2E9AFBE9}"
         "UpgradeCode" = "8:{6B08017E-AD38-42B0-B00D-4687FFE19E00}"
@@ -314,7 +314,7 @@
         "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-2946"
         "ARPHELPLINK" = "8:http://his.cuahsi.org/"
-        "Title" = "8:ODM SDL 1.1.3"
+        "Title" = "8:ODM SDL 1.1.3.1"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Utah Water Research Laboratory"
         "Keywords" = "8:"
@@ -425,7 +425,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_34B60CC20B8D4B3CABE5435C3E8BBCE1"
             {
-            "Name" = "8:Setup ODM SDL 1.1.3"
+            "Name" = "8:Setup ODM SDL 1.1.3.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -439,7 +439,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_36532C5F686C46B3A271FD547F456B4C"
             {
-            "Name" = "8:Run ODM SDL 1.1.3"
+            "Name" = "8:Run ODM SDL 1.1.3.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1030,7 +1030,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_72BFEA09DBB3431CA5FE08FDC52FE75D"
             {
-            "SourcePath" = "8:..\\ODM SDL\\obj\\Debug\\ODMSDL.exe"
+            "SourcePath" = "8:..\\ODM SDL\\obj\\Release\\ODMSDL.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0B97927DD3F04DE5B023B96B7C4C3008"
@@ -1058,7 +1058,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9F65458A75F14BEEB6DC608D9CE68061"
             {
-            "SourcePath" = "8:..\\ODM SDL Wizard\\obj\\Debug\\Configuration Wizard.exe"
+            "SourcePath" = "8:..\\ODM SDL Wizard\\obj\\Release\\Configuration Wizard.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0B97927DD3F04DE5B023B96B7C4C3008"
