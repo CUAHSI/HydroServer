@@ -1,0 +1,2 @@
+This folder contains the PHP implementation of WaterOneFlow 1.1 web service
+author: Jiri Kadlec (jirikadlec2@gmail.com)
