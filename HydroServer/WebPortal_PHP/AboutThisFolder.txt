@@ -1,0 +1,1 @@
+This folder contains the HydroServer data entry web portal in PHP
