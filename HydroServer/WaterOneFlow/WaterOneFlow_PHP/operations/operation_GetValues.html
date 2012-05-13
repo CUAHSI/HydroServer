@@ -1,0 +1,207 @@
+<!--Custom!<BR>--><!--Name: , TargetNamespace: http://www.cuahsi.org/his/1.1/ws/, Services.Count=1<BR>--><!--Looking for binding name WaterOneFlow, target namespace: http://www.cuahsi.org/his/1.1/ws/<BR>--><!--Checking services found in description collection.<BR>--><!--Checking 4 ports.<BR>--><!--Port binding name WaterOneFlow, port binding namespace: http://www.cuahsi.org/his/1.1/ws/<BR>--><!--Looking for binding name WaterOneFlow, target namespace: http://www.cuahsi.org/his/1.1/ws/<BR>--><!--Checking services found in description collection.<BR>--><!--Checking 4 ports.<BR>--><!--Port binding name WaterOneFlow, port binding namespace: http://www.cuahsi.org/his/1.1/ws/<BR>-->
+
+<html>
+
+    
+
+  <head>
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <link rel="alternate" type="text/xml" href="cuahsi_1_1.php?disco"/>
+
+    <style type="text/css">
+    
+		BODY { color: #000000; background-color: white; font-family: ; margin-left: 0px; margin-top: 0px; }
+		#content { margin-left: 30px; font-size: .70em; padding-bottom: 2em; }
+		A:link { color: #336699; font-weight: bold; text-decoration: underline; }
+		A:visited { color: #6699cc; font-weight: bold; text-decoration: underline; }
+		A:active { color: #336699; font-weight: bold; text-decoration: underline; }
+		A:hover { color: cc3300; font-weight: bold; text-decoration: underline; }
+		P { color: #000000; margin-top: 0px; margin-bottom: 12px; font-family: ; }
+		pre { background-color: #e5e5cc; padding: 5px; font-family: ; font-size: x-small; margin-top: -5px; border: 1px #f0f0e0 solid; }
+		td { color: #000000; font-family: ; font-size: .7em; }
+		h2 { font-size: 1.5em; font-weight: bold; margin-top: 25px; margin-bottom: 10px; border-top: 1px solid #003366; margin-left: -15px; color: #003366; }
+		h3 { font-size: 1.1em; color: #000000; margin-left: -15px; margin-top: 10px; margin-bottom: 10px; }
+		ul, ol { margin-top: 10px; margin-left: 20px; }
+		li { margin-top: 10px; color: #000000; }
+		font.value { color: darkblue; font: bold; }
+		font.key { color: darkgreen; font: bold; }
+		.heading1 { color: #ffffff; font-family: ; font-size: 26px; font-weight: normal; background-color: #003366; margin-top: 0px; margin-bottom: 0px; margin-left: -30px; padding-top: 10px; padding-bottom: 3px; padding-left: 15px; width: 105%; }
+		.button { background-color: #dcdcdc; font-family: ; font-size: 1em; border-top: #cccccc 1px solid; border-bottom: #666666 1px solid; border-left: #cccccc 1px solid; border-right: #666666 1px solid; }
+		.frmheader { color: #000000; background: #dcdcdc; font-family: ; font-size: .7em; font-weight: normal; border-bottom: 1px solid #dcdcdc; padding-top: 2px; padding-bottom: 2px; }
+		.frmtext { font-family: ; font-size: .7em; margin-top: 8px; margin-bottom: 0px; margin-left: 32px; }
+		.frmInput { font-family: ; font-size: 1em; }
+		.intro { margin-left: -15px; }
+           
+    </style>
+
+    <title>WaterOneFlow Web Service</title>
+
+      <script language="javascript" type="text/javascript">
+		
+		function ShowTestSection() {
+			document.getElementById("soaptemplaterequest").style.display = "block";
+			document.getElementById("soapsamplerequest").style.display = "none";
+			document.getElementById("soapsampleresponse").style.display = "none";
+			document.getElementById("testhref").style.display = "none";
+			document.getElementById("samplehref").style.display = "block";
+			document.getElementById("soapsampletitle").style.display = "none";
+			document.getElementById("soaptesttitle").style.display = "block";
+		}
+		
+		function ShowTemplateSection() {
+			document.getElementById("soaptemplaterequest").style.display = "none";
+			document.getElementById("soapsamplerequest").style.display = "block";
+			document.getElementById("soapsampleresponse").style.display = "block";
+			document.getElementById("samplehref").style.display = "none";
+			document.getElementById("testhref").style.display = "block";
+			document.getElementById("soapsampletitle").style.display = "block";
+			document.getElementById("soaptesttitle").style.display = "none";
+		}
+
+		function SendSoapRequest_onclick(SoapRequest, MethodName, Url) {
+		// clear any old message 
+		
+       document.getElementById("note").firstChild.nodeValue ="";
+		// SoapRequst Javascript not working in FF
+		SoapRequest = document.getElementById("txasoaptemplaterequest").value;
+			var xmlhttp;
+			if (window.XMLHttpRequest)
+              {// code for all new browsers
+              xmlhttp=new XMLHttpRequest();
+              } else if (window.ActiveXObject)
+              {// code for IE5 and IE6
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+            if (xmlhttp!=null)
+              {	
+	            // Function.
+	            xmlhttp.onreadystatechange=function() {
+                     if (xmlhttp.readyState==4)
+                     {
+                         if (xmlhttp.status == 200) {
+                          // alert(xmlhttp.responseText)	
+   		                    document.getElementById("tempsoaprequest").value = document.getElementById("txasoaptemplaterequest").value;
+			                document.getElementById("txasoaptemplaterequest").value = xmlhttp.responseText;
+			                document.getElementById("backhref").style.display = "block";
+			                document.getElementById("posthref").style.display = "none";
+    			        
+                         } else {
+    		              document.getElementById("tempsoaprequest").value = document.getElementById("txasoaptemplaterequest").value;
+                         
+                          document.getElementById("note").style.visibility = "visible";
+                         document.getElementById("note").firstChild.nodeValue ="ERROR" ;
+                         }
+                         // done. turn off status
+                        document.getElementById("Status").style.visibility = "hidden";
+
+                     }
+                 }
+	        xmlhttp.open('POST', Url, true);
+			xmlhttp.setRequestHeader('Content-Type', 'text/xml; charset="UTF-8"');
+			xmlhttp.setRequestHeader('SOAPAction', 'http://www.cuahsi.org/his/1.1/ws/GetValues');
+			
+			document.getElementById("Status").style.visibility = "visible";
+			
+			xmlhttp.send(SoapRequest);
+
+          }
+            else
+              {
+              alert("Your browser does not support XMLHTTP.");
+              }
+		}
+
+		function GoBackToRequest_onclick() {
+			document.getElementById("txasoaptemplaterequest").value = document.getElementById("tempsoaprequest").value;
+			document.getElementById("backhref").style.display = "none";
+			document.getElementById("posthref").style.display = "block";
+		}
+      </script>
+
+  </head>
+
+<body>
+<div id="content">
+
+	<p class="heading1">WaterOneFlow</p>
+	<br>
+	
+	
+
+	<span id="Span3">
+		<p class="intro">Click <a href="cuahsi_1_1.php">here</a> for a complete list of operations.</p>
+		<h2>GetValues</h2>
+		<p class="intro">Given a site number, a variable, a start date, and an end date, this method returns a time series. Pass in the sitecode and variable in this format: 'NetworkName:SiteCode' and 'NetworkName:Variable'</p>
+		<div id="Span4">
+			<h3	id="testhref">
+				<a href="javascript:ShowTestSection();">Test this	call...</a>
+			</h3>
+			<h3	id="samplehref"	style="display:none;"><a href="javascript:ShowTemplateSection();">Show sample request/response...</a>
+			</h3>
+			<p id="soaptesttitle" style="display:none;">&nbsp;</p>
+			<p id="soapsampletitle">The following is a sample SOAP 1.1 request and response.  The <font class=value>placeholders</font> shown need to be replaced with actual values.</p>
+			<div id="soaptemplaterequest" style="display:none;">
+			    <form>
+			        <textarea	id="txasoaptemplaterequest" style="background-color:#e5e5cc;width:80em;height:40em;font-family:monospace;white-space: pre;">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;GetValues xmlns="http://www.cuahsi.org/his/1.1/ws/"&gt;
+      &lt;location&gt;string&lt;/location&gt;
+      &lt;variable&gt;string&lt;/variable&gt;
+      &lt;startDate&gt;string&lt;/startDate&gt;
+      &lt;endDate&gt;string&lt;/endDate&gt;
+      &lt;authToken&gt;string&lt;/authToken&gt;
+    &lt;/GetValues&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</textarea>
+			        <div id="posthref" style="font-size:1.1em;color:#000000;margin-top:10px;margin-bottom:10px;">
+			             <a	href="javascript:SendSoapRequest_onclick(document.getElementById('txasoaptemplaterequest').innerText,	'GetValues', './cuahsi_1_1.php');"	>Post template...</a>
+			        
+			        </div>
+                    <div id="note" style="font-size:0.8em;color:#ff0000;margin-top:10px;margin-bottom:10px;">
+                       &amp;
+                    </div>
+                    <div id="backhref" style="display:none;font-size:1.1em;color:#000000;margin-top:10px;margin-bottom:10px;"><a href="javascript:GoBackToRequest_onclick();" >GO back to request template...</a>
+                        <br />
+                    </div>
+                    <input id="tempsoaprequest" type="hidden"	/>
+                </form>
+            </div>
+		    <div id="soapsamplerequest"	style="background-color:#e5e5cc;width:80em;height:40em;font-family:monospace;white-space: pre;">POST ./cuahsi_1_1.php HTTP/1.1
+Host: hydrodata.info
+Content-Type: text/xml; charset=utf-8
+Content-Length: <font class=value>length</font>
+SOAPAction: "http://www.cuahsi.org/his/1.1/ws/GetValues"
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;GetValues xmlns="http://www.cuahsi.org/his/1.1/ws/"&gt;
+      &lt;location&gt;<font class=value>string</font>&lt;/location&gt;
+      &lt;variable&gt;<font class=value>string</font>&lt;/variable&gt;
+      &lt;startDate&gt;<font class=value>string</font>&lt;/startDate&gt;
+      &lt;endDate&gt;<font class=value>string</font>&lt;/endDate&gt;
+      &lt;authToken&gt;<font class=value>string</font>&lt;/authToken&gt;
+    &lt;/GetValues&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</div>
+			<div id="soapsampleresponse" style="background-color:#e5e5cc;;font-family:monospace;white-space: pre;">HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: <font class=value>length</font>
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;GetValuesResponse xmlns="http://www.cuahsi.org/his/1.1/ws/"&gt;
+      &lt;GetValuesResult&gt;<font class=value>string</font>&lt;/GetValuesResult&gt;
+    &lt;/GetValuesResponse&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</div>
+		</div>
+	</span>
+</div>
+<div id="Status" style="visibility:hidden;z-index:1;position:absolute;left:50%;top:50%;border:thick double #00FF00;" >
+Running
+</div>
+</body>
+</html>
