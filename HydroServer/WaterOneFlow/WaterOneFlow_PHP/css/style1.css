@@ -1,0 +1,316 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    font: x-small sans-serif;
+    /*position: relative;*/
+	/*background: #f9f9f9;*/
+}
+
+/* scale back up to a sane default */
+#globalWrapper 
+{
+	position: relative;
+	font-size: 127%;
+	margin: auto;
+	padding: 0 10px;
+	width: 54em;
+}
+
+hr
+    {
+        visibility: hidden;
+    }
+    
+    #header
+    {
+        width: 683px;
+        height: 62px;      
+    }
+    #header img
+    {
+        width: 683px;
+        height: 62px;
+        border: 0;
+    }
+    
+    
+    #hlavni
+    {
+        
+       margin: 0;
+       padding-top: 1.5em;
+       background: white;
+	   color: black;
+	   line-height: 1.5em;	         
+    }
+    
+   a 
+   {
+	   text-decoration: none;
+	   color: #002bb8;
+	   background: none;
+   }
+   a:visited 
+   {
+	   color: #5a3696;
+   }
+a:active {
+	color: #faa700;
+   }
+a:hover {
+	text-decoration: underline;
+   }
+
+p {
+		margin: .4em 0 .5em 0;
+		padding: 0;
+		line-height: 1.5em;
+	}
+    
+    h1, h2, h3, h4, h5, h6 {
+	color: black;
+	background: none;
+	font-weight: normal;
+	margin: 0;
+	padding-top: .5em;
+	padding-bottom: .17em;
+	/*border-bottom: 1px solid #aaa;*/
+}
+
+h1 
+{ 
+    font-size: 188%;
+    margin-top: 1em;
+    margin-bottom: 0.5em; 
+}
+
+
+h2 
+{ 
+    font-size: 150%;
+    margin-bottom: 0.5em;
+}
+
+
+h3, h4, h5, h6 {
+	border-bottom: none;
+	font-weight: bold;
+}
+h3 { font-size: 132%; }
+h3 { font-size: 124%; }
+h4 { font-size: 116%; }
+
+h5 { font-size: 100%; }
+
+h6 { font-size: 80%;  }
+
+    
+    
+	 
+	 /* ----- STYLY PRO TABULKY ----- */
+    table 
+    {
+        border-top: 1px solid #999;
+        border-left: 1px solid #999;
+        border-collapse: collapse;
+    }
+    
+    caption
+    {
+        color: #933;
+        background-color: #fff;
+        padding-bottom: 6px;
+        font-family: Verdana, Sans-Serif;
+        font-size: larger;
+        font-style: italic;
+    }
+    
+    th, td
+    {
+        padding: 8px;
+        border-right: 1px solid #999;
+        border-bottom: 1px solid #999;
+    }
+    
+    th
+    {
+        font-family: Verdana, Sans-Serif;
+        background-color: #ccc;
+    }
+    
+     /* ----- STYLY PRO NAVIGACI    ----- */
+    
+    #navigace
+    {     
+        /*position: absolute;
+        top: 60px;
+        left: 10px;
+        float: left;
+        clear: both;
+        padding-top: 1em;*/
+		  width: 54em;            
+    }
+    
+    #navigace h2
+    {
+        display: none;
+    }
+    
+    #navigace ul
+    {     
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-family: Georgia, Serif;    
+        font-size: medium; 
+    }
+    
+    #navigace li
+    {        
+        display: inline;     
+    }
+    
+    
+    #navigace li a
+    {
+        float: left;
+        display: block;
+        padding: 0.5em;
+        margin: 0;
+        width: 7em;
+        border: 1px solid #090;
+        border-right: 0;
+        color: #00f;
+        background-color: #ffc;
+        text-decoration: underline;
+    }
+    
+    #navigace li a.current
+    {
+        color: #000;
+        background-color: #fc0;
+        text-decoration: none;
+    }
+    #navigace li a.cs, #navigace li a.en
+    {
+        padding-left: 2em;
+        border-right: 1px solid #090;
+    }
+    
+    #navigace li a.cs
+    {
+        background: #ffc url("/obr/flag/vlajky_cz.gif") no-repeat center left;
+        background-position: 0.5em 0.8em;
+    }
+    
+    #navigace li a.en
+    {
+        background: #ffc url("/obr/flag/vlajky_en.gif") no-repeat center left;
+        background-position: 0.5em 0.8em;
+    }
+    
+    #navigace li a:active, #navigace li a:hover, #navigace li a.cs:hover, #navigace li a.en:hover
+    {
+        color: #000;
+        text-decoration: underline;
+        background-color: #9f6;
+    }
+    
+    #navigace li a.current, #navigace li a.current:hover
+    {
+        text-decoration: none;
+        color: #000;
+        background-color: #fc0;
+    }
+	 
+	 /* ----- STYLY PRO RAMECKY NA UVODNI STRANCE ---- */
+   .photo_div 
+	{
+		background:  white;
+		color: black;
+		
+		background-image: url("/obr/galerie-pozadi.png");	 
+		background-position: bottom; 
+		background-repeat: repeat-x; 
+		padding: 10px; 	
+		min-height: 100px;
+		height: auto; 		 				
+		width: 650px;					
+		margin: 1.2em 20px 0 0;
+		border: 1px;
+		border-top-color: #69748a;
+		border-left-color: #69748a;
+		border-right-color: #9eadb5;
+		border-bottom-color: #9eadb5;	
+		border-style: solid;			
+		text-decoration: none;
+		position: relative;
+   }
+
+
+.photo_div img {
+	float: left;
+   border: 1px;
+   border-color: black;
+   border-style: solid;			
+   height: 100px;
+   width: 130px;
+   position: relative;
+   top: -2.5em;
+}
+
+.photo_div img.graf {
+	width: 200px;
+	float: right;
+	margin: 0;
+	margin-left: 10px;
+}
+
+.photo_div a, .photo_div a:visited {
+	background: white;
+	color: brown;
+	text-decoration: underline;
+}
+
+.photo_div a:active, .photo_div a:hover {
+	color: black;
+	background: #ffc;
+}
+
+.photo_div h2, .photo_div p {
+	margin: 0 140px;
+	border: 0;
+}
+
+
+    
+    /* ----- STYLY PRO ZAPATI STRANKY    ----- */
+    #foot
+    {               
+		  padding-bottom: 1em;
+		  clear: left;            
+    }
+    
+    #foot p
+    {       
+        margin: 0;
+        line-height: 1em;
+        padding: 0.5em;
+        color: black;
+        background-color: #ffc;
+        border: 1px solid #00f;
+    }
+	 
+	 #foot a
+	 {
+	 	float: right;
+	 }
+	 
+	 /* ----- STYLY PRO STATISTIKY    ----- */
+	 div#statistics {
+	    float: left;
+	    border: 2px solid #00f;
+	    padding: 5px;
+	    margin: 5px;
+	 }
