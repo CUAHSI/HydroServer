@@ -1,0 +1,4 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule ^(.*)\.asmx/([a-zA-Z_]+) $1.php?method=$2 [QSA,L,nc]
+RewriteRule ^(.*)\.asmx $1.php [nc]

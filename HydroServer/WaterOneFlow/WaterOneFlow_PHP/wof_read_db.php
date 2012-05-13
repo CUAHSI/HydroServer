@@ -141,6 +141,11 @@ function createQuery_GetAllSites() {
    return $query_text;
 }
 
+function createQuery_GetSitesByBox($west, $south, $east, $north) {
+  $where = ' WHERE Longitude >= "' . $west . '" AND Longitude <= "' . $east . '" AND Latitude >= "' . $south . '" AND Latitude <= "' . $north . '"';
+  return createQuery_GetAllSites() . $where;
+}
+
 function createQuery_GetSiteByCode($shortcode) {
   $where = ' WHERE SiteCode = "'. $shortcode . '"';
   return createQuery_GetAllSites() . $where;
@@ -189,7 +194,26 @@ function db_GetSites() {
 
 function db_GetSitesByCodes($fullSiteCodeArray) {
   $query_text = createQuery_GetSitesByCodes($fullSiteCodeArray);
-  return db_GetSitesByQuery($query_text);
+  $sitesArray = db_GetSitesByQuery($query_text);
+  $retval = '';
+  foreach($sitesArray as $site) {
+	$retval .= "<site>";
+	$retval .= $site;
+	$retval .= "</site>";
+  }
+  return $retval;
+}
+
+function db_GetSitesByBox($west, $south, $east, $north) {
+  $query_text = createQuery_GetSitesByBox($west, $south, $east, $north);
+  $sitesArray = db_GetSitesByQuery($query_text);
+  $retval = '';
+  foreach($sitesArray as $site) {
+	$retval .= "<site>";
+	$retval .= $site;
+	$retval .= "</site>";
+  }
+  return $retval;
 }
 
 function db_GetVariableByCode($shortvariablecode = NULL) {

@@ -164,7 +164,7 @@ function wof_GetSiteInfo($authToken, $fullSiteCode) {
 
 //returns full information about multiple sites according to the array of site codes
 function wof_GetSiteInfoMultipleObject($authToken, $siteArray) {
-  $retval = '<sitesResponse xmlns="http://www.cuahsi.org/waterML/1.1/">' .
+  $retval = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">' .
   wof_queryInfo_MultipleSites($siteArray);
   
   foreach($siteArray as $sitecodeparam) {
@@ -183,16 +183,11 @@ function wof_GetSites() {
   return $retval;
 }
 
-function wof_GetSitesByBox($north, $south, $east, $west, $IncludeSeries) {
-  //todo get array of site codes in box
-  $sitearray = array('JK:001', 'JK:002', 'JK:003');  
-  $retval = '<sitesResponse xmlns="http://www.cuahsi.org/waterML/1.1/">';
+function wof_GetSitesByBox($west, $south, $east, $north, $IncludeSeries) {
+  //TODO add support for IncludeSeries (now assumed FALSE)
+  $retval = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">';
   $retval .= wof_queryInfo_SitesByBox($north, $south, $east, $west, $IncludeSeries);
-  
-  foreach($sitearray as $sitecodeparam) {
-    $retval .= wof_GetSiteInfoByCode($sitecodeparam, $IncludeSeries); 
-  }
-  
+  $retval .= db_GetSitesByBox($west, $south, $east, $north);
   $retval .= '</sitesResponse>';
   return $retval;
 }
@@ -289,7 +284,7 @@ function GetSites() {
 function GetSitesByBoxObject($north, $south, $east, $west, $includeSeries) {
   wof_start();
   echo '<GetSitesByBoxObjectResponse xmlns="http://www.cuahsi.org/his/1.1/ws/">';
-  echo wof_GetSitesByBox($north, $south, $east, $west, $includeSeries);
+  echo wof_GetSitesByBox($west, $south, $east, $north, $includeSeries);
   echo '</GetSitesByBoxObjectResponse>';
   wof_finish();
 }
