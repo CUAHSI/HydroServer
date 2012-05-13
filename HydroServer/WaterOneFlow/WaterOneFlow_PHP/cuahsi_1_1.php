@@ -2,12 +2,17 @@
   
   require_once 'wof.php';
   
-  //checks if the web service description is set
+  //if the query string contains ?wsdl
   $wsdl_is_set = (isset($_REQUEST['wsdl']) or isset($_REQUEST['WSDL']));
   
+  //if the POST request contains the SoapACTION parameter
   $action_is_set = (isset($_SERVER['HTTP_SOAPACTION']));
   
+  //if the query string contains ?op
   $op_is_set = (isset($_REQUEST['op']));
+  
+  //if the request is a REST-style request with parameters in HTTP GET
+  $method_is_set = (isset($_REQUEST['method']));
   
   //when the SOAPAction is set, call the appropriate web method
   if ($action_is_set == 1) {
@@ -87,9 +92,9 @@
   }
   
   //when the op parameter is set, return the web method test page
-  if ($op_is_set == 1) {
+  elseif ($op_is_set == 1) {
     $operation_name = $_REQUEST['op'];
-    $name = 'ui/operation_' . $operation_name . '.html';
+    $name = 'operations/operation_' . $operation_name . '.html';
 
     // send the right headers
     header("Content-Type: text/html");
@@ -102,7 +107,7 @@
   }
   
   //when the WSDL query string document is set, return the WSDL
-  if ($wsdl_is_set == 1) {
+  elseif ($wsdl_is_set == 1) {
   
     // Return the WSDL
     $wsdl = @implode ('', @file ('wateroneflow.wsdl'));
@@ -124,17 +129,155 @@
       echo "HTTP/1.0 500 Internal Server Error";
     }
   }
-  //else {
-  //  echo '<html>';
-  //  echo '<h1>WSDL is not set!</h1>';
-//	echo '</html>';
-//
+  else if ($method_is_set == 1) {
+    //the method was sent by a HTTP GET request
+	$method = $_REQUEST["method"];
+	//echo 'method: ' . $method;
+	$authToken = "";
+	
+	if ($method == 'GetSiteInfo') {
+	  if (!isset($_REQUEST["site"])) {
+	    echo "Value cannot be null.\nParameter name: SiteCode";
+	  } else {
+		$site = $_REQUEST["site"];
+		if ($site == "") {
+		  echo "Value cannot be null.\nParameter name: SiteCode";
+		} else {
+		  header("Content-type: text/xml");
+		  echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);
+		  echo "<string>" . htmlspecialchars(wof_GetSiteInfo($authToken, $site)) . "</string>";
+		}
+	  }
+	  exit;	  
+	} elseif ($method == 'GetSiteInfoMultpleObject') {
+	  //TODO: user may post multiple site values in query string
+	  if (!isset($_REQUEST["site"])) {
+	    echo "Value cannot be null.\nParameter name: SiteCode";
+	  } else {
+		$site = $_REQUEST["site"];
+		if ($site == "") {
+		  echo "Value cannot be null.\nParameter name: SiteCode";
+		} else {
+		  header("Content-type: text/xml");
+		  echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);	  
+		  echo wof_GetSiteInfoMultipleObject($authToken, array($site));
+		}
+	  }
+	  exit;	  
+	} elseif ($method == 'GetSiteInfoObject') {
+	  if (!isset($_REQUEST["site"])) {
+	    echo "Value cannot be null.\nParameter name: SiteCode";
+	  } else {
+		$site = $_REQUEST["site"];
+		if ($site == "") {
+		  echo "Value cannot be null.\nParameter name: SiteCode";
+		} else {
+		  header("Content-type: text/xml");
+		  echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);	  
+		  echo wof_GetSiteInfo($authToken, $site);
+		}
+	  }
+	  exit;	  
+	} elseif ($method == 'GetSites') {	  
+	  header("Content-type: text/xml");
+	  echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);
+	  echo "<string>" . htmlspecialchars(wof_GetSites()) . "</string>";
+	  exit;	
+	} elseif ($method == 'GetSitesByBoxObject') {
+	  $includeSeries = FALSE;
+	  if (!isset($_REQUEST["west"])) {
+	    echo "Missing parameter: west";
+		exit;
+	  }
+	  if (!isset($_REQUEST["south"])) {
+	    echo "Missing parameter: south";
+		exit;
+	  }
+	  if (!isset($_REQUEST["east"])) {
+	    echo "Missing parameter: east";
+		exit;
+	  }
+	  if (!isset($_REQUEST["north"])) {
+	    echo "Missing parameter: north";
+		exit;
+	  }
+	  if (isset($_REQUEST["IncludeSeries"])) {
+	    $includeSeries = $_REQUEST["IncludeSeries"]; //TRUE or FALSE
+	  }
+	  $west = $_REQUEST['west'];
+	  if ($west == NULL) {
+	    echo "Value cannot be null.\nParameter name: west";
+		exit;
+	  }
+	  $south = $_REQUEST['south'];
+	  if ($south == NULL) {
+	    echo "Value cannot be null.\nParameter name: south";
+		exit;
+	  }
+	  $east = $_REQUEST['east'];
+	  if ($east == NULL) {
+	    echo "Value cannot be null.\nParameter name: east";
+		exit;
+	  }
+	  $north = $_REQUEST['north'];
+	  if ($north == NULL) {
+	    echo "Value cannot be null.\nParameter name: north";
+		exit;
+	  } 
+	  header("Content-type: text/xml");
+	  echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);	  
+	  echo wof_GetSitesByBox($west, $south, $east, $north, $includeSeries);
+	  exit;
+	} elseif ($method == 'GetSitesObject') {
+	  header("Content-type: text/xml");
+	  echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);	  
+	  echo wof_GetSites();
+	  exit;
+	} elseif ($method == 'GETVALUES') {
+	  $location = wof_read_parameter($postdata, 'location');
+	  $variable = wof_read_parameter($postdata, 'variable');
+	  $startDate =  wof_read_parameter($postdata, 'startdate');
+	  $endDate = wof_read_parameter($postdata, 'enddate');
+	  GetValues($authtoken, $location, $variable, $startDate, $endDate);
+	  exit;
+	} elseif ($method == 'GetValuesForASiteObject') {
+	  $site = wof_read_parameter($postdata, 'site');
+	  $startDate =  wof_read_parameter($postdata, 'startdate');
+	  $endDate = wof_read_parameter($postdata, 'enddate');
+	  GetValuesForASiteObject($authtoken, $site, $startDate, $endDate);
+	  exit;
+	} elseif ($method == 'GetValuesObject') {
+	  $location = wof_read_parameter($postdata, 'location');
+	  $variable = wof_read_parameter($postdata, 'variable');
+	  $startDate =  wof_read_parameter($postdata, 'startdate');
+	  $endDate = wof_read_parameter($postdata, 'enddate');
+	  GetValuesObject($authtoken, $location, $variable, $startDate, $endDate);
+	  exit;
+	} elseif ($method == 'GetVariableInfo') {
+	  $variable = wof_read_parameter($postdata, 'variable');
+	  GetVariableInfo($authtoken, $variable);
+	  exit;
+	} elseif ($method == 'GetVariableInfoObject') {
+	  $variable = wof_read_parameter($postdata, 'variable');
+	  GetVariableInfoObject($authtoken, $variable);
+	  exit;
+	} elseif ($method == 'GetVariables') {
+	  GetVariables();
+	  exit;
+	} elseif ($method == 'GetVariablesObject') {
+	  GetVariablesObject();
+	  exit;
+	}
+	else {  
+	  echo $method . " Web Service method name is not valid. method names are case sensitive.";
+	  exit;
+	}
+	
+	exit;
+  }
 ?>
 
 <html>
-
-    
-
   <head>
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <link rel="alternate" type="text/xml" href="cuahsi_1_1.asmx?disco"/>
