@@ -233,40 +233,86 @@
 	  echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);	  
 	  echo wof_GetSites();
 	  exit;
-	} elseif ($method == 'GETVALUES') {
-	  $location = wof_read_parameter($postdata, 'location');
-	  $variable = wof_read_parameter($postdata, 'variable');
-	  $startDate =  wof_read_parameter($postdata, 'startdate');
-	  $endDate = wof_read_parameter($postdata, 'enddate');
-	  GetValues($authtoken, $location, $variable, $startDate, $endDate);
-	  exit;
+	} elseif ($method == 'GetValues' or $method == 'GetValuesObject') {
+        if (!isset($_REQUEST['location'])) {
+            echo "Missing parameter: location";
+            exit;
+        }
+        if (!isset($_REQUEST['variable'])) {
+            echo "Missing parameter: variable";
+            exit;
+        }
+        if (!isset($_REQUEST['startDate'])) {
+            echo "Missing parameter: startDate";
+            exit;
+        }
+        if (!isset($_REQUEST['endDate'])) {
+            echo "Missing parameter: endDate";
+            exit;
+        }
+	    $location = $_REQUEST["location"];
+	    $variable = $_REQUEST["variable"];
+	    $startDate =  $_REQUEST["startDate"];
+	    $endDate = $_REQUEST["endDate"];
+        header("Content-type: text/xml");
+        echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);
+
+        if ($method == "GetValues") {
+            echo '<string>';
+            echo htmlspecialchars(wof_GetValues($authToken, $location, $variable, $startDate, $endDate));
+            echo "</string>";
+        }
+        elseif ($method == "GetValuesObject") {
+            echo wof_GetValues($authToken, $location, $variable, $startDate, $endDate);
+        }
+        exit;
 	} elseif ($method == 'GetValuesForASiteObject') {
-	  $site = wof_read_parameter($postdata, 'site');
-	  $startDate =  wof_read_parameter($postdata, 'startdate');
-	  $endDate = wof_read_parameter($postdata, 'enddate');
-	  GetValuesForASiteObject($authtoken, $site, $startDate, $endDate);
-	  exit;
-	} elseif ($method == 'GetValuesObject') {
-	  $location = wof_read_parameter($postdata, 'location');
-	  $variable = wof_read_parameter($postdata, 'variable');
-	  $startDate =  wof_read_parameter($postdata, 'startdate');
-	  $endDate = wof_read_parameter($postdata, 'enddate');
-	  GetValuesObject($authtoken, $location, $variable, $startDate, $endDate);
-	  exit;
-	} elseif ($method == 'GetVariableInfo') {
-	  $variable = wof_read_parameter($postdata, 'variable');
-	  GetVariableInfo($authtoken, $variable);
-	  exit;
-	} elseif ($method == 'GetVariableInfoObject') {
-	  $variable = wof_read_parameter($postdata, 'variable');
-	  GetVariableInfoObject($authtoken, $variable);
-	  exit;
+        if (!isset($_REQUEST['site'])) {
+            echo "Missing parameter: site";
+            exit;
+        }
+        if (!isset($_REQUEST['startDate'])) {
+            echo "Missing parameter: startDate";
+            exit;
+        }
+        if (!isset($_REQUEST['endDate'])) {
+            echo "Missing parameter: endDate";
+            exit;
+        }
+        $site = $_REQUEST['site'];
+	    $startDate =  $_REQUEST['startDate'];
+        $endDate = $_REQUEST['endDate'];
+        header("Content-type: text/xml");
+        echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);
+        echo wof_GetValuesForASite($authToken, $site, $startDate, $endDate);
+        exit;
+	} elseif ($method == 'GetVariableInfo' or $method == 'GetVariableInfoObject') {
+        $variable = "";
+        if (isset($_REQUEST['variable'])) {
+            $variable = $_REQUEST['variable'];
+        }
+        header("Content-type: text/xml");
+        echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);
+        if ($method == "GetVariableInfo") {
+            echo '<string>';
+            echo htmlspecialchars(wof_GetVariableInfo($authToken, $variable));
+            echo '</string>';
+        } elseif ($method == "GetVariableInfoObject") {
+            echo wof_GetVariableInfo($authToken, $variable);
+        }
+        exit;
 	} elseif ($method == 'GetVariables') {
-	  GetVariables();
-	  exit;
+        header("Content-type: text/xml");
+        echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);
+        echo '<string>';
+        echo htmlspecialchars(wof_GetVariables());
+        echo '</string>';
+	    exit;
 	} elseif ($method == 'GetVariablesObject') {
-	  GetVariablesObject();
-	  exit;
+        header("Content-type: text/xml");
+        echo chr(60).chr(63).'xml version="1.0" encoding="utf-8" '.chr(63).chr(62);
+        echo wof_GetVariables();
+	    exit;
 	}
 	else {  
 	  echo $method . " Web Service method name is not valid. method names are case sensitive.";

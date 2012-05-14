@@ -72,170 +72,215 @@ function wof_finish() {
 }
 
 function wof_queryInfo_variables() {
-  $retval = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
-  $retval .= '<criteria MethodCalled="GetVariables"><parameter name="variable" value="" />';
-  $retval .= "</criteria></queryInfo>";
-  return $retval;  
+  $retVal = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
+  $retVal .= '<criteria MethodCalled="GetVariables"><parameter name="variable" value="" />';
+  $retVal .= "</criteria></queryInfo>";
+  return $retVal;  
 }
 
 function wof_queryInfo_variable($variable) {
-  $retval = "<queryInfo><creationTime>" . date('c') . "</creationTime>";
-  $retval .= '<criteria MethodCalled="GetVariableInfo">';
-  $retval .= "<variableParam>" . $variable . "</variableParam>";
-  $retval .= '<parameter name="variable" value="' . $variable . '" />';
-  $retval .= "</criteria></queryInfo>";
-  return $retval;
+  $retVal = "<queryInfo><creationTime>" . date('c') . "</creationTime>";
+  $retVal .= '<criteria MethodCalled="GetVariableInfo">';
+  $retVal .= "<variableParam>" . $variable . "</variableParam>";
+  $retVal .= '<parameter name="variable" value="' . $variable . '" />';
+  $retVal .= "</criteria></queryInfo>";
+  return $retVal;
 }
 
 function wof_queryInfo_GetSites($site = null) {
-  $retval = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
-  $retval .= '<criteria MethodCalled="GetSites">';
-  $retval .= '<parameter name="site" value="ALL SITES" /></criteria></queryInfo>';
-  return $retval;
+  $retVal = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
+  $retVal .= '<criteria MethodCalled="GetSites">';
+  $retVal .= '<parameter name="site" value="ALL SITES" /></criteria></queryInfo>';
+  return $retVal;
 }
 
 function wof_queryInfo_site($site = null) {
-  $retval = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
-  $retval .= '<criteria MethodCalled="GetSiteInfo">';
-  $retval .= '<parameter name="site" value="' . $site . '" /></criteria></queryInfo>';
-  return $retval;
+  $retVal = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
+  $retVal .= '<criteria MethodCalled="GetSiteInfo">';
+  $retVal .= '<parameter name="site" value="' . $site . '" /></criteria></queryInfo>';
+  return $retVal;
 }
 
 function wof_queryInfo_MultipleSites($siteArray) {
-  $retval = '<queryInfo><creationTime>' . date('c') . '</creationTime><criteria MethodCalled="GetSiteInfo">';
+  $retVal = '<queryInfo><creationTime>' . date('c') . '</creationTime><criteria MethodCalled="GetSiteInfo">';
   foreach($siteArray as $param) {
-    $retval .= '<parameter name="site" value="' . $param . '" />';
+    $retVal .= '<parameter name="site" value="' . $param . '" />';
   }
-  $retval .= '</criteria></queryInfo>';
-  return $retval;
+  $retVal .= '</criteria></queryInfo>';
+  return $retVal;
 }
 
 function wof_queryInfo_SitesByBox($north, $south, $east, $west, $IncludeSeries) {
-  $retval = '<queryInfo><creationTime>' . date('c') . '</creationTime>
+  $retVal = '<queryInfo><creationTime>' . date('c') . '</creationTime>
   <criteria MethodCalled="GetSitesByBoxObject">';
-  $retval .= '<parameter name="north" value="' . $north . '" />';
-  $retval .= '<parameter name="south" value="' . $south . '" />';
-  $retval .= '<parameter name="east" value="' . $east . '" />';
-  $retval .= '<parameter name="west" value="' . $west . '" />';
-  $retval .= '<parameter name="IncludeSeries" value="' . $IncludeSeries . '" />';
-  $retval .= '</criteria></queryInfo>';
-  return $retval;
+  $retVal .= '<parameter name="north" value="' . $north . '" />';
+  $retVal .= '<parameter name="south" value="' . $south . '" />';
+  $retVal .= '<parameter name="east" value="' . $east . '" />';
+  $retVal .= '<parameter name="west" value="' . $west . '" />';
+  $retVal .= '<parameter name="IncludeSeries" value="' . $IncludeSeries . '" />';
+  $retVal .= '</criteria></queryInfo>';
+  return $retVal;
 }
 
 function wof_queryInfo_Values($location, $variable, $startDate, $endDate) {
-  $retval = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
-  $retval .= '<criteria MethodCalled="GetValues">';
-  $retval .= '<parameter name="site" value="' . $location . '" />';
-  $retval .= '<parameter name="variable" value="' . $variable . '" />';
-  $retval .= '<parameter name="startDate" value="' . $startDate . '" />';
-  $retval .= '<parameter name="endDate" value="' . $endDate . '" />';
-  $retval .= '</criteria></queryInfo>';
-  return $retval;
+  $retVal = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
+  $retVal .= '<criteria MethodCalled="GetValues">';
+  $retVal .= '<parameter name="site" value="' . $location . '" />';
+  $retVal .= '<parameter name="variable" value="' . $variable . '" />';
+  $retVal .= '<parameter name="startDate" value="' . $startDate . '" />';
+  $retVal .= '<parameter name="endDate" value="' . $endDate . '" />';
+  $retVal .= '</criteria></queryInfo>';
+  return $retVal;
+}
+
+function wof_queryInfo_ValuesForSite($site, $startDate, $endDate) {
+    $retVal = '<queryInfo><creationTime>' . date('c') . '</creationTime>';
+    $retVal .= '<criteria MethodCalled="GetValuesForASite">';
+    $retVal .= '<parameter name="site" value="' . $site . '" />';
+    $retVal .= '<parameter name="startDate" value="' . $startDate . '" />';
+    $retVal .= '<parameter name="endDate" value="' . $endDate . '" />';
+    $retVal .= '</criteria></queryInfo>';
+    return $retVal;
 }
 
 //auxiliary function: gets the <site> element corresponding to the site code
 function wof_GetSiteInfoByCode($sitecode, $includeSeriesCatalog) {
   $split = explode(":", $sitecode);
   $shortcode = $split[1]; 
-  $retval = "<site>";
-  $retval .= db_GetSiteByCode($shortcode);
+  $retVal = "<site>";
+  $retVal .= db_GetSiteByCode($shortcode);
   
   if ($includeSeriesCatalog) {
-    $retval .=  db_GetSeriesCatalog($shortcode);
+    $retVal .=  db_GetSeriesCatalog($shortcode);
   }
-  $retval .= '</site>';
-  return $retval;
+  $retVal .= '</site>';
+  return $retVal;
 }
 
 function wof_GetSiteInfo($authToken, $fullSiteCode) {
-  $retval = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">
+  $retVal = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">
   <queryInfo><creationTime>'. date('c') . '</creationTime><criteria MethodCalled="GetSiteInfo"><parameter name="site" value="'. $fullSiteCode . '" /></criteria></queryInfo>';
   
   $split = explode(":", $fullSiteCode);
   $shortcode = $split[1];
   
-  $retval .= "<site>";
-  $retval .= db_GetSiteByCode($shortcode);
-  $retval .=  db_GetSeriesCatalog($shortcode);
-  $retval .= '</site>';
-  $retval .= '</sitesResponse>';
-  return $retval;
+  $retVal .= "<site>";
+  $retVal .= db_GetSiteByCode($shortcode);
+  $retVal .=  db_GetSeriesCatalog($shortcode);
+  $retVal .= '</site>';
+  $retVal .= '</sitesResponse>';
+  return $retVal;
 }
 
 //returns full information about multiple sites according to the array of site codes
 function wof_GetSiteInfoMultipleObject($authToken, $siteArray) {
-  $retval = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">' .
+  $retVal = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">' .
   wof_queryInfo_MultipleSites($siteArray);
   
   foreach($siteArray as $sitecodeparam) {
-    $retval .= wof_GetSiteInfoByCode($sitecodeparam, true); 
+    $retVal .= wof_GetSiteInfoByCode($sitecodeparam, true); 
   }
   
-  $retval .= '</sitesResponse>';
-  return $retval;
+  $retVal .= '</sitesResponse>';
+  return $retVal;
 }
 
 function wof_GetSites() {
-  $retval = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">';
-  $retval .= wof_queryInfo_GetSites();
-  $retval .= db_GetSites();  
-  $retval .= '</sitesResponse>';
-  return $retval;
+  $retVal = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">';
+  $retVal .= wof_queryInfo_GetSites();
+  $retVal .= db_GetSites();  
+  $retVal .= '</sitesResponse>';
+  return $retVal;
 }
 
 function wof_GetSitesByBox($west, $south, $east, $north, $IncludeSeries) {
   //TODO add support for IncludeSeries (now assumed FALSE)
-  $retval = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">';
-  $retval .= wof_queryInfo_SitesByBox($north, $south, $east, $west, $IncludeSeries);
-  $retval .= db_GetSitesByBox($west, $south, $east, $north);
-  $retval .= '</sitesResponse>';
-  return $retval;
+  $retVal = '<sitesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.cuahsi.org/waterML/1.1/">';
+  $retVal .= wof_queryInfo_SitesByBox($north, $south, $east, $west, $IncludeSeries);
+  $retVal .= db_GetSitesByBox($west, $south, $east, $north);
+  $retVal .= '</sitesResponse>';
+  return $retVal;
 }
 
-function wof_GetValues($authToken, $location, $variable, $startDate, $endDate) {
+function wof_GetValues( $authToken, $location, $variable, $startDate, $endDate ) {
+    //get the short variable code and short site code
+    $shortSiteCode = $location;
+    $shortVariableCode = $variable;
+    $pos1 = strpos($location, ":");
+    if ($pos1 === TRUE) {
+        $split1 = explode(":", $location);
+        $shortSiteCode = $split1[1];
+    }
+    $pos2 = strpos($variable, ":");
+    if ($pos2 === TRUE) {
+        $split2 = explode(":", $variable);
+        $shortVariableCode = $split2[1];
+    }
   
-  //get the short variable code and short site code
-  $split1 = explode(":", $location);
-  $shortSiteCode = $split1[1];
-  $split2 = explode(":", $variable);
-  $shortVariableCode = $split2[1];
+    $retVal = '<timeSeriesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
+    $retVal .= wof_queryInfo_Values($location, $variable, $startDate, $endDate);
+    $retVal .= '<timeSeries>';
   
-  $retval = '<timeSeriesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
-  $retval .= wof_queryInfo_Values($location, $variable, $startDate, $endDate);
-  $retval .= '<timeSeries>';
+    //write site information
+    $retVal .= db_GetSiteByCode($shortSiteCode, "sourceInfo", "SiteInfoType");
   
-  //write site information
-  $retval .= db_GetSiteByCode($shortSiteCode, "sourceInfo", "SiteInfoType");
+    //write variable information
+    $retVal .= db_GetVariableByCode($shortVariableCode);
   
-  //write variable information
-  $retval .= db_GetVariableByCode($shortVariableCode);
+    //write list of data values
+    $retVal .= db_GetValues($shortSiteCode, $shortVariableCode, $startDate, $endDate);
   
-  //write list of data values
-  $retval .= db_GetValues($shortSiteCode, $shortVariableCode, $startDate, $endDate);
-  
-  $retval .= "</timeSeries>";
-  $retval .= "</timeSeriesResponse>";
-  return $retval;
+    $retVal .= "</timeSeries>";
+    $retVal .= "</timeSeriesResponse>";
+    return $retVal;
 }
 
-function wof_GetValuesForASite($authToken, $site, $startDate, $endDate) { 
-  //todo write xml code here
+function wof_GetValuesForASite( $authToken, $site, $startDate, $endDate ) {
+    $shortSiteCode = $site;
+    $pos1 = strpos($site, ":");
+    if ($pos1 >= 0) {
+        $split1 = explode(":", $site);
+        $shortSiteCode = $split1[1];
+    }
+
+    $retVal = '<timeSeriesResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
+    $retVal .= wof_queryInfo_ValuesForSite($site, $startDate, $endDate);
+    $variableCodes = db_GetVariableCodesBySite($shortSiteCode);
+    $siteInformation = db_GetSiteByCode($shortSiteCode, "sourceInfo", "SiteInfoType");
+
+    foreach($variableCodes as $varCode ) {
+        $retVal .= '<timeSeries>';
+
+        //write site information
+        $retVal .= $siteInformation;
+
+        //write variable information
+        $retVal .= db_GetVariableByCode($varCode);
+
+        //write list of data values
+        $retVal .= db_GetValues($shortSiteCode, $varCode, $startDate, $endDate);
+
+        $retVal .= "</timeSeries>";
+    }
+
+    $retVal .= "</timeSeriesResponse>";
+    return $retVal;
 }
 
 function wof_GetVariables() {
-  $retval = '<variablesResponse xmlns="http://www.cuahsi.org/waterML/1.1/">';
-  $retval .= wof_queryInfo_variables();
-  $retval .= '<variables>';
-  $retval .= db_GetVariableByCode(NULL);
-  $retval .= '</variables></variablesResponse>';	  
-  return $retval;
+  $retVal = '<variablesResponse xmlns="http://www.cuahsi.org/waterML/1.1/">';
+  $retVal .= wof_queryInfo_variables();
+  $retVal .= '<variables>';
+  $retVal .= db_GetVariableByCode(NULL);
+  $retVal .= '</variables></variablesResponse>';	  
+  return $retVal;
 }
 
 // GetVariableInfo Web Method
 function wof_GetVariableInfo($authToken, $variable) {
    
-  $retval = '<variablesResponse>';  
-  $retval .= wof_queryInfo_variable($variable);
+  $retVal = '<variablesResponse>';  
+  $retVal .= wof_queryInfo_variable($variable);
   
   //checking for variable code: send NULL or send the short code
   $short_code = NULL;
@@ -243,10 +288,10 @@ function wof_GetVariableInfo($authToken, $variable) {
     $short_code = substr($variable, strpos($variable, ':') + 1);
   }
   
-  $retval .= '<variables>';
-  $retval .= db_GetVariableByCode($short_code);
-  $retval .= '</variables></variablesResponse>';	  
-  return $retval;
+  $retVal .= '<variables>';
+  $retVal .= db_GetVariableByCode($short_code);
+  $retVal .= '</variables></variablesResponse>';	  
+  return $retVal;
 }
 
 function GetSiteInfo($authToken, $site) {
