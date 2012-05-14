@@ -1,0 +1,1 @@
+document.write("<blockquote><br /><p><strong>Data</strong><br /><a href=add_data_value.php>Add a single value</a><br /><a href=add_data_values.php>Add multiple values</a></p><p><strong>View Data</strong><br /><a href=>Show all by source</a><br /><a href=>Show all by date range</a><br /><a href=>Show all by specifics</a></p><p><a href=logout.html>Logout</a></p></blockquote>");

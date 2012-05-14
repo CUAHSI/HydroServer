@@ -1,0 +1,9 @@
+$sql = "INSERT INTO `moss_users`(`firstname`, `lastname`, `username`, `password`, `authority`) VALUES (\'Jiri\',\'Kadlec\',\'jkadlec\',\'jiri4moss\',\'admin\')";
+
+
+
+"localhost","wc4moss","pw2testWC"
+
+
+
+UPDATE `moss_users` SET `password`=PASSWORD('jiri4moss') WHERE `username`='jkadlec'

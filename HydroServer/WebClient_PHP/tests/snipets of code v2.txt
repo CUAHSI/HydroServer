@@ -1,0 +1,145 @@
+$auth = mysql_result($result,0,"authority");
+
+		if ($auth == "admin") {
+			$nav ="<SCRIPT src=A_navbar.js></SCRIPT>";
+		
+		} elseif ($auth == "teacher") {
+			$nav ="<SCRIPT src=T_navbar.js></SCRIPT>";
+		
+		} else {
+			$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
+		}
+
+
+
+<SCRIPT src="A_navbar.js"></SCRIPT>
+
+
+&copy;
+
+
+<?php echo "$msg,$msg2"; ?>
+
+
+$num = @mysql_num_rows($result);
+	
+	if ($num < 1) {
+
+    	$msg = "<P><em>Sorry, there are no users.</em></p>";
+	
+	} else {
+	
+	while ($row = mysql_fetch_array ($result)) {
+
+		$users = $row["username"];
+
+		$option_block .= "<option value=$users>users</option>";
+	}
+}
+
+
+This works:
+SELECT username FROM `moss_users` WHERE authority = 'teacher'
+
+Select username FROM $table_name WHERE (authority='teacher' OR authority='student') ORDER BY username
+
+
+
+It's a better practice not to use $_POST values directly in SQL statements. You really should sanitize them first by using the function mysql_real_escape_string(). If not you run the risk of an SQL injection attack which is a big security risk. So for your query the code would be something like:
+
+$last = mysql_real_escape_string($_POST["LastName"]);
+$first = mysql_real_escape_string($_POST["FirstName"]);
+
+$sql="SELECT * FROM name1 WHERE LastName='" . $last . "' AND FirstName='" . $first . "'";
+
+Strings need to be encapsulated by ' and POST variables are an array so to properly address them the names need to have " around them.
+
+I didn't change any of the names of the variable so I'm assuming this matches your database table structure. If not make sure you are using the same names as you have in your table. 
+
+
+
+
+
+$row = mysql_fetch_assoc($qShowStatusResult);
+$next_increment = $row['Auto_increment'];
+
+echo "next increment number: [$next_increment]";
+
+
+
+
+
+<?php
+$string1 = "This is an example";
+$string2 = "of connecting strings.";
+$NewString = $string1 . $string2;
+echo "$NewString";
+?> 
+
+This is an exampleof connecting strings. 
+
+There should be a space between the words example and of. Let's add in a space on the connecting code line :
+
+$NewString = $string1 . " " . $string2;
+
+This is an example of connecting strings. 
+
+
+
+
+Code to get next increment automatically:
+
+<?
+$tablename 		= "tablename";
+$next_increment 	= 0;
+$qShowStatus 		= "SHOW TABLE STATUS LIKE '$tablename'";
+$qShowStatusResult 	= mysql_query($qShowStatus) or die ( "Query failed: " . mysql_error() . "<br/>" . $qShowStatus );
+
+$row = mysql_fetch_assoc($qShowStatusResult);
+$next_increment = $row['Auto_increment'];
+
+echo "next increment number: [$next_increment]";
+?>
+
+
+
+Code to explore a string:
+
+$TimeString = "$string2 + :00";
+
+$newtime = explode(":", $string2);
+
+$newtime[0]; // piece1
+$newtime[1]; // piece2
+$newtime[2]; // piece3
+
+$newUTC = $newtime[0] + $UTCOffset
+
+$FinalTime = $newUTC + $newtime[1] + $newtime[2]
+
+
+
+
+if ($newUTCpiece > 24) {
+
+	$AdjustedDate = explode("-", $LocalDate);
+
+	$DatePiece[0]; // piece1
+	$DatePiece[1]; // piece2
+	$DatePiece[2]; // piece3
+
+	$NewDate = $DatePiece[2] + 1;
+
+	$NewTimePiece = $newUTCpiece - 24;
+
+	$DateTimeUTC = $NewTimePiece . 
+
+	} else {
+
+
+	$DateTimeUTC = $LocalDate . " " . $newUTCpiece . $newtime[1] . ":00";
+
+	$LocalDateTime = $LocalDate . " " . $LocalTime . ":00";
+	}
+
+}

@@ -1,0 +1,71 @@
+body {
+	margin-top: 0px;
+	margin-left: 0px;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 16pt;
+	font-family: Arial;
+	font-style: normal;
+	color: #3c3c3c;
+}
+h2 {
+	font-weight: bold;
+	font-size: 14pt;
+	font-family: Arial;
+	font-style: normal;
+	color: #3c3c3c;
+}
+
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+}
+
+.em {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: italic;
+}
+
+.em2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-style: italic;
+	color: #F00;
+	font-weight: bold;
+}
+
+a:link {
+	FONT: 10pt Arial;
+	COLOR: blue;
+	text-decoration: underline;
+}
+
+a:active {
+	FONT: 10pt Arial; 
+	BACKGROUND: yellow; 
+	COLOR: black; 
+	TEXT-DECORATION: underline;
+}
+
+a:hover {
+	FONT: 10pt Arial; 
+	BACKGROUND: yellow; 
+	COLOR: red; 
+	TEXT-DECORATION: underline;
+}
+
+a:visited {
+	FONT: 10pt Arial;
+	COLOR: blue;
+	text-decoration: none;
+}
+
+td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+}
