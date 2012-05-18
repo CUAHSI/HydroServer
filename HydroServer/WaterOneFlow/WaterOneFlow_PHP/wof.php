@@ -207,12 +207,12 @@ function wof_GetValues( $authToken, $location, $variable, $startDate, $endDate )
     $shortSiteCode = $location;
     $shortVariableCode = $variable;
     $pos1 = strpos($location, ":");
-    if ($pos1 === TRUE) {
+    if ($pos1 >= 0) {
         $split1 = explode(":", $location);
         $shortSiteCode = $split1[1];
     }
     $pos2 = strpos($variable, ":");
-    if ($pos2 === TRUE) {
+    if ($pos2 >= 0) {
         $split2 = explode(":", $variable);
         $shortVariableCode = $split2[1];
     }
