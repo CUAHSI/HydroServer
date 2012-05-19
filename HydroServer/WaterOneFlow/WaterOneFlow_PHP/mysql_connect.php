@@ -1,6 +1,6 @@
 <?php
   
-  require 'app_config.php';
+  require 'configuration/app_config.php';
   
   mysql_connect(DATABASE_HOST, DATABASE_USERNAME, DATABASE_PASSWORD)
     or die('<p>Error connecting to database: ' . 
@@ -27,5 +27,3 @@
 	echo "<li>Table: {$row[0]}</li>";
   }
   echo "</ul>";
-	
-?>

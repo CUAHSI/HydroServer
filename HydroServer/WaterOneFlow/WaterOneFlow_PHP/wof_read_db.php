@@ -459,5 +459,3 @@ function db_GetSourceByID($sourceID)
     $retVal .= "</source>";
     return $retVal;
 }
-
-?>
