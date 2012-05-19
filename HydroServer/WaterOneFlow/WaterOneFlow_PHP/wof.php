@@ -397,5 +397,3 @@ function GetVariablesObject() {
   echo '</GetVariablesObjectResponse>';
   wof_finish();
 }
-
-?>

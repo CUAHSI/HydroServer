@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <link rel="alternate" type="text/xml" href="cuahsi_1_1.asmx?disco"/>
+
+    <style type="text/css">
+
+        BODY { color: #000000; background-color: white; font-family: ; margin-left: 0px; margin-top: 0px; }
+        #content { margin-left: 30px; font-size: .70em; padding-bottom: 2em; }
+        A:link { color: #336699; font-weight: bold; text-decoration: underline; }
+        A:visited { color: #6699cc; font-weight: bold; text-decoration: underline; }
+        A:active { color: #336699; font-weight: bold; text-decoration: underline; }
+        A:hover { color: cc3300; font-weight: bold; text-decoration: underline; }
+        P { color: #000000; margin-top: 0px; margin-bottom: 12px; font-family: ; }
+        pre { background-color: #e5e5cc; padding: 5px; font-family: ; font-size: x-small; margin-top: -5px; border: 1px #f0f0e0 solid; }
+        td { color: #000000; font-family: ; font-size: .7em; }
+        h2 { font-size: 1.5em; font-weight: bold; margin-top: 25px; margin-bottom: 10px; border-top: 1px solid #003366; margin-left: -15px; color: #003366; }
+        h3 { font-size: 1.1em; color: #000000; margin-left: -15px; margin-top: 10px; margin-bottom: 10px; }
+        ul, ol { margin-top: 10px; margin-left: 20px; }
+        li { margin-top: 10px; color: #000000; }
+        font.value { color: darkblue; font: bold; }
+        font.key { color: darkgreen; font: bold; }
+        .heading1 { color: #ffffff; font-family: ; font-size: 26px; font-weight: normal; background-color: #003366; margin-top: 0px; margin-bottom: 0px; margin-left: -30px; padding-top: 10px; padding-bottom: 3px; padding-left: 15px; width: 105%; }
+
+        .intro { margin-left: -15px; }
+
+    </style>
+
+    <title>WaterOneFlow Web Service</title>
+
+    <script language="javascript" type="text/javascript">
+
+        function ShowTestSection() {
+            document.getElementById("soaptemplaterequest").style.display = "block";
+            document.getElementById("soapsamplerequest").style.display = "none";
+            document.getElementById("soapsampleresponse").style.display = "none";
+            document.getElementById("testhref").style.display = "none";
+            document.getElementById("samplehref").style.display = "block";
+            document.getElementById("soapsampletitle").style.display = "none";
+            document.getElementById("soaptesttitle").style.display = "block";
+        }
+
+        function ShowTemplateSection() {
+            document.getElementById("soaptemplaterequest").style.display = "none";
+            document.getElementById("soapsamplerequest").style.display = "block";
+            document.getElementById("soapsampleresponse").style.display = "block";
+            document.getElementById("samplehref").style.display = "none";
+            document.getElementById("testhref").style.display = "block";
+            document.getElementById("soapsampletitle").style.display = "block";
+            document.getElementById("soaptesttitle").style.display = "none";
+        }
+
+        function SendSoapRequest_onclick(SoapRequest, MethodName, Url) {
+            // clear any old message
+
+            document.getElementById("note").firstChild.nodeValue ="";
+            // SoapRequst Javascript not working in FF
+            SoapRequest = document.getElementById("txasoaptemplaterequest").value;
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {// code for all new browsers
+                xmlhttp=new XMLHttpRequest();
+            } else if (window.ActiveXObject)
+            {// code for IE5 and IE6
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            if (xmlhttp!=null)
+            {
+                // Function.
+                xmlhttp.onreadystatechange=function() {
+                    if (xmlhttp.readyState==4)
+                    {
+                        if (xmlhttp.status == 200) {
+                            // alert(xmlhttp.responseText)
+                            document.getElementById("tempsoaprequest").value = document.getElementById("txasoaptemplaterequest").value;
+                            document.getElementById("txasoaptemplaterequest").value = xmlhttp.responseText;
+                            document.getElementById("backhref").style.display = "block";
+                            document.getElementById("posthref").style.display = "none";
+
+                        } else {
+                            document.getElementById("tempsoaprequest").value = document.getElementById("txasoaptemplaterequest").value;
+
+                            document.getElementById("note").style.visibility = "visible";
+                            document.getElementById("note").firstChild.nodeValue ="ERROR" ;
+                        }
+                        // done. turn off status
+                        document.getElementById("Status").style.visibility = "hidden";
+
+                    }
+                }
+                xmlhttp.open('POST', Url, true);
+                xmlhttp.setRequestHeader('Content-Type', 'text/xml; charset="UTF-8"');
+                xmlhttp.setRequestHeader('SOAPAction', '');
+
+                document.getElementById("Status").style.visibility = "visible";
+
+                xmlhttp.send(SoapRequest);
+
+            }
+            else
+            {
+                alert("Your browser does not support XMLHTTP.");
+            }
+        }
+
+        function GoBackToRequest_onclick() {
+            document.getElementById("txasoaptemplaterequest").value = document.getElementById("tempsoaprequest").value;
+            document.getElementById("backhref").style.display = "none";
+            document.getElementById("posthref").style.display = "block";
+        }
+    </script>
+
+</head>
+
+<body>
+
+
+
+<div id="content">
+
+    <p class="heading1">WaterOneFlow</p>
+    <br>
+
+	<span id="Span1">
+		<p class="intro">The following operations are supported.  For a formal definition, please review the <a href="cuahsi_1_1.php?WSDL">Service Description</a>.</p>
+
+				<ul>
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetSiteInfo">GetSiteInfo</a>
+					<span id="MethodList_ctl01_Span2">
+						<br>Given a site number, this method returns the site's metadata. Send the site code in this format: 'NetworkName:SiteCode'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetSiteInfoMultpleObject">GetSiteInfoMultpleObject</a>
+					<span id="MethodList_ctl02_Span2">
+						<br>Given a site number, this method returns the site's metadata. Send the site code in this format: 'NetworkName:SiteCode'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetSiteInfoObject">GetSiteInfoObject</a>
+					<span id="MethodList_ctl03_Span2">
+						<br>Given a site number, this method returns the site's metadata. Send the site code in this format: 'NetworkName:SiteCode'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetSites">GetSites</a>
+					<span id="MethodList_ctl04_Span2">
+						<br>Given an array of site numbers, this method returns the site metadata for each one. Send the array of site codes in this format: 'NetworkName:SiteCode'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetSitesByBoxObject">GetSitesByBoxObject</a>
+					<span id="MethodList_ctl05_Span2">
+						<br>Given a site number, this method returns the site's metadata. Send the site code in this format: 'NetworkName:SiteCode'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetSitesObject">GetSitesObject</a>
+					<span id="MethodList_ctl06_Span2">
+						<br>Given an array of site numbers, this method returns the site metadata for each one. Send the array of site codes in this format: 'NetworkName:SiteCode'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetValues">GetValues</a>
+					<span id="MethodList_ctl07_Span2">
+						<br>Given a site number, a variable, a start date, and an end date, this method returns a time series. Pass in the sitecode and variable in this format: 'NetworkName:SiteCode' and 'NetworkName:Variable'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetValuesForASiteObject">GetValuesForASiteObject</a>
+					<span id="MethodList_ctl08_Span2">
+						<br>Given a site number, this method returns the site's metadata. Send the site code in this format: 'NetworkName:SiteCode'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetValuesObject">GetValuesObject</a>
+					<span id="MethodList_ctl09_Span2">
+						<br>Given a site number, a variable, a start date, and an end date, this method returns a time series. Pass in the sitecode and variable in this format: 'NetworkName:SiteCode' and 'NetworkName:Variable'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetVariableInfo">GetVariableInfo</a>
+					<span id="MethodList_ctl10_Span2">
+						<br>Given a variable code, this method returns the variable's name. Pass in the variable in this format: 'NetworkName:Variable'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetVariableInfoObject">GetVariableInfoObject</a>
+					<span id="MethodList_ctl11_Span2">
+						<br>Given a variable code, this method returns the variable's siteName. Pass in the variable in this format: 'NetworkName:Variable'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetVariables">GetVariables</a>
+					<span id="MethodList_ctl12_Span2">
+						<br>Given a variable code, this method returns the variable's name. Pass in the variable in this format: 'NetworkName:Variable'
+					</span>
+                    </li>
+                    <p />
+
+                    <li>
+                        <a href="cuahsi_1_1.php?op=GetVariablesObject">GetVariablesObject</a>
+					<span id="MethodList_ctl13_Span2">
+						<br>Given a variable code, this method returns the variable's siteName. Pass in the variable in this format: 'NetworkName:Variable'
+					</span>
+                    </li>
+                    <p />
+
+                </ul>
+
+	</span>
+
+
+</div>
+<div id="Status" style="visibility:hidden;z-index:1;position:absolute;left:50%;top:50%;border:thick double #00FF00;" >
+    Running
+</div>
+</body>
+</html>
