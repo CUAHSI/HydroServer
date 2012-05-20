@@ -7,7 +7,8 @@
  * Time: 10:45 AM
  * To change this template use File | Settings | File Templates.
  */
-require_once("../configuration/app_config.php");
+
+require_once('database_connection.php');
 
 $user = $_POST["user"];
 $password = $_POST["password"];
