@@ -1,12 +1,20 @@
 <?php
-
-//setup names of database and table to use
-$db_name ="moss_db";
+//Display the correct navigation or redirect them to the unauthorized user page
+if ($_COOKIE[auth] == "admin"){
+			$nav ="<SCRIPT src=A_navbar.js></SCRIPT>";
+		
+		} elseif ($auth == "teacher"){
+			$nav ="<SCRIPT src=T_navbar.js></SCRIPT>";
+		
+		} elseif ($auth == "student"){
+			$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
+		} else {
+		header("Location: unauthorized.php");
+		exit;	
+		}
 
 //connect to server and select database
-$connection = @mysql_connect("localhost","wc4moss","pw2testWC") or die(mysql_error());
-
-$db = @mysql_select_db($db_name,$connection)or die(mysql_error());
+require_once 'database_connection.php';
 
 //add the SourceID's
 $sql ="Select * FROM sources";
@@ -22,9 +30,10 @@ $num = @mysql_num_rows($result);
 
 	while ($row = mysql_fetch_array ($result)) {
 
-		$sources = $row["Organization"];
+		$sourceid = $row["SourceID"];
+		$sourcename = $row["Organization"];
 
-		$option_block .= "<option value=$sources>$sources</option>";
+		$option_block .= "<option value=$sourceid>$sourcename</option>";
 
 		}
 	}
@@ -43,9 +52,10 @@ $num = @mysql_num_rows($result2);
 
 	while ($row2 = mysql_fetch_array ($result2)) {
 
-		$sites = $row2["SiteName"];
+		$siteid = $row2["SiteID"];
+		$sitename = $row2["SiteName"];
 
-		$option_block2 .= "<option value=$sites>$sites</option>";
+		$option_block2 .= "<option value=$siteid>$sitename</option>";
 
 		}
 	}
@@ -64,9 +74,10 @@ $num = @mysql_num_rows($result3);
 
 	while ($row3 = mysql_fetch_array ($result3)) {
 
-		$type = $row3["VariableName"];
+		$typeid = $row3["VariableID"];
+		$typename = $row3["VariableName"];
 
-		$option_block3 .= "<option value=$type>$type</option>";
+		$option_block3 .= "<option value=$typeid>$typename</option>";
 
 		}
 	}
@@ -85,30 +96,20 @@ $num = @mysql_num_rows($result4);
 
 	while ($row4 = mysql_fetch_array ($result4)) {
 
-		$method = $row4["MethodDescription"];
+		$methodid = $row4["MethodID"];
+		$methodname = $row4["MethodDescription"];
 
-		$option_block4 .= "<option value=$method>$method</option>";
+		$option_block4 .= "<option value=$methodid>$methodname</option>";
 
 		}
 	}
-
-//create next increment ValueID in the table
-$next_increment = 0;
-
-$sql5 ="SHOW TABLE STATUS LIKE 'datavalues'";
-
-$result5 = @mysql_query($sql5,$connection)or die(mysql_error());
-
-$row5 = mysql_fetch_assoc($result5);
-
-$next_increment = $row5['Auto_increment'];
 
 ?>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hydrologic System</title>
+<title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
 <script type="text/javascript">
@@ -119,7 +120,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
 </script>
 </head>
 
-<body background="images/bkgrdimage.png">
+<body background="images/bkgrdimage.jpg">
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning Banner" /></td>
@@ -178,7 +179,8 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Time:</strong></td>
-          <td valign="top"><input type="text" name="Time" size=5 maxlength=5 /><span class="em">&nbsp;(Ex: &quot;13:45&quot; for 1:45 pm)</span></td>
+          <td valign="top"><input type="text" name="Time" size=5 maxlength=5 />
+          <span class="em">&nbsp;(Ex: &quot;13:45&quot; for 1:45 pm or &quot;06:30&quot; for 6:30 am)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>

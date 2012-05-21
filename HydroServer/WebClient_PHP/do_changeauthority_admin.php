@@ -1,21 +1,18 @@
 <?php
+//check authority to be here
+require_once 'auth_admin.php';
+
 //check for required fields
 if ((!$_POST['username']) || (!$_POST['authority'])) {
 	header("Location: changeauthority.php");
 	exit;
 }
 
-//setup names of database and table to use
-$db_name ="moss_db";
-$table_name ="moss_users";
-
 //connect to server and select database
-$connection = @mysql_connect("localhost","wc4moss","pw2testWC") or die(mysql_error());
-
-$db = @mysql_select_db($db_name,$connection)or die(mysql_error());
+require_once 'database_connection.php';
 
 //add the user's data
-$sql ="UPDATE $table_name SET authority='$_POST[authority]' WHERE username='$_POST[username]'";
+$sql ="UPDATE moss_users SET authority='$_POST[authority]' WHERE username='$_POST[username]'";
 
 $result = @mysql_query($sql,$connection)or die(mysql_error());
 
@@ -26,7 +23,7 @@ $msg ="<p class=em2>Congratulations, you're changed the authority of $_POST[user
 }
 
 //add the user's data
-$sql2 ="Select username FROM $table_name WHERE (authority='teacher' OR authority='student') ORDER BY username";
+$sql2 ="Select username FROM moss_users WHERE (authority='teacher' OR authority='student') ORDER BY username";
 
 $result2 = @mysql_query($sql2,$connection)or die(mysql_error());
 
@@ -50,11 +47,11 @@ $num = @mysql_num_rows($result2);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hydrologic System</title>
+<title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 
-<body background="images/bkgrdimage.png">
+<body background="images/bkgrdimage.jpg">
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>
