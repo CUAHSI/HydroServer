@@ -1,6 +1,7 @@
 <?php
 
 require_once 'database_connection.php';
+require_once 'table_names.php';
 
 function db_GetSeriesCatalog($shortSiteCode)
 {
@@ -13,12 +14,12 @@ function db_GetSeriesCatalog($shortSiteCode)
    s.SourceID, s.Organization, s.SourceDescription, s.Citation, 
    s.QualityControlLevelID, s.QualityControlLevelCode, qc.Definition, 
    s.MethodID, s.MethodDescription, m.MethodLink
-   FROM seriescatalog s
-   LEFT JOIN variables v ON s.VariableID = v.VariableID
-   LEFT JOIN units u ON s.VariableUnitsID = u.UnitsID
-   LEFT JOIN units tu ON s.TimeUnitsID = tu.UnitsID
-   LEFT JOIN qualitycontrollevels qc ON s.QualityControlLevelID = qc.QualityControlLevelID 
-   LEFT JOIN methods m ON m.MethodID = s.MethodID";
+   FROM " . get_table_name('SeriesCatalog') . ' s LEFT JOIN ' .
+   get_table_name('Variables') . ' v ON s.VariableID = v.VariableID LEFT JOIN ' .
+   get_table_name('Units') . ' u ON s.VariableUnitsID = u.UnitsID LEFT JOIN ' . 
+   get_table_name('Units') . ' tu ON s.TimeUnitsID = tu.UnitsID LEFT JOIN ' .
+   get_table_name('QualityControlLevels') . ' qc ON s.QualityControlLevelID = qc.QualityControlLevelID LEFT JOIN ' . 
+   get_table_name('Methods') . ' m ON m.MethodID = s.MethodID';
     $query_text .= ' WHERE SiteCode = "' . $shortSiteCode . '"';
 
     $result = mysql_query($query_text);
@@ -72,7 +73,7 @@ function db_GetSeriesCatalog($shortSiteCode)
         $retVal .= "<methodLink>" . $row[33] . "</methodLink>";
         $retVal .= "</method>";
         $retVal .= "<source sourceID=\"{$row[24]}\">";
-        $retVal .= "<organization>{$row[25]}</organization>";
+        $retVal .= utf8_encode("<organization>{$row[25]}</organization>");
         $retVal .= "<sourceDescription>{$row[26]}</sourceDescription>";
         $retVal .= "<citation>{$row[27]}</citation>";
         $retVal .= "</source>";
@@ -105,7 +106,7 @@ function db_GetSitesByQuery($query_text, $siteTag = "siteInfo", $siteTagType = "
     while ($row = mysql_fetch_row($result)) {
         $retVal = '';
         $retVal .= "<" . $fullSiteTag . ">";
-        $retVal .= "<siteName>{$row[0]}</siteName>";
+        $retVal .= '<siteName>'. $row[0] . '</siteName>';
         $retVal .= '<siteCode network="' . SERVICE_CODE . '">' . $row[2] . "</siteCode>";
         $retVal .= '<geoLocation><geogLocation xsi:type="LatLonPointType">';
         $retVal .= "<latitude>{$row[3]}</latitude><longitude>{$row[4]}</longitude></geogLocation>";
@@ -115,8 +116,8 @@ function db_GetSitesByQuery($query_text, $siteTag = "siteInfo", $siteTagType = "
         $localX = $row[6];
         $localY = $row[7];
         if ($localProjectionID != '' and $localX != '' and $localY != '') {
-            $retVal .= '<localSiteXY projectionInformation="' . $localProjectionID .
-                "<X>{$localX}</X><Y>{$localY}</Y></localSiteXY>";
+            $retVal .= '<localSiteXY projectionInformation="' . $localProjectionID . '" >';
+            $retVal .= '<X>' . $localX . '</X><Y>' . $localY . '</Y></localSiteXY>';
         }
 
         $retVal .= "</geoLocation>";
@@ -131,7 +132,7 @@ function db_GetSitesByQuery($query_text, $siteTag = "siteInfo", $siteTagType = "
         }
         $retVal .= '<note type="custom" title="my note">MyHydroServer</note>';
         $retVal .= "</" . $siteTag . ">";
-        $siteArray[$siteIndex] = $retVal;
+        $siteArray[$siteIndex] = utf8_encode($retVal);
         $siteIndex++;
     }
     return $siteArray;
@@ -140,9 +141,9 @@ function db_GetSitesByQuery($query_text, $siteTag = "siteInfo", $siteTagType = "
 function createQuery_GetAllSites()
 {
     $query_text =
-        'SELECT SiteName, SiteID, SiteCode, Latitude, Longitude, SRSID, LocalX, LocalY,
-        Elevation_m, VerticalDatum, State, County, Comments
-        FROM sites LEFT JOIN spatialreferences ON sites.LocalProjectionID = spatialreferences.SpatialReferenceID';
+        'SELECT s.SiteName, s.SiteID, s.SiteCode, s.Latitude, s.Longitude, sr.SRSID, s.LocalX, s.LocalY,
+        s.Elevation_m, s.VerticalDatum, s.State, s.County, s.Comments
+        FROM ' . get_table_name('Sites') . 's LEFT JOIN ' . get_table_name('SpatialReferences') . 'sr ON s.LocalProjectionID = sr.SpatialReferenceID';
     return $query_text;
 }
 
@@ -231,7 +232,7 @@ function db_GetSitesByBox($west, $south, $east, $north)
 
 function db_GetVariableCodesBySite($shortSiteCode) {
     $query_text =
-        'SELECT VariableCode FROM seriescatalog WHERE SiteCode = "' . $shortSiteCode . '"';
+        'SELECT VariableCode FROM ' . get_table_name('SeriesCatalog') . ' WHERE SiteCode = "' . $shortSiteCode . '"';
     $result = mysql_query($query_text);
 
     if (!$result) {
@@ -257,9 +258,9 @@ function db_GetVariableByCode($shortvariablecode = NULL)
    VariableUnitsID, NoDataValue, IsRegular, 
    u2.UnitsName AS "TimeUnitsName", u2.UnitsType AS "TimeUnitsType", u2.UnitsAbbreviation AS "TimeUnitsAbbreviation", 
    TimeUnitsID, TimeSupport, Speciation
-   FROM variables
-   LEFT JOIN units u1 ON variables.VariableUnitsID = u1.UnitsID
-   LEFT JOIN units u2 ON variables.TimeUnitsID = u2.UnitsID';
+   FROM ' . get_table_name('Variables') . 'v LEFT JOIN ' .
+   get_table_name('Units') . ' u1 ON v.VariableUnitsID = u1.UnitsID LEFT JOIN ' .
+   get_table_name('Units') . ' u2 ON v.TimeUnitsID = u2.UnitsID';
 
     if (!is_null($shortvariablecode)) {
         $query_text .= ' WHERE VariableCode = "' . $shortvariablecode . '"';
@@ -310,10 +311,10 @@ function createQuery_TimeRange($startTime, $endTime)
 function db_GetValues($siteCode, $variableCode, $beginTime, $endTime)
 {
     //first get the metadata
-    $querymeta = "SELECT SiteID, VariableID, MethodID, SourceID, QualityControlLevelID FROM seriescatalog WHERE SiteCode = '";
-    $querymeta .= $siteCode . "' AND VariableCode = '" . $variableCode . "'";
-    $querymeta .= " AND " . createQuery_TimeRange($beginTime, $endTime);
-
+    $querymeta = 'SELECT SiteID, VariableID, MethodID, SourceID, QualityControlLevelID FROM ' . get_table_name('SeriesCatalog');
+    $querymeta .= ' WHERE SiteCode = "' . $siteCode . '" AND VariableCode = "' . $variableCode . '" AND ';
+    $querymeta .= createQuery_TimeRange($beginTime, $endTime);
+	
     $result = mysql_query($querymeta);
 
     if (!$result) {
@@ -321,7 +322,7 @@ function db_GetValues($siteCode, $variableCode, $beginTime, $endTime)
             mysql_error() . "</p>");
     }
 
-    $numSeries = $num_rows = mysql_num_rows($result);
+    $numSeries = mysql_num_rows($result);
 
     if ($numSeries == 0) {
         return "<values />";
@@ -341,7 +342,7 @@ function db_GetValues($siteCode, $variableCode, $beginTime, $endTime)
 
 function db_GetValues_OneSeries($siteID, $variableID, $methodID, $sourceID, $qcID, $beginTime, $endTime)
 {
-    $queryval = "SELECT LocalDateTime, UTCOffset, DateTimeUTC, DataValue FROM datavalues WHERE ";
+    $queryval = 'SELECT LocalDateTime, UTCOffset, DateTimeUTC, DataValue FROM ' . get_table_name('DataValues') . ' WHERE ';
     $queryval .= "SiteID={$siteID} AND VariableID={$variableID} AND MethodID={$methodID} AND SourceID={$sourceID} AND QualityControlLevelID={$qcID}";
     $queryval .= " AND LocalDateTime >= '" . $beginTime . "' AND LocalDateTime <= '" . $endTime . "'";
 
@@ -371,7 +372,7 @@ function db_GetValues_OneSeries($siteID, $variableID, $methodID, $sourceID, $qcI
 
 function db_GetValues_MultipleSeries($siteID, $variableID, $beginTime, $endTime)
 {
-    $queryval = "SELECT LocalDateTime, UTCOffset, DateTimeUTC, MethodID, SourceID, QualityControlLevelID, DataValue FROM datavalues WHERE ";
+    $queryval = "SELECT LocalDateTime, UTCOffset, DateTimeUTC, MethodID, SourceID, QualityControlLevelID, DataValue FROM " . get_table_name('DataValues') . ' WHERE ';
     $queryval .= "SiteID={$siteID} AND VariableID={$variableID}";
     $queryval .= " AND LocalDateTime >= '" . $beginTime . "' AND LocalDateTime <= '" . $endTime . "'";
 
@@ -399,7 +400,7 @@ function db_GetValues_MultipleSeries($siteID, $variableID, $beginTime, $endTime)
 
 function db_GetQualityControlLevelByID($qcID)
 {
-    $query = "SELECT QualityControlLevelCode, Definition, Explanation FROM qualitycontrollevels WHERE QualityControlLevelID = " . $qcID;
+    $query = "SELECT QualityControlLevelCode, Definition, Explanation FROM " . get_table_name("QualityControlLevels") . " WHERE QualityControlLevelID = " . $qcID;
     $result = mysql_query($query);
     if (!$result) {
         die("<p>Error in executing the SQL query " . $query . ": " .
@@ -417,7 +418,7 @@ function db_GetQualityControlLevelByID($qcID)
 
 function db_GetMethodByID($methodID)
 {
-    $query = "SELECT MethodDescription, MethodLink FROM methods WHERE MethodID = " . $methodID;
+    $query = "SELECT MethodDescription, MethodLink FROM " . get_table_name("Methods") . " WHERE MethodID = " . $methodID;
     $result = mysql_query($query);
     if (!$result) {
         die("<p>Error in executing the SQL query " . $query . ": " .
@@ -435,7 +436,7 @@ function db_GetMethodByID($methodID)
 function db_GetSourceByID($sourceID)
 {
     $query = "SELECT Organization, SourceDescription, ContactName, Phone, Email, Address, City, State, ZipCode, SourceLink, ";
-    $query .= "Citation FROM sources WHERE SourceID = " . $sourceID;
+    $query .= "Citation FROM " . get_table_name('Sources') . " WHERE SourceID = " . $sourceID;
     $result = mysql_query($query);
     if (!$result) {
         die("<p>Error in executing the SQL query " . $query . ": " .
@@ -457,5 +458,5 @@ function db_GetSourceByID($sourceID)
     $retVal .= "<sourceLink>" . $row[9] . "</sourceLink>";
     $retVal .= "<citation>" . $row[10] . "</citation>";
     $retVal .= "</source>";
-    return $retVal;
+    return utf8_encode($retVal);
 }
