@@ -4,4 +4,5 @@ define("DATABASE_HOST", "localhost");
 define("DATABASE_USERNAME", "odm");
 define("DATABASE_PASSWORD", "odm");
 define("DATABASE_NAME", "odm");
-define("SERVICE_CODE", "MOSS");
+define("SERVICE_CODE", "BRDY");
+define("LOWERCASE_TABLE_NAMES", "FALSE");
