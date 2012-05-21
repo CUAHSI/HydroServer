@@ -1,0 +1,1 @@
+[15-May-2012 09:17:58] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'odm'@'localhost' (using password: YES) in /home5/advenup1/public_html/his/services/database_connection.php on line 4

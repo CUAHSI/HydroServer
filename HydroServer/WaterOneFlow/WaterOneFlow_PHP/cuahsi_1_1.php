@@ -31,6 +31,8 @@ $action = substr($action_name2, strlen('http://www.cuahsi.org/his/1.1/ws/'));
 $postdata = file_get_contents('php://input');
 $authtoken = wof_read_authtoken($postdata);
 
+header('Content-Type: text/html; charset=utf-8');
+
 if ($action == 'GetSiteInfo') {
   $site = wof_read_parameter($postdata, 'site');
   GetSiteInfo($authtoken, $site);
@@ -60,21 +62,23 @@ if ($action == 'GetSiteInfo') {
 } elseif ($action == 'GetValues') {
   $location = wof_read_parameter($postdata, 'location');
   $variable = wof_read_parameter($postdata, 'variable');
-  $startDate =  wof_read_parameter($postdata, 'startdate');
-  $endDate = wof_read_parameter($postdata, 'enddate');
-  GetValues($authtoken, $location, $variable, $startDate, $endDate);
+  $startDate =  wof_read_parameter($postdata, 'startDate');
+  $endDate = wof_read_parameter($postdata, 'endDate');
+  echo 'postdata: ' . $postdata;
+  echo $location . $variable . 'startDate:' . $startDate;
+  //GetValues($authtoken, $location, $variable, $startDate, $endDate);
   exit;
 } elseif ($action == 'GetValuesForASiteObject') {
   $site = wof_read_parameter($postdata, 'site');
-  $startDate =  wof_read_parameter($postdata, 'startdate');
-  $endDate = wof_read_parameter($postdata, 'enddate');
+  $startDate =  wof_read_parameter($postdata, 'startDate');
+  $endDate = wof_read_parameter($postdata, 'endDate');
   GetValuesForASiteObject($authtoken, $site, $startDate, $endDate);
   exit;
 } elseif ($action == 'GetValuesObject') {
   $location = wof_read_parameter($postdata, 'location');
   $variable = wof_read_parameter($postdata, 'variable');
-  $startDate =  wof_read_parameter($postdata, 'startdate');
-  $endDate = wof_read_parameter($postdata, 'enddate');
+  $startDate =  wof_read_parameter($postdata, 'startDate');
+  $endDate = wof_read_parameter($postdata, 'endDate');
   GetValuesObject($authtoken, $location, $variable, $startDate, $endDate);
   exit;
 } elseif ($action == 'GetVariableInfo') {

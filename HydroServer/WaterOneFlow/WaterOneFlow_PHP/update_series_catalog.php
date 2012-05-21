@@ -1,6 +1,7 @@
 <?php
 
 require_once 'database_connection.php';
+require_once 'table_names.php';
 
 echo 'Testing UpdateSeriesCatalog!';
 db_UpdateSeriesCatalog_All();
@@ -13,9 +14,9 @@ function db_UpdateSeriesCatalog_All() {
   
   $result_status = array("inserted" => 0, "updated" => 0);
   
-  $query = "SELECT MAX(SiteID), MAX(VariableID), MAX(MethodID), MAX(SourceID), MAX(QualityControlLevelID)
-            FROM datavalues
-            GROUP BY SiteID, VariableID, SourceID, MethodID, QualityControlLevelID";
+  $query = 'SELECT MAX(SiteID), MAX(VariableID), MAX(MethodID), MAX(SourceID), MAX(QualityControlLevelID)
+            FROM ' . get_table_name('DataValues') .
+            ' GROUP BY SiteID, VariableID, SourceID, MethodID, QualityControlLevelID';
   
   $result = mysql_query($query);
   
@@ -50,7 +51,7 @@ function mysql_fetch_rowsarr($result, $numass=MYSQL_BOTH) {
 }
 
 function db_find_seriesid($siteID, $variableID, $methodID, $sourceID, $qcID) {
-  $query_text = "SELECT SeriesID FROM seriescatalog WHERE ";
+  $query_text = 'SELECT SeriesID FROM ' . get_table_name('SeriesCatalog') . ' WHERE ';
   $query_text .= "SiteID = " . $siteID . " AND VariableID = " . $variableID . " AND MethodID = " . $methodID . " AND SourceID = " . $sourceID . " AND QualityControlLevelID = " . $qcID;
   
   echo "<p>db_find_seriesid</p>";
@@ -82,43 +83,41 @@ function db_UpdateSeriesCatalog($siteID, $variableID, $methodID, $sourceID, $qcI
   
   //run the values query - series catalog from data values table
  
-	$values_query = 
-	"SELECT dv.SiteID, 
-s.SiteCode, s.SiteName, s.SiteType,
-dv.VariableID,
-v.VariableCode, v.VariableName, v.Speciation, 
+$qry = 
+'SELECT dv.SiteID, s.SiteCode, s.SiteName, s.SiteType,
+dv.VariableID, v.VariableCode, v.VariableName, v.Speciation, 
 v.VariableUnitsID, vu.UnitsName, 
 v.SampleMedium, v.ValueType, v.TimeSupport, 
 v.TimeUnitsID, tu.UnitsName, 
 v.DataType, v.GeneralCategory,
 m.MethodID, m.MethodDescription, 
 sou.SourceID, sou.Organization, sou.SourceDescription, sou.Citation,
-qc.QualityControlLevelID, qc.QualityControlLevelCode,
-MIN( dv.LocalDateTime ) AS 'BeginDateTime', MAX( dv.LocalDateTime ) AS 'EndDateTime' , 
-MIN( dv.DateTimeUTC )  AS 'BeginDateTimeUTC', MAX( dv.DateTimeUTC )  AS 'EndDateTimeUTC', 
-COUNT( dv.ValueID ) AS 'ValueCount'
-FROM datavalues dv
-INNER JOIN sites s ON dv.SiteID = s.SiteID
-INNER JOIN variables v ON dv.VariableID = v.VariableID
-INNER JOIN units vu ON v.VariableunitsID = vu.UnitsID
-INNER JOIN units tu ON v.TimeunitsID = tu.UnitsID
-INNER JOIN methods m ON dv.MethodID = m.MethodID
-INNER JOIN sources sou ON dv.SourceID = sou.SourceID
-INNER JOIN qualitycontrollevels qc ON dv.QualityControlLevelID = qc.QualityControlLevelID
-WHERE dv.SiteID ={$siteID}
- AND dv.VariableID ={$variableID}
- AND dv.MethodID ={$methodID}
- AND dv.SourceID ={$sourceID}
- AND dv.QualityControlLevelID ={$qcID}";
- 
-   $valuesresult = mysql_query($values_query);
+qc.QualityControlLevelID, qc.QualityControlLevelCode, ';
+$qry .= 'MIN( dv.LocalDateTime ) AS "BeginDateTime", MAX( dv.LocalDateTime ) AS "EndDateTime", ' ; 
+$qry .= 'MIN( dv.DateTimeUTC )  AS "BeginDateTimeUTC", MAX( dv.DateTimeUTC )  AS "EndDateTimeUTC", '; 
+$qry .= 'COUNT( dv.ValueID ) AS "ValueCount"  ';
+$qry .= 'FROM ' . get_table_name('DataValues') . ' dv ';
+$qry .= 'INNER JOIN ' . get_table_name('Sites') . ' s ON dv.SiteID = s.SiteID ';
+$qry .= 'INNER JOIN ' . get_table_name('Variables') . ' v ON dv.VariableID = v.VariableID ';
+$qry .= 'INNER JOIN ' . get_table_name('Units') . ' vu ON v.VariableunitsID = vu.UnitsID ';
+$qry .= 'INNER JOIN ' . get_table_name('Units') . ' tu ON v.TimeunitsID = tu.UnitsID ';
+$qry .= 'INNER JOIN ' . get_table_name('Methods') . ' m ON dv.MethodID = m.MethodID ';
+$qry .= 'INNER JOIN ' . get_table_name('Sources') . ' sou ON dv.SourceID = sou.SourceID ';
+$qry .= 'INNER JOIN ' . get_table_name('QualityControlLevels') . ' qc ON dv.QualityControlLevelID = qc.QualityControlLevelID ';
+$qry .= 'WHERE dv.SiteID = ' . $siteID;
+$qry .= ' AND dv.VariableID = ' . $variableID;
+$qry .= ' AND dv.MethodID = ' . $methodID;
+$qry .= ' AND dv.SourceID = ' . $sourceID;
+$qry .= ' AND dv.QualityControlLevelID = ' . $qcID;
+
+   $valuesresult = mysql_query($qry);
    
    if (!$valuesresult) {
-    die("<p>Error in executing the SQL query " . $values_query . ": " . 
+    die("<p>Error in executing the SQL query " . $qry . ": " . 
 	  mysql_error() . "</p>");
   }
   
-  echo "<pre>" . $values_query . "</pre>";
+  echo "<pre>" . $qry . "</pre>";
   
   $num_values_rows = mysql_num_rows($valuesresult);
   
@@ -163,13 +162,13 @@ WHERE dv.SiteID ={$siteID}
   //IF SERIESID IS NOT FOUND: INSERT
   if ($series_id == 0) { // INSERT
     $insert = 
-	"INSERT INTO seriescatalog(SiteID, SiteCode, SiteName, SiteType,
+	'INSERT INTO ' . get_table_name('SeriesCatalog') . ' (SiteID, SiteCode, SiteName, SiteType,
 	VariableID, VariableCode, VariableName, Speciation, VariableunitsID, VariableunitsName,
 	SampleMedium, ValueType, TimeSupport, TimeunitsID, TimeunitsName, DataType, GeneralCategory,
 	MethodID, MethodDescription,
 	SourceID, Organization, SourceDescription, Citation,
 	QualityControlLevelID, QualityControlLevelCode,
-	BeginDateTime, EndDateTime, BeginDateTimeUTC, EndDateTimeUTC, ValueCount) VALUES (";
+	BeginDateTime, EndDateTime, BeginDateTimeUTC, EndDateTimeUTC, ValueCount) VALUES (';
 	$insert .= "'" . $siteID . "', ";
 	$insert .= "'" . $siteCode . "', ";
 	$insert .= "'" . mysql_real_escape_string($siteName) . "', ";
@@ -201,6 +200,7 @@ WHERE dv.SiteID ={$siteID}
 	$insert .= "'" . $endDateTimeUTC . "', ";
 	$insert .= "'" . $valueCount . "'); ";
 	
+	$insert = utf8_encode($insert);
 	echo "<pre>" . $insert . "</pre>";
 	
 	   $insertresult = mysql_query($insert);
@@ -213,7 +213,7 @@ WHERE dv.SiteID ={$siteID}
   }
   //IF SERIESID IS FOUND: UPDATE
   else {                 
-    $update = "UPDATE seriescatalog SET ";
+    $update = 'UPDATE ' . get_table_name('SeriesCatalog') . ' SET ';
 	$update .= "SiteID = '" . $siteID . "', ";
 	$update .= "SiteCode='" . $siteCode . "', ";
 	$update .= "SiteName='" . mysql_real_escape_string($siteName) . "', ";
@@ -244,7 +244,6 @@ WHERE dv.SiteID ={$siteID}
 	$update .= "BeginDateTimeUTC='" . $beginDateTimeUTC . "', ";
 	$update .= "ValueCount='" . $valueCount . "'";
 	$update .= " WHERE SeriesID = " . $series_id . ";";
-	
 	echo "<pre>" . $update . "</pre>";
 	
 	$updateresult = mysql_query($update);
