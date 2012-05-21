@@ -1,20 +1,9 @@
 <?php
 require_once('authorization.php');
 
-if (!isset($_POST["token"])) {
-	echo 'missing access token!';
-	exit;
-	//todo return unauthorized http header
-}
+if (isset($_POST["token"]) and isset($_POST["data"])) {
 
 $user_token = $_POST["token"];
-if ($user_token != get_current_token()) {
-  echo 'invalid access token!';
-  exit;
-}
-
-if (isset($_POST["data"])) {
-//POST the datah
 $url = "http://localhost:333/his/services/editing/create_sites.php";
 $data = $_POST["data"];
 
@@ -41,7 +30,6 @@ if(!curl_errno($soap_do)){
 curl_close($soap_do);
 echo $tuData; 
 }
-
 ?>
 <!DOCTYPE html>
 <html>
