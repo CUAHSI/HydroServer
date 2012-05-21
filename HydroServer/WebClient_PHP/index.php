@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hydrologic System: Homepage</title>
+<title>HydroServer Lite Web Client: Homepage</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
 <script type="text/javascript">
@@ -14,7 +14,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
 
 </head>
 
-<body background="images/bkgrdimage.png">
+<body background="images/bkgrdimage.jpg">
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning Banner" /></td>
@@ -67,8 +67,6 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
 <p>To find out how your school or organization can get their own version 
 of the HydroServer Lite Interactive Web Client,
 please contact us  at <a href="#">email</a>.</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

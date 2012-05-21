@@ -56,11 +56,11 @@ $num = @mysql_num_rows($result2);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hydrologic System</title>
+<title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 
-<body background="images/bkgrdimage.png">
+<body background="images/bkgrdimage.jpg">
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning Banner" /></td>

@@ -1,21 +1,15 @@
 <?php
 //check for required fields
 if ((!$_POST['username']) || (!$_POST['password'])) {
-	header("Location: index.html");
+	header("Location: incorrectlogin.php");
 	exit;
 }
 
-//setup names of database and table to use
-$db_name ="moss_db";
-$table_name ="moss_users";
-
 //connect to server and select database
-$connection = @mysql_connect("localhost","wc4moss","pw2testWC") or die(mysql_error());
-
-$db = @mysql_select_db($db_name,$connection)or die(mysql_error());
+require_once 'database_connection.php';
 
 //build and issue the query
-$sql ="SELECT * FROM $table_name WHERE username='$_POST[username]' AND password= password('$_POST[password]')";
+$sql ="SELECT * FROM moss_users WHERE username='$_POST[username]' AND password= password('$_POST[password]')";
 
 $result = @mysql_query($sql,$connection) or die(mysql_error());
 
@@ -28,7 +22,7 @@ $num = mysql_num_rows($result);
 		}
 		$msg ="<h1>Welcome, $firstname!</h1>";
 	} else {
-		header("Location: index.html");
+		header("Location: incorrectlogin.php");
 		exit;
 	}
 
@@ -43,16 +37,49 @@ $auth = mysql_result($result,0,"authority");
 		} else {
 			$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
 		}
-		
+
+//This sets a cookie of the user's authority or redirect them elsewhere if unauthorized
+if ($auth ==admin){
+	$cookie_name ="auth";
+	$cookie_value ="$auth";
+	$cookie_expire ="0";
+	$cookie_domain ="localhost";
+
+	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
+	}
+
+else if ($auth ==teacher){
+	$cookie_name ="auth";
+	$cookie_value ="$auth";
+	$cookie_expire ="0";
+	$cookie_domain ="localhost";
+
+	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
+	}
+	
+else if ($auth ==student){
+	$cookie_name ="auth";
+	$cookie_value ="$auth";
+	$cookie_expire ="0";
+	$cookie_domain ="localhost";
+
+	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
+	}
+	
+else {
+	header("Location: unauthorized.php");
+	exit;	
+	}
+
 ?>
 
 <html>
 <head>
-<title>Hydrologic System</title>
+<title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 
-<body background="images/bkgrdimage.png">
+<body background="images/bkgrdimage.jpg">
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>

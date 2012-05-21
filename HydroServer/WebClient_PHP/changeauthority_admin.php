@@ -1,16 +1,12 @@
 <?php
-
-//setup names of database and table to use
-$db_name ="moss_db";
-$table_name ="moss_users";
+//check authority to be here
+require_once 'auth_admin.php';
 
 //connect to server and select database
-$connection = @mysql_connect("localhost","wc4moss","pw2testWC") or die(mysql_error());
-
-$db = @mysql_select_db($db_name,$connection)or die(mysql_error());
+require_once 'database_connection.php';
 
 //add the user's data
-$sql ="SELECT username FROM $table_name WHERE (authority='teacher' OR authority='student') ORDER BY username";
+$sql ="SELECT username FROM moss_users WHERE (authority='teacher' OR authority='student') ORDER BY username";
 
 $result = @mysql_query($sql,$connection)or die(mysql_error());
 
@@ -34,11 +30,11 @@ $num = @mysql_num_rows($result);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hydrologic System</title>
+<title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 
-<body background="images/bkgrdimage.png">
+<body background="images/bkgrdimage.jpg">
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>
@@ -51,7 +47,6 @@ $num = @mysql_num_rows($result);
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Change the authority of a user</h1>
       <p><?php echo "$msg"; ?>&nbsp;</p>
-      <p><strong>Change Authority</strong></p>
       <form method="post" action="do_changeauthority_admin.php">
         <table width="300" border="0" cellspacing="0" cellpadding="0">
           <tr>
