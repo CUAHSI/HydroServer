@@ -23,7 +23,7 @@ $msg ="<p class=em2>$sql</p>";
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hydrologic System</title>
+<title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 
@@ -53,7 +53,7 @@ $msg ="<p class=em2>$sql</p>";
     <p></p></td>
   </tr>
   <tr>
-    <td colspan="2" bgcolor="#0971B3"><center><font color="#FFFFFF" face="Arial, Helvetica, sans-serif" size="2"><i>HIS Hydrologic Systems. Copyright © 2012. All rights reserved.</i></font></center></td>
+    <td colspan="2" bgcolor="#0971B3"><center><font color="#FFFFFF" face="Arial, Helvetica, sans-serif" size="2"><i>HIS HydroServer Lite Web Clients. Copyright © 2012. All rights reserved.</i></font></center></td>
   </tr>
 </table>
 </body>
