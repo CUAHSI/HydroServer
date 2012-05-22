@@ -66,7 +66,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
 <p>This software is furnished by the <a href="http://www.cuahsi.org" target="_blank">Consortium of Universities for the Advancement of Hydrologic Sciences</a>, or commonly referred to as CUAHSI (pronounced &quot;kwä-zē&quot;).</p>
 <p>To find out how your school or organization can get their own version 
 of the HydroServer Lite Interactive Web Client,
-please contact us  at <a href="#">email</a>.</p>
+please contact us <a href="http://www.hydrodesktop.org/" target="_blank">here</a>.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

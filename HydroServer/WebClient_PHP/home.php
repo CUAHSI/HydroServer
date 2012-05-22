@@ -28,40 +28,44 @@ $num = mysql_num_rows($result);
 
 $auth = mysql_result($result,0,"authority");
 
-		if ($auth == "admin") {
+		if ($auth == "admin"){
 			$nav ="<SCRIPT src=A_navbar.js></SCRIPT>";
 		
-		} elseif ($auth == "teacher") {
+		} elseif ($auth == "teacher"){
 			$nav ="<SCRIPT src=T_navbar.js></SCRIPT>";
 		
-		} else {
+		} elseif ($auth == "student"){
 			$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
+
+		} else {
+		header("Location: unauthorized.php");
+		exit;	
 		}
 
 //This sets a cookie of the user's authority or redirect them elsewhere if unauthorized
-if ($auth ==admin){
+if ($auth =="admin"){
 	$cookie_name ="auth";
 	$cookie_value ="$auth";
 	$cookie_expire ="0";
-	$cookie_domain ="localhost";
+	$cookie_domain ="adventurelearningat.com";
 
 	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
 	}
 
-else if ($auth ==teacher){
+else if ($auth =="teacher"){
 	$cookie_name ="auth";
 	$cookie_value ="$auth";
 	$cookie_expire ="0";
-	$cookie_domain ="localhost";
+	$cookie_domain ="adventurelearningat.com";
 
 	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
 	}
 	
-else if ($auth ==student){
+else if ($auth =="student"){
 	$cookie_name ="auth";
 	$cookie_value ="$auth";
 	$cookie_expire ="0";
-	$cookie_domain ="localhost";
+	$cookie_domain ="adventurelearningat.com";
 
 	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
 	}

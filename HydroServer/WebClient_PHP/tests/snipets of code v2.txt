@@ -41,7 +41,7 @@ $num = @mysql_num_rows($result);
 This works:
 SELECT username FROM `moss_users` WHERE authority = 'teacher'
 
-Select username FROM $table_name WHERE (authority='teacher' OR authority='student') ORDER BY username
+Select username FROM moss_users WHERE (authority='teacher' OR authority='student') ORDER BY username
 
 
 
