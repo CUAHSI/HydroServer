@@ -1,8 +1,8 @@
 <?php
 // Database connection constants
 define("DATABASE_HOST", "localhost");
-define("DATABASE_USERNAME", "odm");
-define("DATABASE_PASSWORD", "odm");
-define("DATABASE_NAME", "odm");
-define("SERVICE_CODE", "BRDY");
-define("LOWERCASE_TABLE_NAMES", "FALSE");
+define("DATABASE_USERNAME", "advenup1_odm");
+define("DATABASE_PASSWORD", "MapW1nd0w");
+define("DATABASE_NAME", "advenup1_odm");
+define("SERVICE_CODE", "MOSS");
+define("LOWERCASE_TABLE_NAMES", "TRUE");
