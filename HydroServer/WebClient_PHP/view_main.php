@@ -312,7 +312,7 @@ function loadall()
   </tr>
   <tr>
   
-  <td width="240" valign="top" bgcolor="#f2e6d6"><?php //echo "$nav"; ?> </td>
+  <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?> </td>
     <td width="700px" height="500px">
       <div id="map" style="width:100%; height:100%"></div>
     </td>
