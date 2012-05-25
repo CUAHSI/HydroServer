@@ -5,6 +5,9 @@ if ((!$_POST['username']) || (!$_POST['password'])) {
 	exit;
 }
 
+//check authority to be here
+require_once 'authorization_check.php';
+
 //connect to server and select database
 require_once 'database_connection.php';
 
@@ -57,7 +60,7 @@ $num = @mysql_num_rows($result2);
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" valign="top" bgcolor="#f2e6d6"><SCRIPT src="A_navbar.js"></SCRIPT></td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Remove existing user</h1>
       <p><?php echo "$msg,$msg2"; ?>&nbsp;</p>

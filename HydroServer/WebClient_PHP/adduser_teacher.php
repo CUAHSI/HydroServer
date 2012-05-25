@@ -1,6 +1,13 @@
 <?php
+
 //check authority to be here
-require_once 'auth_teacher.php';
+require_once 'authorization_check.php';
+
+//Kick out unauthorized users
+if ($_COOKIE[auth] != "teacher"){
+		header("Location: unauthorized.php");
+		exit;	
+		}
 
 ?>
 
@@ -21,7 +28,7 @@ require_once 'auth_teacher.php';
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" valign="top" bgcolor="#f2e6d6"><SCRIPT src="T_navbar.js"></SCRIPT></td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Add a new user</h1>
       <FORM METHOD="POST" ACTION="do_adduser_admin.php">

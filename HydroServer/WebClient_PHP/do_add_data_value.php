@@ -14,22 +14,52 @@ if ($_COOKIE[auth] == "admin"){
 		}
 
 //check for required fields
-if ((!$_POST['SourceID']) || (!$_POST['SiteID']) || (!$_POST['VariableID']) || (!$_POST['MethodID']) || (!$_POST['Date']) || (!$_POST['Time']) || (!$_POST['Value'])) {
-	header("Location: add_data_value.php");
-	exit;
-	}
+//if ((!$_POST['SourceID']) || (!$_POST['SiteID']) || (!$_POST['VariableID']) || //(!$_POST['MethodID']) || (!$_POST['datepicker']) || (!$_POST['timepicker']) || //(!$_POST['value'])) {
+//	header("Location: add_data_value.php");
+//	exit;
+//	}
+//check for required fields
+
+if (!isset($_POST['SourceID'])) {
+  echo "source id is missing!";
+  exit;
+}
+if (!isset($_POST['MethodID'])) {
+  echo "MethodID is missing!";
+  exit;
+}
+if (!isset($_POST['SiteID'])) {
+  echo "SiteID is missing!";
+  exit;
+}
+if (!isset($_POST['VariableID'])) {
+  echo "VariableID is missing!";
+  exit;
+}
+if (!isset($_POST['value'])) {
+  echo "Value is missing!";
+  exit;
+}
+if (!isset($_POST['timepicker'])) {
+  echo "timepicker is missing!";
+  exit;
+}
+if (!isset($_POST['datepicker'])) {
+  echo "datepicker is missing!";
+  exit;
+}
 
 $SourceID = $_POST["SourceID"];
 $SiteID = $_POST["SiteID"];
 $VariableID = $_POST["VariableID"];
 $MethodID = $_POST["MethodID"];
-$DataValue = $_POST["Value"];
+$DataValue = $_POST["value"];
 
 require_once 'AL_hidden_values.php';
 
 //Create Local and UTC DateTimes
-$LocalDate = $_POST["Date"];
-$LocalTime = $_POST["Time"];
+$LocalDate = $_POST["datepicker"];
+$LocalTime = $_POST["timepicker"];
 
 $timepieces = explode(":", $LocalTime);
 $timepieces[0]; // piece1 (hours)
@@ -147,6 +177,10 @@ require_once 'database_connection.php';
 $sql7 ="INSERT INTO `datavalues`(`ValueID`, `DataValue`, `ValueAccuracy`, `LocalDateTime`, `UTCOffset`, `DateTimeUTC`, `SiteID`, `VariableID`, `OffsetValue`, `OffsetTypeID`, `CensorCode`, `QualifierID`, `MethodID`, `SourceID`, `SampleID`, `DerivedFromID`, `QualityControlLevelID`) VALUES ('$ValueID', '$DataValue', $ValueAccuracy, '$LocalDateTime', '$UTCOffset', '$DateTimeUTC', '$SiteID', '$VariableID', $OffsetValue, $OffsetTypeID, '$CensorCode', '$QualifierID', '$MethodID', '$SourceID', $SampleID, '$DerivedFromID', '$QualityControlLevelID')";
 
 $result7 = @mysql_query($sql7,$connection)or die(mysql_error());
+
+require_once 'update_series_catalog_function.php';
+
+update_series_catalog($SiteID, $VariableID, $MethodID, $SourceID, $QualityControlLevelID);
 
 //get a good message for display upon success
 if ($result7) {
@@ -310,7 +344,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Date:</strong></td>
-          <td valign="top"><input type="text" name="Date" size=10 maxlength=10 /><span class="em">&nbsp;(Ex: &quot;2012-05-04&quot; for 4 May  2012)</span></td>
+          <td valign="top"><input type="text" name="datepicker" size=10 maxlength=10 /><span class="em">&nbsp;(Ex: &quot;2012-05-04&quot; for 4 May  2012)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -318,7 +352,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Time:</strong></td>
-          <td valign="top"><input type="text" name="Time" size=5 maxlength=5 /><span class="em">&nbsp;(Ex: &quot;13:45&quot; for 1:45 pm or &quot;06:30&quot; for 6:30 am)</span></td>
+          <td valign="top"><input type="text" name="timepicker" size=5 maxlength=5 /><span class="em">&nbsp;(Ex: &quot;13:45&quot; for 1:45 pm or &quot;06:30&quot; for 6:30 am)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -326,7 +360,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Value:</strong></td>
-          <td valign="top"><input type="text" name="Value" size=10 maxlength=20 /><span class="em">&nbsp;(Must be a number)</span></td>
+          <td valign="top"><input type="text" id="value" name="value" size=10 maxlength=20 /><span class="em">&nbsp;(Must be a number)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>

@@ -1,10 +1,12 @@
 <?php
+//check authority to be here
+require_once 'authorization_check.php';
 
 //connect to server and select database
 require_once 'database_connection.php';
 
 //add the user's data
-$sql ="Select username FROM moss_users ORDER BY username";
+$sql ="Select username FROM moss_users WHERE (authority='teacher' OR authority='student') ORDER BY username";
 
 $result = @mysql_query($sql,$connection)or die(mysql_error());
 
@@ -41,7 +43,7 @@ $num = @mysql_num_rows($result);
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" valign="top" bgcolor="#f2e6d6"><SCRIPT src="A_navbar.js"></SCRIPT></td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Remove existing user</h1>
       <p><?php echo "$msg"; ?>&nbsp;</p>

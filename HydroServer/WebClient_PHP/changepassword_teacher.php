@@ -1,6 +1,6 @@
 <?php
 //check authority to be here
-require_once 'auth_teacher.php';
+require_once 'authorization_check.php';
 	
 //connect to server and select database
 require_once 'database_connection.php';
@@ -43,7 +43,7 @@ $num = @mysql_num_rows($result);
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" valign="top" bgcolor="#f2e6d6"><SCRIPT src="T_navbar.js"></SCRIPT></td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Change a password for a user</h1>
       <p><?php echo "$msg"; ?>&nbsp;</p>
