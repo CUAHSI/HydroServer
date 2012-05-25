@@ -1,7 +1,7 @@
 <?php
 
 //check authority to be here
-require_once 'auth_admin.php';
+require_once 'authorization_check.php';
 
 ?>
 

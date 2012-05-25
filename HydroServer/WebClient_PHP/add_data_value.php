@@ -61,7 +61,7 @@ $num = @mysql_num_rows($result2);
 	}
 
 //add the Types
-$sql3 ="Select * FROM variables";
+$sql3 ="Select * FROM variables ORDER BY VariableName ASC";
 
 $result3 = @mysql_query($sql3,$connection)or die(mysql_error());
 
@@ -76,8 +76,9 @@ $num = @mysql_num_rows($result3);
 
 		$typeid = $row3["VariableID"];
 		$typename = $row3["VariableName"];
+		$datatype = $row3["DataType"];
 
-		$option_block3 .= "<option value=$typeid>$typename</option>";
+		$option_block3 .= "<option value=$typeid>$typename ($datatype)</option>";
 
 		}
 	}
@@ -113,11 +114,35 @@ $num = @mysql_num_rows($result4);
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
 <script type="text/javascript">
-function show_alert()
-{
+function show_answer(){
 alert("If you do not see your location listed here," + '\n' + "please contact your teacher and ask them" + '\n' + "to add it before entering data.");
 }
 </script>
+
+<script src="js/numbervalidation.js"></script>
+
+<link rel="stylesheet" href="styles/jqstyles/jquery.ui.all.css">
+<link rel="stylesheet" href="styles/jqstyles/jquery.ui.timepicker.css">
+<script src="js/jquery-1.7.2.js"></script>
+<script src="js/ui/jquery.ui.core.js"></script>
+<script src="js/ui/jquery.ui.widget.js"></script>
+<script src="js/ui/jquery.ui.datepicker.js"></script>
+<script src="js/ui/jquery.ui.timepicker.js"></script>
+<link rel="stylesheet" href="styles/jqstyles/demos.css">
+<script>
+	$(function() {
+		
+		$( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+		
+		
+		$( "#timepicker" ).timepicker({
+			showOn: "focus",
+    		showPeriodLabels: false,
+		});
+		
+	});
+</script>
+
 </head>
 
 <body background="images/bkgrdimage.jpg">
@@ -129,12 +154,12 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" valign="top" bgcolor="#f2e6d6"><SCRIPT src="A_navbar.js"></SCRIPT></td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Enter a single data value</h1>
       <p>&nbsp;</p>
-      <FORM METHOD="POST" ACTION="do_add_data_value.php">
-      <table width="425" border="0" cellspacing="0" cellpadding="0">
+      <FORM METHOD="POST" ACTION="do_add_data_value.php" name="addvalue">
+      <table width="500" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td valign="top"><strong>Source:</strong></td>
           <td valign="top"><select name="SourceID" id="SourceID"><option value="">Select....</option><?php echo "$option_block"; ?></select></td>
@@ -145,7 +170,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td valign="top"><strong>Site:</strong></td>
-          <td valign="top"><select name="SiteID" id="SiteID"><option value="">Select....</option><?php echo "$option_block2"; ?></select> <a href="#" onClick="show_alert()" border="0"><img src="images/questionmark.png"></a></td>
+          <td valign="top"><select name="SiteID" id="SiteID"><option value="">Select....</option><?php echo "$option_block2"; ?></select> <a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -171,7 +196,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Date:</strong></td>
-          <td valign="top"><input type="text" name="Date" size=10 maxlength=10 /><span class="em">&nbsp;(Ex: &quot;2012-05-04&quot; for 4 May  2012)</span></td>
+          <td valign="top"><input type="text" id="datepicker" name="datepicker"><span class="em">&nbsp;(Ex: &quot;2012-05-04&quot; for 4 May  2012)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -179,8 +204,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Time:</strong></td>
-          <td valign="top"><input type="text" name="Time" size=5 maxlength=5 />
-          <span class="em">&nbsp;(Ex: &quot;13:45&quot; for 1:45 pm or &quot;06:30&quot; for 6:30 am)</span></td>
+          <td valign="top"><input type="text" id="timepicker" name="timepicker"><span class="em">&nbsp;(24 hour format; Ex: &quot;13:45&quot; for 1:45 pm)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -188,7 +212,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Value:</strong></td>
-          <td valign="top"><input type="text" name="Value" size=10 maxlength=20 /><span class="em">&nbsp;(Must be a number)</span></td>
+          <td valign="top"><input type="text" id="value" name="value" size=10 maxlength=20 onBlur="return validateNum()"/><span class="em">&nbsp;(Must be a number; no commas allowed)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -200,7 +224,11 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
       </table>
       </FORM></p>
-</blockquote>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </blockquote>
     <p></p></td>
   </tr>
   <tr>

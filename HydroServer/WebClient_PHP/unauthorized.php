@@ -1,3 +1,8 @@
+<?php
+// set the expiration date to one hour ago
+setcookie ("auth", "", time() - 3600, "localhost");
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -61,9 +66,8 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote>
       <p><br />
         </p>
-      <p>&nbsp;</p>
-      <p><strong><em>According to our system, you are not authorized to view this page. If you feel this message is in error, please login and try navigating to it again.</em></strong></p>
-      <p>&nbsp;</p>
+      <p><strong><em>You are not authorized to view this page.</em></strong><em> (If you feel this message is in error, please login and try navigating to it again.</em>)</p>
+<p>&nbsp;</p>
 <h1><img src="images/homepage_shot.jpg" alt="student working with teacher" width="300" height="235" hspace="10" align="right" />Welcome</h1>
         <p>The HydroServer Lite Interactive Web Client is an online software tool that helps store, organize, and publish data provided by citizen scientists.</p>
         <p>What are citizen scientists? They can be anyone who collects and  shares scientific data with professional scientists to achieve common goals.</p>

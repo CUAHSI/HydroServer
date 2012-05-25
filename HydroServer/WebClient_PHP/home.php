@@ -26,50 +26,34 @@ $num = mysql_num_rows($result);
 		exit;
 	}
 
+//Set the navigation menu and a cookie of the user's authority
+// or redirect the user elsewhere if unauthorized
 $auth = mysql_result($result,0,"authority");
 
-		if ($auth == "admin"){
-			$nav ="<SCRIPT src=A_navbar.js></SCRIPT>";
-		
-		} elseif ($auth == "teacher"){
-			$nav ="<SCRIPT src=T_navbar.js></SCRIPT>";
-		
-		} elseif ($auth == "student"){
-			$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
-
-		} else {
-		header("Location: unauthorized.php");
-		exit;	
-		}
-
-//This sets a cookie of the user's authority or redirect them elsewhere if unauthorized
-if ($auth =="admin"){
+if ($auth == "admin"){
+	$nav ="<script src=A_navbar.js></SCRIPT>";
 	$cookie_name ="auth";
 	$cookie_value ="$auth";
 	$cookie_expire ="0";
 	$cookie_domain ="adventurelearningat.com";
-
 	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
 	}
-
-else if ($auth =="teacher"){
+elseif ($auth == "teacher"){
+	$nav ="<SCRIPT src=T_navbar.js></SCRIPT>";
 	$cookie_name ="auth";
 	$cookie_value ="$auth";
 	$cookie_expire ="0";
 	$cookie_domain ="adventurelearningat.com";
-
 	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
 	}
-	
-else if ($auth =="student"){
+elseif ($auth == "student"){
+	$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
 	$cookie_name ="auth";
 	$cookie_value ="$auth";
 	$cookie_expire ="0";
 	$cookie_domain ="adventurelearningat.com";
-
 	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
 	}
-	
 else {
 	header("Location: unauthorized.php");
 	exit;	
