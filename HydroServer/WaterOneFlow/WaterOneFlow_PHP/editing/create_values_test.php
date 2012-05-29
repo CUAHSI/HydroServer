@@ -1,16 +1,20 @@
 <?php
 require_once('authorization.php');
 
-if (isset($_POST["token"]) and isset($_POST["data"])) {
+if (isset($_POST["token"]) and isset($_POST["data"]) and isset($_POST["SiteCode"]) and isset($_POST["VariableCode"])) {
 
 $user_token = $_POST["token"];
+
 $complete_uri = get_complete_uri();
-$url = substr($complete_uri, 0, strrpos($complete_uri, '/')) . "/create_sites.php";
+$url = substr($complete_uri, 0, strrpos($complete_uri, '/')) . "/create_values.php";
 
 $data = $_POST["data"];
+$site_code = $_POST["SiteCode"];
+$variable_code = $_POST["VariableCode"];
+$params = '?SiteCode=' . $site_code . '&VariableCode=' . $variable_code;
 
 $soap_do = curl_init(); 
-curl_setopt($soap_do, CURLOPT_URL,            $url );   
+curl_setopt($soap_do, CURLOPT_URL,            $url . $params );   
 curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10); 
 curl_setopt($soap_do, CURLOPT_TIMEOUT,        10); 
 curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
@@ -18,7 +22,7 @@ curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false); 
 curl_setopt($soap_do, CURLOPT_POST,           true ); 
 curl_setopt($soap_do, CURLOPT_POSTFIELDS,    $data); 
-curl_setopt($soap_do, CURLOPT_HTTPHEADER,     array('Content-Type: text/xml; charset=utf-8', 'Content-Length: '.strlen($data), 'submitted: ' . TRUE,
+curl_setopt($soap_do, CURLOPT_HTTPHEADER, array('Content-Type: text/xml; charset=utf-8', 'Content-Length: '.strlen($data), 'submitted: ' . TRUE,
 'token: ' . $user_token)); 
 
 $tuData = curl_exec($soap_do);
@@ -45,13 +49,14 @@ function get_complete_uri() {
 	}
 	return $pageURL;
 }
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 
 <title>
-Add a Site
+Create Data Values
 </title>
 
 <!-- Meta Tags -->
@@ -67,28 +72,45 @@ Add a Site
 <div id="container" class="ltr">
 
 <h1 id="logo">
-Create Sites Test
+Create Values Test
 </h1>
 
 <form id="form8" name="form8"  autocomplete="off" enctype="multipart/form-data" method="post" novalidate
 action="">
-    Access Token: <input type="text" name="token" /><br />
-    Format:   <select name="format" >
+    <table>
+    <tr>
+    <td>Access Token:</td><td> <input type="text" name="token" /></td>
+    </tr>
+    <tr>
+    <td>Format:</td><td> <select name="format" >
     <option value="XML">XML</option>
     <option value="CSV">CSV</option>
-    </select>
-    <p>Data:</p> 
-	<textarea rows="20" cols="60" name="data">
-	<sites>
-	  <siteInfo>
-	    <siteName>MY SITE</siteName>
-		<latitude>50.0234</latitude>
-		<longitude>15.678</longitude>
-		<elevation_m>333</elevation_m>
-	  </siteInfo>
-	</sites>
-	</textarea><br />
-    <input type="submit" name="submit_button"/>
+    </select></td>
+    </tr>
+    <tr>
+    <td>
+    Site Code:</td><td>
+    <input type="text" name="SiteCode" id="SiteCode" />
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Variable Code: </td><td>
+    <input type="text" name="VariableCode" id="VariableCode" /></td>
+    </tr>
+    <tr>
+    <td>Data:</td>
+    <td><textarea rows="20" cols="80" name="data"><values>
+<value DateTimeUTC="2012-06-01T14:00:00">23.33</value>
+<value DateTimeUTC="2012-01-01T14:01:00">22.12</value>
+</values>
+	</textarea><br /></td>
+    </tr>
+    <tr>
+    <td />
+    <td><input type="submit" name="submit_button"/></td>
+    </tr>
+    </table>
 </form> 
 </div>
 </body>
