@@ -1,6 +1,7 @@
 <?php
 require_once("wof.php");
 
+// This function writes the PHP header  
 function write_XML_header()
 {
     header("Content-type: text/xml; charset=utf-8'");
