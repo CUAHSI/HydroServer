@@ -1,15 +1,6 @@
 <?php
 
-//add this to secondary pages to display the correct navigation options or redirect them to the unauthorized user page
-if ($_COOKIE[auth] =="admin"){
-	$nav ="<SCRIPT src=A_navbar.js></SCRIPT>";
-	} 
-    else {
-	header("Location: unauthorized.php");
-	exit;	
-	}
-
-$msg = "The cookie value is $_COOKIE[auth]";
+$msg = "The cookie value is $_COOKIE[power].";
 
 ?>
 
@@ -30,81 +21,15 @@ $msg = "The cookie value is $_COOKIE[auth]";
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$msg"; ?></td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
-      <h1>Add a new user</h1>
-      <FORM METHOD="POST" ACTION="do_adduser_admin.php">
-      <table width="600" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="95" valign="top"><strong>First Name:</strong></td>
-          <td width="175" valign="top"><input type="text" name="firstname" size=25 maxlength=50 /></td>
-          <td width="330" valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td width="175" valign="top">&nbsp;</td>
-          <td width="330" valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td width="95" valign="top"><strong>Last Name:</strong></td>
-          <td valign="top"><input type="text" name="lastname" size=25 maxlength=50 /></td>
-          <td valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td width="95" valign="top"><strong>Username:</strong></td>
-          <td valign="top"><input type="text" name="username" size=25 maxlength=25 />
-          <div class="em"></div></td>
-          <td valign="top"><span class="em">&nbsp;(First initial and last name; ex: &quot;jdoe&quot; for John Doe)</span></td>
-        </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td width="95" valign="top"><strong>Password:</strong></td>
-          <td valign="top"><input type="text" name="password" size=25 maxlength=25 /><div class="em"></div></td>
-          <td valign="top"><span class="em">&nbsp;(Case sensitive; enter 6-8 characters)</span></td>
-        </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td width="95" valign="top"><strong>Authority:</strong></td>
-          <td valign="top"><select name="authority" id="authority">
-            <option value="">Select....</option>
-            <option value="admin">Administrator</option>
-            <option value="teacher">Teacher</option>
-            <option value="student">Student</option>
-          </select></td>
-          <td valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td width="95" valign="top">&nbsp;</td>
-          <td valign="top"><input type="SUBMIT" name="submit" value="Add User" /></td>
-          <td valign="top">&nbsp;</td>
-        </tr>
-      </table></FORM>
+      <h1>Testing Cookies....</h1>
+      <?php echo "$msg"; ?>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
+	  <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
@@ -112,7 +37,7 @@ $msg = "The cookie value is $_COOKIE[auth]";
     <p></p></td>
   </tr>
   <tr>
-    <SCRIPT src="footer.js"></SCRIPT>
+    <script src="footer.js"></script>
   </tr>
 </table>
 </body>

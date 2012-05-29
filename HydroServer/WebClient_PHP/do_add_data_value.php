@@ -1,17 +1,6 @@
 <?php
-//Display the correct navigation or redirect them to the unauthorized user page
-if ($_COOKIE[auth] == "admin"){
-			$nav ="<SCRIPT src=A_navbar.js></SCRIPT>";
-		
-		} elseif ($auth == "teacher"){
-			$nav ="<SCRIPT src=T_navbar.js></SCRIPT>";
-		
-		} elseif ($auth == "student"){
-			$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
-		} else {
-		header("Location: unauthorized.php");
-		exit;	
-		}
+//check authority to be here
+require_once 'authorization_check.php';
 
 //check for required fields
 //if ((!$_POST['SourceID']) || (!$_POST['SiteID']) || (!$_POST['VariableID']) || //(!$_POST['MethodID']) || (!$_POST['datepicker']) || (!$_POST['timepicker']) || //(!$_POST['value'])) {
@@ -375,7 +364,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
     </blockquote></td>
   </tr>
   <tr>
-    <SCRIPT src="footer.js"></SCRIPT>
+    <script src="footer.js"></script>
   </tr>
 </table>
 </body>
