@@ -1,0 +1,9 @@
+ValueID,DataValue,ValueAccuracy,LocalDateTime,UTCOffset,DateTimeUTC,SiteID,VariableID,OffsetValue,OffsetTypeID,CensorCode,QualifierID,MethodID,SourceID,SampleID,DerivedFromID,QualityControlLevelID
+74553,10.99,,4/1/2005 0:00,-7,,1,4,,,nc,,2,1,,,1
+74554,11.01,,4/1/2005 0:10,-7,,1,4,,,nc,,2,1,,,1
+74555,11.02,,4/1/2005 0:20,-7,,1,4,,,nc,,2,1,,,1
+74556,11.04,,4/1/2005 0:30,-7,,1,4,,,nc,,2,1,,,1
+74557,11.04,,4/1/2005 0:40,-7,,1,4,,,nc,,2,1,,,1
+74558,11.05,,4/1/2005 0:50,-7,,1,4,,,nc,,2,1,,,1
+74559,11.07,,4/1/2005 1:00,-7,,1,4,,,nc,,2,1,,,1
+74560,11.08,,4/1/2005 1:10,-7,,1,4,,,nc,,2,1,,,1
