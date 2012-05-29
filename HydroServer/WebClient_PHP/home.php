@@ -16,9 +16,10 @@ $result = @mysql_query($sql,$connection) or die(mysql_error());
 //get the number of rows in the result set
 $num = mysql_num_rows($result);
 	if ($num != 0) {
-		//get the person's first name
+		//get the person's first name and authority
 		while ($row = mysql_fetch_assoc($result)) {
 		$firstname = $row['firstname'];
+		$auth = $row['authority'];
 		}
 		$msg ="<h1>Welcome, $firstname!</h1>";
 	} else {
@@ -28,31 +29,30 @@ $num = mysql_num_rows($result);
 
 //Set the navigation menu and a cookie of the user's authority
 // or redirect the user elsewhere if unauthorized
-$auth = mysql_result($result,0,"authority");
 
 if ($auth == "admin"){
-	$nav ="<script src=A_navbar.js></SCRIPT>";
-	$cookie_name ="auth";
-	$cookie_value ="$auth";
-	$cookie_expire ="0";
-	$cookie_domain ="adventurelearningat.com";
-	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
+	$nav = "<script src=A_navbar.js></script>";
+	$cookie_name = "power";
+	$cookie_value = $auth;
+	$cookie_expire = time()+14400;
+	$cookie_domain = "localhost";
+	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 elseif ($auth == "teacher"){
-	$nav ="<SCRIPT src=T_navbar.js></SCRIPT>";
-	$cookie_name ="auth";
-	$cookie_value ="$auth";
-	$cookie_expire ="0";
-	$cookie_domain ="adventurelearningat.com";
-	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
+	$nav = "<script src=T_navbar.js></script>";
+	$cookie_name = "power";
+	$cookie_value = $auth;
+	$cookie_expire = time()+14400;
+	$cookie_domain = "adventurelearningat.com";
+	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 elseif ($auth == "student"){
-	$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
-	$cookie_name ="auth";
-	$cookie_value ="$auth";
-	$cookie_expire ="0";
-	$cookie_domain ="adventurelearningat.com";
-	setcookie($cookie_name,$cookie_value,$cookie_expire,"/", $cookie_domain,0);
+	$nav = "<script src=S_navbar.js></script>";
+	$cookie_name = "power";
+	$cookie_value = $auth;
+	$cookie_expire = time()+14400;
+	$cookie_domain = "adventurelearningat.com";
+	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 else {
 	header("Location: unauthorized.php");
@@ -80,7 +80,7 @@ else {
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <?php echo "$msg"; ?>
       <p>Please select a function from the left-hand menu....</p>
-      <p>&nbsp;</p>
+      <p></p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
@@ -96,7 +96,7 @@ else {
     <p></p></td>
   </tr>
   <tr>
-    <SCRIPT src="footer.js"></SCRIPT>
+    <script src="footer.js"></script>
   </tr>
 </table>
 </body>

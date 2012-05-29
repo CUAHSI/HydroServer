@@ -166,7 +166,7 @@
     <p></p></td>
   </tr>
   <tr>
-    <SCRIPT src="footer.js"></SCRIPT>
+    <script src="footer.js"></script>
   </tr>
 </table>
 </body>

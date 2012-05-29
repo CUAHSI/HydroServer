@@ -1,6 +1,6 @@
 <?php
 // set the expiration date to one hour ago
-setcookie ("auth", "", time() - 3600, "localhost");
+setcookie ("power", "", time()-3600, "adventurelearningat.com");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -80,7 +80,7 @@ please contact us <a href="http://www.hydrodesktop.org/" target="_blank">here</a
     </blockquote></td>
   </tr>
   <tr>
-    <SCRIPT src="footer.js"></SCRIPT>
+    <script src="footer.js"></script>
   </tr>
 </table>
 </body>

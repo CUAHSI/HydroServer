@@ -60,7 +60,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td><center><A HREF="#" onclick="show_alert()">Forgot your password?</a></center></td>
+          <td><center><A HREF="#" onClick="show_alert()">Forgot your password?</a></center></td>
         </tr>
     </table></FORM>
     </td>
@@ -88,7 +88,7 @@ please contact us  at <a href="#">email</a>.</p>
     </blockquote></td>
   </tr>
   <tr>
-    <SCRIPT src="footer.js"></SCRIPT>
+    <script src="footer.js"></script>
   </tr>
 </table>
 </body>
