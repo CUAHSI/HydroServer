@@ -8,22 +8,39 @@ if ($_COOKIE[power] !="admin"){
 	exit;	
 	}
 
+//check for required fields
+if ((!$_POST['username']) || (!$_POST['authority'])) {
+	header("Location: changeauthority.php");
+	exit;
+}
+
 //connect to server and select database
 require_once 'database_connection.php';
 
 //add the user's data
-$sql ="SELECT username FROM moss_users WHERE (authority='teacher' OR authority='student') ORDER BY username";
+$sql ="UPDATE moss_users SET authority='$_POST[authority]' WHERE username='$_POST[username]'";
 
 $result = @mysql_query($sql,$connection)or die(mysql_error());
 
-$num = @mysql_num_rows($result);
+//get a good message for display upon success
+if ($result) {
+
+$msg ="<p class=em2>Congratulations, you're changed the authority of $_POST[username]. Would you like to do another?</p>";
+}
+
+//add the user's data
+$sql2 ="Select username FROM moss_users WHERE (authority='teacher' OR authority='student') ORDER BY username";
+
+$result2 = @mysql_query($sql2,$connection)or die(mysql_error());
+
+$num = @mysql_num_rows($result2);
 	if ($num < 1) {
 
-    	$msg = "<P><em2>Sorry, there are no users.</em></p>";
+    	$msg2 = "<P><em2>Sorry, there are no users.</em></p>";
 
 	} else {
 
-	while ($row = mysql_fetch_array ($result)) {
+	while ($row = mysql_fetch_array ($result2)) {
 
 		$users = $row["username"];
 
@@ -31,8 +48,8 @@ $num = @mysql_num_rows($result);
 
 		}
 	}
-?>
 
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -50,9 +67,8 @@ $num = @mysql_num_rows($result);
   </tr>
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
-    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
+    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg,$msg2"; ?>
       <h1>Change the authority of a user</h1>
-      <p><?php echo "$msg"; ?>&nbsp;</p>
       <form method="post" action="do_changeauthority.php">
         <table width="300" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -80,15 +96,18 @@ $num = @mysql_num_rows($result);
             <td valign="top"><input type="submit" name="submit2" value="Change Authority" /></td>
           </tr>
         </table>
-  </form>
+</form>
 <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
     </blockquote>
     <p></p></td>
   </tr>
   <tr>
-    <script src="footer.js"></script>
+    <SCRIPT src="footer.js"></SCRIPT>
   </tr>
 </table>
 </body>
