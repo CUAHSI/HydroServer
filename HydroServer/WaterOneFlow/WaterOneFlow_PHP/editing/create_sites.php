@@ -9,7 +9,7 @@
  */
 
 require_once('database_connection.php');
-require_once('authorization.php');
+require_once('db_helper.php');
 
 //get the token
 if (isset($_POST["token"])) {
@@ -24,13 +24,10 @@ else {
 	exit;
   }
 }
-$valid_token = get_current_token();
-if ($token != $valid_token) {
+
+if (!validate_token($token)) {
   echo 'not authorized (invalid token).';
   exit;
-}
-else {
-  echo 'token is valid. authorized.';
 }
 
 //get the format (XML)
@@ -54,7 +51,6 @@ if ($format == "XML") {
     $xml = simplexml_load_string($data);
 
     $site = $xml->siteInfo[0];
-    print_r($site);
 
 	//call SaveSite here!!!
 	save_site($site);
@@ -67,12 +63,21 @@ function save_site($xmlsite) {
 	$site_name = $xmlsite->siteName;
 	$latitude = $xmlsite->latitude;
 	$longitude = $xmlsite->longitude;
+	
 	$site_code = generate_site_code($latitude, $longitude);
-	$query = 'INSERT INTO Sites(SiteCode, SiteName, Latitude, Longitude) VALUES ';
+	if (isset($xmlsite->siteCode)) {
+		$site_code = $xmlsite->siteCode;
+	}
+	$elevation_m = 0;
+	if (isset($xmlsite->elevation_m)) {
+		$elevation_m = $xmlsite-> elevation_m;
+	}
+	$query = 'INSERT INTO Sites(SiteCode, SiteName, Latitude, Longitude, Elevation_m) VALUES ';
 	$query .= '("' . $site_code . '",';
 	$query .= '"' . $site_name . '",';
 	$query .= '"' . $latitude . '",';
-	$query .= '"' . $longitude . '")';
+	$query .= '"' . $longitude . '",';
+	$query .= '"' . $elevation_m . '")';
 	
 	$result = mysql_query($query);
    
@@ -86,9 +91,9 @@ function save_site($xmlsite) {
 function generate_site_code($latitude, $longitude) {
 	$north_south = $latitude > 0 ? 'N' : 'S';
 	$east_west = $longitude > 0 ? 'E' : 'W';
-	$lat_str = number_format(abs($latitude), 6);
-	$lon_str = number_format(abs($longitude), 6);
-	$code = $lat_str . $north_south . '_' . $lon_str . $east_west;
+	$lat = number_format(abs((float) $latitude),6);
+	$lon = number_format(abs((float) $longitude),6);
+	$code = $lat . $north_south . '_' . $lon . $east_west;
 	return $code;
 }
 
