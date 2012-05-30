@@ -1,30 +1,25 @@
 <?php
-require_once('authorization.php');
-
-if (!isset($_REQUEST["user"])) {
+require_once('db_helper.php');
+if (!isset($_POST["user"])) {
 	echo "Missing user parameter.";
 	exit;
 }
-if (!isset($_REQUEST["password"])) {
+if (!isset($_POST["password"])) {
 	echo "Missing user name or password.";
 	exit;
 }
-$user = $_REQUEST['user'];
-$password = $_REQUEST['password'];
+$user = $_POST['user'];
+$password = $_POST['password'];
 
 //do the authorization: encrypt name and password and compare it to values in the DB
-$valid_user = "jkadlec";
-$valid_password = "jiri4moss";
-
-if ($user != $valid_user || $password != $valid_password) {
-  echo "Bad user name or password!";
-  exit;
+if (validate_user($user, $password) === FALSE) {
+	echo "Bad user name or password!";
+	exit;
 }
 
 //we have a valid password: generate the token
-$token = get_current_token();
-
+$token_info = generate_token($user, $password);
 
 header("Content-type: text/xml; charset=utf-8'");
 echo chr(60) . chr(63) . 'xml version="1.0" encoding="utf-8" ' . chr(63) . chr(62);
-echo '<token expires="' . date("Y-m-d H:i:s", strtotime ("+1 hour")) . '">' . $token . '</token>';
+echo '<token expires="' . $token_info['expires'] . '">' . $token_info['token'] . '</token>';
