@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles/form-style.css">
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/web_service_helper.js"></script>
+<script type="text/javascript">
+//$(document).ready(function() {
+//	invoke_web_service('create_values.php')
+//});
+</script>
+<title>
+Create Values
+</title>
+
+<!-- Meta Tags -->
+<meta charset="utf-8">
+</head>
+
+<body id="public">
+<div id="container" class="ltr">
+
+<h1 id="logo">
+CreateVariables method test
+</h1>
+<p>CreateVariables method. enter one or more variables in the xml. The variableName, variableUnits, timeUnits,</p>
+<p>dataType, valueType, timeSupport xml elements are required.</p>
+<p>Use a HTTP POST request with following parameters:</p>
+<dl>
+<dt>authToken</dt><dd>the authorization key.</dd>
+<dt>data</dt><dd>the list of data values. The list should be in XML or CSV format.</dd>
+<dt>format</dt><dd>the data format. Default format is XML.</dd>
+</dl>
+<form target="_blank" id="frm" name="frm"  method="post"
+action="create_values.php">
+<table>
+<tr><th class="frmheader">Parameter</th><th class="frmheader">Value</th></tr>
+<tr><td class="frmtext">authToken</td><td><input type="text" id="authToken" name="authToken" class="frmInput" /></td></tr>
+<tr>
+<td>format</td>
+<td>
+<select name="format">
+<option value="XML">XML</option>
+<option value="CSV">CSV</option>
+    </select>
+    </td></tr>
+    <tr>
+    <td class="frmtext">siteCode</td>
+    <td><input type="text" id="siteCode" name="siteCode" class="frmInput"/></td>
+    </tr>
+    <tr>
+    <td class="frmtext">variableCode</td>
+    <td><input type="text" id="variableCode" name="variableCode" class="frmInput"/></td>
+    </tr>
+	<tr>
+    <td class="frmtext">methodCode</td>
+    <td><input type="text" id="methodCode" name="methodCode" class="frmInput"/></td>
+    </tr>
+	<tr>
+    <td class="frmtext">sourceCode</td>
+    <td><input type="text" id="sourceCode" name="sourceCode" class="frmInput"/></td>
+    </tr>
+	<tr>
+    <td class="frmtext">qualityControlLevelCode</td>
+    <td><input type="text" id="qualityControlLevelCode" name="qualityControlLevelCode" class="frmInput"/></td>
+    </tr>
+    <tr>
+    <td>data</td>
+    <td> 
+	<textarea rows="10" cols="75" name="data" id="data">
+&lt;variables&gt;
+&lt;variable&gt;
+&lt;variableName&gt;string&lt;/variableName&gt;
+&lt;variableCode&gt;string&lt;/variableCode&gt;
+&lt;variableUnitsName&gt;string&lt;/variableUnitsName&gt;
+&lt;variableUnitsCode&gt;string&lt;/variableUnitsCode&gt;
+&lt;/variable&gt;
+&lt;/variables&gt;
+	</textarea></td></tr>
+    <tr><td></td><td align="right">
+    <input id="submit_button" name="submit_button" type="submit" value="Invoke" class="button" /></td></tr>
+    </table>
+</form>
+<div class="response">
+<p id="response_header" class="frmheader">XML Response: <span id="status"></span></p>
+<p id="test_response" class="frmInput"></p>
+</div>
+</div>
+</body>
+</html>
