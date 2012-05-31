@@ -9,51 +9,48 @@
  */
 
 require_once('database_connection.php');
-require_once('authorization.php');
+require_once('db_helper.php');
 
 //get the token
-if (isset($_POST["token"])) {
-  $token = $_POST["token"];
+if (isset($_POST["authToken"])) {
+  $token = $_POST["authToken"];
 }
 else {
-  if (isset($_SERVER['HTTP_TOKEN'])) {
-    $token = $_SERVER['HTTP_TOKEN'];
+  if (isset($_SERVER['HTTP_AUTHTOKEN'])) {
+    $token = $_SERVER['HTTP_AUTHTOKEN'];
   }
   else {
     echo 'not authorized (unspecified token).';
 	exit;
   }
 }
-$valid_token = get_current_token();
-if ($token != $valid_token) {
-  echo 'not authorized (invalid token).';
+
+if (!validate_token($token)) {
+  header('HTTP/1.0 403 Forbidden');
+  header ("Content-Type:text/xml");
+  echo '<response>not authorized (invalid token).</response>';
   exit;
-}
-else {
-  echo 'token is valid. authorized.';
 }
 
 //get the site code
-if (isset($_GET["SiteCode"])) {
-$site_code = $_GET["SiteCode"];
+if (isset($_POST["siteCode"])) {
+$site_code = $_POST["siteCode"];
 }
 else {
-	echo 'Site Code is not valid.';
-	exit;
+	return_error('Site Code is not specified.');
 }
 
 //get the variable code
-if (isset($_GET["VariableCode"])) {
-	$variable_code = $_GET["VariableCode"];
+if (isset($_POST["variableCode"])) {
+	$variable_code = $_POST["variableCode"];
 }else {
-	echo 'Variable Code is not valid.';
-	exit;
+	return_error('Variable code is not specified.');
 }
 
 //get the format (XML)
 $format = "XML";
-if (isset($_REQUEST["format"])) {
-	$format = $_REQUEST["format"];
+if (isset($_POST["format"])) {
+	$format = $_POST["format"];
 }
 $data = 'EMPTY-DATA';
 if (isset($_POST["data"])) {
@@ -67,14 +64,14 @@ else {
 //validate SiteID and VariableID
 $site_id = get_valid_site_id($site_code);
 if ($site_id < 1) {
-	echo "site ID not found for code: " . $site_code;
-	exit;
+	return_error( "site ID not found for code: " . $site_code);
 }
 $variable_id = get_valid_variable_id($variable_code);
 if ($variable_id < 1) {
-	echo "variable ID not found for code: " . $variable_code;
-	exit;
+	return_error( "variable ID not found for code: " . $variable_code);
 }
+
+//todo read method, source, qc
 
 $source_id = get_valid_source_id();
 
@@ -171,13 +168,11 @@ function save_value($site_id, $variable_id, $source_id, $utc_date_time, $data_va
 	echo 'values for ' . $variable_id . ' and ' . $site_id . ' saved successfully.';
 }
 
-function generate_site_code($latitude, $longitude) {
-	$north_south = $latitude > 0 ? 'N' : 'S';
-	$east_west = $longitude > 0 ? 'E' : 'W';
-	$lat_str = number_format(abs($latitude), 6);
-	$lon_str = number_format(abs($longitude), 6);
-	$code = $lat_str . $north_south . '_' . $lon_str . $east_west;
-	return $code;
+function return_error($error_text) {
+	header('HTTP/1.0 500 Internal Server Error');
+	header ("Content-Type:text/xml");
+	echo '<response>' . $error_text . '</response>';
+	exit;
 }
 
 function csv2array($input,$delimiter=',',$enclosure='"',$escape='\\'){

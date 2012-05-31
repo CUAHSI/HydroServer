@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles/form-style.css">
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/web_service_helper.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	invoke_web_service('create_sites.php')
+});
+</script>
+<title>
+Create Sites
+</title>
+
+<!-- Meta Tags -->
+<meta charset="utf-8">
+</head>
+
+<body id="public">
+<div id="container" class="ltr">
+
+<h1 id="logo">
+CreateSites method test
+</h1>
+<p>CreateSites method. enter one or more sites in the xml. The siteName, latitude and longitude elements are required. The elevation_m and siteCode elements are optional.
+</p>
+<p>Use a HTTP POST request with following parameters:</p>
+<dl>
+<dt>authToken</dt><dd>the authorization key.</dd>
+<dt>data</dt><dd>the list of sites. The list should be in XML or CSV format.</dd>
+<dt>format</dt><dd>the data format. Default format is XML. Optional format is CSV.</dd>
+</dl>
+<form target="_blank" id="frm" name="frm"  method="post"
+action="create_sites.php">
+<table>
+<tr><th class="frmheader">Parameter</th><th class="frmheader">Value</th></tr>
+<tr><td class="frmtext">authToken</td><td><input type="text" id="authToken" name="authToken" class="frminput" style="width:300px"/></td></tr>
+<tr>
+<td>format</td>
+<td>
+<select name="format" style="width:304px">
+<option value="XML">XML</option>
+<option value="CSV">CSV</option>
+    </select>
+    </td></tr>
+    <tr><td>data</td>
+    <td> 
+	<textarea rows="10" cols="75" name="data" id="data">
+&lt;sites&gt;
+&nbsp;&lt;siteInfo&gt;
+&nbsp;&nbsp;&lt;siteName&gt;MY SITE&lt;/siteName&gt;
+&nbsp;&nbsp;&nbsp;&lt;latitude&gt;50.0234&lt;/latitude&gt;
+&nbsp;&nbsp;&nbsp;&lt;longitude&gt;15.678&lt;/longitude&gt;
+&nbsp;&nbsp;&nbsp;&lt;elevation_m&gt;333&lt;/elevation_m&gt;
+&nbsp;&nbsp;&lt;/siteInfo&gt;
+&lt;/sites&gt;
+	</textarea></td></tr>
+    <tr><td></td><td align="right">
+    <input id="submit_button" name="submit_button" type="submit" value="Invoke" class="button" /></td></tr>
+    </table>
+</form>
+<div class="response">
+<p id="response_header" class="frmheader">XML Response: <span id="status"></span></p>
+<p id="test_response" class="frmInput"></p>
+</div>
+</div>
+</body>
+</html>
