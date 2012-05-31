@@ -17,7 +17,7 @@ function validate_user($user, $password) {
 
 function validate_token($token) {
 	$cd = date('c', time());
-	$tok = mysql_real_escape_string($token);
+	$tok = $token;
 	$sql = "SELECT token from moss_user_tokens WHERE token = '$tok' AND issued < '$cd' AND expires > '$cd'";
 	$result = mysql_query($sql) or die(mysql_error());
 	$num = mysql_num_rows($result);
