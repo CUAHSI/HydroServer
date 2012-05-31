@@ -76,7 +76,8 @@ if ($variable_id < 1) {
 $source_id = get_valid_source_id();
 
 if ($format == "XML") {
-    $xml = simplexml_load_string(trim($data));
+	echo 'your data:' . $data;
+    $xml = simplexml_load_string(urldecode($data));
 
 	foreach($xml->children() as $val) {
 		$attr = $val->attributes();
