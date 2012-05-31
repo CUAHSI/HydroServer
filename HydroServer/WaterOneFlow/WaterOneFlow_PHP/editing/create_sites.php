@@ -80,7 +80,7 @@ function save_site($xmlsite) {
 	if (isset($xmlsite->elevation_m)) {
 		$elevation_m = $xmlsite-> elevation_m;
 	}
-	$query = 'INSERT INTO Sites(SiteCode, SiteName, Latitude, Longitude, Elevation_m) VALUES ';
+	$query = 'INSERT INTO sites(SiteCode, SiteName, Latitude, Longitude, Elevation_m) VALUES ';
 	$query .= '("' . $site_code . '",';
 	$query .= '"' . $site_name . '",';
 	$query .= '"' . $latitude . '",';

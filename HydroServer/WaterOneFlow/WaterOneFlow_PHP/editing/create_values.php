@@ -90,7 +90,7 @@ else {
 }
 
 function get_valid_site_id($site_code) {
-	$query = 'SELECT SiteID FROM Sites WHERE SiteCode = "' . $site_code . '"';
+	$query = 'SELECT SiteID FROM sites WHERE SiteCode = "' . $site_code . '"';
 	
 	$result = mysql_query($query);
 	if (!$result) {
@@ -110,7 +110,7 @@ function get_valid_site_id($site_code) {
 }
 
 function get_valid_variable_id($variable_code) {
-	$query = 'SELECT VariableID FROM Variables WHERE VariableCode = "' . $variable_code . '"';
+	$query = 'SELECT VariableID FROM variables WHERE VariableCode = "' . $variable_code . '"';
 	
 	$result = mysql_query($query);
 	if (!$result) {
