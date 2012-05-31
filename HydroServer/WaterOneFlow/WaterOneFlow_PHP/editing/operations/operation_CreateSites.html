@@ -1,0 +1,181 @@
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <link rel="alternate" type="text/xml" href="cuahsi_1_1.php?disco"/>
+    <link rel='stylesheet' type='text/css' href="css/operation_style.css" />
+    <title>WaterOneFlow Web Service</title>
+
+      <script language="javascript" type="text/javascript">
+		
+		function ShowTestSection() {
+			document.getElementById("soaptemplaterequest").style.display = "block";
+			document.getElementById("soapsamplerequest").style.display = "none";
+			document.getElementById("soapsampleresponse").style.display = "none";
+			document.getElementById("testhref").style.display = "none";
+			document.getElementById("samplehref").style.display = "block";
+			document.getElementById("soapsampletitle").style.display = "none";
+			document.getElementById("soaptesttitle").style.display = "block";
+		}
+		
+		function ShowTemplateSection() {
+			document.getElementById("soaptemplaterequest").style.display = "none";
+			document.getElementById("soapsamplerequest").style.display = "block";
+			document.getElementById("soapsampleresponse").style.display = "block";
+			document.getElementById("samplehref").style.display = "none";
+			document.getElementById("testhref").style.display = "block";
+			document.getElementById("soapsampletitle").style.display = "block";
+			document.getElementById("soaptesttitle").style.display = "none";
+		}
+
+		function SendSoapRequest_onclick(SoapRequest, MethodName, Url) {
+		// clear any old message 
+		
+       document.getElementById("note").firstChild.nodeValue ="";
+		// SoapRequst Javascript not working in FF
+		SoapRequest = document.getElementById("txasoaptemplaterequest").value;
+			var xmlhttp;
+			if (window.XMLHttpRequest)
+              {// code for all new browsers
+              xmlhttp=new XMLHttpRequest();
+              } else if (window.ActiveXObject)
+              {// code for IE5 and IE6
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+            if (xmlhttp!=null)
+              {	
+	            // Function.
+	            xmlhttp.onreadystatechange=function() {
+                     if (xmlhttp.readyState==4)
+                     {
+                         if (xmlhttp.status == 200) {
+                          // alert(xmlhttp.responseText)	
+   		                    document.getElementById("tempsoaprequest").value = document.getElementById("txasoaptemplaterequest").value;
+			                document.getElementById("txasoaptemplaterequest").value = xmlhttp.responseText;
+			                document.getElementById("backhref").style.display = "block";
+			                document.getElementById("posthref").style.display = "none";
+    			        
+                         } else {
+    		              document.getElementById("tempsoaprequest").value = document.getElementById("txasoaptemplaterequest").value;
+                         
+                          document.getElementById("note").style.visibility = "visible";
+                         document.getElementById("note").firstChild.nodeValue ="ERROR" ;
+                         }
+                         // done. turn off status
+                        document.getElementById("Status").style.visibility = "hidden";
+
+                     }
+                 }
+	        xmlhttp.open('POST', Url, true);
+			xmlhttp.setRequestHeader('Content-Type', 'text/xml; charset="UTF-8"');
+			xmlhttp.setRequestHeader('SOAPAction', 'http://www.cuahsi.org/his/1.1/ws/GetSiteInfoObject');
+			
+			document.getElementById("Status").style.visibility = "visible";
+			
+			xmlhttp.send(SoapRequest);
+
+          }
+            else
+              {
+              alert("Your browser does not support XMLHTTP.");
+              }
+		}
+
+		function GoBackToRequest_onclick() {
+			document.getElementById("txasoaptemplaterequest").value = document.getElementById("tempsoaprequest").value;
+			document.getElementById("backhref").style.display = "none";
+			document.getElementById("posthref").style.display = "block";
+		}
+      </script>
+
+  </head>
+
+<body>
+<div id="content">
+
+	<p class="heading1">WaterOneFlow_Editing</p>
+	<br>
+	
+	
+
+	<span id="Span3">
+		<p class="intro">Click <a href="editing_service.php">here</a> for a complete list of operations.</p>
+		<h2>CreateSites</h2>
+		<p class="intro">Given the site information, create new sites in the Hydroserver database. The site information must have properties: siteName, latitude, longitude. The optional properties are: siteCode, elevation_m. The latitude and longitude must be in WGS1984.</p>
+		<div id="Span4">
+			<h3	id="testhref">
+				<a href="javascript:ShowTestSection();">Test this	call...</a>
+			</h3>
+			<h3	id="samplehref"	style="display:none;"><a href="javascript:ShowTemplateSection();">Show sample request/response...</a>
+			</h3>
+			<p id="soaptesttitle" style="display:none;">&nbsp;</p>
+			<p id="soapsampletitle">The following is a sample SOAP 1.1 request and response.  The <font class=value>placeholders</font> shown need to be replaced with actual values.</p>
+			<div id="soaptemplaterequest" style="display:none;">
+			    <form>
+			        <textarea	id="txasoaptemplaterequest" style="background-color:#e5e5cc;width:80em;height:40em;font-family:monospace;white-space: pre;">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateSites xmlns="http://www.cuahsi.org/his/1.1/ws/"&gt;
+      &lt;authToken&gt;string&lt;/authToken&gt;
+      &lt;siteInfo&gt;string&lt;/siteInfo&gt;
+        &lt;siteName&gt;string&lt;/siteName&gt;
+        &lt;siteCode&gt;string&lt;/siteCode&gt;
+        &lt;latitude&gt;string&lt;/latitude&gt;
+        &lt;longitude&gt;string&lt;/longitude&gt;
+        &lt;elevation_m&gt;string&lt;/elevation_m&gt;
+      &lt;/siteInfo&gt;
+      &lt;siteInfo&gt;string&lt;/siteInfo&gt;
+        &lt;siteName&gt;string&lt;/siteName&gt;
+        &lt;siteCode&gt;string&lt;/siteCode&gt;
+        &lt;latitude&gt;string&lt;/latitude&gt;
+        &lt;longitude&gt;string&lt;/longitude&gt;
+        &lt;elevation_m&gt;string&lt;/elevation_m&gt;
+      &lt;/siteInfo&gt;
+    &lt;/CreateSites&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</textarea>
+			        <div id="posthref" style="font-size:1.1em;color:#000000;margin-top:10px;margin-bottom:10px;">
+			             <a	href="javascript:SendSoapRequest_onclick(document.getElementById('txasoaptemplaterequest').innerText,	'CreateSites', './editing_service.php');"	>Post template...</a>
+			        
+			        </div>
+                    <div id="note" style="font-size:0.8em;color:#ff0000;margin-top:10px;margin-bottom:10px;">
+                       &amp;
+                    </div>
+                    <div id="backhref" style="display:none;font-size:1.1em;color:#000000;margin-top:10px;margin-bottom:10px;"><a href="javascript:GoBackToRequest_onclick();" >GO back to request template...</a>
+                        <br />
+                    </div>
+                    <input id="tempsoaprequest" type="hidden"	/>
+                </form>
+            </div>
+		    <div id="soapsamplerequest"	style="background-color:#e5e5cc;width:80em;height:20em;font-family:monospace;white-space: pre;">POST http://localhost:8080/his/services/editing/create_sites.php HTTP/1.1
+Host: hydrodata.info
+Content-Type: text/xml; charset=utf-8
+Content-Length: <font class=value>length</font>
+SOAPAction: "http://www.cuahsi.org/his/1.1/ws/GetSiteInfoObject"
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateSites xmlns="http://www.cuahsi.org/his/1.1/ws/"&gt;
+      &lt;authToken&gt;<font class=value>string</font>&lt;/authToken&gt; <font class=value>&lt;siteInfo&gt; &lt;siteName&gt;string&lt;/siteName&gt;</font>&lt;latitude&gt; string &lt;/latitude&gt; &lt;longitude&gt; string &lt;/longitude&gt; &lt;/siteInfo&gt;&lt;/CreateSites&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</div>
+			<div id="soapsampleresponse" style="background-color:#e5e5cc;;font-family:monospace;white-space: pre;">HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: <font class=value>length</font>
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateSitesResponse xmlns="http://www.cuahsi.org/his/1.1/ws/"&gt;
+      &lt;sitesResponse xmlns="http://www.cuahsi.org/waterML/1.1/"&gt;&lt;status&gt;string&lt;/status&gt; &lt;siteCode&gt;string&lt;/siteCode&gt;
+    &lt;/CreateSitesResponse&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</div>
+		</div>
+	</span>
+</div>
+<div id="Status" style="visibility:hidden;z-index:1;position:absolute;left:50%;top:50%;border:thick double #00FF00;" >
+Running
+</div>
+</body>
+</html>

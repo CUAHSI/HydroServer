@@ -12,21 +12,25 @@ require_once('database_connection.php');
 require_once('db_helper.php');
 
 //get the token
-if (isset($_POST["token"])) {
-  $token = $_POST["token"];
+if (isset($_POST["authToken"])) {
+  $token = $_POST["authToken"];
 }
 else {
-  if (isset($_SERVER['HTTP_TOKEN'])) {
-    $token = $_SERVER['HTTP_TOKEN'];
+  if (isset($_SERVER['HTTP_AUTHTOKEN'])) {
+    $token = $_SERVER['HTTP_AUTHTOKEN'];
   }
   else {
-    echo 'not authorized (unspecified token).';
+	header('HTTP/1.0 403 Forbidden');
+	header ("Content-Type:text/xml");
+    echo '<response>not authorized (unspecified token).</response>';
 	exit;
   }
 }
 
 if (!validate_token($token)) {
-  echo 'not authorized (invalid token).';
+  header('HTTP/1.0 403 Forbidden');
+  header ("Content-Type:text/xml");
+  echo '<response>not authorized (unspecified token).</response>';
   exit;
 }
 
@@ -43,9 +47,6 @@ else {
 	//get the sites POST data
 	$data = file_get_contents('php://input');
 }
-echo "<html>";
-echo "<p>your data :$data</p>";
-echo "format:" . $format;
 
 if ($format == "XML") {
     $xml = simplexml_load_string($data);
@@ -57,6 +58,13 @@ if ($format == "XML") {
 }
 else {
 	echo '<p>CSV format is not yet supported.</p>';
+}
+
+function return_error($error_text) {
+	header('HTTP/1.0 500 Internal Server Error');
+	header ("Content-Type:text/xml");
+	echo '<response>' . $error_text . '</response>';
+	exit;
 }
 
 function save_site($xmlsite) {
@@ -82,10 +90,11 @@ function save_site($xmlsite) {
 	$result = mysql_query($query);
    
 	if (!$result) {
-	die("<p>Error inserting sites" . $query . ": " . 
-	  mysql_error() . "</p>");
+		return_error('error creating site.' . mysql_error());
 	}
-	echo 'site ' . $site_code . ' saved successfully.';
+	header ("Content-Type:text/xml");
+	echo '<response>site ' . $site_code . ' saved successfully.</response>';
+	exit;
 }
 
 function generate_site_code($latitude, $longitude) {
