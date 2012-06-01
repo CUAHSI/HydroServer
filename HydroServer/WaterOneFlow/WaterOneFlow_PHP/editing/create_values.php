@@ -80,9 +80,8 @@ if ($format == "XML") {
     $xml = simplexml_load_string(urldecode($data));
 
 	foreach($xml->children() as $val) {
-		$attr = $val->attributes();
-		$time = $attr['DateTimeUTC'];
-		$data_value = $val[0];
+		$time = $val[0];
+		$data_value = $val[1];
 		save_value($site_id, $variable_id, $source_id, $time, $data_value);
 	}
 }
