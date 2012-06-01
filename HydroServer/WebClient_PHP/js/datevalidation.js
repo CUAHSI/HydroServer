@@ -6,19 +6,18 @@ function validateDate() {
 var value2 = document.all("datepicker").value;
 
 //Removing all space
-value = value2.replace(" ",""); 
+var value = value2.replace(" ",""); 
 
 //minimum length is 10. example 2012-05-31
-alert(value.length);
 if(value.length != 10){
 	
-	alert("Invalid date length. Date format should be 2012-05-31");
+	alert("Invalid date length. Date format should be YYYY-MM-DD");
 	return false;
 	}
 if (isDate(value) == false){
-	alert("Incorrect date. You cannot enter 00.");
 	return false;
 	}
+return true;
 }
 
 //Check the length of each segment to ensure it is correct. The order is yyyy-mm-dd by default.
@@ -32,24 +31,33 @@ function isDate(value) {
         value = value.replace("/","-").replace(".","-"); 
         var SplitValue = value.split("-");
         var OK = true;
+
 		//Check the length of the year
-        
 		if (OK && SplitValue[YearIndex].length != 4){
 			alert("Please enter the correct length for the YEAR.");
             OK = false;
+			return OK;
         }
 		
 		//Check the length of the month
         if (OK && SplitValue[MonthIndex].length != 2){
 			alert("Please enter the correct length for the MONTH.");
             OK = false;
+			return OK;
         }
 		
 		//Check the length of the day
         if (SplitValue[DayIndex].length != 2){
 			alert("Please enter the correct length for the DAY.");
             OK = false;
+			return OK;
         }
+		if ((SplitValue[DayIndex] == "00") || (SplitValue[MonthIndex] == "00")){
+			alert("Incorrect date. You cannot enter 00.");
+			OK = false;
+			return OK;
+		}		
+		
 		
         if (OK) {
             var Year = parseInt(SplitValue[YearIndex], 10);
@@ -78,6 +86,9 @@ function isDate(value) {
                 }
             }
         }
+		if (OK == false){
+			alert("Incorrect date range.");
+		}
         return OK;
     }
     catch (e) {

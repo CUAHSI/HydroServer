@@ -107,13 +107,10 @@ alert("If you do not see your METHOD listed here," + '\n' + "please contact your
 <script>
 	$(function() {
 		
-		$( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+		$( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd", constrainInput: false, showOn: "button", buttonImage: "images/calendar.gif", buttonImageOnly: true });
 		
 		
-		$( "#timepicker" ).timepicker({
-			showOn: "focus",
-    		showPeriodLabels: false,
-		});
+		$( "#timepicker" ).timepicker({ showOn: "focus", showPeriodLabels: false });
 		
 	});
 </script>
@@ -200,7 +197,7 @@ xmlhttp.send();
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Date:</strong></td>
-          <td valign="top"><input type="text" id="datepicker" name="datepicker" onBlur="return validateDate()">
+          <td valign="top"><input type="text" id="datepicker" name="datepicker" onChange="return validateDate()">
             <span class="em">&nbsp;(YYYY-MM-DD format; Ex: 2012-05-04 for 4 May  2012)</span></td>
           </tr>
         <tr>
@@ -209,7 +206,7 @@ xmlhttp.send();
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Time:</strong></td>
-          <td valign="top"><input type="text" id="timepicker" name="timepicker" onBlur="return validateTime()">
+          <td valign="top"><input type="text" id="timepicker" name="timepicker" onChange="return validateTime()">
             <span class="em">&nbsp;(HH:MM, 24 hour  format; Ex: 13:45 for 1:45 pm)</span></td>
           </tr>
         <tr>
