@@ -6,14 +6,16 @@ require_once 'authorization_check.php';
 require_once 'database_connection.php';
 
 //add the SourceID's
-$sql ="Select * FROM sources";
+$sql ="Select distinct SourceID, Organization FROM seriescatalog";
 
 $result = @mysql_query($sql,$connection)or die(mysql_error());
+
+
 
 $num = @mysql_num_rows($result);
 	if ($num < 1) {
 
-    $msg = "<P><em2>Sorry, there are no SourceID names.</em></p>";
+    $msg = "<P><em2>Sorry, no Sources available.</em></p>";
 
 	} else {
 
@@ -23,28 +25,6 @@ $num = @mysql_num_rows($result);
 		$sourcename = $row["Organization"];
 
 		$option_block .= "<option value=$sourceid>$sourcename</option>";
-
-		}
-	}
-
-//add the SiteID's
-$sql2 ="Select * FROM sites";
-
-$result2 = @mysql_query($sql2,$connection)or die(mysql_error());
-
-$num = @mysql_num_rows($result2);
-	if ($num < 1) {
-
-    $msg2 = "<P><em2>Sorry, there are no SiteID names.</em></p>";
-
-	} else {
-
-	while ($row2 = mysql_fetch_array ($result2)) {
-
-		$siteid = $row2["SiteID"];
-		$sitename = $row2["SiteName"];
-
-		$option_block2 .= "<option value=$siteid>$sitename</option>";
 
 		}
 	}
@@ -107,6 +87,10 @@ $num = @mysql_num_rows($result4);
 function show_answer(){
 alert("If you do not see your location listed here," + '\n' + "please contact your teacher and ask them" + '\n' + "to add it before entering data.");
 }
+
+function show_answer2(){
+alert("If you do not see your METHOD listed here," + '\n' + "please contact your teacher and ask them" + '\n' + "to add it before entering data.");
+}
 </script>
 
 <script src="js/numbervalidation.js"></script>
@@ -133,6 +117,66 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
 	});
 </script>
 
+<script type="text/javascript">
+function showSites(str){
+
+document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png'></a>";
+
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","getsites.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+
+<script type="text/javascript">
+function showTypes(str){
+
+document.getElementById("txtHint2").innerHTML="";
+
+if (str=="")
+  {
+  document.getElementById("txtHint2").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint2").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","gettypes.php?x="+str,true);
+xmlhttp.send();
+}
+</script>
+
 </head>
 
 <body background="images/bkgrdimage.jpg">
@@ -147,12 +191,12 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Enter multiple values manually</h1>
-      <p>Need to enter more than 10 values? Try the <a href="import_data_file.php">import csv file</a> method!</p>
+      <p>Need to enter more than 10 values? Try the <a href="import_data_file.php">import csv file</a> method!</p></blockquote>
       <FORM METHOD="POST" ACTION="do_add_data_value.php" name="addvalue">
-      <table width="400" border="0" cellspacing="0" cellpadding="0">
+      <blockquote><table width="450" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td valign="top"><strong>Source:</strong></td>
-          <td valign="top"><select name="SourceID" id="SourceID"><option value="">Select....</option><?php echo "$option_block"; ?></select></td>
+          <td width="55" valign="top"><strong>Source:</strong></td>
+          <td width="370" valign="top"><select name="SourceID" id="SourceID" onChange="showSites(this.value)"><option value="">Select....</option><?php echo "$option_block"; ?></select></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -160,153 +204,168 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td valign="top"><strong>Site:</strong></td>
-          <td valign="top"><select name="SiteID" id="SiteID"><option value="">Select....</option><?php echo "$option_block2"; ?></select> <a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></td>
+          <td valign="top"><div id="txtHint"><select name="" id=""><option value="">Select....</option></select>&nbsp;<a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></div></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
           <td valign="top">&nbsp;</td>
           </tr>
+      </table></blockquote>
+      <table width="600" border="1" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="55" valign="top"><strong>Type:</strong></td>
-          <td width="370" valign="top"><select name="VariableID" id="VariableID">
-            <option value="">Select....</option><?php echo "$option_block3"; ?></select></td>
+          <td width="182"><center><strong>Type:</strong></center></td>
+          <td width="249"><center><strong>Method:</strong> <a href="#" onclick="show_answer2()" border="0"><img src="images/questionmark.png" /></a></center></td>
+          <td width="60"><center><strong>Date:</strong>**</center></td>
+          <td width="46"><center><strong>Time:**</strong></center></td>
+          <td width="51"><center><strong>Value:**</strong></center></td>
           </tr>
         <tr>
-          <td valign="top">&nbsp;</td>
-          <td valign="top">&nbsp;</td>
+          <td width="182" bgcolor="#0099FF">&nbsp;</td>
+          <td width="249" bgcolor="#0099FF">&nbsp;</td>
+          <td width="60" bgcolor="#0099FF">&nbsp;</td>
+          <td width="46" bgcolor="#0099FF">&nbsp;</td>
+          <td width="51" bgcolor="#0099FF">&nbsp;</td>
           </tr>
         <tr>
-          <td valign="top"><strong>Method:</strong></td>
-          <td valign="top"><select name="MethodID" id="MethodID">
-            <option value="">Select....</option><?php echo "$option_block4"; ?></select></td>
+          <td width="182"><div id="txtHint2"><select name="" id=""><option value="">Select....</option></select></div></td>
+          <td width="249"><select name="MethodID" id="MethodID">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td width="60"><center><input type="text" id="datepicker" name="datepicker1" size=10 maxlength=12 /></center></td>
+          <td width="46"><center><input type="text" id="timepicker" name="timepicker1" size=7 maxlength=10></center></td>
+          <td width="51"><center><input type="text" id="value" name="value" size=7 maxlength=20 onBlur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td valign="top">&nbsp;</td>
-          <td width="370" valign="top">&nbsp;</td>
-          </tr>
-      </table>
-      <table width="600" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="150"><center><strong>Date:</strong></center></td>
-          <td width="150"><center><strong>Time:</strong></center></td>
-          <td width="70"><center><strong>Value:</strong></center></td>
-          <td width="230"><center><strong>Formating Note:</strong></center></td>
-        </tr>
-        <tr>
-          <td width="150"><center></center></td>
-          <td><center></center></td>
-          <td width="70"><center>
-          </center></td>
-          <td rowspan="11" valign="top"><center><br />
-            <span class="em">Date should be formatted like this<br />
-            &quot;2012-05-04&quot; for 4 May  2012.</span>
-            <p><span class="em">Time should be formatted like this<br />
-&quot;13:45&quot; for              1:45 pm</span></p>
-            <p><span class="em">Value must be a number, and<br />
-no 
-commas are allowed</span></p>
-          </center></td>
-        </tr>
-        <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker1"></center></td>
-          <td><center><input type="text" id="timepicker" name="timepicker1"></center></td>
-          <td width="70"><center><input type="text" id="value" name="value" size=10 maxlength=20 onBlur="return validateNum()"/></center></td>
+          <td width="182"><select name="VariableID2" id="VariableID2">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td width="249"><select name="MethodID2" id="MethodID2">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td width="60"><center><input type="text" id="datepicker2" name="datepicker2" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker2" name="timepicker2" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value2" name="value2" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker2"></center></td>
-          <td><center>
-            <input type="text" id="timepicker2" name="timepicker2" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value2" name="value2" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td><select name="VariableID3" id="VariableID3">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td><select name="MethodID3" id="MethodID3">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td><center><input type="text" id="datepicker3" name="datepicker3" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker3" name="timepicker3" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value3" name="value3" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker3"></center></td>
-          <td><center>
-            <input type="text" id="timepicker3" name="timepicker3" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value3" name="value3" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td><select name="VariableID4" id="VariableID4">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td><select name="MethodID4" id="MethodID4">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td><center><input type="text" id="datepicker4" name="datepicker4" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker4" name="timepicker4" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value4" name="value4" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker4"></center></td>
-          <td><center>
-            <input type="text" id="timepicker4" name="timepicker4" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value4" name="value4" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td><select name="VariableID5" id="VariableID5">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td><select name="MethodID5" id="MethodID5">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td><center><input type="text" id="datepicker5" name="datepicker5" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker5" name="timepicker5" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value5" name="value5" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker5"></center></td>
-          <td><center>
-            <input type="text" id="timepicker5" name="timepicker5" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value5" name="value5" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td><select name="VariableID6" id="VariableID6">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td><select name="MethodID6" id="MethodID6">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td><center><input type="text" id="datepicker6" name="datepicker6" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker6" name="timepicker6" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value6" name="value6" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker6"></center></td>
-          <td><center>
-            <input type="text" id="timepicker6" name="timepicker6" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value6" name="value6" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td><select name="VariableID7" id="VariableID7">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td><select name="MethodID7" id="MethodID7">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td><center><input type="text" id="datepicker7" name="datepicker7" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker7" name="timepicker7" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value7" name="value7" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker7"></center></td>
-          <td><center>
-            <input type="text" id="timepicker7" name="timepicker7" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value7" name="value7" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td><select name="VariableID8" id="VariableID8">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td><select name="MethodID8" id="MethodID8">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td><center><input type="text" id="datepicker8" name="datepicker8" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker8" name="timepicker8" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value8" name="value8" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker8"></center></td>
-          <td><center>
-            <input type="text" id="timepicker8" name="timepicker8" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value8" name="value8" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td><select name="VariableID9" id="VariableID9">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td><select name="MethodID9" id="MethodID9">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td><center><input type="text" id="datepicker9" name="datepicker9" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker9" name="timepicker9" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value9" name="value9" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker9"></center></td>
-          <td><center>
-            <input type="text" id="timepicker9" name="timepicker9" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value9" name="value9" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td><select name="VariableID10" id="VariableID10">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
+          <td><select name="MethodID10" id="MethodID10">
+            <option value="">Select....</option>
+            <?php echo "$option_block4"; ?>
+          </select></td>
+          <td><center><input type="text" id="datepicker10" name="datepicker10" size="10" maxlength="12" /></center></td>
+          <td width="46"><center><input type="text" id="timepicker10" name="timepicker10" size="7" maxlength="10" /></center></td>
+          <td width="51"><center><input type="text" id="value10" name="value10" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
           </tr>
         <tr>
-          <td width="150"><center><input type="text" id="datepicker" name="datepicker10"></center></td>
-          <td><center>
-            <input type="text" id="timepicker10" name="timepicker10" />
-          </center></td>
-          <td width="70"><center>
-            <input type="text" id="value10" name="value10" size="10" maxlength="20" onblur="return validateNum()"/>
-          </center></td>
+          <td colspan="5">&nbsp;</td>
           </tr>
         <tr>
-          <td width="150">&nbsp;</td>
-          <td>&nbsp;</td>
-          <td width="70">&nbsp;</td>
-          <td>&nbsp;</td>
+          <td colspan="5"><center><input type="SUBMIT" name="submit" value="Submit Your Data" /></center></td>
           </tr>
-        <tr>
-          <td width="150">&nbsp;</td>
-          <td><center><input type="SUBMIT" name="submit" value="Submit Your Data" /></center></td>
-          <td width="70">&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-      </table>
-      </FORM></p>
+      </table></FORM><blockquote>
+      <p>**<strong>Formating Notes:</strong><br />
+<span class="em">Date should be formatted like this &quot;2012-05-04&quot; for 4 May  2012.<br />
+Time should be formatted like this &quot;13:45&quot; for 1:45 pm</span><span class="em"><br />
+Value must be a number, and no 
+commas are allowed</span><br />
+</p>
 </blockquote>
     <p></p></td>
   </tr>

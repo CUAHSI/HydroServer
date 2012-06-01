@@ -171,7 +171,7 @@ xmlhttp.send();
           </tr>
         <tr>
           <td valign="top"><strong>Site:</strong></td>
-          <td valign="top"><div id="txtHint"><select name="" id=""><option value="">Select....</option></select><a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></div> 
+          <td valign="top"><div id="txtHint"><select name="" id=""><option value="">Select....</option></select> <a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></div> 
 </td>
           </tr>
         <tr>
