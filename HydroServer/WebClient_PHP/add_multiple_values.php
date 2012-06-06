@@ -147,36 +147,6 @@ xmlhttp.send();
 }
 </script>
 
-<script type="text/javascript">
-function showTypes(str){
-
-document.getElementById("txtHint2").innerHTML="";
-
-if (str=="")
-  {
-  document.getElementById("txtHint2").innerHTML="";
-  return;
-  }
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("txtHint2").innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.open("GET","gettypes.php?x="+str,true);
-xmlhttp.send();
-}
-</script>
-
 </head>
 
 <body background="images/bkgrdimage.jpg">
@@ -227,7 +197,10 @@ xmlhttp.send();
           <td width="51" bgcolor="#0099FF">&nbsp;</td>
           </tr>
         <tr>
-          <td width="182"><div id="txtHint2"><select name="" id=""><option value="">Select....</option></select></div></td>
+          <td width="182"><select name="VariableID" id="VariableID">
+              <option value="">Select....</option>
+              <?php echo "$option_block3"; ?>
+            </select></td>
           <td width="249"><select name="MethodID" id="MethodID">
             <option value="">Select....</option>
             <?php echo "$option_block4"; ?>
