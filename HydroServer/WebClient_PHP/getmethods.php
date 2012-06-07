@@ -1,33 +1,55 @@
 <?php
 //value given from the page
-$q=$_GET["y"];
+$m=$_GET["m"];
 
 //connect to server and select database
 require_once 'database_connection.php';
 
 //filter the Type results after Site is selected
-$sql6 ="SELECT DISTINCT MethodID, MethodDescription FROM seriescatalog WHERE SourceID='".$y."' ORDER BY MethodDescription ASC";
+$sql_m ="SELECT MethodID FROM varmeth WHERE VariableCode=$m";
 
-$result6 = @mysql_query($sql6,$connection)or die(mysql_error());
+$result_m = @mysql_query($sql_m,$connection)or die(mysql_error());
 
-$num = @mysql_num_rows($result6);
-	if ($num < 1) {
+$num_m = @mysql_num_rows($result_m);
+	if ($num_m < 1) {
 
-    echo "<P><em2>No Types for this Site.</em></p>";
+    	echo "<p><em2>No Methods for this Type.</em></p>";
+		} 
 
-	} else {
-$option_block6 = "<select name='VariableID' id='VariableID'><option value=''>Select....</option>";
-	while ($row6 = mysql_fetch_array ($result6)) {
+	else {
 
-		$typeid = $row6["VariableID"];
-		$typename = $row6["VariableName"];
-		$datatype = $row6["DataType"];
+	$option_block_m = "<select name='MethodID' id='MethodID'><option value=''>Select....</option>";
 
-		$option_block6 .= "<option value=$typeid>$typename ($datatype)</option>";
+	$method =  mysql_fetch_field($result_m);
 
+	$methodstr = explode(",", $method);
+	
+	for ($a = 0; $a<= "10"; $a++){
+		
+		//Creates a variable for each method number, starting with $m1
+		$m[$a++] = $methodstr[$a]; 
+		
+		foreach($m[]){
+		
+		$sql_m2 ="SELECT * FROM methods WHERE MethodID=$m[]";
+
+		$result_m2 = @mysql_query($sql_m2,$connection)or die(mysql_error());
+
+			while ($rows = mysql_fetch_array ($result_m2)) {
+
+			$methodNum = $rows["MethodID"];
+			$methodName = $rows["MethodDescription"];
+
+			$option_block_m .= "<option value=$methodNum>$methodName</option>";
+
+			}
 		}
 	}
-$option_block6 .= "</select>";
-echo $option_block6;
+}
+
+$option_block_m .= "</select>";
+echo $option_block_m;
+
 mysql_close($connection);
+
 ?>

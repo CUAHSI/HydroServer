@@ -52,28 +52,6 @@ $num = @mysql_num_rows($result3);
 		}
 	}
 
-//add the Methods
-$sql4 ="Select * FROM methods";
-
-$result4 = @mysql_query($sql4,$connection)or die(mysql_error());
-
-$num = @mysql_num_rows($result4);
-	if ($num < 1) {
-
-    $msg4 = "<P><em2>Sorry, there are no Methods.</em></p>";
-
-	} else {
-
-	while ($row4 = mysql_fetch_array ($result4)) {
-
-		$methodid = $row4["MethodID"];
-		$methodname = $row4["MethodDescription"];
-
-		$option_block4 .= "<option value=$methodid>$methodname</option>";
-
-		}
-	}
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -145,6 +123,35 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("GET","getsites.php?q="+str,true);
 xmlhttp.send();
 }
+
+
+function showMethods(str){
+
+document.getElementById("txtHint2").innerHTML="";
+
+if (str=="")
+  {
+  document.getElementById("txtHint2").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint2").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","getmethods.php?m="+str,true);
+xmlhttp.send();
+}
 </script>
 
 </head>
@@ -197,14 +204,11 @@ xmlhttp.send();
           <td width="51" bgcolor="#0099FF">&nbsp;</td>
           </tr>
         <tr>
-          <td width="182"><select name="VariableID" id="VariableID">
+          <td width="182"><select name="VariableID" id="VariableID" onChange="showMethods(this.value)">
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td width="249"><select name="MethodID" id="MethodID">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td width="249"><div id="txtHint2"><select name="" id=""><option value="">Select....</option></select></div></td>
           <td width="60"><center><input type="text" id="datepicker" name="datepicker1" size=10 maxlength=12 /></center></td>
           <td width="46"><center><input type="text" id="timepicker" name="timepicker1" size=7 maxlength=10></center></td>
           <td width="51"><center><input type="text" id="value" name="value" size=7 maxlength=20 onBlur="return validateNum()"/></center></td>
@@ -214,10 +218,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td width="249"><select name="MethodID2" id="MethodID2">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td width="249">&nbsp;</td>
           <td width="60"><center><input type="text" id="datepicker2" name="datepicker2" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker2" name="timepicker2" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value2" name="value2" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
@@ -227,10 +228,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td><select name="MethodID3" id="MethodID3">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td>&nbsp;</td>
           <td><center><input type="text" id="datepicker3" name="datepicker3" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker3" name="timepicker3" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value3" name="value3" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
@@ -240,10 +238,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td><select name="MethodID4" id="MethodID4">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td>&nbsp;</td>
           <td><center><input type="text" id="datepicker4" name="datepicker4" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker4" name="timepicker4" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value4" name="value4" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
@@ -253,10 +248,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td><select name="MethodID5" id="MethodID5">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td>&nbsp;</td>
           <td><center><input type="text" id="datepicker5" name="datepicker5" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker5" name="timepicker5" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value5" name="value5" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
@@ -266,10 +258,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td><select name="MethodID6" id="MethodID6">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td>&nbsp;</td>
           <td><center><input type="text" id="datepicker6" name="datepicker6" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker6" name="timepicker6" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value6" name="value6" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
@@ -279,10 +268,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td><select name="MethodID7" id="MethodID7">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td>&nbsp;</td>
           <td><center><input type="text" id="datepicker7" name="datepicker7" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker7" name="timepicker7" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value7" name="value7" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
@@ -292,10 +278,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td><select name="MethodID8" id="MethodID8">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td>&nbsp;</td>
           <td><center><input type="text" id="datepicker8" name="datepicker8" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker8" name="timepicker8" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value8" name="value8" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
@@ -305,10 +288,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td><select name="MethodID9" id="MethodID9">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td>&nbsp;</td>
           <td><center><input type="text" id="datepicker9" name="datepicker9" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker9" name="timepicker9" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value9" name="value9" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
@@ -318,10 +298,7 @@ xmlhttp.send();
               <option value="">Select....</option>
               <?php echo "$option_block3"; ?>
             </select></td>
-          <td><select name="MethodID10" id="MethodID10">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
+          <td>&nbsp;</td>
           <td><center><input type="text" id="datepicker10" name="datepicker10" size="10" maxlength="12" /></center></td>
           <td width="46"><center><input type="text" id="timepicker10" name="timepicker10" size="7" maxlength="10" /></center></td>
           <td width="51"><center><input type="text" id="value10" name="value10" size="7" maxlength="20" onblur="return validateNum()"/></center></td>
