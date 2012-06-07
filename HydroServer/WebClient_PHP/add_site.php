@@ -99,6 +99,32 @@ $num4 = @mysql_num_rows($result4);
 <title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
+<!-- JQuery JS -->
+<script type="text/javascript" src="js/jquery-1.2.6.min.js"></script>
+
+<!-- Drop Down JS -->
+<script type="text/javascript" src="js/drop_down.js"></script>
+
+<!-- Preload Images -->
+<SCRIPT language="JavaScript">
+<!--
+pic1 = new Image(16, 16); 
+pic1.src="images/loader.gif";
+//-->
+</SCRIPT>
+
+<STYLE TYPE="text/css">
+<!--
+#county_drop_down, #no_county_drop_down, #loading_county_drop_down
+{
+display: none;
+}
+--> 
+</STYLE>
+
+<!-- Creating the Site Code automatically -->
+<script type="text/javascript" src="js/create_site_code.js"></script>
+
 </head>
 
 <body background="images/bkgrdimage.jpg">
@@ -114,11 +140,11 @@ $num4 = @mysql_num_rows($result4);
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg"; ?>
       <h1>Add a new Site to the database    </h1>
       <p>&nbsp;</p>
-      <FORM METHOD="POST" ACTION="do_add_data_value.php" name="addvalue">
+      <FORM METHOD="POST" ACTION="do_add_site.php" name="addsite">
         <table width="650" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="125" valign="top"><strong>Source:</strong></td>
-            <td colspan="2" valign="top"><select name="SourceID" id="SourceID">
+            <td colspan="2" valign="top"><select name="SourceID" id="SourceID" onChange="CreateCode(this.value)">
               <option value="">Select....</option>
               <?php echo "$option_block"; ?></select></td>
             </tr>
@@ -215,7 +241,7 @@ $num4 = @mysql_num_rows($result4);
           </tr>
         <tr>
           <td width="125" valign="top"><strong>State:</strong></td>
-          <td width="223" valign="top"><select name="State" id="State">
+          <td width="223" valign="top"><select name="state" id="state">
             <option value="">Select....</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -276,7 +302,9 @@ $num4 = @mysql_num_rows($result4);
           </tr>
         <tr>
           <td width="125" valign="top"><strong>County:</strong></td>
-          <td width="223" valign="top"><input type="text" id="County" name="County"></td>
+          <td width="223" valign="top"><div id="county_drop_down"><select id="county" name="county"><option value="">County...</option></select></div>
+	 <span id="loading_county_drop_down"><img src="images/loader.gif" width="16" height="16" align="absmiddle">&nbsp;Select State first...</span>
+	 <div id="no_county_drop_down">This state has no counties.</div></td>
           </tr>
         <tr>
           <td width="125" valign="top">&nbsp;</td>
