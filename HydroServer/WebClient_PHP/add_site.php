@@ -70,7 +70,7 @@ $num3 = @mysql_num_rows($result3);
 	}
 
 //add the LatLongDatumID options
-$sql4 ="Select * FROM spatialreferences WHERE SRSID !='2914'";
+$sql4 ="Select * FROM spatialreferences";
 
 $result4 = @mysql_query($sql4,$connection)or die(mysql_error());
 
@@ -123,8 +123,28 @@ display: none;
 </STYLE>
 
 <!-- Creating the Site Code automatically -->
-<script type="text/javascript" src="js/create_site_code.js"></script>
+<script type="text/javascript">
 
+/*!
+ * Site Code Creation script by Rohit Khattar and Rex Burch
+ */
+
+function CreateCode(){
+var sid = document.all("SourceID").value;
+alert(sid);
+
+var SiteName = FindSource(sid); //This calls the FindSource function
+
+}
+
+//Take the SourceID and run a query using #, return name, and abbrev. it
+function FindSource(){
+	//connect to server and select the info needed
+	location('getsourcename.php?SourceID='+sid,'_self');
+	}
+	
+</script>	
+	
 </head>
 
 <body background="images/bkgrdimage.jpg">
@@ -139,192 +159,205 @@ display: none;
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg"; ?>
       <h1>Add a new Site to the database    </h1>
-      <p>&nbsp;</p>
-      <FORM METHOD="POST" ACTION="do_add_site.php" name="addsite">
-        <table width="650" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="125" valign="top"><strong>Source:</strong></td>
-            <td colspan="2" valign="top"><select name="SourceID" id="SourceID" onChange="CreateCode(this.value)">
-              <option value="">Select....</option>
-              <?php echo "$option_block"; ?></select></td>
-            </tr>
-          <tr>
-            <td width="125" valign="top">&nbsp;</td>
-            <td width="223" valign="top">&nbsp;</td>
-            <td width="302" valign="top">&nbsp;</td>
-          </tr>
+      <p>&nbsp;</p><FORM METHOD="POST" ACTION="do_add_site.php" name="addsite">
+      <table width="600" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="125" valign="top"><strong>Site Name:</strong></td>
-          <td colspan="2" valign="top"><input type="text" id="SiteName" name="SiteName" size=20 maxlength=20"/>&nbsp;<span class="em">(Ex: Boulder Creek at Jug Mountain Ranch)</span></td>
-          </tr>
-        <tr>
-          <td width="125" valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-          <td width="302" valign="top">&nbsp;</td>
+          <td width="93"><strong>Source:</strong></td>
+          <td width="557"><select name="SourceID" id="SourceID" onChange="CreateCode(this.value)">
+            <option value="">Select....</option>
+            <?php echo "$option_block"; ?>
+          </select></td>
         </tr>
         <tr>
-          <td valign="top"><strong>Site Code:</strong></td>
-          <td colspan="2" valign="top"><input type="text" id="SiteCode" name="SiteCode" size=20 maxlength=20"/>
-            &nbsp;<span class="em">(You may adjust this if needed)</span></td>
-          </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-          <td width="302" valign="top">&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
-          <td width="125" valign="top"><strong>Site Type:</strong></td>
-          <td colspan="2" valign="top"><select name="SiteType" id="SiteType">
+          <td><strong>Site Name:</strong></td>
+          <td><input type="text" id="SiteName" name="SiteName" size=20 maxlength=20"/>
+&nbsp;<span class="em">(Ex: Boulder Creek at Jug Mountain Ranch)</span></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><strong>Site Code:</strong></td>
+          <td><input type="text" id="SiteCode" name="SiteCode" size=20 maxlength=20"/>
+&nbsp;<span class="em">(You may adjust this if needed)</span></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><strong>Site Type:</strong></td>
+          <td><select name="SiteType" id="SiteType">
             <option value="">Select....</option>
             <?php echo "$option_block2"; ?>
           </select></td>
-          </tr>
-        <tr>
-          <td width="125" valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-          <td width="302" valign="top">&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="3" valign="top">You may either enter the latitude and longitude manually below or simply select the location on the map.</td>
-          </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-          <td width="302" valign="top">&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
-          <td width="125" valign="top"><strong>Latitude:</strong></td>
-          <td width="223" valign="top"><input type="text" id="Latitude" name="Latitude" size=20 maxlength=20/></td>
-          <td width="302" rowspan="13" valign="top"><img src="WebClient_PHP/images/google_map.jpg" width="300" height="235" alt="google map"></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+        <table width="600" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td colspan="4" valign="top"><strong>You may either enter the latitude/longitude manually or simply select the location on the map.</strong></td>
         </tr>
         <tr>
-          <td width="125" valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
+          <td width="100" valign="top">&nbsp;</td>
+          <td width="145" valign="top">&nbsp;</td>
+          <td width="96" valign="top">&nbsp;</td>
+          <td width="309" valign="top">&nbsp;</td>
           </tr>
         <tr>
-          <td width="125" valign="top"><strong>Longitude:</strong></td>
-          <td width="223" valign="top"><input type="text" id="Longitude" name="Longitude" size=20 maxlength=20/></td>
+          <td width="100" align="right" valign="top"><strong>Latitude:&nbsp;</strong></td>
+          <td width="145" valign="top"><input type="text" id="Latitude" name="Latitude" size=20 maxlength=20/></td>
+          <td width="96" align="right" valign="top"><strong>Longitude:&nbsp;</strong></td>
+          <td width="309" valign="top"><input type="text" id="Longitude" name="Longitude" size=20 maxlength=20/></td>
           </tr>
         <tr>
-          <td width="125" valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
+          <td width="100" valign="top">&nbsp;</td>
+          <td width="145" valign="top">&nbsp;</td>
+          <td width="96" valign="top">&nbsp;</td>
+          <td width="309" valign="top">&nbsp;</td>
           </tr>
         <tr>
-          <td valign="top"><strong>Vertical Datum:</strong></td>
-          <td width="223" valign="top"><select name="VerticalDatum" id="VerticalDatum">
-            <option value="">Select....</option>
-            <?php echo "$option_block3"; ?>
-          </select></td>
+          <td colspan="4" valign="top"><center>
+            <p><img src="images/google_map.jpeg" width="552" height="514" alt="google map"></p>
+          </center></td>
         </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td valign="top"><strong>Spatial Reference:</strong></td>
-          <td width="223" valign="top"><select name="LatLongDatumID" id="LatLongDatumID">
-            <option value="">Select....</option>
-            <?php echo "$option_block4"; ?>
-          </select></td>
-        </tr>
-        <tr>
-          <td valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-        </tr>
-        <tr>
-          <td width="125" valign="top"><strong>Elevation:</strong></td>
-          <td width="223" valign="top"><input type="text" id="Elevation" name="Elevation" size=20 maxlength=20/></td>
-          </tr>
-        <tr>
-          <td width="125" valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-          </tr>
-        <tr>
-          <td width="125" valign="top"><strong>State:</strong></td>
-          <td width="223" valign="top"><select name="state" id="state">
-            <option value="">Select....</option>
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-            <option value="AZ">Arizona</option>
-            <option value="AR">Arkansas</option>
-            <option value="CA">California</option>
-            <option value="CO">Colorado</option>
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="DC">District of Columbia</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="HI">Hawaii</option>
-            <option value="ID">Idaho</option>
-            <option value="IL">Illinois</option>
-            <option value="IN">Indiana</option>
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KY">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-            <option value="MA">Massachusetts</option>
-            <option value="MI">Michigan</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="MT">Montana</option>
-            <option value="NE">Nebraska</option>
-            <option value="NV">Nevada</option>
-            <option value="NH">New Hampshire</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NM">New Mexico</option>
-            <option value="NY">New York</option>
-            <option value="NC">North Carolina</option>
-            <option value="ND">North Dakota</option>
-            <option value="OH">Ohio</option>
-            <option value="OK">Oklahoma</option>
-            <option value="OR">Oregon</option>
-            <option value="PA">Pennsylvania</option>
-            <option value="RI">Rhode Island</option>
-            <option value="SC">South Carolina</option>
-            <option value="SD">South Dakota</option>
-            <option value="TN">Tennessee</option>
-            <option value="TX">Texas</option>
-            <option value="UT">Utah</option>
-            <option value="VT">Vermont</option>
-            <option value="VA">Virginia</option>
-            <option value="WA">Washington</option>
-            <option value="WV">West Virginia</option>
-            <option value="WI">Wisconsin</option>
-            <option value="WY">Wyoming</option>
-          </select></td>
-          </tr>
-        <tr>
-          <td width="125" valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-          </tr>
-        <tr>
-          <td width="125" valign="top"><strong>County:</strong></td>
-          <td width="223" valign="top"><div id="county_drop_down"><select id="county" name="county"><option value="">County...</option></select></div>
-	 <span id="loading_county_drop_down"><img src="images/loader.gif" width="16" height="16" align="absmiddle">&nbsp;Select State first...</span>
+      </table><table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="130">&nbsp;</td>
+    <td width="520">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>Elevation:</strong></td>
+    <td><input type="text" id="Elevation" name="Elevation" size=20 maxlength=20/></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>State:</strong></td>
+    <td><select name="state" id="state">
+      <option value="">Select....</option>
+        <option value="AL">Alabama</option>
+        <option value="AK">Alaska</option>
+        <option value="AZ">Arizona</option>
+        <option value="AR">Arkansas</option>
+        <option value="CA">California</option>
+        <option value="CO">Colorado</option>
+        <option value="CT">Connecticut</option>
+        <option value="DE">Delaware</option>
+        <option value="DC">District of Columbia</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="IL">Illinois</option>
+        <option value="IN">Indiana</option>
+        <option value="IA">Iowa</option>
+        <option value="KS">Kansas</option>
+        <option value="KY">Kentucky</option>
+        <option value="LA">Louisiana</option>
+        <option value="ME">Maine</option>
+        <option value="MD">Maryland</option>
+        <option value="MA">Massachusetts</option>
+        <option value="MI">Michigan</option>
+        <option value="MN">Minnesota</option>
+        <option value="MS">Mississippi</option>
+        <option value="MO">Missouri</option>
+        <option value="MT">Montana</option>
+        <option value="NE">Nebraska</option>
+        <option value="NV">Nevada</option>
+        <option value="NH">New Hampshire</option>
+        <option value="NJ">New Jersey</option>
+        <option value="NM">New Mexico</option>
+        <option value="NY">New York</option>
+        <option value="NC">North Carolina</option>
+        <option value="ND">North Dakota</option>
+        <option value="OH">Ohio</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+        <option value="SD">South Dakota</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="UT">Utah</option>
+        <option value="VT">Vermont</option>
+        <option value="VA">Virginia</option>
+        <option value="WA">Washington</option>
+        <option value="WV">West Virginia</option>
+        <option value="WI">Wisconsin</option>
+        <option value="WY">Wyoming</option>
+    </select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>County:</strong></td>
+    <td><div id="county_drop_down"><select id="county" name="county"><option value="">County...</option></select></div>
+	 <span id="loading_county_drop_down"><img src="images/loader.gif" width="16" height="16" align="absmiddle">&nbsp;Select state first...</span>
 	 <div id="no_county_drop_down">This state has no counties.</div></td>
-          </tr>
-        <tr>
-          <td width="125" valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-          <td width="302" valign="top">&nbsp;</td>
-          </tr>
-        <tr>
-          <td width="125" valign="top"><strong>Comments:</strong></td>
-          <td colspan="2" valign="top"><input type="text" id="value" name="value" size=20 maxlength=20/> 
-            <span class="em">(Optional)</span></td>
-          </tr>
-        <tr>
-          <td width="125" valign="top">&nbsp;</td>
-          <td width="223" valign="top">&nbsp;</td>
-          <td width="302" valign="top">&nbsp;</td>
-          </tr>
-        <tr>
-          <td colspan="3" valign="top"><center><input type="SUBMIT" name="submit" value="Submit Your Site" /></center></td>
-          </tr>
-      </table></FORM>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>Vertical Datum:</strong></td>
+    <td><select name="VerticalDatum" id="VerticalDatum">
+      <option value="">Select....</option>
+      <?php echo "$option_block3"; ?>
+    </select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>Spatial Reference:</strong></td>
+    <td><select name="LatLongDatumID" id="LatLongDatumID">
+      <option value="">Select....</option>
+      <?php echo "$option_block4"; ?>
+    </select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>Comments:</strong></td>
+    <td><input type="text" id="value" name="value" size=50 maxlength=500/>
+      <span class="em">&nbsp;(Optional)</span></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="SUBMIT" name="submit" value="Submit Your Site" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+      </table>
+</FORM>
       <p>******Need hidden values added too</p>
     </blockquote>
     <p></p></td>
