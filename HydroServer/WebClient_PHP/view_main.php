@@ -1,26 +1,7 @@
 <?php
 
-//Enable Cookies Once Dev is Complete
-
-/*Display the correct navigation or redirect them to the unauthorized user page
-if ($_COOKIE[auth] == "admin"){
-			$nav ="<SCRIPT src=A_navbar.js></SCRIPT>";
-		
-		} elseif ($auth == "teacher"){
-			$nav ="<SCRIPT src=T_navbar.js></SCRIPT>";
-		
-		} elseif ($auth == "student"){
-			$nav ="<SCRIPT src=S_navbar.js></SCRIPT>";
-		} else {
-		
-		//General Public Nav
-		
-		header("Location: unauthorized.php");
-		exit;	
-		}
-		
-
-*/
+//check authority to be here
+require_once 'authorization_check2.php';
 
 ?>
 
