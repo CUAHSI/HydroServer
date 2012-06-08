@@ -65,7 +65,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
         </tr>
     </table></FORM>
     <p>&nbsp;</p>
-    <p><center><strong><a href="view_main.php">View data collected!</a></strong>
+    <p><center><strong><a href="view_main.php"><img src="images/view_data.gif" alt="View Data Collected" width="136" height="33" border="0" /></a></strong>
     </center></p></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1><img src="images/homepage_shot.jpg" alt="student working with teacher" width="300" height="235" hspace="10" align="right" />Welcome</h1>

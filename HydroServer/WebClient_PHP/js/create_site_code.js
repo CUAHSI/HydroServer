@@ -2,25 +2,9 @@
  * Site Code Creation script by Rohit Khattar and Rex Burch
  */
 
-function CreateCode(){
-var sid = document.all("SourceID").value;
-alert(sid);
-
-var SiteName = FindSource(sid); //This calls the FindSource function
-
-}
-
-//Take the Source ID and run a query to sources using #, return name and abbrev. it
-
-function FindSource(){
-	//connect to server and select the info needed
-	location('getsourcename.php?SourceID='+sid,'_self');
-	alert($sname);
-
 var str = "$sname";	//McCall Outdoor Science School
 var matches = str.match(/\b(\w)/g);	// ['M','O','S','S']
 var newsource = matches.join('');	// MOSS
-
 
 //Take the first letter from each word in name provided, and abbrev. it
 
@@ -56,6 +40,4 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
 
 		document.all("SiteCode").value = newString;
 	}
-}
-
 }
