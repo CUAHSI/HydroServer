@@ -35,7 +35,7 @@ if ($auth == "admin"){
 	$cookie_name = "power";
 	$cookie_value = $auth;
 	$cookie_expire = time()+14400;
-	$cookie_domain = "localhost";
+	$cookie_domain = "adventurelearningat.com";
 	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 elseif ($auth == "teacher"){
