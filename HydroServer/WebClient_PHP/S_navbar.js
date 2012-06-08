@@ -1,1 +1,0 @@
-document.write("<blockquote><br /><strong>Student Navigation</strong><br /><p><strong>Data</strong><br /><a href=add_data_value.php>Add a single value</a><br /><a href=add_multiple_values.php>Add multiple values</a><br /><a href=import_data_file.php>Import data file</a><br /><a href=view_main.php>Search Data</a></p><p><a href=index.php>Logout</a></p></blockquote>");
