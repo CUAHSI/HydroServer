@@ -1,9 +1,10 @@
 <?php
 //check authority to be here
-require_once 'authorization_check.php';
+//require_once 'authorization_check.php';
 
 //connect to server and select database
 require_once 'database_connection.php';
+require_once 'main_config.php';
 
 //add the SourceID's options
 $sql ="Select * FROM sources";
@@ -22,10 +23,16 @@ $num = @mysql_num_rows($result);
 		$sourceid = $row["SourceID"];
 		$sourcename = $row["Organization"];
 
-		$option_block .= "<option value=$sourceid>$sourcename</option>";
-
+		if ($sourcename==$default_source){
+	
+			$option_block .= "<option selected='selected' value=$sourceid>$sourcename</option>";
+	
+		}else{
+			
+			$option_block .= "<option value=$sourceid>$sourcename</option>";
 		}
 	}
+}
 
 //add the SiteType options
 $sql2 ="Select * FROM sitetypecv";
@@ -64,10 +71,15 @@ $num3 = @mysql_num_rows($result3);
 
 		$vd = $row3["Term"];
 
-		$option_block3 .= "<option value=$vd>$vd</option>";
+		if ($vd==$default_datum){
+	
+			$option_block3 .= "<option selected='selected' value=$vd>$vd</option>";
 
+	}else{
+			$option_block3 .= "<option value=$vd>$vd</option>";
 		}
 	}
+}
 
 //add the LatLongDatumID options
 $sql4 ="Select * FROM spatialreferences";
@@ -86,17 +98,16 @@ $num4 = @mysql_num_rows($result4);
 		$srid = $row4["SpatialReferenceID"];
 		$srsname = $row4["SRSName"];
 
-		$option_block4 .= "<option value=$srid>$srsname</option>";
+		if ($srsname==$default_spatial){
+	
+			$option_block4 .= "<option selected='selected' value=$srid>$srsname</option>";
 
-		}
+	}else{
+			$option_block4 .= "<option value=$srid>$srsname</option>";
+			}
+
 	}
-
-//value given from the getsourcename.php page
-$sname=$_GET["SName"];
-
-echo $sname;
-
-echo "<script> ProcessSite(sname); </script>";
+}
 
 ?>
 
@@ -107,10 +118,11 @@ echo "<script> ProcessSite(sname); </script>";
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
 <!-- JQuery JS -->
-<script type="text/javascript" src="js/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
 
 <!-- Drop Down JS -->
 <script type="text/javascript" src="js/drop_down.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC3d042tZnUAA8256hCC2Y6QeTSREaxrY0&sensor=true"></script>
 
 <!-- Preload Images -->
 <SCRIPT language="JavaScript">
@@ -119,6 +131,159 @@ pic1 = new Image(16, 16);
 pic1.src="images/loader.gif";
 //-->
 </SCRIPT>
+
+<script type="text/javascript">
+     var map;
+	 var marker=null;
+	 var elevator;
+	 
+function initialize() {
+	GetSourceName()
+	var myLatlng = new google.maps.LatLng(43.52764,-112.04951);
+	
+
+  
+  var myOptions = {
+    zoom: 14,
+    center: myLatlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+	disableDoubleClickZoom : true
+  }
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+elevator = new google.maps.ElevationService();
+  google.maps.event.addListener(map, 'dblclick', function(event) {
+	 
+	// $('#Latitude').value('askjhsdf');
+
+    placeMarker(event.latLng);
+  });
+}
+
+ if(navigator.geolocation) {
+    browserSupportFlag = true;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+	   
+	    var geocoder = new google.maps.Geocoder();
+     geocoder.geocode({location: initialLocation}, function(results, status) {
+       if (status == google.maps.GeocoderStatus.OK) {
+		 
+		  map.setCenter(results[0].geometry.location);  
+		   
+       
+		;
+       } else {
+         alert(address + ' not found');
+       }
+     });
+  
+	   
+	   
+    }, function() {
+      handleNoGeolocation(browserSupportFlag);
+    });
+  }
+  // Browser doesn't support Geolocation
+   else {
+    browserSupportFlag = false;
+    handleNoGeolocation(browserSupportFlag);
+  }
+  
+
+
+function placeMarker(location) {
+ 
+ 
+ if(marker==null)
+ {
+  marker = new google.maps.Marker({
+      position: location,
+      map: map,
+	  draggable: true
+  });
+  
+  google.maps.event.addListener(marker, 'dragend', function(event) {
+	 
+//Again Update the Latitude longitude values
+update(event.latLng)
+//    placeMarker(event.latLng);
+  });
+  
+  
+  //Update values in the 
+  update(location)
+  
+ }
+ else
+ {
+	marker.setPosition(location); 
+//Update Values into the form	
+update(location)
+
+ }
+  map.setCenter(location);
+}
+
+function update(location)
+{
+	
+	$("#Latitude").val(location.lat());
+	$("#Longitude").val(location.lng());
+
+//Update Elevation
+
+  var locations = [];
+  locations.push(location);
+
+  // Create a LocationElevationRequest object using the array's one value
+  var positionalRequest = {
+    'locations': locations
+  }
+
+  // Initiate the location request
+  elevator.getElevationForLocations(positionalRequest, function(results, status) {
+    if (status == google.maps.ElevationStatus.OK) {
+
+      // Retrieve the first result
+      if (results[0]) {
+
+        // Open an info window indicating the elevation at the clicked position
+        $("#Elevation").val(results[0].elevation);
+	
+        
+      } else {
+        alert("No results found");
+      }
+    } else {
+      alert("Elevation service failed due to: " + status);
+    }
+  });
+
+
+// Now to update the state
+var latlng1 = new google.maps.LatLng(location.lat(), location.lng());
+var geocoder = new google.maps.Geocoder();
+geocoder.geocode({'latLng': latlng1}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+			
+			$("#locationtext").html("Your selected location according to us is: " + results[0].formatted_address + ". Please select the state and county accordingly.");
+			
+        
+          
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+
+
+
+}
+ 
+//Function to run on form submission to implement a validation and then run an ajax request to post the data to the server and display the message that the site has been added successfully
+
+</script>
 
 <STYLE TYPE="text/css">
 <!--
@@ -130,73 +295,11 @@ display: none;
 </STYLE>
 
 <!-- Creating the Site Code automatically -->
-<script type="text/javascript">
+<script type="text/javascript" src="js/create_site_code.js"></script>
 
-/*!
- * Go get the source's name form the SourceID
- */
-
-function GetName(){
-var sid = document.all("SourceID").value;
-	alert(sid);
-	location('getsourcename.php?SourceID='+sid,'_self');
-}
-
-/*!
- * Process the Source's name returned from getsourcename.php
- */
-function ProcessSite(){
-var str = sname;	//McCall Outdoor Science School
-var matches = str.match(/\b(\w)/g);	// ['M','O','S','S']
-var newsource = matches.join('');	// MOSS
-alert(newsource);
-document.all("SiteCode").value = newsource;
-}
-
-/*!
- * Process the Site's name typed in after Source is selected
- */
-function CreateCode() {
-var initial_info = document.all("SiteCode").value;	// MOSS
-	
-var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mountain Ranch
-
-	//if string contains " at "
-	if(info_provided.indexOf(" at ")){
-
-		//Split the string where "at" is used
-		var newpieces = info_provided.split(" at ");
-		var first_hlf = newpieces[0];
-		var second_hlf = newpieces[1];
-
-		//process each new string
-		var match1 = first_hlf.match(/\b(\w)/g);	// ['B','C']
-		var acronym1 = match1.join('');	// BC
-
-		var match2 = second_hlf.match(/\b(\w)/g);	// ['J','M','R']
-		var acronym2 = match2.join('');	// JMR
-
-		var newString = (initial_info + '-' + acronym1 + '-' + acronym2);
-
-		document.all("SiteCode").value = newString;
-		}
-	else {
-
-		//process string they type in
-		var match1 = info_provided.match(/\b(\w)/g);	// ['B','C']
-		var acronym1 = match1.join('');	// BC
-
-		var newString = (initial_info + '-' + acronym1);
-
-		document.all("SiteCode").value = newString;
-	}
-}
-
-</script>	
-	
 </head>
 
-<body background="images/bkgrdimage.jpg">
+<body background="images/bkgrdimage.jpg" onLoad="initialize()">
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning Banner" /></td>
@@ -206,14 +309,14 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
   </tr>
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
-    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg"; ?>
+    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php //echo "$msg"; ?>
       <h1>Add a new Site to the database    </h1>
-      <p>&nbsp;</p><FORM METHOD="POST" ACTION="do_add_site.php" name="addsite">
-      <table width="600" border="0" cellspacing="0" cellpadding="0">
+      <p>&nbsp;</p><FORM METHOD="POST" ACTION="" name="addsite" id="addsite">
+      <table width="650" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="93"><strong>Source:</strong></td>
-          <td width="557"><select name="SourceID" id="SourceID" onChange="GetName(this.value)">
-            <option value="">Select....</option>
+          <td width="557"><select name="SourceID" id="SourceID" onChange="GetSourceName()">
+            <option value="-1">Select....</option>
             <?php echo "$option_block"; ?>
           </select></td>
         </tr>
@@ -223,7 +326,7 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
         </tr>
         <tr>
           <td><strong>Site Name:</strong></td>
-          <td><input type="text" id="SiteName" name="SiteName" size=20 maxlength=20" onChange="CreateCode(this.value)"/>
+          <td><input type="text" id="SiteName" name="SiteName" size=20 maxlength="200" onkeyup="GetSiteName()"/>
 &nbsp;<span class="em">(Ex: Boulder Creek at Jug Mountain Ranch)</span></td>
         </tr>
         <tr>
@@ -242,7 +345,7 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
         <tr>
           <td><strong>Site Type:</strong></td>
           <td><select name="SiteType" id="SiteType">
-            <option value="">Select....</option>
+            <option value="-1">Select....</option>
             <?php echo "$option_block2"; ?>
           </select></td>
         </tr>
@@ -255,7 +358,7 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
           <td>&nbsp;</td>
         </tr>
       </table>
-        <table width="600" border="0" cellspacing="0" cellpadding="0">
+        <table width="650" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td colspan="4" valign="top"><strong>You may either enter the latitude/longitude manually or simply select the location on the map.</strong></td>
         </tr>
@@ -278,19 +381,24 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
           <td width="309" valign="top">&nbsp;</td>
           </tr>
         <tr>
-          <td colspan="4" valign="top"><center>
-            <p><img src="images/google_map.jpeg" width="552" height="514" alt="google map"></p>
-          </center></td>
+          <td colspan="4" valign="top"><div id="map_canvas" style="width:650px; height:450px"></div></td>
         </tr>
-      </table><table width="600" border="0" cellspacing="0" cellpadding="0">
+      </table><table width="650" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="130">&nbsp;</td>
     <td width="520">&nbsp;</td>
   </tr>
   <tr>
     <td><strong>Elevation:</strong></td>
-    <td><input type="text" id="Elevation" name="Elevation" size=20 maxlength=20/></td>
+    <td><input type="text" id="Elevation" name="Elevation" size=20 maxlength=20/>m</td>
   </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2"><div id="locationtext"></div></td>
+    </tr>
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -298,7 +406,7 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
   <tr>
     <td><strong>State:</strong></td>
     <td><select name="state" id="state">
-      <option value="">Select....</option>
+      <option value="-1">Select....</option>
         <option value="AL">Alabama</option>
         <option value="AK">Alaska</option>
         <option value="AZ">Arizona</option>
@@ -369,7 +477,7 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
   <tr>
     <td><strong>Vertical Datum:</strong></td>
     <td><select name="VerticalDatum" id="VerticalDatum">
-      <option value="">Select....</option>
+      <option value="-1">Select....</option>
       <?php echo "$option_block3"; ?>
     </select></td>
   </tr>
@@ -380,7 +488,7 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
   <tr>
     <td><strong>Spatial Reference:</strong></td>
     <td><select name="LatLongDatumID" id="LatLongDatumID">
-      <option value="">Select....</option>
+      <option value="-1">Select....</option>
       <?php echo "$option_block4"; ?>
     </select></td>
   </tr>
@@ -390,7 +498,7 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
   </tr>
   <tr>
     <td><strong>Comments:</strong></td>
-    <td><input type="text" id="value" name="value" size=50 maxlength=500/>
+    <td><input type="text" id="com" name="value" size=50 maxlength=500/>
       <span class="em">&nbsp;(Optional)</span></td>
   </tr>
   <tr>
@@ -412,8 +520,143 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
     <p></p></td>
   </tr>
   <tr>
-    <script src="js/footer.js"></script>
+    <script src="footer.js"></script>
   </tr>
 </table>
+
+<script>
+
+    $("form").submit(function() {
+      //Validate all fields
+	  
+if(($("#SourceID option:selected").val())==-1)
+{
+alert("Please select a Source. If you do not find it in the list, please visit the 'Add a new source' page");
+return false;
+}
+
+if(($("#SiteName").val())=="")
+{
+alert("Please enter a name for the site.");
+return false;
+}
+
+if(($("#SiteCode").val())=="")
+{
+alert("Please enter a code for the site.");
+return false;
+}
+
+if(($("#SiteType option:selected").val())==-1)
+{
+alert("Please select a Site Type.");
+return false;
+}	  
+
+if(($("#Latitude").val())=="")
+{
+alert("Please enter the latitude for the site or select a point from the map");
+return false;
+}
+
+if(($("#Longitude").val())=="")
+{
+alert("Please enter the longitude for the site or select a point from the map");
+return false;
+}
+
+if(($("#Elevation").val())=="")
+{
+alert("Please enter the elevation for the site or select a point from the map");
+return false;
+}
+
+
+var floatRegex = '[-+]?([0-9]*\.[0-9]+|[0-9]+)';
+var myInt = $("#Latitude").val().match(floatRegex);
+
+
+if(myInt==null)
+{alert("Invalid characters present in latitude. Please correct it.");
+      return false;
+}
+
+
+if(myInt[0]!=$("#Latitude").val())
+{alert("Invalid characters present in latitude. Please correct it.");
+      return false;
+}
+
+
+myInt = $("#Longitude").val().match(floatRegex);
+
+
+if(myInt==null)
+{alert("Invalid characters present in longitude. Please correct it.");
+      return false;
+}
+
+
+if(myInt[0]!=$("#Longitude").val())
+{alert("Invalid characters present in longitude. Please correct it.");
+      return false;
+}
+
+myInt = $("#Elevation").val().match(floatRegex);
+
+
+if(myInt==null)
+{alert("Invalid characters present in elevation. Please correct it.");
+      return false;
+}
+
+
+if(myInt[0]!=$("#Elevation").val())
+{alert("Invalid characters present in elevation. Please correct it.");
+      return false;
+}
+
+if(($("#state option:selected").val())==-1)
+{
+alert("Please select a state.");
+return false;
+}
+if(($("#VerticalDatum option:selected").val())==-1)
+{
+alert("Please select a vertical datum.");
+return false;
+}
+if(($("#LatLongDatumID option:selected").val())==-1)
+{
+alert("Please select a spatial reference.");
+return false;
+}
+
+//All Validation Checks completed.Now add data to the database
+
+$.ajax({
+  type: "POST",
+  url: "do_add_site.php?sc="+$("#SiteCode").val()+"&sn="+$("#SiteName").val()+"&lat="+$("#Latitude").val()+"&lng="+$("#Longitude").val()+"&llid="+$("#LatLongDatumID option:selected").val()+"&type="+$("#SiteType option:selected").text()+"&elev="+$("#Elevation").val()+"&datum="+$("#VerticalDatum option:selected").text()+"&state="+$("#state option:selected").text()+"&county="+$("#county option:selected").text()+"&com="+$("#com").val()
+}).done(function( msg ) {
+  if(msg==1)
+  {
+	  alert("Site successfully added");
+	  window.location.href = "add_site.php";
+	  return true;
+  }
+  else
+  {
+  alert("Error in database configuration");
+  return false;
+  }
+  
+});
+
+
+      return false;
+    });
+</script>
+
+
 </body>
 </html>
