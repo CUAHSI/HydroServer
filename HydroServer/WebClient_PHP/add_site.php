@@ -131,17 +131,9 @@ display: none;
 
 function CreateCode(){
 var sid = document.all("SourceID").value;
-alert(sid);
-
-var SiteName = FindSource(sid); //This calls the FindSource function
-
-}
-
-//Take the SourceID and run a query using #, return name, and abbrev. it
-function FindSource(){
-	//connect to server and select the info needed
+	alert(sid);
 	location('getsourcename.php?SourceID='+sid,'_self');
-	}
+}
 	
 </script>	
 	

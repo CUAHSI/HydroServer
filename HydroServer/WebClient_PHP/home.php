@@ -31,15 +31,15 @@ $num = mysql_num_rows($result);
 // or redirect the user elsewhere if unauthorized
 
 if ($auth == "admin"){
-	$nav = "<script src=A_navbar.js></script>";
+	$nav = "<script src=js/A_navbar.js></script>";
 	$cookie_name = "power";
 	$cookie_value = $auth;
 	$cookie_expire = time()+14400;
-	$cookie_domain = "adventurelearningat.com";
+	$cookie_domain = "localhost";
 	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 elseif ($auth == "teacher"){
-	$nav = "<script src=T_navbar.js></script>";
+	$nav = "<script src=js/T_navbar.js></script>";
 	$cookie_name = "power";
 	$cookie_value = $auth;
 	$cookie_expire = time()+14400;
@@ -47,7 +47,7 @@ elseif ($auth == "teacher"){
 	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 elseif ($auth == "student"){
-	$nav = "<script src=S_navbar.js></script>";
+	$nav = "<script src=js/S_navbar.js></script>";
 	$cookie_name = "power";
 	$cookie_value = $auth;
 	$cookie_expire = time()+14400;
