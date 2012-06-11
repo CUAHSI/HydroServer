@@ -114,7 +114,7 @@ $num = @mysql_num_rows($result2);
     <p></p></td>
   </tr>
   <tr>
-    <script src="footer.js"></script>
+    <script src="js/footer.js"></script>
   </tr>
 </table>
 </body>
@@ -235,7 +235,7 @@ $num = @mysql_num_rows($result2);
     <p></p></td>
   </tr>
   <tr>
-    <script src="footer.js"></script>
+    <script src="js/footer.js"></script>
   </tr>
 </table>
 </body>

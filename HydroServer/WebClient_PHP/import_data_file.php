@@ -209,7 +209,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
     </td>
   </tr>
   <tr>
-    <script src="footer.js"></script>
+    <script src="js/footer.js"></script>
   </tr>
 </table>
 </body>

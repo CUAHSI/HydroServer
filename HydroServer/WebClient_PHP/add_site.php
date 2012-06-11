@@ -91,6 +91,13 @@ $num4 = @mysql_num_rows($result4);
 		}
 	}
 
+//value given from the getsourcename.php page
+$sname=$_GET["SName"];
+
+echo $sname;
+
+echo "<script> ProcessSite(sname); </script>";
+
 ?>
 
 <html>
@@ -126,15 +133,65 @@ display: none;
 <script type="text/javascript">
 
 /*!
- * Site Code Creation script by Rohit Khattar and Rex Burch
+ * Go get the source's name form the SourceID
  */
 
-function CreateCode(){
+function GetName(){
 var sid = document.all("SourceID").value;
 	alert(sid);
 	location('getsourcename.php?SourceID='+sid,'_self');
 }
+
+/*!
+ * Process the Source's name returned from getsourcename.php
+ */
+function ProcessSite(){
+var str = sname;	//McCall Outdoor Science School
+var matches = str.match(/\b(\w)/g);	// ['M','O','S','S']
+var newsource = matches.join('');	// MOSS
+alert(newsource);
+document.all("SiteCode").value = newsource;
+}
+
+/*!
+ * Process the Site's name typed in after Source is selected
+ */
+function CreateCode() {
+var initial_info = document.all("SiteCode").value;	// MOSS
 	
+var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mountain Ranch
+
+	//if string contains " at "
+	if(info_provided.indexOf(" at ")){
+
+		//Split the string where "at" is used
+		var newpieces = info_provided.split(" at ");
+		var first_hlf = newpieces[0];
+		var second_hlf = newpieces[1];
+
+		//process each new string
+		var match1 = first_hlf.match(/\b(\w)/g);	// ['B','C']
+		var acronym1 = match1.join('');	// BC
+
+		var match2 = second_hlf.match(/\b(\w)/g);	// ['J','M','R']
+		var acronym2 = match2.join('');	// JMR
+
+		var newString = (initial_info + '-' + acronym1 + '-' + acronym2);
+
+		document.all("SiteCode").value = newString;
+		}
+	else {
+
+		//process string they type in
+		var match1 = info_provided.match(/\b(\w)/g);	// ['B','C']
+		var acronym1 = match1.join('');	// BC
+
+		var newString = (initial_info + '-' + acronym1);
+
+		document.all("SiteCode").value = newString;
+	}
+}
+
 </script>	
 	
 </head>
@@ -155,7 +212,7 @@ var sid = document.all("SourceID").value;
       <table width="600" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="93"><strong>Source:</strong></td>
-          <td width="557"><select name="SourceID" id="SourceID" onChange="CreateCode(this.value)">
+          <td width="557"><select name="SourceID" id="SourceID" onChange="GetName(this.value)">
             <option value="">Select....</option>
             <?php echo "$option_block"; ?>
           </select></td>
@@ -166,7 +223,7 @@ var sid = document.all("SourceID").value;
         </tr>
         <tr>
           <td><strong>Site Name:</strong></td>
-          <td><input type="text" id="SiteName" name="SiteName" size=20 maxlength=20"/>
+          <td><input type="text" id="SiteName" name="SiteName" size=20 maxlength=20" onChange="CreateCode(this.value)"/>
 &nbsp;<span class="em">(Ex: Boulder Creek at Jug Mountain Ranch)</span></td>
         </tr>
         <tr>
@@ -355,7 +412,7 @@ var sid = document.all("SourceID").value;
     <p></p></td>
   </tr>
   <tr>
-    <script src="footer.js"></script>
+    <script src="js/footer.js"></script>
   </tr>
 </table>
 </body>

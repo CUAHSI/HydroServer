@@ -82,7 +82,7 @@ please contact us  at <a href="#">email</a>.</p>
     </blockquote></td>
   </tr>
   <tr>
-    <script src="footer.js"></script>
+    <script src="js/footer.js"></script>
   </tr>
 </table>
 </body>
