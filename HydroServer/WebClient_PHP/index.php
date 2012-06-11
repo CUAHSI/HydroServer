@@ -84,7 +84,7 @@ please contact us <a href="http://www.hydrodesktop.org/" target="_blank">here</a
     </blockquote></td>
   </tr>
   <tr>
-    <script src="footer.js"></script>
+    <script src="js/footer.js"></script>
   </tr>
 </table>
 </body>

@@ -29,8 +29,8 @@ $num_cc = @mysql_num_rows($result_cc);
 	}
 echo $sname;	
 
-SendSource();
-	
+echo "<script> SendName(sname); </script>";
+
 mysql_close($connection);
 
 ?>
@@ -39,13 +39,11 @@ mysql_close($connection);
 <head>
 <script type="text/javascript">
 
-var sname = $sname;
+function SendName(){
 
-//Take the SourceID and run a query using #, return name, and abbrev. it
-function SendSource(){
-	//connect to server and select the info needed
-	location('create_site_code.js?='+sname,'_self');
-	
+location('add_site.php?SName='+sname,'_self');
+}
+
 </script>
 </head>
 </html>

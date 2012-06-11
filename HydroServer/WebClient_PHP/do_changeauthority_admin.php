@@ -100,7 +100,7 @@ $num = @mysql_num_rows($result2);
     <p></p></td>
   </tr>
   <tr>
-    <SCRIPT src="footer.js"></SCRIPT>
+    <script src="js/footer.js"></script>
   </tr>
 </table>
 </body>
