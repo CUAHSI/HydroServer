@@ -291,7 +291,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" valign="top" bgcolor="#f2e6d6"><SCRIPT src="A_navbar.js"></SCRIPT></td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><SCRIPT src="js/A_navbar.js"></SCRIPT></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <?php echo "$msg7"; ?>
       <h1>Would you like to enter another data value?</h1>
