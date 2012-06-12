@@ -157,7 +157,7 @@ xmlhttp.send();
   </tr>
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
-    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg"; ?>
+    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg"; ?>&nbsp;<?php echo "$msg3"; ?>&nbsp;<?php echo "$msg4"; ?>
       <h1>Enter a single data value</h1>
       <FORM METHOD="POST" ACTION="do_add_data_value.php" name="addvalue">
         <table width="600" border="0" cellspacing="0" cellpadding="0">

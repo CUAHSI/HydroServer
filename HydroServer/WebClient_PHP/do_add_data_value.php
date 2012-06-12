@@ -2,13 +2,6 @@
 //check authority to be here
 require_once 'authorization_check.php';
 
-//check for required fields
-//if ((!$_POST['SourceID']) || (!$_POST['SiteID']) || (!$_POST['VariableID']) || //(!$_POST['MethodID']) || (!$_POST['datepicker']) || (!$_POST['timepicker']) || //(!$_POST['value'])) {
-//	header("Location: add_data_value.php");
-//	exit;
-//	}
-//check for required fields
-
 if (!isset($_POST['SourceID'])) {
   echo "source id is missing!";
   exit;
@@ -174,7 +167,7 @@ update_series_catalog($SiteID, $VariableID, $MethodID, $SourceID, $QualityContro
 //get a good message for display upon success
 if ($result7) {
 
-	$msg7 ="<h1>Thank you!</h1><p class=em2>You have successfully entered data values.</p>";
+	$msg ="<p class=em2>Thank you! You have successfully entered data values.</p>";
 	}
 
 //Setup the rest of hte page from here down in case they want to submit another data value
@@ -186,7 +179,7 @@ $result = @mysql_query($sql,$connection)or die(mysql_error());
 $num = @mysql_num_rows($result);
 	if ($num < 1) {
 
-    $msg = "<P><em2>Sorry, there are no SourceID names.</em></p>";
+    $msg1 = "<P><em2>Sorry, there are no SourceID names.</em></p>";
 
 	} else {
 
@@ -275,11 +268,45 @@ $num = @mysql_num_rows($result4);
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
 <script type="text/javascript">
-function show_alert()
-{
-alert("If you do not see your location listed here," + '\n' + "please contact your teacher and ask them" + '\n' + "to add it before entering data.");
+function show_answer(){
+alert("If you do not see your SITE listed here," + '\n' + "please contact your teacher and ask them" + '\n' + "to add it before entering data.");
+}
+
+function show_answer2(){
+alert("If you do not see your METHOD listed here," + '\n' + "please contact your teacher and ask them" + '\n' + "to add it before entering data.");
 }
 </script>
+
+<script type="text/javascript">
+function showSites(str){
+
+document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png'></a>";
+
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","getsites.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+
 </head>
 
 <body background="images/bkgrdimage.jpg">
@@ -291,15 +318,15 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" valign="top" bgcolor="#f2e6d6"><SCRIPT src="js/A_navbar.js"></SCRIPT></td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
-      <?php echo "$msg7"; ?>
-      <h1>Would you like to enter another data value?</h1>
+      <?php echo "$msg"; ?>&nbsp;<?php echo "$msg1"; ?>&nbsp;<?php echo "$msg2"; ?>&nbsp;<?php echo "$msg3"; ?>&nbsp;<?php echo "$msg4"; ?>
+      <h1>Enter a single data value</h1>
       <FORM METHOD="POST" ACTION="do_add_data_value.php">
-      <table width="425" border="0" cellspacing="0" cellpadding="0">
+      <table width="500" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td valign="top"><strong>Source:</strong></td>
-          <td valign="top"><select name="SourceID" id="SourceID"><option value="">Select....</option><?php echo "$option_block"; ?></select></td>
+          <td valign="top"><select name="SourceID" id="SourceID" onChange="showSites(this.value)"><option value="">Select....</option><?php echo "$option_block"; ?></select></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -307,7 +334,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td valign="top"><strong>Site:</strong></td>
-          <td valign="top"><select name="SiteID" id="SiteID"><option value="">Select....</option><?php echo "$option_block2"; ?></select> <a href="#" onClick="show_alert()" border="0"><img src="images/questionmark.png"></a></td>
+          <td valign="top"><div id="txtHint"><select name="" id=""><option value="">Select....</option></select> <a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></div></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -315,8 +342,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Type:</strong></td>
-          <td width="370" valign="top"><select name="VariableID" id="VariableID">
-            <option value="">Select....</option><?php echo "$option_block3"; ?></select></td>
+          <td width="370" valign="top"><select name="VariableID" id="VariableID"><option value="">Select....</option><?php echo "$option_block3"; ?></select></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -324,8 +350,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td valign="top"><strong>Method:</strong></td>
-          <td valign="top"><select name="MethodID" id="MethodID">
-            <option value="">Select....</option><?php echo "$option_block4"; ?></select></td>
+          <td valign="top"><select name="MethodID" id="MethodID"><option value="">Select....</option><?php echo "$option_block4"; ?></select>&nbsp;<a href="#" onClick="show_answer2()" border="0"><img src="images/questionmark.png"></a></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -333,7 +358,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Date:</strong></td>
-          <td valign="top"><input type="text" name="datepicker" size=10 maxlength=10 /><span class="em">&nbsp;(Ex: &quot;2012-05-04&quot; for 4 May  2012)</span></td>
+          <td valign="top"><input type="text" name="datepicker" /><span class="em">&nbsp;(Ex: &quot;2012-05-04&quot; for 4 May  2012)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -341,7 +366,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           </tr>
         <tr>
           <td width="55" valign="top"><strong>Time:</strong></td>
-          <td valign="top"><input type="text" name="timepicker" size=5 maxlength=5 /><span class="em">&nbsp;(Ex: &quot;13:45&quot; for 1:45 pm or &quot;06:30&quot; for 6:30 am)</span></td>
+          <td valign="top"><input type="text" name="timepicker" /><span class="em">&nbsp;(Ex: &quot;13:45&quot; for 1:45 pm or &quot;06:30&quot; for 6:30 am)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -360,6 +385,7 @@ alert("If you do not see your location listed here," + '\n' + "please contact yo
           <td valign="top"><input type="SUBMIT" name="submit" value="Submit Your Data" /></td>
           </tr>
       </table></FORM>
+      <p>&nbsp;</p>
       <p>&nbsp;</p>
     </blockquote></td>
   </tr>
