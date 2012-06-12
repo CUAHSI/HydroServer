@@ -1,1 +1,1 @@
-document.write("<blockquote><br /><strong>Public Navigation</strong><br /><p><strong>View Data Collected</strong><br /><a href=../view_main.php>Search Data</a></p><p><a href=../index.php>Back to Home</a></p></blockquote>");
+document.write("<div class='nav'><br /><div class='menuhead2'>Public Navigation</div><a href=view_main.php class='button'><img src='images/icons/SearchData.png'>&nbsp;&nbsp;Search data</a></p><p><a href=index.php class='button'><img src='images/icons/Logout.png'>&nbsp;&nbsp;Back to Home</a></p></div>");
