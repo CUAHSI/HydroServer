@@ -1,6 +1,6 @@
 <?php
 //check authority to be here
-//require_once 'authorization_check.php';
+require_once 'authorization_check.php';
 
 //connect to server and select database
 require_once 'database_connection.php';
@@ -23,16 +23,22 @@ $num = @mysql_num_rows($result);
 		$sourceid = $row["SourceID"];
 		$sourcename = $row["Organization"];
 
-		if ($sourcename==$default_source){
+if ($sourcename==$default_source)
+{
 	
-			$option_block .= "<option selected='selected' value=$sourceid>$sourcename</option>";
 	
-		}else{
-			
-			$option_block .= "<option value=$sourceid>$sourcename</option>";
+	$option_block .= "<option selected='selected' value=$sourceid>$sourcename</option>";
+}
+else
+{
+		$option_block .= "<option value=$sourceid>$sourcename</option>";
+}
+
+
+
+		
 		}
 	}
-}
 
 //add the SiteType options
 $sql2 ="Select * FROM sitetypecv";
@@ -70,16 +76,17 @@ $num3 = @mysql_num_rows($result3);
 	while ($row3 = mysql_fetch_array ($result3)) {
 
 		$vd = $row3["Term"];
-
-		if ($vd==$default_datum){
+if ($vd==$default_datum)
+{
 	
-			$option_block3 .= "<option selected='selected' value=$vd>$vd</option>";
-
-	}else{
-			$option_block3 .= "<option value=$vd>$vd</option>";
+	$option_block3 .= "<option selected='selected' value=$vd>$vd</option>";
+}
+else
+{
+		$option_block3 .= "<option value=$vd>$vd</option>";
+}
 		}
 	}
-}
 
 //add the LatLongDatumID options
 $sql4 ="Select * FROM spatialreferences";
@@ -98,16 +105,23 @@ $num4 = @mysql_num_rows($result4);
 		$srid = $row4["SpatialReferenceID"];
 		$srsname = $row4["SRSName"];
 
-		if ($srsname==$default_spatial){
+
+if ($srsname==$default_spatial)
+{
 	
-			$option_block4 .= "<option selected='selected' value=$srid>$srsname</option>";
-
-	}else{
-			$option_block4 .= "<option value=$srid>$srsname</option>";
-			}
-
-	}
+	$option_block4 .= "<option selected='selected' value=$srid>$srsname</option>";
 }
+else
+{
+		$option_block4 .= "<option value=$srid>$srsname</option>";
+}
+
+
+
+		
+
+		}
+	}
 
 ?>
 
@@ -138,7 +152,7 @@ pic1.src="images/loader.gif";
 	 var elevator;
 	 
 function initialize() {
-	GetSourceName()
+	GetSourceName();
 	var myLatlng = new google.maps.LatLng(43.52764,-112.04951);
 	
 
@@ -232,6 +246,9 @@ function update(location)
 
 //Update Elevation
 
+
+
+
   var locations = [];
   locations.push(location);
 
@@ -259,6 +276,7 @@ function update(location)
     }
   });
 
+	
 
 // Now to update the state
 var latlng1 = new google.maps.LatLng(location.lat(), location.lng());
@@ -283,7 +301,10 @@ geocoder.geocode({'latLng': latlng1}, function(results, status) {
  
 //Function to run on form submission to implement a validation and then run an ajax request to post the data to the server and display the message that the site has been added successfully
 
-</script>
+
+
+ 
+    </script>
 
 <STYLE TYPE="text/css">
 <!--
@@ -326,7 +347,7 @@ display: none;
         </tr>
         <tr>
           <td><strong>Site Name:</strong></td>
-          <td><input type="text" id="SiteName" name="SiteName" size=20 maxlength="200" onkeyup="GetSiteName()"/>
+          <td><input type="text" id="SiteName" name="SiteName" size=20 maxlength="200" onKeyUp="GetSiteName()"/>
 &nbsp;<span class="em">(Ex: Boulder Creek at Jug Mountain Ranch)</span></td>
         </tr>
         <tr>
@@ -335,7 +356,7 @@ display: none;
         </tr>
         <tr>
           <td><strong>Site Code:</strong></td>
-          <td><input type="text" id="SiteCode" name="SiteCode" size=20 maxlength=20"/>
+          <td><input type="text" id="SiteCode" name="SiteCode" size=20 maxlength="200"/>
 &nbsp;<span class="em">(You may adjust this if needed)</span></td>
         </tr>
         <tr>
@@ -390,7 +411,8 @@ display: none;
   </tr>
   <tr>
     <td><strong>Elevation:</strong></td>
-    <td><input type="text" id="Elevation" name="Elevation" size=20 maxlength=20/>m</td>
+    <td><input type="text" id="Elevation" name="Elevation" size=20 maxlength=20/>
+    meter</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -515,7 +537,7 @@ display: none;
   </tr>
       </table>
 </FORM>
-      <p>******Need hidden values added too</p>
+     
     </blockquote>
     <p></p></td>
   </tr>
@@ -636,7 +658,7 @@ return false;
 
 $.ajax({
   type: "POST",
-  url: "do_add_site.php?sc="+$("#SiteCode").val()+"&sn="+$("#SiteName").val()+"&lat="+$("#Latitude").val()+"&lng="+$("#Longitude").val()+"&llid="+$("#LatLongDatumID option:selected").val()+"&type="+$("#SiteType option:selected").text()+"&elev="+$("#Elevation").val()+"&datum="+$("#VerticalDatum option:selected").text()+"&state="+$("#state option:selected").text()+"&county="+$("#county option:selected").text()+"&com="+$("#com").val()
+  url: "do_add_site.php?sc="+$("#SiteCode").val()+"&sn="+$("#SiteName").val()+"&lat="+$("#Latitude").val()+"&lng="+$("#Longitude").val()+"&llid="+$("#LatLongDatumID option:selected").val()+"&type="+$("#SiteType option:selected").text()+"&elev="+$("#Elevation").val()+"&datum="+$("#VerticalDatum option:selected").text()+"&state="+$("#state option:selected").text()+"&county="+$("#county option:selected").text()+"&com="+$("#com").val()+"&source="+$("#SourceID").val()
 }).done(function( msg ) {
   if(msg==1)
   {

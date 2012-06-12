@@ -36,7 +36,7 @@ var browserSupportFlag =  new Boolean();
  
       map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(44, -160),
-        zoom: 4,
+        zoom: 12,
         mapTypeId: 'roadmap',
         mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
       });
@@ -110,7 +110,9 @@ function loadall()
 	    create_source(latlng, name, sitecode, type, lat, long, siteid, i);
     bounds.extend(latlng);
   }
+
   map.fitBounds(bounds);
+  panToBounds(bounds);
 	 });
 	
 	}
