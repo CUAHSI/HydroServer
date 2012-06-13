@@ -5860,7 +5860,7 @@ Public Class frmODMTools
         Dim varUnits As String
         Dim startDate As Date
         Dim endDate As Date
-        Dim varUnitsIndex As Integer = 2
+        Dim varUnitsIndex As Integer = 3
         gboxPointOptions.Enabled = True
         'NOTE: Colums for lvVisData Series:
         'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
@@ -9550,6 +9550,8 @@ Public Class frmODMTools
             gPane.YAxis.Scale.Min = minY - (m_YBorder * rangeY)
             gPane.YAxis.Scale.Max = maxY + (m_YBorder * rangeY)
 
+
+
             zg5EditPlot.IsAutoScrollRange = False
             zg5EditPlot.ScrollMinX = minX.ToOADate - (m_XBorder * rangeX)
             zg5EditPlot.ScrollMaxX = maxX.ToOADate + (m_XBorder * rangeX)
@@ -9789,8 +9791,8 @@ Public Class frmODMTools
         Dim qcLevel As String
         'Dim methodID As Integer	'holds the Method ID value from the selected Data SEries -> value retrieved from lvEditDataSeries for the selected item
         'Dim sourceID As Integer
-        Dim varUnitsIndex As Integer = 2
-        Dim qcLevelIndex As Integer = 8
+        Dim varUnitsIndex As Integer = 3
+        Dim qcLevelIndex As Integer = 9
         Dim qcLevelCode As String
         'NOTE: Colums for lvEditData Series:
         'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
@@ -13365,7 +13367,7 @@ Public Class frmODMTools
             'btnEditDataDeriveNewDS.Enabled = True
             're-enable add functionality if can
             Dim qcLevel As String
-            Dim qcIndex As Integer = 8
+            Dim qcIndex As Integer = 9
             Dim qcCode As String
             'NOTE: Colums for lvEditData Series:
             'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description, Citation, Local Date Range, UTC Date Range, Value Count
@@ -13429,7 +13431,7 @@ Public Class frmODMTools
 
             '6. Enable Data Editing Functionality if can
             'NOTE: right now, due to changes in lvEditDataSeries, is currently looking at wrong column for qclevel
-            Dim qcLevelIndex As Integer = 8
+            Dim qcLevelIndex As Integer = 9
             'NOTE: Colums for lvEditDataSeries:
             'General Category, Speciation, Variable Units, Time Support, Time Units, Sample Medium, Value Type, Data Type, Quality Control Level, Method, Organization, Source Description,Citation, Local Date Range, UTC Date Range, Value Count
             Dim qcLevel As String
@@ -13446,6 +13448,7 @@ Public Class frmODMTools
                         Else
                             dc.ReadOnly = True
                         End If
+                        dc.SortMode = DataGridViewColumnSortMode.NotSortable
                     Next
                     'dgvEditTable.ReadOnly = True
                     'dgvEditTable.Columns("DataValue").ReadOnly = False
