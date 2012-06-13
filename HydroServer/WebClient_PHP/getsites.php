@@ -16,7 +16,7 @@ $num = @mysql_num_rows($result2);
     echo "<P><em2>No Sites for this Source.</em></p>";
 
 	} else {
-$option_block2 = "<select name='SiteID' id='SiteID' onChange='showTypes(this.value)'><option value=''>Select....</option>";
+$option_block2 = "<select name='SiteID' id='SiteID' onChange='showTypes(this.value)'><option value='-1'>Select....</option>";
 	while ($row2 = mysql_fetch_array ($result2)) {
 
 		$siteid = $row2["SiteID"];
