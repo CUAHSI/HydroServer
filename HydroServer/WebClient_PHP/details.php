@@ -59,6 +59,7 @@ var flag=0;
 
     $(document).ready(function () {
 		 	$("#loadingtext").hide();
+			$("#button1").hide();
 
 //Create date selectors and hide them
 
@@ -262,8 +263,8 @@ $("#jqxDateTimeInput").jqxDateTimeInput('setMaxDate', new Date(year_to, month_to
 $("#jqxDateTimeInputto").jqxDateTimeInput('setMaxDate', new Date(year_to, month_to, day_to)); 
 //Plot the Chart with default limits
 
-date_from_sql=date1.getFullYear() + '-' + add_zero((date1.getMonth()+1)) + '-' + add_zero(date1.getDate()) + ' 00:00:00';
-date_to_sql=date2.getFullYear() + '-' + add_zero((date2.getMonth()+1)) + '-' + add_zero(date2.getDate()) + ' 00:00:00';
+date_from_sql=date1.getFullYear() + '-' + add_zero((date1.getMonth())) + '-' + add_zero(date1.getDate()) + ' 00:00:00';
+date_to_sql=date2.getFullYear() + '-' + add_zero((date2.getMonth()+2)) + '-' + add_zero(date2.getDate()) + ' 00:00:00';
 $("#fromdatedrop").jqxDropDownButton('setContent', "Please enter from date");
 $("#todatedrop").jqxDropDownButton('setContent', "Please enter to date");
 
@@ -591,8 +592,32 @@ $("#jqxgrid").bind("cellclick", function (event) {
     <td colspan="4" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="235" rowspan="8" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
+    <td width="235" rowspan="10" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="63" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="212" align="left" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3" valign="middle" bgcolor="#FFFFFF">
+    
+    <?php  
+
+require_once 'db_config.php';
+
+// get data and store in a json array
+$query = "SELECT DISTINCT SiteName, SiteType, Latitude, Longitude FROM sites";
+$siteid = $_GET['siteid'];
+$query .= " WHERE SiteID=".$siteid;
+
+$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+$row = mysql_fetch_array($result, MYSQL_ASSOC);
+echo("<p align='center'><b>Site: </b>".$row['SiteName']."</p>");
+
+?>    
+    </td>
+  </tr>
+  <tr>
+    <td valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
     <td width="212" align="left" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
     <td valign="top" bgcolor="#FFFFFF">&nbsp;</td>
   </tr>
@@ -641,15 +666,7 @@ $("#jqxgrid").bind("cellclick", function (event) {
     <div>
 <?php  
 
-require_once 'db_config.php';
 
-// get data and store in a json array
-$query = "SELECT DISTINCT SiteName, SiteType, Latitude, Longitude FROM sites";
-$siteid = $_GET['siteid'];
-$query .= " WHERE SiteID=".$siteid;
-
-$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-$row = mysql_fetch_array($result, MYSQL_ASSOC);
 echo("<b>Site: </b>".$row['SiteName']."<br/>"."<b>Type: </b>".$row['SiteType']."<br/><b>Latitude: </b>".$row['Latitude']."<br/><b>Longitude: </b>".$row['Longitude']);
 
 $query = "SELECT DISTINCT VariableName FROM seriescatalog";
