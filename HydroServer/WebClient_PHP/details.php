@@ -55,6 +55,7 @@ var varname;
 var datatype;
 var sitename;
 var flag=0;
+var methodid;
 //Populate the Drop Down list with values from the JSON output of the php page
 
     $(document).ready(function () {
@@ -187,7 +188,15 @@ $.ajax({
     success: function(data) {
 varid=data;
 //Now We have the VariableID, We call the dates function
-get_dates();
+
+
+//Filter by methods available for that specific selection of variable and site
+
+get_methods();
+
+
+
+//get_dates();
 	}
 });
 
@@ -196,12 +205,65 @@ get_dates();
 
 //Function to get dates and plot a default plot
 
+function get_methods()
+{
 
+   var source122 =
+        {
+            datatype: "json",
+            datafields: [
+                { name: 'methodid' },
+                { name: 'methodname' },
+            ],
+            url: 'db_get_methods.php?siteid='+siteid+'&varid='+varid
+        };
+
+		
+//Defining the Data adapter
+var dataAdapter122 = new $.jqx.dataAdapter(source122);
+
+//Creating the Drop Down list
+        $("#methodlist").jqxDropDownList(
+        {
+            source: dataAdapter122,
+            theme: 'classic',
+            width: 200,
+            height: 25,
+            selectedIndex: 0,
+            displayMember: 'methodname',
+            valueMember: 'methodid'
+        });
+
+//Binding an Event in case of Selection of Drop Down List to update the varid according to the selection
+
+$('#methodlist').bind('select', function (event) {
+	 
+var args = event.args;
+var item = $('#methodlist').jqxDropDownList('getItem', args.index);
+//Check if a valid value is selected and process futher to display dates
+if (item != null) {		
+methodid=item.value;
+
+get_dates();
+//Now call to check dates
+
+
+
+}
+
+});
+	
+	
+	
+	
+	
+	
+}
 function get_dates()
 {
 
 
-var url="get_date.php?siteid="+siteid+"&varid=" + varid;
+var url="get_date.php?siteid="+siteid+"&varid=" + varid+"&methodid=" + methodid;
 $.ajax({
         type: "GET",
 	url: url,
@@ -270,7 +332,7 @@ $("#todatedrop").jqxDropDownButton('setContent', "Please enter to date");
 
 plot_chart();
 //Binding An Event to the first calender
-
+/*
 $('#jqxDateTimeInput').bind('valuechanged', function (event) 
 {
 	
@@ -301,7 +363,7 @@ date_to_sql=date_select_to.getFullYear() + '-' + add_zero((date_select_to.getMon
 plot_chart();
 });
 
-
+*/
 
 });
 	}
@@ -314,21 +376,13 @@ function plot_chart()
 {
 
 
-$("#loadingtext").css({
-        top: (1),
-        left: (100)
-    });
-
-
-
-
-$("#loadingtext").show();	
+	
 var unit_yaxis="unit";
 //	alert("");
 
 //Chaning Complete Data loading technique..need to create a php page that will output javascript...
 
-var url_test='db_get_data_test.php?siteid='+siteid+'&varid='+varid+'&startdate='+date_from_sql+'&enddate='+date_to_sql;
+var url_test='db_get_data.php?siteid='+siteid+'&varid='+varid+'&meth='+methodid+'&startdate='+date_from_sql+'&enddate='+date_to_sql;
 
 
 
@@ -338,7 +392,7 @@ $.ajax({
   type: "GET",
   dataType: "script"
 }).done(function( datatest ) {
- 
+  
  
 // var data_test=datatest;
 
@@ -469,7 +523,7 @@ function make_grid()
 
 
             
-var url='db_get_data2.php?siteid='+siteid+'&varid='+varid+'&startdate='+date_from_sql+'&enddate='+date_to_sql;
+var url='db_get_data2.php?siteid='+siteid+'&varid='+varid+'&meth='+methodid+'&startdate='+date_from_sql+'&enddate='+date_to_sql;
 
 var source12 =
             {
@@ -530,7 +584,7 @@ if(flag!=1)
 $("#export").jqxButton({ width: '250', height: '25', theme: 'classic'});
 $("#export").bind('click', function () {
 
-var url='data_export.php?siteid='+siteid+'&varid='+varid+'&startdate='+date_from_sql+'&enddate='+date_to_sql;
+var url='data_export.php?siteid='+siteid+'&varid='+varid+'&meth='+methodid+'&startdate='+date_from_sql+'&enddate='+date_to_sql;
 
 window.open(url,'_blank');
 
@@ -586,19 +640,19 @@ $("#jqxgrid").bind("cellclick", function (event) {
 
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td colspan="4"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>
+    <td colspan="5"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>
   </tr>
   <tr>
-    <td colspan="4" bgcolor="#3c3c3c">&nbsp;</td>
+    <td colspan="5" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="235" rowspan="10" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
-    <td width="63" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
-    <td width="212" align="left" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-    <td valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="242" rowspan="10" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
+    <td width="68" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="265" align="left" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    <td colspan="2" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="3" valign="middle" bgcolor="#FFFFFF">
+    <td colspan="4" valign="middle" bgcolor="#FFFFFF">
     
     <?php  
 
@@ -618,29 +672,30 @@ echo("<p align='center'><b>Site: </b>".$row['SiteName']."</p>");
   </tr>
   <tr>
     <td valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
-    <td width="212" align="left" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-    <td valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="265" align="left" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    <td colspan="2" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
   </tr>
   <tr>
     <td valign="middle" bgcolor="#FFFFFF"><strong>Variable:</strong></td>
-    <td width="212" align="left" valign="top" bgcolor="#FFFFFF"><div id="dropdownlist"></div></td>
-    <td valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="265" align="left" valign="top" bgcolor="#FFFFFF"><div id="dropdownlist"></div></td>
+    <td colspan="2" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="3" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
+    <td colspan="4" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
   </tr>
   <tr>
     <td height="37" valign="middle" bgcolor="#FFFFFF">
       <div id='typelist_text' style="margin-bottom:10px;"><strong>Type:</strong></div>
     </td>
     <td align="left" valign="top" bgcolor="#FFFFFF"><div id='typelist'></div></td>
-    <td valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="68" valign="top" bgcolor="#FFFFFF"> <div id='methodlist_text' style="margin-bottom:10px;"><strong>Method:</strong></div></td>
+    <td width="317" valign="top" bgcolor="#FFFFFF"><div id='methodlist'></div></td>
   </tr>
   <tr>
-    <td colspan="3" valign="top" bgcolor="#FFFFFF"><div id='daterange'></div></td>
+    <td colspan="4" valign="top" bgcolor="#FFFFFF"><div id='daterange'></div></td>
   </tr>
   <tr>
-    <td colspan="3" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    <td colspan="4" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
   </tr>
   
   <tr>
@@ -648,12 +703,12 @@ echo("<p align='center'><b>Site: </b>".$row['SiteName']."</p>");
   <div id='fromdatedrop'><div id='jqxDateTimeInput'></div></div> 
       <br/><br/>
     </td>
-    <td width="393" valign="top" bgcolor="#FFFFFF"><div id='todatedrop'><div id='jqxDateTimeInputto'></div></div> </td>
+    <td colspan="2" valign="top" bgcolor="#FFFFFF"><div id='todatedrop'><div id='jqxDateTimeInputto'></div></div> </td>
   <br/><br/>
   </tr>
   
    <tr>
-    <td colspan="3" valign="top" bgcolor="#FFFFFF">
+    <td colspan="4" valign="top" bgcolor="#FFFFFF">
     
      <div id="loadingtext" class="loading">Please Wait..Data is loading<br/>
     </div>

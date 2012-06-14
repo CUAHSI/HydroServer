@@ -5,9 +5,10 @@ $siteid=$_GET['siteid'];
 $varid=$_GET['varid'];
 $startdate=$_GET['startdate'];
 $enddate=$_GET['enddate'];
+$methodid=$_GET['meth'];
 
 $query = "SELECT ValueID, DataValue, LocalDateTime FROM datavalues";
-$query .= " WHERE SiteID=".$siteid." and VariableID=".$varid." and LocalDateTime between '".$startdate."' and '".$enddate."' ORDER BY LocalDateTime ASC";
+$query .= " WHERE SiteID=".$siteid." and VariableID=".$varid." and MethodID='$methodid' and LocalDateTime between '".$startdate."' and '".$enddate."' ORDER BY LocalDateTime ASC";
 
 $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
 
@@ -36,5 +37,5 @@ $count=1;
     }
     
   }
-mysql_close($connect);
+
 ?>
