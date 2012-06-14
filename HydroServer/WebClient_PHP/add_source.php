@@ -2,12 +2,6 @@
 //check authority to be here
 require_once 'authorization_check.php';
 
-//redirect anyone that is not an administrator
-if ($_COOKIE[power] !="admin"){
-	header("Location: index.php?state=pass2");
-	exit;	
-	}
-
 //connect to server and select database
 require_once 'database_connection.php';
 
@@ -61,6 +55,39 @@ $num2 = @mysql_num_rows($result2);
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	
+	$("#TopicCategory").attr('disabled', true);
+	$("#Title").attr('disabled', true);
+	$("#Abstract").attr('disabled', true);
+	$("#ContactName4").attr('disabled', true);
+	
+$("#MetadataChoice").click(function() {
+
+	$("#TopicCategory").attr('disabled', true);
+	$("#Title").attr('disabled', true);
+	$("#Abstract").attr('disabled', true);
+	$("#ContactName4").attr('disabled', true);
+});
+
+$("#MetadataChoice1").click(function() {
+	 	$("#TopicCategory").removeAttr("disabled");
+	$("#Title").removeAttr("disabled");
+	$("#Abstract").removeAttr("disabled");
+	$("#ContactName4").removeAttr("disabled");
+
+ 
+});
+
+
+});
+
+</script>
 
 </head>
 
@@ -77,7 +104,7 @@ $num2 = @mysql_num_rows($result2);
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Add a new Source</h1>
       <p>&nbsp;</p>
-      <FORM METHOD="POST" ACTION="do_add_source.php" name="addsource">
+      <FORM METHOD="POST" ACTION="" name="addsource" id="addsource">
         <table width="600" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="108" valign="top"><strong>Organization:</strong></td>
@@ -126,7 +153,7 @@ $num2 = @mysql_num_rows($result2);
         </tr>
         <tr>
           <td valign="top"><strong>Email:</strong></td>
-          <td colspan="2" valign="top"><input type="text" id="Email" name="Email" size="12" maxlength="15"/>&nbsp;<span class="em">(Ex: info@moss.org)</span></td>
+          <td colspan="2" valign="top"><input type="text" id="Email" name="Email" size="12" maxlength="50"/>&nbsp;<span class="em">(Ex: info@moss.org)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -236,8 +263,8 @@ $num2 = @mysql_num_rows($result2);
           <td valign="top"><strong>MetadataID:</strong></td>
           <td valign="top"><input name="radio" type="radio" id="MetadataChoice" value="existing" checked></td>
           <td valign="top"><strong>Existing:</strong>
-<select name="MetadataID" id="MetadataID" onChange="showSites(this.value)">
-  <option value="">Select....</option>
+<select name="MetadataID" id="MetadataID">
+  <option value="-1">Select....</option>
   <?php echo "$option_block1"; ?>
 </select>&nbsp;<?php echo "$msg1"; ?><br><span class="em">(If you select from  existing ones, you do not need to fill out anything else below.)</span></td>
         </tr>
@@ -248,7 +275,7 @@ $num2 = @mysql_num_rows($result2);
         </tr>
         <tr>
           <td valign="top">&nbsp;</td>
-          <td valign="top"><input type="radio" name="radio" id="MetadataChoice" value="new"></td>
+          <td valign="top"><input type="radio" name="radio" id="MetadataChoice1" value="new"></td>
           <td valign="top"><strong>New</strong></td>
         </tr>
         <tr>
@@ -256,10 +283,11 @@ $num2 = @mysql_num_rows($result2);
           <td valign="top">&nbsp;</td>
           <td valign="top">&nbsp;</td>
         </tr>
+     <div id="optional">   
         <tr>
           <td valign="top"><strong>Topic Category:</strong></td>
-          <td colspan="2" valign="top"><select name="TopicCategory" id="TopicCategory" onChange="showSites(this.value)">
-            <option value="">Select....</option>
+          <td colspan="2" valign="top"><select name="TopicCategory" id="TopicCategory">
+            <option value="-1">Select....</option>
             <?php echo "$option_block2"; ?>
           </select>&nbsp;<?php echo "$msg2"; ?></td>
           </tr>
@@ -301,6 +329,8 @@ $num2 = @mysql_num_rows($result2);
           <td width="22" valign="top">&nbsp;</td>
           <td width="470" valign="top">&nbsp;</td>
         </tr>
+        
+        </div>
         <tr>
           <td colspan="2" valign="top"><center><input type="SUBMIT" name="submit" value="Add New Source" /></center></td>
           <td valign="top">&nbsp;</td>
@@ -313,5 +343,184 @@ $num2 = @mysql_num_rows($result2);
     <script src="js/footer.js"></script>
   </tr>
 </table>
+
+<script>
+
+    $("#addsource").submit(function() {
+      //Validate all fields
+
+
+if(($("#Organization").val())=="")
+{
+alert("Please enter an organization for the source.");
+return false;
+}
+
+if(($("#SourceDescription").val())=="")
+{
+alert("Please enter a description for the source.");
+return false;
+}
+
+
+if(($("#SourceLink").val())=="")
+{
+alert("Please enter a link for the source.");
+return false;
+}
+
+
+
+if(($("#ContactName").val())=="")
+{
+alert("Please enter a contact name for the source.");
+return false;
+}
+
+if(($("#Phone").val())=="")
+{
+alert("Please enter a phone number for the contact person.");
+return false;
+}
+
+//Phone Validation
+
+var regex = /^((\+?1-)?\d\d\d-)?\d\d\d-\d\d\d\d$/;
+if(!($("#Phone").val().match(regex)))
+{
+	alert("Invalid phone number");
+	return false;
+}
+
+
+
+
+if(($("#Email").val())=="")
+{
+alert("Please enter an email address for the source.");
+return false;
+}
+
+var pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+
+if(!($("#Email").val().match(pattern)))
+{
+	alert("Invalid email address");
+	return false;
+}
+
+
+
+if(($("#Address").val())=="")
+{
+alert("Please enter an address for the source.");
+return false;
+}
+if(($("#City").val())=="")
+{
+alert("Please enter a city for the source.");
+return false;
+}
+
+
+if(($("#state option:selected").val())==-1)
+{
+alert("Please select a state for the source.");
+return false;
+}
+
+
+if(($("#ZipCode").val())=="")
+{
+alert("Please enter a zip code for the source.");
+return false;
+}
+
+
+
+if(!($("#ZipCode").val().match(/^\d{5}(-\d{4})?$/)))
+{
+	alert("Invalid zip code");
+	return false;
+}
+
+
+if(($("#Citation").val())=="")
+{
+alert("Please enter a citation for the source.");
+return false;
+}
+
+
+//Check for Metadata Exisitng or not
+
+
+
+if($('input:radio[id=MetadataChoice]:checked').val()=="existing")
+{
+	
+if(($("#MetadataID option:selected").val())==-1)
+{
+alert("Please select an exisiting Metadata. In case you don't find it, please select 'New' option for Metadata");
+return false;
+}
+}
+
+//For new metadata
+
+
+if($('input:radio[id=MetadataChoice1]:checked').val()=="new")
+{
+	
+if(($("#TopicCategory option:selected").val())==-1)
+{
+alert("Please select a topic category for Metadata.");
+return false;
+}
+
+if(($("#Title").val())=="")
+{
+alert("Please enter a title for Metadata.");
+return false;
+}
+
+if(($("#Abstract").val())=="")
+{
+alert("Please enter an abstract for Metadata.");
+return false;
+}
+
+if(($("#ContactName4").val())=="")
+{
+alert("Please enter a link for Metadata.");
+return false;
+}
+
+}
+
+//Validation Complete
+
+$.post("do_add_source.php", $("#addsource").serialize(),  function( data ) {
+   alert(data);
+		 if(data==1)
+  {
+	  alert("Source successfully added");
+	  window.location.href = "add_source.php";
+	  return true;
+  }
+  else
+  {
+  alert("Error in database configuration");
+  return false;
+  }
+		
+		      });
+
+
+      return false;
+    });
+</script>
+
+
 </body>
 </html>
