@@ -4,7 +4,7 @@ require_once 'authorization_check.php';
 
 //redirect anyone that is not an administrator
 if ($_COOKIE[power] !="admin"){
-	header("Location: unauthorized.php");
+	header("Location: index.php?state=pass2");
 	exit;	
 	}
 
