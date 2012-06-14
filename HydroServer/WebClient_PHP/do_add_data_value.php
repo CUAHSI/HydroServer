@@ -280,7 +280,7 @@ alert("If you do not see your METHOD listed here," + '\n' + "please contact your
 <script type="text/javascript">
 function showSites(str){
 
-document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png'></a>";
+document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png' border='0'></a>";
 
 if (str=="")
   {
