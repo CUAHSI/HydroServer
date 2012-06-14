@@ -74,8 +74,10 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
       <p><?php if ($_GET['state'])
 	  {
 		  if ($_GET['state']=="pass"){
-			echo "<p class=em2>Incorrect username and/or password!</p>";  
-		  	}
+			echo "<p class=em2>***Incorrect username and/or password!</p>";
+		}elseif ($_GET['state']=="pass2"){
+			echo "<p class=em2>***You are not authorized to view that page!</p>";
+			}
 	  }
 	  ?></p>
       <h1><img src="images/homepage_shot.jpg" alt="student working with teacher" width="300" height="235" hspace="10" align="right" />Welcome</h1>

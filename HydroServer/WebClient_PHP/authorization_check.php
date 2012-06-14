@@ -11,7 +11,7 @@ elseif ($_COOKIE[power] ==student){
 	$nav ="<script src=js/S_navbar.js></script>";
 	} 
 else {
-	header("Location: unauthorized.php");
+	header("Location: index.php?state=pass2");
 	exit;	
 	}
 	
