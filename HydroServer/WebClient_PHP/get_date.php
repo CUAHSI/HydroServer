@@ -4,6 +4,8 @@ require_once 'db_config.php';
 // Get parameters from URL
 $siteid = $_GET["siteid"];
 $varid = $_GET["varid"];
+$methodid = $_GET["methodid"];
+
 
 // Start XML file, create parent node
 $dom = new DOMDocument("1.0");
@@ -12,9 +14,10 @@ $parnode = $dom->appendChild($node);
 
 
 // Search the rows in the markers table
-$query = sprintf("SELECT BeginDateTime, EndDateTime, SiteName FROM seriescatalog WHERE SiteID='%s' and VariableID='%s'",
+$query = sprintf("SELECT BeginDateTime, EndDateTime, SiteName FROM seriescatalog WHERE SiteID='%s' and VariableID='%s'and MethodID='%s'",
   mysql_real_escape_string($siteid),
-  mysql_real_escape_string($varid));
+  mysql_real_escape_string($varid),
+  mysql_real_escape_string($methodid));
 $result = mysql_query($query);
 
 $result = mysql_query($query);
@@ -36,5 +39,4 @@ while ($row = @mysql_fetch_assoc($result)){
 //Output the XML DATA to be fed into the google maps api
 
 echo $dom->saveXML();
-mysql_close($connect);
 ?>
