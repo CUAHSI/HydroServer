@@ -1,0 +1,1 @@
+document.write("<td colspan=2 bgcolor=#0971B3><center><font color=#FFFFFF face=Arial, Helvetica, sans-serif size=2><i>Consortium of Universities for the Advancement of Hydrologic Sciences. Copyright &copy; 2012. All Rights Reserved.</i></font></center></td>");
