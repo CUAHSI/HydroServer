@@ -12,6 +12,9 @@ setcookie ("power", null, -3600, "/", "adventurelearningat.com", 0);
 <title>HydroServer Lite Web Client: Homepage</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
+<!-- JQuery JS -->
+<script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
+
 <script type="text/javascript">
 function show_alert()
 {
@@ -32,7 +35,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6">
     <p>&nbsp;</p>
-    <FORM METHOD="POST" ACTION="home.php">
+    <FORM METHOD="POST" ACTION="home.php" name="login" id="login">
     <table width="200" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td><center>
@@ -48,14 +51,14 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
         <tr>
           <td><center><font face="Arial, Helvetica, sans-serif" size="2"><strong>Username:
           </strong></font><br />
-            <INPUT TYPE="text" NAME="username" SIZE=25 MAXLENGTH=25></center></td>
+            <INPUT TYPE="text" id="username" name="username" SIZE=25 MAXLENGTH=25></center></td>
         </tr>
         <tr>
           <td><center><font face="Arial, Helvetica, sans-serif" size="2"><strong>Password:</strong></font><br />
-            <INPUT TYPE="password" NAME="password" SIZE=25 MAXLENGTH=25></center></td>
+            <INPUT TYPE="password" id="password" name="password" SIZE=25 MAXLENGTH=25></center></td>
         </tr>
         <tr>
-          <td><center><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Login"></center></td>
+          <td><center><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Login" class="button"></center></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -65,9 +68,16 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
         </tr>
     </table></FORM>
     <p>&nbsp;</p>
-    <p><center><strong><a href="view_main.php"><img src="images/view_data.gif" alt="View Data Collected" width="136" height="33" border="0" /></a></strong>
+    <p><center><strong><a href="view_main.php" class="button"><img src='images/icons/SearchData.png'>&nbsp;&nbsp;Search Data</a></strong>
     </center></p></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
+      <p><?php if ($_GET['state'])
+	  {
+		  if ($_GET['state']=="pass"){
+			echo "<p class=em2>Incorrect username and/or password!</p>";  
+		  	}
+	  }
+	  ?></p>
       <h1><img src="images/homepage_shot.jpg" alt="student working with teacher" width="300" height="235" hspace="10" align="right" />Welcome</h1>
         <p>The HydroServer Lite Interactive Web Client is an online software tool that helps store, organize, and publish data provided by citizen scientists.</p>
         <p>What are citizen scientists? They can be anyone who collects and  shares scientific data with professional scientists to achieve common goals.</p>
@@ -87,5 +97,27 @@ please contact us <a href="http://www.hydrodesktop.org/" target="_blank">here</a
     <script src="js/footer.js"></script>
   </tr>
 </table>
+
+<script type="text/javascript">
+
+//Validate username and password
+$("form").submit(function(){
+
+	if(($("#username").val())==""){
+	alert("Please enter a username!");
+	return false;
+	}
+
+	if(($("#password").val())==""){
+	alert("Please enter a password!");
+	return false;
+	}
+
+//Now that all validation checks are completed, allow the data to query database
+
+	return true;
+});
+</script>
+
 </body>
 </html>
