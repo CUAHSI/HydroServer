@@ -576,7 +576,7 @@ $('#' + newid).change(function() {
 
 function showSites(str){
 
-document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png'></a>";
+document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png' border='0'></a>";
 
 if (str=="")
   {
