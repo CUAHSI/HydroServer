@@ -501,7 +501,7 @@ return false;
 //Validation Complete
 
 $.post("do_add_source.php", $("#addsource").serialize(),  function( data ) {
-   alert(data);
+  
 		 if(data==1)
   {
 	  alert("Source successfully added");
