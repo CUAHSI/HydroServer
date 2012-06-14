@@ -633,7 +633,7 @@ xmlhttp.send();
           </tr>
         <tr>
           <td valign="top"><strong>Site:</strong></td>
-          <td valign="top"><div id="txtHint"><select name="" id=""><option value="-1">Select....</option></select>&nbsp;<a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></div></td>
+          <td valign="top"><div id="txtHint"><select name="" id=""><option value="-1">Select....</option></select>&nbsp;<a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png" border="0"></a></div></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -643,7 +643,7 @@ xmlhttp.send();
       <table width="600" border="1" cellpadding="0" cellspacing="0" id="multiple">
         <tr>
           <td width="182"><center><strong>Type:</strong></center></td>
-          <td width="249"><center><strong>Method:</strong> <a href="#" onclick="show_answer2()" border="0"><img src="images/questionmark.png" /></a></center></td>
+          <td width="249"><center><strong>Method:</strong> <a href="#" onclick="show_answer2()" border="0"><img src="images/questionmark.png" border="0"></a></center></td>
           <td width="60"><center><strong>Date:</strong>**</center></td>
           <td width="46"><center><strong>Time:**</strong></center></td>
           <td width="51"><center><strong>Value:**</strong></center></td>
