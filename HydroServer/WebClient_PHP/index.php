@@ -70,7 +70,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
         </tr>
     </table></FORM>
     <p>&nbsp;</p>
-    <p><center><strong><a href="view_main.php" class="button"><img src='images/icons/SearchData.png'>&nbsp;&nbsp;Search Data</a></strong>
+    <p><center><strong><a href="view_main.php" class="button"><img src='images/icons/SearchData.png' border='0'>&nbsp;&nbsp;Search Data</a></strong>
     </center></p></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <p><?php if ($_GET['state'])
@@ -82,14 +82,11 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
 			}
 	  }
 	  ?></p>
-      <h1><img src="images/homepage_shot.jpg" alt="student working with teacher" width="300" height="235" hspace="10" align="right" />Welcome</h1>
+      <h1><img src="images/homepage_shot.jpg" alt="student working with teacher" width="300" height="301" hspace="10" align="right" />Welcome</h1>
         <p>The HydroServer Lite Interactive Web Client is an online software tool that helps store, organize, and publish data provided by citizen scientists.</p>
         <p>What are citizen scientists? They can be anyone who collects and  shares scientific data with professional scientists to achieve common goals.</p>
         <p>Once you are a  registered user, you will be able to login and upload your own data into our database to  provide valuable input into the research being done in your area as well as around the world.</p>
-<p>This software is furnished by the <a href="http://www.cuahsi.org" target="_blank">Consortium of Universities for the Advancement of Hydrologic Sciences</a>, or commonly referred to as CUAHSI (pronounced &quot;kwä-zē&quot;).</p>
-<p>To find out how your school or organization can get their own version 
-of the HydroServer Lite Interactive Web Client,
-please contact us <a href="http://www.hydrodesktop.org/" target="_blank">here</a>.</p>
+        <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
