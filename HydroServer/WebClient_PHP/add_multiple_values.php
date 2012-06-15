@@ -75,28 +75,24 @@ alert("If you do not see your METHOD listed here," + '\n' + "please contact your
 
 <link rel="stylesheet" href="styles/jqstyles/jquery.ui.all.css">
 <link rel="stylesheet" href="styles/jqstyles/jquery.ui.timepicker.css">
-<link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
+
 <script src="js/jquery-1.7.2.js"></script>
 <script src="js/ui/jquery.ui.core.js"></script>
 <script src="js/ui/jquery.ui.widget.js"></script>
 <script src="js/ui/jquery.ui.datepicker.js"></script>
 <script src="js/ui/jquery.ui.timepicker.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="js/gettheme.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxbuttons.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxscrollbar.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxlistbox.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxdropdownlist.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxdata.js"></script>
-
-
-
-
 <link rel="stylesheet" href="styles/jqstyles/demos.css">
 <link rel="stylesheet" href="js/jqwidgets/styles/jqx.base.css" type="text/css" />
-<link rel="stylesheet" href="js/jqwidgets/styles/jqx.classic.css" type="text/css" />
 <link rel="stylesheet" href="js/jqwidgets/styles/jqx.darkblue.css" type="text/css" />
-<link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
+<link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript">
 
 
@@ -576,7 +572,7 @@ $('#' + newid).change(function() {
 
 function showSites(str){
 
-document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png' border='0'></a>";
+document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png'></a>";
 
 if (str=="")
   {
@@ -633,7 +629,7 @@ xmlhttp.send();
           </tr>
         <tr>
           <td valign="top"><strong>Site:</strong></td>
-          <td valign="top"><div id="txtHint"><select name="" id=""><option value="-1">Select....</option></select>&nbsp;<a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png" border="0"></a></div></td>
+          <td valign="top"><div id="txtHint"><select name="" id=""><option value="-1">Select....</option></select>&nbsp;<a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></div></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -643,7 +639,7 @@ xmlhttp.send();
       <table width="600" border="1" cellpadding="0" cellspacing="0" id="multiple">
         <tr>
           <td width="182"><center><strong>Type:</strong></center></td>
-          <td width="249"><center><strong>Method:</strong> <a href="#" onclick="show_answer2()" border="0"><img src="images/questionmark.png" border="0"></a></center></td>
+          <td width="249"><center><strong>Method:</strong> <a href="#" onclick="show_answer2()" border="0"><img src="images/questionmark.png" /></a></center></td>
           <td width="60"><center><strong>Date:</strong>**</center></td>
           <td width="46"><center><strong>Time:**</strong></center></td>
           <td width="51"><center><strong>Value:**</strong></center></td>

@@ -1,18 +1,38 @@
-/*!
- * Site Code Creation script by Rohit Khattar and Rex Burch
- */
+// JavaScript created by 
 
-var str = "$sname";	//McCall Outdoor Science School
+//Take the first letter from each word in Source name and abbrev. it
+
+
+var newsource="";
+var newString="-1";
+function GetSourceName(){
+	 //McCall Outdoor Science School
+
+newsource="";
+var str = $("#SourceID option:selected").text();
+
 var matches = str.match(/\b(\w)/g);	// ['M','O','S','S']
-var newsource = matches.join('');	// MOSS
+newsource = matches.join('');	// MOSS
+if (newString=="-1")
+{
+$("#SiteCode").val(newsource + '-');	
+}
+else
+{
+$("#SiteCode").val(newsource + '-' + newString);	
+}
 
-//Take the first letter from each word in name provided, and abbrev. it
+ //output current results
+}
 
-function FindName() {
-var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mountain Ranch
+//Take the first letter from each word in Name provided and abbrev. it
 
+function GetSiteName(){
+	newstring="";
+var info_provided = $("#SiteName").val(); //Boulder Creek at Jug Mountain Ranch
 	//if string contains " at "
-	if(info_provided.indexOf(" at ")){
+	
+	if(info_provided.indexOf(" at ")!=-1){
 
 		//Split the string where "at" is used
 		var newpieces = info_provided.split(" at ");
@@ -26,18 +46,16 @@ var info_provided = document.all("SiteName").value; //Boulder Creek at Jug Mount
 		var match2 = second_hlf.match(/\b(\w)/g);	// ['J','M','R']
 		var acronym2 = match2.join('');	// JMR
 
-		var newString = (newsource + '-' + acronym1 + '-' + acronym2);
+		newString = (acronym1 + '-' + acronym2);
 
-		document.all("SiteCode").value = newString;
+		$("#SiteCode").val(newsource + '-' + newString);
 		}
 	else {
-
 		//process string they type in
 		var match1 = info_provided.match(/\b(\w)/g);	// ['B','C']
 		var acronym1 = match1.join('');	// BC
+		newString = (acronym1);
 
-		var newString = (newsource + '-' + acronym1);
-
-		document.all("SiteCode").value = newString;
+	$("#SiteCode").val(newsource + '-' + newString);
 	}
 }
