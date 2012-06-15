@@ -6,10 +6,6 @@ require_once 'authorization_check2.php';
 <head>
 <title>HydroServer Lite Web Client</title>
 
-
-<link rel="stylesheet" href="js/jqwidgets/styles/jqx.base.css" type="text/css" />
-<link rel="stylesheet" href="js/jqwidgets/styles/jqx.classic.css" type="text/css" />
-<link rel="stylesheet" href="js/jqwidgets/styles/jqx.darkblue.css" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxcore.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxbuttons.js"></script>
@@ -22,6 +18,7 @@ require_once 'authorization_check2.php';
 <script type="text/javascript" src="js/jqwidgets/jqxdatetimeinput.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxcalendar.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxtooltip.js"></script>
+<script type="text/javascript" src="js/gettheme.js"></script>
 <script type="text/javascript" src="js/jqwidgets/globalization/jquery.global.js"></script>
 <script src="js/highstock.js" type="text/javascript"></script>
 <script src="js/modules/exporting.js" type="text/javascript"></script>
@@ -35,6 +32,9 @@ require_once 'authorization_check2.php';
 <script type="text/javascript" src="js/jqwidgets/jqxgrid.sort.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxgrid.edit.js"></script>
 
+<link rel="stylesheet" href="js/jqwidgets/styles/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="js/jqwidgets/styles/jqx.classic.css" type="text/css" />
+<link rel="stylesheet" href="js/jqwidgets/styles/jqx.darkblue.css" type="text/css" />
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 <!--Main Script to display the data-->
 
@@ -425,14 +425,14 @@ $.ajax({
 			title: {
                 text: 'Time',
 				margin: 30
-            },
+            }
 			
         },
   yAxis: {
             title: {
                 text: unit_yaxis,
 				margin: 40
-            },
+            }
 			
         },
 	
@@ -759,7 +759,7 @@ Selected the wrong site? No worries! Click <a href="view_main.php" style="color:
       </div>
     <div>
       <div id="jqxgrid"></div>
-      <input style='margin-left: 25px; margin-top:25px;' type="button" value="Edit Mode: Off" id='button1' />
+     
          <br/>
       <div style="alignment-adjust: middle; float:right;">
         <input type="button" value="Download the above data" id='export' /></div>

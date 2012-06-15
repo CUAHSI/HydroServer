@@ -830,15 +830,7 @@
     background-position: 0 50%;
     background-repeat: no-repeat;
 }
-/*applied to the anchor elements of a sub menu item.*/
-.jqx-menu-item a:link, a:visited
-{
-    border: none;
-    background-color: transparent;
-    outline: none;
-    color: #FFF;
-    text-decoration: none;
-}
+
 /*applied to the anchor elements of a sub menu item.*/
 .jqx-menu-item a:hover
 {
@@ -1010,25 +1002,7 @@
     cursor: pointer;
     text-decoration: none;
 }
-/*applied to the anchor element of a tree item.*/
-.jqx-tree-item a:link
-{
-    text-indent: 0;
-    background-color: transparent;
-    border: 0px solid transparent;
-    list-style: none;
-    padding: 0px;
-    margin: 0px;
-    float: none;
-    overflow: hidden;
-    left: 100%;
-    color: #FFF;
-    right: 0;
-    text-align: left;
-    cursor: pointer;
-    text-decoration: none;
-    outline: none;
-}
+
 .jqx-tree-item-selected, .jqx-tree-item-hover a:hover
 {
     color: inherit;

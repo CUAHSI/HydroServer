@@ -66,9 +66,9 @@ td {
 	font-weight: bold;
 	padding: 5px 11px;
 	text-decoration: none;
-	
+	behavior: url(styles/PIE.htc);
 	text-align: left;	
-
+	 position:relative;
 	
 }
 
@@ -90,7 +90,8 @@ td {
 	text-decoration: none;
 	
 	text-align: left;
-	
+	 position:relative;
+	behavior: url(styles/PIE.htc);
 
 	
 }
@@ -113,7 +114,8 @@ td {
 	text-decoration: none;
 	
 	text-align: left;
-	
+	 position:relative;
+	behavior: url(styles/PIE.htc);
 
 	
 }

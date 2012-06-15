@@ -41,6 +41,7 @@ elseif ($_COOKIE[power] == "student"){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 </head>
 
 <body background="images/bkgrdimage.jpg">

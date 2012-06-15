@@ -10,6 +10,8 @@ setcookie ("power", null, -3600, "/", "adventurelearningat.com", 0);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>HydroServer Lite Web Client: Homepage</title>
+
+
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 
 <!-- JQuery JS -->
