@@ -381,7 +381,7 @@ display: none;
       </table>
         <table width="650" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td colspan="4" valign="top"><strong>You may either enter the latitude/longitude manually or simply double click the location on the map.</strong></td>
+          <td colspan="4" valign="top"><strong>You may either enter the latitude/longitude manually or simply double click the location on the map. Once the marker is placed on the map, you may then click and drag it to the exact location you desire to adjust the results to be more accurate.</strong></td>
         </tr>
         <tr>
           <td width="100" valign="top">&nbsp;</td>
@@ -528,7 +528,7 @@ display: none;
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td><input type="SUBMIT" name="submit" value="Submit Your Site" /></td>
+    <td><input type="SUBMIT" name="submit" value="Submit Your Site" class="button"/></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
