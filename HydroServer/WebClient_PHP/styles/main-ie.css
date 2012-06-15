@@ -1,3 +1,6 @@
+@charset "utf-8";
+/* CSS Document- IE Only*/
+
 body {
 	margin-top: 0px;
 	margin-left: 0px;
@@ -51,14 +54,10 @@ td {
 }
 
 .button {
-	behavior: url(styles/PIE.php);
 	margin-top: 5px;
-	-moz-box-shadow: inset 0px 0px 0px 0px #bbdaf7;
-	-webkit-box-shadow: inset 0px 0px 0px 0px #bbdaf7;
 	box-shadow: inset 0px 0px 0px 0px #bbdaf7;
 	background-color:#33F;
-	-moz-border-radius: 17px;
-	-webkit-border-radius: 17px;
+	behavior: url(/styles/border-radius.htc);
 	border-radius: 17px;
 	display: inline-block;
 	color: #ffffff;
@@ -67,9 +66,9 @@ td {
 	font-weight: bold;
 	padding: 5px 11px;
 	text-decoration: none;
-	
+	position:relative;
 	text-align: left;	
-	 position:relative;
+
 	
 }
 
@@ -89,9 +88,9 @@ td {
 	font-weight:bolder;
 	padding: 10px 15px;
 	text-decoration: none;
+	
 	text-align: left;
-	position:relative;
-	behavior: url(styles/PIE.php);
+	
 
 	
 }
@@ -114,8 +113,7 @@ td {
 	text-decoration: none;
 	
 	text-align: left;
-	 position:relative;
-	behavior: url(styles/PIE.php);
+	
 
 	
 }
@@ -124,7 +122,7 @@ td {
 	width:24px;
 	height:24px;
 	vertical-align:middle;
-	border:0;	
+		
 }
 
 .button:hover {
@@ -158,3 +156,4 @@ td {
 	-o-transition: all 1s ease-in-out 0.1s;
 	transition: all 1s ease-in-out 0.1s;
 }
+
