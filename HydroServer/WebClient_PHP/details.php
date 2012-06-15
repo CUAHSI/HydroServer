@@ -26,7 +26,7 @@ require_once 'authorization_check2.php';
 <script type="text/javascript" src="js/jqwidgets/jqxcheckbox.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxmenu.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxgrid.js"></script>
-<script type="text/javascript" src="js/jqwidgets/jqxgrid.selection.js"></script>  
+<script type="text/javascript" src="js/jqwidgets/jqxgrid.selection.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxgrid.columnsresize.js"></script> 
 <script type="text/javascript" src="js/jqwidgets/jqxgrid.pager.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxgrid.sort.js"></script>
@@ -37,9 +37,7 @@ require_once 'authorization_check2.php';
 <link rel="stylesheet" href="js/jqwidgets/styles/jqx.darkblue.css" type="text/css" />
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 <!--Main Script to display the data-->
-
 <script type="text/javascript">
-
 
 var siteid=<?php echo $_GET['siteid'];?>;
 var date_to;
@@ -66,9 +64,8 @@ var methodid;
 //Create the edit button
 
 
-
 //Create Tabs for Table Chart Switching
-$('#jqxtabs').jqxTabs({ width: 710, height: 450, theme: 'darkblue', collapsible: true });
+$('#jqxtabs').jqxTabs({ width: 620, height: 450, theme: 'darkblue', collapsible: true });
 $('#jqxtabs').jqxTabs('disable');
 var selectedItem = $('#jqxtabs').jqxTabs('selectedItem');
 $('#jqxtabs').jqxTabs('enableAt', selectedItem);
@@ -118,8 +115,6 @@ var t=setTimeout("create_var_list()",300)
 
 }
 });
-
-
 
 
 });
@@ -172,7 +167,6 @@ update_var_id();
 
 });
 
-
 }
 
 //End of create_var_list function	
@@ -198,7 +192,6 @@ get_methods();
 	}
 });
 
-
 }
 
 //Function to get dates and plot a default plot
@@ -216,7 +209,6 @@ function get_methods()
             url: 'db_get_methods.php?siteid='+siteid+'&varid='+varid
         };
 
-		
 //Defining the Data adapter
 var dataAdapter122 = new $.jqx.dataAdapter(source122);
 
@@ -253,9 +245,6 @@ get_dates();
 	
 	
 	
-	
-	
-	
 }
 function get_dates()
 {
@@ -280,7 +269,7 @@ date_to=String($(this).attr("date_to"));
 
 $('#daterange').html("");
 //$('#daterange').empty();	
-$('#daterange').prepend('<p>Dates Available From ' + date_from + ' to ' + date_to +'</p>');
+$('#daterange').prepend('<p><strong>Dates Available:</strong> ' + date_from + ' <strong>to</strong> ' + date_to +'</p>');
 
 $("#jqxDateTimeInput").jqxDateTimeInput({ width: '250px', height: '25px'});
 $("#jqxDateTimeInput").jqxDateTimeInput({ formatString: 'd' });
@@ -309,7 +298,6 @@ $("#todatedrop").jqxDropDownButton({ width: 250, height: 25});
 
 //Use Show And Hide Method instead of repeating formation - optimization number 2
 
-
 $('#jqxDateTimeInput').jqxDateTimeInput('setDate', date1);
 $("#jqxDateTimeInput").jqxDateTimeInput('setMinDate', new Date(year, month, day));
 var year_to = parseInt(date_to.slice(0,4));		
@@ -325,8 +313,8 @@ $("#jqxDateTimeInputto").jqxDateTimeInput('setMaxDate', new Date(year_to, month_
 
 date_from_sql=date1.getFullYear() + '-' + add_zero((date1.getMonth())) + '-' + add_zero(date1.getDate()) + ' 00:00:00';
 date_to_sql=date2.getFullYear() + '-' + add_zero((date2.getMonth()+2)) + '-' + add_zero(date2.getDate()) + ' 00:00:00';
-$("#fromdatedrop").jqxDropDownButton('setContent', "Please enter from date");
-$("#todatedrop").jqxDropDownButton('setContent', "Please enter to date");
+$("#fromdatedrop").jqxDropDownButton('setContent', "Select start date");
+$("#todatedrop").jqxDropDownButton('setContent', "Select end date");
 
 plot_chart();
 //Binding An Event to the first calender
@@ -373,16 +361,12 @@ plot_chart();
 function plot_chart()
 {
 
-
-	
 var unit_yaxis="unit";
 //	alert("");
 
 //Chaning Complete Data loading technique..need to create a php page that will output javascript...
 
 var url_test='db_get_data.php?siteid='+siteid+'&varid='+varid+'&meth='+methodid+'&startdate='+date_from_sql+'&enddate='+date_to_sql;
-
-
 
 
 $.ajax({
@@ -396,7 +380,7 @@ $.ajax({
 
  var chart=new Highcharts.StockChart({
     chart: {
-		width: 700,
+		width: 620,
         renderTo: 'container',
 		 zoomType: 'x'
     },
@@ -475,8 +459,6 @@ $.ajax({
             },
 	
 	
-
-	
      series: [{
             data: data_test,
 			name: varname +'('+datatype+')'     
@@ -518,8 +500,6 @@ return new Date(year,month,day,hour,minute,sec);
 
 function make_grid()
 {
-
-
             
 var url='db_get_data2.php?siteid='+siteid+'&varid='+varid+'&meth='+methodid+'&startdate='+date_from_sql+'&enddate='+date_to_sql;
 
@@ -549,8 +529,8 @@ if (flag==1)
                 source: dataAdapter12,
                
                 columns: [
-                  { text: 'Date', datafield: 'date', width: 352 },
-	              { text: 'Value', datafield: 'Value', width: 353}                     
+                  { text: 'Date', datafield: 'date', width: 290 },
+	              { text: 'Value', datafield: 'Value', width: 290}                     
                 ]
             });		
 
@@ -561,7 +541,7 @@ if(flag!=1)
 
             $("#jqxgrid").jqxGrid(
             {
-                width: 705,
+                width: 610,
                 source: dataAdapter12,
                 theme: 'darkblue',   
                 columnsresize: true,
@@ -571,8 +551,8 @@ if(flag!=1)
 				 editable: false,
 				   selectionmode: 'singlecell',
                 columns: [
-                  { text: 'Date', datafield: 'date', width: 352 },
-	              { text: 'Value', datafield: 'Value', width: 353}                     
+                  { text: 'Date', datafield: 'date', width: 305 },
+	              { text: 'Value', datafield: 'Value', width: 305}                     
                 ]
             });		
 		flag=1;		
@@ -622,28 +602,18 @@ $("#jqxgrid").bind("cellclick", function (event) {
 
 					}
 				});				
-
-
 }
-
-
-
 </script>
 
-
 <STYLE type="text/css">
-  .button a:link { color:#FFF; text-decoration: none}
+.button a:link { color:#FFF; text-decoration: none}
 .button a:visited { color: #FFF; text-decoration: none}
 .button a:hover { color: #FFF; text-decoration: none}
 .button a:active { color: #FFF; text-decoration: none}
  </STYLE>
 
 </head>
-
 <body background="images/bkgrdimage.jpg">
-
-
-
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="6"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>
@@ -652,16 +622,12 @@ $("#jqxgrid").bind("cellclick", function (event) {
     <td colspan="6" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" rowspan="10" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
-    <td width="8" rowspan="10" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-    <td width="59" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
-    <td width="266" align="left" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-    <td colspan="2" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-  </tr>
-  <tr>
-    <td colspan="4" valign="middle" bgcolor="#FFFFFF">
-    
-    <?php  
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
+    <td valign="middle" bgcolor="#FFFFFF" width="720"><blockquote>
+      <p>&nbsp;</p>
+      <table width="630" border="0">
+        <tr>
+          <td colspan="4"><?php  
 
 require_once 'db_config.php';
 
@@ -674,50 +640,59 @@ $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
 $row = mysql_fetch_array($result, MYSQL_ASSOC);
 echo("<p align='center'><b>Site: </b>".$row['SiteName']."</p>");
 
-?>    
-    </td>
-  </tr>
-  <tr>
-    <td valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
-    <td width="266" align="left" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-    <td colspan="2" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-  </tr>
-  <tr>
-    <td valign="middle" bgcolor="#FFFFFF"><strong>Variable:</strong></td>
-    <td width="266" align="left" valign="top" bgcolor="#FFFFFF"><div id="dropdownlist"></div></td>
-    <td colspan="2" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-  </tr>
-  <tr>
-    <td colspan="4" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
-  </tr>
-  <tr>
-    <td height="37" valign="middle" bgcolor="#FFFFFF">
-      <div id='typelist_text' style="margin-bottom:10px;"><strong>Type:</strong></div>
-    </td>
-    <td align="left" valign="top" bgcolor="#FFFFFF"><div id='typelist'></div></td>
-    <td width="68" valign="top" bgcolor="#FFFFFF"> <div id='methodlist_text' style="margin-bottom:10px;"><strong>Method:</strong></div></td>
-    <td width="318" valign="top" bgcolor="#FFFFFF"><div id='methodlist'></div></td>
-  </tr>
-  <tr>
-    <td colspan="4" valign="top" bgcolor="#FFFFFF"><div id='daterange'></div></td>
-  </tr>
-  <tr>
-    <td colspan="4" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
-  </tr>
-  
-  <tr>
-    <td colspan="2" valign="top" bgcolor="#FFFFFF">
-  <div id='fromdatedrop'><div id='jqxDateTimeInput'></div></div> 
-      <br/><br/>
-    </td>
-    <td colspan="2" valign="top" bgcolor="#FFFFFF"><div id='todatedrop'><div id='jqxDateTimeInputto'></div></div> </td>
-  <br/><br/>
-  </tr>
-  
-   <tr>
-    <td colspan="4" valign="top" bgcolor="#FFFFFF">
-    
-     <div id="loadingtext" class="loading">Please Wait..Data is loading<br/>
+?></td>
+          </tr>
+        <tr>
+          <td width="67">&nbsp;</td>
+          <td width="239">&nbsp;</td>
+          <td width="55">&nbsp;</td>
+          <td width="221">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><strong>Variable:</strong></td>
+          <td><div id="dropdownlist"></div></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div id='typelist_text'><strong>Type:</strong></div></td>
+          <td><div id='typelist'></div></td>
+          <td><div id='methodlist_text'><strong>Method:</strong></div></td>
+          <td><div id='methodlist'></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="4"><div id='daterange'></div></td>
+          </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2"><div id='fromdatedrop'><div id='jqxDateTimeInput'></div></div></td>
+          <td colspan="2"><div id='todatedrop'><div id='jqxDateTimeInputto'></div></div></td>
+          </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="4"><div id="loadingtext" class="loading">Please Wait..Data is loading<br/>
     </div>
   <div id='jqxtabs'>
     <ul style='margin-left: 20px;'>
@@ -764,10 +739,20 @@ Selected the wrong site? No worries! Click <a href="view_main.php" style="color:
       <div style="alignment-adjust: middle; float:right;">
         <input type="button" value="Download the above data" id='export' /></div>
       </div>
-    </div>
-      
-    </td>
+    </div></td>
+          </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table></blockquote>
+    <p>&nbsp;</p></td>
   </tr>
+    <tr>
+    <script src="js/footer.js"></script>
+    </tr>
 </table>
 
 </body>
