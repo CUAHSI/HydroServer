@@ -86,6 +86,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
         <p>The HydroServer Lite Interactive Web Client is an online software tool that helps store, organize, and publish data provided by citizen scientists.</p>
         <p>What are citizen scientists? They can be anyone who collects and  shares scientific data with professional scientists to achieve common goals.</p>
         <p>Once you are a  registered user, you will be able to login and upload your own data into our database to  provide valuable input into the research being done in your area as well as around the world.</p>
+        <p>This server is running:  HydroServer Lite Interactive Web Client Version 1.0</p>
         <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
