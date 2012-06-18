@@ -70,6 +70,7 @@ $num = @mysql_num_rows($result2);
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg,$msg2"; ?>
       <h1>Change the authority of a user</h1>
+      <p>&nbsp;</p>
       <form method="post" action="do_changeauthority.php">
         <table width="300" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -94,7 +95,7 @@ $num = @mysql_num_rows($result2);
           </tr>
           <tr>
             <td valign="top">&nbsp;</td>
-            <td valign="top"><input type="submit" name="submit2" value="Change Authority" /></td>
+            <td valign="top"><input type="submit" name="submit2" value="Change Authority" class="button" /></td>
           </tr>
         </table>
 </form>

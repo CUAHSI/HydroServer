@@ -59,9 +59,9 @@ elseif ($_COOKIE[power] == "student"){
   </tr>
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
-    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
+    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg"; ?>
       <h1>Change a password for a user</h1>
-      <p><?php echo "$msg"; ?>&nbsp;</p>
+      <p>&nbsp;</p>
       <FORM METHOD="POST" ACTION="do_changepassword.php">
         <table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -82,7 +82,7 @@ elseif ($_COOKIE[power] == "student"){
         </tr>
         <tr>
           <td valign="top">&nbsp;</td>
-          <td valign="top"><input type="SUBMIT" name="submit" value="Change Password" /></td>
+          <td valign="top"><input type="SUBMIT" name="submit" value="Change Password" class="button" /></td>
         </tr>
       </table>
   </FORM>
