@@ -300,10 +300,6 @@ var long = markerNodes[i].getAttribute("lng");
 
     function doNothing() {}
 
-
-
-	
-
     //]]>
   </script>
 
@@ -318,38 +314,50 @@ var long = markerNodes[i].getAttribute("lng");
     <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
   </tr>
   <tr>
-    <td width="240" rowspan="2" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?> </td>
+    <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?> </td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
-      <?php //echo "$msg"; ?>
-       <div>
-         <p>Please enter a location to search data collection sites nearby or hit the button "Find sites near me!" to show sites near(300 mile radius) your present geographic location</p>
-         <p><br/>
-           <input type="text" id="addressInput" size="10"/>
-           <select id="radiusSelect">
-             <option value="25" selected>25mi</option>
-             <option value="50">50mi</option>
-             <option value="100">100mi</option>
-             <option value="200">200mi</option>
-             <option value="300">300mi</option>
-             <option value="400">400mi</option>
-             <option value="500">500mi</option>
-           </select>
-           <input type="button" onClick="searchLocations()" value="Search"/>
-           <input type='button' onClick="loadall()" value="Reset Search"/>
-           <input type='button' onClick="track_loc()" value="Find sites near me!"/>
-         </p>
-      </div>
-    <div><select id="locationSelect" style="width:100%;visibility:hidden"></select></div>
+         <table width="630" border="0">
+           <tr>
+             <td>Please enter a location to search data collection sites nearby or hit the button "Find sites near me!" to show sites near (300 mile radius) your present geographic location.</td>
+           </tr>
+           <tr>
+             <td>&nbsp;</td>
+           </tr>
+           <tr>
+             <td><input type="text" id="addressInput" size="10"/>
+               <select name="radiusSelect" id="radiusSelect">
+                 <option value="25" selected>25mi</option>
+                 <option value="50">50mi</option>
+                 <option value="100">100mi</option>
+                 <option value="200">200mi</option>
+                 <option value="300">300mi</option>
+                 <option value="400">400mi</option>
+                 <option value="500">500mi</option>
+               </select>
+               <input type="button" onClick="searchLocations()" value="Search"/>
+               <input type='button' onClick="loadall()" value="Reset Search"/>
+             <input type='button' onClick="track_loc()" value="Find sites near me!"/></td>
+           </tr>
+           <tr>
+             <td>&nbsp;</td>
+           </tr>
+           <tr>
+             <td><div><select name="locationSelect" id="locationSelect" style="width:100%;visibility:hidden"></select></div></td>
+           </tr>
+           <tr>
+             <td>&nbsp;</td>
+           </tr>
+           <tr>
+             <td width="630" height="450"><div id="map" style="width:100%; height:100%"></div></td>
+           </tr>
+         </table>
+    </blockquote>
+      	 <p>&nbsp;</p>
     </td>
   </tr>
   <tr>
-    
-    <td width="720" height="500">
-      <div id="map" style="width:100%; height:100%"></div>
-    </td>
-    
+    <script src="js/footer.js"></script>
   </tr>  
 </table>
-
 </body>
 </html>
