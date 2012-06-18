@@ -56,6 +56,7 @@ elseif ($_COOKIE[power] == "student"){
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg"; ?>
       <h1>Add a new user</h1>
+      <p>&nbsp;</p>
       <FORM METHOD="POST" ACTION="do_adduser.php">
       <table width="600" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -111,7 +112,7 @@ elseif ($_COOKIE[power] == "student"){
         </tr>
         <tr>
           <td width="95" valign="top">&nbsp;</td>
-          <td valign="top"><input type="SUBMIT" name="submit" value="Add User" /></td>
+          <td valign="top"><input type="SUBMIT" name="submit" value="Add User" class="button"/></td>
           <td valign="top">&nbsp;</td>
         </tr>
       </table></FORM>

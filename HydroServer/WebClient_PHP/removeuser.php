@@ -59,9 +59,9 @@ elseif ($_COOKIE[power] == "student"){
   </tr>
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
-    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
+    <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br /><?php echo "$msg"; ?>
       <h1>Remove existing user</h1>
-      <p><?php echo "$msg"; ?>&nbsp;</p>
+      <p>&nbsp;</p>
       <FORM METHOD="POST" ACTION="do_removeuser.php">
         <table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -74,7 +74,7 @@ elseif ($_COOKIE[power] == "student"){
         </tr>
         <tr>
           <td valign="top">&nbsp;</td>
-          <td valign="top"><input type="SUBMIT" name="submit" value="Remove User" /></td>
+          <td valign="top"><input type="SUBMIT" name="submit" value="Remove User" class="button" /></td>
         </tr>
       </table>
   </FORM>
