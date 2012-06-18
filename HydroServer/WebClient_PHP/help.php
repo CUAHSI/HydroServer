@@ -34,7 +34,7 @@ require_once 'authorization_check2.php';
           Creating an account 
         must be done by your direct supervisor. Please contact them to fulfil this request.</p>
 <p><strong><a name="Bug" id="Bug"></a>Need to report a bug?</strong><br>
-If you are experiencing an issue with the website, you may share it with the programming team to have it resolved. Please visit us <a href="http://hydroserver.codeplex.com/workitem/list/basic" target="_blank">here</a>, register for an account, and post the request by clicking &quot;Create Issue&quot; in the &quot;Issue Tracker.&quot;</p>
+If you are experiencing an issue with the website, you may share it with the programming team to have it resolved. Please visit us <a href="http://www.adventurelearningat.com/his/client/issues/index.php" target="_blank">here</a>, register for an account, and post the request by clicking &quot;Create Issue&quot; in the &quot;Issue Tracker.&quot;</p>
          <p><strong><a name="Questions"></a>Still have questions?</strong><br>
          If you do not see the answer you are seeking, please contact your direct supervisor about these additional  questions.</p>
          <p><strong><a name="CreatSite" id="CreatSite"></a>Ready to create a site of your own?</strong><br>
