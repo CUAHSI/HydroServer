@@ -71,7 +71,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
     </table></FORM>
     <p>&nbsp;</p>
     <p><center><strong><a href="view_main.php" class="button"><img src='images/icons/SearchData.png' border='0'>&nbsp;&nbsp;Search Data</a></strong>
-    </center></p></td>
+    </center></p><p><center><strong><a href="help.php" class="button"><img src='images/icons/Help.png' border='0'>&nbsp;&nbsp;Help Center</a></strong></center></p></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <p><?php if ($_GET['state'])
 	  {
@@ -87,6 +87,8 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
         <p>What are citizen scientists? They can be anyone who collects and  shares scientific data with professional scientists to achieve common goals.</p>
         <p>Once you are a  registered user, you will be able to login and upload your own data into our database to  provide valuable input into the research being done in your area as well as around the world.</p>
         <p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
