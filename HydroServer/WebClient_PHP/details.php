@@ -199,6 +199,9 @@ get_methods();
 function get_methods()
 {
 
+$('#methodlist').off()
+$('#methodlist').unbind('valuechanged');
+
    var source122 =
         {
             datatype: "json",
@@ -260,7 +263,9 @@ $.ajax({
 //Displaying the Available Dates	
 $(xml).find("dates").each(function()
 {
-	
+
+
+
 //Displaying the Available Dates
 sitename=String($(this).attr("sitename"));	
 date_from=String($(this).attr("date_from"));
@@ -279,7 +284,7 @@ $("#jqxDateTimeInputto").jqxDateTimeInput({ formatString: 'd' });
 //Resetting the bind functions
 $('#jqxDateTimeInput').off()
 $('#jqxDateTimeInputto').off()
-$().unbind('valuechanged');
+$('#jqxDateTimeInput').unbind('valuechanged');
 //Binding An Event To the Second Calendar
 $('#jqxDateTimeInputo').unbind('valuechanged');
 
@@ -318,7 +323,7 @@ $("#todatedrop").jqxDropDownButton('setContent', "Select end date");
 
 plot_chart();
 //Binding An Event to the first calender
-/*
+
 $('#jqxDateTimeInput').bind('valuechanged', function (event) 
 {
 	
@@ -349,7 +354,7 @@ date_to_sql=date_select_to.getFullYear() + '-' + add_zero((date_select_to.getMon
 plot_chart();
 });
 
-*/
+
 
 });
 	}
