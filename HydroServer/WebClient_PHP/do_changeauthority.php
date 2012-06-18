@@ -95,7 +95,7 @@ $num = @mysql_num_rows($result2);
           </tr>
           <tr>
             <td valign="top">&nbsp;</td>
-            <td valign="top"><input type="submit" name="submit2" value="Change Authority" class="button" /></td>
+            <td valign="top"><input type="submit" name="submit2" value="Change Authority" class="button" style="width: 145px" /></td>
           </tr>
         </table>
 </form>

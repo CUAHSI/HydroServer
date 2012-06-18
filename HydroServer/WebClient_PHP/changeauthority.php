@@ -55,7 +55,7 @@ $num = @mysql_num_rows($result);
       <h1>Change the authority of a user</h1>
       <p>&nbsp;</p>
       <form method="post" action="do_changeauthority.php">
-        <table width="300" border="0" cellspacing="0" cellpadding="0">
+        <table width="350" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="95" valign="top"><strong>Username:</strong></td>
             <td width="205" valign="top"><select name="username" id="username"><option value="">Select a username....</option><?php echo "$option_block"; ?></select></td>
@@ -78,7 +78,7 @@ $num = @mysql_num_rows($result);
           </tr>
           <tr>
             <td valign="top">&nbsp;</td>
-            <td valign="top"><input type="submit" name="submit2" value="Change Authority" class="button" /></td>
+            <td valign="top"><input type="submit" name="submit2" value="Change Authority" class="button" style="width: 145px" /></td>
           </tr>
         </table>
   </form>
