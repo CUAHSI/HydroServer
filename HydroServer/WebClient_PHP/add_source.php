@@ -126,7 +126,8 @@ $("#MetadataChoice1").click(function() {
         </tr>
         <tr>
           <td valign="top"><strong>Link to Org:</strong></td>
-          <td colspan="2" valign="top"><input type="text" id="SourceLink" name="SourceLink" size="35" maxlength="200"/>&nbsp;<span class="em">(Ex: http://www.mossidaho.org)</span></td>
+          <td colspan="2" valign="top"><input type="text" id="SourceLink" name="SourceLink" size="35" style="background-color:#9FF" maxlength="200"/>
+          &nbsp;<span class="em">(Ex: http://www.mossidaho.org) (Optional)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -251,8 +252,8 @@ $("#MetadataChoice1").click(function() {
         </tr>
         <tr>
           <td valign="top"><strong>Citation:</strong></td>
-          <td colspan="2" valign="top"><input type="text" id="Citation" name="Citation" size="35" maxlength="100"/>
-            &nbsp;<span class="em">(Ex: Data collected by MOSS scientists and citizen scie...)</span></td>
+          <td colspan="2" valign="top"><input type="text" id="Citation" name="Citation" size="35" style="background-color:#9FF" maxlength="100"/>
+            &nbsp;<span class="em">(Ex: Data collected by MOSS scientists and citizen scie...) (Optional)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -307,7 +308,8 @@ $("#MetadataChoice1").click(function() {
         </tr>
         <tr>
           <td valign="top"><strong>Abstract:</strong></td>
-          <td colspan="2" valign="top"><input type="text" id="Abstract" name="Abstract" size="35" maxlength="250"/>&nbsp;<span class="em">(Ex: High school students/citizen scientists collecting...)</span></td>
+          <td colspan="2" valign="top"><input type="text" id="Abstract" name="Abstract" size="35" style="background-color:#9FF" maxlength="250"/>
+          &nbsp;<span class="em">(Ex: High school students/citizen scientists collecting...) (Optional)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -316,7 +318,7 @@ $("#MetadataChoice1").click(function() {
         </tr>
         <tr>
           <td valign="top"><strong>Metadata Link:</strong></td>
-          <td colspan="2" valign="top"><input type="text" id="ContactName4" name="ContactName4" size="12" maxlength="15"/>
+          <td colspan="2" valign="top"><input type="text" id="ContactName4" name="ContactName4" style="background-color:#9FF" size="12" maxlength="15"/>
 &nbsp;<span class="em">(Optional)</span></td>
           </tr>
         <tr>
@@ -363,10 +365,15 @@ return false;
 }
 
 
-if(($("#SourceLink").val())=="")
+if(($("#SourceLink").val())!="")
 {
-alert("Please enter a link for the source.");
-return false;
+var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+if(!($("#SourceLink").val().match(regexp)))
+{
+	alert("Invalid url for sourcelink");
+	return false;
+}
+
 }
 
 
@@ -445,12 +452,6 @@ if(!($("#ZipCode").val().match(/^\d{5}(-\d{4})?$/)))
 }
 
 
-if(($("#Citation").val())=="")
-{
-alert("Please enter a citation for the source.");
-return false;
-}
-
 
 //Check for Metadata Exisitng or not
 
@@ -484,17 +485,18 @@ alert("Please enter a title for Metadata.");
 return false;
 }
 
-if(($("#Abstract").val())=="")
+
+if(($("#ContactName4").val())!="")
 {
-alert("Please enter an abstract for Metadata.");
-return false;
+var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+if(!($("#ContactName4").val().match(regexp)))
+{
+	alert("Invalid url for Metadata link");
+	return false;
 }
 
-if(($("#ContactName4").val())=="")
-{
-alert("Please enter a link for Metadata.");
-return false;
 }
+
 
 }
 
