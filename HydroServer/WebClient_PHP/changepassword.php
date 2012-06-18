@@ -63,13 +63,13 @@ elseif ($_COOKIE[power] == "student"){
       <h1>Change a password for a user</h1>
       <p>&nbsp;</p>
       <FORM METHOD="POST" ACTION="do_changepassword.php">
-        <table width="300" border="0" cellspacing="0" cellpadding="0">
+        <table width="350" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="100" valign="top"><strong>Username:</strong></td>
-          <td width="200" valign="top"><select name="username" id="username"><option value="">Select a username....</option><?php echo "$option_block"; ?></select></td>
+          <td width="107" valign="top"><strong>Username:</strong></td>
+          <td width="193" valign="top"><select name="username" id="username"><option value="">Select a username....</option><?php echo "$option_block"; ?></select></td>
         </tr>
         <tr>
-          <td width="100" valign="top">&nbsp;</td>
+          <td width="107" valign="top">&nbsp;</td>
           <td valign="top">&nbsp;</td>
         </tr>
         <tr>
@@ -82,7 +82,7 @@ elseif ($_COOKIE[power] == "student"){
         </tr>
         <tr>
           <td valign="top">&nbsp;</td>
-          <td valign="top"><input type="SUBMIT" name="submit" value="Change Password" class="button" /></td>
+          <td valign="top"><input type="SUBMIT" name="submit" value="Change Password" class="button" style="width: 145px" /></td>
         </tr>
       </table>
   </FORM>

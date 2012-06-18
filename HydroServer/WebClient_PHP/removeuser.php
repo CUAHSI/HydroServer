@@ -74,7 +74,7 @@ elseif ($_COOKIE[power] == "student"){
         </tr>
         <tr>
           <td valign="top">&nbsp;</td>
-          <td valign="top"><input type="SUBMIT" name="submit" value="Remove User" class="button" /></td>
+          <td valign="top"><input type="SUBMIT" name="submit" value="Remove User" class="button" style="width: 145px" /></td>
         </tr>
       </table>
   </FORM>
