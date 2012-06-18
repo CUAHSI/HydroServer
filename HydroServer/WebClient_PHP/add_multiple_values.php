@@ -710,6 +710,7 @@ return false;
 //First check if there is any data in the last row
 
 var final_rows;
+var valid_rows=0;
 var checkid='VariableID'+row_no;
 var item = $('#' + checkid).jqxDropDownList('getSelectedItem'); 
 
@@ -727,12 +728,28 @@ else
 final_rows=row_no;	
 }
 
-alert("Total number of rows entered: "+final_rows);
 
 //Now we start validating each row
 
 
 for(var j=1;j<=final_rows;j++)
+{
+
+var checkid='VariableID'+j;
+var item = $('#' + checkid).jqxDropDownList('getSelectedItem'); 
+
+checkid='MethodID'+j;
+var item1 = $('#' + checkid).jqxDropDownList('getSelectedItem'); 
+
+checkid='value'+j;
+
+if((item.value==-1)&&(item1==undefined)&&($('#' + checkid).val()==""))
+{
+	
+}
+
+else
+
 {
 
 //first check if type is selected or not
@@ -778,14 +795,47 @@ if(validatenum(checkid)==false)
 	//alert("Error in row "+j+": Please enter a valid value");
 return false;
 }
+valid_rows=valid_rows+1;
 
+}
 	
 }
 var final_result=1;
 //Validation Complete
 //Input data
+
+
+if(valid_rows==0)
+{
+alert("Please enter atleast one value");
+return false;	
+}
+else
+{
+
+var ajax_count=0;
 for(var j=1;j<=final_rows;j++)
 {
+
+var checkid='VariableID'+j;
+var item = $('#' + checkid).jqxDropDownList('getSelectedItem'); 
+
+checkid='MethodID'+j;
+var item1 = $('#' + checkid).jqxDropDownList('getSelectedItem'); 
+
+checkid='value'+j;
+
+if((item.value==-1)&&(item1==undefined)&&($('#' + checkid).val()==""))
+{
+
+}
+
+else
+
+{
+
+
+
 
 var sourceid=$("#SourceID option:selected").val();
 var siteid=$("#SiteID option:selected").val();
@@ -803,7 +853,7 @@ checkid='timepicker'+j;
 var time=$('#' + checkid).val();
 
 var temp_result=-1;
-var ajax_count=0;
+
 $.ajax({
   type: "POST",
   url: "do_add_multiple.php?SourceID="+sourceid+"&SiteID="+siteid+"&VariableID="+variableid+"&MethodID="+methodid+"&value="+value1+"&datepicker="+date+"&timepicker="+time
@@ -811,8 +861,10 @@ $.ajax({
   if(msg==1)
   {
 	  ajax_count=ajax_count+1;
- if(ajax_count==final_rows)
+ if(ajax_count==valid_rows)
  {
+	 
+	 
 	 alert("Data successfully added");
 	  window.location.href = "add_multiple_values.php";
 	  return true;
@@ -829,7 +881,9 @@ $.ajax({
   }
  });
 
+}
 
+}
 
 }
 
