@@ -32,7 +32,7 @@ alert("If you have forgotten your password," + '\n' + "please contact your direc
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning Banner" /></td>
   </tr>
   <tr>
-    <td colspan="2" bgcolor="#3c3c3c">&nbsp;</td>
+    <td colspan="2" align="right" valign="middle" bgcolor="#3c3c3c"><script src="js/header.js"></script></td>
   </tr>
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6">
