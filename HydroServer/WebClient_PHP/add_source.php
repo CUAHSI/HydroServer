@@ -127,7 +127,7 @@ $("#MetadataChoice1").click(function() {
         <tr>
           <td valign="top"><strong>Link to Org:</strong></td>
           <td colspan="2" valign="top"><input type="text" id="SourceLink" name="SourceLink" size="35" style="background-color:#9FF" maxlength="200"/>
-          &nbsp;<span class="em">(Ex: http://www.mossidaho.org) (Optional)</span></td>
+          &nbsp;<span class="em">(Optional, Ex: http://www.mossidaho.org)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -253,7 +253,7 @@ $("#MetadataChoice1").click(function() {
         <tr>
           <td valign="top"><strong>Citation:</strong></td>
           <td colspan="2" valign="top"><input type="text" id="Citation" name="Citation" size="35" style="background-color:#9FF" maxlength="100"/>
-            &nbsp;<span class="em">(Ex: Data collected by MOSS scientists and citizen scie...) (Optional)</span></td>
+            &nbsp;<span class="em">(Optional, Ex: Data collected by MOSS scientists and citizen scie...)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
@@ -309,7 +309,7 @@ $("#MetadataChoice1").click(function() {
         <tr>
           <td valign="top"><strong>Abstract:</strong></td>
           <td colspan="2" valign="top"><input type="text" id="Abstract" name="Abstract" size="35" style="background-color:#9FF" maxlength="250"/>
-          &nbsp;<span class="em">(Ex: High school students/citizen scientists collecting...) (Optional)</span></td>
+          &nbsp;<span class="em">(Optional, Ex: High school students/citizen scientists collecting...)</span></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
