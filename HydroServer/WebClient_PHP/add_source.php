@@ -334,7 +334,7 @@ $("#MetadataChoice1").click(function() {
         
         </div>
         <tr>
-          <td colspan="2" valign="top"><center><input type="SUBMIT" name="submit" value="Add New Source" /></center></td>
+          <td colspan="2" valign="top"><center><input type="SUBMIT" name="submit" value="Add New Source" class="button" /></center></td>
           <td valign="top">&nbsp;</td>
           </tr>
       </table></FORM>
