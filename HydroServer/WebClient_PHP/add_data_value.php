@@ -223,7 +223,7 @@ xmlhttp.send();
           </tr>
         <tr>
           <td width="55" valign="top">&nbsp;</td>
-          <td valign="top"><input type="SUBMIT" name="submit" value="Submit Your Data" /></td>
+          <td valign="top"><input type="SUBMIT" name="submit" value="Submit Your Data" class="button" /></td>
           </tr>
       </table>
     </FORM></p>
