@@ -668,7 +668,7 @@ xmlhttp.send();
       </table>
       </blockquote>
       <br/>
-      <center><input type="SUBMIT" name="submit" value="Submit Your Data" /></center>
+      <center><input type="SUBMIT" name="submit" value="Submit Your Data" class="button" /></center>
         
       </FORM><blockquote>
       <p>**<strong>Formating Notes:</strong><br />
