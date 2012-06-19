@@ -118,7 +118,7 @@ alert("If you do not see your METHOD listed here," + '\n' + "please contact your
 <script type="text/javascript">
 function showSites(str){
 
-document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png'></a>";
+document.getElementById("txtHint").innerHTML="<a href='#' onClick='show_answer()' border='0'><img src='images/questionmark.png' border='0'></a>";
 
 if (str=="")
   {
@@ -171,7 +171,7 @@ xmlhttp.send();
           </tr>
         <tr>
           <td valign="top"><strong>Site:</strong></td>
-          <td valign="top"><div id="txtHint"><select name="" id=""><option value="">Select....</option></select> <a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png"></a></div> 
+          <td valign="top"><div id="txtHint"><select name="" id=""><option value="">Select....</option></select> <a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png" border="0"></a></div> 
 </td>
           </tr>
         <tr>
@@ -189,7 +189,7 @@ xmlhttp.send();
         <tr>
           <td valign="top"><strong>Method:</strong></td>
           <td valign="top"><select name="MethodID" id="MethodID">
-            <option value="">Select....</option><?php echo "$option_block4"; ?></select> <a href="#" onClick="show_answer2()" border="0"><img src="images/questionmark.png"></a></td>
+            <option value="">Select....</option><?php echo "$option_block4"; ?></select> <a href="#" onClick="show_answer2()" border="0"><img src="images/questionmark.png" border="0"></a></td>
           </tr>
         <tr>
           <td valign="top">&nbsp;</td>
