@@ -621,10 +621,10 @@ $("#jqxgrid").bind("cellclick", function (event) {
 <body background="images/bkgrdimage.jpg">
 <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td colspan="6"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>
+    <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>
   </tr>
   <tr>
-    <td colspan="6" bgcolor="#3c3c3c">&nbsp;</td>
+    <td colspan="2" align="right" valign="middle" bgcolor="#3c3c3c"><script src="js/header.js"></script></td>
   </tr>
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
