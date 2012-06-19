@@ -11,7 +11,7 @@ elseif ($_COOKIE[power] == "teacher"){
 	$selection = "<select name=authority id=authority><option value=>Select....</option><option value=teacher>Teacher</option><option value=student>Student</option></select>";
 	}
 elseif ($_COOKIE[power] == "student"){
-	header("Location: unauthorized.php");
+	header("Location: index.php?state=pass2");
 	exit;	
 	}
 
@@ -23,7 +23,10 @@ elseif ($_COOKIE[power] == "student"){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
+<!-- JQuery JS -->
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript" src="js/create_username.js"></script>
 </head>
 
 <body background="images/bkgrdimage.jpg">
@@ -39,11 +42,11 @@ elseif ($_COOKIE[power] == "student"){
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
       <h1>Add a new user</h1>
       <p>&nbsp;</p>
-      <FORM METHOD="POST" ACTION="do_adduser.php">
+      <FORM METHOD="POST" ACTION="do_adduser.php" name="newuser">
       <table width="600" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="95" valign="top"><strong>First Name:</strong></td>
-          <td width="175" valign="top"><input type="text" name="firstname" size=25 maxlength=50 /></td>
+          <td width="175" valign="top"><input type="text" id="firstname" name="firstname" size=25 maxlength=50 onBlur="GetFirstLetter()"/></td>
           <td width="330" valign="top">&nbsp;</td>
         </tr>
         <tr>
@@ -53,7 +56,7 @@ elseif ($_COOKIE[power] == "student"){
         </tr>
         <tr>
           <td width="95" valign="top"><strong>Last Name:</strong></td>
-          <td valign="top"><input type="text" name="lastname" size=25 maxlength=50 /></td>
+          <td valign="top"><input type="text" id="lastname" name="lastname" size=25 maxlength=50 onBlur="GetLastName()"/></td>
           <td valign="top">&nbsp;</td>
         </tr>
         <tr>
@@ -63,7 +66,7 @@ elseif ($_COOKIE[power] == "student"){
         </tr>
         <tr>
           <td width="95" valign="top"><strong>Username:</strong></td>
-          <td valign="top"><input type="text" name="username" size=25 maxlength=25 />
+          <td valign="top"><input type="text" id="username" name="username" size=25 maxlength=25 />
           <div class="em"></div></td>
           <td valign="top"><span class="em">&nbsp;(First initial and last name; ex: &quot;jdoe&quot; for John Doe)</span></td>
         </tr>
