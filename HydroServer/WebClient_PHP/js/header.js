@@ -1,0 +1,1 @@
+document.write("<font color=#FFFFFF face=Arial, Helvetica, sans-serif size=2><i><a href='http://www.adventurelearningat.com' class='button2'>Back to the MOSS blog</a></i></font>");
