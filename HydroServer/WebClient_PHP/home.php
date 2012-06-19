@@ -1,9 +1,4 @@
 <?php
-//check for required fields
-if ((!$_POST['username']) || (!$_POST['password'])) {
-	header("Location: incorrectlogin.php");
-	exit;
-}
 
 //connect to server and select database
 require_once 'database_connection.php';
@@ -23,7 +18,7 @@ $num = mysql_num_rows($result);
 		}
 		$msg ="<h1>Welcome, $firstname!</h1>";
 	} else {
-		header("Location: incorrectlogin.php");
+		header("Location: index.php?state=pass");
 		exit;
 	}
 
@@ -55,7 +50,7 @@ elseif ($auth == "student"){
 	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 else {
-	header("Location: unauthorized.php");
+	header("Location: index.php?state=pass2");
 	exit;	
 	}
 
