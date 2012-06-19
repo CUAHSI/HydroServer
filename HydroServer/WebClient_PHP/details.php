@@ -697,7 +697,7 @@ echo("<p align='center'><b>Site: </b>".$row['SiteName']."</p>");
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="4"><div id="loadingtext" class="loading">Please Wait..Data is loading<br/>
+          <td colspan="4"><div id="loadingtext" class="loading">Please Wait....Data is loading....<br/>
     </div>
   <div id='jqxtabs'>
     <ul style='margin-left: 20px;'>
@@ -716,7 +716,7 @@ $siteid = $_GET['siteid'];
 $query .= " WHERE SiteID=".$siteid;
 
 $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-echo("<br/><br/><b>Measurements made at this site: </b>");
+echo("<br/><br/><b>Measurements taken here: </b>");
 $num_rows = mysql_num_rows($result);
 $count=1;
 while($row = mysql_fetch_array($result, MYSQL_ASSOC))
@@ -731,8 +731,10 @@ if($row['VariableName']!="")
 	}
 
 ?>    
-<br/><br/>Please select the variable and other details from the above options<br/><br/>
-Selected the wrong site? No worries! Click <a href="view_main.php" style="color:#00F">here</a> to go back to the map </div>
+<br/><br/>
+Please select the variable and other details from the above options before clicking the Data Plot or Data Table tabs above.
+<br/><br/>
+Selected the wrong site? No worries! Click <a href="view_main.php" style="color:#00F">here</a> to go back to the map. </div>
     <div>
    
       <div id="container" style="height: 400px"></div>
