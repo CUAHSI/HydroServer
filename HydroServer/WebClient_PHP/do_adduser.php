@@ -19,7 +19,7 @@ $result = @mysql_query($sql,$connection)or die(mysql_error());
 //get a good message for display upon success
 if ($result) {
 
-$msg ="<p class=em2>Congratulations, you're registered $_POST[firstname]. Would you like to add another?</p>";
+$msg ="<p class=em2>Congratulations, you've registered $_POST[firstname]. Would you like to add another?</p>";
 }
 
 //Display the appropriate user authority to add depending on the user's authority
