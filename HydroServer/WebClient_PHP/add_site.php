@@ -130,7 +130,11 @@ else
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
-
+<script type="text/javascript">
+function show_answer(){
+alert("The current version of this software" + '\n' + "does not autmatically select the State and County. " + '\n' + "Please select them mannually.");
+}
+</script>
 <!-- JQuery JS -->
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
@@ -480,7 +484,7 @@ display: none;
         <option value="WV">West Virginia</option>
         <option value="WI">Wisconsin</option>
         <option value="WY">Wyoming</option>
-    </select></td>
+    </select>&nbsp;<a href="#" onClick="show_answer()" border="0"><img src="images/questionmark.png" border="0"></a></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
