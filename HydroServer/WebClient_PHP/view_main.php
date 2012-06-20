@@ -9,11 +9,8 @@ require_once 'authorization_check2.php';
 <head>
 <title>HydroServer Lite Web Client</title>
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
-<script src="http://maps.google.com/maps/api/js?sensor=true"
-            type="text/javascript"></script>
-    
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
-            type="text/javascript"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC3d042tZnUAA8256hCC2Y6QeTSREaxrY0&sensor=true"></script>    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
             
             
 	<script type="text/javascript">
