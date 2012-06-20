@@ -5,17 +5,12 @@ $m=$_GET["m"];
 //connect to server and select database
 require_once 'db_config.php';
 
-
-
 $query = "SELECT MethodID FROM varmeth WHERE VariableID='".$m."'";
 
 $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
 
-	
-
 
 //filter the Type results after Site is selected
-
 
 $row2 = mysql_fetch_array ($result);
 $num_m = @mysql_num_rows($result);
