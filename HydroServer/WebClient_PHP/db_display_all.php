@@ -21,6 +21,11 @@ header("Content-type: text/xml");
 
 // Iterate through the rows, adding XML nodes for each
 while ($row = @mysql_fetch_assoc($result)){
+	
+$query1 = "SELECT * FROM seriescatalog WHERE SiteID=".$row['SiteID']." and VariableID='NULL'";
+$result1 = mysql_query($query1);
+	if ($result1) {
+	
   $node = $dom->createElement("marker");
   $newnode = $parnode->appendChild($node);
   $newnode->setAttribute("name", $row['SiteName']);
@@ -30,6 +35,7 @@ while ($row = @mysql_fetch_assoc($result)){
   $newnode->setAttribute("lng", $row['Longitude']);
   $newnode->setAttribute("sitetype", $row['SiteType']);
   $newnode->setAttribute("distance", $dist);
+	}
 }
 
 echo $dom->saveXML();

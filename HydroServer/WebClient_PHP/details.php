@@ -40,6 +40,8 @@ require_once 'authorization_check2.php';
 <script type="text/javascript">
 
 var siteid=<?php echo $_GET['siteid'];?>;
+var glob_df;
+var glob_dt;
 var date_to;
 var date_from;
 var date_select_to;
@@ -294,6 +296,7 @@ var month = parseInt(date_from.slice(5,7),10);
 var day = parseInt(date_from.slice(8,10),10);
 month=month-1;
 var date1 = new Date();
+glob_df=date1;
 date1.setFullYear(year, month, day);
 
 $("#fromdatedrop").jqxDropDownButton({ width: 250, height: 25});
@@ -311,6 +314,8 @@ var day_to = parseInt(date_to.slice(8,10),10);
 //month_to=month_to-1;
 var date2 = new Date();
 date2.setFullYear(year_to, month_to-1, day_to);
+glob_dt=date2;
+
 $('#jqxDateTimeInputto').jqxDateTimeInput('setDate', date2);
 $("#jqxDateTimeInput").jqxDateTimeInput('setMaxDate', new Date(year_to, month_to, day_to)); 
 $("#jqxDateTimeInputto").jqxDateTimeInput('setMaxDate', new Date(year_to, month_to, day_to)); 
@@ -321,7 +326,7 @@ date_to_sql=date2.getFullYear() + '-' + add_zero((date2.getMonth()+2)) + '-' + a
 $("#fromdatedrop").jqxDropDownButton('setContent', "Select start date");
 $("#todatedrop").jqxDropDownButton('setContent', "Select end date");
 
-plot_chart();
+plot_chart();	
 //Binding An Event to the first calender
 
 $('#jqxDateTimeInput').bind('valuechanged', function (event) 
@@ -330,13 +335,15 @@ $('#jqxDateTimeInput').bind('valuechanged', function (event)
 
 var date = event.args.date;
 date_select_from=new Date(date);
+glob_df=date_select_from;
 //Converting to SQL Format for Searching
 
 var date_from_sql2=date_select_from.getFullYear() + '-' + add_zero((date_select_from.getMonth()+1)) + '-' + add_zero(date_select_from.getDate()) + ' 00:00:00';
 //Setting the Second calendar's min date to be the date of the first calendar
 $("#jqxDateTimeInputto").jqxDateTimeInput('setMinDate', date);
-var tempdate=add_zero((date_select_from.getMonth()+1))+'/'+add_zero(date_select_from.getDate())+'/'+date_select_from.getFullYear();
-$("#fromdatedrop").jqxDropDownButton('setContent', tempdate);
+var tempdate2=add_zero((date_select_from.getMonth()+1))+'/'+add_zero(date_select_from.getDate())+'/'+date_select_from.getFullYear();
+
+$("#fromdatedrop").jqxDropDownButton('setContent', tempdate2);
 
 if(date_from_sql!=date_from_sql2)
 {date_from_sql=date_from_sql2;
@@ -348,6 +355,7 @@ $('#jqxDateTimeInputto').bind('valuechanged', function (event) {
 	
 var date = event.args.date;
 date_select_to=new Date(date);
+glob_dt=date_select_to;
 var tempdate=add_zero((date_select_to.getMonth()+1))+'/'+add_zero(date_select_to.getDate())+'/'+date_select_to.getFullYear();
 $("#todatedrop").jqxDropDownButton('setContent', tempdate);
 date_to_sql=date_select_to.getFullYear() + '-' + add_zero((date_select_to.getMonth()+1)) + '-' + add_zero(date_select_to.getDate()) + ' 00:00:00';
@@ -379,18 +387,22 @@ $.ajax({
   type: "GET",
   dataType: "script"
 }).done(function( datatest ) {
-  
+   
+var date_chart_from=glob_df.getFullYear() + '-' + add_zero((glob_df.getMonth()+1)) + '-' + add_zero(glob_df.getDate());
+var date_chart_to=glob_dt.getFullYear() + '-' + add_zero((glob_dt.getMonth()+1)) + '-' + add_zero(glob_dt.getDate());
  
+// var n=str.replace("Microsoft","W3Schools"); 
+  
 // var data_test=datatest;
 
  var chart=new Highcharts.StockChart({
     chart: {
-		width: 620,
+		width: 580,
         renderTo: 'container',
 		 zoomType: 'x'
     },
     title: {
-        text: 'Data of '+sitename+' from '+ date_from_sql + ' to ' + date_to_sql,
+        text: 'Data of '+sitename+' from '+ date_chart_from + ' to ' + date_chart_to,
 		style: {
                 fontSize: '12px'
             }
@@ -436,7 +448,13 @@ $.ajax({
 		
 
 	rangeSelector: {
-                buttons: [{
+                buttons: [
+				{
+                    type: 'day',
+                    count: 1,
+                    text: '1d'
+                },
+				{
                     type: 'day',
                     count: 3,
                     text: '3d'

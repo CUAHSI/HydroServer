@@ -245,8 +245,9 @@ update(location)
 function update(location)
 {
 	
-	$("#Latitude").val(location.lat());
-	$("#Longitude").val(location.lng());
+	
+	$("#Latitude").val(parseFloat(location.lat()).toFixed(5));
+	$("#Longitude").val(parseFloat(location.lng()).toFixed(5));
 
 //Update Elevation
 
@@ -269,7 +270,7 @@ function update(location)
       if (results[0]) {
 
         // Open an info window indicating the elevation at the clicked position
-        $("#Elevation").val(results[0].elevation);
+        $("#Elevation").val(parseFloat(results[0].elevation).toFixed(1));
 	
         
       } else {
