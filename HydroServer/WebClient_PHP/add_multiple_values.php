@@ -95,7 +95,7 @@ alert("If you do not see your METHOD listed here," + '\n' + "please contact your
 <link href="styles/main_css.css" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript">
 
-
+var glob_siteid=1;
 
 //Date Validation Script Begins
 
@@ -352,9 +352,19 @@ var source =
 	
 		var dataAdapter = new $.jqx.dataAdapter(source);
             $(document).ready(function () {
-				
 
-				
+$("#viewdata").click(function() {
+	window.location.href = "details.php?siteid="+glob_siteid;
+	
+});	
+
+
+$("#viewdata2").click(function() {
+	window.location.href = "add_multiple_values.php";
+	
+});	
+
+				$("#statusmsg").hide();
 	
 //Creating the Drop Down list
         $("#VariableID1").jqxDropDownList(
@@ -399,24 +409,6 @@ var source1 =
             valueMember: 'methodid'
         });		
 }
-/*
-if ((item != null)&&(item.label != "Please select a variable")) {		
-
-//Clear the Box
-//$('#daterange').empty();	
-$('#daterange').html("");
-
-
-varname=item.label;
-//varid=item.value;
-
-//Going to the next function that will generate a list of data types available for that variable
-var t=setTimeout("create_var_list()",300)
-
-
-
-}
-*/
 
 //Create 10 rows in the beginning
 
@@ -615,8 +607,14 @@ xmlhttp.send();
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
-      <h1>Enter multiple values manually</h1>
-      <p>Please enter the data in the below table. Don't see enough number of rows? Don't worry! Start entering the values and see the magic happen.</p></blockquote>
+      <h1>Enter multiple values manually      </h1>
+      <p>Please enter the data in the below table. Don't see enough number of rows? Don't worry! Start entering the values and see the magic happen.<div id="statusmsg">
+        <p class=em2>Data Entered successfully.
+        <input type="button" name="viewdata" id="viewdata" value="View data inputed" />
+        <input type="button" name="viewdata2" id="viewdata2" value="Add more data" />
+        </p>
+      </div></blockquote>
+    
       <FORM METHOD="POST" ACTION="" name="addvalue">
       <blockquote><table width="450" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -839,6 +837,7 @@ else
 
 var sourceid=$("#SourceID option:selected").val();
 var siteid=$("#SiteID option:selected").val();
+glob_siteid=siteid;
 checkid='VariableID'+j;
 item = $('#' + checkid).jqxDropDownList('getSelectedItem'); 
 var variableid=item.value;
@@ -865,15 +864,19 @@ $.ajax({
  {
 	 
 	 
-	 alert("Data successfully added");
-	  window.location.href = "add_multiple_values.php";
+	 $("#statusmsg").show(1200);
+	 //Clear out all the data inputed. and create two new rows
+	 
+	  $("#multiple").find("tr:gt(0)").remove();
+	
+
 	  return true;
 	
  }
   temp_result=1;
   }
   else
-  {
+  {alert(msg);
 	  temp_result=-1;
 	   alert("Error in database configuration");
   return false;
