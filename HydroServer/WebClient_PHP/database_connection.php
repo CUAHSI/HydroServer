@@ -1,5 +1,5 @@
 <?php
-require 'wc_config.php';
+require 'main_config.php';
   
   $connection = mysql_connect(DATABASE_HOST, DATABASE_USERNAME, DATABASE_PASSWORD)
     or die("<p>Error connecting to database: " . 

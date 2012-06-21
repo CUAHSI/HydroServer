@@ -1,11 +1,8 @@
 <?php
 
-//Establish default values for new MOSS site
-$LocalX ='NULL';
-$LocalY ='NULL';
-$LocalProjectionID ='NULL';
-$PosAccuracy_m ='NULL';
 
+
+require_once 'main_config.php';
 
 //create next increment SiteID in the table
 $next_increment ="0";
