@@ -1,17 +1,6 @@
 <?php
 
-//Establish default values for MOSS' data variables
-$UTCOffset = -7; 
-$UTCOffset2 = 7; // Actually it is -7
-$CensorCode ='nc';
-$QualityControlLevelID = 0;
-$ValueAccuracy ='NULL'; 
-$OffsetValue ='NULL';
-$OffsetTypeID ='NULL';
-$QualifierID =1;
-$SampleID ='NULL';
-$DerivedFromID ='NULL';
-
+require_once 'main_config.php';
 
 //create next increment ValueID in the table
 $next_increment ="0";

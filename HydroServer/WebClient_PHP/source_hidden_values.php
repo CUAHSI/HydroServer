@@ -1,7 +1,6 @@
 <?php
 
-//Establish default values for MOSS' source info
-$ProfileVersion = 'ISO 19115'; 
+require 'main_config.php';
 
 //create next increment SourceID in the table
 $next_increment ="0";

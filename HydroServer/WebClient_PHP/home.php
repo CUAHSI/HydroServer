@@ -2,7 +2,7 @@
 
 //connect to server and select database
 require_once 'database_connection.php';
-
+require_once 'main_config.php';
 //build and issue the query
 $sql ="SELECT * FROM moss_users WHERE username='$_POST[username]' AND password= password('$_POST[password]')";
 
@@ -30,7 +30,7 @@ if ($auth == "admin"){
 	$cookie_name = "power";
 	$cookie_value = $auth;
 	$cookie_expire = time()+14400;
-	$cookie_domain = "adventurelearningat.com";
+	$cookie_domain = $www;
 	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 elseif ($auth == "teacher"){
@@ -38,7 +38,7 @@ elseif ($auth == "teacher"){
 	$cookie_name = "power";
 	$cookie_value = $auth;
 	$cookie_expire = time()+14400;
-	$cookie_domain = "adventurelearningat.com";
+	$cookie_domain = $www;
 	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 elseif ($auth == "student"){
@@ -46,7 +46,7 @@ elseif ($auth == "student"){
 	$cookie_name = "power";
 	$cookie_value = $auth;
 	$cookie_expire = time()+14400;
-	$cookie_domain = "adventurelearningat.com";
+	$cookie_domain = $www;
 	setcookie($cookie_name, $cookie_value, $cookie_expire, "/", $cookie_domain, 0);
 	}
 else {
@@ -69,7 +69,7 @@ else {
     <td colspan="2"><img src="images/WebClientBanner.png" width="960" height="200" alt="Adventure Learning banner" /></td>
   </tr>
   <tr>
-    <td colspan="2" align="right" valign="middle" bgcolor="#3c3c3c"><script src="js/header.js"></script></td>
+    <td colspan="2" align="right" valign="middle" bgcolor="#3c3c3c"><?php require_once 'header.php'; ?></td>
   </tr>
   <tr>
     <td width="240" valign="top" bgcolor="#f2e6d6"><?php echo "$nav"; ?></td>

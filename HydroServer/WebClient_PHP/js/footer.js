@@ -1,1 +1,1 @@
-document.write("<td colspan=2 bgcolor=#0971B3><center><font color=#FFFFFF face=Arial, Helvetica, sans-serif size=2><i>Consortium of Universities for the Advancement of Hydrologic Sciences. Copyright &copy; 2012. All Rights Reserved.</i></font></center></td>");
+document.write("<td colspan=2 bgcolor=#0971B3><center><font color=#FFFFFF face=Arial, Helvetica, sans-serif size=2><i>Copyright &copy; 2012. Hydroserver Lite. All Rights Reserved. <a href='devteam.php'>Meet the Developers</a></i></font></center></td>");

@@ -158,3 +158,30 @@ td {
 	-o-transition: all 1s ease-in-out 0.1s;
 	transition: all 1s ease-in-out 0.1s;
 }
+
+.button2 {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	-moz-box-shadow: inset 0px 0px 0px 0px #bbdaf7;
+	-webkit-box-shadow: inset 0px 0px 0px 0px #bbdaf7;
+	box-shadow: inset 0px 0px 0px 0px #bbdaf7;
+	background-color:#33F;
+	-moz-border-radius: 17px;
+	-webkit-border-radius: 17px;
+	border-radius: 17px;
+	display: inline-block;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px 11px;
+	text-decoration: none;
+	behavior: url(styles/PIE.htc);
+	text-align: left;	
+	position:relative;
+		behavior: url(styles/PIE.php);
+}
+
+.button2:hover {
+	background-color:#50BFF5;
+}
