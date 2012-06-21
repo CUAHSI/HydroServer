@@ -315,12 +315,19 @@ var long = markerNodes[i].getAttribute("lng");
     <td width="720" valign="top" bgcolor="#FFFFFF"><blockquote><br />
          <table width="630" border="0">
            <tr>
-             <td>Please enter a location to search data collection sites nearby or hit the button "Find sites near me!" to show sites near (300 mile radius) your present geographic location.</td>
+             <td>Please enter a location to search data collection sites nearby or hit the button "Find sites near me!" to show sites near (300 mile radius) your present geographic location.(Note: Sites in which there is no data will NOT be displayed below)</td>
            </tr>
            <tr>
              <td>&nbsp;</td>
            </tr>
+         
            <tr>
+             <td width="630" height="450"><div id="map" style="width:100%; height:100%"></div></td>
+           </tr>
+            <tr>
+             <td>&nbsp;</td>
+           </tr>
+            <tr>
              <td><input type="text" id="addressInput" size="10"/>
                <select name="radiusSelect" id="radiusSelect">
                  <option value="25" selected>25mi</option>
@@ -335,18 +342,15 @@ var long = markerNodes[i].getAttribute("lng");
                <input type='button' onClick="loadall()" value="Reset Search"/>
              <input type='button' onClick="track_loc()" value="Find sites near me!"/></td>
            </tr>
+           
            <tr>
              <td>&nbsp;</td>
            </tr>
-           <tr>
+             <tr>
              <td><div><select name="locationSelect" id="locationSelect" style="width:100%;visibility:hidden"></select></div></td>
            </tr>
-           <tr>
-             <td>&nbsp;</td>
-           </tr>
-           <tr>
-             <td width="630" height="450"><div id="map" style="width:100%; height:100%"></div></td>
-           </tr>
+           
+           
          </table>
     </blockquote>
       	 <p>&nbsp;</p>
