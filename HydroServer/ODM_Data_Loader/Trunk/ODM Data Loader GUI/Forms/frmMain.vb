@@ -70,7 +70,8 @@ Public Class frmMain
                                 LogPath = tempLog
                             End If
                         Else
-                            LogPath = dirPath & "\" & tempLog
+                            'LogPath = dirPath & "\" & tempLog
+                            LogPath = tempLog
                         End If
                     Case Else
                         Dim tempError As String = _

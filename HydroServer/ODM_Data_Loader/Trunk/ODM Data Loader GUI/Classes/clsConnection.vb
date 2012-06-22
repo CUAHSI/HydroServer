@@ -478,15 +478,12 @@ Class clsConnection
             dataAdapter.SelectCommand.Transaction = trans
 
             'get the table from the database
-            
-
-            ' stTime = DateTime.Now
-
+            'stTime = DateTime.Now
 
             dataAdapter.Fill(table)
 
             'endTime = DateTime.Now
-            ' writer.WriteLine(tableName & " time taken: " & (endTime - stTime).ToString()) 'Testing Only!
+            'writer.WriteLine(tableName & " time taken: " & (endTime - stTime).ToString()) 'Testing Only!
             'MsgBox(tableName & " time taken: " & (endTime - stTime).ToString()) 'Testing Only!
 
             dataAdapter = Nothing
