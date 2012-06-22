@@ -180,7 +180,7 @@ Class clsSamples
                         'All of the alternative LabMethod fields are specified and are not empty so test to make sure a corresponding record exists in the LabMethods table
                         Dim LabMethodRows() As DataRow = LabMethods.Select(db_fld_LabName & " = '" & Replace(System.Text.RegularExpressions.Regex.Replace(fileRow.Item(file_Samples_LabName), "[\t\r\v\f\n]", ""), "'", "''") & "' AND " & db_fld_LabOrganization & " = '" & Replace(System.Text.RegularExpressions.Regex.Replace(fileRow.Item(file_Samples_LabOrganization), "[\t\r\v\f\n]", ""), "'", "''") & "' AND " & db_fld_LabMethodName & " = '" & Replace(System.Text.RegularExpressions.Regex.Replace(fileRow.Item(file_Samples_LabMethodName), "[\t\r\v\f\n]", ""), "'", "''") & "' AND " & db_fld_LabMethodDescription & " = '" & Replace(fileRow.Item(file_Samples_LabMethodDescription), "'", "''") & "'")
                         If (LabMethodRows.Length > 0) Then
-                            tempRow.Item(db_fld_LabMethodID) = Val(LabMethodRows(LabMethodRows.Length).Item(db_fld_LabMethodID))
+                            tempRow.Item(db_fld_LabMethodID) = Val(LabMethodRows(LabMethodRows.Length - 1).Item(db_fld_LabMethodID))
                         Else
                             'There is no record in the LabMethods table that matches the information that they have given
                             'Throw New Exception("ROW # " & (i+1) & ": " & "Cannot find an associated LabMethod record in the LabMethods table for the information given.")

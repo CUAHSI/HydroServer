@@ -327,7 +327,7 @@ Class clsDataValues
             End If
 
             'Load The Table Template Here
-            valid = m_Connection.OpenTable(connect, trans, db_tbl_DataValues, "SELECT * FROM " & db_tbl_DataValues & " WHERE " & db_tbl_DataValues & "." & db_fld_ValueID & " <> " & db_tbl_DataValues & "." & db_fld_ValueID)
+            valid = m_Connection.OpenTable(connect, trans, db_tbl_DataValues, "SELECT TOP 0 * FROM " & db_tbl_DataValues) '& " WHERE " & db_tbl_DataValues & "." & db_fld_ValueID & " <> " & db_tbl_DataValues & "." & db_fld_ValueID)
             If (valid Is Nothing) OrElse (valid.Rows.Count > 0) Then
                 Throw New Exception("Error Getting Database Schema")
             End If

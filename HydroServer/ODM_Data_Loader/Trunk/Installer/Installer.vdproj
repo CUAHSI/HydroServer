@@ -330,7 +330,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Data Loader 1.1.6.1"
+        "ProductName" = "8:ODM Data Loader 1.1.6.2"
         "ProductCode" = "8:{0173AB53-D576-421D-A123-CD666EC1B0A1}"
         "PackageCode" = "8:{B3C724A4-67B5-4447-AD87-025E79E72C2B}"
         "UpgradeCode" = "8:{B3619D6E-AE69-4E35-AFF4-8B2BD9D950AB}"
@@ -467,7 +467,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9624BB8BCC3C440296CE884FE0D59120"
             {
-            "Name" = "8:ODM DL 1.1.6 Wizard"
+            "Name" = "8:ODM DL 1.1.6.2 Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -481,7 +481,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C15D35F33E0047CD812979750CBD340D"
             {
-            "Name" = "8:ODM DL 1.1.6.1"
+            "Name" = "8:ODM DL 1.1.6.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1030,7 +1030,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_73027A305D3941F49B7FD02D1B2EA4D0"
             {
-            "SourcePath" = "8:..\\AddNewPath\\obj\\Debug\\AddNewPath.dll"
+            "SourcePath" = "8:..\\AddNewPath\\obj\\Release\\AddNewPath.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B8707195AA241168E9AF02920B35157"
@@ -1058,7 +1058,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DB56D9B9C47B4CA3B25F9DD6FDD5F19C"
             {
-            "SourcePath" = "8:..\\ODM Data Loader GUI\\obj\\Debug\\ODMLoader.exe"
+            "SourcePath" = "8:..\\ODM Data Loader GUI\\obj\\Release\\ODMLoader.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B8707195AA241168E9AF02920B35157"
@@ -1114,7 +1114,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EE5A2179B82A425781E05E7B82A430D7"
             {
-            "SourcePath" = "8:..\\Simple Wizard\\obj\\Debug\\Simple Wizard.exe"
+            "SourcePath" = "8:..\\Simple Wizard\\obj\\Release\\Simple Wizard.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B8707195AA241168E9AF02920B35157"
