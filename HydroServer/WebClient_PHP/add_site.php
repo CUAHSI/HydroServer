@@ -300,15 +300,13 @@ geocoder.geocode({'latLng': latlng1}, function(results, status) {
       }
     });
 
-
-
 }
  
 //Function to run on form submission to implement a validation and then run an ajax request to post the data to the server and display the message that the site has been added successfully
 
-
-
- 
+function TrainingAlert(){
+	alert("To automatically enter the latitude, longitude, and elevation, simply double click the location on the map. Once the marker is placed on the map, you may then click and drag it to the exact location you desire to adjust the results to be more accurate."); 
+} 
     </script>
 
 <STYLE TYPE="text/css">
@@ -370,7 +368,7 @@ display: none;
         </tr>
         <tr>
           <td><strong>Site Type:</strong></td>
-          <td><select name="SiteType" id="SiteType">
+          <td><select name="SiteType" id="SiteType" onChange="TrainingAlert()">
             <option value="-1">Select....</option>
             <?php echo "$option_block2"; ?>
           </select></td>
