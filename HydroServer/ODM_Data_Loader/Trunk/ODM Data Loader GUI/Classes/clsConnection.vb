@@ -429,7 +429,7 @@ Class clsConnection
     End Sub
 
     Public Function IncrementTimeout() As Boolean
-        'Increments the Timeout setting by 1 as long as it is <= 15
+        'Increments the Timeout setting by 1 as long as it is <= 30
         'Then regenerates the conntection string 
         'Output:    Returns True if m_timeout is not too high
         If Timeout <= 30 Then
@@ -476,7 +476,7 @@ Class clsConnection
             'connect to the Database
             dataAdapter = New SqlClient.SqlDataAdapter(sqlQuery, conn)
             dataAdapter.SelectCommand.Transaction = trans
-
+            dataAdapter.SelectCommand.CommandTimeout = 9000
             'get the table from the database
             'stTime = DateTime.Now
 
@@ -501,7 +501,8 @@ Class clsConnection
                 If IncrementTimeout() Then
                     'My.Settings.Timeout = settings.Timeout
                     'My.Settings.Save()
-                    Return OpenTable(conn, trans, tableName, sqlQuery)
+                    OpenTable(conn, trans, tableName, sqlQuery)
+                    Return Nothing
                 Else
                     LogError(ex)
                 End If
@@ -538,6 +539,7 @@ Class clsConnection
             'create the updateAdapter,commandBuilder
             updateAdapter = New SqlClient.SqlDataAdapter(query, conn)
             updateAdapter.SelectCommand.Transaction = trans
+            updateAdapter.SelectCommand.CommandTimeout = 9000
             commandBuilder = New SqlClient.SqlCommandBuilder(updateAdapter)
             If (table.Columns(0).ColumnName.EndsWith("ID")) And (table.Columns(0).ColumnName <> "GroupID") And (table.Columns(0).ColumnName <> "DerivedFromID") Then
                 Dim insert As SqlClient.SqlCommand = commandBuilder.GetInsertCommand
