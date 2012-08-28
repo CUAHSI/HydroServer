@@ -404,7 +404,7 @@ Public Class clsConnection
 
 #Region " Connection String Functions "
 
-    Public Sub New(Optional ByVal e_ServerAddress As String = "", Optional ByVal e_DBName As String = "", Optional ByVal e_Timeout As Integer = 1, Optional ByVal e_Trusted As Boolean = False, Optional ByVal e_UserID As String = "", Optional ByVal e_Password As String = "")
+    Public Sub New(Optional ByVal e_ServerAddress As String = "", Optional ByVal e_DBName As String = "", Optional ByVal e_Timeout As Integer = 10, Optional ByVal e_Trusted As Boolean = False, Optional ByVal e_UserID As String = "", Optional ByVal e_Password As String = "")
         'Create a new set of connection settings with the specified parameters (if any are specified)
         m_ServerAddress = e_ServerAddress
         m_DBName = e_DBName
@@ -418,11 +418,11 @@ Public Class clsConnection
     End Sub
 
     Public Function IncrementTimeout() As Boolean
-        'Increments the Timeout setting by 1 as long as it is <= 15
+        'Increments the Timeout setting by 10 as long as it is <= 60
         'Then regenerates the conntection string 
         'Output:    Returns True if m_timeout is not too high
-        If Timeout <= 30 Then
-            m_Timeout = m_Timeout + 1
+        If Timeout <= 60 Then
+            m_Timeout = m_Timeout + 10
             SetConnectionString()
             Return True
         Else

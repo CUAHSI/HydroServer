@@ -479,7 +479,7 @@ Module modDatabase
             'connect to the Database
 
             dataAdapter = New SqlClient.SqlDataAdapter(sqlQuery, settings.ConnectionString) 'New OleDb.OleDbDataAdapter(sqlQuery, settings.ConnectionString)
-            'dataAdapter.SelectCommand.CommandTimeout = 9000
+            dataAdapter.SelectCommand.CommandTimeout = 9000
             'get the table from the database
             dataAdapter.Fill(table)
             dataAdapter = Nothing
