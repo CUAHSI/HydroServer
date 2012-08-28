@@ -463,7 +463,11 @@ Public Class ucCVMerge
                     End If
                 Next currWRow
                 'Changes and Additions
+                Dim i As Integer = 0
                 For Each currWRow As DataRow In WebTable.Rows
+
+                    'Console.WriteLine(i.ToString)
+                    i = i + 1
                     If (currWRow.RowState <> DataRowState.Deleted) AndAlso (currWRow.RowError <> match) Then
                         fndRows = LocalTable.Select(db_fld_CV_Term & " = '" & FormatForDB(currWRow.Item(db_fld_CV_Term).ToString) & "'")
                         If (fndRows.Length = 1) AndAlso (matches(LocalTable.Rows.IndexOf(fndRows(0))) = False) Then
@@ -471,8 +475,12 @@ Public Class ucCVMerge
                             fndRows(0).Item(db_fld_CV_Definition) = currWRow.Item(db_fld_CV_Definition)
                             changes = True
                         Else
+                            Console.WriteLine(currWRow.Item(db_fld_CV_Definition).ToString)
                             fndRows = LocalTable.Select(db_fld_CV_Definition & " = '" & FormatForDB(currWRow.Item(db_fld_CV_Definition).ToString) & "'")
-                            If (fndRows.Length = 1) AndAlso (matches(LocalTable.Rows.IndexOf(fndRows(0))) = False) Then
+                            If (fndRows.Length = 1) AndAlso LocalTable.Rows.IndexOf(fndRows(0)) <= matches.Length AndAlso (matches(LocalTable.Rows.IndexOf(fndRows(0))) = False) Then
+                                'If (fndRows.Length = 1) AndAlso (matches(LocalTable.Rows.IndexOf(fndRows(0))) = False) Then
+
+                                Console.WriteLine(LocalTable.Rows.IndexOf(fndRows(0)).ToString)
                                 matches(LocalTable.Rows.IndexOf(fndRows(0))) = True
 
                                 Dim newLocalRow As DataRow = LocalTable.NewRow
@@ -496,6 +504,7 @@ Public Class ucCVMerge
                                 changes = True
                             End If
                         End If
+
                     End If
                 Next currWRow
                 'Deletions
