@@ -20,11 +20,6 @@ C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM Tools.exe.manifest
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM Tools.exe
 C:\DEV\ODM\HydroServer2-8-2012\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM Tools.xml
-C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\ODM Tools.exe.config
-C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM Tools.exe
-C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM Tools.xml
-C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\ODM Tools.exe
-C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\ODM Tools.xml
 C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\ODM CVUpdate.dll
 C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\VBEnumerator.dll
 C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\ZedGraph.dll
@@ -64,3 +59,8 @@ C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM_Tools.frmCreate
 C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM_Tools.frmProgress.resources
 C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM_Tools.Resources.resources
 C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM_Tools1_1.vbproj.GenerateResource.Cache
+C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\ODM_Tools.exe.config
+C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\ODM_Tools.exe
+C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\bin\Release\ODM_Tools.xml
+C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM_Tools.exe
+C:\DEV\ODM\HydroServer\ODM_Tools\Trunk\ODM_Tools\obj\Release\ODM_Tools.xml

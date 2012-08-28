@@ -415,7 +415,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Tools 1.1.3.1"
+        "ProductName" = "8:ODM Tools 1.1.3.2"
         "ProductCode" = "8:{DFE5C6F1-1994-42CD-B222-61769F75FD79}"
         "PackageCode" = "8:{F1F8F309-0476-493E-A5FD-E9865B4C15BF}"
         "UpgradeCode" = "8:{4EC09388-349A-41C5-B07C-EA75B3B0261F}"
@@ -427,7 +427,7 @@
         "Manufacturer" = "8:CUAHSI HIS"
         "ARPHELPTELEPHONE" = "8:(435) 797-7176"
         "ARPHELPLINK" = "8:http://his.cuahsi.org/"
-        "Title" = "8:ODM Tools 1.1.3.1"
+        "Title" = "8:ODM Tools 1.1.3.2"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Utah Water Research Laboratory"
         "Keywords" = "8:"
@@ -538,7 +538,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3F7029EEDE394B45B36C4864B9785BEE"
             {
-            "Name" = "8:ODM Tools 1.1.3.1"
+            "Name" = "8:ODM Tools 1.1.3.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -552,7 +552,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A9375652B899460D8928822F7DF2D5FF"
             {
-            "Name" = "8:ODM Tools 1.1.3.1"
+            "Name" = "8:ODM Tools 1.1.3.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1087,7 +1087,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7F7F513BBCA4417E963511B41F379106"
             {
-            "SourcePath" = "8:..\\ODM_CVUpdateDLL\\obj\\Release\\ODM CVUpdate.dll"
+            "SourcePath" = "8:..\\ODM_CVUpdateDLL\\obj\\Debug\\ODM CVUpdate.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_97128F5AB98D422E9F644FDABBDE73ED"
@@ -1115,7 +1115,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BA683F70B84D468F80CCE09DFDBBB392"
             {
-            "SourcePath" = "8:..\\ODM_Tools\\obj\\Release\\ODM Tools.exe"
+            "SourcePath" = "8:..\\ODM_Tools\\obj\\Debug\\ODM_Tools.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_97128F5AB98D422E9F644FDABBDE73ED"
