@@ -1,0 +1,27 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>publish\</PublishUrlHistory>
+    <InstallUrlHistory>
+    </InstallUrlHistory>
+    <SupportUrlHistory>
+    </SupportUrlHistory>
+    <UpdateUrlHistory>
+    </UpdateUrlHistory>
+    <BootstrapperUrlHistory>
+    </BootstrapperUrlHistory>
+    <ErrorReportUrlHistory>
+    </ErrorReportUrlHistory>
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartArguments>"C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\ODM Data Loader GUI\bin\Debug\ODMLoader.exe" -server (local) -db LittleBear11 -user ODM -enc "1 0 0 0 D0 8C 9D DF 1 15 D1 11 8C 7A 0 C0 4F C2 97 EB 1 0 0 0 2E C 20 3B 2C 84 6B 43 AB 7A C5 E 64 A3 6 66 0 0 0 0 2 0 0 0 0 0 10 66 0 0 0 1 0 0 20 0 0 0 B2 3 2C 11 85 50 9C 1C C6 C9 5A BF 51 81 28 55 0 49 F7 80 37 B E3 10 23 F2 D9 0 B4 54 9 B3 0 0 0 0 E 80 0 0 0 2 0 0 20 0 0 0 6D 5F F3 55 F4 E6 8A 3B 51 53 EF 2E F 51 48 F9 5E 61 3B 4A E9 67 DF 10 52 BB 1C 47 69 B 4F 18 10 0 0 0 E6 16 E8 A9 38 CA A6 E1 94 40 16 CF 17 7C 1E A 40 0 0 0 75 7B 6E A7 3E A4 E6 30 30 19 0 14 50 97 B4 1B 21 C4 A5 66 5B DC 3B 38 82 C6 A5 BD 7E F7 45 ED 3A 3 67 1D 9E 54 25 76 7D 5A B D8 FE 61 5D E7 9F F6 45 AF 5 57 A1 FB F4 CC E9 B3 88 1F F 3C" -file "C:\DEV\Testing\ODM Batch file\LNpit1_BedrockVWC.csv" -log "C:\DEV\Testing\ODM Batch file\logtest.text"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartArguments>
+    </StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CMD Test|AnyCPU' ">
+    <StartArguments>"C:\DEV\ODM\HydroServer\ODM_Data_Loader\Trunk\ODM Data Loader GUI\bin\Debug\ODMLoader.exe" -server (local) -db LittleBear11 -user ODM -enc "1 0 0 0 D0 8C 9D DF 1 15 D1 11 8C 7A 0 C0 4F C2 97 EB 1 0 0 0 2E C 20 3B 2C 84 6B 43 AB 7A C5 E 64 A3 6 66 0 0 0 0 2 0 0 0 0 0 10 66 0 0 0 1 0 0 20 0 0 0 B2 3 2C 11 85 50 9C 1C C6 C9 5A BF 51 81 28 55 0 49 F7 80 37 B E3 10 23 F2 D9 0 B4 54 9 B3 0 0 0 0 E 80 0 0 0 2 0 0 20 0 0 0 6D 5F F3 55 F4 E6 8A 3B 51 53 EF 2E F 51 48 F9 5E 61 3B 4A E9 67 DF 10 52 BB 1C 47 69 B 4F 18 10 0 0 0 E6 16 E8 A9 38 CA A6 E1 94 40 16 CF 17 7C 1E A 40 0 0 0 75 7B 6E A7 3E A4 E6 30 30 19 0 14 50 97 B4 1B 21 C4 A5 66 5B DC 3B 38 82 C6 A5 BD 7E F7 45 ED 3A 3 67 1D 9E 54 25 76 7D 5A B D8 FE 61 5D E7 9F F6 45 AF 5 57 A1 FB F4 CC E9 B3 88 1F F 3C" -file "C:\DEV\Testing\ODM Batch file\LNpit1_BedrockVWC.csv" -log "C:\DEV\Testing\ODM Batch file\logtest.text"</StartArguments>
+  </PropertyGroup>
+</Project>

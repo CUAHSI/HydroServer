@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ODM Data Loader GUI", "ODM Data Loader GUI\ODM Data Loader GUI.vbproj", "{5CC06C2C-C60E-46A4-9825-71FA3C46D29D}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Simple Wizard", "Simple Wizard\Simple Wizard.vbproj", "{80B9E3E1-BD46-42B2-8FA1-CB4883B58FA6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{7CAAD6E2-80D3-47A2-ABCA-19F8DF154C84}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AddNewPath", "AddNewPath\AddNewPath.vbproj", "{170185F2-1E5D-4697-8F41-322DEC8841F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CMD Test|Any CPU = CMD Test|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CC06C2C-C60E-46A4-9825-71FA3C46D29D}.CMD Test|Any CPU.ActiveCfg = CMD Test|Any CPU
+		{5CC06C2C-C60E-46A4-9825-71FA3C46D29D}.CMD Test|Any CPU.Build.0 = CMD Test|Any CPU
+		{5CC06C2C-C60E-46A4-9825-71FA3C46D29D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC06C2C-C60E-46A4-9825-71FA3C46D29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC06C2C-C60E-46A4-9825-71FA3C46D29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC06C2C-C60E-46A4-9825-71FA3C46D29D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80B9E3E1-BD46-42B2-8FA1-CB4883B58FA6}.CMD Test|Any CPU.ActiveCfg = Release|Any CPU
+		{80B9E3E1-BD46-42B2-8FA1-CB4883B58FA6}.CMD Test|Any CPU.Build.0 = Release|Any CPU
+		{80B9E3E1-BD46-42B2-8FA1-CB4883B58FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80B9E3E1-BD46-42B2-8FA1-CB4883B58FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80B9E3E1-BD46-42B2-8FA1-CB4883B58FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80B9E3E1-BD46-42B2-8FA1-CB4883B58FA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CAAD6E2-80D3-47A2-ABCA-19F8DF154C84}.CMD Test|Any CPU.ActiveCfg = Release
+		{7CAAD6E2-80D3-47A2-ABCA-19F8DF154C84}.Debug|Any CPU.ActiveCfg = Debug
+		{7CAAD6E2-80D3-47A2-ABCA-19F8DF154C84}.Release|Any CPU.ActiveCfg = Release
+		{170185F2-1E5D-4697-8F41-322DEC8841F0}.CMD Test|Any CPU.ActiveCfg = Release|Any CPU
+		{170185F2-1E5D-4697-8F41-322DEC8841F0}.CMD Test|Any CPU.Build.0 = Release|Any CPU
+		{170185F2-1E5D-4697-8F41-322DEC8841F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170185F2-1E5D-4697-8F41-322DEC8841F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170185F2-1E5D-4697-8F41-322DEC8841F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170185F2-1E5D-4697-8F41-322DEC8841F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
