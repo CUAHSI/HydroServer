@@ -380,7 +380,9 @@ Public Class FrmDBConnection
         ElseIf (txtSQLPWD.Text = "") Then '(Not chbSQLTrusted.Checked) AndAlso (txtSQLPWD.Text = "")
             ShowError("Please enter a Password." & vbCrLf & "No Password")
         Else
+
             m_FinalConnSettings = New clsConnectionSettings(txtSQLAddress.Text, txtDatabaseName.Text, 10, False, txtSQLUID.Text, txtSQLPWD.Text) '(,,,chbSQLTrusted.checked,,)
+
             If TestDBConnection(m_FinalConnSettings, errorMessage) Then
                 'Conection was completed without exceptions
                 MsgBox("Connection Successful", MsgBoxStyle.Information, "ODM Tools")
