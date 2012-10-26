@@ -1,3 +1,5 @@
+Imports System.Data.SqlClient
+
 'ODM Tools
 'Copyright (c) 2007, Utah State University
 'All rights reserved.
@@ -52,27 +54,50 @@ Module ODMTSettings
             g_CurrOptions.MetadataExport = My.Settings.Export_MetaData
             g_CurrOptions.ExportQualityControlLevels = My.Settings.Export_QCLevel
 
-            'create a new clsConnectionSettings object
-            m_TempConnSettings = New clsConnectionSettings(serverAddress, dBName, timeout, trusted, userID, password)
-
             If (serverAddress = "") Or (dBName = "") Or (userID = "") Then
                 Return False
             End If
 
-            'no errors occurred, return true
-            If TestDBConnection(m_TempConnSettings) Then
-                g_CurrConnSettings = m_TempConnSettings
-                Return True
-            Else
-                g_CurrConnSettings = New clsConnectionSettings
+            'create a new clsConnectionSettings object
+            m_TempConnSettings = New clsConnectionSettings(serverAddress, dBName, timeout, trusted, userID, password)
+
+            
+
+            Try
+                'no errors occurred, return true
+                Dim testConn As New SqlClient.SqlConnection(m_TempConnSettings.ConnectionString)
+                testConn.Open()
+                'Create an sql command that accesses all tables and a field within the series catalog table
+                Dim sql1 As String = "SELECT MAX(VersionNumber) as CurrentVersion FROM ODMVersion"
+                Dim VersTable As New SqlClient.SqlDataAdapter(sql1, testConn)
+                Dim Table As New DataTable
+                VersTable.Fill(Table)
+                testConn.Close()
+                testConn.Dispose()
+                My.Settings.ODMVersion = (Table.Rows(0).Item("CurrentVersion").ToString())
+
+            Catch ex As Exception
                 Return False
-            End If
+            End Try
+            Return True
+
+
+
+            'If TestDBConnection(m_TempConnSettings) Then
+            '    g_CurrConnSettings = m_TempConnSettings
+            '    Return True
+            'Else
+            '    g_CurrConnSettings = New clsConnectionSettings
+            '    Return False
+            'End If
+
+        Catch ex As SqlException
 
         Catch ex As Exception
             ShowError("An Error occurred while retrieving your settings." & vbCrLf & "Error = " & ex.Message, ex)
         End Try
-        'error(s) occurred above, return false
-        Return False
+            'error(s) occurred above, return false
+            Return False
     End Function
 
 #End Region

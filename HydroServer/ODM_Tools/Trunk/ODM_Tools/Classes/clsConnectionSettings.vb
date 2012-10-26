@@ -38,18 +38,19 @@ Public Class clsConnectionSettings
 
         'Regenerate the connection string
         SetConnectionString()
-        If Not (e_DBName = "") Then
-            Dim testConn As New SqlClient.SqlConnection(m_ConnStr)
-            testConn.Open()
-            'Create an sql command that accesses all tables and a field within the series catalog table
-            Dim sql1 As String = "SELECT MAX(VersionNumber) as CurrentVersion FROM ODMVersion"
-            Dim VersTable As New SqlClient.SqlDataAdapter(sql1, testConn)
-            Dim Table As New DataTable
-            VersTable.Fill(Table)
-            testConn.Close()
-            testConn.Dispose()
-            My.Settings.ODMVersion = (Table.Rows(0).Item("CurrentVersion").ToString())
-        End If
+
+        'If Not (e_DBName = "") Then
+        '    Dim testConn As New SqlClient.SqlConnection(m_ConnStr)
+        '    testConn.Open()
+        '    'Create an sql command that accesses all tables and a field within the series catalog table
+        '    Dim sql1 As String = "SELECT MAX(VersionNumber) as CurrentVersion FROM ODMVersion"
+        '    Dim VersTable As New SqlClient.SqlDataAdapter(sql1, testConn)
+        '    Dim Table As New DataTable
+        '    VersTable.Fill(Table)
+        '    testConn.Close()
+        '    testConn.Dispose()
+        '    My.Settings.ODMVersion = (Table.Rows(0).Item("CurrentVersion").ToString())
+        'End If
     End Sub
 
 #End Region
