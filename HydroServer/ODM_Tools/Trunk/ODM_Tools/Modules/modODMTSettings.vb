@@ -77,10 +77,13 @@ Module ODMTSettings
                 My.Settings.ODMVersion = (Table.Rows(0).Item("CurrentVersion").ToString())
 
             Catch ex As Exception
+                g_CurrConnSettings = New clsConnectionSettings
                 Return False
             End Try
-            Return True
 
+            g_CurrConnSettings = m_TempConnSettings
+            Return True
+            
 
 
             'If TestDBConnection(m_TempConnSettings) Then

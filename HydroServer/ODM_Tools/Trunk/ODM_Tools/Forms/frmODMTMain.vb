@@ -5400,17 +5400,17 @@ Public Class frmODMTools
         tabctlODMTools.SelectedTab = tabpgVisualize
         Me.Refresh()
         Dim i As Integer 'counter variable
-
+        Console.WriteLine(lv_qryResults.SelectedItems(0).SubItems(0).Text)
         '1. Select the selected value's site in cboxVisSite
         For i = cboxVisSite.Items.Count - 1 To 0 Step -1
             If cboxVisSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text) Then
                 cboxVisSite.SelectedIndex = i
             End If
         Next
-
+        Console.WriteLine(lv_qryResults.SelectedItems(0).SubItems(2).Text)
         '2. Select the selected value's variable in cboxVisVariable
         For i = cboxVisVariable.Items.Count - 1 To 0 Step -1
-            If cboxVisVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
+            If cboxVisVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(2).Text) Then
                 cboxVisVariable.SelectedIndex = i
             End If
         Next
@@ -5447,17 +5447,17 @@ Public Class frmODMTools
         Dim i As Integer 'counter variable
 
         If m_IsEditTabEnabled Then
-
+            Console.WriteLine(lv_qryResults.SelectedItems(0).SubItems(0).Text)
             '1. Select the selected value's site in cboxEditSite
             For i = cboxEditSite.Items.Count - 1 To 0 Step -1
                 If cboxEditSite.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(0).Text) Then
                     cboxEditSite.SelectedIndex = i
                 End If
             Next
-
+            Console.WriteLine(lv_qryResults.SelectedItems(0).SubItems(2).Text)
             '2. Select the selected value's variable in cboxEditVariable
             For i = cboxEditVariable.Items.Count - 1 To 0 Step -1
-                If cboxEditVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(1).Text) Then
+                If cboxEditVariable.Items.Item(i) = (lv_qryResults.SelectedItems(0).SubItems(2).Text) Then
                     cboxEditVariable.SelectedIndex = i
                 End If
             Next
