@@ -70,6 +70,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_039A0D8358410C7B722D7AE72E8FC9E8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_032C6A5230F099FC37B879498361176D"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -77,12 +83,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_281D1DEBC1EFDCBF045B18C98B4DAC4D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_039A0D8358410C7B722D7AE72E8FC9E8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -415,9 +415,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ODM Tools 1.1.3.3"
+        "ProductName" = "8:ODM Tools 1.1.3.4"
         "ProductCode" = "8:{DFE5C6F1-1994-42CD-B222-61769F75FD79}"
-        "PackageCode" = "8:{6DB45CFD-FE43-4C41-83FA-DB27D9D4509C}"
+        "PackageCode" = "8:{D8F10F51-1C35-4C0A-8AAA-F7D26B09CFB6}"
         "UpgradeCode" = "8:{4EC09388-349A-41C5-B07C-EA75B3B0261F}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -538,7 +538,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3F7029EEDE394B45B36C4864B9785BEE"
             {
-            "Name" = "8:ODM Tools 1.1.3.3"
+            "Name" = "8:ODM Tools 1.1.3.4"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -552,7 +552,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A9375652B899460D8928822F7DF2D5FF"
             {
-            "Name" = "8:ODM Tools 1.1.3.3"
+            "Name" = "8:ODM Tools 1.1.3.4"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

@@ -5415,21 +5415,34 @@ Public Class frmODMTools
             End If
         Next
 
+        'VisDataSeries
+        'Me.lvcolVisSiteType-0, Me.lvcolVisGenCategory-1, Me.lvcolVisSpeciation-2, Me.lvcolVisVarUnits-3, 
+        'Me.lvcolVisTimeSupport-4, Me.lvcolVisTimeUnits-5, Me.lvcolVisSampleMedium-6, Me.lvcolVisValueType-7, 
+        'Me.lvcolVisDataType-8, Me.lvcolVisQCLevel-9, Me.lvcolVisMethod-10, Me.lvcolVisOrganization-11, 
+        'Me.lvcolVisSourceDesc-12, Me.lvcolVisCitation-13, Me.lvcolVisLocalDateRange-14, Me.lvcolVisUTCDateRange-15, 
+        'Me.lvcolVisValueCount-16
+        'lv_qryResults
+        'Me.col_qrySiteCodeName-0, Me.col_qrySiteType-1, Me.col_qryVarCodeName-2, Me.col_qrySpeciation-3, Me.col_qryVarUnits-4, 
+        'Me.col_qryGenCat-5, Me.col_qryValType-6, Me.col_qrySampleMed-7, Me.col_qryDataType-8, Me.col_qryQCLevel-9, 
+        'Me.col_qryMethodDesc-10, Me.col_qryNumObs-11, Me.col_qryDateTime-12, Me.col_qryOrg-13, Me.col_qrySrcDesc-14, 
+        'Me.col_qryCitation-15, Me.col_qryTimeSupport-16, Me.col_qryTimeSupportUnits-17
+
+
         '3. Select the selected specific data series in 
         For i = lvVisDataSeries.Items.Count - 1 To 0 Step -1
-            If (lvVisDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(3).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(2).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(2).Text = lv_qryResults.SelectedItems(0).SubItems(13).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(3).Text = lv_qryResults.SelectedItems(0).SubItems(14).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(4).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(6).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(7).Text) AndAlso _
+            If (lvVisDataSeries.Items.Item(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(2).Text = lv_qryResults.SelectedItems(0).SubItems(3).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(3).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(4).Text = lv_qryResults.SelectedItems(0).SubItems(16).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(17).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(7).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(6).Text) AndAlso _
                (lvVisDataSeries.Items.Item(i).SubItems(8).Text = lv_qryResults.SelectedItems(0).SubItems(8).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(11).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(10).Text = lv_qryResults.SelectedItems(0).SubItems(12).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(11).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) AndAlso _
-               (lvVisDataSeries.Items.Item(i).SubItems(13).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) Then
+               (lvVisDataSeries.Items.Item(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(10).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(11).Text = lv_qryResults.SelectedItems(0).SubItems(13).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(16).Text = lv_qryResults.SelectedItems(0).SubItems(11).Text) AndAlso _
+               (lvVisDataSeries.Items.Item(i).SubItems(13).Text = lv_qryResults.SelectedItems(0).SubItems(15).Text) Then
 
                 lvVisDataSeries.Select()
                 lvVisDataSeries.Items(i).Selected = True
@@ -5461,23 +5474,34 @@ Public Class frmODMTools
                     cboxEditVariable.SelectedIndex = i
                 End If
             Next
+            'lvEditDataSeries
+            'Me.lvcolEditSiteType-0, Me.lvcolEditGenCategory-1, Me.lvcolEditSpeciation-2, Me.lvcolEditVarUnits-3, 
+            'Me.lvcolEditTimeSupport-4, Me.lvcolEditTimeUnits-5, Me.lvcolEditSampleMedium-6, Me.lvcolEditValueType-7, 
+            'Me.lvcolEditDataType-8, Me.lvcolEditQCLevel-9, Me.lvcolEditMethod-10, Me.lvcolEditOrganization-11, 
+            'Me.lvcolEditSourceDesc-12, Me.lvcolEditCitation-13, Me.lvcolEditLocalDateRange-14, Me.lvcolEditUTCDateRange-15, 
+            'Me.lvcolEditValueCount-16
+            'lv_qryResults
+            'Me.col_qrySiteCodeName-0, Me.col_qrySiteType-1, Me.col_qryVarCodeName-2, Me.col_qrySpeciation-3, Me.col_qryVarUnits-4, 
+            'Me.col_qryGenCat-5, Me.col_qryValType-6, Me.col_qrySampleMed-7, Me.col_qryDataType-8, Me.col_qryQCLevel-9, 
+            'Me.col_qryMethodDesc-10, Me.col_qryNumObs-11, Me.col_qryDateTime-12, Me.col_qryOrg-13, Me.col_qrySrcDesc-14, 
+            'Me.col_qryCitation-15, Me.col_qryTimeSupport-16, Me.col_qryTimeSupportUnits-17
 
             '3. Select the selected specific data series in 
             For i = lvEditDataSeries.Items.Count - 1 To 0 Step -1
-                If (lvEditDataSeries.Items.Item(i).SubItems(0).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
-                    (lvEditDataSeries.Items(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(2).Text) AndAlso _
+                If (lvEditDataSeries.Items.Item(i).SubItems(1).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) AndAlso _
                     (lvEditDataSeries.Items(i).SubItems(2).Text = lv_qryResults.SelectedItems(0).SubItems(3).Text) AndAlso _
-                    (lvEditDataSeries.Items(i).SubItems(3).Text = lv_qryResults.SelectedItems(0).SubItems(15).Text) AndAlso _
+                    (lvEditDataSeries.Items(i).SubItems(3).Text = lv_qryResults.SelectedItems(0).SubItems(4).Text) AndAlso _
                     (lvEditDataSeries.Items(i).SubItems(4).Text = lv_qryResults.SelectedItems(0).SubItems(16).Text) AndAlso _
-                    (lvEditDataSeries.Items(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(6).Text) AndAlso _
-                    (lvEditDataSeries.Items(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(5).Text) AndAlso _
-                    (lvEditDataSeries.Items(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(7).Text) AndAlso _
+                    (lvEditDataSeries.Items(i).SubItems(5).Text = lv_qryResults.SelectedItems(0).SubItems(17).Text) AndAlso _
+                    (lvEditDataSeries.Items(i).SubItems(6).Text = lv_qryResults.SelectedItems(0).SubItems(7).Text) AndAlso _
+                    (lvEditDataSeries.Items(i).SubItems(7).Text = lv_qryResults.SelectedItems(0).SubItems(6).Text) AndAlso _
                     (lvEditDataSeries.Items(i).SubItems(8).Text = lv_qryResults.SelectedItems(0).SubItems(8).Text) AndAlso _
                     (lvEditDataSeries.Items(i).SubItems(9).Text = lv_qryResults.SelectedItems(0).SubItems(9).Text) AndAlso _
-                    (lvEditDataSeries.Items(i).SubItems(10).Text = lv_qryResults.SelectedItems(0).SubItems(12).Text) AndAlso _
+                    (lvEditDataSeries.Items(i).SubItems(10).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) AndAlso _
                     (lvEditDataSeries.Items(i).SubItems(11).Text = lv_qryResults.SelectedItems(0).SubItems(13).Text) AndAlso _
                     (lvEditDataSeries.Items(i).SubItems(12).Text = lv_qryResults.SelectedItems(0).SubItems(14).Text) AndAlso _
-                    (lvEditDataSeries.Items(i).SubItems(15).Text = lv_qryResults.SelectedItems(0).SubItems(10).Text) Then
+                    (lvEditDataSeries.Items(i).SubItems(13).Text = lv_qryResults.SelectedItems(0).SubItems(15).Text) AndAlso _
+                    (lvEditDataSeries.Items(i).SubItems(16).Text = lv_qryResults.SelectedItems(0).SubItems(11).Text) Then
 
                     lvEditDataSeries.Select()
                     lvEditDataSeries.Items(i).Selected = True
