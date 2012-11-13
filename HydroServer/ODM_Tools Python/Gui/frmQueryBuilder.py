@@ -27,12 +27,14 @@ class frmQueryBuilder(wx.Frame):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRMQUERYBUILDER,
               name=u'frmQueryBuilder', parent=prnt, pos=wx.Point(787, 299),
-              size=wx.Size(382, 469), style=wx.DEFAULT_FRAME_STYLE,
+              size=wx.Size(379, 469), style=wx.DEFAULT_FRAME_STYLE,
               title=u'Advanced Query')
-        self.SetClientSize(wx.Size(366, 431))
+        self.SetClientSize(wx.Size(363, 431))
+        self.SetMaxSize(wx.Size(379, 469))
+        self.SetMinSize(wx.Size(379, 469))
 
         self.panel1 = wx.Panel(id=wxID_FRMQUERYBUILDERPANEL1, name='panel1',
-              parent=self, pos=wx.Point(0, 0), size=wx.Size(366, 431),
+              parent=self, pos=wx.Point(0, 0), size=wx.Size(363, 431),
               style=wx.TAB_TRAVERSAL)
 
         self.listColumns = wx.ListBox(choices=[],
