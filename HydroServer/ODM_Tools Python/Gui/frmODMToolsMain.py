@@ -190,7 +190,7 @@ class frmODMToolsMain(wx.Frame):
         dateTime_buttonbar.AddSimpleButton(wxID_RIBBONPLOTDATEFULL, "Full Date Range",  
                                 CreateBitmap("C:\\Users\\Stephanie\\Pictures\\icons\\png\\32x32\\FullDateRange.png"), "")                                                                                            
                                     
-#-------------------------------------------------------------------------------      
+#-------------------------------------------------------------------------------
         editPage = RB.RibbonPage(self._ribbon, wx.ID_ANY, "Edit", CreateBitmap("C:\\Users\\Stephanie\\Pictures\\icons\\png\\32x32\\Brush.png"))
         
         main_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Main", wx.NullBitmap, wx.DefaultPosition,
@@ -205,7 +205,7 @@ class frmODMToolsMain(wx.Frame):
         main_bar.AddHybridButton(wxID_RIBBONEDITSAVE, "Save",  
                                 CreateBitmap("C:\\Users\\Stephanie\\Pictures\\icons\\png\\32x32\\Save Data.png"), "")                                                                                            
  
- #-------------------------------------------------------------------------------
+ #------------------------------------------------------------------------------
         edit_panel = RB.RibbonPanel( editPage, wx.ID_ANY, "Edit Functions" , wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
         edit_bar= RB.RibbonButtonBar(edit_panel)
@@ -233,7 +233,7 @@ class frmODMToolsMain(wx.Frame):
         script_bar.AddHybridButton(wxID_RIBBONEDITSCRIPTSAVE, "Save",  
                                 CreateBitmap("C:\\Users\\Stephanie\\Pictures\\icons\\png\\32x32\\Save (2).png"), "")                            
 
-#-------------------------------------------------------------------------------      
+#-------------------------------------------------------------------------------
         viewPage = RB.RibbonPage(self._ribbon, wx.ID_ANY, "View", CreateBitmap("C:\\Users\\Stephanie\\Pictures\\icons\\png\\32x32\\Brush.png"))
         view_panel = RB.RibbonPanel( viewPage, wx.ID_ANY, "Tools" , wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)                                                                                                                

@@ -7,13 +7,12 @@ def create(parent):
 
 [wxID_FRMDBCONFIG, wxID_FRMDBCONFIGBOXCONNECTION, wxID_FRMDBCONFIGBTNCANCEL, 
  wxID_FRMDBCONFIGBTNSAVE, wxID_FRMDBCONFIGBTNTEST, wxID_FRMDBCONFIGCOMBOBOX1, 
- wxID_FRMDBCONFIGLBLDBNAME, wxID_FRMDBCONFIGLBLDBTYPE, wxID_FRMDBCONFIGPNLMAIN,
+ wxID_FRMDBCONFIGLBLDBNAME, wxID_FRMDBCONFIGLBLDBTYPE, 
  wxID_FRMDBCONFIGLBLPASS, wxID_FRMDBCONFIGLBLSERVER, wxID_FRMDBCONFIGLBLUSER, 
- wxID_FRMDBCONFIGPNLCONNECTION, wxID_FRMDBCONFIGPNLMAIN, wxID_FRAME1BOXCONNECTION,
- wxID_FRMDBCONFIGTXTDBNAME, wxID_FRMDBCONFIGTXTPASS, wxID_FRAME1LBLUSER, 
- wxID_FRMDBCONFIGTXTSERVER, wxID_FRMDBCONFIGTXTUSER, wxID_FRAME1TXTPASS,
- wxID_FRAME1LBLDBNAME, wxID_FRAME1TXTSERVER, wxID_FRAME1BOXCONNECTION,
-] = [wx.NewId() for _init_ctrls in range(24)]
+ wxID_FRMDBCONFIGPNLCONNECTION, wxID_FRMDBCONFIGPNLMAIN, 
+ wxID_FRMDBCONFIGTXTDBNAME, wxID_FRMDBCONFIGTXTPASS, 
+ wxID_FRMDBCONFIGTXTSERVER, wxID_FRMDBCONFIGTXTUSER, 
+] = [wx.NewId() for _init_ctrls in range(17)]
 
 class frmDBConfig(wx.Frame):
     def _init_coll_boxSizer3_Items(self, parent):
@@ -54,39 +53,39 @@ class frmDBConfig(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRMDBCONFIG, name=u'frmDBConfig',
-              parent=prnt, pos=wx.Point(685, 312), size=wx.Size(476, 310),
+              parent=prnt, pos=wx.Point(685, 312), size=wx.Size(473, 308),
               style=wx.DEFAULT_FRAME_STYLE, title=u'Database Configuration')
-        self.SetClientSize(wx.Size(460, 272))
+        self.SetClientSize(wx.Size(457, 270))
 
         self.pnlMain = wx.Panel(id=wxID_FRMDBCONFIGPNLMAIN, name=u'pnlMain',
-              parent=self, pos=wx.Point(0, 0), size=wx.Size(460, 272),
+              parent=self, pos=wx.Point(0, 0), size=wx.Size(457, 270),
               style=wx.TAB_TRAVERSAL)
 
         self.lblDbType = wx.StaticText(id=wxID_FRMDBCONFIGLBLDBTYPE,
               label=u'Connection Type:', name=u'lblDbType', parent=self.pnlMain,
-              pos=wx.Point(10, 10), size=wx.Size(102, 26), style=0)
+              pos=wx.Point(10, 10), size=wx.Size(101, 25), style=0)
 
         self.comboBox1 = wx.ComboBox(choices=[], id=wxID_FRMDBCONFIGCOMBOBOX1,
-              name='comboBox1', parent=self.pnlMain, pos=wx.Point(122, 10),
-              size=wx.Size(328, 21), style=0,
+              name='comboBox1', parent=self.pnlMain, pos=wx.Point(121, 10),
+              size=wx.Size(326, 21), style=0,
               value=u'Microsoft SQL Server\nMySQL')
         self.comboBox1.SetLabel(u'Microsoft SQL Server')
 
         self.btnTest = wx.Button(id=wxID_FRMDBCONFIGBTNTEST,
               label=u'Test Connection', name=u'btnTest', parent=self.pnlMain,
-              pos=wx.Point(10, 235), size=wx.Size(140, 27), style=0)
+              pos=wx.Point(10, 233), size=wx.Size(139, 27), style=0)
 
         self.btnSave = wx.Button(id=wxID_FRMDBCONFIGBTNSAVE,
               label=u'Save Connection', name=u'btnSave', parent=self.pnlMain,
-              pos=wx.Point(160, 235), size=wx.Size(140, 27), style=0)
+              pos=wx.Point(159, 233), size=wx.Size(139, 27), style=0)
 
         self.btnCancel = wx.Button(id=wxID_FRMDBCONFIGBTNCANCEL,
               label=u'Cancel', name=u'btnCancel', parent=self.pnlMain,
-              pos=wx.Point(310, 235), size=wx.Size(140, 27), style=0)
+              pos=wx.Point(308, 233), size=wx.Size(139, 27), style=0)
 
         self.pnlConnection = wx.Panel(id=wxID_FRMDBCONFIGPNLCONNECTION,
-              name=u'pnlConnection', parent=self.pnlMain, pos=wx.Point(5, 51),
-              size=wx.Size(450, 169), style=wx.TAB_TRAVERSAL)
+              name=u'pnlConnection', parent=self.pnlMain, pos=wx.Point(5, 50),
+              size=wx.Size(447, 168), style=wx.TAB_TRAVERSAL)
 
         self.boxConnection = wx.StaticBox(id=wxID_FRAME1BOXCONNECTION,
               label=u'Microsoft SQL Server', name=u'boxConnection',
@@ -98,9 +97,9 @@ class frmDBConfig(wx.Frame):
               parent=self.pnlConnection, pos=wx.Point(64, 104), size=wx.Size(76,
               13), style=0)
 
-        self.txtPass = wx.TextCtrl(id=wxID_FRAME1TXTPASS,
-              name=u'txtPass', parent=self.pnlConnection, pos=wx.Point(160,
-              128), size=wx.Size(248, 21), style=0, value=u'')
+        self.txtPass = wx.TextCtrl(id=wxID_FRAME1TXTPASS, name=u'txtPass',
+              parent=self.pnlConnection, pos=wx.Point(160, 128),
+              size=wx.Size(248, 21), style=0, value=u'')
 
         self.txtDBName = wx.TextCtrl(id=wxID_FRMDBCONFIGTXTDBNAME,
               name=u'txtDBName', parent=self.pnlConnection, pos=wx.Point(160,
@@ -111,9 +110,9 @@ class frmDBConfig(wx.Frame):
               parent=self.pnlConnection, pos=wx.Point(64, 72), size=wx.Size(81,
               13), style=0)
 
-        self.txtServer = wx.TextCtrl(id=wxID_FRAME1TXTSERVER,
-              name=u'txtServer', parent=self.pnlConnection, pos=wx.Point(160,
-              32), size=wx.Size(248, 21), style=0, value=u'')
+        self.txtServer = wx.TextCtrl(id=wxID_FRAME1TXTSERVER, name=u'txtServer',
+              parent=self.pnlConnection, pos=wx.Point(160, 32),
+              size=wx.Size(248, 21), style=0, value=u'')
 
         self.lblServer = wx.StaticText(id=wxID_FRMDBCONFIGLBLSERVER,
               label=u'Server Address:', name=u'lblServer',
