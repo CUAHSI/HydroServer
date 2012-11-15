@@ -9,6 +9,11 @@ import wx.richtext
 import wx.stc
 import matplotlib
 import datetime
+
+import sys
+sys.path.append('C:\DEV\ODM\HydroServer\ODM_Tools Python')
+
+from odmservices.series_service import SeriesService
 ##import numpy
 ##import pylab
 matplotlib.use('WXAgg')
@@ -386,6 +391,7 @@ class frmODMToolsMain(wx.Frame):
         
 
     def __init__(self, parent):
+        self.createdummyService()
         self._init_ctrls(parent)
     
     
@@ -417,7 +423,12 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.UnInit()
         # delete the frame
         self.Destroy()
-
+    
+    def createdummyService(self):
+        self.sc = SeriesService("mssql+pyodbc://NIDIS:N1d1s!@drought.uwrl.usu.edu\Summary")
+        for site in self.sc.get_sites():
+            print site
+        
 
 ##    def BindAction(self):
 ##        #self.Bind(wx.EVT_MENU, self.test, None, 1)
