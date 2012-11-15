@@ -5,11 +5,12 @@ from odmdata.unit import Unit
 from odmdata.series import Series
 from odmdata.quality_control_level import QualityControlLevel
 
+from sqlalchemy import distinct
+
 class SeriesService():
 
 	# Accepts a string for creating a SessionFactory, default uses odmdata/connection.cfg
 	def __init__(self, connection_string="", debug=False):
-		print "passed: ", connection_string
 		session_factory = SessionFactory(connection_string, debug)
 		self.session = session_factory.get_session()
 
@@ -21,13 +22,16 @@ class SeriesService():
 	# Sites methods
 	def get_sites(self, site_code = ""):
 		if (site_code):
-			return self.session.query(Site).filter_by(site_code=site_code).one()
+			return self.session.query(distinct(Series.site_id), Series.site_code, Series.site_name).filter_by(site_code=site_code).one()
 		else:
-			return self.session.query(Series.sites).unique()
+			return self.session.query(distinct(Series.site_id), Series.site_code, Series.site_name).order_by(Series.site_code).all()
 
 	# Variables methods
-	def get_variable(self, var_code):	# covers NoDV, VarUnits, TimeUnits
-		return self.session.query(Variable).filter_by(code=var_code).all()
+	def get_variables(self, site_code = ""):	# covers NoDV, VarUnits, TimeUnits
+		if (site_code):
+			return self.session.query(distinct(Series.variable_id), Series.variable_code, Series.variable_name).filter_by(site_code=site_code).all()
+		else:
+			return self.session.query(distinct(Series.variable_id), Series.variable_code, Series.variable_name).order_by(Series.variable_code).all()
 
 	# Unit methods
 	def get_unit_by_name(self, unit_name):
