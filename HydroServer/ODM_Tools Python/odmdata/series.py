@@ -11,6 +11,7 @@ class Series(Base):
 	site_name 		    	   = Column('SiteName', String)
 	variable_id		    	   = Column('VariableID', Integer)
 	variable_code			   = Column('VariableCode', String)
+	variable_name              = Column('VariableName', String)
 	speciation	 	    	   = Column('Speciation', String)
 	variable_units_id   	   = Column('VariableUnitsID', Integer)
 	variable_units_name 	   = Column('VariableUnitsName', String)
