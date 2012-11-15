@@ -8,6 +8,9 @@ import wx.aui
 import wx.richtext
 import wx.stc
 import matplotlib
+import datetime
+##import numpy
+##import pylab
 matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import \
@@ -340,22 +343,37 @@ class frmODMToolsMain(wx.Frame):
       
 
 ############# Graph ###############             
-        self.data = [5, 6, 9, 14]
+        self.data = [9, 6, 5, 14]
         
+        t = [datetime.date(2012,01,01).toordinal(),datetime.date(2012,01,02).toordinal(),datetime.date(2012,01,03).toordinal(),datetime.date(2012,01,04).toordinal()]
+        s = self.data        
+##        pylab.plot(t, s)
+## 
+##        pylab.xlabel('DateTime')
+##        pylab.ylabel('Value')
+##        pylab.title('SiteName')
+##        pylab.grid(True)
+## 
+##        pylab.show()
 
-        self.dpi = 100
-        self.fig = Figure((5.0, 4.0), dpi=self.dpi)
+        x = range(len(self.data))
+        self.fig = matplotlib.figure.Figure()
+        self.axis=self.fig.add_subplot(111)
+        self.axis.axis([datetime.date(2011,12,31).toordinal(), datetime.date(2012,01,05).toordinal(), 0, 20])#
+        self.axis.plot(t,s)  
+              
         self.canvas = FigCanvas(self.pnlDocking, -1, self.fig)
-        self.axes = self.fig.add_subplot(111)
-        self.draw_figure()
+        #self.axes.legend(loc= 'upper right')
+        self.canvas.draw()
+        #self.draw_figure()
         
 ############ Docking ###################
         
         self._mgr = wx.aui.AuiManager(self.pnlDocking)
         self._mgr.AddPane(self.grid1, wx.RIGHT, 'Table View')
         self._mgr.AddPane(self.pnlSelector, wx.BOTTOM, 'Series Selector')
-        self._mgr.AddPane(self.txtPythonScript, wx.BOTTOM , 'Script')
-        self._mgr.AddPane(self.txtPythonConsole, wx.BOTTOM , 'Python Console')
+        #self._mgr.AddPane(self.txtPythonScript, wx.BOTTOM , 'Script')
+        #self._mgr.AddPane(self.txtPythonConsole, wx.BOTTOM , 'Python Console')
         #self._mgr.AddPane(self._ribbon, wx.TOP)
         self._mgr.AddPane(self.canvas, wx.CENTER)
         self._mgr.Update()
@@ -376,7 +394,8 @@ class frmODMToolsMain(wx.Frame):
         """
         #str = self.textbox.GetValue()
         #self.data = map(int, str.split())
-        x = range(len(self.data))
+        
+        
 
         # clear the axes and redraw the plot anew
         #
@@ -400,6 +419,16 @@ class frmODMToolsMain(wx.Frame):
         self.Destroy()
 
 
+##    def BindAction(self):
+##        #self.Bind(wx.EVT_MENU, self.test, None, 1)
+##        #self.Bind(wx.EVT_BUTTON, self.OnBtnAdvButton, id = )
+##        
+##    def OnBtnAdvButton(self, event):
+##        self.new = NewWindow(parent=None, id=-1)
+##        self.new.Show()
+    
+    
+    
 if __name__ == '__main__':
     app = wx.PySimpleApp()
     frame = create(None)
