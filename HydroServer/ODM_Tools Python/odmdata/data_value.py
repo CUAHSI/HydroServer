@@ -25,4 +25,4 @@ class DataValue(Base):
 	quality_control_level_id = Column('QualityControlLevelID', Integer)
 
 	def __repr__(self):
-		return "<DataValue('%s', '%s')>" % (self.data_value, self.value_accuracy)
+		return "<DataValue('%s', '%s')>" % (self.data_value, self.local_date_time)
