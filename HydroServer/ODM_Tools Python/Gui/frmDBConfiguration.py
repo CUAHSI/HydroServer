@@ -1,6 +1,7 @@
 #Boa:Frame:frmDBConfig
 
 import wx
+import frmODMToolsMain
 
 def create(parent):
     return frmDBConfig(parent)
@@ -11,8 +12,10 @@ def create(parent):
  wxID_FRMDBCONFIGLBLPASS, wxID_FRMDBCONFIGLBLSERVER, wxID_FRMDBCONFIGLBLUSER, 
  wxID_FRMDBCONFIGPNLCONNECTION, wxID_FRMDBCONFIGPNLMAIN, 
  wxID_FRMDBCONFIGTXTDBNAME, wxID_FRMDBCONFIGTXTPASS, 
- wxID_FRMDBCONFIGTXTSERVER, wxID_FRMDBCONFIGTXTUSER, 
-] = [wx.NewId() for _init_ctrls in range(17)]
+ wxID_FRMDBCONFIGTXTSERVER, wxID_FRMDBCONFIGTXTUSER, wxID_FRAME1BOXCONNECTION, 
+ wxID_FRAME1LBLUSER, wxID_FRAME1TXTPASS, wxID_FRMDBCONFIGTXTDBNAME, 
+ wxID_FRAME1LBLDBNAME, wxID_FRAME1TXTSERVER, wxID_FRMDBCONFIGLBLSERVER,
+] = [wx.NewId() for _init_ctrls in range(24)]
 
 class frmDBConfig(wx.Frame):
     def _init_coll_boxSizer3_Items(self, parent):
@@ -127,12 +130,22 @@ class frmDBConfig(wx.Frame):
         self.txtUser = wx.TextCtrl(id=wxID_FRMDBCONFIGTXTUSER, name=u'txtUser',
               parent=self.pnlConnection, pos=wx.Point(160, 96),
               size=wx.Size(248, 21), style=0, value=u'')
-
         self._init_sizers()
+        
+        
+        self.BindActions()
+
 
     def __init__(self, parent):
         self._init_ctrls(parent)
 
+    def BindActions(self):
+        self.btnSave.Bind(wx.EVT_BUTTON, self.OnBtnSaveButton,
+        id=wxID_FRMDBCONFIGBTNSAVE)
+              
+    def OnBtnSaveButton(self, event):
+        self.new = frmODMToolsMain.frmODMToolsMain(parent=None)
+        self.new.Show()
 
 
 if __name__ == '__main__':
