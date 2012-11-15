@@ -10,7 +10,8 @@ class SessionFactory():
 			fn = os.path.join(os.path.dirname(__file__), 'connection.cfg')
 			f = open(fn)
 			connection_string = f.readline()
-
+			print "file cnxn_string", connection_string
+            
 		self.engine = create_engine(connection_string, encoding='utf-8', echo=True)
 
 		# Create session maker

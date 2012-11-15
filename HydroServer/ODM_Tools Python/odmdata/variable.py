@@ -21,10 +21,10 @@ class Variable(Base):
 	no_data_value	  = Column('NoDataValue', Float, nullable=False)
 
 	# relationships
-	variable_unit = relationship("Units", 
-		primaryjoin="Units.UnitsID==Variables.VariableUnitsID")
-	time_unit = relationship("Unit", 
-		primaryjoin="Units.UnitsID==Variables.TimeUnitsID")
+	#variable_unit = relationship("Units", 
+	#	primaryjoin="Units.UnitsID==Variables.VariableUnitsID")
+	#time_unit = relationship("Units", 
+	#	primaryjoin="Units.UnitsID==Variables.TimeUnitsID")
 
 	def __repr__(self):
 		return "<Variable('%s', '%s', '%s')>" % (self.id, self.code, self.name)
