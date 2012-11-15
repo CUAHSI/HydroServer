@@ -3,6 +3,7 @@ from odmdata.site import Site
 from odmdata.variable import Variable
 from odmdata.unit import Unit
 from odmdata.series import Series
+from odmdata.data_values import DataValues
 from odmdata.quality_control_level import QualityControlLevel
 
 from sqlalchemy import distinct
@@ -41,7 +42,7 @@ class SeriesService():
 		return self.session.query(Unit).filter_by(id=unit_id).one()
 
 	# Series Catalog methods
-	def get_series(self, site_code=""):
+	def get_series(self, site_code="", var_code=""):		# NEED 2
 		if (site_code):
 			return self.session.query(Series.site_id, Series.variable_id).filter_by(site_code=site_code).all()
 		else:
@@ -50,6 +51,15 @@ class SeriesService():
 	def get_series_from_filter(self):
 		# Pass in probably a Series object, match it against the database
 		pass
+
+	# DataValues by Series
+	def get_data_values_by_series(series):
+		return self.session.query(DataValues).filter_by(
+								variable_id=series.variable_id, 
+								site_id=series.site_id,
+								method_id=series.method_id,
+								source_id=series.source_id,
+								quality_control_level_id=series.quality_control_level_id).all()
 
 	# Quality Control Level methods
 	def get_qcl_definition(self, qcl_id):
