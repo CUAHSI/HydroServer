@@ -8,8 +8,8 @@ from odmdata.quality_control_level import QualityControlLevel
 class SeriesService():
 
 	# Accepts a string for creating a SessionFactory, default uses odmdata/connection.cfg
-	def __init__(self, connection_string="", debug=True):
-		print "passed:", connection_string
+	def __init__(self, connection_string="", debug=False):
+		print "passed: ", connection_string
 		session_factory = SessionFactory(connection_string, debug)
 		self.session = session_factory.get_session()
 
@@ -23,7 +23,7 @@ class SeriesService():
 		if (site_code):
 			return self.session.query(Site).filter_by(site_code=site_code).one()
 		else:
-			return self.session.query(Site).all()
+			return self.session.query(Series.sites).unique()
 
 	# Variables methods
 	def get_variable(self, var_code):	# covers NoDV, VarUnits, TimeUnits

@@ -21,6 +21,9 @@ class Site(Base):
 	county			    = Column('County', String)
 	comments		    = Column('Comments', String)
 
+
+	# TODO: site_type optional
+
 	def __init__(self, site_code, site_name):
 		self.site_code = site_code
 		self.site_name = site_name

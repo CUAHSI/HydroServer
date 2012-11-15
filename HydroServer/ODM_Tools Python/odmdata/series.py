@@ -35,5 +35,9 @@ class Series(Base):
 	end_date_time_utc		   = Column('EndDateTimeUTC', DateTime)
 	value_count				   = Column('ValueCount', Integer)
 
+
+
 	def __repr__(self):
 		return "<Series('%s')>" % (self.id)
+
+
