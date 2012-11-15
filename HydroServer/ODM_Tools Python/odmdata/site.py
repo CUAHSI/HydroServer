@@ -1,6 +1,6 @@
 # Declare a mapped class
 from sqlalchemy import *
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from base import Base
 
 class Site(Base):

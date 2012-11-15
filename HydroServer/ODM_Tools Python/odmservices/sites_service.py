@@ -12,3 +12,6 @@ def get_by_code(site_code):
 def get_all():
 	return session.query(Site).order_by(Site.id).all()
 
+def test():
+	from odmdata.unit import Unit
+	return session.query(Unit).all()

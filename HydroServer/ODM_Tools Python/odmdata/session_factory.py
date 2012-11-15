@@ -2,15 +2,28 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
 
-# open the config file to get the connection string
-fn = os.path.join(os.path.dirname(__file__), 'connection.cfg')
-f = open(fn)
-cnxn_string = f.read()
+class SessionFactory():
+	# open the config file to get the connection string
+	def __init__(self, connection_string='', debug=False):
 
-engine = create_engine(cnxn_string, echo=True)
+		if (not connection_string):
+			fn = os.path.join(os.path.dirname(__file__), 'connection.cfg')
+			f = open(fn)
+			connection_string = f.readline()
 
-# Create session maker
-Session = sessionmaker(bind=engine)
+		self.engine = create_engine(connection_string, encoding='utf-8', echo=True)
 
-def get_session():
-	return Session()
+		# Create session maker
+		self.Session = sessionmaker(bind=self.engine)
+
+	def get_session(self):
+		return self.Session()
+
+	def __repr__(self):
+		return "<SessionFactory('%s')>" % (self.engine)
+
+
+# for testing
+if (__name__ == "__main__"):
+	sf = SessionFactory()
+	print sf
