@@ -37,7 +37,7 @@ class Series(Base):
 	value_count				   = Column('ValueCount', Integer)
 
 
-
+	# TODO add all to repr
 	def __repr__(self):
 		return "<Series('%s')>" % (self.id)
 
