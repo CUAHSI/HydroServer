@@ -425,7 +425,7 @@ class frmODMToolsMain(wx.Frame):
         self.Destroy()
     
     def createdummyService(self):
-        self.sc = SeriesService("mssql+pyodbc://NIDIS:N1d1s!@drought.uwrl.usu.edu\Summary")
+        self.sc = SeriesService(connection_string="mssql+pyodbc://NIDIS:N1d1s!@drought.uwrl.usu.edu/Summary")
         for site in self.sc.get_sites():
             print site
         

@@ -24,5 +24,14 @@ class DataValue(Base):
 	derived_from_id	    	 = Column('DerivedFromID', Integer)
 	quality_control_level_id = Column('QualityControlLevelID', Integer)
 
+	# relationships
+
+	# site = 
+	# variable = 
+	# qualifier =
+	# method =
+	# source =
+	# quality_control_level =
+
 	def __repr__(self):
 		return "<DataValue('%s', '%s')>" % (self.data_value, self.local_date_time)
