@@ -2,13 +2,14 @@
 
 import wx
 import frmQueryBuilder
+import frmODMToolsMain
 
 [wxID_PNLSERIESSELECTOR, wxID_PNLSERIESSELECTORBTNFILTER, 
  wxID_PNLSERIESSELECTORBTNVIEWALL, wxID_PNLSERIESSELECTORBTNVIEWSELECTED, 
  wxID_PNLSERIESSELECTORCBSITES, wxID_PNLSERIESSELECTORCBVARIABLES, 
  wxID_PNLSERIESSELECTORCHECKSITE, wxID_PNLSERIESSELECTORCHECKVARIABLE, 
- wxID_PNLSERIESSELECTORCLBSERIES, wxID_PNLSERIESSELECTORLBLSITE, 
- wxID_PNLSERIESSELECTORLBLVARIABLE, wxID_PNLSERIESSELECTORPANEL1, 
+ wxID_PNLSERIESSELECTORLBLSITE, wxID_PNLSERIESSELECTORLBLVARIABLE, 
+ wxID_PNLSERIESSELECTORLISTSERIES, wxID_PNLSERIESSELECTORPANEL1, 
  wxID_PNLSERIESSELECTORPANEL2, wxID_PNLSERIESSELECTORPANEL3, 
  wxID_PNLSERIESSELECTORPANEL4, 
 ] = [wx.NewId() for _init_ctrls in range(15)]
@@ -27,7 +28,8 @@ class pnlSeriesSelector(wx.Panel):
     def _init_coll_boxSizer3_Items(self, parent):
         # generated method, don't edit
 
-        parent.AddWindow(self.clbSeries, 100, border=3, flag=wx.ALL | wx.EXPAND)
+        parent.AddWindow(self.listSeries, 100, border=5,
+              flag=wx.EXPAND | wx.ALL)
 
     def _init_coll_boxSizer4_Items(self, parent):
         # generated method, don't edit
@@ -51,6 +53,16 @@ class pnlSeriesSelector(wx.Panel):
         parent.AddWindow(self.lblVariable, 10, border=3, flag=wx.ALL)
         parent.AddWindow(self.cbVariables, 85, border=3,
               flag=wx.EXPAND | wx.ALL)
+
+    def _init_coll_listSeries_Columns(self, parent):
+        # generated method, don't edit
+
+        parent.InsertColumn(col=0, format=wx.LIST_FORMAT_CENTRE, heading=u'',
+              width=50)
+        parent.InsertColumn(col=1, format=wx.LIST_FORMAT_LEFT,
+              heading=u'Site Name', width=140)
+        parent.InsertColumn(col=2, format=wx.LIST_FORMAT_LEFT,
+              heading=u'Variable Name', width=140)
 
     def _init_sizers(self):
         # generated method, don't edit
@@ -104,7 +116,7 @@ class pnlSeriesSelector(wx.Panel):
         self.checkSite = wx.CheckBox(id=wxID_PNLSERIESSELECTORCHECKSITE,
               label=u'', name=u'checkSite', parent=self.panel1, pos=wx.Point(3,
               3), size=wx.Size(21, 21), style=0)
-        self.checkSite.SetValue(False)
+        self.checkSite.SetValue(True)
 
         self.lblSite = wx.StaticText(id=wxID_PNLSERIESSELECTORLBLSITE,
               label=u'Site', name=u'lblSite', parent=self.panel1,
@@ -122,22 +134,13 @@ class pnlSeriesSelector(wx.Panel):
         self.checkVariable = wx.CheckBox(id=wxID_PNLSERIESSELECTORCHECKVARIABLE,
               label=u'', name=u'checkVariable', parent=self.panel2,
               pos=wx.Point(3, 3), size=wx.Size(21, 16), style=0)
-        self.checkVariable.SetValue(True)
+        #self.checkVariable.SetValue(True)
 
         self.cbVariables = wx.ComboBox(choices=[],
               id=wxID_PNLSERIESSELECTORCBVARIABLES, name=u'cbVariables',
               parent=self.panel2, pos=wx.Point(123, 3), size=wx.Size(787, 21),
               style=0, value='comboBox4')
         self.cbVariables.SetLabel(u'')
-
-        self.clbSeries = wx.CheckListBox(choices=[],
-              id=wxID_PNLSERIESSELECTORCLBSERIES, name=u'clbSeries',
-              parent=self.panel3, pos=wx.Point(3, 3), size=wx.Size(907, 238),
-              style=0)
-        self.clbSeries.SetLabel(u'')
-        self.clbSeries.SetStringSelection(u'')
-        self.clbSeries.Bind(wx.EVT_LISTBOX, self.OnCheckcblSeries,
-              id=wxID_PNLSERIESSELECTORCLBSERIES)
 
         self.btnFilter = wx.Button(id=wxID_PNLSERIESSELECTORBTNFILTER,
               label=u'Advanced Filter', name=u'btnFilter', parent=self,
@@ -161,9 +164,19 @@ class pnlSeriesSelector(wx.Panel):
               parent=self, pos=wx.Point(96, 75), size=wx.Size(668, 25),
               style=wx.TAB_TRAVERSAL)
 
+        self.listSeries = wx.ListCtrl(id=wxID_PNLSERIESSELECTORLISTSERIES,
+              name=u'listSeries', parent=self.panel3, pos=wx.Point(5, 5),
+              size=wx.Size(903, 234),
+              style=wx.HSCROLL | wx.VSCROLL | wx.LC_REPORT)
+        self._init_coll_listSeries_Columns(self.listSeries)
+        self.listSeries.Bind(wx.EVT_LIST_ITEM_SELECTED,
+              self.OnListSeriesListItemSelected,
+              id=wxID_PNLSERIESSELECTORLISTSERIES)
+
         self._init_sizers()
 
-    def __init__(self, parent, id, pos, size, style, name, dbservice):        
+    def __init__(self, parent, id, pos, size, style, name, dbservice): 
+        self.parent= parent       
         self._init_ctrls(parent)
         self.dbservice = dbservice
         ##initialize drop down boxes for series selector
@@ -175,15 +188,13 @@ class pnlSeriesSelector(wx.Panel):
         self.varList= self.dbservice.get_variables(self.siteList[0].site_code)
         for var in self.varList:
             self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
-        self.cbVariables.SetSelection(0)
+        self.cbVariables.SetSelection(0)  
         
-        
-        
-        for series in self.dbservice.get_series(self.siteList[0].site_code):
-            self.clbSeries.Append(repr(series))
-            print series
-        
-        
+        self.seriesList = self.dbservice.get_series(self.siteList[0].site_code)
+        for series in self.seriesList:       
+            self.listSeries.Append([False, series.site_name ,series.variable_name])
+            
+        self.SelectedSeries = []    
 
     def OnBtnFilterButton(self, event):
         self.new = frmQueryBuilder.frmQueryBuilder(parent=None)
@@ -193,19 +204,50 @@ class pnlSeriesSelector(wx.Panel):
         event.Skip()
 
     def OnBtnViewSelectedButton(self, event):
-        event.Skip()
-
-    def OnCheckcblSeries(self, event):
-        event.Skip()
+        event.Skip()    
+        
 
     def OnCbSitesCombobox(self, event):
+        #clear list for new site info
+##        index = 0
+##        count =  self.listSeries.GetItemCount()
+##        while index < count:
+##            self.listSeries.DeleteItem(0)
+##            index = index+1
+        self.listSeries.DeleteAllItems()
+        
         self.varList =[]
         site_code = self.siteList[event.GetSelection()].site_code
         self.varList= self.dbservice.get_variables(site_code)
         for var in self.varList:
             self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
         self.cbVariables.SetSelection(0)
+        self.seriesList = self.dbservice.get_series(site_code)
+            
+        for series in self.seriesList:
+            self.listSeries.Append(["False", series.site_name ,series.variable_name])
         
-        for series in self.dbservice.get_series(site_code):
-            self.clbSeries.Append(repr(series))
+          
+
+    def OnListSeriesListItemSelected(self, event):
+        #print self.seriesList[event.m_itemIndex]
+        if ( self.listSeries.GetItemText(event.m_itemIndex) == "False"):           
+            self.listSeries.SetStringItem(event.m_itemIndex, 0, "True")
+            self.SelectedSeries.append(self.seriesList[event.m_itemIndex])
+            #get DataValues       
+            
+            self.DataValues = self.dbservice.get_data_values_by_series(self.seriesList[event.m_itemIndex])
+##            for dv in self.DataValues:
+##                print dv
+            print self.parent.name
+            #plot series
+            #frmODMToolsMain.frmODMToolsMain.addPlot(self.DataValues) 
         
+        else:
+            self.listSeries.SetStringItem(event.m_itemIndex, 0, "False")
+            self.SelectedSeries.remove(self.seriesList[event.m_itemIndex])
+##        for series in self.SelectedSeries:
+##            print series.site_name + series.variable_name
+            
+            
+            

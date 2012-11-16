@@ -2,35 +2,30 @@
 
 import wx
 import wx.grid
-import wx.lib.plot
 import wx.lib.agw.ribbon as RB
 import wx.aui
 import wx.richtext
 import wx.stc
 import matplotlib
-import datetime
-
-import sys
-sys.path.append('C:\DEV\ODM\HydroServer\ODM_Tools Python')
-
-from odmservices.series_service import SeriesService
-import pnlSeriesSelector
-##import numpy
-##import pylab
 matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import \
     FigureCanvasWxAgg as FigCanvas, \
     NavigationToolbar2WxAgg as NavigationToolbar
+
+import wx.lib.plot
+import datetime
+
+# import sys
+# sys.path.append('C:\DEV\ODM\HydroServer\ODM_Tools Python')
+
+from odmservices.series_service import SeriesService
+import pnlSeriesSelector
+import mnuRibbon
+
+
     
-    
-def CreateBitmap(xpm):
-    #bmp = wx.Bitmap("bitmaps/%s"%xpm, wx.BITMAP_TYPE_XPM)   
-     
-    bmp = wx.Image(xpm, wx.BITMAP_TYPE_ANY).ConvertToBitmap()
-    #bmp = bmp.Scale(32, 32, wx.IMAGE_QUALITY_HIGH)
-    return bmp    
-    
+
 
 def create(parent):
     return frmODMToolsMain(parent)
@@ -39,19 +34,8 @@ def create(parent):
  wxID_ODMTOOLSCOMBOBOX2, wxID_ODMTOOLSCOMBOBOX4, wxID_ODMTOOLSCOMBOBOX5, 
  wxID_ODMTOOLSGRID1, wxID_ODMTOOLSPANEL1, wxID_ODMTOOLSPANEL2, 
  wxID_ODMTOOLSTOOLBAR1,  wxID_PNLSELECTOR,  wxID_TXTPYTHONSCRIPT, 
- wxID_TXTPYTHONCONSOLE, wxID_RIBBONPLOTTIMESERIES, wxID_RIBBONTPLOTPROB,
- wxID_RIBBONPLOTHIST, wxID_RIBBONPLOTBOX, wxID_RIBBONPLOTSUMMARY, 
- wxID_RIBBONPLOTTSTYPE, wxID_RIBBONPLOTTSCOLOR, wxID_RIBBONPLOTTSLEGEND,
- wxID_RIBBONPLOTBOXTYPE, wxID_RIBBONPLOTHISTTYPE, wxID_RIBBONPLOTHISTBIN,
- wxID_RIBBONPLOTDATEEND, wxID_RIBBONPLOTDATEREFRESH, wxID_RIBBONPLOTDATEFULL,
- wxID_RIBBONEDITSERIES, wxID_RIBBONEDITDERIVE, wxID_RIBBONEDITRESTORE,
- wxID_RIBBONEDITSAVE, wxID_RIBBONEDITCHGVALUE, wxID_RIBBONEDITINTEROPOLATE, 
- wxID_RIBBONEDITFLAG, wxID_RIBBONEDITADDPOINT, wxID_RIBBONEDITDELPOINT,
- wxID_RIBBONEDITSCRIPTEXECUTE, wxID_RIBBONEDITSCRIPTOPEN, wxID_RIBBONEDITSCRIPTNEW,
- wxID_RIBBONEDITSCRIPTSAVE, wxID_RIBBONVIEWPLOT, wxID_RIBBONVIEWTABLE,
- wxID_RIBBONVIEWSERIES, wxID_RIBBONVIEWCONSOLE, wxID_RIBBONVIEWSCRIPT,
- wxID_RIBBONPLOTDATESTART,
-] = [wx.NewId() for _init_ctrls in range(46)]
+ wxID_TXTPYTHONCONSOLE, 
+] = [wx.NewId() for _init_ctrls in range(13)]
 
 class frmODMToolsMain(wx.Frame):
     
@@ -85,122 +69,8 @@ class frmODMToolsMain(wx.Frame):
               
               
 ############### Ribbon ###################
-        self._ribbon = RB.RibbonBar(parent=self, id=wx.ID_ANY, name ='ribbon')
-        home = RB.RibbonPage(self._ribbon, wx.ID_ANY, "Plot", CreateBitmap("images\\3d graph.png"))
-        
-        plot_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plots", wx.NullBitmap, wx.DefaultPosition,
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
-        plots_bar = RB.RibbonButtonBar(plot_panel, wx.ID_ANY)           
-        plots_bar.AddSimpleButton(wxID_RIBBONPLOTTIMESERIES, "Time Series",  
-                                CreateBitmap("images\\TSA_icon.png"), "")
-        plots_bar.AddSimpleButton(wxID_RIBBONTPLOTPROB, "Probablity",  
-                                CreateBitmap("images\\Probability.png"), "")
-        plots_bar.AddSimpleButton(wxID_RIBBONTPLOTPROB, "Histogram",  
-                                CreateBitmap("images\\Histogram.png"), "")
-        plots_bar.AddSimpleButton(wxID_RIBBONPLOTBOX, "Box/Whisker",  
-                                CreateBitmap("images\\BoxWisker.png"), "")
-        plots_bar.AddSimpleButton(wxID_RIBBONPLOTSUMMARY, "Summary",  
-                                CreateBitmap("images\\Summary.png"), "")
+        self._ribbon = mnuRibbon.mnuRibbon(parent=self, id=wx.ID_ANY, name ='ribbon')
 
-#-------------------------------------------------------------------------------                                
-        tsPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
-        tsPlotsOptions_bar = RB.RibbonButtonBar(tsPlotOptions_panel, wx.ID_ANY)
-        tsPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTTSTYPE, "Plot Type",  
-                                CreateBitmap("images\\PlotType.png"), "")
-        tsPlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSCOLOR, "Color Setting",  
-                                CreateBitmap("images\\ColorSetting.png"), "")
-        tsPlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
-                                CreateBitmap("images\\Legend.png"), "")
-                                
-#-------------------------------------------------------------------------------                                
-        boxPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
-        boxPlotsOptions_bar = RB.RibbonButtonBar(boxPlotOptions_panel, wx.ID_ANY)
-        boxPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTBOXTYPE, "Box Whisker Type",  
-                                CreateBitmap("images\\BoxWhiskerType.png"), "")
-                                
-#-------------------------------------------------------------------------------
-        histPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
-        histPlotsOptions_bar = RB.RibbonButtonBar(histPlotOptions_panel, wx.ID_ANY)
-        histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTTYPE, "Histogram Type",  
-                                CreateBitmap("images\\HisType.png"), "") 
-        histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTBIN, "Binning Algorithms",  
-                                CreateBitmap("images\\Binning.png"), "")                                                                    
-     
-#-------------------------------------------------------------------------------
-        dateTime_panel = RB.RibbonPanel(home, wx.ID_ANY, "Date Time", wx.NullBitmap, wx.DefaultPosition, 
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
-        #dateTime_toolbar= RB.RibbonToolBar(dateTime_panel)
-        dateTime_buttonbar = RB.RibbonButtonBar(dateTime_panel)
-        dateTime_buttonbar.AddHybridButton( wxID_RIBBONPLOTDATESTART, "Start" ,CreateBitmap("images\\Calendar.png"), "") #,wx.Size(100, 21))
-        dateTime_buttonbar.AddHybridButton( wxID_RIBBONPLOTDATEEND, "End" ,CreateBitmap("images\\Calendar.png"), "") #,wx.Size(100, 21))
-        
-        
-        dateTime_buttonbar.AddSimpleButton(wxID_RIBBONPLOTDATEREFRESH, "Refresh",  
-                                CreateBitmap("images\\DateSetting.png"), "")
-        dateTime_buttonbar.AddSimpleButton(wxID_RIBBONPLOTDATEFULL, "Full Date Range",  
-                                CreateBitmap("images\\FullDateRange.png"), "")                                                                                            
-                                    
-#-------------------------------------------------------------------------------
-        editPage = RB.RibbonPage(self._ribbon, wx.ID_ANY, "Edit", CreateBitmap("images\\Brush.png"))
-        
-        main_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Main", wx.NullBitmap, wx.DefaultPosition,
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
-        main_bar = RB.RibbonButtonBar(main_panel)                                                                 
-        main_bar.AddSimpleButton(wxID_RIBBONEDITSERIES, "Edit Series",  
-                                CreateBitmap("images\\Edit (2).png"), "")                                                                                            
-        main_bar.AddSimpleButton(wxID_RIBBONEDITDERIVE, "Derive New Series",  
-                                CreateBitmap("images\\DeriveNewSeries.png"), "")                                                                                            
-        main_bar.AddSimpleButton(wxID_RIBBONEDITRESTORE, "Restore",  
-                                CreateBitmap("images\\Restore.png"), "")                                                                                            
-        main_bar.AddHybridButton(wxID_RIBBONEDITSAVE, "Save",  
-                                CreateBitmap("images\\Save Data.png"), "")                                                                                            
- 
- #------------------------------------------------------------------------------
-        edit_panel = RB.RibbonPanel( editPage, wx.ID_ANY, "Edit Functions" , wx.NullBitmap, wx.DefaultPosition,
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
-        edit_bar= RB.RibbonButtonBar(edit_panel)
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITCHGVALUE, "Change Value", 
-                                CreateBitmap("images\\EditView_icon.png"), "")                                
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITINTEROPOLATE, "Interpolate", 
-                                CreateBitmap("images\\Interpolate.png"), "") 
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITFLAG, "Flag",  
-                                CreateBitmap("images\\Flag.png"), "")  
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITADDPOINT, "Add Point",  
-                                CreateBitmap("images\\Add (2).png"), "")
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITDELPOINT, "Delete Point",  
-                                CreateBitmap("images\\Delete (3).png"), "")                                                                                                                                                              
-
-#------------------------------------------------------------------------------- 
-        script_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Script", wx.NullBitmap, wx.DefaultPosition,
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
-        script_bar = RB.RibbonButtonBar(script_panel)
-        script_bar.AddSimpleButton(wx.ID_ANY, "Execute",  
-                                CreateBitmap("images\\Window Enter.png"), "") 
-        script_bar.AddSimpleButton(wxID_RIBBONEDITSCRIPTOPEN, "Open",  
-                                CreateBitmap("images\\Open file.png"), "")
-        script_bar.AddSimpleButton(wxID_RIBBONEDITSCRIPTNEW, "New",  
-                                CreateBitmap("images\\File New.png"), "")
-        script_bar.AddHybridButton(wxID_RIBBONEDITSCRIPTSAVE, "Save",  
-                                CreateBitmap("images\\Save (2).png"), "")                            
-
-#-------------------------------------------------------------------------------
-        viewPage = RB.RibbonPage(self._ribbon, wx.ID_ANY, "View", CreateBitmap("images\\Brush.png"))
-        view_panel = RB.RibbonPanel( viewPage, wx.ID_ANY, "Tools" , wx.NullBitmap, wx.DefaultPosition,
-                                        wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)                                                                                                                
-        view_bar= RB.RibbonButtonBar(view_panel)
-        view_bar.AddSimpleButton(wxID_RIBBONVIEWPLOT, "Plot", 
-                                CreateBitmap("images\\Line Chart.png"), "")                                
-        view_bar.AddSimpleButton(wxID_RIBBONVIEWTABLE, "Table", 
-                                CreateBitmap("images\\Table.png"), "") 
-        view_bar.AddSimpleButton(wxID_RIBBONVIEWSERIES, "Series Selector",  
-                                CreateBitmap("images\\Bitmap editor.png"), "")  
-        view_bar.AddSimpleButton(wxID_RIBBONVIEWCONSOLE, "Python Console",  
-                                CreateBitmap("images\\Window Command Line.png"), "")
-        view_bar.AddSimpleButton(wxID_RIBBONVIEWSCRIPT, "PythonScript",  
-                                CreateBitmap("images\\Script.png"), "") 
               
 ################ Docking Tools##############
         self.pnlDocking = wx.Panel(id=wxID_ODMTOOLSPANEL1, name='pnlDocking',
@@ -231,29 +101,16 @@ class frmODMToolsMain(wx.Frame):
        
 
 ############# Graph ###############             
-        self.data = [9, 6, 5, 14]
         
-        t = [datetime.date(2012,01,01).toordinal(),datetime.date(2012,01,02).toordinal(),datetime.date(2012,01,03).toordinal(),datetime.date(2012,01,04).toordinal()]
-        s = self.data        
-##        pylab.plot(t, s)
-## 
-##        pylab.xlabel('DateTime')
-##        pylab.ylabel('Value')
-##        pylab.title('SiteName')
-##        pylab.grid(True)
-## 
-##        pylab.show()
-
-        x = range(len(self.data))
+        #empty plot
         self.fig = matplotlib.figure.Figure()
         self.axis=self.fig.add_subplot(111)
-        self.axis.axis([datetime.date(2011,12,31).toordinal(), datetime.date(2012,01,05).toordinal(), 0, 20])#
-        self.axis.plot(t,s)  
+        self.axis.axis([0, 1, 0, 1])#
+        self.axis.plot([],[])  
               
         self.canvas = FigCanvas(self.pnlDocking, -1, self.fig)
         #self.axes.legend(loc= 'upper right')
         self.canvas.draw()
-        #self.draw_figure()
         
 ############ Docking ###################
         
@@ -279,9 +136,30 @@ class frmODMToolsMain(wx.Frame):
         self.Refresh()
     
     
-    def draw_figure(self):
+    def addPlot(self, DataValue):
         """ Redraws the figure
         """
+
+        for dv in DataValue:
+            self.dataValues.append(DataValue.data_value)
+            self.dateTimes.append(DataValue.local_date_time.toordinal())
+        
+        #t = [datetime.date(2012,01,01).toordinal(),datetime.date(2012,01,02).toordinal(),datetime.date(2012,01,03).toordinal(),datetime.date(2012,01,04).toordinal()]
+        #s = self.data 
+
+        x = range(len(self.dataValues))
+        self.fig = matplotlib.figure.Figure()
+        self.axis=self.fig.add_subplot(111)
+        self.axis.axis([datetime.date(2008,01,01).toordinal(), datetime.date(2009,01,01).toordinal(), 0, 20])#
+        self.axis.plot(self.dateTimes,self.dataValues)  
+              
+        self.canvas = FigCanvas(self.pnlDocking, -1, self.fig)
+        #self.axes.legend(loc= 'upper right')
+        self.canvas.draw()
+        #self.draw_figure()
+
+
+
         #str = self.textbox.GetValue()
         #self.data = map(int, str.split())
         
@@ -289,18 +167,18 @@ class frmODMToolsMain(wx.Frame):
 
         # clear the axes and redraw the plot anew
         #
-        self.axes.clear()        
-        #self.axes.grid(self.cb_grid.IsChecked())
+        # self.axes.clear()        
+        # #self.axes.grid(self.cb_grid.IsChecked())
         
-        self.axes.bar(
-            left=x, 
-            height=self.data, 
-            width=50 / 100.0, 
-            align='center', 
-            alpha=0.44,
-            picker=5)
+        # self.axes.bar(
+        #     left=x, 
+        #     height=self.data, 
+        #     width=50 / 100.0, 
+        #     align='center', 
+        #     alpha=0.44,
+        #     picker=5)
         
-        self.canvas.draw()
+        # self.canvas.draw()
         
     def OnClose(self, event):
         # deinitialize the frame manager
