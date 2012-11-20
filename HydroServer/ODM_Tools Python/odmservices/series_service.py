@@ -42,7 +42,7 @@ class SeriesService():
 		return self.session.query(Unit).filter_by(id=unit_id).one()
 
 	# Series Catalog methods
-	def get_series(self, site_code="", var_code=""):		# NEED 2
+	def get_series(self, site_code="", var_code=""):
 		if (site_code and var_code):
 			return self.session.query(Series).filter_by(site_code=site_code, variable_code=var_code).all()
 		elif (site_code):
