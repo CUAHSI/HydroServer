@@ -146,4 +146,12 @@ class mnuRibbon(RB.RibbonBar):
     def __init__(self, parent, id, name):
         self._init_ctrls(parent)
         
+##    def BindAction(self):
+##        #self.Bind(wx.EVT_MENU, self.test, None, 1)
+##        #self.Bind(wx.EVT_BUTTON, self.OnBtnAdvButton, id = )
+##        
+##    def OnBtnAdvButton(self, event):
+##        self.new = NewWindow(parent=None, id=-1)
+##        self.new.Show()
+     
         

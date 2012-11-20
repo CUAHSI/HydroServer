@@ -2,6 +2,7 @@
 
 import wx
 import frmQueryBuilder
+from wx.lib.pubsub import Publisher
 import frmODMToolsMain
 
 [wxID_PNLSERIESSELECTOR, wxID_PNLSERIESSELECTORBTNFILTER, 
@@ -90,7 +91,7 @@ class pnlSeriesSelector(wx.Panel):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Panel.__init__(self, id=wxID_PNLSERIESSELECTOR,
-              name=u'pnlSeriesSelector', parent=prnt, pos=wx.Point(606, 352),
+              name=u'pnlSeriesSelector', parent=prnt, pos=wx.Point(599, 351),
               size=wx.Size(935, 393), style=wx.TAB_TRAVERSAL)
         self.SetClientSize(wx.Size(919, 355))
 
@@ -134,13 +135,14 @@ class pnlSeriesSelector(wx.Panel):
         self.checkVariable = wx.CheckBox(id=wxID_PNLSERIESSELECTORCHECKVARIABLE,
               label=u'', name=u'checkVariable', parent=self.panel2,
               pos=wx.Point(3, 3), size=wx.Size(21, 16), style=0)
-        #self.checkVariable.SetValue(True)
 
         self.cbVariables = wx.ComboBox(choices=[],
               id=wxID_PNLSERIESSELECTORCBVARIABLES, name=u'cbVariables',
               parent=self.panel2, pos=wx.Point(123, 3), size=wx.Size(787, 21),
               style=0, value='comboBox4')
         self.cbVariables.SetLabel(u'')
+        self.cbVariables.Bind(wx.EVT_COMBOBOX, self.OnCbVariablesCombobox,
+              id=wxID_PNLSERIESSELECTORCBVARIABLES)
 
         self.btnFilter = wx.Button(id=wxID_PNLSERIESSELECTORBTNFILTER,
               label=u'Advanced Filter', name=u'btnFilter', parent=self,
@@ -184,6 +186,7 @@ class pnlSeriesSelector(wx.Panel):
         for site in self.siteList:
             self.cbSites.Append(site.site_code+'-'+site.site_name)
         self.cbSites.SetSelection(0)
+        self.site_code = self.siteList[0].site_code
         
         self.varList= self.dbservice.get_variables(self.siteList[0].site_code)
         for var in self.varList:
@@ -209,25 +212,21 @@ class pnlSeriesSelector(wx.Panel):
 
     def OnCbSitesCombobox(self, event):
         #clear list for new site info
-##        index = 0
-##        count =  self.listSeries.GetItemCount()
-##        while index < count:
-##            self.listSeries.DeleteItem(0)
-##            index = index+1
+
         self.listSeries.DeleteAllItems()
         
         self.varList =[]
-        site_code = self.siteList[event.GetSelection()].site_code
-        self.varList= self.dbservice.get_variables(site_code)
+        self.site_code = self.siteList[event.GetSelection()].site_code
+        
+        self.varList= self.dbservice.get_variables(self.site_code)
         for var in self.varList:
             self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
         self.cbVariables.SetSelection(0)
-        self.seriesList = self.dbservice.get_series(site_code)
-            
+        #if (not self.checkVariable):
+        self.seriesList = self.dbservice.get_series(self.site_code)
         for series in self.seriesList:
             self.listSeries.Append(["False", series.site_name ,series.variable_name])
-        
-          
+         
 
     def OnListSeriesListItemSelected(self, event):
         #print self.seriesList[event.m_itemIndex]
@@ -237,17 +236,25 @@ class pnlSeriesSelector(wx.Panel):
             #get DataValues       
             
             self.DataValues = self.dbservice.get_data_values_by_series(self.seriesList[event.m_itemIndex])
-##            for dv in self.DataValues:
-##                print dv
-            print self.parent.name
-            #plot series
-            #frmODMToolsMain.frmODMToolsMain.addPlot(self.DataValues) 
-        
+            Publisher().sendMessage(("add.NewPlot"), [self.DataValues, self.seriesList[event.m_itemIndex]])
+            
         else:
             self.listSeries.SetStringItem(event.m_itemIndex, 0, "False")
             self.SelectedSeries.remove(self.seriesList[event.m_itemIndex])
-##        for series in self.SelectedSeries:
-##            print series.site_name + series.variable_name
+
+    def OnCbVariablesCombobox(self, event):
+        self.listSeries.DeleteAllItems()
+                
+        #site_code = self.siteList[event.GetSelection()].site_code
+        var_code = self.varList[event.GetSelection()].variable_code
+        
+        self.seriesList = self.dbservice.get_series(site_code = self.site_code, var_code= var_code)
+        for series in self.seriesList:
+            print series
+            
+        for series in self.seriesList:
+            self.listSeries.Append(["False", series.site_name ,series.variable_name])
+        
             
             
             

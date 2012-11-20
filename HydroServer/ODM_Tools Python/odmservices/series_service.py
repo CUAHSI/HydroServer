@@ -43,8 +43,12 @@ class SeriesService():
 
 	# Series Catalog methods
 	def get_series(self, site_code="", var_code=""):		# NEED 2
-		if (site_code):
+		if (site_code and var_code):
+			return self.session.query(Series).filter_by(site_code=site_code, variable_code=var_code).all()
+		elif (site_code):
 			return self.session.query(Series).filter_by(site_code=site_code).all()
+		elif (var_code):
+			return self.session.query(Series).filter_by(variable_code=var_code).all()
 		else:
 			return self.session.query(Series).all()
 
@@ -59,7 +63,7 @@ class SeriesService():
 								site_id=series.site_id,
 								method_id=series.method_id,
 								source_id=series.source_id,
-								quality_control_level_id=series.quality_control_level_id).all()
+								quality_control_level_id=series.quality_control_level_id).order_by(DataValue.local_date_time).all()
 
 	# Quality Control Level methods
 	def get_qcl_definition(self, qcl_id):
