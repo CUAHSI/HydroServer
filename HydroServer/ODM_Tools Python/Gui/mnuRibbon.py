@@ -2,6 +2,8 @@
 
 import wx
 import wx.lib.agw.ribbon as RB
+from wx.lib.pubsub import Publisher
+
 
 [wxID_PANEL1, wxID_RIBBONPLOTTIMESERIES, wxID_RIBBONTPLOTPROB,
  wxID_RIBBONPLOTHIST, wxID_RIBBONPLOTBOX, wxID_RIBBONPLOTSUMMARY, 
@@ -142,13 +144,37 @@ class mnuRibbon(RB.RibbonBar):
         view_bar.AddSimpleButton(wxID_RIBBONVIEWSCRIPT, "PythonScript",  
                                 CreateBitmap("images\\Script.png"), "") 
                                 
-                                
+        #self.BindEvents()  
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWTABLE) 
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWSERIES)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWPLOT)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWCONSOLE)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWSCRIPT)
+                             
     def __init__(self, parent, id, name):
         self._init_ctrls(parent)
         
-##    def BindAction(self):
-##        #self.Bind(wx.EVT_MENU, self.test, None, 1)
-##        #self.Bind(wx.EVT_BUTTON, self.OnBtnAdvButton, id = )
+    def BindEvents(self):
+        #self.Bind(wx.EVT_MENU, self.test, None, 1)
+        #self.Bind(wx.EVT_BUTTON, self.OnBtnAdvButton, id = )
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWTABLE)
+        
+    def onDocking(self, event):
+        
+        id= event.GetId()        
+        if id == 172:
+            value = "Script"
+        elif id == 171:
+            value= "Console"
+        elif id == 170:
+            value="Selector"
+        elif id == 169:
+            value="Table"
+        elif id == 168:
+            value= "Plot"       
+                 
+        Publisher().sendMessage(("adjust.Docking"), value)
+            
 ##        
 ##    def OnBtnAdvButton(self, event):
 ##        self.new = NewWindow(parent=None, id=-1)
