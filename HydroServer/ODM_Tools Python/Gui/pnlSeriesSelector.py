@@ -42,10 +42,10 @@ class pnlSeriesSelector(wx.Panel):
     def _init_coll_boxSizer1_Items(self, parent):
         # generated method, don't edit
 
-        parent.AddWindow(self.panel1, 10, border=3, flag=wx.EXPAND | wx.ALL)
-        parent.AddWindow(self.panel2, 10, border=3, flag=wx.EXPAND | wx.ALL)
-        parent.AddSizer(self.boxSizer5, 10, border=5, flag=wx.ALL | wx.GROW)
-        parent.AddWindow(self.panel3, 70, border=3, flag=wx.ALL | wx.EXPAND)
+        parent.AddWindow(self.panel1, 15, border=3, flag=wx.EXPAND | wx.ALL)
+        parent.AddWindow(self.panel2, 15, border=3, flag=wx.EXPAND | wx.ALL)
+        parent.AddSizer(self.boxSizer5, 15, border=5, flag=wx.ALL | wx.GROW)
+        parent.AddWindow(self.panel3, 50, border=3, flag=wx.ALL | wx.EXPAND)
 
     def _init_coll_boxSizer2_Items(self, parent):
         # generated method, don't edit
@@ -91,20 +91,20 @@ class pnlSeriesSelector(wx.Panel):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Panel.__init__(self, id=wxID_PNLSERIESSELECTOR,
-              name=u'pnlSeriesSelector', parent=prnt, pos=wx.Point(599, 351),
-              size=wx.Size(935, 393), style=wx.TAB_TRAVERSAL)
-        self.SetClientSize(wx.Size(919, 355))
+              name=u'pnlSeriesSelector', parent=prnt, pos=wx.Point(599, 508),
+              size=wx.Size(935, 270), style=wx.TAB_TRAVERSAL)
+        self.SetClientSize(wx.Size(919, 232))
 
         self.panel1 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL1, name='panel1',
-              parent=self, pos=wx.Point(3, 3), size=wx.Size(913, 29),
+              parent=self, pos=wx.Point(3, 3), size=wx.Size(913, 30),
               style=wx.TAB_TRAVERSAL)
 
         self.panel2 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL2, name='panel2',
-              parent=self, pos=wx.Point(3, 38), size=wx.Size(913, 29),
+              parent=self, pos=wx.Point(3, 39), size=wx.Size(913, 30),
               style=wx.TAB_TRAVERSAL)
 
         self.panel3 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL3, name='panel3',
-              parent=self, pos=wx.Point(3, 108), size=wx.Size(913, 244),
+              parent=self, pos=wx.Point(3, 111), size=wx.Size(913, 118),
               style=wx.TAB_TRAVERSAL)
 
         self.cbSites = wx.ComboBox(choices=[], id=wxID_PNLSERIESSELECTORCBSITES,
@@ -146,29 +146,29 @@ class pnlSeriesSelector(wx.Panel):
 
         self.btnFilter = wx.Button(id=wxID_PNLSERIESSELECTORBTNFILTER,
               label=u'Advanced Filter', name=u'btnFilter', parent=self,
-              pos=wx.Point(5, 75), size=wx.Size(91, 23), style=0)
+              pos=wx.Point(5, 77), size=wx.Size(91, 23), style=0)
         self.btnFilter.Bind(wx.EVT_BUTTON, self.OnBtnFilterButton,
               id=wxID_PNLSERIESSELECTORBTNFILTER)
 
         self.btnViewAll = wx.Button(id=wxID_PNLSERIESSELECTORBTNVIEWALL,
               label=u'View All', name=u'btnViewAll', parent=self,
-              pos=wx.Point(764, 75), size=wx.Size(75, 23), style=0)
+              pos=wx.Point(764, 77), size=wx.Size(75, 23), style=0)
         self.btnViewAll.Bind(wx.EVT_BUTTON, self.OnBtnViewAllButton,
               id=wxID_PNLSERIESSELECTORBTNVIEWALL)
 
         self.btnViewSelected = wx.Button(id=wxID_PNLSERIESSELECTORBTNVIEWSELECTED,
               label=u'View Selected', name=u'btnViewSelected', parent=self,
-              pos=wx.Point(839, 75), size=wx.Size(75, 23), style=0)
+              pos=wx.Point(839, 77), size=wx.Size(75, 23), style=0)
         self.btnViewSelected.Bind(wx.EVT_BUTTON, self.OnBtnViewSelectedButton,
               id=wxID_PNLSERIESSELECTORBTNVIEWSELECTED)
 
         self.panel4 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL4, name='panel4',
-              parent=self, pos=wx.Point(96, 75), size=wx.Size(668, 25),
+              parent=self, pos=wx.Point(96, 77), size=wx.Size(668, 25),
               style=wx.TAB_TRAVERSAL)
 
         self.listSeries = wx.ListCtrl(id=wxID_PNLSERIESSELECTORLISTSERIES,
               name=u'listSeries', parent=self.panel3, pos=wx.Point(5, 5),
-              size=wx.Size(903, 234),
+              size=wx.Size(903, 108),
               style=wx.HSCROLL | wx.VSCROLL | wx.LC_REPORT)
         self._init_coll_listSeries_Columns(self.listSeries)
         self.listSeries.Bind(wx.EVT_LIST_ITEM_SELECTED,

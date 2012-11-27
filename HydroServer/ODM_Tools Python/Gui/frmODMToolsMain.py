@@ -7,6 +7,8 @@ import wx.aui
 import wx.richtext
 import wx.stc
 import datetime
+import wx.lib.agw.aui as aui 
+from wx.lib.agw.aui import aui_switcherdialog as ASD 
 from wx.lib.pubsub import Publisher
 from numpy import arange, sin, cos, exp, pi
 
@@ -15,6 +17,7 @@ from odmservices.series_service import SeriesService
 import pnlSeriesSelector
 import pnlPlot
 import mnuRibbon
+import pnlDataTable
 
 
 # import sys
@@ -58,6 +61,7 @@ class frmODMToolsMain(wx.Frame):
               pos=wx.Point(150, 150), size=wx.Size(1190, 812),
               style=wx.DEFAULT_FRAME_STYLE, title=u'ODM Tools')
         Publisher().subscribe(self.addPlot, ("add.NewPlot")) 
+        Publisher().subscribe(self.onDocking, ("adjust.Docking")) 
 
 
 
@@ -70,19 +74,25 @@ class frmODMToolsMain(wx.Frame):
               parent=self, pos=wx.Point(0, 0), size=wx.Size(605, 458),
               style=wx.TAB_TRAVERSAL)
               
-        self.grid1 = wx.grid.Grid(id=wxID_ODMTOOLSGRID1, name='grid1',
+        
+        self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
+              name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+              size=wx.Size(368, 168), style=0)
+              
+        self.txtPythonConsole = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONCONSOLE,
+              name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+              size=wx.Size(368, 168), style=0)
+             
+
+
+
+
+####################grid##################
+        self.dataTable = pnlDataTable.pnlDataTable(id=wxID_ODMTOOLSGRID1, name='dataTable',
               parent=self.pnlDocking, pos=wx.Point(64, 160), size=wx.Size(376, 280),
               style=0)
-        # self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
-        #       name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-        #       size=wx.Size(368, 168), style=0)
-              
-        # self.txtPythonConsole = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONCONSOLE,
-        #       name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-        #       size=wx.Size(368, 168), style=0)
-        self.grid1.EnableGridLines(True)        
-
-
+        
+        
         
 ################ Series Selection Panel ##################           
 
@@ -97,33 +107,58 @@ class frmODMToolsMain(wx.Frame):
        
         self.pnlPlot= pnlPlot.pnlPlot(id=wxID_ODMTOOLSPANEL1, name='pnlPlot',
               parent=self.pnlDocking, pos=wx.Point(0, 0), size=wx.Size(605, 458),
-               style=wx.TAB_TRAVERSAL)
-        # wx.Panel(id=wxID_ODMTOOLSPANEL1, name='plotPanel',
-        #       parent=self.pnlDocking, pos=wx.Point(0, 0), size=wx.Size(605, 458),
-        #       style=wx.TAB_TRAVERSAL)
-        
+               style=wx.TAB_TRAVERSAL)     
                   
-
-
-
 
 
 ############ Docking ###################
        
         self._mgr = wx.aui.AuiManager(self.pnlDocking)
-        self._mgr.AddPane(self.grid1, wx.RIGHT, 'Table View')
+        self._mgr.AddPane(self.dataTable, wx.RIGHT, 'Table View')
+        self._mgr.GetPane(self.dataTable).Name("Table").MinSize(size=wx.Size( 400, 400))       
+       # DestroyOnClose(b=False)
         self._mgr.AddPane(self.pnlSelector, wx.BOTTOM, 'Series Selector')
-        #self._mgr.AddPane(self.txtPythonScript, wx.BOTTOM , 'Script')
-        #self._mgr.AddPane(self.txtPythonConsole, wx.BOTTOM , 'Python Console')
-        #self._mgr.AddPane(self._ribbon, wx.TOP)
+        self._mgr.GetPane(self.pnlSelector).Name("Selector").MinSize(size=wx.Size(300, 200)).Layer(0)       
+        self._mgr.AddPane(self.txtPythonScript, wx.BOTTOM , 'Script')
+        self._mgr.GetPane(self.txtPythonScript).Name("Script").Show(show=False).Layer(1)
+        self._mgr.AddPane(self.txtPythonConsole, wx.BOTTOM , 'Python Console')
+        self._mgr.GetPane(self.txtPythonConsole).Name("Console").Show(show=False).Layer(1)
+        
         self._mgr.AddPane(self.pnlPlot, wx.CENTER)
+        self._mgr.GetPane(self.pnlPlot).Name("Plot")
 
 
         self._mgr.Update()
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         self._init_sizers()
-        self._ribbon.Realize()       
+        self._ribbon.Realize() 
+
+
+    def addPlot(self, Values):
+        self.pnlPlot.addPlot(Values)
+
+    def onDocking(self, Value):       
+        
+        panedet=self._mgr.GetPane(self.pnlPlot)
+        if Value.data == "Table":
+            panedet=self._mgr.GetPane(self.dataTable)
+        elif Value.data == "Selector":
+            panedet=self._mgr.GetPane(self.pnlSelector)
+        elif Value.data == "Script":
+            panedet=self._mgr.GetPane(self.txtPythonScript)
+        elif Value.data == "Console":
+            panedet=self._mgr.GetPane(self.txtPythonConsole)  
+                   
+
+        if panedet.IsShown():          
+            panedet.Show(show=False)
+            self._mgr.Update()
+        else:         
+            panedet.Show(show=True)
+            self._mgr.Update()      
+      
+
 
 
     def __init__(self, parent):
@@ -131,9 +166,6 @@ class frmODMToolsMain(wx.Frame):
         self._init_ctrls(parent)
         self.Refresh()
     
-    
-    def addPlot(self, Values):
-        self.pnlPlot.addPlot(Values)
 
         
     def OnClose(self, event):
