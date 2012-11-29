@@ -3,9 +3,9 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 class SessionFactory():
-	# open the config file to get the connection string
 	def __init__(self, connection_string, echo):
 
+		# open the config file to get the connection string
 		if (not connection_string):
 			fn = os.path.join(os.path.dirname(__file__), 'connection.cfg')
 			f = open(fn)
