@@ -7,20 +7,20 @@ def create(parent):
     return frmQueryBuilder(parent)
 
 [wxID_FRMQUERYBUILDER, wxID_FRMQUERYBUILDERBTNALL, wxID_FRMQUERYBUILDERBTNAND, 
- wxID_FRMQUERYBUILDERBTNCREATE, wxID_FRMQUERYBUILDERBTNEQUAL, 
- wxID_FRMQUERYBUILDERBTNGETUNIQUE, wxID_FRMQUERYBUILDERBTNGREATTHAN, 
- wxID_FRMQUERYBUILDERBTNGTEQUAL, wxID_FRMQUERYBUILDERBTNISNOTNULL, 
- wxID_FRMQUERYBUILDERBTNISNULL, wxID_FRMQUERYBUILDERBTNLESSTHAN, 
- wxID_FRMQUERYBUILDERBTNLIKE, wxID_FRMQUERYBUILDERBTNLTEQUAL, 
- wxID_FRMQUERYBUILDERBTNNOT, wxID_FRMQUERYBUILDERBTNNOTEQUAL, 
- wxID_FRMQUERYBUILDERBTNOR, wxID_FRMQUERYBUILDERBTNPAREN, 
- wxID_FRMQUERYBUILDERLBLCOLUMNS, wxID_FRMQUERYBUILDERLBLMAXIMUM, 
- wxID_FRMQUERYBUILDERLBLMINIMUM, wxID_FRMQUERYBUILDERLBLQUERY, 
- wxID_FRMQUERYBUILDERLBLVALUES, wxID_FRMQUERYBUILDERLISTCOLUMNS, 
- wxID_FRMQUERYBUILDERLISTUNIQEVALUES, wxID_FRMQUERYBUILDERPANEL1, 
- wxID_FRMQUERYBUILDERRICHTEXTCTRL1, wxID_FRMQUERYBUILDERTXTMAX, 
- wxID_FRMQUERYBUILDERTXTMIN, 
-] = [wx.NewId() for _init_ctrls in range(28)]
+ wxID_FRMQUERYBUILDERBTNCANCEL, wxID_FRMQUERYBUILDERBTNCREATE, 
+ wxID_FRMQUERYBUILDERBTNEQUAL, wxID_FRMQUERYBUILDERBTNGETUNIQUE, 
+ wxID_FRMQUERYBUILDERBTNGREATTHAN, wxID_FRMQUERYBUILDERBTNGTEQUAL, 
+ wxID_FRMQUERYBUILDERBTNISNOTNULL, wxID_FRMQUERYBUILDERBTNISNULL, 
+ wxID_FRMQUERYBUILDERBTNLESSTHAN, wxID_FRMQUERYBUILDERBTNLIKE, 
+ wxID_FRMQUERYBUILDERBTNLTEQUAL, wxID_FRMQUERYBUILDERBTNNOT, 
+ wxID_FRMQUERYBUILDERBTNNOTEQUAL, wxID_FRMQUERYBUILDERBTNOR, 
+ wxID_FRMQUERYBUILDERBTNPAREN, wxID_FRMQUERYBUILDERLBLCOLUMNS, 
+ wxID_FRMQUERYBUILDERLBLMAXIMUM, wxID_FRMQUERYBUILDERLBLMINIMUM, 
+ wxID_FRMQUERYBUILDERLBLQUERY, wxID_FRMQUERYBUILDERLBLVALUES, 
+ wxID_FRMQUERYBUILDERLISTCOLUMNS, wxID_FRMQUERYBUILDERLISTUNIQEVALUES, 
+ wxID_FRMQUERYBUILDERPANEL1, wxID_FRMQUERYBUILDERRICHTEXTCTRL1, 
+ wxID_FRMQUERYBUILDERTXTMAX, wxID_FRMQUERYBUILDERTXTMIN, 
+] = [wx.NewId() for _init_ctrls in range(29)]
 
 class frmQueryBuilder(wx.Frame):
     def _init_ctrls(self, prnt):
@@ -87,7 +87,9 @@ class frmQueryBuilder(wx.Frame):
 
         self.btnCreate = wx.Button(id=wxID_FRMQUERYBUILDERBTNCREATE,
               label=u'Create Query', name=u'btnCreate', parent=self.panel1,
-              pos=wx.Point(272, 400), size=wx.Size(75, 23), style=0)
+              pos=wx.Point(192, 400), size=wx.Size(75, 23), style=0)
+        self.btnCreate.Bind(wx.EVT_BUTTON, self.OnBtnCreateButton,
+              id=wxID_FRMQUERYBUILDERBTNCREATE)
 
         self.btnNot = wx.Button(id=wxID_FRMQUERYBUILDERBTNNOT, label=u'Not',
               name=u'btnNot', parent=self.panel1, pos=wx.Point(160, 216),
@@ -146,13 +148,25 @@ class frmQueryBuilder(wx.Frame):
               label=u'Is Not Null', name=u'btnIsNotNull', parent=self.panel1,
               pos=wx.Point(64, 184), size=wx.Size(64, 24), style=0)
 
+        self.btnCancel = wx.Button(id=wxID_FRMQUERYBUILDERBTNCANCEL,
+              label=u'Cancel', name=u'btnCancel', parent=self.panel1,
+              pos=wx.Point(280, 400), size=wx.Size(75, 23), style=0)
+        self.btnCancel.Bind(wx.EVT_BUTTON, self.OnBtnCancelButton,
+              id=wxID_FRMQUERYBUILDERBUTTON1)
+
     def __init__(self, parent):
         self._init_ctrls(parent)
+        
+
+    def OnBtnCreateButton(self, event):
+        return "Select *"
+        self.Close()
+        event.Skip()
+
+    def OnBtnCancelButton(self, event):
+        return ""
+        self.Close()
+        event.Skip()
 
 
-if __name__ == '__main__':
-    app = wx.PySimpleApp()
-    frame = create(None)
-    frame.Show()
 
-    app.MainLoop()

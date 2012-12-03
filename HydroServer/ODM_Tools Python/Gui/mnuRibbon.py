@@ -4,6 +4,8 @@ import wx
 import wx.lib.agw.ribbon as RB
 from wx.lib.pubsub import Publisher
 
+import pnlDatePicker
+
 
 [wxID_PANEL1, wxID_RIBBONPLOTTIMESERIES, wxID_RIBBONTPLOTPROB,
  wxID_RIBBONPLOTHIST, wxID_RIBBONPLOTBOX, wxID_RIBBONPLOTSUMMARY, 
@@ -27,6 +29,12 @@ class mnuRibbon(RB.RibbonBar):
     
     def _init_ctrls(self, prnt):
         RB.RibbonBar.__init__(self,  name='ribbon', parent=prnt, id=wxID_PANEL1)
+
+        #self.GetArtProvider().SetColourScheme("GRAY","LIGHT GRAY","WHITE")
+        self.SetArtProvider(RB.RibbonAUIArtProvider())
+        self.SetFont(wx.Font(20, wx.SWISS, wx.NORMAL, wx.NORMAL,
+              False, u'Tahoma'))
+
         #self.ribbon= RB.RibbonBar(parent=self, id=wx.ID_ANY, name ='ribbon')
         home = RB.RibbonPage(self, wx.ID_ANY, "Plot", CreateBitmap("images\\3d graph.png"))
         
@@ -66,25 +74,39 @@ class mnuRibbon(RB.RibbonBar):
         histPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
         histPlotsOptions_bar = RB.RibbonButtonBar(histPlotOptions_panel, wx.ID_ANY)
-        histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTTYPE, "Histogram Type",  
-                                CreateBitmap("images\\HisType.png"), "") 
+        histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTTYPE, "Histogram Type", CreateBitmap("images\\HisType.png"), "") 
         histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTBIN, "Binning Algorithms",  
                                 CreateBitmap("images\\Binning.png"), "")                                                                    
      
 #-------------------------------------------------------------------------------
         dateTime_panel = RB.RibbonPanel(home, wx.ID_ANY, "Date Time", wx.NullBitmap, wx.DefaultPosition, 
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
-        #dateTime_toolbar= RB.RibbonToolBar(dateTime_panel)
+        #radio1 = wx.RadioButton( dummy_2, -1, " Radio1 ", style =wx.RB_GROUP )
+
+        # dateTime_toolbar= RB.RibbonToolBar(dateTime_panel)
         dateTime_buttonbar = RB.RibbonButtonBar(dateTime_panel)
+ 
         dateTime_buttonbar.AddHybridButton( wxID_RIBBONPLOTDATESTART, "Start" ,CreateBitmap("images\\Calendar.png"), "") #,wx.Size(100, 21))
         dateTime_buttonbar.AddHybridButton( wxID_RIBBONPLOTDATEEND, "End" ,CreateBitmap("images\\Calendar.png"), "") #,wx.Size(100, 21))
+       # dateTime_buttonbar.AddTool(wxID_RIBBONPLOTDATESTART,  CreateBitmap("images\\Calendar.png"), kind=pnlDatePicker.pnlDatePicker, client_data=[wxID_RIBBONPLOTDATESTART, "startDate", "Start Date", wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0)])
         
         
         dateTime_buttonbar.AddSimpleButton(wxID_RIBBONPLOTDATEREFRESH, "Refresh",  
                                 CreateBitmap("images\\DateSetting.png"), "")
         dateTime_buttonbar.AddSimpleButton(wxID_RIBBONPLOTDATEFULL, "Full Date Range",  
-                                CreateBitmap("images\\FullDateRange.png"), "")                                                                                            
+                                CreateBitmap("images\\FullDateRange.png"), "")                                                                                          
                                     
+
+
+
+
+
+        self.startDate = pnlDatePicker.pnlDatePicker( home, wxID_RIBBONPLOTDATESTART, 
+                 "Start Date", wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0))
+        self.endDate = pnlDatePicker.pnlDatePicker( home, wxID_RIBBONPLOTDATEEND, 
+                 "End Date", wx.DateTimeFromDMY(30, 9, 2009, 0, 0, 0))
+
+       
 #-------------------------------------------------------------------------------
         editPage = RB.RibbonPage(self, wx.ID_ANY, "Edit", CreateBitmap("images\\Brush.png"))
         
@@ -144,12 +166,8 @@ class mnuRibbon(RB.RibbonBar):
         view_bar.AddSimpleButton(wxID_RIBBONVIEWSCRIPT, "PythonScript",  
                                 CreateBitmap("images\\Script.png"), "") 
                                 
-        #self.BindEvents()  
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWTABLE) 
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWSERIES)
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWPLOT)
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWCONSOLE)
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWSCRIPT)
+        self.BindEvents()  
+        
                              
     def __init__(self, parent, id, name):
         self._init_ctrls(parent)
@@ -157,20 +175,25 @@ class mnuRibbon(RB.RibbonBar):
     def BindEvents(self):
         #self.Bind(wx.EVT_MENU, self.test, None, 1)
         #self.Bind(wx.EVT_BUTTON, self.OnBtnAdvButton, id = )
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWTABLE)
-        
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWTABLE) 
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWSERIES)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWPLOT)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWCONSOLE)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWSCRIPT)
+
+
+
     def onDocking(self, event):
         
-        id= event.GetId()        
-        if id == 172:
+        if event.Id == wxID_RIBBONVIEWSCRIPT:
             value = "Script"
-        elif id == 171:
+        elif event.Id ==wxID_RIBBONVIEWCONSOLE:
             value= "Console"
-        elif id == 170:
+        elif event.Id == wxID_RIBBONVIEWSERIES:
             value="Selector"
-        elif id == 169:
+        elif event.Id == wxID_RIBBONVIEWTABLE:
             value="Table"
-        elif id == 168:
+        elif event.Id == wxID_RIBBONVIEWPLOT:
             value= "Plot"       
                  
         Publisher().sendMessage(("adjust.Docking"), value)

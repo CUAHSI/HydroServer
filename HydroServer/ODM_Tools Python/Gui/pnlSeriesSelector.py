@@ -91,9 +91,10 @@ class pnlSeriesSelector(wx.Panel):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Panel.__init__(self, id=wxID_PNLSERIESSELECTOR,
-              name=u'pnlSeriesSelector', parent=prnt, pos=wx.Point(599, 508),
+              name=u'pnlSeriesSelector', parent=prnt, pos=wx.Point(511, 413),
               size=wx.Size(935, 270), style=wx.TAB_TRAVERSAL)
         self.SetClientSize(wx.Size(919, 232))
+        self.Enable(True)
 
         self.panel1 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL1, name='panel1',
               parent=self, pos=wx.Point(3, 3), size=wx.Size(913, 30),
@@ -118,29 +119,30 @@ class pnlSeriesSelector(wx.Panel):
               label=u'', name=u'checkSite', parent=self.panel1, pos=wx.Point(3,
               3), size=wx.Size(21, 21), style=0)
         self.checkSite.SetValue(True)
+        self.checkSite.Bind(wx.EVT_CHECKBOX, self.OnCheck,
+              id=wxID_PNLSERIESSELECTORCHECKSITE)
 
         self.lblSite = wx.StaticText(id=wxID_PNLSERIESSELECTORLBLSITE,
               label=u'Site', name=u'lblSite', parent=self.panel1,
-              pos=wx.Point(30, 3), size=wx.Size(87, 21), style=0)
+              pos=wx.Point(30, 3), size=wx.Size(87, 13), style=0)
         self.lblSite.SetToolTipString(u'staticText1')
-        self.lblSite.SetFont(wx.Font(13, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
-              u'MS Serif'))
 
         self.lblVariable = wx.StaticText(id=wxID_PNLSERIESSELECTORLBLVARIABLE,
               label=u'Variable', name=u'lblVariable', parent=self.panel2,
-              pos=wx.Point(30, 3), size=wx.Size(87, 16), style=0)
-        self.lblVariable.SetFont(wx.Font(13, wx.SWISS, wx.NORMAL, wx.NORMAL,
-              False, u'MS Serif'))
+              pos=wx.Point(30, 3), size=wx.Size(87, 13), style=0)
 
         self.checkVariable = wx.CheckBox(id=wxID_PNLSERIESSELECTORCHECKVARIABLE,
               label=u'', name=u'checkVariable', parent=self.panel2,
               pos=wx.Point(3, 3), size=wx.Size(21, 16), style=0)
+        self.checkVariable.Bind(wx.EVT_CHECKBOX, self.OnCheck,
+              id=wxID_PNLSERIESSELECTORCHECKVARIABLE)
 
         self.cbVariables = wx.ComboBox(choices=[],
               id=wxID_PNLSERIESSELECTORCBVARIABLES, name=u'cbVariables',
               parent=self.panel2, pos=wx.Point(123, 3), size=wx.Size(787, 21),
               style=0, value='comboBox4')
         self.cbVariables.SetLabel(u'')
+        self.cbVariables.Enable(False)
         self.cbVariables.Bind(wx.EVT_COMBOBOX, self.OnCbVariablesCombobox,
               id=wxID_PNLSERIESSELECTORCBVARIABLES)
 
@@ -152,18 +154,18 @@ class pnlSeriesSelector(wx.Panel):
 
         self.btnViewAll = wx.Button(id=wxID_PNLSERIESSELECTORBTNVIEWALL,
               label=u'View All', name=u'btnViewAll', parent=self,
-              pos=wx.Point(764, 77), size=wx.Size(75, 23), style=0)
+              pos=wx.Point(749, 77), size=wx.Size(75, 23), style=0)
         self.btnViewAll.Bind(wx.EVT_BUTTON, self.OnBtnViewAllButton,
               id=wxID_PNLSERIESSELECTORBTNVIEWALL)
 
         self.btnViewSelected = wx.Button(id=wxID_PNLSERIESSELECTORBTNVIEWSELECTED,
               label=u'View Selected', name=u'btnViewSelected', parent=self,
-              pos=wx.Point(839, 77), size=wx.Size(75, 23), style=0)
+              pos=wx.Point(824, 77), size=wx.Size(90, 23), style=0)
         self.btnViewSelected.Bind(wx.EVT_BUTTON, self.OnBtnViewSelectedButton,
               id=wxID_PNLSERIESSELECTORBTNVIEWSELECTED)
 
         self.panel4 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL4, name='panel4',
-              parent=self, pos=wx.Point(96, 77), size=wx.Size(668, 25),
+              parent=self, pos=wx.Point(96, 77), size=wx.Size(653, 25),
               style=wx.TAB_TRAVERSAL)
 
         self.listSeries = wx.ListCtrl(id=wxID_PNLSERIESSELECTORLISTSERIES,
@@ -212,21 +214,43 @@ class pnlSeriesSelector(wx.Panel):
 
     def OnCbSitesCombobox(self, event):
         #clear list for new site info
-
+        
         self.listSeries.DeleteAllItems()
         
         self.varList =[]
         self.site_code = self.siteList[event.GetSelection()].site_code
         
         self.varList= self.dbservice.get_variables(self.site_code)
+        self.cbVariables.Clear()
         for var in self.varList:
             self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
         self.cbVariables.SetSelection(0)
         #if (not self.checkVariable):
-        self.seriesList = self.dbservice.get_series(self.site_code)
+        self.seriesList = self.dbservice.get_series(site_code = self.site_code, var_code = self.varList[0].variable_code)
         for series in self.seriesList:
             self.listSeries.Append(["False", series.site_name ,series.variable_name])
-         
+
+
+    def OnCbVariablesCombobox(self, event):
+        self.listSeries.DeleteAllItems()
+             
+        if (self.checkSite.GetValue() and self.checkVariable.GetValue()):        
+        #site_code = self.siteList[event.GetSelection()].site_code             
+            self.var_code = self.varList[event.GetSelection()].variable_code
+            self.seriesList = self.dbservice.get_series(site_code = self.site_code, var_code= self.var_code)        
+        
+        elif (not self.checkSite.GetValue() and self.checkVariable.GetValue()):               
+            self.var_code = self.varList[event.GetSelection()].variable_code
+            self.seriesList = self.dbservice.get_series( var_code= self.var_code) 
+        
+
+##        for series in self.seriesList:
+##            print series
+            
+        for series in self.seriesList:
+            self.listSeries.Append(["False", series.site_name ,series.variable_name]) 
+
+             
 
     def OnListSeriesListItemSelected(self, event):
         #print self.seriesList[event.m_itemIndex]
@@ -241,20 +265,73 @@ class pnlSeriesSelector(wx.Panel):
         else:
             self.listSeries.SetStringItem(event.m_itemIndex, 0, "False")
             self.SelectedSeries.remove(self.seriesList[event.m_itemIndex])
-
-    def OnCbVariablesCombobox(self, event):
+    
+    def siteAndVariables(self):
+        self.cbVariables.Clear()
+        self.varList= self.dbservice.get_variables(self.site_code)
+        for var in self.varList:
+            self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
+        self.cbVariables.SetSelection(0)
+        self.seriesList = self.dbservice.get_series(site_code = self.siteList[0].site_code, var_code= self.varList[0].variable_code)
+        self.cbVariables.Enabled =True
+        self.cbSites.Enabled = True
+        
+    def siteOnly(self):
+        self.cbVariables.Enabled = False
+        self.cbSites.Enabled = True
+        self.seriesList = self.dbservice.get_series(site_code = self.siteList[0].site_code)
+    
+    def variableOnly(self):
+        self.cbVariables.Clear()
+        self.varList= self.dbservice.get_variables()
+        for var in self.varList:
+            self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
+        self.cbVariables.SetSelection(0)
+        self.cbSites.Enabled = False
+        self.cbVariables.Enabled = True
+        self.seriesList = self.dbservice.get_series(var_code= self.varList[0].variable_code)
+           
+    
+    def OnCheck(self, event):
         self.listSeries.DeleteAllItems()
-                
-        #site_code = self.siteList[event.GetSelection()].site_code
-        var_code = self.varList[event.GetSelection()].variable_code
-        
-        self.seriesList = self.dbservice.get_series(site_code = self.site_code, var_code= var_code)
-        for series in self.seriesList:
-            print series
+        if self.checkSite.GetValue():
+            if self.checkVariable.GetValue():
+                self.siteAndVariables()
+            else:
+                self.siteOnly()
+        else:
+            if self.checkVariable.GetValue():
+                self.variableOnly()
+            else: 
+                self.cbSites.Enabled = False
+                self.cbVariables.Enabled = False
+      
             
-        for series in self.seriesList:
-            self.listSeries.Append(["False", series.site_name ,series.variable_name])
-        
-            
-            
-            
+##    def InitColumns(self):
+##        self.myOlv.SetColumns([
+##            ColumnDefn("SiteID", "center", 100, "SiteID"),
+##            ColumnDefn("SiteCode", "center", 100, "SiteCode"),
+##            ColumnDefn("SiteName", "center", 100, "SiteName"),
+##            ColumnDefn("VariableID", "center", 100, "VariableID"),           
+##            ColumnDefn("VariableCode", "center", 100, "VariableCode"),
+##            ColumnDefn("Speciation", "center", 100, "VariableUnitsID"),
+##            ColumnDefn("VariableUnitsID", "center", 100, "VariableUnitsID"),            
+##            ColumnDefn("VariableUnitsName", "center", 100, "VariableUnitsName"),
+##            ColumnDefn("SampleMedium", "center", 100, "SampleMedium"),
+##            ColumnDefn("ValueType", "center", 100, "ValueType"),
+##            ColumnDefn("TimeSupport", "center", 100, "TimeSupport"),
+##            ColumnDefn("TimeUnitsID", "center", 100, "TimeUnitsID"),
+##            ColumnDefn("TimeUnitsName", "center", 100, "TimeUnitsName"),
+##            ColumnDefn("DataType", "center", 100, "DataType"),
+##            ColumnDefn("Citation", "center", 100, "Citation"),
+##            ColumnDefn("QualityControlLevelID", "center", 100, "QualityControlLevelID"),
+##            ColumnDefn("QualityControlLevelCode", "center", 100, "QualityControlLevelCode"),
+##            ColumnDefn("BeginDateTime", "center", 100, "BeginDateTime",stringConverter="%d-%m-%Y"),
+##            ColumnDefn("EndDateTime", "center", 100, "EndDateTime",stringConverter="%d-%m-%Y"),
+##            ColumnDefn("BeginDateTimeUTC", "center", 100, "BeginDateTimeUTC",stringConverter="%d-%m-%Y"),
+##            ColumnDefn("EndDateTimeUTC", "center", 100, "EndDateTimeUTC",stringConverter="%d-%m-%Y"),
+##            ColumnDefn("ValueCount", "center", 100, "ValueCount")
+##            
+##        ])
+
+    
