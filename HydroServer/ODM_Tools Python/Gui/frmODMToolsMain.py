@@ -60,6 +60,8 @@ class frmODMToolsMain(wx.Frame):
         wx.Frame.__init__(self, id=wxID_ODMTOOLS, name=u'ODMTools', parent=prnt,
               pos=wx.Point(150, 150), size=wx.Size(1190, 812),
               style=wx.DEFAULT_FRAME_STYLE, title=u'ODM Tools')
+        self.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
+              False, u'Tahoma'))
         Publisher().subscribe(self.addPlot, ("add.NewPlot")) 
         Publisher().subscribe(self.onDocking, ("adjust.Docking")) 
 
@@ -127,6 +129,9 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.AddPane(self.pnlPlot, wx.CENTER)
         self._mgr.GetPane(self.pnlPlot).Name("Plot")
 
+        # self._mgr.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
+        #       False, u'Tahoma'))
+
 
         self._mgr.Update()
         self.Bind(wx.EVT_CLOSE, self.OnClose)
@@ -136,7 +141,8 @@ class frmODMToolsMain(wx.Frame):
 
 
     def addPlot(self, Values):
-        self.pnlPlot.addPlot(Values)
+        self.pnlPlot.addPlot(Values.data)
+        self.dataTable.Init(Values.data[0])
 
     def onDocking(self, Value):       
         
