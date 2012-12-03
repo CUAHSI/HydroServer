@@ -6,19 +6,6 @@ from odmdata.series import Series
 from odmdata.data_value import DataValue
 from odmdata.quality_control_level import QualityControlLevel
 
-# CV imports
-from odmdata.vertical_datum_cv import VerticalDatumCV
-from odmdata.site_type_cv import SiteTypeCV
-from odmdata.variable_name_cv import VariableNameCV
-from odmdata.speciation_cv import SpeciationCV
-from odmdata.sample_medium_cv import SampleMediumCV
-from odmdata.value_type_cv import ValueTypeCV
-from odmdata.data_type_cv import DataTypeCV
-from odmdata.general_category_cv import GeneralCategoryCV
-from odmdata.censor_code_cv import CensorCodeCV
-from odmdata.topic_category_cv import TopicCategoryCV
-from odmdata.sampe_type_cv import SampleTypeCV
-
 from sqlalchemy import distinct
 
 class SeriesService():
@@ -26,7 +13,7 @@ class SeriesService():
 	# Accepts a string for creating a SessionFactory, default uses odmdata/connection.cfg
 	def __init__(self, connection_string="", debug=False):
 		self._session_factory = SessionFactory(connection_string, debug)
-		self.__edit_session = self._session_factory.get_session()
+		self._edit_session = self._session_factory.get_session()
 		self._debug = debug
 
 	# Creates a new session factory with the given connection string
@@ -51,7 +38,9 @@ class SeriesService():
 		session = self._session_factory.get_session()
 		result = None
 		if (site_code):
-			result = self._session.query(distinct(Series.variable_id), Series.variable_code, Series.variable_name).filter_by(site_code=site_code).all()
+			result = session.query(
+				distinct(Series.variable_id), Series.variable_code, Series.variable_name).filter_by(site_code=site_code).order_by(Series.variable_code
+			).all()
 		else:
 			result = session.query(distinct(Series.variable_id), Series.variable_code, Series.variable_name).order_by(Series.variable_code).all()
 
@@ -85,13 +74,13 @@ class SeriesService():
 		session = self._session_factory.get_session()
 		result = None
 		if (site_code and var_code):
-			result = session.query(Series).filter_by(site_code=site_code, variable_code=var_code).all()
+			result = session.query(Series).filter_by(site_code=site_code, variable_code=var_code).order_by(Series.id).all()
 		elif (site_code):
-			result = session.query(Series).filter_by(site_code=site_code).all()
+			result = session.query(Series).filter_by(site_code=site_code).order_by(Series.id).all()
 		elif (var_code):
-			result = session.query(Series).filter_by(variable_code=var_code).all()
+			result = session.query(Series).filter_by(variable_code=var_code).order_by(Series.id).all()
 		else:
-			result = session.query(Series).all()
+			result = session.query(Series).order_by(Series.id).all()
 		session.close()
 		return result
 
@@ -130,67 +119,6 @@ class SeriesService():
 		session.close()
 		return result
 
-	# Controlled Vocabulary get methods
-	def get_vertical_datum_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(VerticalDatumCV).all()
-		session.close()
-		return result
-
-	def get_site_type_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(SiteTypeCV).all()
-		session.close()
-		return result
-
-	def get_variable_name_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(VariableNameCV).all()
-		session.close()
-		return result
-
-	def get_speciation_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(SpeciationCV).all()
-		session.close()
-		return result
-
-	def get_sample_medium_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(SampleMediumCV).all()
-		session.close()
-		return result
-
-	def get_value_type_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(ValueTypeCV).all()
-		session.close()
-		return result
-
-	def get_data_type_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(DataTypeCV).all()
-		session.close()
-		return result
-
-	def get_general_category_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(GeneralCategoryCV).all()
-		session.close()
-		return result
-
-	def get_censor_code_cvs(self):
-		session = self._session_factory.get_session()
-		result = session.query(CensorCodeCV).all()
-		session.close()
-		return result
-
-	def get_sample_type_cvs(self):		
-		session = self._session_factory.get_session()
-		result = session.query(SampleTypeCV).all()
-		session.close()
-		return result
-
 
 	# Edit/delete methods
 	def delete_dvs(self, dv_list):
@@ -210,3 +138,11 @@ class SeriesService():
 
 		session.commit()
 		session.close()
+
+	def create_method(self, method):
+		session = self._session_factory.get_session()
+		new_method = session.merge(method)
+		session.add(new_method)
+		session.commit()
+		session.close()
+
