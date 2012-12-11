@@ -65,6 +65,8 @@ class frmODMToolsMain(wx.Frame):
         Publisher().subscribe(self.addPlot, ("add.NewPlot")) 
         Publisher().subscribe(self.onDocking, ("adjust.Docking")) 
 
+        Publisher().subscribe(self.onPlotSelection, ("select.Plot")) 
+
 
 
 ############### Ribbon ###################
@@ -162,8 +164,10 @@ class frmODMToolsMain(wx.Frame):
             self._mgr.Update()
         else:         
             panedet.Show(show=True)
-            self._mgr.Update()      
-      
+            self._mgr.Update()     
+
+    def onPlotSelection(self, value):         
+        self.pnlPlot.selectPlot(value)
 
 
 

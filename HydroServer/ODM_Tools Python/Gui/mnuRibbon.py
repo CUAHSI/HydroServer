@@ -7,7 +7,7 @@ from wx.lib.pubsub import Publisher
 import pnlDatePicker
 
 
-[wxID_PANEL1, wxID_RIBBONPLOTTIMESERIES, wxID_RIBBONTPLOTPROB,
+[wxID_PANEL1, wxID_RIBBONPLOTTIMESERIES, wxID_RIBBONPLOTPROB,
  wxID_RIBBONPLOTHIST, wxID_RIBBONPLOTBOX, wxID_RIBBONPLOTSUMMARY, 
  wxID_RIBBONPLOTTSTYPE, wxID_RIBBONPLOTTSCOLOR, wxID_RIBBONPLOTTSLEGEND,
  wxID_RIBBONPLOTBOXTYPE, wxID_RIBBONPLOTHISTTYPE, wxID_RIBBONPLOTHISTBIN,
@@ -43,9 +43,9 @@ class mnuRibbon(RB.RibbonBar):
         plots_bar = RB.RibbonButtonBar(plot_panel, wx.ID_ANY)           
         plots_bar.AddSimpleButton(wxID_RIBBONPLOTTIMESERIES, "Time Series",  
                                 CreateBitmap("images\\TSA_icon.png"), "")
-        plots_bar.AddSimpleButton(wxID_RIBBONTPLOTPROB, "Probablity",  
+        plots_bar.AddSimpleButton(wxID_RIBBONPLOTPROB, "Probablity",  
                                 CreateBitmap("images\\Probability.png"), "")
-        plots_bar.AddSimpleButton(wxID_RIBBONTPLOTPROB, "Histogram",  
+        plots_bar.AddSimpleButton(wxID_RIBBONPLOTHIST, "Histogram",  
                                 CreateBitmap("images\\Histogram.png"), "")
         plots_bar.AddSimpleButton(wxID_RIBBONPLOTBOX, "Box/Whisker",  
                                 CreateBitmap("images\\BoxWisker.png"), "")
@@ -180,6 +180,27 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWPLOT)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWCONSOLE)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onDocking, id=wxID_RIBBONVIEWSCRIPT)
+
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onPlotSelection, id=wxID_RIBBONPLOTTIMESERIES) 
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onPlotSelection, id=wxID_RIBBONPLOTPROB)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onPlotSelection, id=wxID_RIBBONPLOTBOX)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onPlotSelection, id=wxID_RIBBONPLOTHIST)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onPlotSelection, id=wxID_RIBBONPLOTSUMMARY)
+
+        
+
+    def onPlotSelection(self, event):
+        if event.Id == wxID_RIBBONPLOTTIMESERIES:       
+            value = 0
+        elif event.Id ==wxID_RIBBONPLOTPROB:
+            value= 1
+        elif event.Id == wxID_RIBBONPLOTHIST:
+            value=2
+        elif event.Id == wxID_RIBBONPLOTBOX:
+            value=3
+        elif event.Id == wxID_RIBBONPLOTSUMMARY:
+            value= 4  
+        Publisher().sendMessage(("select.Plot"), value)
 
 
 
