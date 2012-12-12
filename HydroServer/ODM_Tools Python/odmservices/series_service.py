@@ -5,6 +5,7 @@ from odmdata.unit import Unit
 from odmdata.series import Series
 from odmdata.data_value import DataValue
 from odmdata.quality_control_level import QualityControlLevel
+from odmdata.qualifier import Qualifier
 
 from sqlalchemy import distinct
 
@@ -15,11 +16,6 @@ class SeriesService():
 		self._session_factory = SessionFactory(connection_string, debug)
 		self._edit_session = self._session_factory.get_session()
 		self._debug = debug
-
-	# Creates a new session factory with the given connection string
-	def change_connection(connection_string):
-		self._session_factory = SessionFactory(connection_string, self._debug)
-		self._edit_session = self._session_factory.get_session()
 
 	# Sites methods
 	def get_sites(self, site_code = ""):
@@ -146,3 +142,75 @@ class SeriesService():
 		session.commit()
 		session.close()
 
+	def create_new_series(self, data_values, variable_id, site_id, method_id, source_id, qcl_id):
+		self.update_dvs(data_values)
+		series = Series()
+		series.variable_id = variable_id
+		series.site_id = site_id
+		series.method_id = method_id
+		series.source_id = source_id
+		series.quality_control_level_id = qcl_id
+
+		session = self._session_factory.get_session()
+		session.add(series)
+		session.commit()
+		session.close()
+
+	def create_qualifier(self, code, description):
+		qualifier = Qualifier()
+		qualifier.code = code
+		qualifier.description = description
+
+		session = self._session_factory.get_session()
+		session.add(qualifier)
+		session.commit()
+		session.close()
+
+	def create_variable(self, code, name, speciation, variable_unit, sample_medium, 
+		value_type, is_regular, time_support, time_unit, data_type, general_category, no_data_value):
+		var = Variable()
+		var.code = code
+		var.name = name
+		var.speciation = speciation
+		var.variable_unit = variable_unit
+		var.sample_medium = sample_medium
+		var.value_type =  value_type
+		var.is_regular = is_regular
+		var.time_support = time_support
+		var.time_unit = time_unit
+		var.data_type = data_type
+		var.general_category = general_category
+		var.no_data_value = no_data_value
+
+		session = self._session_factory.get_session()
+		session.add(var)
+		session.commit()
+		session.close()
+
+	def update_series_catalog(self, series):
+		session = self._session_factory.get_session()
+		merged_series = session.merge(series)
+		session.add(merged_series)
+		session.commit()
+		session.close()
+
+	def create_qcl(self, code, definition, explanation):
+		qcl = QualityControlLevel()
+		qcl.code = code
+		qcl.definition = definition
+		qcl.explanation = explanation
+
+		session = self._session_factory.get_session()
+		session.add(qcl)
+		session.commit()
+		session.close()
+
+	def delete_series(self, series):
+		data_values = self.get_data_values_by_series(series)
+		self.delete_dvs(data_values)
+
+		session = self._session_factory.get_session()
+		delete_series = session.merge(series)
+		session.delete(delete_series)
+		session.commit()
+		session.close()

@@ -11,18 +11,12 @@ from odmdata.censor_code_cv import CensorCodeCV
 from odmdata.topic_category_cv import TopicCategoryCV
 from odmdata.sample_type_cv import SampleTypeCV
 
-class SeriesService():
+class CVService():
 	# Accepts a string for creating a SessionFactory, default uses odmdata/connection.cfg
 	def __init__(self, connection_string="", debug=False):
 		self._session_factory = SessionFactory(connection_string, debug)
 		self._edit_session = self._session_factory.get_session()
 		self._debug = debug
-
-	# Creates a new session factory with the given connection string
-	def change_connection(connection_string):
-		self._session_factory = SessionFactory(connection_string, self._debug)
-		self._edit_session = self._session_factory.get_session()
-
 
 	# Controlled Vocabulary get methods
 	def get_vertical_datum_cvs(self):
