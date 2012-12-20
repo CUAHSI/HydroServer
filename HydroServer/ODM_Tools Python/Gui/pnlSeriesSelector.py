@@ -262,6 +262,40 @@ class pnlSeriesSelector(wx.Panel):
             self.DataValues = self.dbservice.get_data_values_by_series(self.seriesList[event.m_itemIndex])
             Publisher().sendMessage(("add.NewPlot"), [self.DataValues, self.seriesList[event.m_itemIndex]])
             
+            
+            #when Selected for editing
+            self.conn = sqlite3.connect(":memory:")
+            cursor = conn.cursor()
+            cursor.execute("""CREATE TABLE DataValues
+                (ValueID INTEGER NOT NULL,
+                DataValue FLOAT NOT NULL,
+                ValueAccuracy FLOAT,
+                LocalDateTime TEXT(25) NOT NULL,
+                UTCOffset FLOAT NOT NULL,
+                DateTimeUTC TEXT(25) NOT NULL,
+                SiteID INTEGER NOT NULL,
+                VariableID INTEGER NOT NULL,
+                OffsetValue FLOAT,
+                OffsetTypeID INTEGER,
+                CensorCode VARCHAR(50) NOT NULL,
+                QualifierID INTEGER,
+                MethodID INTEGER NOT NULL,
+                SourceID INTEGER NOT NULL,
+                SampleID INTEGER,
+                DerivedFromID INTEGER,
+                QualityControlLevelID INTEGER NOT NULL,
+                isSelected INTEGER NOT NULL,
+                PRIMARY KEY (ValueID),
+                UNIQUE (DataValue, LocalDateTime, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID))
+               """)
+##        albums = [('Exodus', 'Andy Hunter', '7/9/2002', 'Sparrow Records', 'CD'),
+##          ('Until We Have Faces', 'Red', '2/1/2011', 'Essential Records', 'CD'),
+##          ('The End is Where We Begin', 'Thousand Foot Krutch', '4/17/2012', 'TFKmusic', 'CD'),
+##          ('The Good Life', 'Trip Lee', '4/10/2012', 'Reach Records', 'CD')]
+        cursor.executemany("INSERT INTO albums VALUES (?,?,?,?,?)", albums)
+        conn.commit()
+        
+            
         else:
             self.listSeries.SetStringItem(event.m_itemIndex, 0, "False")
             self.SelectedSeries.remove(self.seriesList[event.m_itemIndex])

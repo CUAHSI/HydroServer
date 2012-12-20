@@ -1,5 +1,7 @@
 
 import wx
+import numpy
+import math
 
 from wx.lib.pubsub import Publisher
 
@@ -55,7 +57,29 @@ class plotHist(wx.Panel):
       self._init_sizers()
 
    
-   
+  def ChangeNumOfBins(self, bins):
+      self.bins = bins
+      self.plot.clear()
+
+      self.plot.set_xlabel(self.Series.variable_name)
+      self.plot.set_ylabel("Number of Observations")
+
+      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      
+      self.plot=self.figure.add_subplot(111)
+      xRange =round(max(self.dataValues) - min(self.dataValues), 3)
+      dX= round(xRange/bins, 3)
+
+      self.plot.hist(self.dataValues, bins, normed=1, facecolor='g')
+      self.canvas.draw()
+     
+  def defaultNumBins(self, numVals):
+      numBins = 0
+      top = 2.303 * numpy.sqrt(numVals)
+      bottom = numpy.log(numVals)
+      numBins = math.floor((top/bottom)*2)
+      
+      return numBins
 
 
   def addPlot(self, datavalues, datetimes, series):
@@ -63,13 +87,15 @@ class plotHist(wx.Panel):
       self.dataValues = datavalues
       self.dateTimes = datetimes
       self.Series= series
-      self.plot.clear()
-      self.plot.set_xlabel("Value")
-      self.plot.set_ylabel("Count")
+      self.plot.set_xlabel(self.Series.variable_name)
+      self.plot.set_ylabel("Number of Observations")
+
+
+
       self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
       
       self.plot=self.figure.add_subplot(111)
-      self.plot.hist(self.dataValues, 50, normed=1, facecolor='g', alpha=0.75)
+      self.plot.hist(self.dataValues, self.defaultNumBins(len(self.dataValues)), normed=1, facecolor='g', alpha=0.75, label = self.Series.site_name+" "+self.Series.variable_name)
        
       self.canvas.draw()
 

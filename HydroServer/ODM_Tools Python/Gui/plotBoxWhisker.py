@@ -68,7 +68,7 @@ class plotBox(wx.Panel):
       self.Series= series
       self.plot.clear()
       x = range(len(self.dataValues))
-      self.plot.set_xlabel("Date Time")
+      self.plot.set_xlabel("Overall") 
       self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
       self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
              
@@ -86,7 +86,15 @@ class plotBox(wx.Panel):
       self.figure.set_edgecolor( color )
       self.canvas.SetBackgroundColour( color )
        
-       
+  def monthly(self):
+      self.plot.set_xlabel("Monthly")
+  def seasonaly(self):
+      self.plot.set_xlabel("Seasonally")
+  def yearly(self):
+      self.plot.set_xlabel("Yearly")
+  def overall(self): 
+      self.plot.set_xlabel("Overall") 
+
        
   def __init__(self, parent, id, pos, size, style, name):
       self._init_ctrls(parent)
