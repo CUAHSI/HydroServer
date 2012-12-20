@@ -96,6 +96,20 @@ class SeriesService():
 		session.close()
 		return result
 
+	def get_data_values_by_series_test(self, series):
+		session = self._session_factory.get_session()
+		result = session.query(DataValue.id, DataValue.data_value, DataValue.local_date_time, DataValue.utc_offset,DataValue.date_time_utc,
+							   DataValue.site_id, DataValue.variable_id, DataValue.offset_value, DataValue.offset_type_id, DataValue.censor_code,
+							   DataValue.qualifier_id, DataValue.method_id, DataValue.source_id, DataValue.sample_id, DataValue.derived_from_id,
+							   DataValue.quality_control_level_id).filter_by(
+								variable_id=series.variable_id, 
+								site_id=series.site_id,
+								method_id=series.method_id,
+								source_id=series.source_id,
+								quality_control_level_id=series.quality_control_level_id).order_by(DataValue.local_date_time).all()
+		session.close()
+		return result
+
 	def get_data_value_by_id(self, id):
 		session = self._session_factory.get_session()
 		try:
