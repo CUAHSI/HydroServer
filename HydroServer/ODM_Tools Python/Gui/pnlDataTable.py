@@ -4,9 +4,25 @@ import wx
 import wx.grid
 from ObjectListView import ObjectListView, ColumnDefn
 import odmdata
+import sqlite3
     
 [wxID_PNLDATATABLE, wxID_PNLDATATABLEDATAGRID, 
 ] = [wx.NewId() for _init_ctrls in range(2)]
+
+
+class Track:
+    """
+    A song in some music library
+    """
+    def __init__(self, **kwargs):
+        self.isChecked = False
+        self.attributeNames = kwargs.keys()
+        self.attributeNames.extend(["isChecked"])
+        self.__dict__.update(kwargs)
+
+    
+
+
 
 class pnlDataTable(wx.Panel):
     def _init_coll_boxSizer1_Items(self, parent):
@@ -37,16 +53,79 @@ class pnlDataTable(wx.Panel):
         
 
     def InitModel(self, Values):
-        self.values = Values 
+        #self.values = Values 
+
+        # self.values = [  
+        #     Track(ValueID= 1, DataValue = 10, ValueAccuracy = 5, LocalDateTime = "09-13-1986", UTCOffset = -7, DateTimeUTC = "09-13-1986", SiteID = 10, VariableID = 5),
+        #     Track(ValueID= 1, DataValue = 10, ValueAccuracy = 5, LocalDateTime = "09-13-1986", UTCOffset = -7, DateTimeUTC = "09-13-1986", SiteID = 10, VariableID = 5),
+        #     Track(ValueID= 1, DataValue = 10, ValueAccuracy = 5, LocalDateTime = "09-13-1986", UTCOffset = -7, DateTimeUTC = "09-13-1986", SiteID = 10, VariableID = 5),
+        #     Track(ValueID= 1, DataValue = 10, ValueAccuracy = 5, LocalDateTime = "09-13-1986", UTCOffset = -7, DateTimeUTC = "09-13-1986", SiteID = 10, VariableID = 5),
+        #     Track(ValueID= 1, DataValue = 10, ValueAccuracy = 5, LocalDateTime = "09-13-1986", UTCOffset = -7, DateTimeUTC = "09-13-1986", SiteID = 10, VariableID = 5),
+        # ]
+        
+      
+
+        #self.values = [[dv.id, dv.data_value, dv.value_accuracy, dv.local_date_time, dv.utc_offset, dv.date_time_utc, dv.site_id, dv.variable_id  ] for dv in Values]
+        
+
+
+
+
+        conn = sqlite3.connect(":memory:")
+        cursor = conn.cursor()
+        cursor.execute("""CREATE TABLE albums
+                  (title text, artist text, release_date text, 
+                   publisher text, media_type text) 
+               """)
+        albums = [('Exodus', 'Andy Hunter', '7/9/2002', 'Sparrow Records', 'CD'),
+          ('Until We Have Faces', 'Red', '2/1/2011', 'Essential Records', 'CD'),
+          ('The End is Where We Begin', 'Thousand Foot Krutch', '4/17/2012', 'TFKmusic', 'CD'),
+          ('The Good Life', 'Trip Lee', '4/10/2012', 'Reach Records', 'CD')]
+        cursor.executemany("INSERT INTO albums VALUES (?,?,?,?,?)", albums)
+        conn.commit()
+
+        sql = "SELECT * FROM albums"
+        cursor.execute(sql)
+
+
+
+        self.myOlv.SetColumns(ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(cursor.description))
+
+        self.values = [list(x) for x in cursor.fetchall()] 
+        # ColumnDefn("Title", "center", 100, "title"),
+            # ColumnDefn("Artist", "center", 100, "artist"),
+            # ColumnDefn("Release date", "center", 100, "release_date"),
+            # ColumnDefn("Publisher", "center", 100, "publisher"),
+            # ColumnDefn("Media Type", "center", 100, "media_type")
+
+
+
+
+
         print type(self.values)        
         print type(self.values[0])
         print dir(self.values[0])
         print isinstance(self.values[0], odmdata.data_value.DataValue)
         self.myOlv.SetObjects(self.values)
+        conn.close()
 
     def InitWidgets(self):
         
         self.myOlv = ObjectListView(self, -1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+        self.myOlv.CreateCheckStateColumn()
+        self.myOlv.SetEmptyListMsg("")
+        # self.myOlv.UseSubItemCheckBoxes = true
+        # RowBorderDecoration rbd = new RowBorderDecoration()
+        # rbd.BorderPen = new Pen(Color.FromArgb(128, Color.LightSeaGreen), 2)
+        # rbd.BoundsPadding = new Size(1, 1)
+        # rbd.CornerRounding = 4.0f
+
+        # # Put the decoration onto the hot item
+        # self.olv1.HotItemStyle = new HotItemStyle()
+        # self.olv1.HotItemStyle.Decoration = rbd
+
+
+
         sizer_2 = wx.BoxSizer(wx.VERTICAL)
         sizer_2.Add(self.myOlv, 1, wx.ALL|wx.EXPAND, 4)
         self.SetSizer(sizer_2)
@@ -65,23 +144,33 @@ class pnlDataTable(wx.Panel):
 ##            ColumnDefn("Last Played", "left", 100, "lastPlayed", stringConverter="%d-%m-%Y"),
 ##            ColumnDefn("Rating", "center", 100, "rating"),
 
-            ColumnDefn("ValueID", "center", 100, "ValueID"),
-            ColumnDefn("DataValue", "center", 100, "DataValue"),
-            ColumnDefn("ValueAccuracy", "center", 100, "ValueAccuracy"),
-            ColumnDefn("LocalDateTime", "center", 100, "LocalDateTime"),           
-            ColumnDefn("UTCOffset", "center", 100, "UTCOffset"),
-            ColumnDefn("DateTimeUTC", "center", 100, "DateTimeUTC"),
-            ColumnDefn("SiteID", "center", 100, "SiteID"),            
-            ColumnDefn("VariableID", "center", 100, "VariableID"),
-            ColumnDefn("OffsetValue", "center", 100, "OffsetValue"),
-            ColumnDefn("OffsetTypeID", "center", 100, "OffsetTypeID"),
-            ColumnDefn("CensorCode", "center", 100, "CensorCode"),
-            ColumnDefn("QualifierID", "center", 100, "QualifierID"),
-            ColumnDefn("MethodID", "center", 100, "MethodID"),
-            ColumnDefn("SourceID", "center", 100, "SourceID"),
-            ColumnDefn("SampleID", "center", 100, "SampleID"),
-            ColumnDefn("DerivedFromID", "center", 100, "DerivedFromID"),
-            ColumnDefn("QualityControlLevelID", "center", 100, "QCLID")
+
+
+            # ColumnDefn("Title", "center", 100, "title"),
+            # ColumnDefn("Artist", "center", 100, "artist"),
+            # ColumnDefn("Release date", "center", 100, "release_date"),
+            # ColumnDefn("Publisher", "center", 100, "publisher"),
+            # ColumnDefn("Media Type", "center", 100, "media_type")
+
+
+
+            # ColumnDefn("ValueID", "center", 100, "ValueID"),
+            # ColumnDefn("DataValue", "center", 100, "DataValue"),
+            # ColumnDefn("ValueAccuracy", "center", 100, "ValueAccuracy"),
+            # ColumnDefn("LocalDateTime", "center", 100, "LocalDateTime"),           
+            # ColumnDefn("UTCOffset", "center", 100, "UTCOffset"),
+            # ColumnDefn("DateTimeUTC", "center", 100, "DateTimeUTC"),
+            # ColumnDefn("SiteID", "center", 100, "SiteID"),            
+            # ColumnDefn("VariableID", "center", 100, "VariableID"),
+            # ColumnDefn("OffsetValue", "center", 100, "OffsetValue"),
+            # ColumnDefn("OffsetTypeID", "center", 100, "OffsetTypeID"),
+            # ColumnDefn("CensorCode", "center", 100, "CensorCode"),
+            # ColumnDefn("QualifierID", "center", 100, "QualifierID"),
+            # ColumnDefn("MethodID", "center", 100, "MethodID"),
+            # ColumnDefn("SourceID", "center", 100, "SourceID"),
+            # ColumnDefn("SampleID", "center", 100, "SampleID"),
+            # ColumnDefn("DerivedFromID", "center", 100, "DerivedFromID"),
+            # ColumnDefn("QualityControlLevelID", "center", 100, "QCLID")
             
         ])
 
