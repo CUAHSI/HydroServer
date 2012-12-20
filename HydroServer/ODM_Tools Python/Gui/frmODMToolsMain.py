@@ -171,8 +171,9 @@ class frmODMToolsMain(wx.Frame):
 
 
 
-    def __init__(self, parent):
-        self.createdummyService()
+    def __init__(self, parent, service_manager):
+        self.service_manager = service_manager
+        self.createService()
         self._init_ctrls(parent)
         self.Refresh()
     
@@ -184,10 +185,9 @@ class frmODMToolsMain(wx.Frame):
         # delete the frame
         self.Destroy()
 
-    
-    
-    def createdummyService(self):
-        self.sc = SeriesService(connection_string="mssql+pyodbc://ODM:odm@(local)\sqlexpress/LittleBear11")#connection_string="mssql+pyodbc://ODM:odm@Arroyo/LittleBear11")
+
+    def createService(self):
+        self.sc = self.service_manager.get_series_service()
         
         
 

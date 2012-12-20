@@ -2,9 +2,10 @@
 
 import wx
 import frmODMToolsMain
+from odmservices.service_manager import ServiceManager
 
-def create(parent):
-    return frmDBConfig(parent)
+def create(parent, is_main):
+    return frmDBConfig(parent, is_main = is_main)
 
 [wxID_FRMDBCONFIG, wxID_FRMDBCONFIGBOXCONNECTION, wxID_FRMDBCONFIGBTNCANCEL, 
  wxID_FRMDBCONFIGBTNSAVE, wxID_FRMDBCONFIGBTNTEST, wxID_FRMDBCONFIGCOMBOBOX1, 
@@ -95,36 +96,29 @@ class frmDBConfig(wx.Frame):
               parent=self.pnlConnection, pos=wx.Point(8, 8), size=wx.Size(432,
               152), style=0)
 
-        self.lblUser = wx.StaticText(id=wxID_FRAME1LBLUSER,
-              label=u'Server User ID:', name=u'lblUser',
-              parent=self.pnlConnection, pos=wx.Point(64, 104), size=wx.Size(76,
-              13), style=0)
-
-        self.txtPass = wx.TextCtrl(id=wxID_FRAME1TXTPASS, name=u'txtPass',
-              parent=self.pnlConnection, pos=wx.Point(160, 128),
-              size=wx.Size(248, 21), style=0, value=u'')
-
-        self.txtDBName = wx.TextCtrl(id=wxID_FRMDBCONFIGTXTDBNAME,
-              name=u'txtDBName', parent=self.pnlConnection, pos=wx.Point(160,
-              64), size=wx.Size(248, 21), style=0, value=u'')
-
-        self.lblDBName = wx.StaticText(id=wxID_FRAME1LBLDBNAME,
-              label=u'Database Name:', name=u'lblDBName',
-              parent=self.pnlConnection, pos=wx.Point(64, 72), size=wx.Size(81,
-              13), style=0)
-
-        self.txtServer = wx.TextCtrl(id=wxID_FRAME1TXTSERVER, name=u'txtServer',
-              parent=self.pnlConnection, pos=wx.Point(160, 32),
-              size=wx.Size(248, 21), style=0, value=u'')
+        # ----------------------------
 
         self.lblServer = wx.StaticText(id=wxID_FRMDBCONFIGLBLSERVER,
               label=u'Server Address:', name=u'lblServer',
               parent=self.pnlConnection, pos=wx.Point(64, 40), size=wx.Size(79,
               16), style=0)
 
-        self.lblPass = wx.StaticText(id=wxID_FRMDBCONFIGLBLPASS,
-              label=u'Server Password:', name=u'lblPass',
-              parent=self.pnlConnection, pos=wx.Point(56, 136), size=wx.Size(86,
+        self.txtServer = wx.TextCtrl(id=wxID_FRAME1TXTSERVER, name=u'txtServer',
+              parent=self.pnlConnection, pos=wx.Point(160, 32),
+              size=wx.Size(248, 21), style=0, value=u'')
+
+        self.lblDBName = wx.StaticText(id=wxID_FRAME1LBLDBNAME,
+              label=u'Database Name:', name=u'lblDBName',
+              parent=self.pnlConnection, pos=wx.Point(64, 72), size=wx.Size(81,
+              13), style=0)
+
+        self.txtDBName = wx.TextCtrl(id=wxID_FRMDBCONFIGTXTDBNAME,
+              name=u'txtDBName', parent=self.pnlConnection, pos=wx.Point(160,
+              64), size=wx.Size(248, 21), style=0, value=u'')
+
+        self.lblUser = wx.StaticText(id=wxID_FRAME1LBLUSER,
+              label=u'Server User ID:', name=u'lblUser',
+              parent=self.pnlConnection, pos=wx.Point(64, 104), size=wx.Size(76,
               13), style=0)
 
         self.txtUser = wx.TextCtrl(id=wxID_FRMDBCONFIGTXTUSER, name=u'txtUser',
@@ -132,25 +126,54 @@ class frmDBConfig(wx.Frame):
               size=wx.Size(248, 21), style=0, value=u'')
         self._init_sizers()
         
-        
+        self.lblPass = wx.StaticText(id=wxID_FRMDBCONFIGLBLPASS,
+              label=u'Server Password:', name=u'lblPass',
+              parent=self.pnlConnection, pos=wx.Point(56, 136), size=wx.Size(86,
+              13), style=0)        
+
+        self.txtPass = wx.TextCtrl(id=wxID_FRAME1TXTPASS, name=u'txtPass',
+              parent=self.pnlConnection, pos=wx.Point(160, 128),
+              size=wx.Size(248, 21), style=wx.PASSWORD, value=u'')
+
         self.BindActions()
 
 
-    def __init__(self, parent):
+    def __init__(self, parent, is_main=False):
+        self.is_main = is_main
         self._init_ctrls(parent)
 
     def BindActions(self):
         self.btnSave.Bind(wx.EVT_BUTTON, self.OnBtnSaveButton,
-        id=wxID_FRMDBCONFIGBTNSAVE)
+          id=wxID_FRMDBCONFIGBTNSAVE)
+
+        self.btnCancel.Bind(wx.EVT_BUTTON, self.OnBtnCancel,
+          id=wxID_FRMDBCONFIGBTNCANCEL)
               
     def OnBtnSaveButton(self, event):
-        self.new = frmODMToolsMain.frmODMToolsMain(parent=None)
-        self.new.Show()
+        conn_dict = {}
+        if self.comboBox1.GetValue() == 'Microsoft SQL Server':
+          conn_dict['engine']   = 'mssql'
 
+        conn_dict['user']     = self.txtUser.GetValue()
+        conn_dict['password'] = self.txtPass.GetValue()
+        conn_dict['address']  = self.txtServer.GetValue()
+        conn_dict['db']       = self.txtDBName.GetValue()
+
+        service_manager = ServiceManager()
+        service_manager.add_connection(conn_dict)
+
+        if self.is_main:
+          self.new = frmODMToolsMain.frmODMToolsMain(parent=None, service_manager=service_manager)
+          self.new.Show()
+
+        self.Close()
+
+    def OnBtnCancel(self, e):
+      self.Close()
 
 if __name__ == '__main__':
     app = wx.PySimpleApp()
-    frame = create(None)
+    frame = create(None, True)
     frame.Show()
 
     app.MainLoop()

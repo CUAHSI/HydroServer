@@ -3,7 +3,8 @@ from odmservices.cv_service import CVService
 import os
 
 class ServiceManager():
-	def __init__(self):
+	def __init__(self, debug=False):
+		self.debug = debug
 		f = self._get_file('r')
 		self._connections = []
 		self._connection_format = "%s+pyodbc://%s:%s@%s/%s"
@@ -43,7 +44,7 @@ class ServiceManager():
 		"""conn_dict must be a dictionary with keys: engine, user, password, address, db"""
 
 		# remove earlier connections that are identical to this one
-		self._connections[:] = [x for x in self._connections if x != conn_dict]
+		self.delete_connection(conn_dict)
 
 		self._connections.append(conn_dict)
 		self._current_connection = self._connections[-1]
@@ -51,14 +52,17 @@ class ServiceManager():
 		# write changes to connection file
 		self._save_connections()
 
+	def delete_connection(self, conn_dict):
+		self._connections[:] = [x for x in self._connections if x != conn_dict]
+
 	# Create and return services based on the currently active connection
 	def get_series_service(self):
 		conn_string = self._build_connection_string(self._current_connection)
-		return SeriesService(conn_string, True)
+		return SeriesService(conn_string, self.debug)
 
 	def get_cv_service(self):
 		conn_string = self._build_connection_string(self._current_connection)
-		return CVService(conn_string, True)
+		return CVService(conn_string, self.debug)
 
 
 
