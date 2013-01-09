@@ -18,7 +18,7 @@ def create(parent, is_main):
  wxID_FRAME1LBLDBNAME, wxID_FRAME1TXTSERVER, wxID_FRMDBCONFIGLBLSERVER,
 ] = [wx.NewId() for _init_ctrls in range(24)]
 
-class frmDBConfig(wx.Frame):
+class frmDBConfig(wx.Dialog):
     def _init_coll_boxSizer3_Items(self, parent):
         # generated method, don't edit
 
@@ -56,9 +56,9 @@ class frmDBConfig(wx.Frame):
 
     def _init_ctrls(self, prnt):
         # generated method, don't edit
-        wx.Frame.__init__(self, id=wxID_FRMDBCONFIG, name=u'frmDBConfig',
+        wx.Dialog.__init__(self, id=wxID_FRMDBCONFIG, name=u'frmDBConfig',
               parent=prnt, pos=wx.Point(685, 312), size=wx.Size(473, 308),
-              style=wx.DEFAULT_FRAME_STYLE, title=u'Database Configuration')
+              style=wx.DEFAULT_DIALOG_STYLE, title=u'Database Configuration')
         self.SetClientSize(wx.Size(457, 270))
 
         self.pnlMain = wx.Panel(id=wxID_FRMDBCONFIGPNLMAIN, name=u'pnlMain',
