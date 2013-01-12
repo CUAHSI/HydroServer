@@ -56,17 +56,34 @@ class pnlPlot(wx.Notebook):
     
     def addPlot(self, Values):
     
-        self.dataValues = []
-        self.dateTimes= []
-        #self.Series = Values[1]
-        for dv in Values[0]:
-           self.dataValues.append(dv.data_value)
-           self.dateTimes.append(dv.local_date_time)
-        self.pltSum.addPlot(self.dataValues,  Values[1])
-        self.pltTS.addPlot(self.dataValues, self.dateTimes, Values[1])
-        self.pltHist.addPlot(self.dataValues, self.dateTimes, Values[1])
-        self.pltProb.addPlot(self.dataValues, self.dateTimes, Values[1])
-        self.pltBox.addPlot(self.dataValues, self.dateTimes, Values[1])
+        self.cursor = Values[0]
+
+       #  sql = "SELECT  DataValue, LocalDateTime FROM DataValues"
+       #  self.cursor.execute(sql)
+       #  self.values = [list(x) for x in self.cursor.fetchall()]
+
+       
+       #  self.dataValues = []
+       #  self.dateTimes= []
+       #  #self.Series = Values[1]
+       #  for dv in self.values: 
+       #     self.dataValues.append(dv[0])
+       #     self.dateTimes.append(dv[1])
+       # # print self.dateTimes   
+
+       #  self.pltSum.addPlot(self.dataValues,  Values[1])
+        
+       #  self.pltHist.addPlot(self.dataValues, self.dateTimes, Values[1])
+       #  self.pltProb.addPlot(self.dataValues, self.dateTimes, Values[1])
+       #  self.pltBox.addPlot(self.dataValues, self.dateTimes, Values[1])
+       #  self.pltTS.addPlot(self.dataValues, self.dateTimes, Values[1])
+
+        Filter = " WHERE DataValue <> -9999"
+        self.pltSum.addPlot(Values, Filter)
+        self.pltHist.addPlot(Values, Filter)
+        self.pltProb.addPlot(Values, Filter)
+        self.pltBox.addPlot(Values, Filter)
+        self.pltTS.addPlot(Values, Filter)
         
 
 

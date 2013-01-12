@@ -37,12 +37,14 @@ class plotSummary(wx.Panel):
         self.initPlot()
         self._init_sizers()
 
-    def addPlot(self, datavalues, series):
-        
+    def addPlot(self, Values, Filter):
+
+        series=Values[1]
+
         self.grdSummary.AppendCols(numCols = 1, updateLabels = True)
         count = self.grdSummary.GetNumberCols()
         self.grdSummary.SetColLabelValue(count-1, series.site_name +"-"+ series.variable_name)
-        self.fillValues(datavalues, series.id, count-1)
+        self.fillValues(Values, Filter, count-1)
         
     def remPlot(self, id):
         self.grdSummary.DeleteCols(pos = 0, numCols = 1,  updateLabels = True)
@@ -68,17 +70,25 @@ class plotSummary(wx.Panel):
         self.grdSummary.SetRowLabelValue(14, "90%")
         
         
-    def fillValues(self, dataValues, sID, col):
+    def fillValues(self, Values, Filter, col):
         #SetCellValue(int row, int col, const wxString& s)  
 
+        self.cursor = Values[0]        
+
+
+        self.cursor.execute("SELECT DataValue FROM DataValues"+Filter)
+        dataValues =[x[0] for x in self.cursor.fetchall()]
+
+        self.cursor.execute("SELECT Count(ValueID) FROM DataValues WHERE CensorCode <> 'nc'")
+        val= self.cursor.fetchone()[0]
+        print(val)
         data= sorted(dataValues)
         count=len(data)
-        self.grdSummary.SetCellValue(0, col, repr(sID))  
-        self.grdSummary.SetCellValue(1, col, repr(count))        
-        self.grdSummary.SetCellValue(2, col, repr(0))
-        self.grdSummary.SetCellValue(3, col, repr(numpy.mean(data)))  
 
-        
+        self.grdSummary.SetCellValue(0, col, repr(Values[1].id))  
+        self.grdSummary.SetCellValue(1, col, repr(count))        
+        self.grdSummary.SetCellValue(2, col, repr(val))
+        self.grdSummary.SetCellValue(3, col, repr(numpy.mean(data)))  
 
        
         sumval = 0 
@@ -91,8 +101,8 @@ class plotSummary(wx.Panel):
                     sign = sign * -1
                 sumval = sumval+ numpy.log2(numpy.absolute(dv))    
 
-                
-        self.grdSummary.SetCellValue(4, col, repr((sign * 2) ** float(sumval / float(count))))
+             
+        self.grdSummary.SetCellValue(4, col, repr(sign * (2 ** float(sumval / float(count)))))
         self.grdSummary.SetCellValue(5, col, repr(max(data)))  
         self.grdSummary.SetCellValue(6, col, repr(min(data))) 
         self.grdSummary.SetCellValue(7, col, repr(numpy.std(data)))  
@@ -103,6 +113,7 @@ class plotSummary(wx.Panel):
         self.grdSummary.SetCellValue(10, col, repr(data[int(math.floor(count/10))]))  
         self.grdSummary.SetCellValue(11, col, repr(data[int(math.floor(count/4))]))
 
+             
         if count % 2 == 0 :
             self.grdSummary.SetCellValue(12, col, repr((data[int(math.floor((count/2)-1))]+ data[int(count/2)])/2))  
         else:

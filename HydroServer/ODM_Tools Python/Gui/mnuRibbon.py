@@ -52,7 +52,7 @@ class mnuRibbon(RB.RibbonBar):
         plots_bar.AddSimpleButton(wxID_RIBBONPLOTSUMMARY, "Summary",  
                                 CreateBitmap("images\\Summary.png"), "")
 
-#-------------------------------------------------------------------------------                                
+#--TIME SERIES PLOT OPTIONS-----------------------------------------------------------------------------                                
         tsPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
         tsPlotsOptions_bar = RB.RibbonButtonBar(tsPlotOptions_panel, wx.ID_ANY)
@@ -63,14 +63,14 @@ class mnuRibbon(RB.RibbonBar):
         tsPlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
                                 CreateBitmap("images\\Legend.png"), "")
                                 
-#-------------------------------------------------------------------------------                                
+#- BOXPLOT OPTIONS------------------------------------------------------------------------------                                
         boxPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
         boxPlotsOptions_bar = RB.RibbonButtonBar(boxPlotOptions_panel, wx.ID_ANY)
         boxPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTBOXTYPE, "Box Whisker Type",  
                                 CreateBitmap("images\\BoxWhiskerType.png"), "")
                                 
-#-------------------------------------------------------------------------------
+#- HISTOGRAM PLOT OPTIONS------------------------------------------------------------------------------
         histPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
         histPlotsOptions_bar = RB.RibbonButtonBar(histPlotOptions_panel, wx.ID_ANY)

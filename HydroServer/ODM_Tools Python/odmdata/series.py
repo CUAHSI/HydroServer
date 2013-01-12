@@ -40,5 +40,11 @@ class Series(Base):
 	# TODO add all to repr
 	def __repr__(self):
 		return "<Series('%s')>" % (self.id)
+	def __dir__(self):
+		return ['SeriesID','SiteID', 'SiteCode', 'SiteName','VaraibleID', 'VariableCode', 'VarieableName',
+			'Speciation', 'VariableUnitsID', 'VariableUnitsName', 'SampleMedium', 'ValueType', 'TimeSupport',
+			'TimeUnitsID', 'TimeUnitsName', 'DataType', 'GeneralCategory', 'MethodID', 'MethodDescription',
+			'SourceID', 'SourceDescription', 'Organization', 'Citation', 'QualityControlLevelID', 'QualityControlLevelCode', 
+			'BeginDateTime', 'EndDateTime', 'BeginDateTimeUTC', 'EndDateTimeUTC', 'ValueCount'	]
 
 

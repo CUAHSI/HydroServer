@@ -61,11 +61,18 @@ class plotBox(wx.Panel):
    
    
 
-  def addPlot(self, datavalues, datetimes, series):
-      self.plot.clear()
-      self.dataValues = datavalues
-      self.dateTimes = datetimes
-      self.Series= series
+  def addPlot(self, Values, Filter):
+
+      self.cursor = Values[0]
+
+
+      self.cursor.execute("SELECT  DataValue FROM DataValues"+Filter)
+      self.dataValues =[x[0] for x in self.cursor.fetchall()]
+
+     
+      self.Series= Values[1]
+      
+
       self.plot.clear()
       x = range(len(self.dataValues))
       self.plot.set_xlabel("Overall") 

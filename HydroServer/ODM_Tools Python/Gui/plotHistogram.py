@@ -56,6 +56,9 @@ class plotHist(wx.Panel):
       self.canvas.draw()
       self._init_sizers()
 
+  
+      
+
    
   def ChangeNumOfBins(self, bins):
       self.bins = bins
@@ -81,12 +84,22 @@ class plotHist(wx.Panel):
       
       return numBins
 
+  
+  def addPlot(self, Values, Filter):
+      
 
-  def addPlot(self, datavalues, datetimes, series):
+      self.cursor = Values[0]
+
+
+      self.cursor.execute("SELECT  DataValue FROM DataValues"+Filter)
+      self.dataValues =[x[0] for x in self.cursor.fetchall()]
+
+     
+      self.Series= Values[1]
+
+
+
       self.plot.clear()
-      self.dataValues = datavalues
-      self.dateTimes = datetimes
-      self.Series= series
       self.plot.set_xlabel(self.Series.variable_name)
       self.plot.set_ylabel("Number of Observations")
 

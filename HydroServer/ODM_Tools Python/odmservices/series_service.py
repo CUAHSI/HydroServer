@@ -98,7 +98,7 @@ class SeriesService():
 
 	def get_data_values_by_series_test(self, series):
 		session = self._session_factory.get_session()
-		result = session.query(DataValue.id, DataValue.data_value, DataValue.local_date_time, DataValue.utc_offset,DataValue.date_time_utc,
+		result = session.query(DataValue.id, DataValue.data_value, DataValue.value_accuracy, DataValue.local_date_time,  DataValue.utc_offset,DataValue.date_time_utc,
 							   DataValue.site_id, DataValue.variable_id, DataValue.offset_value, DataValue.offset_type_id, DataValue.censor_code,
 							   DataValue.qualifier_id, DataValue.method_id, DataValue.source_id, DataValue.sample_id, DataValue.derived_from_id,
 							   DataValue.quality_control_level_id).filter_by(
