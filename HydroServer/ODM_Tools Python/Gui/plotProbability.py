@@ -61,12 +61,26 @@ class plotProb(wx.Panel):
    
    
 
-  def addPlot(self, datavalues, datetimes, series):
+  def addPlot(self, Values, Filter):
+
+      self.cursor = Values[0]
+
+
+      self.cursor.execute("SELECT DataValue FROM DataValues"+Filter)
+      self.dataValues =[x[0] for x in self.cursor.fetchall()]
+
+     
+      self.Series= Values[1]
+      
+
+
+
+
       self.plot.clear()
      
-      length = len(datavalues)
+      length = len(self.dataValues)
       
-      self.Yaxis = sorted(datavalues)
+      self.Yaxis = sorted(self.dataValues)
       self.Xaxis = []
       for it in range (0, length):
           #curValue = datavalues[it]
@@ -78,7 +92,7 @@ class plotProb(wx.Panel):
       #print self.Xaxis
      # print self.Yaxis
 
-      self.Series= series
+      
       self.plot.clear()
       x = range(len(self.Xaxis))
       self.plot.set_xlabel("Cumulative Frequency < Stated Value %")

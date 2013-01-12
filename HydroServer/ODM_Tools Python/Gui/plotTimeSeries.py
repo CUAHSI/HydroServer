@@ -79,22 +79,32 @@ class plotTimeSeries(wx.Panel):
     return selected
     #return lambda n: [randint(0,1) for b in range(1,n+1)]
 
-  def addPlot(self, datavalues, datetimes, series):
+  def addPlot(self, Values, Filter):
+
+      self.cursor = Values[0]
+
+      self.cursor.execute("SELECT  DataValue, LocalDateTime FROM DataValues"+Filter)
+      results = self.cursor.fetchall()
+      self.dataValues =[x[0] for x in results]
+
+      
+      self.dateTimes = [x[1] for x in results]
+      self.Series= Values[1]
+
+
+
       self.timeSeries.clear()
-      self.dataValues = datavalues
-      self.dateTimes = datetimes
-      self.Series= series
-      self.timeSeries.clear()
-      self.colorlist = self.randBinList(len(datavalues))
+      self.colorlist = self.randBinList(len(self.dataValues))
       x = range(len(self.dataValues))
       self.timeSeries.set_xlabel("Date Time")
       self.timeSeries.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
       self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)
       
 
+      # print self.dateTimes
+
 
       #self.timeSeries=self.figure.add_subplot(111)
-
       lines= self.timeSeries.plot_date( self.dateTimes, self.dataValues,'-ro', xdate = True, tz = None )
       #self.timeSeries.setp(lines, color= colorlist, linewidth = 2.0) 
        # c=self.colorlist.
@@ -129,6 +139,8 @@ class plotTimeSeries(wx.Panel):
       # Indices of data interval to be plotted:
       self.i_start = 0
       self.i_end = self.i_start + self.i_window
+
+
 
   def init_plot(self):
        
@@ -185,11 +197,9 @@ class plotTimeSeries(wx.Panel):
       self.popup_menu.Append(self.popup_unzoom_one, 'Zoom out')
       self.popup_menu.Append(self.popup_unzoom_all, 'Zoom all the way out')
       self.popup_menu.AppendSeparator()
-      
-   
 
-       
-       
+
+
        
   def __init__(self, parent, id, pos, size, style, name):
       self._init_ctrls(parent)

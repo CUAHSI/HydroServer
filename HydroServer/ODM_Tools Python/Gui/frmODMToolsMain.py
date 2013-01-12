@@ -143,8 +143,9 @@ class frmODMToolsMain(wx.Frame):
 
 
     def addPlot(self, Values):
-        self.pnlPlot.addPlot(Values.data)
         self.dataTable.Init(Values.data[0])
+        self.pnlPlot.addPlot(Values.data)
+        
 
     def onDocking(self, Value):       
         
@@ -170,12 +171,29 @@ class frmODMToolsMain(wx.Frame):
         self.pnlPlot.selectPlot(value)
 
 
-
-    def __init__(self, parent, service_manager):
-        self.service_manager = service_manager
-        self.createService()
+########Used only for testing purposes
+    def __init__(self, parent):
+        self.createdummyService()
         self._init_ctrls(parent)
         self.Refresh()
+
+    def createdummyService(self):
+        self.sc = SeriesService(connection_string="mssql+pyodbc://ODM:odm@(local)\sqlexpress/LittleBear11")#connection_string="mssql+pyodbc://ODM:odm@Arroyo/LittleBear11")
+
+    
+
+##### use when not testing and code remembers previous connections
+
+    # def __init__(self, parent, service_manager):
+        
+    #     self.service_manager = service_manager
+    #     self.createService()
+    #     self._init_ctrls(parent)
+    #     self.Refresh()
+
+    # def createService(self):
+    #     self.sc = self.service_manager.get_series_service()
+
     
 
         
@@ -186,21 +204,6 @@ class frmODMToolsMain(wx.Frame):
         self.Destroy()
 
 
-    def createService(self):
-        self.sc = self.service_manager.get_series_service()
-        
-        
-
-##    def BindAction(self):
-##        #self.Bind(wx.EVT_MENU, self.test, None, 1)
-##        #self.Bind(wx.EVT_BUTTON, self.OnBtnAdvButton, id = )
-##        
-##    def OnBtnAdvButton(self, event):
-##        self.new = NewWindow(parent=None, id=-1)
-##        self.new.Show()
-    
-    
-    
 if __name__ == '__main__':
     app = wx.PySimpleApp()
     frame = create(None)
