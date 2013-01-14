@@ -1,6 +1,7 @@
 from odmservices.series_service import SeriesService
 from odmservices.cv_service import CVService
 import os
+from sqlalchemy.exc import SQLAlchemyError
 
 class ServiceManager():
 	def __init__(self, debug=False):
@@ -51,6 +52,18 @@ class ServiceManager():
 
 		# write changes to connection file
 		self._save_connections()
+
+	def test_connection(self, conn_dict):
+		conn_string = self._build_connection_string(conn_dict)
+		try:
+			service = SeriesService(conn_string, True)
+			site = service.get_test_data()
+			print site
+		except SQLAlchemyError:
+			return False
+
+		return True
+
 
 	def delete_connection(self, conn_dict):
 		self._connections[:] = [x for x in self._connections if x != conn_dict]

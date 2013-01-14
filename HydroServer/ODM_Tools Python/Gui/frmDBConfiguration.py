@@ -4,8 +4,8 @@ import wx
 import frmODMToolsMain
 from odmservices.service_manager import ServiceManager
 
-def create(parent, is_main):
-    return frmDBConfig(parent, is_main = is_main)
+def create(parent, service_manager, is_main):
+    return frmDBConfig(parent, service_manager, is_main = is_main)
 
 [wxID_FRMDBCONFIG, wxID_FRMDBCONFIGBOXCONNECTION, wxID_FRMDBCONFIGBTNCANCEL, 
  wxID_FRMDBCONFIGBTNSAVE, wxID_FRMDBCONFIGBTNTEST, wxID_FRMDBCONFIGCOMBOBOX1, 
@@ -138,42 +138,61 @@ class frmDBConfig(wx.Dialog):
         self.BindActions()
 
 
-    def __init__(self, parent, is_main=False):
+    def __init__(self, parent, service_manager, is_main=False):
+        self.service_manager = service_manager
         self.is_main = is_main
         self._init_ctrls(parent)
 
     def BindActions(self):
-        self.btnSave.Bind(wx.EVT_BUTTON, self.OnBtnSaveButton,
+        self.btnSave.Bind(wx.EVT_BUTTON, self.OnBtnSave,
           id=wxID_FRMDBCONFIGBTNSAVE)
 
         self.btnCancel.Bind(wx.EVT_BUTTON, self.OnBtnCancel,
           id=wxID_FRMDBCONFIGBTNCANCEL)
+
+        self.btnTest.Bind(wx.EVT_BUTTON, self.OnBtnTest,
+          id=wxID_FRMDBCONFIGBTNTEST)
+
+    def OnBtnTest(self, event):
+      conn_dict = self._GetFieldValues()
+      message = ""
+      if self.service_manager.test_connection(conn_dict):
+        message = "This connection is valid"
+      else:
+        message = "This connection is invalid"
+
+      wx.MessageBox(message, 'Test Connection', wx.OK)
               
-    def OnBtnSaveButton(self, event):
-        conn_dict = {}
-        if self.comboBox1.GetValue() == 'Microsoft SQL Server':
-          conn_dict['engine']   = 'mssql'
+    def OnBtnSave(self, event):
+      conn_dict = self._GetFieldValues()
 
-        conn_dict['user']     = self.txtUser.GetValue()
-        conn_dict['password'] = self.txtPass.GetValue()
-        conn_dict['address']  = self.txtServer.GetValue()
-        conn_dict['db']       = self.txtDBName.GetValue()
+      self.service_manager.add_connection(conn_dict)
 
-        service_manager = ServiceManager()
-        service_manager.add_connection(conn_dict)
-
-        if self.is_main:
-          self.new = frmODMToolsMain.frmODMToolsMain(parent=None, service_manager=service_manager)
-          self.new.Show()
-
-        self.Close()
+      self.Close()
+      self.Destroy()
 
     def OnBtnCancel(self, e):
       self.Close()
+      self.Destroy()
+
+    # Returns a dictionary of the database values entered in the form
+    def _GetFieldValues(self):
+      conn_dict = {}
+
+      if self.comboBox1.GetValue() == 'Microsoft SQL Server':
+        conn_dict['engine']   = 'mssql'
+
+      conn_dict['user']     = self.txtUser.GetValue()
+      conn_dict['password'] = self.txtPass.GetValue()
+      conn_dict['address']  = self.txtServer.GetValue()
+      conn_dict['db']       = self.txtDBName.GetValue()
+
+      return conn_dict
+
 
 if __name__ == '__main__':
     app = wx.PySimpleApp()
-    frame = create(None, True)
+    frame = create(None, ServiceManager(), True)
     frame.Show()
 
     app.MainLoop()
