@@ -11,9 +11,9 @@ import wx.lib.agw.aui as aui
 from wx.lib.agw.aui import aui_switcherdialog as ASD 
 from wx.lib.pubsub import Publisher
 from numpy import arange, sin, cos, exp, pi
+import frmDBConfiguration
 
-
-from odmservices.series_service import SeriesService
+from odmservices.service_manager import ServiceManager
 import pnlSeriesSelector
 import pnlPlot
 import mnuRibbon
@@ -171,28 +171,20 @@ class frmODMToolsMain(wx.Frame):
         self.pnlPlot.selectPlot(value)
 
 
-########Used only for testing purposes
     def __init__(self, parent):
-        self.createdummyService()
+        self.service_manager = ServiceManager()
+        if self.service_manager.get_current_connection() == None:
+            # Create a DB form which will set a connection for the service manager
+            db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)
+            db_config.ShowModal()
+
+        self.createService()
+        print self.sc.get_sites()
         self._init_ctrls(parent)
         self.Refresh()
-
-    def createdummyService(self):
-        self.sc = SeriesService(connection_string="mssql+pyodbc://ODM:odm@(local)\sqlexpress/LittleBear11")#connection_string="mssql+pyodbc://ODM:odm@Arroyo/LittleBear11")
-
     
-
-##### use when not testing and code remembers previous connections
-
-    # def __init__(self, parent, service_manager):
-        
-    #     self.service_manager = service_manager
-    #     self.createService()
-    #     self._init_ctrls(parent)
-    #     self.Refresh()
-
-    # def createService(self):
-    #     self.sc = self.service_manager.get_series_service()
+    def createService(self):
+        self.sc = self.service_manager.get_series_service()
 
     
 

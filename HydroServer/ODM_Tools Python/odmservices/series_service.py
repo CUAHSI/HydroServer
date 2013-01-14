@@ -17,6 +17,10 @@ class SeriesService():
 		self._edit_session = self._session_factory.get_session()
 		self._debug = debug
 
+	def get_test_data(self):
+		session = self._session_factory.get_session()
+		return session.query(Site).first()
+
 	# Sites methods
 	def get_sites(self, site_code = ""):
 		session = self._session_factory.get_session()

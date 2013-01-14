@@ -324,8 +324,6 @@ class pnlSeriesSelector(wx.Panel):
                """)
 
 
-
-
             #isSelected INTEGER NOT NULL,
             self.DataValues = self.dbservice.get_data_values_by_series_test(self.seriesList[event.m_itemIndex])
 

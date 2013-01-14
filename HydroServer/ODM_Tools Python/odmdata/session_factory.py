@@ -4,13 +4,7 @@ import os
 
 class SessionFactory():
 	def __init__(self, connection_string, echo):
-
-		# open the config file to get the connection string
-		if (not connection_string):
-			fn = os.path.join(os.path.dirname(__file__), 'connection.cfg')
-			f = open(fn)
-			connection_string = f.readline()
-            
+	
 		self.engine = create_engine(connection_string, encoding='utf-8', echo=echo)
 
 		# Create session maker
