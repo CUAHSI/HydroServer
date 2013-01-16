@@ -64,19 +64,38 @@ class mnuRibbon(RB.RibbonBar):
                                 CreateBitmap("images\\Legend.png"), "")
                                 
 #- BOXPLOT OPTIONS------------------------------------------------------------------------------                                
+        
+
+
         boxPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
         boxPlotsOptions_bar = RB.RibbonButtonBar(boxPlotOptions_panel, wx.ID_ANY)
         boxPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTBOXTYPE, "Box Whisker Type",  
                                 CreateBitmap("images\\BoxWhiskerType.png"), "")
+        boxPlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSCOLOR, "Color Setting",  
+                                CreateBitmap("images\\ColorSetting.png"), "")
+        tsPlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
+                                CreateBitmap("images\\Legend.png"), "")
                                 
 #- HISTOGRAM PLOT OPTIONS------------------------------------------------------------------------------
+        # histPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
+        #                                 wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
+        # histPlotsOptions_bar = RB.RibbonButtonBar(histPlotOptions_panel, wx.ID_ANY)
+        # histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTTYPE, "Histogram Type", CreateBitmap("images\\HisType.png"), "") 
+        # histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTBIN, "Binning Algorithms",  
+        #                         CreateBitmap("images\\Binning.png"), "")            
+
+
+
         histPlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
         histPlotsOptions_bar = RB.RibbonButtonBar(histPlotOptions_panel, wx.ID_ANY)
-        histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTTYPE, "Histogram Type", CreateBitmap("images\\HisType.png"), "") 
+        histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTTYPE, "Histogram Type",  
+                                CreateBitmap("images\\HisType.png"), "")
         histPlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTBIN, "Binning Algorithms",  
-                                CreateBitmap("images\\Binning.png"), "")                                                                    
+                                CreateBitmap("images\\Binning.png"), "")
+        histPlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
+                                CreateBitmap("images\\Legend.png"), "")                                                        
      
 #-------------------------------------------------------------------------------
         dateTime_panel = RB.RibbonPanel(home, wx.ID_ANY, "Date Time", wx.NullBitmap, wx.DefaultPosition, 
@@ -101,10 +120,10 @@ class mnuRibbon(RB.RibbonBar):
 
 
 
-        self.startDate = pnlDatePicker.pnlDatePicker( home, wxID_RIBBONPLOTDATESTART, 
-                 "Start Date", wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0))
-        self.endDate = pnlDatePicker.pnlDatePicker( home, wxID_RIBBONPLOTDATEEND, 
-                 "End Date", wx.DateTimeFromDMY(30, 9, 2009, 0, 0, 0))
+        # self.startDate = pnlDatePicker.pnlDatePicker( home, wxID_RIBBONPLOTDATESTART, 
+        #          "Start Date", wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0))
+        # self.endDate = pnlDatePicker.pnlDatePicker( home, wxID_RIBBONPLOTDATEEND, 
+        #          "End Date", wx.DateTimeFromDMY(30, 9, 2009, 0, 0, 0))
 
        
 #-------------------------------------------------------------------------------

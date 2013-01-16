@@ -27,7 +27,7 @@ class Series(Base):
 	source_id		    	   = Column('SourceID', Integer)
 	source_description  	   = Column('SourceDescription', String)
 	organization	    	   = Column('Organization', String)
-	cititation				   = Column('Citation', String)
+	citation				   = Column('Citation', String)
 	quality_control_level_id   = Column('QualityControlLevelID', Integer)
 	quality_control_level_code = Column('QualityControlLevelCode', String)
 	begin_date_time			   = Column('BeginDateTime', DateTime)
@@ -40,8 +40,10 @@ class Series(Base):
 	# TODO add all to repr
 	def __repr__(self):
 		return "<Series('%s')>" % (self.id)
-	def __dir__(self):
-		return ['SeriesID','SiteID', 'SiteCode', 'SiteName','VaraibleID', 'VariableCode', 'VarieableName',
+
+		
+	def getCols(self):
+		return ['SeriesID','SiteID', 'SiteCode', 'SiteName','VariableID', 'VariableCode', 'VariableName',
 			'Speciation', 'VariableUnitsID', 'VariableUnitsName', 'SampleMedium', 'ValueType', 'TimeSupport',
 			'TimeUnitsID', 'TimeUnitsName', 'DataType', 'GeneralCategory', 'MethodID', 'MethodDescription',
 			'SourceID', 'SourceDescription', 'Organization', 'Citation', 'QualityControlLevelID', 'QualityControlLevelCode', 

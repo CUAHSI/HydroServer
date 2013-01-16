@@ -179,7 +179,7 @@ class frmODMToolsMain(wx.Frame):
             db_config.ShowModal()
 
         self.createService()
-        print self.sc.get_sites()
+        #print self.sc.get_sites()
         self._init_ctrls(parent)
         self.Refresh()
     
