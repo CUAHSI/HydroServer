@@ -84,6 +84,20 @@ class SeriesService():
 		session.close()
 		return result
 
+	def get_series_test(self):
+		session = self._session_factory.get_session()		
+		
+		result = session.query(Series.id, Series.site_id, Series.site_code, Series.site_name, Series.variable_id, Series.variable_code,
+									Series.variable_name, Series.speciation, Series.variable_units_id, Series.variable_units_name, Series.sample_medium,
+									Series.value_type, Series.time_support, Series.time_units_id, Series.time_units_name, Series.data_type, Series.general_category,
+									Series.method_id, Series.method_description, Series.source_id, Series.organization, Series.source_description,
+									Series.citation, Series.quality_control_level_id, Series.quality_control_level_code, Series.begin_date_time, 
+									Series.end_date_time, Series.begin_date_time_utc, Series.end_date_time_utc, Series.value_count
+								).order_by(Series.id).all()
+		session.close()
+		return result
+
+
 	def get_series_from_filter(self):
 		# Pass in probably a Series object, match it against the database
 		pass

@@ -57,8 +57,9 @@ class pnlDataTable(wx.Panel):
         sql = "SELECT * FROM DataValues"
         cursor.execute(sql)
 
-
-        print enumerate(cursor.description)
+  
+       
+      
         self.myOlv.SetColumns(ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(cursor.description))
         self.InitTable()       
 

@@ -78,7 +78,7 @@ class pnlPlot(wx.Notebook):
        #  self.pltBox.addPlot(self.dataValues, self.dateTimes, Values[1])
        #  self.pltTS.addPlot(self.dataValues, self.dateTimes, Values[1])
 
-        Filter = " WHERE DataValue <> -9999"
+        Filter = " WHERE DataValue <> -9999 OR CensorCode <> 'nc'"
         self.pltSum.addPlot(Values, Filter)
         self.pltHist.addPlot(Values, Filter)
         self.pltProb.addPlot(Values, Filter)
