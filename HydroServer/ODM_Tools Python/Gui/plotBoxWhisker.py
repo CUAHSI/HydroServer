@@ -10,6 +10,11 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from matplotlib.widgets import Lasso
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
 
+ 
+from wx.lib.pubsub import Publisher
+
+
+
 
 class plotBox(wx.Panel):
    
@@ -33,6 +38,13 @@ class plotBox(wx.Panel):
       #matplotlib.figure.Figure.__init__(self)
       wx.Panel.__init__(self, prnt, -1)
       
+
+      Publisher().subscribe(self.monthly, ("box.Monthly"))
+      Publisher().subscribe(self.yearly, ("box.Yearly"))
+      Publisher().subscribe(self.seasonaly, ("box.Seasonal"))
+      Publisher().subscribe(self.overall, ("box.Overall")) 
+
+
       self.figure = matplotlib.figure.Figure()
       self.plot=self.figure.add_subplot(111)
       self.plot.axis([0, 1, 0, 1])#
@@ -66,25 +78,28 @@ class plotBox(wx.Panel):
       self.cursor = Values[0]
 
 
-      self.cursor.execute("SELECT  DataValue FROM DataValues"+Filter)
-      self.dataValues =[x[0] for x in self.cursor.fetchall()]
+      self.cursor.execute("SELECT  DataValue, strftime('%m', LocalDateTime) AS Month, strftime('%Y)',LocalDateTime) As Year FROM DataValues"+Filter)
+      self.Data= self.cursor.fetchall() 
+      
+      
+
+
+
+
+
+      # = ]
+      print self.Data[0]
 
      
       self.Series= Values[1]
       
 
-      self.plot.clear()
-      x = range(len(self.dataValues))
-      self.plot.set_xlabel("Overall") 
-      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-             
+      self.overall("")             
       #self.plot=self.figure.add_subplot(111)
-      self.plot.boxplot(self.dataValues, 1)
+      
 
 
-      self.canvas.draw()
-
+      
 
  
   def SetColor( self, color):
@@ -93,14 +108,30 @@ class plotBox(wx.Panel):
       self.figure.set_edgecolor( color )
       self.canvas.SetBackgroundColour( color )
        
-  def monthly(self):
+  def monthly(self, str):
       self.plot.set_xlabel("Monthly")
-  def seasonaly(self):
+      self.canvas.draw()
+
+  def seasonaly(self, str):
       self.plot.set_xlabel("Seasonally")
-  def yearly(self):
+      self.canvas.draw()
+
+
+
+  def yearly(self, str):
       self.plot.set_xlabel("Yearly")
-  def overall(self): 
+      self.canvas.draw()
+
+
+  def overall(self, str): 
+      self.plot.clear()
+      x = range(len(self.dataValues))
       self.plot.set_xlabel("Overall") 
+      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      self.plot.boxplot( [x[0] for x in self.Data], notch = True)
+      self.canvas.draw()
+
 
        
   def __init__(self, parent, id, pos, size, style, name):

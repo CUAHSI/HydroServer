@@ -119,7 +119,7 @@ class frmODMToolsMain(wx.Frame):
        
         self._mgr = wx.aui.AuiManager(self.pnlDocking)
         self._mgr.AddPane(self.dataTable, wx.RIGHT, 'Table View')
-        self._mgr.GetPane(self.dataTable).Name("Table").MinSize(size=wx.Size( 400, 400))       
+        self._mgr.GetPane(self.dataTable).Name("Table").MinSize(size=wx.Size( 400, 400)).Show(show=False)       
        # DestroyOnClose(b=False)
         self._mgr.AddPane(self.pnlSelector, wx.BOTTOM, 'Series Selector')
         self._mgr.GetPane(self.pnlSelector).Name("Selector").MinSize(size=wx.Size(300, 200)).Layer(0)       

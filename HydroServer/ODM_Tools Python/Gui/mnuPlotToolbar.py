@@ -23,21 +23,22 @@ class MyCustomToolbar(NavigationToolbar):
         	CONFIGURE_SUBPLOTS_TOOLBAR_BTN_POSITION = 6
         	self.DeleteToolByPos(CONFIGURE_SUBPLOTS_TOOLBAR_BTN_POSITION)
         # add the new toolbar buttons that we do want
-        self.AddSimpleTool(self.ON_CUSTOM_LEFT, _load_bitmap('stock_left.xpm'),
+        self.AddSimpleTool(self.ON_CUSTOM_LEFT, CreateBitmap("images\\scroll left.png"),
                            'Pan to the left', 'Pan graph to the left')
         wx.EVT_TOOL(self, self.ON_CUSTOM_LEFT, self._on_custom_pan_left)
-        self.AddSimpleTool(self.ON_CUSTOM_RIGHT, _load_bitmap('stock_right.xpm'),
+        self.AddSimpleTool(self.ON_CUSTOM_RIGHT, CreateBitmap("images\\scroll right.png"),
                            'Pan to the right', 'Pan graph to the right')
         wx.EVT_TOOL(self, self.ON_CUSTOM_RIGHT, self._on_custom_pan_right)
-        self.SetToolBitmapSize(wx.Size(16, 16))
+        self.SetToolBitmapSize(wx.Size(16, 16))        
         self.Realize()
 
     # in theory this should never get called, because we delete the toolbar
     #  button that calls it. but in case it does get called (e.g. if there
     # is a keyboard shortcut I don't know about) then we override the method
     # that gets called - to protect against the exceptions that it throws
-    # def configure_subplot(self, evt):
-    #     print 'ERROR: This application does not support subplots'
+    def configure_subplot(self, evt):
+        if (not multPlots):
+            print 'ERROR: This application does not support subplots'
 
     # pan the graph to the left
     def _on_custom_pan_left(self, evt):

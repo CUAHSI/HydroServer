@@ -58,7 +58,15 @@ class pnlSeriesSelector(wx.Panel):
         parent.AddWindow(self.cbVariables, 85, border=3,
               flag=wx.EXPAND | wx.ALL)
 
-    
+    def _init_coll_tableSeries_Columns(self, parent):
+       # generated method, don't edit
+
+       parent.InsertColumn(col=0, format=wx.LIST_FORMAT_CENTRE, heading=u'',
+             width=50)
+       parent.InsertColumn(col=1, format=wx.LIST_FORMAT_LEFT,
+             heading=u'Site Name', width=140)
+       parent.InsertColumn(col=2, format=wx.LIST_FORMAT_LEFT,
+             heading=u'Variable Name', width=140)
 
     def _init_sizers(self):
         # generated method, don't edit
@@ -159,18 +167,18 @@ class pnlSeriesSelector(wx.Panel):
               parent=self, pos=wx.Point(96, 77), size=wx.Size(653, 25),
               style=wx.TAB_TRAVERSAL)
 
-        # self.tableSeries = wx.ListCtrl(id=wxID_PNLSERIESSELECTORtableSeries,
-        #       name=u'tableSeries', parent=self.panel3, pos=wx.Point(5, 5),
-        #       size=wx.Size(903, 108),
-        #       style=wx.HSCROLL | wx.VSCROLL | wx.LC_REPORT)
+        self.tableSeries = wx.ListCtrl(id=wxID_PNLSERIESSELECTORtableSeries,
+              name=u'tableSeries', parent=self.panel3, pos=wx.Point(5, 5),
+              size=wx.Size(903, 108),
+              style=wx.HSCROLL | wx.VSCROLL | wx.LC_REPORT)
 
         
-        self.tableSeries = ObjectListView(self.panel3, id=wxID_PNLSERIESSELECTORtableSeries, name=u'tableSeries',  
-              style=wx.LC_REPORT|wx.SUNKEN_BORDER)
-        self.tableSeries.SetEmptyListMsg("")
+        # self.tableSeries = ObjectListView(self.panel3, id=wxID_PNLSERIESSELECTORtableSeries, name=u'tableSeries',  
+        #       style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+        # self.tableSeries.SetEmptyListMsg("")
 
        
-        # self._init_coll_tableSeries_Columns(self.tableSeries)
+        self._init_coll_tableSeries_Columns(self.tableSeries)
         self.tableSeries.Bind(wx.EVT_LIST_ITEM_SELECTED,
               self.OntableSeriesListItemSelected,
               id=wxID_PNLSERIESSELECTORtableSeries)
@@ -183,23 +191,20 @@ class pnlSeriesSelector(wx.Panel):
         
         #####INIT DB Connection
         self.dbservice = dbservice
-        self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
-        self.cursor = self.conn.cursor()
-        self.initDB()
+        # self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
+        # self.cursor = self.conn.cursor()
+        # self.initDB()
 
 
         ### INIT Series Catalog        
-        self.cursor.executemany("INSERT INTO SeriesCatalog VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.dbservice.get_series_test())
-        self.conn.commit()
-        sql = "SELECT (1=0) As Plot, * FROM SeriesCatalog"
+        # self.cursor.executemany("INSERT INTO SeriesCatalog VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.dbservice.get_series_test())
+        # self.conn.commit()
         # sql = "SELECT * FROM SeriesCatalog"
-        self.cursor.execute(sql)
-        columns = [ColumnDefn("", minimumWidth= 25, valueGetter = 0, checkStateGetter="Plot")]+[ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(self.cursor.description)]
-        self.tableSeries.SetColumns(columns)
-        # self.tableSeries.CreateCheckStateColumn()
-        self.tableSeries.InstallCheckStateColumn(self.tableSeries.columns[0])
-        self.Series = [list(x) for x in self.cursor.fetchall()]
-        self.tableSeries.SetObjects(self.Series)
+        # self.cursor.execute(sql)
+        # self.tableSeries.SetColumns(ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(self.cursor.description))
+        # self.tableSeries.InstallCheckStateColumn(self.tableSeries.columns[0])
+        # self.Series = [list(x) for x in self.cursor.fetchall()]
+        # self.tableSeries.SetObjects(self.Series)
 
         #####INIT drop down boxes for series selector
         self.siteList=self.dbservice.get_sites()
@@ -214,19 +219,21 @@ class pnlSeriesSelector(wx.Panel):
         self.cbVariables.SetSelection(0)
 
 
-        ####INIT table with filters        
-        self.tableSeries.SetFilter(Filter.TextSearch(self.tableSeries, text = self.site_code ))        
-        self.tableSeries.RepopulateList()
+        ####INIT table with filters
 
 
-       
+        # self.siteFilter= Filter.TextSearch(self.tableSeries, text = self.site_code )
+        # self.tableSeries.SetFilter(Filter.TextSearch(self.tableSeries, self.tableSeries.columns[0:4]))
+        # self.tableSeries.GetFilter().SetText(self.site_code)
+        
+        # self.tableSeries.RepopulateList()
         
 
 
-        #self.seriesList = self.dbservice.get_series(self.siteList[0].site_code)
+        self.seriesList = self.dbservice.get_series(self.siteList[0].site_code)
         
-        # for series in self.seriesList:
-        #     self.tableSeries.Append([False, series.site_name ,series.variable_name])
+        for series in self.seriesList:
+            self.tableSeries.Append([False, series.site_name ,series.variable_name])
         
 
         self.SelectedSeries = []
@@ -245,7 +252,8 @@ class pnlSeriesSelector(wx.Panel):
     def OnCbSitesCombobox(self, event):
         #clear list for new site info
 
-        # self.tableSeries.DeleteAllItems()
+        self.tableSeries.DeleteAllItems()
+        self.tableSeries.DeleteAllItems()
 
         self.varList =[]
         self.site_code = self.siteList[event.GetSelection()].site_code
@@ -258,57 +266,57 @@ class pnlSeriesSelector(wx.Panel):
         #if (not self.checkVariable):
         
 
-        ###FILTER
-        self.tableSeries.SetFilter(Filter.TextSearch(self.tableSeries, text = self.site_code ))      
-        self.tableSeries.RepopulateList()
-
         
 
-        #self.seriesList = self.dbservice.get_series(site_code = self.site_code)
+        #self.seriesList = self.dbservice.get_series(site_code = self.site_code, var_code = self.varList[0].variable_code)
         
         # for series in self.seriesList:
         #     self.tableSeries.Append(["False", series.site_name ,series.variable_name])
 
 
     def OnCbVariablesCombobox(self, event):
-        # self.tableSeries.DeleteAllItems()
+        self.tableSeries.DeleteAllItems()
 
-        if (self.checkSite.GetValue() and self.checkVariable.GetValue()):            
+        if (self.checkSite.GetValue() and self.checkVariable.GetValue()):
+        #site_code = self.siteList[event.GetSelection()].site_code
             self.var_code = self.varList[event.GetSelection()].variable_code
-            #self.seriesList = self.dbservice.get_series(site_code = self.site_code, var_code= self.var_code)
-            
-            ###FILTER
-            self.tableSeries.SetFilter(Filter.Chain(Filter.TextSearch(self.tableSeries, text = self.site_code ), 
-                                                    Filter.TextSearch(self.tableSeries, text = self.var_code)))
+            self.seriesList = self.dbservice.get_series(site_code = self.site_code, var_code= self.var_code)
 
         elif (not self.checkSite.GetValue() and self.checkVariable.GetValue()):
             self.var_code = self.varList[event.GetSelection()].variable_code
-            #self.seriesList = self.dbservice.get_series( var_code= self.var_code)
-            ###FILTER
-            self.tableSeries.SetFilter(Filter.TextSearch(self.tableSeries, text = self.var_code ))      
-            
-        self.tableSeries.RepopulateList()
+            self.seriesList = self.dbservice.get_series( var_code= self.var_code)
 
 
+
+       #self.tableSeries.GetFilter().SetText(self.site_code)
 ##        for series in self.seriesList:
 ##            print series
 
-        # for series in self.seriesList:
-        #     self.tableSeries.Append(["False", series.site_name ,series.variable_name])
+        for series in self.seriesList:
+            self.tableSeries.Append(["False", series.site_name ,series.variable_name])
 
 
 
     def OntableSeriesListItemSelected(self, event):
-        
-        
-        if (event.IsChecked()) :          
+        # print self.seriesList[event.m_itemIndex]
+        if ( self.tableSeries.GetItemText(event.m_itemIndex) == "False"):
+            self.tableSeries.SetStringItem(event.m_itemIndex, 0, "True")  
+
+        # print dir(event)
+        # print event.GetIndex()
+        # print self.tableSeries[event.GetIndex()][0]
+        # print self.tableSeries[event.GetIndex()][2]
+        # if (event.IsChecked()) :          
 
             
             # print dir(event)
             # print event.IsChecked()
             
-            self.SelectedSeries.append(self.tableSeries[event.GetIndex()][2])  
-
+            self.SelectedSeries.append(self.seriesList[event.m_itemIndex])  
+            
+            self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
+            self.cursor = self.conn.cursor()
+            self.initDB()
 
             #when Selected for editing
 
@@ -324,7 +332,11 @@ class pnlSeriesSelector(wx.Panel):
 
 
             Publisher().sendMessage(("add.NewPlot"), [self.cursor, self.seriesList[event.m_itemIndex]])
-       
+
+
+        else:
+            self.tableSeries.SetStringItem(event.m_itemIndex, 0, "False")
+            self.SelectedSeries.remove(self.seriesList[event.m_itemIndex])
             
 
 
@@ -334,27 +346,28 @@ class pnlSeriesSelector(wx.Panel):
         for var in self.varList:
             self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
         self.cbVariables.SetSelection(0)
+
+
+        ###FILTER
+        # self.siteFilter= Filter.TextSearch(self.tableSeries, text = self.site_code )
+        # self.variableFilter = Filter.TextSearch(self.tableSeries, text = self.varList[0].variable_code)
+        # self.tableSeries.SetFilter(Filter.Chain(self.siteFilter, self.variableFilter))
+        
+
+        self.seriesList = self.dbservice.get_series(site_code = self.siteList[0].site_code, var_code= self.varList[0].variable_code)
         self.cbVariables.Enabled =True
         self.cbSites.Enabled = True
-
-        ####Filter
-        
-        self.tableSeries.SetFilter(Filter.Chain(Filter.TextSearch(self.tableSeries, text = self.siteList[0].site_code), 
-                                                Filter.TextSearch(self.tableSeries, text = self.varList[0].variable_code)))
-        self.tableSeries.RepopulateList()
-        #self.seriesList = self.dbservice.get_series(site_code = self.siteList[0].site_code, var_code= self.varList[0].variable_code)
-        
 
     def siteOnly(self):
         self.cbVariables.Enabled = False
         self.cbSites.Enabled = True
-        self.cbSites.SetSelection(0)
-
-        ####Filter
         
-        self.tableSeries.SetFilter(Filter.TextSearch(self.tableSeries, text = self.siteList[0].site_code ))       
-        self.tableSeries.RepopulateList()
-        #self.seriesList = self.dbservice.get_series(site_code = self.siteList[0].site_code)
+        ###FILTER
+        # self.tableSeries.SetFilter(Filter.TextSearch(self.tableSeries, self.tableSeries.columns[0:4]))
+        # self.tableSeries.GetFilter().SetText(self.site_code)        
+        # self.tableSeries.RepopulateList()
+
+        self.seriesList = self.dbservice.get_series(site_code = self.siteList[0].site_code)
 
     def variableOnly(self):
         self.cbVariables.Clear()
@@ -365,10 +378,10 @@ class pnlSeriesSelector(wx.Panel):
         self.cbSites.Enabled = False
         self.cbVariables.Enabled = True
 
-        ###Filter  
-        print "Variable: " +   self.varList[0].variable_code 
-        self.tableSeries.SetFilter(Filter.TextSearch(self.tableSeries, text = self.varList[0].variable_code ))      
-        self.tableSeries.RepopulateList()
+        ###FILTER
+        # self.tableSeries.SetFilter(Filter.TextSearch(self.tableSeries, self.tableSeries.columns[0:4]))
+        # self.tableSeries.GetFilter().SetText(self.varList[0].variable_code)        
+        # self.tableSeries.RepopulateList()
         
         # self.seriesList = self.dbservice.get_series(var_code= self.varList[0].variable_code)
 
