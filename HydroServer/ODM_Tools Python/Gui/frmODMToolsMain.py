@@ -10,6 +10,7 @@ import datetime
 import wx.lib.agw.aui as aui 
 from wx.lib.agw.aui import aui_switcherdialog as ASD 
 from wx.lib.pubsub import Publisher
+import wx.py.crust
 from numpy import arange, sin, cos, exp, pi
 import frmDBConfiguration
 
@@ -82,10 +83,15 @@ class frmODMToolsMain(wx.Frame):
         self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
               name=u'txtPython', parent=self, pos=wx.Point(72, 24),
               size=wx.Size(368, 168), style=0)
-              
-        self.txtPythonConsole = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONCONSOLE,
-              name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-              size=wx.Size(368, 168), style=0)
+        
+        self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
+                name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+                size=wx.Size(500,800), style=0)
+
+
+        # self.txtPythonConsole = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONCONSOLE,
+        #       name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+        #       size=wx.Size(368, 168), style=0)
              
 
 
@@ -125,8 +131,8 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.GetPane(self.pnlSelector).Name("Selector").MinSize(size=wx.Size(300, 200)).Layer(0)       
         self._mgr.AddPane(self.txtPythonScript, wx.BOTTOM , 'Script')
         self._mgr.GetPane(self.txtPythonScript).Name("Script").Show(show=False).Layer(1)
-        self._mgr.AddPane(self.txtPythonConsole, wx.BOTTOM , 'Python Console')
-        self._mgr.GetPane(self.txtPythonConsole).Name("Console").Show(show=False).Layer(1)
+        self._mgr.AddPane(self.txtPythonConsole, wx.Bottom,  caption='Python Console')
+        self._mgr.GetPane(self.txtPythonConsole).Name("Console").Layer(1).Show(show=False).Float()
         
         self._mgr.AddPane(self.pnlPlot, wx.CENTER)
         self._mgr.GetPane(self.pnlPlot).Name("Plot")
@@ -157,7 +163,7 @@ class frmODMToolsMain(wx.Frame):
         elif Value.data == "Script":
             panedet=self._mgr.GetPane(self.txtPythonScript)
         elif Value.data == "Console":
-            panedet=self._mgr.GetPane(self.txtPythonConsole)  
+            panedet=self._mgr.GetPane(self.txtPythonConsole)
                    
 
         if panedet.IsShown():          
@@ -179,7 +185,6 @@ class frmODMToolsMain(wx.Frame):
             db_config.ShowModal()
 
         self.createService()
-        #print self.sc.get_sites()
         self._init_ctrls(parent)
         self.Refresh()
     
