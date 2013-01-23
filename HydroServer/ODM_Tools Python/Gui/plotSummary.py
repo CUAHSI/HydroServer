@@ -88,7 +88,7 @@ class plotSummary(wx.Panel):
         self.grdSummary.SetCellValue(0, col, repr(Values[1].id))  
         self.grdSummary.SetCellValue(1, col, repr(count))        
         self.grdSummary.SetCellValue(2, col, repr(val))
-        self.grdSummary.SetCellValue(3, col, repr(numpy.mean(data)))  
+        self.grdSummary.SetCellValue(3, col, repr(round(numpy.mean(data),5)))  
 
        
         sumval = 0 
@@ -102,25 +102,25 @@ class plotSummary(wx.Panel):
                 sumval = sumval+ numpy.log2(numpy.absolute(dv))    
 
              
-        self.grdSummary.SetCellValue(4, col, repr(sign * (2 ** float(sumval / float(count)))))
-        self.grdSummary.SetCellValue(5, col, repr(max(data)))  
-        self.grdSummary.SetCellValue(6, col, repr(min(data))) 
-        self.grdSummary.SetCellValue(7, col, repr(numpy.std(data)))  
-        self.grdSummary.SetCellValue(8, col, repr(numpy.var(data)))
+        self.grdSummary.SetCellValue(4, col,  repr(round(sign * (2 ** float(sumval / float(count))),5)))
+        self.grdSummary.SetCellValue(5, col, repr(round(max(data),5)))  
+        self.grdSummary.SetCellValue(6, col, repr(round(min(data),5))) 
+        self.grdSummary.SetCellValue(7, col, repr(round(numpy.std(data),5)))  
+        self.grdSummary.SetCellValue(8, col, repr(round(numpy.var(data),5)))
 
 
         ##Percentiles
-        self.grdSummary.SetCellValue(10, col, repr(data[int(math.floor(count/10))]))  
-        self.grdSummary.SetCellValue(11, col, repr(data[int(math.floor(count/4))]))
+        self.grdSummary.SetCellValue(10, col, repr(round(data[int(math.floor(count/10))],5)))  
+        self.grdSummary.SetCellValue(11, col, repr(round(data[int(math.floor(count/4))],5)))
 
              
         if count % 2 == 0 :
-            self.grdSummary.SetCellValue(12, col, repr((data[int(math.floor((count/2)-1))]+ data[int(count/2)])/2))  
+            self.grdSummary.SetCellValue(12, col, repr(round((data[int(math.floor((count/2)-1))]+ data[int(count/2)])/2,5)))  
         else:
-            self.grdSummary.SetCellValue(12, col, repr(data[int(numpy.ceil(count/2))]))    
+            self.grdSummary.SetCellValue(12, col, repr(round(data[int(numpy.ceil(count/2))],5)))    
 
-        self.grdSummary.SetCellValue(13, col, repr(data[int(math.floor(count/4*3))]))         
-        self.grdSummary.SetCellValue(14, col, repr(data[int(math.floor(count/10*9))]))
+        self.grdSummary.SetCellValue(13, col, repr(round(data[int(math.floor(count/4*3))],5)))        
+        self.grdSummary.SetCellValue(14, col, repr(round(data[int(math.floor(count/10*9))],5)))
 
         
 
