@@ -168,7 +168,7 @@ class mnuRibbon(RB.RibbonBar):
         script_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Script", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
         script_bar = RB.RibbonButtonBar(script_panel)
-        script_bar.AddSimpleButton(wx.ID_ANY, "Execute",  
+        script_bar.AddSimpleButton(wxID_RIBBONEDITSCRIPTEXECUTE, "Execute",  
                                 CreateBitmap("images\\Window Enter.png"), "") 
         script_bar.AddSimpleButton(wxID_RIBBONEDITSCRIPTOPEN, "Open",  
                                 CreateBitmap("images\\Open file.png"), "")
@@ -226,6 +226,10 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED, self.OnBoxTypeDropdown, id=wxID_RIBBONPLOTBOXTYPE)
         # self.Bind(RB.EVT_RIBBONBAR_TAB_CLICKED, self.OnFileMenu, id=wxID_FileMenu)
         
+        ###Add event  to editab
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onExecuteScript, id= wxID_RIBBONEDITSCRIPTEXECUTE)
+
+
        
 
 
@@ -257,7 +261,11 @@ class mnuRibbon(RB.RibbonBar):
         print 'select Overall' 
         Publisher().sendMessage(("box.Overall"), [""])                 
         
-        
+    def onExecuteScript(self, event):
+
+        Publisher().sendMessage(("execute.script"), [""])
+
+
     def OnBoxTypeDropdown(self, event):
         
         menu = wx.Menu()

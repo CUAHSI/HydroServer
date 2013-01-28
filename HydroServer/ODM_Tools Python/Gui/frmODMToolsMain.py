@@ -67,6 +67,7 @@ class frmODMToolsMain(wx.Frame):
         Publisher().subscribe(self.onDocking, ("adjust.Docking")) 
 
         Publisher().subscribe(self.onPlotSelection, ("select.Plot")) 
+        Publisher().subscribe(self.onExecuteScript, ("execute.script")) 
 
 
 
@@ -86,13 +87,7 @@ class frmODMToolsMain(wx.Frame):
         
         self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
                 name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-                size=wx.Size(500,800), style=0)
-
-
-        # self.txtPythonConsole = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONCONSOLE,
-        #       name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-        #       size=wx.Size(368, 168), style=0)
-             
+                size=wx.Size(500,800), style=0)           
 
 
 
@@ -190,7 +185,10 @@ class frmODMToolsMain(wx.Frame):
     
     def createService(self):
         self.sc = self.service_manager.get_series_service()
-
+    
+    def onExecuteScript(self, value):
+        print "testing file execution with test.py"
+        pass
     
 
         
@@ -207,4 +205,3 @@ if __name__ == '__main__':
     frame.Show()
 
     app.MainLoop()
-    
