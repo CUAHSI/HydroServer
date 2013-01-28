@@ -70,6 +70,8 @@ class frmODMToolsMain(wx.Frame):
         Publisher().subscribe(self.onExecuteScript, ("execute.script")) 
 
 
+        Publisher().subscribe(self.onChangeDBConn, ("change.dbConfig"))
+
 
 ############### Ribbon ###################
         self._ribbon = mnuRibbon.mnuRibbon(parent=self, id=wx.ID_ANY, name ='ribbon')
@@ -88,8 +90,12 @@ class frmODMToolsMain(wx.Frame):
         self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
                 name=u'txtPython', parent=self, pos=wx.Point(72, 24),
                 size=wx.Size(500,800), style=0)           
-
-
+        
+        
+################ Series Selection Panel ##################
+        self.pnlSelector = pnlSeriesSelector.pnlSeriesSelector(id=wxID_PNLSELECTOR, name=u'pnlSelector',
+               parent=self.pnlDocking, pos=wx.Point(0, 0), size=wx.Size(770, 388),
+               style=wx.TAB_TRAVERSAL, dbservice= self.sc)  
 
 
 ####################grid##################
@@ -98,23 +104,11 @@ class frmODMToolsMain(wx.Frame):
               style=0)
         
         
-        
-################ Series Selection Panel ##################           
-
-        self.pnlSelector = pnlSeriesSelector.pnlSeriesSelector(id=wxID_PNLSELECTOR, name=u'pnlSelector',
-               parent=self.pnlDocking, pos=wx.Point(0, 0), size=wx.Size(770, 388),
-               style=wx.TAB_TRAVERSAL, dbservice= self.sc)       
-
-
-
+      
 ############# Graph ###############
-        
-       
         self.pnlPlot= pnlPlot.pnlPlot(id=wxID_ODMTOOLSPANEL1, name='pnlPlot',
               parent=self.pnlDocking, pos=wx.Point(0, 0), size=wx.Size(605, 458),
-               style=wx.TAB_TRAVERSAL)     
-                  
-
+               style=wx.TAB_TRAVERSAL) 
 
 ############ Docking ###################
        
@@ -131,11 +125,6 @@ class frmODMToolsMain(wx.Frame):
         
         self._mgr.AddPane(self.pnlPlot, wx.CENTER)
         self._mgr.GetPane(self.pnlPlot).Name("Plot")
-
-        # self._mgr.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
-        #       False, u'Tahoma'))
-
-
         self._mgr.Update()
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
@@ -159,17 +148,26 @@ class frmODMToolsMain(wx.Frame):
             panedet=self._mgr.GetPane(self.txtPythonScript)
         elif Value.data == "Console":
             panedet=self._mgr.GetPane(self.txtPythonConsole)
-                   
-
+        
+        # self._mgr.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
+        #       False, u'Tahoma'))
         if panedet.IsShown():          
             panedet.Show(show=False)
             self._mgr.Update()
         else:         
             panedet.Show(show=True)
-            self._mgr.Update()     
+        self._mgr.Update()
+        self.Bind(wx.EVT_CLOSE, self.OnClose)
+
 
     def onPlotSelection(self, value):         
         self.pnlPlot.selectPlot(value)
+
+
+    def addPlot(self, Values):
+        self.dataTable.Init(Values.data[0])
+        self.pnlPlot.addPlot(Values.data)        
+
 
 
     def __init__(self, parent):
@@ -182,7 +180,16 @@ class frmODMToolsMain(wx.Frame):
         self.createService()
         self._init_ctrls(parent)
         self.Refresh()
-    
+
+
+    def createService(self):
+        self.sc = self.service_manager.get_series_service()
+
+    def onChangeDBConn(self, val):
+        db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)
+        db_config.ShowModal()
+
+
     def createService(self):
         self.sc = self.service_manager.get_series_service()
     

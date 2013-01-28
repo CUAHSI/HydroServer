@@ -242,24 +242,14 @@ class mnuRibbon(RB.RibbonBar):
         
         if self.GetActivePage()==0:
             menu = wx.Menu()
-            menu.Append(wx.ID_ANY, "Change DB Configuration")
+            self.Bind(wx.EVT_MENU,  self.onChangeDBConfig, menu.Append(wx.ID_ANY, "Change DB Configuration"))
             menu.Append(wx.ID_ANY, "Close")
 
-            event.PopupMenu(menu)  
+            self.PopupMenu(menu) 
 
-
-    def OnBoxMonthly(self, event):
-        print 'select Monthly'
-        Publisher().sendMessage(("box.Monthly"), [""])
-    def OnBoxYearly(self, event):
-        print 'select Yearly'
-        Publisher().sendMessage(("box.Yearly"), [""])
-    def OnBoxSeasonal(self, event):
-        print 'select Seasonal'
-        Publisher().sendMessage(("box.Seasonal"), [""])
-    def OnBoxOverall(self, event):
-        print 'select Overall' 
-        Publisher().sendMessage(("box.Overall"), [""])                 
+    def onChangeDBConfig(self, event):
+        Publisher().sendMessage(("change.dbConfig"),"")
+               
         
     def onExecuteScript(self, event):
 
@@ -277,6 +267,16 @@ class mnuRibbon(RB.RibbonBar):
         # self.Bind(wx.EVT_MENU, self.OnBoxMonthly, mnuMonthly)
 
         event.PopupMenu(menu)  
+
+
+    def OnBoxMonthly(self, event):
+        Publisher().sendMessage(("box.Monthly"), [""])
+    def OnBoxYearly(self, event):
+        Publisher().sendMessage(("box.Yearly"), [""])
+    def OnBoxSeasonal(self, event):
+        Publisher().sendMessage(("box.Seasonal"), [""])
+    def OnBoxOverall(self, event):
+        Publisher().sendMessage(("box.Overall"), [""])      
 
     def OnPlotTypeDropdown(self, event):
 
@@ -299,6 +299,9 @@ class mnuRibbon(RB.RibbonBar):
         elif event.Id == wxID_RIBBONPLOTSUMMARY:
             value= 4  
         Publisher().sendMessage(("select.Plot"), value)
+
+
+    
 
 
 

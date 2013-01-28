@@ -78,28 +78,13 @@ class plotBox(wx.Panel):
       self.cursor = Values[0]
 
 
-      self.cursor.execute("SELECT  DataValue, strftime('%m', LocalDateTime) AS Month, strftime('%Y)',LocalDateTime) As Year FROM DataValues"+Filter)
+      self.cursor.execute("SELECT  DataValue, CAST(strftime('%m', LocalDateTime) AS INTEGER) AS Month, CAST(strftime('%Y', LocalDateTime)AS INTEGER) As Year FROM DataValues "+Filter)
       self.Data= self.cursor.fetchall() 
-      
-      
 
-
-
-
-
-      # = ]
-      print self.Data[0]
-
-     
       self.Series= Values[1]
       
 
       self.overall("")             
-      #self.plot=self.figure.add_subplot(111)
-      
-
-
-      
 
  
   def SetColor( self, color):
@@ -109,27 +94,56 @@ class plotBox(wx.Panel):
       self.canvas.SetBackgroundColour( color )
        
   def monthly(self, str):
+
+
+      self.plot.clear()
+      
       self.plot.set_xlabel("Monthly")
+      x = range(len(self.Data))
+      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      self.plot.boxplot( [[x[0] for x in self.Data if x[1]==1], [x[0] for x in self.Data if x[1]==2], [x[0] for x in self.Data if x[1]==3],[x[0] for x in self.Data if x[1]==4], [x[0] for x in self.Data if x[1]==5], [x[0] for x in self.Data if x[1]==6], [x[0] for x in self.Data if x[1]==7], [x[0] for x in self.Data if x[1]==8], [x[0] for x in self.Data if x[1]==9], [x[0] for x in self.Data if x[1]==10], [x[0] for x in self.Data if x[1]==11], [x[0] for x in self.Data if x[1]==12]], notch = True, sym = "gs")
+      self.plot.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
       self.canvas.draw()
+
+
 
   def seasonaly(self, str):
+      self.plot.clear()
+      x = range(len(self.Data))
       self.plot.set_xlabel("Seasonally")
+      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      self.plot.boxplot( [[x[0] for x in self.Data if x[1] in (1,2,3)], [x[0] for x in self.Data if x[1]in (4,5,6)], [x[0] for x in self.Data if x[1]in (6,7,8)],[x[0] for x in self.Data if x[1]in (10,11,12)]], notch = True, sym = "gs")
+      self.plot.set_xticklabels( ['Winter', 'Spring', 'Summer', 'Fall'])
       self.canvas.draw()
-
 
 
   def yearly(self, str):
+      
+      years = sorted(list(set([x[2] for x in self.Data] )))      
+      histlist = []
+      for y in years:
+          histlist.append([x[0] for x in self.Data if x[2]==y])
+
+      self.plot.clear()
       self.plot.set_xlabel("Yearly")
+      x = range(len(self.Data))
+      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      self.plot.boxplot( histlist , notch = True, sym = "gs")
+      self.plot.set_xticklabels( years)
       self.canvas.draw()
 
 
   def overall(self, str): 
-      self.plot.clear()
-      x = range(len(self.dataValues))
+      
       self.plot.set_xlabel("Overall") 
+      self.plot.clear()
+      x = range(len(self.Data))
       self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
       self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      self.plot.boxplot( [x[0] for x in self.Data], notch = True)
+      self.plot.boxplot( [x[0] for x in self.Data], notch = True, sym = "gs")
       self.canvas.draw()
 
 
