@@ -36,9 +36,9 @@ class MyCustomToolbar(NavigationToolbar):
     #  button that calls it. but in case it does get called (e.g. if there
     # is a keyboard shortcut I don't know about) then we override the method
     # that gets called - to protect against the exceptions that it throws
-    def configure_subplot(self, evt):
-        if (not multPlots):
-            print 'ERROR: This application does not support subplots'
+    # def configure_subplot(self, evt):
+    #     if (not multPlots):
+    #         print 'ERROR: This application does not support subplots'
 
     # pan the graph to the left
     def _on_custom_pan_left(self, evt):
