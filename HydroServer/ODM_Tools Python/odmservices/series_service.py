@@ -19,7 +19,7 @@ class SeriesService():
 
 	def get_test_data(self):
 		session = self._session_factory.get_session()
-		return session.query(Site).first()
+		return session.query(ODMVersion).first()
 
 	# Sites methods
 	def get_sites(self, site_code = ""):
