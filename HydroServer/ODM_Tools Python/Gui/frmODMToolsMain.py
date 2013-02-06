@@ -15,6 +15,7 @@ from numpy import arange, sin, cos, exp, pi
 import frmDBConfiguration
 
 from odmservices.service_manager import ServiceManager
+from pnlScript import pnlScript
 import pnlSeriesSelector
 import pnlPlot
 import mnuRibbon
@@ -81,12 +82,18 @@ class frmODMToolsMain(wx.Frame):
         self.pnlDocking = wx.Panel(id=wxID_ODMTOOLSPANEL1, name='pnlDocking',
               parent=self, pos=wx.Point(0, 0), size=wx.Size(605, 458),
               style=wx.TAB_TRAVERSAL)
-              
+
         
-        self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
+
+
+        
+        # self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
+        #       name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+        #       size=wx.Size(368, 168), style=0)
+        self.txtPythonScript = pnlScript(ID=wxID_TXTPYTHONSCRIPT,
               name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-              size=wx.Size(368, 168), style=0)
-        
+              size=wx.Size(500, 800)) 
+
         self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
                 name=u'txtPython', parent=self, pos=wx.Point(72, 24),
                 size=wx.Size(500,800), style=0)           
@@ -119,7 +126,7 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.AddPane(self.pnlSelector, wx.BOTTOM, 'Series Selector')
         self._mgr.GetPane(self.pnlSelector).Name("Selector").MinSize(size=wx.Size(300, 200)).Layer(0)       
         self._mgr.AddPane(self.txtPythonScript, wx.BOTTOM , 'Script')
-        self._mgr.GetPane(self.txtPythonScript).Name("Script").Show(show=False).Layer(1)
+        self._mgr.GetPane(self.txtPythonScript).Name("Script").Show(show=False).Layer(1).Float().MinSize(size=wx.Size(500,800))
         self._mgr.AddPane(self.txtPythonConsole, wx.Bottom,  caption='Python Console')
         self._mgr.GetPane(self.txtPythonConsole).Name("Console").Layer(1).Show(show=False).Float()
         
@@ -194,7 +201,9 @@ class frmODMToolsMain(wx.Frame):
         self.sc = self.service_manager.get_series_service()
     
     def onExecuteScript(self, value):
-        print "testing file execution with test.py"
+        print "testing script logging"
+        for i in ('red', 'blue', 'green', 'magenta'):
+            self.txtPythonScript('This is a test\n', i)
         pass
     
 
