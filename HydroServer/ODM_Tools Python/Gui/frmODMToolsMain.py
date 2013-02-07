@@ -4,6 +4,15 @@ import wx
 import wx.grid
 import wx.lib.agw.ribbon as RB
 import wx.aui
+# import wx.aui
+
+try:
+    from agw import aui
+except ImportError: # if it's not there locally, try the wxPython lib.
+    import wx.lib.agw.aui as aui
+    
+
+
 import wx.richtext
 import wx.stc
 import datetime
@@ -28,7 +37,6 @@ import pnlDataTable
 
 def create(parent):
     return frmODMToolsMain(parent)
-
 [wxID_ODMTOOLS, wxID_ODMTOOLSCHECKLISTBOX2, wxID_ODMTOOLSCOMBOBOX1, 
  wxID_ODMTOOLSCOMBOBOX2, wxID_ODMTOOLSCOMBOBOX4, wxID_ODMTOOLSCOMBOBOX5, 
  wxID_ODMTOOLSGRID1, wxID_ODMTOOLSPANEL1, wxID_ODMTOOLSPANEL2, 
@@ -67,11 +75,14 @@ class frmODMToolsMain(wx.Frame):
         Publisher().subscribe(self.addPlot, ("add.NewPlot")) 
         Publisher().subscribe(self.onDocking, ("adjust.Docking")) 
 
+        Publisher().subscribe(self.onDocking, ("adjust.Docking"))
         Publisher().subscribe(self.onPlotSelection, ("select.Plot")) 
         Publisher().subscribe(self.onExecuteScript, ("execute.script")) 
 
 
+        Publisher().subscribe(self.onExecuteScript, ("execute.script"))
         Publisher().subscribe(self.onChangeDBConn, ("change.dbConfig"))
+        Publisher().subscribe(self.OnClose, ("onClose"))
 
 
 ############### Ribbon ###################
@@ -82,18 +93,12 @@ class frmODMToolsMain(wx.Frame):
         self.pnlDocking = wx.Panel(id=wxID_ODMTOOLSPANEL1, name='pnlDocking',
               parent=self, pos=wx.Point(0, 0), size=wx.Size(605, 458),
               style=wx.TAB_TRAVERSAL)
-
+              
         
-
-
-        
-        # self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
-        #       name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-        #       size=wx.Size(368, 168), style=0)
-        self.txtPythonScript = pnlScript(ID=wxID_TXTPYTHONSCRIPT,
+        self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
               name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-              size=wx.Size(500, 800)) 
-
+              size=wx.Size(368, 168), style=0)
+        
         self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
                 name=u'txtPython', parent=self, pos=wx.Point(72, 24),
                 size=wx.Size(500,800), style=0)           
@@ -117,32 +122,33 @@ class frmODMToolsMain(wx.Frame):
               parent=self.pnlDocking, pos=wx.Point(0, 0), size=wx.Size(605, 458),
                style=wx.TAB_TRAVERSAL) 
 
+
 ############ Docking ###################
        
-        self._mgr = wx.aui.AuiManager(self.pnlDocking)
-        self._mgr.AddPane(self.dataTable, wx.RIGHT, 'Table View')
-        self._mgr.GetPane(self.dataTable).Name("Table").MinSize(size=wx.Size( 400, 400)).Show(show=False)       
-       # DestroyOnClose(b=False)
-        self._mgr.AddPane(self.pnlSelector, wx.BOTTOM, 'Series Selector')
-        self._mgr.GetPane(self.pnlSelector).Name("Selector").MinSize(size=wx.Size(300, 200)).Layer(0)       
-        self._mgr.AddPane(self.txtPythonScript, wx.BOTTOM , 'Script')
-        self._mgr.GetPane(self.txtPythonScript).Name("Script").Show(show=False).Layer(1).Float().MinSize(size=wx.Size(500,800))
-        self._mgr.AddPane(self.txtPythonConsole, wx.Bottom,  caption='Python Console')
-        self._mgr.GetPane(self.txtPythonConsole).Name("Console").Layer(1).Show(show=False).Float()
-        
-        self._mgr.AddPane(self.pnlPlot, wx.CENTER)
-        self._mgr.GetPane(self.pnlPlot).Name("Plot")
+        self._mgr = aui.AuiManager()
+        self._mgr.SetManagedWindow(self.pnlDocking)
+        self._mgr.AddPane(self.dataTable, aui.AuiPaneInfo().Right().Name("Table").
+                Show(show=False).Caption('Table View').MinSize(wx.Size( 400, 400)))
+        # DestroyOnClose(b=False)
+        self._mgr.AddPane(self.pnlSelector, aui.AuiPaneInfo().Bottom().Name("Selector").
+                Layer(0).Caption('Series Selector').MinSize(wx.Size(100, 200)) )   
+        self._mgr.AddPane(self.txtPythonScript,  aui.AuiPaneInfo().Bottom().Caption('Script').
+                Name("Script").Show(show=False).Layer(1))
+        self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Bottom().Caption('Python Console').
+                Name("Console").Layer(1).Show(show=False).Float())        
+        self._mgr.AddPane(self.pnlPlot,  aui.AuiPaneInfo().CenterPane().Name("Plot"))
+
+
         self._mgr.Update()
+
+
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         self._init_sizers()
         self._ribbon.Realize() 
 
-
-    def addPlot(self, Values):
-        self.dataTable.Init(Values.data[0])
-        self.pnlPlot.addPlot(Values.data)
-        
+       
+       
 
     def onDocking(self, Value):       
         
@@ -174,6 +180,8 @@ class frmODMToolsMain(wx.Frame):
     def addPlot(self, Values):
         self.dataTable.Init(Values.data[0])
         self.pnlPlot.addPlot(Values.data)        
+        self._ribbon.enableButtons(self.pnlPlot.getActivePlotID() )
+       
 
 
 
@@ -189,18 +197,22 @@ class frmODMToolsMain(wx.Frame):
         self.Refresh()
 
 
-    def createService(self):
-        self.sc = self.service_manager.get_series_service()
-
-    def onChangeDBConn(self, val):
+    def addEdit(self, Values): 
+         self.dataTable.Init(Values.data[0])
+    
+   
+    def onChangeDBConn(self, event):
         db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)
         db_config.ShowModal()
 
 
     def createService(self):
         self.sc = self.service_manager.get_series_service()
+   
+    
     
     def onExecuteScript(self, value):
+        print "testing file execution with test.py"
         print "testing script logging"
         for i in ('red', 'blue', 'green', 'magenta'):
             self.txtPythonScript('This is a test\n', i)
@@ -208,11 +220,15 @@ class frmODMToolsMain(wx.Frame):
     
 
         
+            
     def OnClose(self, event):
         # deinitialize the frame manager
         self._mgr.UnInit()
         # delete the frame
         self.Destroy()
+
+
+
 
 
 if __name__ == '__main__':

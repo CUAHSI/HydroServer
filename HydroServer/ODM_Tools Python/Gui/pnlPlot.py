@@ -3,6 +3,11 @@
 import wx
 from wx.lib.pubsub import Publisher
 
+try:
+    from agw import flatnotebook as fnb
+except ImportError: # if it's not there locally, try the wxPython lib.
+    import wx.lib.agw.flatnotebook as fnb
+
 
 import plotTimeSeries
 import plotSummary
@@ -15,14 +20,16 @@ wxID_PAGESUMMARY, wxID_PAGETIMESERIES, wxID_TABPLOTS
 ] = [wx.NewId() for _init_ctrls in range(7)]
 
 
-class pnlPlot(wx.Notebook):  
+class pnlPlot(fnb.FlatNotebook):  
     
     
     
     def _init_ctrls(self, prnt):
-        wx.Notebook.__init__(self, id=wxID_TABPLOTS, name=u'tabPlots',
+        fnb.FlatNotebook.__init__(self, id=wxID_TABPLOTS, name=u'tabPlots',
               parent=prnt, pos=wx.Point(0, 0), size=wx.Size(491, 288),
-              style=wx.BK_DEFAULT)
+              agwStyle=fnb.FNB_NODRAG | fnb.FNB_HIDE_TABS)
+        # style |= fnb.FNB_HIDE_TABS
+        # self.book.SetAGWWindowStyleFlag(style)
         
         self.pltTS = plotTimeSeries.plotTimeSeries(id=wxID_PAGETIMESERIES, name='pltTS',
                 parent=self, pos=wx.Point(0, 0), size=wx.Size(605, 458),
@@ -49,9 +56,29 @@ class pnlPlot(wx.Notebook):
               parent=self, pos=wx.Point(784, 256), size=wx.Size(437, 477),
               style=wx.TAB_TRAVERSAL)
         self.AddPage(self.pltSum, 'Summary')
+
+
+
+        Publisher().subscribe(self.onDateChanged, ("onDateChanged"))
+        Publisher().subscribe(self.OnPlotType, ("onPlotType"))
+        Publisher().subscribe(self.OnShowLegend, ("OnShowLegend"))
+        Publisher().subscribe(self.OnNumBins, ("OnNumBins"))
         
-        
-       
+
+    def OnNumBins(self , numBins):
+      self.pltHist.ChangeNumOfBins(numBins.data)
+
+    def onDateChanged(self, Args): 
+      self.pltTS.onDateChanged(Args.data[0], Args.data[1])
+    
+    def OnPlotType(self, Args):     
+      self.pltTS.OnPlotType( Args.data[1])
+
+
+    def OnShowLegend(self, Args):
+      event, isVisible = Args.data[0], Args.data[1]
+      self.pltTS.OnShowLegend(isVisible)
+      
 
     
     def addPlot(self, Values):
@@ -78,7 +105,7 @@ class pnlPlot(wx.Notebook):
        #  self.pltBox.addPlot(self.dataValues, self.dateTimes, Values[1])
        #  self.pltTS.addPlot(self.dataValues, self.dateTimes, Values[1])
 
-        Filter = " WHERE DataValue <> -9999 OR CensorCode <> 'nc'"
+        Filter = " WHERE DataValue <> -9999 AND CensorCode = 'nc'"
         self.pltSum.addPlot(Values, Filter)
         self.pltHist.addPlot(Values, Filter)
         self.pltProb.addPlot(Values, Filter)
@@ -89,6 +116,9 @@ class pnlPlot(wx.Notebook):
 
     def selectPlot(self, value):       
         self.SetSelection(value.data)
+
+    def getActivePlotID(self):
+        return self.GetSelection()
        
         
     def __init__(self, parent, id, pos, size, style, name):

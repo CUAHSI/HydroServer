@@ -1,5 +1,4 @@
 import wx
-from matplotlib.backends.backend_wx import  _load_bitmap
 from matplotlib.backends.backend_wxagg import NavigationToolbar2WxAgg as NavigationToolbar
 
 def CreateBitmap(xpm):
