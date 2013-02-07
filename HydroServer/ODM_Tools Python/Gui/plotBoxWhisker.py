@@ -7,11 +7,14 @@ import matplotlib
 matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
-from matplotlib.widgets import Lasso
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+
 
  
-from wx.lib.pubsub import Publisher
+
 
 
 
@@ -95,26 +98,29 @@ class plotBox(wx.Panel):
        
   def monthly(self, str):
 
-
-      self.plot.clear()
-      
-      self.plot.set_xlabel("Monthly")
-      x = range(len(self.Data))
-      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      self.plot.boxplot( [[x[0] for x in self.Data if x[1]==1], [x[0] for x in self.Data if x[1]==2], [x[0] for x in self.Data if x[1]==3],[x[0] for x in self.Data if x[1]==4], [x[0] for x in self.Data if x[1]==5], [x[0] for x in self.Data if x[1]==6], [x[0] for x in self.Data if x[1]==7], [x[0] for x in self.Data if x[1]==8], [x[0] for x in self.Data if x[1]==9], [x[0] for x in self.Data if x[1]==10], [x[0] for x in self.Data if x[1]==11], [x[0] for x in self.Data if x[1]==12]], notch = True, sym = "gs")
+      self.updatePlot("Monthly",  [[x[0] for x in self.Data if x[1]==1], [x[0] for x in self.Data if x[1]==2], [x[0] for x in self.Data if x[1]==3],[x[0] for x in self.Data if x[1]==4], [x[0] for x in self.Data if x[1]==5], [x[0] for x in self.Data if x[1]==6], [x[0] for x in self.Data if x[1]==7], [x[0] for x in self.Data if x[1]==8], [x[0] for x in self.Data if x[1]==9], [x[0] for x in self.Data if x[1]==10], [x[0] for x in self.Data if x[1]==11], [x[0] for x in self.Data if x[1]==12]])
+      # self.plot.clear()      
+      # self.plot.set_xlabel("Monthly")
+      # x = range(len(self.Data))
+      # self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+      # self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      # self.plot.boxplot( [[x[0] for x in self.Data if x[1]==1], [x[0] for x in self.Data if x[1]==2], [x[0] for x in self.Data if x[1]==3],[x[0] for x in self.Data if x[1]==4], [x[0] for x in self.Data if x[1]==5], [x[0] for x in self.Data if x[1]==6], [x[0] for x in self.Data if x[1]==7], [x[0] for x in self.Data if x[1]==8], [x[0] for x in self.Data if x[1]==9], [x[0] for x in self.Data if x[1]==10], [x[0] for x in self.Data if x[1]==11], [x[0] for x in self.Data if x[1]==12]], notch = True, sym = "gs", bootstrap = 10000)
       self.plot.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
       self.canvas.draw()
 
 
 
   def seasonaly(self, str):
-      self.plot.clear()
-      x = range(len(self.Data))
-      self.plot.set_xlabel("Seasonally")
-      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      self.plot.boxplot( [[x[0] for x in self.Data if x[1] in (1,2,3)], [x[0] for x in self.Data if x[1]in (4,5,6)], [x[0] for x in self.Data if x[1]in (6,7,8)],[x[0] for x in self.Data if x[1]in (10,11,12)]], notch = True, sym = "gs")
+
+      self.updatePlot("Seasonally",  [[x[0] for x in self.Data if x[1] in (1,2,3)], [x[0] for x in self.Data if x[1]in (4,5,6)], [x[0] for x in self.Data if x[1]in (6,7,8)],[x[0] for x in self.Data if x[1]in (10,11,12)]])
+      # self.plot.clear()
+      # x = range(len(self.Data))
+      # self.plot.set_xlabel("Seasonally")
+      # self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+      # self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      # self.plot.boxplot( [[x[0] for x in self.Data if x[1] in (1,2,3)], [x[0] for x in self.Data if x[1]in (4,5,6)], [x[0] for x in self.Data if x[1]in (6,7,8)],[x[0] for x in self.Data if x[1]in (10,11,12)]], notch = True, sym = "gs", bootstrap = 10000)
+      
+
       self.plot.set_xticklabels( ['Winter', 'Spring', 'Summer', 'Fall'])
       self.canvas.draw()
 
@@ -126,26 +132,94 @@ class plotBox(wx.Panel):
       for y in years:
           histlist.append([x[0] for x in self.Data if x[2]==y])
 
-      self.plot.clear()
-      self.plot.set_xlabel("Yearly")
-      x = range(len(self.Data))
-      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      self.plot.boxplot( histlist , notch = True, sym = "gs")
+
+      self.updatePlot("Yearly", histlist)
+      # self.plot.clear()
+      # self.plot.set_xlabel("Yearly")
+      # x = range(len(self.Data))
+      # self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+      # self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      # self.plot.boxplot( histlist , notch = True, sym = "gs", bootstrap = 10000)
       self.plot.set_xticklabels( years)
       self.canvas.draw()
 
 
   def overall(self, str): 
+            
+      self.updatePlot("Overall", [x[0] for x in self.Data])
       
-      self.plot.set_xlabel("Overall") 
+
+  def updatePlot(self, title, data):
       self.plot.clear()
-      x = range(len(self.Data))
+      self.plot.set_xlabel(title) 
       self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
       self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      self.plot.boxplot( [x[0] for x in self.Data], notch = True, sym = "gs")
+
+      med, ci, mean = self.calcConfInterval(data)
+      bp=self.plot.boxplot( data,  sym = "-gs", notch = True, bootstrap = 5000,  conf_intervals = ci)
+      
+      self.plot.scatter([range(1,len(mean)+1)], mean, marker='|', c="r")
+      self.plot.scatter([range(1,len(med)+1)], med, marker='s', c="g")      
+      plt.setp(bp['whiskers'], color = 'k', linestyle = '-')
       self.canvas.draw()
 
+
+  def calcConfInterval(self, PlotData):
+      medians = []
+      confint = []
+      means = []
+      if len(PlotData)>12 :
+        vals = self.indivConfInter(PlotData)
+        medians.append(vals[0])
+        means.append(vals[1])
+        confint.append((vals[4], vals[5]))
+        # print vals
+
+      else:      
+        for data in PlotData:
+          vals = self.indivConfInter(data)
+          medians.append(vals[0])
+          means.append(vals[1])
+          confint.append((vals[4], vals[5]))
+          # print vals
+
+      return medians, confint, means
+
+  def indivConfInter(self, data):
+      if len(data)>0:
+        med = np.median(data)
+        mean = np.mean(data)
+        stdDev = math.sqrt(np.var(data))
+        ci95low = mean - 10*(1.96 *(stdDev/math.sqrt(len(data))))
+        ci95up = mean + 10*(1.96 *(stdDev/math.sqrt(len(data))))
+
+        cl95low = med - (1.96 *(stdDev/math.sqrt(len(data))))
+        cl95up = med + (1.96 *(stdDev/math.sqrt(len(data))))
+      
+        return [med, mean, ci95low, ci95up, cl95low, cl95up]
+      else: return [ None, None, None, None, None, None]
+
+     
+
+            
+
+# boxData.mean = Math.Round(data.Compute("Avg(" & db_fld_ValValue & ")", ""), 3)
+# boxData.median = data.Rows(Math.Ceiling((numRows / 2) - 1)).Item(db_fld_ValValue)
+            # If Not (data.Compute("Var(" & db_fld_ValValue & ")", "") Is System.DBNull.Value) Then
+            #     variance = data.Compute("Var(" & db_fld_ValValue & ")", "")
+            #     stdDev = Math.Sqrt(variance)
+            # Else
+            #     stdDev = 0
+            # End If
+            # 'Confidence Interval on Mean
+            # boxData.confidenceInterval95_Lower = boxData.mean - 1.96 * (stdDev / (Math.Sqrt(numRows)))
+            # boxData.confidenceInterval95_Upper = boxData.mean + 1.96 * (stdDev / (Math.Sqrt(numRows)))
+            # 'Confidence Limit on Median
+            # boxData.confidenceLimit95_Lower = boxData.median - 1.96 * (stdDev / (Math.Sqrt(numRows)))
+            # boxData.confidenceLimit95_Upper = boxData.median + 1.96 * (stdDev / (Math.Sqrt(numRows)))
+      
+
+     
 
        
   def __init__(self, parent, id, pos, size, style, name):

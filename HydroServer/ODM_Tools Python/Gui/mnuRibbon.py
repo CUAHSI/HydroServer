@@ -19,7 +19,8 @@ import pnlDatePicker
  wxID_RIBBONEDITSCRIPTSAVE, wxID_RIBBONVIEWPLOT, wxID_RIBBONVIEWTABLE,
  wxID_RIBBONVIEWSERIES, wxID_RIBBONVIEWCONSOLE, wxID_RIBBONVIEWSCRIPT,
  wxID_RIBBONPLOTDATESTART, wxID_FileMenu, wxID_STARTDPDATE, wxID_ENDDPDATE,
- ] = [wx.NewId() for _init_ctrls in range(37)]
+ wxID_FRAME1SPINCTRL1,
+ ] = [wx.NewId() for _init_ctrls in range(38)]
 
 def CreateBitmap(xpm):
     bmp = wx.Image(xpm, wx.BITMAP_TYPE_ANY).ConvertToBitmap()
@@ -59,55 +60,44 @@ class mnuRibbon(RB.RibbonBar):
 #-- PLOT OPTIONS-----------------------------------------------------------------------------                                
         PlotOptions_panel = RB.RibbonPanel(home, wx.ID_ANY, "Plot Options", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE) 
-        PlotsOptions_bar = RB.RibbonButtonBar(PlotOptions_panel, wx.ID_ANY)
+        self.PlotsOptions_bar = RB.RibbonButtonBar(PlotOptions_panel, wx.ID_ANY)
 
-        PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTTSTYPE, "Plot Type",  
+        self.PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTTSTYPE, "Plot Type",  
                                 CreateBitmap("images\\PlotType.png"), "")
 
-        PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSCOLOR, "Color Setting",  
+        self.PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSCOLOR, "Color Setting",  
                                 CreateBitmap("images\\ColorSetting.png"), "")
-        PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
+        self.PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
                                 CreateBitmap("images\\Legend.png"), "")
 
+
+        self.PlotsOptions_bar.AddSimpleButton( wxID_RIBBONPLOTDATESTART, "# Hist Bins" ,CreateBitmap("images\\Blank.png"), "") #,wx.Size(100, 21))
+        self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTDATESTART, False)
+
+        self.spinCtrl1 = wx.SpinCtrl(id=wxID_FRAME1SPINCTRL1, initial=0,
+              max=100, min=0, name='spinCtrl1', parent=self.PlotsOptions_bar,
+              pos=wx.Point(130, 6), size=wx.Size(45, 25),
+              style=wx.SP_ARROW_KEYS)
+        self.spinCtrl1.SetValue(50)
+
         
-        PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTBOXTYPE, "Box Whisker Type",  
-                                CreateBitmap("images\\BoxWhiskerType.png"), "").Enabled = False
-        # PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False)
+        self.PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTBOXTYPE, "Box Whisker Type",  
+                                CreateBitmap("images\\BoxWhiskerType.png"), "")
+        
+        self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, False) 
+        self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
+        self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, False) 
+        self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False)
                                 
 ######################TEMPORARILY COMMENTED OUT
         
-        # PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTTYPE, "Histogram Type",  
+        # self.PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTTYPE, "Histogram Type",  
         #                         CreateBitmap("images\\HisType.png"), "")
-        # PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTBIN, "Binning Algorithms",  
+        # self.PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTHISTBIN, "Binning Algorithms",  
         #                         CreateBitmap("images\\Binning.png"), "")                                                
      
 #-------------------------------------------------------------------------------
       
-
-        self.staticText2 = wx.StaticText(id=wx.ID_ANY,
-              label=u'Start Date:', name='staticText2', parent=home,
-              pos=wx.Point(16, 16), size=wx.Size(55, 13), style=0)
-        self.dpStartDate = wx.DatePickerCtrl(id=wxID_STARTDPDATE, name=u'dpStartDate',
-              parent=home, pos=wx.Point(80, 8), size=wx.Size(120, 24),
-              style=wx.DP_DROPDOWN)
-        self.dpStartDate.SetValue(wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0))#wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0)        
-        self.dpStartDate.SetLabel(repr(wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0)))#.strftime("%m-%d-%Y"))#"%Y-%m-%d'"")#'11/30/2010'
-        self.dpStartDate.SetToolTipString(u'Start Date')
-       
-
-        self.staticText1 = wx.StaticText(id=wx.ID_ANY,
-              label=u'End Date:', name='staticText1', parent=home,
-              pos=wx.Point(24, 48), size=wx.Size(49, 13), style=0)
-
-        self.dpEndDate = wx.DatePickerCtrl(id=wxID_ENDDPDATE, name=u'dpEndDate',
-              parent=home, pos=wx.Point(80, 40), size=wx.Size(120, 24),
-              style=wx.DP_DROPDOWN)
-        self.dpEndDate.SetValue(wx.DateTimeFromDMY(1, 1, 2012, 0, 0, 0))#wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0)        
-        self.dpEndDate.SetLabel(repr(wx.DateTimeFromDMY(1, 1, 2012, 0, 0, 0)))#.strftime("%m-%d-%Y"))#"%Y-%m-%d'"")#'11/30/2010'
-        self.dpEndDate.SetToolTipString(u'End Date')
-
-
-
 
 
 
@@ -119,10 +109,42 @@ class mnuRibbon(RB.RibbonBar):
         # dateTime_toolbar= RB.RibbonToolBar(dateTime_panel)
         dateTime_buttonbar = RB.RibbonButtonBar(dateTime_panel)
  
-       #  dateTime_buttonbar.AddHybridButton( wxID_RIBBONPLOTDATESTART, "Start" ,CreateBitmap("images\\Calendar.png"), "") #,wx.Size(100, 21))
-       #  dateTime_buttonbar.AddHybridButton( wxID_RIBBONPLOTDATEEND, "End" ,CreateBitmap("images\\Calendar.png"), "") #,wx.Size(100, 21))
-       # # dateTime_buttonbar.AddTool(wxID_RIBBONPLOTDATESTART,  CreateBitmap("images\\Calendar.png"), kind=pnlDatePicker.pnlDatePicker, client_data=[wxID_RIBBONPLOTDATESTART, "startDate", "Start Date", wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0)])
+        # dateTime_buttonbar.AddHybridButton( wxID_RIBBONPLOTDATESTART, "Start" ,CreateBitmap("images\\Calendar.png"), "") #,wx.Size(100, 21))
+        # dateTime_buttonbar.AddHybridButton( wxID_RIBBONPLOTDATEEND, "End" ,CreateBitmap("images\\Calendar.png"), "") #,wx.Size(100, 21))
+         # dateTime_buttonbar.AddTool(wxID_RIBBONPLOTDATESTART,  CreateBitmap("images\\Calendar.png"), kind=pnlDatePicker.pnlDatePicker, client_data=[wxID_RIBBONPLOTDATESTART, "startDate", "Start Date", wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0)])
         
+
+         ###Filler buttons to allow enough room for start and end date drop down menus
+
+        dateTime_buttonbar.AddSimpleButton( wxID_RIBBONPLOTDATESTART, "" ,CreateBitmap("images\\Blank.png"), "") #,wx.Size(100, 21))
+        dateTime_buttonbar.AddSimpleButton( wxID_RIBBONPLOTDATESTART, "" ,CreateBitmap("images\\Blank.png"), "") #,wx.Size(100, 21))
+        dateTime_buttonbar.AddSimpleButton( wxID_RIBBONPLOTDATESTART, "" ,CreateBitmap("images\\Blank.png"), "") #,wx.Size(100, 21))
+        dateTime_buttonbar.EnableButton(wxID_RIBBONPLOTDATESTART, False)
+
+
+
+        # self.staticText2 = wx.StaticText(id=wx.ID_ANY,
+        #       label=u'Start Date:', name='staticText2', parent=dateTime_buttonbar,
+        #       pos=wx.Point(0, 16), size=wx.Size(55, 13), style=0)
+        self.dpStartDate = wx.DatePickerCtrl(id=wxID_STARTDPDATE, name=u'dpStartDate',
+              parent=dateTime_buttonbar, pos=wx.Point(5, 8), size=wx.Size(120, 24),
+              style=wx.DP_DROPDOWN)
+        self.dpStartDate.SetValue(wx.DateTimeFromDMY(16, 1, 2008, 0, 0, 0))#wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0)        
+        self.dpStartDate.SetLabel(repr(wx.DateTimeFromDMY(16, 1, 2008, 0, 0, 0)))#.strftime("%m-%d-%Y"))#"%Y-%m-%d'"")#'11/30/2010'
+        self.dpStartDate.SetToolTipString(u'Start Date')
+       
+
+        # self.staticText1 = wx.StaticText(id=wx.ID_ANY,
+        #       label=u'End Date:', name='staticText1', parent=dateTime_buttonbar,
+        #       pos=wx.Point(0, 48), size=wx.Size(49, 13), style=0)
+
+        self.dpEndDate = wx.DatePickerCtrl(id=wxID_ENDDPDATE, name=u'dpEndDate',
+              parent=dateTime_buttonbar, pos=wx.Point(5, 40), size=wx.Size(120, 24),
+              style=wx.DP_DROPDOWN)
+        self.dpEndDate.SetValue(wx.DateTimeFromDMY(01, 04, 2008, 0, 0, 0))#wx.DateTimeFromDMY(30, 10, 2010, 0, 0, 0)        
+        self.dpEndDate.SetLabel(repr(wx.DateTimeFromDMY(1, 04, 2008, 0, 0, 0)))#.strftime("%m-%d-%Y"))#"%Y-%m-%d'"")#'11/30/2010'
+        self.dpEndDate.SetToolTipString(u'End Date')
+
         
         dateTime_buttonbar.AddSimpleButton(wxID_RIBBONPLOTDATEREFRESH, "Refresh",  
                                 CreateBitmap("images\\DateSetting.png"), "")
@@ -224,40 +246,59 @@ class mnuRibbon(RB.RibbonBar):
         ###Dropdownbox events
         self.Bind(RB.EVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED, self.OnPlotTypeDropdown, id=wxID_RIBBONPLOTTSTYPE)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED, self.OnBoxTypeDropdown, id=wxID_RIBBONPLOTBOXTYPE)
-        # self.Bind(RB.EVT_RIBBONBAR_TAB_CLICKED, self.OnFileMenu, id=wxID_FileMenu)
+        
+        ###date changed
+        self.Bind(wx.EVT_DATE_CHANGED, self.oneDateChanged, id = wxID_ENDDPDATE)
+        self.Bind(wx.EVT_DATE_CHANGED, self.onsDateChanged, id = wxID_STARTDPDATE)
+        self.Bind(wx.EVT_SPINCTRL, self.OnNumBins, id=wxID_FRAME1SPINCTRL1)
+
         
         ###Add event  to editab
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onExecuteScript, id= wxID_RIBBONEDITSCRIPTEXECUTE)
 
 
-       
-
-
+        ###Ribbon Event
         self.Bind(RB.EVT_RIBBONBAR_PAGE_CHANGED, self.OnFileMenu, id=wxID_PANEL1)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnShowLegend, id=wxID_RIBBONPLOTTSLEGEND) 
+        self.isLegendVisible = False;
+        
+    def OnNumBins(self, event):
+        Publisher.sendMessage(("OnNumBins"), event.Selection)
 
+    def OnShowLegend(self, event):
+        Publisher.sendMessage(("OnShowLegend"), [event, self.isLegendVisible])        
+        self.isLegendVisible = not self.isLegendVisible
 
+    def oneDateChanged(self,event):
+        # print dir(event)
+        Publisher.sendMessage(("onDateChanged"), [event.Date, "end"])
+
+    def onsDateChanged(self,event):
+        # print event.Date
+        Publisher.sendMessage(("onDateChanged"), [event.Date, "start"])
 
     def OnFileMenu(self, event):
-        
-        
         if self.GetActivePage()==0:
             menu = wx.Menu()
             self.Bind(wx.EVT_MENU,  self.onChangeDBConfig, menu.Append(wx.ID_ANY, "Change DB Configuration"))
-            menu.Append(wx.ID_ANY, "Close")
+            self.Bind(wx.EVT_MENU, self.onClose, menu.Append(wx.ID_ANY, "Close"))
 
             self.PopupMenu(menu) 
 
+    def onClose(self, event):
+        Publisher.sendMessage(("onClose"), event)
+
+
     def onChangeDBConfig(self, event):
-        Publisher().sendMessage(("change.dbConfig"),"")
+        Publisher().sendMessage(("change.dbConfig"), event)
+        self.SetActivePageByIndex(1)
                
         
     def onExecuteScript(self, event):
-
-        Publisher().sendMessage(("execute.script"), [""])
+        Publisher().sendMessage(("execute.script"), event)
 
 
     def OnBoxTypeDropdown(self, event):
-        
         menu = wx.Menu()
         self.Bind(wx.EVT_MENU,  self.OnBoxMonthly, menu.Append(wx.ID_ANY, "Monthly") )       
         self.Bind(wx.EVT_MENU,  self.OnBoxYearly, menu.Append(wx.ID_ANY, "Yearly"))
@@ -270,22 +311,34 @@ class mnuRibbon(RB.RibbonBar):
 
 
     def OnBoxMonthly(self, event):
-        Publisher().sendMessage(("box.Monthly"), [""])
+        Publisher().sendMessage(("box.Monthly"), event)
+
     def OnBoxYearly(self, event):
-        Publisher().sendMessage(("box.Yearly"), [""])
+        Publisher().sendMessage(("box.Yearly"), event)
+
     def OnBoxSeasonal(self, event):
-        Publisher().sendMessage(("box.Seasonal"), [""])
+        Publisher().sendMessage(("box.Seasonal"), event)
+
     def OnBoxOverall(self, event):
-        Publisher().sendMessage(("box.Overall"), [""])      
+        Publisher().sendMessage(("box.Overall"), event)      
 
     def OnPlotTypeDropdown(self, event):
-
         menu = wx.Menu()
-        menu.Append(wx.ID_ANY, "Line")
-        menu.Append(wx.ID_ANY, "Point")
-        menu.Append(wx.ID_ANY, "Both")
+        self.Bind(wx.EVT_MENU,  self.OnPlotTypeLine, menu.Append(wx.ID_ANY, "Line"))
+        self.Bind(wx.EVT_MENU,  self.OnPlotTypePoint, menu.Append(wx.ID_ANY, "Point"))
+        self.Bind(wx.EVT_MENU,  self.OnPlotTypeBoth, menu.Append(wx.ID_ANY, "Both"))
 
-        event.PopupMenu(menu)    
+        event.PopupMenu(menu) 
+
+    def OnPlotTypeLine(self, event):
+        Publisher().sendMessage(("onPlotType"), [event, "line"])
+
+    def OnPlotTypePoint(self, event):
+        Publisher().sendMessage(("onPlotType"), [event, "point"])
+
+    def OnPlotTypeBoth(self, event):
+        Publisher().sendMessage(("onPlotType"), [event, "both"])
+
 
     def onPlotSelection(self, event):
         if event.Id == wxID_RIBBONPLOTTIMESERIES:       
@@ -297,12 +350,9 @@ class mnuRibbon(RB.RibbonBar):
         elif event.Id == wxID_RIBBONPLOTBOX:
             value=3
         elif event.Id == wxID_RIBBONPLOTSUMMARY:
-            value= 4  
+            value= 4
+        self.enableButtons(value)
         Publisher().sendMessage(("select.Plot"), value)
-
-
-    
-
 
 
     def onDocking(self, event):
@@ -319,6 +369,34 @@ class mnuRibbon(RB.RibbonBar):
             value= "Plot"       
                  
         Publisher().sendMessage(("adjust.Docking"), value)
+            
+
+    def enableButtons(self, plot):
+        if plot == 0 or plot == 1:
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, True) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, True) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, True) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False) 
+        elif plot == 2:
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False) 
+        elif plot == 3:
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, True) 
+        elif plot == 4: 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, False) 
+            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False)   
+
+
+
+
+        
             
 ##        
 ##    def OnBtnAdvButton(self, event):

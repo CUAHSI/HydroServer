@@ -55,8 +55,6 @@ class plotHist(wx.Panel):
        
       self.canvas.draw()
       self._init_sizers()
-
-  
       
 
    
@@ -64,17 +62,20 @@ class plotHist(wx.Panel):
       self.bins = bins
       self.plot.clear()
 
+      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
       self.plot.set_xlabel(self.Series.variable_name)
       self.plot.set_ylabel("Number of Observations")
 
-      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      # self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
       
-      self.plot=self.figure.add_subplot(111)
-      xRange =round(max(self.dataValues) - min(self.dataValues), 3)
-      dX= round(xRange/bins, 3)
+      # self.plot=self.figure.add_subplot(111)
+      # xRange =round(max(self.dataValues) - min(self.dataValues), 3)
+      # print xRange
+      # dX= round(xRange/int(bins), 3)
 
       self.plot.hist(self.dataValues, bins, normed=1, facecolor='g')
       self.canvas.draw()
+
      
   def defaultNumBins(self, numVals):
       numBins = 0

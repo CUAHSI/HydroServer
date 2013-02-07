@@ -7,10 +7,13 @@ import matplotlib
 matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
-from matplotlib.widgets import Lasso
+# from matplotlib.widgets import Lasso
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
 import matplotlib.pyplot as plt
 from random import *
+import datetime
+import numpy as np
+
 
 
 class plotTimeSeries(wx.Panel):
@@ -35,7 +38,7 @@ class plotTimeSeries(wx.Panel):
       #matplotlib.figure.Figure.__init__(self)
       wx.Panel.__init__(self, prnt, -1)
       
-      self.figure = matplotlib.figure.Figure()
+      self.figure = Figure()#matplotlib.figure.Figure()
       self.timeSeries=self.figure.add_subplot(111)
       self.timeSeries.axis([0, 1, 0, 1])#
       self.timeSeries.plot([],[])
@@ -45,10 +48,11 @@ class plotTimeSeries(wx.Panel):
       # Create the navigation toolbar, tied to the canvas
       self.toolbar = NavigationToolbar(self.canvas)
       self.toolbar.Realize()
-       
-       
-      #self.canvas.SetCursor(wx.StockCursor(wx.CURSOR_CROSS))        
-      #self.canvas.SetScrollbar(wx.HORIZONTAL, 0,5, 1000)
+
+
+      self.timeSeries.legend(loc = "lower center")
+      self.format = '-o'
+
       self.SetColor("WHITE")
       self.canvas.SetFont(wx.Font(20, wx.SWISS, wx.NORMAL, wx.NORMAL,
             False, u'Tahoma'))
@@ -58,105 +62,158 @@ class plotTimeSeries(wx.Panel):
 
 
       self.canvas.mpl_connect('pick_event', self.on_pick)
-      self.canvas.mpl_connect('button_press_event', self.onclick)
-      self.canvas.Bind(wx.EVT_SCROLLWIN, self.OnScrollEvt)
-       
+      # self.canvas.mpl_connect('button_press_event', self.onclick)
       
-       
-      self.canvas.draw()
-       
-       
-      self.BuildPopup()      
+      self.isfirstplot = True
 
+      self.BuildPopup()
+      self.canvas.draw()      
       self._init_sizers()
 
    
   def randBinList(self, n):
-    selected = []
-    val = n+1
-    for b in range(1,val):
-      selected.append(randint(0,1))
-    return selected
-    #return lambda n: [randint(0,1) for b in range(1,n+1)]
+      selected = []
+      val = n+1
+      for b in range(1,val):
+        selected.append(randint(0,1))
+      return selected
+      #return lambda n: [randint(0,1) for b in range(1,n+1)]
 
-  def addPlot(self, Values, Filter):
-
-      self.cursor = Values[0]
-
-      self.cursor.execute("SELECT  DataValue, LocalDateTime FROM DataValues"+Filter)
-      results = self.cursor.fetchall()
-      self.dataValues =[x[0] for x in results]
-
-      
-      self.dateTimes = [x[1] for x in results]
-      self.Series= Values[1]
-
-
-
+  def editSeries(self, seriesID):
       self.timeSeries.clear()
-      self.colorlist = self.randBinList(len(self.dataValues))
-      x = range(len(self.dataValues))
-      self.timeSeries.set_xlabel("Date Time")
+
+
+      #####include NoDV in plot
+      # remove from regular 'lines'
+      self.removePlot(seriesID)
+
+      #add plot with line only in black      
       self.timeSeries.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      
+      self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)      
+      self.timeSeries.plot_date( self.dateTimes, self.dataValues,'-k', xdate = True, tz = None )
 
-      # print self.dateTimes
+      # add scatterplot with colorlist as colorchart
+      # self.colorlist = ['k' if x==0 else 'r' for x in self.randBinList(len(self.dataValues))]
+      self.colorlist = self.randBinList(len(self.dataValues))
+      self.editPoint = self.timeSeries.scatter(self.dateTimes, self.dataValues, s= 30, c=['k' if x==0 else 'r' for x in self.colorlist])
+      #   self.isfirstplot = False
+      self.editPoint.set_picker(True) 
 
-
-      #self.timeSeries=self.figure.add_subplot(111)
-      lines= self.timeSeries.plot_date( self.dateTimes, self.dataValues,'-ro', xdate = True, tz = None )
-      #self.timeSeries.setp(lines, color= colorlist, linewidth = 2.0) 
-       # c=self.colorlist.
-      #self.timeSeries.set_xticks( minor=False)
-      self.timeSeries.set_picker(True) 
-      self.timeSeries.legend(loc= 'upper right')
       self.canvas.draw()
 
-  def draw_plot(self):
-       # Update data in plot:
-      self.plot_data.set_xdata(self.x[self.i_start:self.i_end])
-      self.plot_data.set_ydata(self.y[self.i_start:self.i_end])
-      # Adjust plot limits:
-      self.timeSeries.set_xlim((min(self.x[self.i_start:self.i_end]),
-                         max(self.x[self.i_start:self.i_end])))
-      self.timeSeries.set_ylim((min(self.y[self.i_start:self.i_end]),
-                          max(self.y[self.i_start:self.i_end])))
-      # Redraw:                  
-      self.canvas.draw()   
-       
+
+
+  def onDateChanged(self, date, time): 
+      # print date
+      # self.timeSeries.clear()
+      date = datetime.datetime(date.Year, date.Month, date.Day, 0, 0, 0)
+      if time == "start":
+        self.startDate = date
+      else:
+        self.endDate = date 
+      
+      # print "SELECT  DataValue, LocalDateTime FROM DataValues "+self.dataFilter + " AND (LocalDateTime BETWEEN '" + str(self.startDate)+"' AND '" + str(self.endDate)+"')"
+      # print "SELECT  DataValue, LocalDateTime FROM DataValues "+self.dataFilter + " AND ( strftime('%m/%d/%Y %H:%M:%S', LocalDateTime) BETWEEN '" + str(self.startDate)+"' AND '" + str(self.endDate)+"')"
+      # self.cursor.execute("SELECT  DataValue, LocalDateTime FROM DataValues "+self.dataFilter + " AND ( strftime('%m/%d/%Y %H:%M:%S', LocalDateTime) BETWEEN '" + str(self.startDate)+"' AND '" + str(self.endDate)+"')")
+
+      # results = self.cursor.fetchall()
+      # self.dataValues =[x[0] for x in results]
+      # self.dateTimes = [x[1] for x in results]
+      # print self.dateTimes
+      # print len(results)
+
+      self.timeSeries.set_xlim(self.startDate, self.endDate)
+      # self.timeSeries.set_xlabel("Date Time")
+      # self.timeSeries.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+      # self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      # self.lines= self.timeSeries.plot_date( self.dateTimes, self.dataValues, self.format, xdate = True, tz = None )
+      self.canvas.draw()
+  
    
 
-  def init_data(self):
-      # Generate some data to plot:
-      self.y = self.dataValues
-      self.x = self.dateTimes
-      # Extents of data sequence:
-      self.i_min =0
-      self.i_max = len(self.x)
-      # Size of plot window:              
-      self.i_window = len(self.y)
-      # Indices of data interval to be plotted:
-      self.i_start = 0
-      self.i_end = self.i_start + self.i_window
+  def OnShowLegend(self, isVisible):
+    # print self.timeSeries.show_legend
+    self.timeSeries.plot(legend= not isVisible)
+    self.canvas.draw()
+      
 
 
+  def OnPlotType(self, ptype):
+    # self.timeSeries.clear()
+    if ptype == "line":
+      ls = '-'
+      m='None'
+    elif ptype == "point":
+      ls='None'
+      m='o'      
+    else:
+      ls = '-'
+      m='o'
+    # print plt.setp(self.lines)
+    print(len(self.lines))
+    format = ls+m
+    for line in self.lines:
+      plt.setp(line, linestyle = ls, marker =  m)
 
-  def init_plot(self):
-       
-      self.plot_data = \
-          self.timeSeries.plot_date(self.x[self.i_start:self.i_end],
-                              self.y[self.i_start:self.i_end], ':bs', xdate = True, tz = None )[0]
+    self.canvas.draw()
+
+
+  def addPlot(self, Values, Filter):
+      self.dataFilter = Filter
+      self.cursor = Values[0]
+
+      self.cursor.execute("SELECT  DataValue, LocalDateTime FROM DataValues"+self.dataFilter)
+      results = self.cursor.fetchall()
+      self.dataValues =[x[0] for x in results]
+      self.dateTimes = [x[1] for x in results]
+      self.startDate= min(self.dateTimes)
+      self.endDate = max(self.dateTimes)
+
+      # print self.startDate
+      # print self.endDate      
+      # print len(self.dateTimes)
+
+      self.Series= Values[1]
+
+      # self.editSeries(1)
+      
+      # self.timeSeries.clear()
+      # self.colorlist = self.randBinList(len(self.dataValues))
+      # x = range(len(self.dataValues))
+
+      
+      if self.isfirstplot:
+        self.timeSeries.clear()
+        self.timeSeries.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+        self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)
+        self.lines= self.timeSeries.plot_date( self.dateTimes, self.dataValues,self.format+'r', xdate = True, tz = None )
+        self.isfirstplot = False
+      else:
+        ax2 = self.timeSeries.twinx()
+        ax2.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+        self.lines.append(ax2.plot_date( self.dateTimes, self.dataValues,self.format+'b', xdate = True, tz = None))
+        # print len(self.lines)
+        ax2.legend(loc= 'lower center')
       self.timeSeries.set_xlabel("Date Time")
-      self.timeSeries.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)
+
+      # self.lines= self.timeSeries.plot_date( self.dateTimes, self.dataValues,self.format, xdate = True, tz = None )
+      
+      #self.timeSeries.set_xticks( minor=False)
+      
+
+      # handles, labels = self.timeSeries.get_legend_handles_labels()    
+      # self.timeSeries.legend(handles, labels, loc= 'lower center')
+
+
+      self.timeSeries.legend(loc= 'lower center')
       self.canvas.draw()
 
-  def OnScrollEvt(self, event):
-     # Update the indices of the plot:
-      self.i_start = self.i_min + event.GetPosition()
-      self.i_end = self.i_min + self.i_window + event.GetPosition()
-      self.draw_plot()   
+
+  def removePlot(self, seriesID): 
+     #if series id matches a key in the dictionary      
+      # self.lines.pop(0).remove()
+      pass
+  
    
   def SetColor( self, color):
       """Set figure and canvas colours to be the same."""        
@@ -165,27 +222,44 @@ class plotTimeSeries(wx.Panel):
       self.canvas.SetBackgroundColour( color )
 
   def on_pick(self, event):
+      # print dir(event)
+      # print "artist", dir(event.artist)
+      # print "picker", dir(event.artist.get_picker)
+      # print "pickradius", dir(event.artist.get_pickradius)
+      # print "get_snaP", dir(event.artist.get_snap)
+      # ind = event.ind
+
+      print(event.ind, np.take(self.dateTimes, event.ind), np.take(self.dataValues, event.ind))
+
+
+
+
+
       # The event received here is of the type
       # matplotlib.backend_bases.PickEvent
       #
       # It carries lots of information, of which we're using
       # only a small amount here.
       #
-      print "point selected"
-      plot_points = event.artist.get_points()
-      print  plot_points
-      msg = "You've clicked on a point with coords:\n %s" % plot_points
+      # print "point selected"
+      # plot_points = event.artist.get_points()
+      # print  plot_points
+      # msg = "You've clicked on a point with coords:\n %s" % plot_points
        
-      dlg = wx.MessageDialog(
-          self,
-          msg,
-          "ok",
-          wx.OK | wx.ICON_INFORMATION)
-      dlg.ShowModal()
-      dlg.Destroy()  
+      # dlg = wx.MessageDialog(
+      #     self,
+      #     msg,
+      #     "ok",
+      #     wx.OK | wx.ICON_INFORMATION)
+      # dlg.ShowModal()
+      # dlg.Destroy()  
 
-  def onclick(self, event):
-      print 'button=%d, x=%d, y=%d, xdata=%f, ydata=%f'%(event.button, event.x, event.y, event.xdata, event.ydata)    
+
+
+      
+
+  # def onclick(self, event):
+  #     print 'button=%d, x=%d, y=%d, xdata=%f, ydata=%f'%(event.button, event.x, event.y, event.xdata, event.ydata)    
       
   def BuildPopup(self):
       # build pop-up menu for right-click display

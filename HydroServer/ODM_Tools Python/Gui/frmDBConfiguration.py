@@ -69,11 +69,11 @@ class frmDBConfig(wx.Dialog):
               label=u'Connection Type:', name=u'lblDbType', parent=self.pnlMain,
               pos=wx.Point(10, 10), size=wx.Size(101, 25), style=0)
 
-        self.comboBox1 = wx.ComboBox(choices=[], id=wxID_FRMDBCONFIGCOMBOBOX1,
+        self.comboBox1 = wx.ComboBox(choices=["Microsoft Sql Server", "MySQL"], id=wxID_FRMDBCONFIGCOMBOBOX1,
               name='comboBox1', parent=self.pnlMain, pos=wx.Point(121, 10),
               size=wx.Size(326, 21), style=0,
-              value=u'Microsoft SQL Server\nMySQL')
-        self.comboBox1.SetLabel(u'Microsoft SQL Server')
+              value=u'Microsoft SQL Server')
+        # self.comboBox1.SetLabel(u'Microsoft SQL Server')
 
         self.btnTest = wx.Button(id=wxID_FRMDBCONFIGBTNTEST,
               label=u'Test Connection', name=u'btnTest', parent=self.pnlMain,
