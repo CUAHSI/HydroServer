@@ -2,17 +2,19 @@ import wx
 import wx.stc as stc
 import os
 
+from highlightSTC import highlightSTC
+
 ID_NEW=101
 ID_OPEN=102
 ID_SAVE=103
 ID_EXECUTE_BUTTON=300
 
 class pnlScript(wx.Frame):
-    def __init__(self, parent, ID=wx.ID_ANY, name="", pos=(0,0), size=(200, 200)):
-        print "size: %s" % size
-        print "position: %s" % pos
-        wx.Frame.__init__(self, parent, ID, name=name, pos=pos, size=size, style=0)
-        self.control = stc.StyledTextCtrl(self, 1, style=wx.TE_MULTILINE)
+    def __init__(self, parent, id=wx.ID_ANY, name="", pos=(0,0), size=(200, 200)):
+        super(pnlScript, self).__init__(parent, id, name=name, pos=pos, size=size, style=0)
+        self.console = parent.txtPythonConsole
+        self.control = highlightSTC(self)
+        # self.control = stc.StyledTextCtrl(self, 1, style=wx.TE_MULTILINE)
 
         # Set up menu
         filemenu = wx.Menu()
@@ -35,6 +37,7 @@ class pnlScript(wx.Frame):
         # Set up execute button
         self.sizer2 = wx.BoxSizer(wx.HORIZONTAL)
         self.executeButton = wx.Button(self, ID_EXECUTE_BUTTON, "&Execute")
+        self.executeButton.Bind(wx.EVT_BUTTON, self.OnExecute)
         self.sizer2.Add(self.executeButton, 1, wx.ALIGN_LEFT)
 
         self.sizer = wx.BoxSizer(wx.VERTICAL)        
@@ -64,16 +67,17 @@ class pnlScript(wx.Frame):
             # Open the file and set its contents into the edit window
             filehandle = open(os.path.join(self.dirname, self.filename), 'r')
             self.control.SetText(filehandle.read())
+            self.control.EmptyUndoBuffer()
             filehandle.close()
 
-            self.parent.SetTitle("Editing: %s" % self.filename)
+            self.SetTitle("Editing: %s" % self.filename)
 
         dlg.Destroy()
 
     def OnSave(self, e):
         dlg = wx.FileDialog(self, "Choose a file", self.dirname, "", "*.*", wx.SAVE | wx.OVERWRITE_PROMPT)
         if dlg.ShowModal() == wx.ID_OK:
-            saved_text = self.control.GetValue()
+            saved_text = self.control.GetText()
 
             self.filename = dlg.GetFilename()
             self.dirname = dlg.GetDirectory()
@@ -85,6 +89,10 @@ class pnlScript(wx.Frame):
 
         dlg.Destroy()
 
+    def OnExecute(self, e):
+        self.OnSave(e)
+        filename = os.path.join(self.dirname, self.filename)
+        self.console.shell.runfile(filename)
 
 
     def getStyle(self, c='black'):

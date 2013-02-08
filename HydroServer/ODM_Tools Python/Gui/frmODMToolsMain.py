@@ -95,16 +95,12 @@ class frmODMToolsMain(wx.Frame):
               style=wx.TAB_TRAVERSAL)
               
         
-        # self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
-        #       name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-        #       size=wx.Size(368, 168), style=0)
-        self.txtPythonScript = pnlScript(ID=wxID_TXTPYTHONSCRIPT,
-                name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-                size=wx.Size(368, 168)) 
-        
         self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
                 name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-                size=wx.Size(500,800), style=0)           
+                size=wx.Size(500,800), style=0)   
+        self.txtPythonScript = pnlScript(id=wxID_TXTPYTHONSCRIPT,
+              name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+              size=wx.Size(500,800))
         
         
 ################ Series Selection Panel ##################
