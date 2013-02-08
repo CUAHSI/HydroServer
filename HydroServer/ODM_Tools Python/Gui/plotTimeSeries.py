@@ -121,8 +121,8 @@ class plotTimeSeries(wx.Panel):
       # self.dateTimes = [x[1] for x in results]
       # print self.dateTimes
       # print len(results)
-
-      self.timeSeries.set_xlim(self.startDate, self.endDate)
+      self.plot.set_xbound(self.startDate,self.endDate)
+      # self.timeSeries.set_xlim(self.startDate, self.endDate)
       # self.timeSeries.set_xlabel("Date Time")
       # self.timeSeries.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
       # self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)

@@ -59,7 +59,7 @@ class plotProb(wx.Panel):
       self._init_sizers()
 
    
-   
+
 
   def addPlot(self, Values, Filter):
 
@@ -102,11 +102,16 @@ class plotProb(wx.Panel):
       self.plot=self.figure.add_subplot(111)
       self.plot.plot( self.Xaxis, self.Yaxis, 'bs')
        
-      self.plot.legend(loc= 'upper right')
+      self.setXaxis()
       self.canvas.draw()
 
  
-
+  def setXaxis(self):
+          
+      self.plot.set_xticklabels(["0.01","0.02", "0.02","1", "2", "5", "10", "20", "30", "40", "50", "60", "70", "80", "90", "95", "98", "99", "99.9", "99.98", "99.99"])
+      self.plot.set_xticks([-3.892,-3.5,-3.095,-2.323,-2.055,-1.645,-1.282,-0.842,-0.542,-0.254,0,0.254,0.542,0.842,1.282,1.645,2.055,2.323,3.095,3.5,3.892])
+      self.plot.set_xbound(-4,4)
+ 
    
   def SetColor( self, color):
       """Set figure and canvas colours to be the same."""        
@@ -120,13 +125,16 @@ class plotProb(wx.Panel):
       except:
         print "An error occurred while calculating the X-Position for a point in the prob plot"
         pass
+
   def CalcualteProbabilityFreq(self, rank, numRows):     
       try:
         return round((rank - .0375)/(numRows+1-(2*0.375)), 3)
       except:
         print "An error occured while calculating the frequency for a point in the prob plot"
         pass
-     
+
+             
+         
        
   def __init__(self, parent, id, pos, size, style, name):
       self._init_ctrls(parent)
