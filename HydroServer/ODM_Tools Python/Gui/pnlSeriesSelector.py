@@ -210,10 +210,7 @@ class pnlSeriesSelector(wx.Panel):
         #       size=wx.Size(903, 108),
         #       style=wx.HSCROLL | wx.VSCROLL | wx.LC_REPORT)
 
-        self.tableSeries = ULC.UltimateListCtrl(id=wxID_PNLSERIESSELECTORtableSeries,
-              name=u'tableSeries', parent=self.panel3, pos=wx.Point(5, 5),
-              size=wx.Size(903, 108),              
-              agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES)
+        
         # self.tableSeries.SetAlternateRowColour("SlateGray")
 
         
@@ -222,6 +219,10 @@ class pnlSeriesSelector(wx.Panel):
         # self.tableSeries.SetEmptyListMsg("")
 
        
+        self.tableSeries = ULC.UltimateListCtrl(id=wxID_PNLSERIESSELECTORtableSeries,
+              name=u'tableSeries', parent=self.panel3, pos=wx.Point(5, 5),
+              size=wx.Size(903, 108),              
+              agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES)
         self._init_coll_tableSeries_Columns(self.tableSeries)
         # self.tableSeries.Bind(ULC.EVT_LIST_ITEM_SELECTED,
         #       self.OntableSeriesListItemSelected,
@@ -449,17 +450,17 @@ class pnlSeriesSelector(wx.Panel):
 
 
 
-    def OntableSeriesListItemDeSelected(self, event):
-        #remove from plot
-        # print dir(event)
+    # def OntableSeriesListItemDeSelected(self, event):
+    #     #remove from plot
+    #     # print dir(event)
 
-        # else:
-            # self.tableSeries.SetStringItem(event.m_itemIndex, 0, "False")
-            # self.SelectedSeries.remove(self.seriesList[event.m_itemIndex])
+    #     # else:
+    #         # self.tableSeries.SetStringItem(event.m_itemIndex, 0, "False")
+    #         # self.SelectedSeries.remove(self.seriesList[event.m_itemIndex])
 
-        #if check box is not checked
-        if not self.tableSeries.IsItemChecked(event.m_itemIndex):
-            print event.m_itemIndex, " deselected"
+    #     #if check box is not checked
+    #     if not self.tableSeries.IsItemChecked(event.m_itemIndex):
+    #         print event.m_itemIndex, " deselected"
 
     def OntableSeriesListItemSelected(self, event):
         # print event.m_itemIndex, " selected"
@@ -467,7 +468,7 @@ class pnlSeriesSelector(wx.Panel):
         # if ( self.tableSeries.GetItemText(event.m_itemIndex) == "False"):
         #     self.tableSeries.SetStringItem(event.m_itemIndex, 0, "True") 
 
-        print dir(event)
+        # print dir(event)
         if self.tableSeries.IsItemChecked(event.m_itemIndex): 
             pass
         else: 
@@ -484,7 +485,7 @@ class pnlSeriesSelector(wx.Panel):
             #when Selected for editing
 
             #when selected for plotting
-             #get DataValues
+            #get DataValues
 
             self.DataValues = self.dbservice.get_data_values_by_series_test(self.seriesList[event.m_itemIndex])
 

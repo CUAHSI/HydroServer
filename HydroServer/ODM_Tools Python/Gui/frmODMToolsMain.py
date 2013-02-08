@@ -95,9 +95,12 @@ class frmODMToolsMain(wx.Frame):
               style=wx.TAB_TRAVERSAL)
               
         
-        self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
-              name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-              size=wx.Size(368, 168), style=0)
+        # self.txtPythonScript = wx.stc.StyledTextCtrl(id=wxID_TXTPYTHONSCRIPT,
+        #       name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+        #       size=wx.Size(368, 168), style=0)
+        self.txtPythonScript = pnlScript(ID=wxID_TXTPYTHONSCRIPT,
+                name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+                size=wx.Size(368, 168)) 
         
         self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
                 name=u'txtPython', parent=self, pos=wx.Point(72, 24),
@@ -132,9 +135,9 @@ class frmODMToolsMain(wx.Frame):
         # DestroyOnClose(b=False)
         self._mgr.AddPane(self.pnlSelector, aui.AuiPaneInfo().Bottom().Name("Selector").
                 Layer(0).Caption('Series Selector').MinSize(wx.Size(100, 200)) )   
-        self._mgr.AddPane(self.txtPythonScript,  aui.AuiPaneInfo().Bottom().Caption('Script').
-                Name("Script").Show(show=False).Layer(1))
-        self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Bottom().Caption('Python Console').
+        self._mgr.AddPane(self.txtPythonScript,  aui.AuiPaneInfo().Caption('Script').
+                Name("Script").Show(show=False).Layer(1).Float().MinSize(wx.Size(500,800)))
+        self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
                 Name("Console").Layer(1).Show(show=False).Float())        
         self._mgr.AddPane(self.pnlPlot,  aui.AuiPaneInfo().CenterPane().Name("Plot"))
 
@@ -212,8 +215,7 @@ class frmODMToolsMain(wx.Frame):
     
     
     def onExecuteScript(self, value):
-        print "testing file execution with test.py"
-        print "testing script logging"
+        # print "testing file execution with test.py"
         for i in ('red', 'blue', 'green', 'magenta'):
             self.txtPythonScript('This is a test\n', i)
         pass
