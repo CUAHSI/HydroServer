@@ -6,11 +6,13 @@ import math
 from wx.lib.pubsub import Publisher
 
 import matplotlib
+import textwrap
 matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from matplotlib.widgets import Lasso
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
+
 
 
 class plotHist(wx.Panel):
@@ -101,12 +103,12 @@ class plotHist(wx.Panel):
 
 
       self.plot.clear()
-      self.plot.set_xlabel(self.Series.variable_name)
+      self.plot.set_xlabel("\n".join(textwrap.wrap(self.Series.variable_name,55)))
       self.plot.set_ylabel("Number of Observations")
 
 
 
-      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      self.plot.set_title("\n".join(textwrap.wrap(self.Series.site_name+" "+self.Series.variable_name,55)))
       
       self.plot=self.figure.add_subplot(111)
       self.plot.hist(self.dataValues, self.defaultNumBins(len(self.dataValues)), normed=1, facecolor='g', alpha=0.75, label = self.Series.site_name+" "+self.Series.variable_name)

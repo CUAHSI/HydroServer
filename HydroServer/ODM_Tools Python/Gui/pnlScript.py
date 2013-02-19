@@ -38,7 +38,7 @@ class pnlScript(wx.Frame):
         self.sizer2 = wx.BoxSizer(wx.HORIZONTAL)
         self.executeButton = wx.Button(self, ID_EXECUTE_BUTTON, "&Execute")
         self.executeButton.Bind(wx.EVT_BUTTON, self.OnExecute)
-        self.sizer2.Add(self.executeButton, 1, wx.ALIGN_LEFT)
+        self.sizer2.Add(self.executeButton, 25, wx.ALIGN_LEFT)
 
         self.sizer = wx.BoxSizer(wx.VERTICAL)        
         self.sizer.Add(self.sizer2, 0, wx.EXPAND)

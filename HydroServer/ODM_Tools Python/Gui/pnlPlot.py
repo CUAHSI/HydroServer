@@ -63,7 +63,11 @@ class pnlPlot(fnb.FlatNotebook):
         Publisher().subscribe(self.OnPlotType, ("onPlotType"))
         Publisher().subscribe(self.OnShowLegend, ("OnShowLegend"))
         Publisher().subscribe(self.OnNumBins, ("OnNumBins"))
+        Publisher().subscribe(self.OnRemovePlot, ("removePlot"))
         
+        
+    def OnRemovePlot(self, seriesID): 
+      self.pltTS.removePlot(seriesID)
 
     def OnNumBins(self , numBins):
       self.pltHist.ChangeNumOfBins(numBins.data)
@@ -73,6 +77,7 @@ class pnlPlot(fnb.FlatNotebook):
     
     def OnPlotType(self, Args):     
       self.pltTS.OnPlotType( Args.data[1])
+      self.pltProb.OnPlotType( Args.data[1])
 
 
     def OnShowLegend(self, Args):

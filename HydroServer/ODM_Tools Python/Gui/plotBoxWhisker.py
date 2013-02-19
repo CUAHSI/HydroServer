@@ -10,13 +10,8 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
 import matplotlib.pyplot as plt
 import math
+import textwrap
 import numpy as np
-
-
- 
-
-
-
 
 
 class plotBox(wx.Panel):
@@ -28,6 +23,7 @@ class plotBox(wx.Panel):
       parent.AddWindow(self.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
       parent.AddWindow(self.toolbar, 0,  wx.EXPAND)
        
+
 
   def _init_sizers(self):
       # generated method, don't edit
@@ -64,30 +60,20 @@ class plotBox(wx.Panel):
       self.SetColor("WHITE")
       self.canvas.SetFont(wx.Font(20, wx.SWISS, wx.NORMAL, wx.NORMAL,
             False, u'Tahoma'))
-
-
-      
-       
       self.canvas.draw()
-       
-
       self._init_sizers()
 
-   
    
 
   def addPlot(self, Values, Filter):
 
       self.cursor = Values[0]
-
-
       self.cursor.execute("SELECT  DataValue, CAST(strftime('%m', LocalDateTime) AS INTEGER) AS Month, CAST(strftime('%Y', LocalDateTime)AS INTEGER) As Year FROM DataValues "+Filter)
       self.Data= self.cursor.fetchall() 
 
       self.Series= Values[1]
-      
-
       self.overall("")             
+
 
  
   def SetColor( self, color):
@@ -96,15 +82,12 @@ class plotBox(wx.Panel):
       self.figure.set_edgecolor( color )
       self.canvas.SetBackgroundColour( color )
        
+
+
   def monthly(self, str):
 
       self.updatePlot("Monthly",  [[x[0] for x in self.Data if x[1]==1], [x[0] for x in self.Data if x[1]==2], [x[0] for x in self.Data if x[1]==3],[x[0] for x in self.Data if x[1]==4], [x[0] for x in self.Data if x[1]==5], [x[0] for x in self.Data if x[1]==6], [x[0] for x in self.Data if x[1]==7], [x[0] for x in self.Data if x[1]==8], [x[0] for x in self.Data if x[1]==9], [x[0] for x in self.Data if x[1]==10], [x[0] for x in self.Data if x[1]==11], [x[0] for x in self.Data if x[1]==12]])
-      # self.plot.clear()      
-      # self.plot.set_xlabel("Monthly")
-      # x = range(len(self.Data))
-      # self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      # self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      # self.plot.boxplot( [[x[0] for x in self.Data if x[1]==1], [x[0] for x in self.Data if x[1]==2], [x[0] for x in self.Data if x[1]==3],[x[0] for x in self.Data if x[1]==4], [x[0] for x in self.Data if x[1]==5], [x[0] for x in self.Data if x[1]==6], [x[0] for x in self.Data if x[1]==7], [x[0] for x in self.Data if x[1]==8], [x[0] for x in self.Data if x[1]==9], [x[0] for x in self.Data if x[1]==10], [x[0] for x in self.Data if x[1]==11], [x[0] for x in self.Data if x[1]==12]], notch = True, sym = "gs", bootstrap = 10000)
+      
       self.plot.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
       self.canvas.draw()
 
@@ -113,16 +96,10 @@ class plotBox(wx.Panel):
   def seasonaly(self, str):
 
       self.updatePlot("Seasonally",  [[x[0] for x in self.Data if x[1] in (1,2,3)], [x[0] for x in self.Data if x[1]in (4,5,6)], [x[0] for x in self.Data if x[1]in (6,7,8)],[x[0] for x in self.Data if x[1]in (10,11,12)]])
-      # self.plot.clear()
-      # x = range(len(self.Data))
-      # self.plot.set_xlabel("Seasonally")
-      # self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      # self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      # self.plot.boxplot( [[x[0] for x in self.Data if x[1] in (1,2,3)], [x[0] for x in self.Data if x[1]in (4,5,6)], [x[0] for x in self.Data if x[1]in (6,7,8)],[x[0] for x in self.Data if x[1]in (10,11,12)]], notch = True, sym = "gs", bootstrap = 10000)
-      
-
+     
       self.plot.set_xticklabels( ['Winter', 'Spring', 'Summer', 'Fall'])
       self.canvas.draw()
+
 
 
   def yearly(self, str):
@@ -132,47 +109,69 @@ class plotBox(wx.Panel):
       for y in years:
           histlist.append([x[0] for x in self.Data if x[2]==y])
 
-
       self.updatePlot("Yearly", histlist)
-      # self.plot.clear()
-      # self.plot.set_xlabel("Yearly")
-      # x = range(len(self.Data))
-      # self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      # self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
-      # self.plot.boxplot( histlist , notch = True, sym = "gs", bootstrap = 10000)
       self.plot.set_xticklabels( years)
       self.canvas.draw()
+
 
 
   def overall(self, str): 
             
       self.updatePlot("Overall", [x[0] for x in self.Data])
+      self.plot.set_xticklabels( [''])
+      # self.plot.set_xlabel(color = "WHITE")
+      self.canvas.draw()
       
+
 
   def updatePlot(self, title, data):
       self.plot.clear()
-      self.plot.set_xlabel(title) 
-      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      self.plot.set_xlabel("\n".join(textwrap.wrap(title, 55))) 
+      self.plot.set_ylabel("\n".join(textwrap.wrap(self.Series.variable_name+ "("+self.Series.variable_units_name+")", 50)))
+      self.plot.set_title("\n".join(textwrap.wrap(self.Series.site_name+" "+self.Series.variable_name, 55 )))
 
-      med, ci, mean = self.calcConfInterval(data)
-      bp=self.plot.boxplot( data,  sym = "-gs", notch = True, bootstrap = 5000,  conf_intervals = ci)
+      med, cl, mean, ci = self.calcConfInterval(data)
+      bp=self.plot.boxplot( data,  sym = "-gs", notch = True, bootstrap = 5000,  conf_intervals = cl)
       
-      self.plot.scatter([range(1,len(mean)+1)], mean, marker='|', c="r")
-      self.plot.scatter([range(1,len(med)+1)], med, marker='s', c="g")      
+
+      # Plot Mean and its confidence interval
+      for x in range(len(mean)):
+        self.plot.vlines(x+1, ci[x][0], ci[x][1], color='r', linestyle = "solid" )
+      self.plot.scatter([range(1,len(mean)+1)], mean, marker='o', c='r', s= 10)
+      
+      
+      # Plot Median 
+      self.plot.scatter([range(1,len(med)+1)], med, marker='s', c="k", s= 10)
+      # Plot the confidence limit of the median 
+      # for x in range(len(mean)):
+      #   self.plot.hlines(cl[x][0], (x+1)-.25, (x+1)+.25, color='GREY', linestyle = "solid" )
+      #   self.plot.hlines(cl[x][1], (x+1)-.25, (x+1)+.25, color='GREY', linestyle = "solid" )  
+
+      # Set Colors of the Box Whisker plot   
       plt.setp(bp['whiskers'], color = 'k', linestyle = '-')
+      plt.setp(bp['medians'], color = 'k', linestyle = '-')
+      plt.setp(bp['boxes'], color = 'GREY', linestyle = '-')
+      plt.setp(bp['caps'], color = 'k')
+      plt.setp(bp['fliers'], markersize = 3.5)
+
+      # self.plot.set_ybound(min(data),max(data))
+      self.plot.set_autoscale_on(True)
+
       self.canvas.draw()
+
 
 
   def calcConfInterval(self, PlotData):
       medians = []
       confint = []
+      conflimit = []
       means = []
       if len(PlotData)>12 :
         vals = self.indivConfInter(PlotData)
         medians.append(vals[0])
         means.append(vals[1])
-        confint.append((vals[4], vals[5]))
+        conflimit.append((vals[4], vals[5]))
+        confint.append((vals[2], vals[3]))
         # print vals
 
       else:      
@@ -180,10 +179,13 @@ class plotBox(wx.Panel):
           vals = self.indivConfInter(data)
           medians.append(vals[0])
           means.append(vals[1])
-          confint.append((vals[4], vals[5]))
+          conflimit.append((vals[4], vals[5]))
+          confint.append((vals[2], vals[3]))
           # print vals
 
-      return medians, confint, means
+      return medians, conflimit, means, confint
+
+
 
   def indivConfInter(self, data):
       if len(data)>0:
@@ -198,27 +200,6 @@ class plotBox(wx.Panel):
       
         return [med, mean, ci95low, ci95up, cl95low, cl95up]
       else: return [ None, None, None, None, None, None]
-
-     
-
-            
-
-# boxData.mean = Math.Round(data.Compute("Avg(" & db_fld_ValValue & ")", ""), 3)
-# boxData.median = data.Rows(Math.Ceiling((numRows / 2) - 1)).Item(db_fld_ValValue)
-            # If Not (data.Compute("Var(" & db_fld_ValValue & ")", "") Is System.DBNull.Value) Then
-            #     variance = data.Compute("Var(" & db_fld_ValValue & ")", "")
-            #     stdDev = Math.Sqrt(variance)
-            # Else
-            #     stdDev = 0
-            # End If
-            # 'Confidence Interval on Mean
-            # boxData.confidenceInterval95_Lower = boxData.mean - 1.96 * (stdDev / (Math.Sqrt(numRows)))
-            # boxData.confidenceInterval95_Upper = boxData.mean + 1.96 * (stdDev / (Math.Sqrt(numRows)))
-            # 'Confidence Limit on Median
-            # boxData.confidenceLimit95_Lower = boxData.median - 1.96 * (stdDev / (Math.Sqrt(numRows)))
-            # boxData.confidenceLimit95_Upper = boxData.median + 1.96 * (stdDev / (Math.Sqrt(numRows)))
-      
-
      
 
        
