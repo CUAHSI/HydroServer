@@ -82,6 +82,7 @@ class frmODMToolsMain(wx.Frame):
 
         Publisher().subscribe(self.onExecuteScript, ("execute.script"))
         Publisher().subscribe(self.onChangeDBConn, ("change.dbConfig"))
+        Publisher().subscribe(self.onSetScriptTitle, ("script.title"))
         Publisher().subscribe(self.OnClose, ("onClose"))
 
 
@@ -94,14 +95,7 @@ class frmODMToolsMain(wx.Frame):
               parent=self, pos=wx.Point(0, 0), size=wx.Size(605, 458),
               style=wx.TAB_TRAVERSAL)
               
-        
-        self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
-                name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-                size=wx.Size(500,800), style=0)   
-        self.txtPythonScript = pnlScript(id=wxID_TXTPYTHONSCRIPT,
-              name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-              size=wx.Size(500,800))
-        
+                
         
         
 ################ Series Selection Panel ##################
@@ -122,6 +116,14 @@ class frmODMToolsMain(wx.Frame):
                style=wx.TAB_TRAVERSAL) 
 
 
+############# Script & Console ###############
+        self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
+                name=u'txtPython', parent=self, rootObject=pnlDataTable, pos=wx.Point(72, 24),
+                size=wx.Size(500,800), style=0)   
+        self.txtPythonScript = pnlScript(id=wxID_TXTPYTHONSCRIPT,
+              name=u'txtPython', parent=self, pos=wx.Point(72, 24),
+              size=wx.Size(500,800))
+
 ############ Docking ###################
         
         self._mgr = aui.AuiManager()
@@ -136,7 +138,8 @@ class frmODMToolsMain(wx.Frame):
         # self._mgr.CreateFloatingFrame(self.txtPythonScript,  aui.AuiPaneInfo().Caption('Script').
         #         Name("Script").MinSize(wx.Size(500,800)))
         self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
-                Name("Console").Layer(1).Show(show=False).Float())        
+                Name("Console").Layer(1).Show(show=False).Float())  
+        # self.txtPythonConsole.ToggleTools()      
         self._mgr.AddPane(self.pnlPlot,  aui.AuiPaneInfo().CenterPane().Name("Plot").Caption("Plot"))
 
 
@@ -145,17 +148,13 @@ class frmODMToolsMain(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         self._init_sizers()
-        self._ribbon.Realize() 
+        self._ribbon.Realize()
 
 
-        # for p in self._mgr.GetAllPanes():
-        #     print p.caption
-        # print "\n"
-            # panedet=self._mgr.GetPane(p)
-            # print panedet.caption
 
-       
-       
+    def toggleConsoleTools(self):
+        self.txtPythonConsole.ToggleTools()
+
 
     def onDocking(self, Value):       
         
@@ -192,7 +191,13 @@ class frmODMToolsMain(wx.Frame):
         self.pnlPlot.addPlot(Values.data)        
         self._ribbon.enableButtons(self.pnlPlot.getActivePlotID() )
        
-
+    def onSetScriptTitle(self, title):
+        scriptPane = self._mgr.GetPane(self.txtPythonScript)
+        scriptPane.Caption(title.data)
+        if scriptPane.IsFloating():
+            print "script is floating"
+            scriptPane.Restore()
+        self._mgr.Update()
 
 
     def __init__(self, parent):
@@ -219,8 +224,11 @@ class frmODMToolsMain(wx.Frame):
 
     def createService(self):
         self.sc = self.service_manager.get_series_service()
+
    
-    
+    def toggleConsoleTools(self):
+        self.txtPythonConsole.ToggleTools()
+
     
     def onExecuteScript(self, value):
         # print "testing file execution with test.py"

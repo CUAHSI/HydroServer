@@ -36,6 +36,8 @@ class highlightSTC(stc.StyledTextCtrl):
     """
     def __init__(self, parent):
         stc.StyledTextCtrl.__init__(self, parent, wx.ID_ANY)
+        self.parent = parent
+        self.nonPrintKeys = (27,306,307,308,310,311,312,313,314,315,316,317,322,340,341,342,343,344,345,346,347,348,349,365,366,367,393,395)
 
         # use Python code highlighting
         self.SetLexer(stc.STC_LEX_PYTHON)
@@ -86,9 +88,9 @@ class highlightSTC(stc.StyledTextCtrl):
         self.StyleSetSpec(stc.STC_STYLE_DEFAULT,
             "face:%(helv)s,size:%(size)d" % faces)
         # set default background color
-        beige = '#F5F5DC'
+        white = '#FFFFFF'
         self.StyleSetBackground(style=stc.STC_STYLE_DEFAULT,
-            back=beige)
+            back=white)
         # reset all to be like the default
         self.StyleClearAll()
 
@@ -181,6 +183,8 @@ class highlightSTC(stc.StyledTextCtrl):
                 self.AutoCompShow(0, " ".join(kw))
         else:
             e.Skip()
+            if key not in self.nonPrintKeys:
+                self.parent.newKeyPressed()
 
     def onUpdateUI(self, e):
         """update the user interface"""
