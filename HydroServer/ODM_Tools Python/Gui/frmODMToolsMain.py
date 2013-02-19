@@ -103,17 +103,17 @@ class frmODMToolsMain(wx.Frame):
               size=wx.Size(500,800))
         
         
+        
 ################ Series Selection Panel ##################
         self.pnlSelector = pnlSeriesSelector.pnlSeriesSelector(id=wxID_PNLSELECTOR, name=u'pnlSelector',
                parent=self.pnlDocking, pos=wx.Point(0, 0), size=wx.Size(770, 388),
                style=wx.TAB_TRAVERSAL, dbservice= self.sc)  
 
-
+        
 ####################grid##################
         self.dataTable = pnlDataTable.pnlDataTable(id=wxID_ODMTOOLSGRID1, name='dataTable',
               parent=self.pnlDocking, pos=wx.Point(64, 160), size=wx.Size(376, 280),
               style=0)
-        
         
       
 ############# Graph ###############
@@ -123,7 +123,7 @@ class frmODMToolsMain(wx.Frame):
 
 
 ############ Docking ###################
-       
+        
         self._mgr = aui.AuiManager()
         self._mgr.SetManagedWindow(self.pnlDocking)
         self._mgr.AddPane(self.dataTable, aui.AuiPaneInfo().Right().Name("Table").
@@ -133,18 +133,26 @@ class frmODMToolsMain(wx.Frame):
                 Layer(0).Caption('Series Selector').MinSize(wx.Size(100, 200)) )   
         self._mgr.AddPane(self.txtPythonScript,  aui.AuiPaneInfo().Caption('Script').
                 Name("Script").Show(show=False).Layer(1).Float().MinSize(wx.Size(500,800)))
+        # self._mgr.CreateFloatingFrame(self.txtPythonScript,  aui.AuiPaneInfo().Caption('Script').
+        #         Name("Script").MinSize(wx.Size(500,800)))
         self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
                 Name("Console").Layer(1).Show(show=False).Float())        
-        self._mgr.AddPane(self.pnlPlot,  aui.AuiPaneInfo().CenterPane().Name("Plot"))
+        self._mgr.AddPane(self.pnlPlot,  aui.AuiPaneInfo().CenterPane().Name("Plot").Caption("Plot"))
 
 
         self._mgr.Update()
-
 
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         self._init_sizers()
         self._ribbon.Realize() 
+
+
+        # for p in self._mgr.GetAllPanes():
+        #     print p.caption
+        # print "\n"
+            # panedet=self._mgr.GetPane(p)
+            # print panedet.caption
 
        
        
@@ -165,11 +173,14 @@ class frmODMToolsMain(wx.Frame):
         #       False, u'Tahoma'))
         if panedet.IsShown():          
             panedet.Show(show=False)
-            self._mgr.Update()
         else:         
             panedet.Show(show=True)
         self._mgr.Update()
         self.Bind(wx.EVT_CLOSE, self.OnClose)
+
+        # for p in self._mgr.GetAllPanes():
+        #     print p.caption
+        # print "\n"
 
 
     def onPlotSelection(self, value):         
@@ -177,7 +188,7 @@ class frmODMToolsMain(wx.Frame):
 
 
     def addPlot(self, Values):
-        self.dataTable.Init(Values.data[0])
+    #     self.dataTable.Init(Values.data[0])
         self.pnlPlot.addPlot(Values.data)        
         self._ribbon.enableButtons(self.pnlPlot.getActivePlotID() )
        
@@ -198,6 +209,7 @@ class frmODMToolsMain(wx.Frame):
 
     def addEdit(self, Values): 
          self.dataTable.Init(Values.data[0])
+         # self.pnlPlot.addEditPlot(Values.data)
     
    
     def onChangeDBConn(self, event):
@@ -214,7 +226,6 @@ class frmODMToolsMain(wx.Frame):
         # print "testing file execution with test.py"
         for i in ('red', 'blue', 'green', 'magenta'):
             self.txtPythonScript('This is a test\n', i)
-        pass
     
 
         

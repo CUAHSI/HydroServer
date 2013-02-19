@@ -9,6 +9,8 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from matplotlib.widgets import Lasso
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
+import matplotlib.pyplot as plt
+import textwrap
 
 
 class plotProb(wx.Panel):
@@ -59,7 +61,24 @@ class plotProb(wx.Panel):
       self._init_sizers()
 
    
+  def OnPlotType(self, ptype):
+    # self.timeSeries.clear()
+    if ptype == "line":
+      ls = '-'
+      m='None'
+    elif ptype == "point":
+      ls='None'
+      m='o'      
+    else:
+      ls = '-'
+      m='o'
+    # print plt.setp(self.lines)
+    # print(len(self.lines))
+    format = ls+m
+    for line in self.lines:
+      plt.setp(line, linestyle = ls, marker =  m)
 
+    self.canvas.draw()
 
   def addPlot(self, Values, Filter):
 
@@ -71,10 +90,6 @@ class plotProb(wx.Panel):
 
      
       self.Series= Values[1]
-      
-
-
-
 
       self.plot.clear()
      
@@ -96,11 +111,11 @@ class plotProb(wx.Panel):
       self.plot.clear()
       x = range(len(self.Xaxis))
       self.plot.set_xlabel("Cumulative Frequency < Stated Value %")
-      self.plot.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.plot.set_title(self.Series.site_name+" "+self.Series.variable_name)
+      self.plot.set_ylabel("\n".join(textwrap.wrap(self.Series.variable_name+ "("+self.Series.variable_units_name+")",50)))
+      self.plot.set_title("\n".join(textwrap.wrap(self.Series.site_name+" "+self.Series.variable_name,55)))
              
       self.plot=self.figure.add_subplot(111)
-      self.plot.plot( self.Xaxis, self.Yaxis, 'bs')
+      self.lines=self.plot.plot( self.Xaxis, self.Yaxis, 'bs')
        
       self.setXaxis()
       self.canvas.draw()

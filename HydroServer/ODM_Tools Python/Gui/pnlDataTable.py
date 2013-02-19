@@ -10,20 +10,6 @@ import sqlite3
 ] = [wx.NewId() for _init_ctrls in range(2)]
 
 
-class Track:
-    """
-    A song in some music library
-    """
-    def __init__(self, **kwargs):
-        self.isChecked = False
-        self.attributeNames = kwargs.keys()
-        self.attributeNames.extend(["isChecked"])
-        self.__dict__.update(kwargs)
-
-    
-
-
-
 class pnlDataTable(wx.Panel):
     def _init_coll_boxSizer1_Items(self, parent):
         # generated method, don't edit
@@ -48,19 +34,15 @@ class pnlDataTable(wx.Panel):
               
     def Init(self, Values = None):
         self.InitModel(Values)
-       
-        
+
 
     def InitModel(self, DVConn):
-       
         cursor = DVConn
         sql = "SELECT * FROM DataValues"
         cursor.execute(sql)
-
-  
        
       
-        self.myOlv.SetColumns(ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(cursor.description))
+        self.myOlv.SetColumns( ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(cursor.description))
         self.InitTable()       
 
 
@@ -99,7 +81,7 @@ class pnlDataTable(wx.Panel):
 
     def InitWidgets(self):
         
-        self.myOlv = ObjectListView(self, -1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+        self.myOlv =  ObjectListView(self, -1, style=wx.LC_REPORT)
         self.myOlv.SetEmptyListMsg("")
 
         sizer_2 = wx.BoxSizer(wx.VERTICAL)

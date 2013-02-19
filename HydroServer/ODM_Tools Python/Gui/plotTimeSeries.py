@@ -1,18 +1,22 @@
 
 import wx
 
-from wx.lib.pubsub import Publisher
 
+import textwrap
+import datetime
+import numpy as np
 import matplotlib
+import matplotlib.pyplot as plt
+
+
 matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 # from matplotlib.widgets import Lasso
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
-import matplotlib.pyplot as plt
 from random import *
-import datetime
-import numpy as np
+from wx.lib.pubsub import Publisher
+
 
 
 
@@ -88,14 +92,14 @@ class plotTimeSeries(wx.Panel):
       self.removePlot(seriesID)
 
       #add plot with line only in black      
-      self.timeSeries.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-      self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)      
+      self.timeSeries.set_ylabel("\n".join(textwrap.wrap(self.Series.variable_name+ "("+self.Series.variable_units_name+")",50)))
+      self.timeSeries.set_title("\n".join(textwrap.wrap(self.Series.site_name+" "+self.Series.variable_name, 55)))      
       self.timeSeries.plot_date( self.dateTimes, self.dataValues,'-k', xdate = True, tz = None )
 
       # add scatterplot with colorlist as colorchart
       # self.colorlist = ['k' if x==0 else 'r' for x in self.randBinList(len(self.dataValues))]
       self.colorlist = self.randBinList(len(self.dataValues))
-      self.editPoint = self.timeSeries.scatter(self.dateTimes, self.dataValues, s= 30, c=['k' if x==0 else 'r' for x in self.colorlist])
+      self.editPoint = self.timeSeries.scatter(self.dateTimes, self.dataValues, s= 20, c=['k' if x==0 else 'r' for x in self.colorlist])
       #   self.isfirstplot = False
       self.editPoint.set_picker(True) 
 
@@ -150,7 +154,7 @@ class plotTimeSeries(wx.Panel):
       ls = '-'
       m='o'
     # print plt.setp(self.lines)
-    print(len(self.lines))
+    # print(len(self.lines))
     format = ls+m
     for line in self.lines:
       plt.setp(line, linestyle = ls, marker =  m)
@@ -184,17 +188,25 @@ class plotTimeSeries(wx.Panel):
       
       if self.isfirstplot:
         self.timeSeries.clear()
-        self.timeSeries.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
-        self.timeSeries.set_title(self.Series.site_name+" "+self.Series.variable_name)
+        self.timeSeries.set_ylabel("\n".join(textwrap.wrap(self.Series.variable_name+ "("+self.Series.variable_units_name+")",50)))
+        self.timeSeries.set_title("\n".join(textwrap.wrap(self.Series.site_name+" "+self.Series.variable_name,55)))
         self.lines= self.timeSeries.plot_date( self.dateTimes, self.dataValues,self.format+'r', xdate = True, tz = None )
         self.isfirstplot = False
       else:
         ax2 = self.timeSeries.twinx()
-        ax2.set_ylabel(self.Series.variable_name+ "("+self.Series.variable_units_name+")")
+        ax2.set_ylabel("\n".join(textwrap.wrap(self.Series.variable_name+ "("+self.Series.variable_units_name+")",50)))
         self.lines.append(ax2.plot_date( self.dateTimes, self.dataValues,self.format+'b', xdate = True, tz = None))
         # print len(self.lines)
         ax2.legend(loc= 'lower center')
+        ax3 = ax2.twinx()
+        ax3.set_ylabel("\n".join(textwrap.wrap(self.Series.variable_name+ "("+self.Series.variable_units_name+")",50)))
+        self.lines.append(ax3.plot_date( self.dateTimes, self.dataValues,self.format+'g', xdate = True, tz = None))
+      
       self.timeSeries.set_xlabel("Date Time")
+
+
+
+        # print len(self.lines)
 
       # self.lines= self.timeSeries.plot_date( self.dateTimes, self.dataValues,self.format, xdate = True, tz = None )
       
@@ -212,6 +224,7 @@ class plotTimeSeries(wx.Panel):
   def removePlot(self, seriesID): 
      #if series id matches a key in the dictionary      
       # self.lines.pop(0).remove()
+      print "in remove plot"
       pass
   
    
