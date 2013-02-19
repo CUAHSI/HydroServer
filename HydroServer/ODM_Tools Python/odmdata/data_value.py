@@ -40,3 +40,6 @@ class DataValue(Base):
 
 	def __repr__(self):
 		return "<DataValue('%s', '%s')>" % (self.data_value, self.local_date_time)
+
+	def toTuple(self):
+		pass

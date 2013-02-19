@@ -1,13 +1,17 @@
 import wx
 import wx.stc as stc
 import os
+from wx.lib.pubsub import Publisher
 
 from highlightSTC import highlightSTC
 
 ID_NEW=101
 ID_OPEN=102
 ID_SAVE=103
+ID_SAVE_AS=104
 ID_EXECUTE_BUTTON=300
+ID_EXECUTE_SELECTION_BUTTON=301
+ID_EXECUTE_LINE_BUTTON=302
 
 class pnlScript(wx.Frame):
     def __init__(self, parent, id=wx.ID_ANY, name="", pos=(0,0), size=(200, 200)):
@@ -23,7 +27,8 @@ class pnlScript(wx.Frame):
         filemenu.Append(ID_NEW, "&New", "New file")
         filemenu.Append(ID_OPEN, "&Open", " Open file")
         filemenu.AppendSeparator()        
-        filemenu.Append(ID_SAVE, "&Save", " Save file")
+        filemenu.Append(ID_SAVE, "&Save", " Save current file")
+        filemenu.Append(ID_SAVE_AS, "Save &As...", " Save to specific file")
 
         # create the menubar
         menuBar = wx.MenuBar()
@@ -33,12 +38,21 @@ class pnlScript(wx.Frame):
         wx.EVT_MENU(self, ID_NEW, self.OnNew)
         wx.EVT_MENU(self, ID_OPEN, self.OnOpen)
         wx.EVT_MENU(self, ID_SAVE, self.OnSave)
+        wx.EVT_MENU(self, ID_SAVE_AS, self.OnSaveAs)
 
-        # Set up execute button
+        # Set up execute buttons
         self.sizer2 = wx.BoxSizer(wx.HORIZONTAL)
         self.executeButton = wx.Button(self, ID_EXECUTE_BUTTON, "&Execute")
         self.executeButton.Bind(wx.EVT_BUTTON, self.OnExecute)
         self.sizer2.Add(self.executeButton, 25, wx.ALIGN_LEFT)
+
+        self.executeSelectionButton = wx.Button(self, ID_EXECUTE_SELECTION_BUTTON, "Execute &Selection")
+        self.executeSelectionButton.Bind(wx.EVT_BUTTON, self.OnExecuteSelection)
+        self.sizer2.Add(self.executeSelectionButton, 1, wx.ALIGN_LEFT)
+
+        self.executeLineButton = wx.Button(self, ID_EXECUTE_LINE_BUTTON, "Execute &Line")
+        self.executeLineButton.Bind(wx.EVT_BUTTON, self.OnExecuteLine)
+        self.sizer2.Add(self.executeLineButton, 1, wx.ALIGN_LEFT)
 
         self.sizer = wx.BoxSizer(wx.VERTICAL)        
         self.sizer.Add(self.sizer2, 0, wx.EXPAND)
@@ -49,14 +63,17 @@ class pnlScript(wx.Frame):
         self.sizer.Fit(self)
 
         self.dirname = ''
+        self.filename = ''
 
     def OnNew(self, e):
         if self.control.GetText() != '':
-            self.OnSave(e)
+            self.OnSaveAs(e)
 
         self.filename = ''
         self.control.SetText('')
-        self.SetTitle("Editing a new file")
+        # self.SetTitle("Editing a new file")
+        print "setting title to %s" % "Editing a new file"
+        Publisher().sendMessage(("script.title"), "Editing a new file")
 
     def OnOpen(self, e):
         dlg = wx.FileDialog(self, "Choose a file", self.dirname, "", "*.*", wx.OPEN)
@@ -70,11 +87,23 @@ class pnlScript(wx.Frame):
             self.control.EmptyUndoBuffer()
             filehandle.close()
 
-            self.SetTitle("Editing: %s" % self.filename)
+            # self.SetTitle("Editing: %s" % self.filename)
+            Publisher().sendMessage(("script.title"), "Editing: %s" % self.filename)
 
         dlg.Destroy()
 
     def OnSave(self, e):
+        if self.filename == '':
+            self.OnSaveAs(e)
+        else:
+            saved_text = self.control.GetText()
+            filehandle = open(os.path.join(self.dirname, self.filename), 'w')
+            filehandle.write(saved_text)
+            filehandle.close()
+            self.setTitle("Editing: %s" % self.filename)
+
+
+    def OnSaveAs(self, e):
         dlg = wx.FileDialog(self, "Choose a file", self.dirname, "", "*.*", wx.SAVE | wx.OVERWRITE_PROMPT)
         if dlg.ShowModal() == wx.ID_OK:
             saved_text = self.control.GetText()
@@ -85,7 +114,8 @@ class pnlScript(wx.Frame):
             filehandle.write(saved_text)
             filehandle.close()
 
-            self.SetTitle("Editing: %s" % self.filename)
+            # self.SetTitle("Editing: %s" % self.filename)
+            self.setTitle("Editing: %s" % self.filename)
 
         dlg.Destroy()
 
@@ -93,6 +123,31 @@ class pnlScript(wx.Frame):
         self.OnSave(e)
         filename = os.path.join(self.dirname, self.filename)
         self.console.shell.runfile(filename)
+        self.console.shell.run("\n")
+
+    def OnExecuteSelection(self, e):
+        text = self.control.GetSelectedTextRaw()
+        for line in text.split("\n"):
+            self.console.shell.run(line)
+
+    def OnExecuteLine(self, e):
+        text = self.control.GetSelectedTextRaw()
+        if text == "":
+            text = self.control.GetLine(self.control.GetCurrentLine())
+        
+        for line in text.split("\n"):
+            self.console.shell.run(line)
+
+    def newKeyPressed(self):
+        if self.filename != '':
+            title = "Editing: %s*" % self.filename
+            self.setTitle(title)
+
+    def setTitle(self, title):
+        Publisher().sendMessage("script.title", title)
+        if self.isFloating():
+            print "refreshing"
+            self.Refresh()
 
 
     def getStyle(self, c='black'):
