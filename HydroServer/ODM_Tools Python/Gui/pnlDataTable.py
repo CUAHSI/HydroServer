@@ -3,6 +3,7 @@
 import wx
 import wx.grid
 from ObjectListView import ObjectListView, ColumnDefn
+from wx.lib.pubsub import Publisher
 import odmdata
 import sqlite3
     
@@ -11,66 +12,96 @@ import sqlite3
 
 
 class pnlDataTable(wx.Panel):
-    def _init_coll_boxSizer1_Items(self, parent):
-        # generated method, don't edit
-
-        parent.AddWindow(self.dataGrid, 100, border=0, flag=wx.GROW | wx.ALL)
-
-    def _init_sizers(self):
-        # generated method, don't edit
-        self.boxSizer1 = wx.BoxSizer(orient=wx.VERTICAL)
-
-        self._init_coll_boxSizer1_Items(self.boxSizer1)
-
-        self.SetSizer(self.boxSizer1)
-
+    
+    # selectedpoints = []
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Panel.__init__(self, id=wxID_PNLDATATABLE, name=u'pnlDataTable',
               parent=prnt, pos=wx.Point(717, 342), size=wx.Size(677, 449),
               style=wx.TAB_TRAVERSAL)
-        self.InitWidgets()
+        self.myOlv =  ObjectListView(self, -1, style=wx.LC_REPORT)
+        self.myOlv.SetEmptyListMsg("")
+
+        sizer_2 = wx.BoxSizer(wx.VERTICAL)
+        sizer_2.Add(self.myOlv, 1, wx.ALL|wx.EXPAND, 4)
+        self.SetSizer(sizer_2)
+        self.doneselecting=True
+
+
+
+
+        self.myOlv.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnItemSelected )
+        self.myOlv.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.OnItemDeSelected )
+        self.myOlv.Bind(wx.EVT_LIST_KEY_DOWN, self.OnLUp, id=wxID_PNLDATATABLE )
+        self.myOlv.Bind(wx.EVT_LEFT_DOWN, self.OnLDown, id=wxID_PNLDATATABLE)
+        Publisher().subscribe(self.OnChangeSelection, ("changeTableSelection"))
+
+        self.Layout()
         
               
-    def Init(self, Values = None):
-        self.InitModel(Values)
-
-
-    def InitModel(self, DVConn):
+    def Init(self, DVConn):
         cursor = DVConn
-        sql = "SELECT * FROM DataValues"
+        sql = "SELECT * FROM DataValuesEdit"
         cursor.execute(sql)
        
       
         self.myOlv.SetColumns( ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(cursor.description))
-        self.InitTable()       
-
-
-        # self.values = [list(x) for x in cursor.fetchall()] 
-        self.myOlv.SetObjects([list(x) for x in cursor.fetchall()] )
-        
-
-    def InitTable(self):
-        #self.myOlv.InstallCheckStateColumn(self.myOlv.columns[0])
-        # self.myOlv.useAlternateBackColors = True
-        #self.myOlv.evenRowsBackColor = "Silver"
+       
+        #####table Settings
+        self.myOlv.useAlternateBackColors = True
         self.myOlv.oddRowsBackColor = "SlateGray"
-        self.myOlv.AutoSizeColumns()
+        self.myOlv.AutoSizeColumns()      
 
-        # isActiveColumn = ColumnDefn("Active?", fixedWidth=24, checkStateGetter="isActive")
-        # self.myOlv.CreateCheckStateColumn()
-        # self.myOlv.InstallCheckStateColumn(self.myOlv.columns[0])
-        #self.myOlv.InstallCheckStateColumn( isActiveColumn)
+
+        self.values = [list(x) for x in cursor.fetchall()]  
+        self.myOlv.SetObjects(self.values)
+    
+    def OnLUp (self, event):
+        print "in up"
+        self.doneselecting = True
+
+    def OnLDown(self, event):
+        print "in down"
+        self.doneselecting = False
+
+    def OnItemSelected(self, event):
+        print "in onItemSelected"
+        # print 
+
+        # if  not (event.m_itemIndex in self.selectedpoints):
+        #     self.selectedpoints.Add(event.m_itemIndex)
+
+        if self.doneselecting:
+            selectedids = self.getSelectedIDs(self.myOlv.GetSelectedObjects())
+            Publisher().sendMessage(("changePlotSelection"), selectedids)
+
+    def OnItemDeSelected(self, event):
+        print event.m_itemIndex
+        # self.selectedpoints.remove(event.m_itemIndex)
+
+    def getSelectedIDs(self, selobjects):        
+        idlist= [0] * len(self.values)
+        for sel in selobjects:
+            idlist[self.myOlv.GetIndexOf(sel)]=1
+        # print idlist
+        return idlist
+
+    
+    def OnChangeSelection(self, sellist):
+        objlist=[]
+        # print sellist.data
+        # print type(sellist.data)
+
+        for i in range(len(sellist.data)):
+            if sellist.data[i]:
+                objlist.append(self.myOlv.GetObjectAt(i))
+        # print objlist
+        self.doneselecting = False  
+        self.myOlv.SelectObjects(objlist, deselectOthers=True)
+        self.doneselecting = True  
         
-        # self.myOlv.UseSubItemCheckBoxes = true
-        # RowBorderDecoration rbd = new RowBorderDecoration()
-        # rbd.BorderPen = new Pen(Color.FromArgb(128, Color.LightSeaGreen), 2)
-        # rbd.BoundsPadding = new Size(1, 1)
-        # rbd.CornerRounding = 4.0f
 
-        # # Put the decoration onto the hot item
-        # self.olv1.HotItemStyle = new HotItemStyle()
-        # self.olv1.HotItemStyle.Decoration = rbd
+    
 
 
 #########self.myOlv.GetCheckedObjects
@@ -78,17 +109,8 @@ class pnlDataTable(wx.Panel):
 ########Uncheck(modelObject), Check(modelObject)
 
 
-
-    def InitWidgets(self):
         
-        self.myOlv =  ObjectListView(self, -1, style=wx.LC_REPORT)
-        self.myOlv.SetEmptyListMsg("")
-
-        sizer_2 = wx.BoxSizer(wx.VERTICAL)
-        sizer_2.Add(self.myOlv, 1, wx.ALL|wx.EXPAND, 4)
-        self.SetSizer(sizer_2)
-
-        self.Layout()
+       
     
 
 

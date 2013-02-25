@@ -96,18 +96,17 @@ class pnlSeriesSelector(wx.Panel):
                 "BeginDateTimeUTC", 
                 "EndDateTimeUTC", 
                 "ValueCount"]
-                
+        
+        parent.SetColumns(self.columnstitle)        
 
-        colnum = 0
-        parent.InsertColumn(col=colnum, format=wx.LIST_FORMAT_CENTRE, heading=u'',
-             width=25) 
-        for c in self.columnstitle:
-            colnum+=1
-            parent.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
-                heading=c, width=140)
-        # parent.InsertColumn(col=2, format=wx.LIST_FORMAT_LEFT,
-        #      heading=u'Variable Name', width=140)
-        # parent.SetColumns(self.columnstitle)
+        # colnum = 0
+        # parent.InsertColumn(col=colnum, format=wx.LIST_FORMAT_CENTRE, heading=u'',
+        #      width=25) 
+        # for c in self.columnstitle:
+        #     colnum+=1
+        #     parent.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
+        #         heading=c, width=140)
+       
 
 
     def _init_sizers(self):
@@ -131,6 +130,7 @@ class pnlSeriesSelector(wx.Panel):
 
     def _init_ctrls(self, prnt):
         # generated method, don't edit
+
         wx.Panel.__init__(self, id=wxID_PNLSERIESSELECTOR,
               name=u'pnlSeriesSelector', parent=prnt, pos=wx.Point(511, 413),
               size=wx.Size(935, 270), style=wx.TAB_TRAVERSAL)
@@ -208,34 +208,18 @@ class pnlSeriesSelector(wx.Panel):
         self.panel4 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL4, name='panel4',
               parent=self, pos=wx.Point(96, 77), size=wx.Size(653, 25),
               style=wx.TAB_TRAVERSAL)
-
-        # self.tableSeries = wx.ListCtrl(id=wxID_PNLSERIESSELECTORtableSeries,
-        #       name=u'tableSeries', parent=self.panel3, pos=wx.Point(5, 5),
-        #       size=wx.Size(903, 108),
-        #       style=wx.HSCROLL | wx.VSCROLL | wx.LC_REPORT)
-
-        
-        # self.tableSeries.SetAlternateRowColour("SlateGray")
-
-        
-        # self.tableSeries = ObjectListView(self.panel3, id=wxID_PNLSERIESSELECTORtableSeries, name=u'tableSeries',  
-        #       style=wx.LC_REPORT|wx.SUNKEN_BORDER)
-        # self.tableSeries.SetEmptyListMsg("")
-
-
        
-        # self.tableSeries = clsULC(id=wxID_PNLSERIESSELECTORtableSeries,
-        #       name=u'tableSeries', parent=self.panel3, pos=wx.Point(5, 5),
-        #       size=wx.Size(903, 108),              
-        #       agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES)
-
-        self.tableSeries = ULC.UltimateListCtrl(id=wxID_PNLSERIESSELECTORtableSeries,
+        self.tableSeries = clsULC(id=wxID_PNLSERIESSELECTORtableSeries,
               name=u'tableSeries', parent=self.panel3, pos=wx.Point(5, 5),
               size=wx.Size(903, 108),              
-              agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES)
+              agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES | ULC.ULC_SINGLE_SEL)
 
+        # self.tableSeries = ULC.UltimateListCtrl(id=wxID_PNLSERIESSELECTORtableSeries,
+        #       name=u'tableSeries', parent=self.panel3, pos=wx.Point(5, 5),
+        #       size=wx.Size(903, 108),              
+        #       agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES | ULC.ULC_SINGLE_SEL)
 
-
+        
 
 
         self._init_coll_tableSeries_Columns(self.tableSeries)
@@ -247,27 +231,32 @@ class pnlSeriesSelector(wx.Panel):
         #       id=wxID_PNLSERIESSELECTORtableSeries)
 
         # ULC.EVT_LIST_ITEM_CHECKING
+
         self.tableSeries.Bind(ULC.EVT_LIST_ITEM_CHECKED,
               self.OntableSeriesListItemSelected,
               id=wxID_PNLSERIESSELECTORtableSeries)
 
-
-
-
         
+        # self.tableSeries.Bind(ULC.EVT_LIST_ITEM_CHECKING,
+        #       self.OntableSeriesItemDeSelected,
+        #       id=wxID_PNLSERIESSELECTORtableSeries)
+
+        self.tableSeries.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK,
+              self.OnTableRightDown,
+              id=wxID_PNLSERIESSELECTORtableSeries)
+
+        Publisher().subscribe(self.OnEditButton, ("selectEdit")) 
         
         self._init_sizers()
+
+    
 
     def __init__(self, parent, id, pos, size, style, name, dbservice):
         self.parent= parent
         self._init_ctrls(parent)
         
         #####INIT DB Connection
-
-        
         self.dbservice = dbservice
-
-        
         self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
         self.cursor = self.conn.cursor()
         self.initDB()
@@ -308,22 +297,82 @@ class pnlSeriesSelector(wx.Panel):
         # self.tableSeries.GetFilter().SetText(self.site_code)
         
         # self.tableSeries.RepopulateList()
-        
-
-
         self.seriesList = self.dbservice.get_series(self.siteList[0].site_code)
         
-        # self.list.InsertImageStringItem(sys.maxint, data[0], [3, 4, 7], it_kind=1)
-        self.ResetTable()
+        # self.ResetTable()
+
+        self.tableSeries.SetObjects(self.seriesList)
+
         # for series in self.seriesList:
         #     ind = self.tableSeries.GetItemCount()
         #     self.tableSeries.Append([False, series.site_name ,series.variable_name])
         #     self.tableSeries.SetStringItem(ind, 0,"", it_kind=1)
         # for series in self.seriesList:
         #     self.tableSeries.Append([False, series.site_name ,series.variable_name])
-        
-
         self.SelectedSeries = []
+
+    
+
+
+    def OnTableRightDown(self, event):
+       
+      # build pop-up menu for right-click display
+        self.selectedIndex= event.m_itemIndex
+        self.selectedID = self.tableSeries.getColumnText(event.m_itemIndex, 1)
+        print self.selectedID
+        popup_edit_series = wx.NewId()
+        popup_plot_series = wx.NewId()
+        popup_export_data = wx.NewId()
+        popup_export_metadata = wx.NewId()
+        popup_select_all = wx.NewId()
+        popup_select_none = wx.NewId()
+        popup_menu = wx.Menu()
+        self.Bind(wx.EVT_MENU,  self.OnRightPlot, popup_menu.Append(popup_plot_series, 'Plot'))
+        self.Bind(wx.EVT_MENU,  self.OnRightEdit, popup_menu.Append(popup_edit_series, 'Edit'))
+        popup_menu.AppendSeparator()
+        self.Bind(wx.EVT_MENU,  self.OnRightExData, popup_menu.Append(popup_export_data, 'Export Data'))
+        self.Bind(wx.EVT_MENU,  self.OnRightExMeta, popup_menu.Append(popup_export_metadata, 'Export MetaData'))
+        popup_menu.AppendSeparator()
+        self.Bind(wx.EVT_MENU,  self.OnRightSelAll, popup_menu.Append(popup_select_all, 'Select All'))
+        self.Bind(wx.EVT_MENU,  self.OnRightSelNone, popup_menu.Append(popup_select_none, 'Select None'))
+
+
+        self.tableSeries.PopupMenu(popup_menu)
+
+
+    def OnRightPlot(self, event):
+        print self.tableSeries.IsItemChecked(self.selectedIndex)
+        self.tableSeries.GetItem(self.selectedID, 0).Check = True
+        print "in OnRightPlot"
+
+    def OnRightEdit(self, event):
+        self.SelectForEdit(self.tableSeries.getColumnText(self.selectedIndex, 1))
+
+    def OnEditButton(self, vals):
+        self.SelectForEdit(self.tableSeries.getColumnText(self.tableSeries.GetSelection(), 1))
+    
+    def SelectForEdit(self, seriesID):
+        self.DataValues = self.dbservice.get_data_values_by_series_id(seriesID)
+            
+        self.cursor.execute("DELETE FROM DataValuesEdit")
+        self.conn.commit()
+        self.cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
+        self.conn.commit()
+
+        Publisher().sendMessage(("edit.NewPlot"), [self.cursor, self.dbservice.get_series_by_id(seriesID)])
+    
+    def OnRightExData(self, event):
+        print "in OnRightExData"
+    
+    def OnRightExMeta(self, event):
+        print "in OnRightExMeta"
+    
+    def OnRightSelAll(self, event):
+        print "in OnRightSelAll"
+    
+    def OnRightSelNone(self, event):
+        print "in OnRightSelNone"
+
 
     def OnBtnFilterButton(self, event):
         # self.new = frmQueryBuilder.frmQueryBuilder(parent=None)
@@ -341,7 +390,6 @@ class pnlSeriesSelector(wx.Panel):
         #clear list for new site info
 
         self.tableSeries.DeleteAllItems()
-
         
         self.site_code = self.siteList[event.GetSelection()].site_code
 
@@ -479,10 +527,11 @@ class pnlSeriesSelector(wx.Panel):
                 self.cbVariables.Enabled = False
 
     def ResetTable(self,  filtertext=""):
-        for series in self.seriesList:
-            ind = self.tableSeries.GetItemCount()
-            self.tableSeries.Append([False, series.site_name ,series.variable_name])
-            self.tableSeries.SetStringItem(ind, 0,"", it_kind=1)
+        # for series in self.seriesList:
+        #     ind = self.tableSeries.GetItemCount()
+        #     self.tableSeries.Append([False, series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
+        #     self.tableSeries.SetStringItem(ind, 0,"", it_kind=1)
+        self.tableSeries.SetObjects(self.seriesList)
        
         # f =TextSearch(self.tableSeries, self.tableSeries.columns[0:4])
         # self.tableSeries.SetFilter(TextSearch(self.tableSeries, self.tableSeries.columns[0:4]))
@@ -490,51 +539,31 @@ class pnlSeriesSelector(wx.Panel):
         # self.tableSeries.RepopulateList()
 
 
-            
-
+    # def OntableSeriesItemDeSelected(self, event):
     def OntableSeriesListItemSelected(self, event):
-        # print event.m_itemIndex, " selected"
-        # print self.seriesList[event.m_itemIndex]
-        # if ( self.tableSeries.GetItemText(event.m_itemIndex) == "False"):
-        #     self.tableSeries.SetStringItem(event.m_itemIndex, 0, "True") 
+#call parents on checking event 
+        # self.tableSeries.OnItemChecking(event)
 
-        # item_column = (event.m_itemIndex, event.m_item.GetColumn())
-        # try:
-        #     idx = self.checked.index(item_column)
-        # except ValueError:
-        #     idx = None
 
-        # if idx == None:
-        #     self.checked.append(item_column)
-        # else:
-        #     del(self.checked[idx])
-        #         # # print dir(event)
+        print "in item checked ", self.tableSeries.IsItemChecked(event.m_itemIndex) 
         if not self.tableSeries.IsItemChecked(event.m_itemIndex): 
-            ##decheck image
-            # print event.m_itemIndex, " dechecked"
-            Publisher().sendMessage(("removePlot"), event.m_itemIndex)
-        # self.Refresh()
-
-        # if idx == None: 
+        
+            Publisher().sendMessage(("removePlot"), self.seriesList[event.m_itemIndex].id)
+        
         else:
-            ##check image
-            # print event.m_itemIndex, " checked"
-
-             
             self.SelectedSeries.append(self.seriesList[event.m_itemIndex])  
             
-            self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
-            self.cursor = self.conn.cursor()
-            self.initDB()
+            # self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
+            # self.cursor = self.conn.cursor()
+            # self.initDB()
 
-            #when Selected for editing
 
             #when selected for plotting
             #get DataValues
 
-            self.DataValues = self.dbservice.get_data_values_by_series_test(self.seriesList[event.m_itemIndex])
-
-
+            # self.DataValues = self.dbservice.get_data_values_by_series(self.seriesList[event.m_itemIndex])
+            self.DataValues = self.dbservice.get_data_values_by_series_id(self.tableSeries.getColumnText(event.m_itemIndex, 1))
+         
             self.cursor.execute("DELETE FROM DataValues")
             self.conn.commit()
             self.cursor.executemany("INSERT INTO DataValues VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
@@ -544,6 +573,8 @@ class pnlSeriesSelector(wx.Panel):
             Publisher().sendMessage(("add.NewPlot"), [self.cursor, self.seriesList[event.m_itemIndex]])
 
         self.Refresh()
+
+
 
     def initDB(self):
         self.cursor.execute("""CREATE TABLE SeriesCatalog

@@ -255,13 +255,16 @@ class mnuRibbon(RB.RibbonBar):
         
         ###Add event  to editab
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onExecuteScript, id= wxID_RIBBONEDITSCRIPTEXECUTE)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnEditSeries, id= wxID_RIBBONEDITSERIES)
 
 
         ###Ribbon Event
         self.Bind(RB.EVT_RIBBONBAR_PAGE_CHANGED, self.OnFileMenu, id=wxID_PANEL1)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnShowLegend, id=wxID_RIBBONPLOTTSLEGEND) 
         self.isLegendVisible = False;
-        
+    def OnEditSeries(self, event):
+        Publisher.sendMessage(("selectEdit"), event)
+
     def OnNumBins(self, event):
         Publisher.sendMessage(("OnNumBins"), event.Selection)
 
