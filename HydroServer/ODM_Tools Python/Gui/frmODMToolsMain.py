@@ -73,6 +73,7 @@ class frmODMToolsMain(wx.Frame):
         self.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
               False, u'Tahoma'))
         Publisher().subscribe(self.addPlot, ("add.NewPlot")) 
+        Publisher().subscribe(self.addEdit, ("edit.NewPlot"))
         Publisher().subscribe(self.onDocking, ("adjust.Docking")) 
 
         Publisher().subscribe(self.onDocking, ("adjust.Docking"))
@@ -124,6 +125,15 @@ class frmODMToolsMain(wx.Frame):
               name=u'txtPython', parent=self, pos=wx.Point(72, 24),
               size=wx.Size(500,800))
 
+
+        # print self.txtPythonConsole.fileMenu.MenuItems
+        # for menu in self.txtPythonConsole.fileMenu.MenuItems:
+        #     print menu.Label, menu.Kind 
+        # print self.txtPythonConsole.fileMenu.MenuItems[11].IsEnabled() 
+        # self.txtPythonConsole.fileMenu.MenuItems[11].Enable=False
+        # print self.txtPythonConsole.fileMenu.MenuItems[11].IsEnabled() 
+
+
 ############ Docking ###################
         
         self._mgr = aui.AuiManager()
@@ -167,6 +177,7 @@ class frmODMToolsMain(wx.Frame):
             panedet=self._mgr.GetPane(self.txtPythonScript)
         elif Value.data == "Console":
             panedet=self._mgr.GetPane(self.txtPythonConsole)
+            print self.txtPythonConsole.fileMenu.MenuItems[11].IsEnabled()
         
         # self._mgr.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
         #       False, u'Tahoma'))
@@ -212,9 +223,9 @@ class frmODMToolsMain(wx.Frame):
         self.Refresh()
 
 
-    def addEdit(self, Values): 
+    def addEdit(self, Values):          
+         self.pnlPlot.addEditPlot(Values.data)
          self.dataTable.Init(Values.data[0])
-         # self.pnlPlot.addEditPlot(Values.data)
     
    
     def onChangeDBConn(self, event):

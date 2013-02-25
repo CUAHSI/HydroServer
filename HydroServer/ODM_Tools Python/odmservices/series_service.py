@@ -83,6 +83,12 @@ class SeriesService():
 			result = session.query(Series).order_by(Series.id).all()
 		session.close()
 		return result
+	
+	def get_series_by_id(self, series_id):
+		session = self._session_factory.get_session()
+		result = session.query(Series).filter_by(id=series_id).order_by(Series.id).one()
+		session.close()
+		return result
 
 	def get_series_test(self):
 		session = self._session_factory.get_session()		
@@ -102,7 +108,11 @@ class SeriesService():
 		# Pass in probably a Series object, match it against the database
 		pass
 
-	# DataValues by Series
+	
+	def get_data_values_by_series_id(self, series_id):
+		return self.get_data_values_by_series_test(self.get_series_by_id(series_id))
+
+	# DataValues by Series	
 	def get_data_values_by_series(self, series):
 		session = self._session_factory.get_session()
 		result = session.query(DataValue).filter_by(

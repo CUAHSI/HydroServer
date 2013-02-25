@@ -64,8 +64,11 @@ class pnlPlot(fnb.FlatNotebook):
         Publisher().subscribe(self.OnShowLegend, ("OnShowLegend"))
         Publisher().subscribe(self.OnNumBins, ("OnNumBins"))
         Publisher().subscribe(self.OnRemovePlot, ("removePlot"))
+        Publisher().subscribe(self.OnChangeSelection, ("changePlotSelection"))
         
-        
+    def OnChangeSelection(self, sellist):
+      self.pltTS.changeSelection(sellist.data)
+
     def OnRemovePlot(self, seriesID): 
       self.pltTS.removePlot(seriesID)
 
@@ -84,7 +87,9 @@ class pnlPlot(fnb.FlatNotebook):
       event, isVisible = Args.data[0], Args.data[1]
       self.pltTS.OnShowLegend(isVisible)
       
-
+    def addEditPlot(self, Values):
+        Filter = " WHERE CensorCode = 'nc'"
+        self.pltTS.editSeries(Values, Filter)
     
     def addPlot(self, Values):
     
