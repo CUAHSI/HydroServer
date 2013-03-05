@@ -48,6 +48,17 @@ def create(parent):
 
 class frmODMToolsMain(wx.Frame):
 
+    def __init__(self, parent):
+        self.service_manager = ServiceManager()
+        if self.service_manager.get_current_connection() == None:
+            # Create a DB form which will set a connection for the service manager
+            db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)
+            db_config.ShowModal()
+
+        self.createService()
+        self._init_ctrls(parent)
+        self.Refresh()
+
 #############Entire Form Sizers##########  
     def _init_sizers(self):
         # generated method, don't edit
@@ -118,9 +129,12 @@ class frmODMToolsMain(wx.Frame):
 
 
 ############# Script & Console ###############
-        self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
-                name=u'txtPython', parent=self, rootObject=pnlDataTable, pos=wx.Point(72, 24),
-                size=wx.Size(500,800), style=0)   
+        # self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
+        #         name=u'txtPython', parent=self, rootObject=pnlDataTable, pos=wx.Point(72, 24),
+        #         size=wx.Size(500,800), style=0) 
+        self.txtPythonConsole= wx.richtext.RichTextCtrl(id=wxID_TXTPYTHONCONSOLE, 
+              parent=self, pos=wx.Point(72, 24), size=wx.Size(500,800),
+              style=wx.richtext.RE_MULTILINE, value='')  
         self.txtPythonScript = pnlScript(id=wxID_TXTPYTHONSCRIPT,
               name=u'txtPython', parent=self, pos=wx.Point(72, 24),
               size=wx.Size(500,800))
@@ -152,6 +166,7 @@ class frmODMToolsMain(wx.Frame):
         # self.txtPythonConsole.ToggleTools()      
         self._mgr.AddPane(self.pnlPlot,  aui.AuiPaneInfo().CenterPane().Name("Plot").Caption("Plot"))
 
+        self.loadDockingSettings()
 
         self._mgr.Update()
 
@@ -160,10 +175,7 @@ class frmODMToolsMain(wx.Frame):
         self._init_sizers()
         self._ribbon.Realize()
 
-
-
-    def toggleConsoleTools(self):
-        self.txtPythonConsole.ToggleTools()
+    
 
 
     def onDocking(self, Value):       
@@ -176,8 +188,14 @@ class frmODMToolsMain(wx.Frame):
         elif Value.data == "Script":
             panedet=self._mgr.GetPane(self.txtPythonScript)
         elif Value.data == "Console":
+
+            self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
+                name=u'txtPython', parent=self,  pos=wx.Point(72, 24),
+                size=wx.Size(500,800), style=0) 
+            self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
+                Name("Console").Layer(1).Show(show=False).Float()) 
             panedet=self._mgr.GetPane(self.txtPythonConsole)
-            print self.txtPythonConsole.fileMenu.MenuItems[11].IsEnabled()
+            # print self.txtPythonConsole.fileMenu.MenuItems[11].IsEnabled()
         
         # self._mgr.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
         #       False, u'Tahoma'))
@@ -186,7 +204,6 @@ class frmODMToolsMain(wx.Frame):
         else:         
             panedet.Show(show=True)
         self._mgr.Update()
-        self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         # for p in self._mgr.GetAllPanes():
         #     print p.caption
@@ -211,18 +228,6 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.Update()
 
 
-    def __init__(self, parent):
-        self.service_manager = ServiceManager()
-        if self.service_manager.get_current_connection() == None:
-            # Create a DB form which will set a connection for the service manager
-            db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)
-            db_config.ShowModal()
-
-        self.createService()
-        self._init_ctrls(parent)
-        self.Refresh()
-
-
     def addEdit(self, Values):          
          self.pnlPlot.addEditPlot(Values.data)
          self.dataTable.Init(Values.data[0])
@@ -231,6 +236,9 @@ class frmODMToolsMain(wx.Frame):
     def onChangeDBConn(self, event):
         db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)
         db_config.ShowModal()
+        #clear editseries
+        #clear all plots
+        #clear table
 
 
     def createService(self):
@@ -243,20 +251,28 @@ class frmODMToolsMain(wx.Frame):
     
     def onExecuteScript(self, value):
         # print "testing file execution with test.py"
-        for i in ('red', 'blue', 'green', 'magenta'):
+        for i in ('red', 'blue', 'green', 'magenta', 'gold', 'cyan', 'brown', 'lime','purple', 'navy'):
             self.txtPythonScript('This is a test\n', i)
     
 
-        
+    def loadDockingSettings(self):
+     #test if there is a perspective to load
+        try:
+            f= open('ODMTools.config', 'r')            
+            self._mgr.LoadPerspective(f.read(), True)
+        except:
+            print "error loading docking data"
             
     def OnClose(self, event):
         # deinitialize the frame manager
+        try:
+            f= open('ODMTools.config', 'w')
+            f.write(self._mgr.SavePerspective())
+        except:
+            print "error saving docking data"
         self._mgr.UnInit()
         # delete the frame
         self.Destroy()
-
-
-
 
 
 if __name__ == '__main__':
