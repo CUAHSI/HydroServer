@@ -282,7 +282,7 @@ class mnuRibbon(RB.RibbonBar):
 
     def OnEditFilter(self, event):
         data_filter = frmDataFilters.frmDataFilter(self)
-        self.filterlist = data_filter.Show()
+        self.filterlist = data_filter.ShowModal()
         pass
     def OnEditChangeValue(self, event):
         change_value=frmChangeValue.frmChangeValue(self)

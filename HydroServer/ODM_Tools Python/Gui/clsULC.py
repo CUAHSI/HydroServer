@@ -20,35 +20,48 @@ class clsULC(ULC.UltimateListCtrl):
 
 
 	def SetColumns(self, columns):
-		self.columns = columns		
+		# self.columns = columns	
+		# # for c in columns:
+		# 	self.columns.append(c)
 		ULC.UltimateListCtrl.ClearAll(self)
 		colnum = 0
 		self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_CENTRE, heading=u'',
 			 width=25) 
 		for c in columns:
-			colnum+=1
-			self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
-				heading=c, width=140)
+			colnum+=1						
+			self.columns.append({'title':c, 'colid':colnum})
+			if "ID" in c:
+				self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
+					heading=c, width=50)
+			else:
+				self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
+					heading=c, width=140)
+		print self.GetColumn(0)
 
-
-	def Clear(self):
-		# self.SetColumns(self.columns)
-		pass
 
 
 	def SetObjects(self, modelObjects):
 		self.modelObjects = modelObjects
-		self.innerList = self.modelObjects
 		self.RepopulateList()
 
 
+	def _BuildInnerList(self):
+		if self.filter:
+			self.innerList = self.filter(self.modelObjects)
+		else:
+			self.innerList = self.modelObjects
+
+
 	def RepopulateList(self):
+		self.DeleteAllItems()
+		self._BuildInnerList()
+
 		for series in self.innerList:
 			ind= self.GetItemCount()
 			# print ind
 			
-			self.Append([False, series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
-           
+			# self.Append([False, series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
+			self.Append([False]+ series.getValues())
 			# # self.Append([False]+[str(getattr(series, attribute))for attribute in vars(series).keys() ])#series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
 			
 			self.SetStringItem(ind, 0, "", it_kind=1)
@@ -77,10 +90,51 @@ class clsULC(ULC.UltimateListCtrl):
 		#returns the one highlighted row in the table		
 		return self.GetFirstSelected()
 
+	def GetObjectAt(self, index):
+		return self.innerList[index]
 
-	def getColumnText(self, index, col):
-		item = self.GetItem(index, col)
+	# 	def GetObjectAt(self, index):
+	# 	# """
+	# 	# Return the model object at the given row of the list.
+	# 	# """
+	# 	# Because of sorting, index can't be used directly, which is
+	# 	# why we set the item data to be the real index
+	# 	return self.innerList[self.GetItemData(index)]
+
+	def AddCheckedItem(self, id):
+		pass
+
+	def RemoveCheckedItem(self, id):
+		pass
+
+	def GetChecked(self):
+		#returns a list of the checked ids
+		pass
+
+	def isChecked(self, index):
+		item = self.GetItem(index, 0)
+		print item
+		pass
+
+	def GetColumnText(self, index, colid):
+		item = self.GetItem(index, colid)
 		return item.GetText()
+
+	def GetStringValue(self, modelObject, col):
+		return modelObject.getValue(col['title'])
+
+	def GetFilter(self):
+		return self.filter
+
+ 	def GetFilteredObjects(self):
+		return self.innerList
+
+ 	def SetFilter(self, filter):
+		self.filter = filter
+
+	def ClearFilter(self):
+		self.filter = None
+
 
 
 	
@@ -334,28 +388,15 @@ class clsULC(ULC.UltimateListCtrl):
 
 
 class TextSearch(object):
-	"""
-	Return only model objects that match a given string. If columns is not empty,
-	only those columns will be considered when searching for the string. Otherwise,
-	all columns will be searched.
-
-	Example::
-		self.olv.SetFilter(Filter.TextSearch(self.olv, text="findthis"))
-		self.olv.RepopulateList()
-	"""
+	
 
 	def __init__(self, objectListView, columns=(), text=""):
-		"""
-		Create a filter that includes on modelObject that have 'self.text' somewhere in the given columns.
-		"""
+		
 		self.objectListView = objectListView
 		self.columns = columns
 		self.text = text
 
 	def __call__(self, modelObjects):
-		"""
-		Return the model objects that contain our text in one of the columns to consider
-		"""
 		if not self.text:
 			return modelObjects
 
@@ -369,43 +410,24 @@ class TextSearch(object):
 
 		def _containsText(modelObject):
 			for col in cols:
-				if textToFind in col.GetStringValue(modelObject).lower():
+				if textToFind in self.objectListView.GetStringValue(modelObject, col).lower(): #col.GetStringValue(modelObject).lower():
 					return True
 			return False
 
 		return [x for x in modelObjects if _containsText(x)]
 
-	def SetText(self, text):
-		"""
-		Set the text that this filter will match. Set this to None or "" to disable the filter.
-		"""
+	def SetText(self, text):		
 		self.text = text
 
 
 class Chain(object):
-	"""
-	Return only model objects that match all of the given filters.
+	
 
-	Example::
-		# Show at most 100 people whose salary is over 50,000
-		salaryFilter = Filter.Predicate(lambda person: person.GetSalary() > 50000)
-		self.olv.SetFilter(Filter.Chain(salaryFilter, Filter.Tail(100)))
-		self.olv.RepopulateList()
-	"""
-
-	def __init__(self, *filters):
-		"""
-		Create a filter that performs all the given filters.
-
-		The order of the filters is important.
-		"""
+	def __init__(self, *filters):		
 		self.filters = filters
 
 
-	def __call__(self, modelObjects):
-		"""
-		Return the model objects that match all of our filters
-		"""
+	def __call__(self, modelObjects):		
 		for filter in self.filters:
 			modelObjects = filter(modelObjects)
 		return modelObjects
