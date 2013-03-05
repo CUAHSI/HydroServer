@@ -110,7 +110,7 @@ class SeriesService():
 
 	
 	def get_data_values_by_series_id(self, series_id):
-		return self.get_data_values_by_series_test(self.get_series_by_id(series_id))
+		return self.get_data_values_by_series_test(self.get_series_by_id(series_id))#.order_by(DataValue.local_date_time).all()
 
 	# DataValues by Series	
 	def get_data_values_by_series(self, series):

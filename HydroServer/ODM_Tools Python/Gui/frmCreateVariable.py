@@ -74,13 +74,13 @@ class frmCreateVariable(wx.Frame):
               size=wx.Size(527, 205), style=wx.TAB_TRAVERSAL)
         self.pnldefinded.SetLabel(u'panel3')
 
-        self.btnCancel = wx.Button(id=wxID_FRMCREATEVARIABLEBTNCANCEL,
-              label=u'Cancel', name=u'btnCancel', parent=self.panel1,
-              pos=wx.Point(429, 346), size=wx.Size(97, 23), style=0)
-
         self.btnCreate = wx.Button(id=wxID_FRMCREATEVARIABLEBTNCREATE,
               label=u'Create', name=u'btnCreate', parent=self.panel1,
               pos=wx.Point(323, 346), size=wx.Size(96, 23), style=0)
+
+        self.btnCancel = wx.Button(id=wxID_FRMCREATEVARIABLEBTNCANCEL,
+              label=u'Cancel', name=u'btnCancel', parent=self.panel1,
+              pos=wx.Point(429, 346), size=wx.Size(97, 23), style=0)
 
         self.pnlFiller = wx.Panel(id=wxID_FRMCREATEVARIABLEPNLFILLER,
               name=u'pnlFiller', parent=self.panel1, pos=wx.Point(5, 346),
@@ -163,54 +163,58 @@ class frmCreateVariable(wx.Frame):
         self.cbVarName = wx.ComboBox(choices=[],
               id=wxID_FRMCREATEVARIABLECBVARNAME, name=u'cbVarName',
               parent=self.pnlPtoSelect, pos=wx.Point(104, 64), size=wx.Size(416,
-              21), style=0, value='comboBox1')
+              21), style=0, value='')
 
         self.cbVarUnits = wx.ComboBox(choices=[],
               id=wxID_FRMCREATEVARIABLECBVARUNITS, name=u'cbVarUnits',
               parent=self.pnlPtoSelect, pos=wx.Point(104, 96), size=wx.Size(176,
-              21), style=0, value='comboBox2')
+              21), style=0, value='')
 
         self.cbSpeciation = wx.ComboBox(choices=[],
               id=wxID_FRMCREATEVARIABLECBSPECIATION, name=u'cbSpeciation',
               parent=self.pnlPtoSelect, pos=wx.Point(360, 96), size=wx.Size(160,
-              21), style=0, value='comboBox3')
+              21), style=0, value='')
 
         self.txtTSValue = wx.TextCtrl(id=wxID_FRMCREATEVARIABLETXTTSVALUE,
               name=u'txtTSValue', parent=self.pnldefinded, pos=wx.Point(96, 48),
-              size=wx.Size(152, 21), style=0, value='textCtrl2')
+              size=wx.Size(152, 21), style=0, value='')
 
         self.txtTSUnits = wx.TextCtrl(id=wxID_FRMCREATEVARIABLETXTTSUNITS,
               name=u'txtTSUnits', parent=self.pnldefinded, pos=wx.Point(296,
-              48), size=wx.Size(200, 21), style=0, value='textCtrl3')
+              48), size=wx.Size(200, 21), style=0, value='')
 
-        self.txtValueType = wx.TextCtrl(id=wxID_FRMCREATEVARIABLETXTVALUETYPE,
-              name=u'txtValueType', parent=self.pnldefinded, pos=wx.Point(104,
-              96), size=wx.Size(168, 21), style=0, value='textCtrl4')
+        self.txtValueType = wx.ComboBox(choices=[],
+              id=wxID_FRMCREATEVARIABLETXTVALUETYPE, name=u'txtValueType',
+              parent=self.pnldefinded, pos=wx.Point(104, 96), size=wx.Size(168,
+              21), style=0, value='')
 
-        self.txtDataType = wx.TextCtrl(id=wxID_FRMCREATEVARIABLETXTDATATYPE,
-              name=u'txtDataType', parent=self.pnldefinded, pos=wx.Point(336,
-              96), size=wx.Size(184, 21), style=0, value='textCtrl5')
+        self.txtDataType = wx.ComboBox(choices=[],
+              id=wxID_FRMCREATEVARIABLETXTDATATYPE, name=u'txtDataType',
+              parent=self.pnldefinded, pos=wx.Point(336, 96), size=wx.Size(184,
+              21), style=0, value='')
 
         self.txtGenCat = wx.TextCtrl(id=wxID_FRMCREATEVARIABLETXTGENCAT,
               name=u'txtGenCat', parent=self.pnldefinded, pos=wx.Point(136,
-              128), size=wx.Size(200, 21), style=0, value='textCtrl6')
+              128), size=wx.Size(200, 21), style=0, value='')
 
         self.txtSampleM = wx.TextCtrl(id=wxID_FRMCREATEVARIABLETXTSAMPLEM,
               name=u'txtSampleM', parent=self.pnldefinded, pos=wx.Point(120,
-              160), size=wx.Size(216, 21), style=0, value='textCtrl7')
+              160), size=wx.Size(216, 21), style=0, value='')
 
         self.txtNoDV = wx.TextCtrl(id=wxID_FRMCREATEVARIABLETXTNODV,
               name=u'txtNoDV', parent=self.pnldefinded, pos=wx.Point(416, 128),
-              size=wx.Size(104, 21), style=0, value='textCtrl8')
+              size=wx.Size(104, 21), style=0, value='')
 
-        self.txtIsRegular = wx.TextCtrl(id=wxID_FRMCREATEVARIABLETXTISREGULAR,
-              name=u'txtIsRegular', parent=self.pnldefinded, pos=wx.Point(416,
-              160), size=wx.Size(104, 21), style=0, value='textCtrl9')
+        self.txtIsRegular = wx.ComboBox(choices=['True', 'False'],
+              id=wxID_FRMCREATEVARIABLETXTISREGULAR, name=u'txtIsRegular',
+              parent=self.pnldefinded, pos=wx.Point(416, 160), size=wx.Size(104,
+              21), style=0, value='')
 
         self._init_sizers()
 
     def __init__(self, parent):
         self._init_ctrls(parent)
+
 
 
 if __name__ == '__main__':

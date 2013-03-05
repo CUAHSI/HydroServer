@@ -16,16 +16,12 @@ class clsULC(ULC.UltimateListCtrl):
 
 		# wx.ListCtrl.__init__(self, *args, **kwargs)
 
-
 		ULC.UltimateListCtrl.__init__(self, *args, **kwargs )
-		# self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnTableRightDown)
 
-
-	def OnItemChecking(self, event):
-		ULC.UltimateListCtrl.CheckItem(event)
 
 	def SetColumns(self, columns):
-
+		self.columns = columns		
+		ULC.UltimateListCtrl.ClearAll(self)
 		colnum = 0
 		self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_CENTRE, heading=u'',
 			 width=25) 
@@ -35,68 +31,50 @@ class clsULC(ULC.UltimateListCtrl):
 				heading=c, width=140)
 
 
+	def Clear(self):
+		# self.SetColumns(self.columns)
+		pass
+
+
 	def SetObjects(self, modelObjects):
 		self.modelObjects = modelObjects
-		
-	
+		self.innerList = self.modelObjects
 		self.RepopulateList()
 
+
 	def RepopulateList(self):
-		for series in self.modelObjects:
+		for series in self.innerList:
 			ind= self.GetItemCount()
+			# print ind
 			
 			self.Append([False, series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
            
-			# self.Append([False]+[str(getattr(series, attribute))for attribute in vars(series).keys() ])#series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
+			# # self.Append([False]+[str(getattr(series, attribute))for attribute in vars(series).keys() ])#series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
 			
 			self.SetStringItem(ind, 0, "", it_kind=1)
 
-
-			# self.InsertStringItem(ind, "", it_kind=1)
+			# row= self.GetItemCount()
+			# print row
+			# self.InsertStringItem(row, "", it_kind=1)
 			
-			# row=1	
+			# ind=1
 			# for attribute in vars(series).keys():
-			# 	# info = self.GetItem(row, ind)
-			# 	info = ULC.UltimateListItem()
-			# 	info._mask = wx.LIST_MASK_TEXT | wx.LIST_MASK_FORMAT
-			# 	info._format = 0
-			# 	info._text = str(getattr(series, attribute))
-			# 	#print '%s = %s' % (attribute, str(getattr(series, attribute)))
-			# 	self.SetStringItem(ind, row, str(getattr(series, attribute)))
-			# 	# row+=1
-			# self.InsertItem(info)
-			# ind +=1
-
-	def OnTableRightDown(self, event):
-	  # build pop-up menu for right-click display
-		popup_edit_series = wx.NewId()
-		popup_plot_series = wx.NewId()
-		popup_export_data = wx.NewId()
-		popup_export_metadata = wx.NewId()
-		popup_select_all = wx.NewId()
-		popup_select_none = wx.NewId()
-		popup_menu = wx.Menu()
-		self.Bind(wx.EVT_MENU,  self.OnRightPlot, popup_menu.Append(popup_plot_series, 'Plot'))
-		self.Bind(wx.EVT_MENU,  self.OnRightEdit, popup_menu.Append(popup_edit_series, 'Edit'))
-		popup_menu.AppendSeparator()
-		self.Bind(wx.EVT_MENU,  self.OnRightExData, popup_menu.Append(popup_export_data, 'Export Data'))
-		self.Bind(wx.EVT_MENU,  self.OnRightExMeta, popup_menu.Append(popup_export_metadata, 'Export MetaData'))
-		popup_menu.AppendSeparator()
-		self.Bind(wx.EVT_MENU,  self.OnRightSelAll, popup_menu.Append(popup_select_all, 'Select All'))
-		self.Bind(wx.EVT_MENU,  self.OnRightSelNone, popup_menu.Append(popup_select_none, 'Select None'))
-
-
-		self.tableSeries.PopupMenu(popup_menu)
+			# 	print ind
+			# # 	# info = self.GetItem(row, ind)
+			# # 	info = ULC.UltimateListItem()
+			# # 	info._mask = wx.LIST_MASK_TEXT | wx.LIST_MASK_FORMAT
+			# # 	info._format = 0
+			# # 	info._text = str(getattr(series, attribute))
+			# # 	#print '%s = %s' % (attribute, str(getattr(series, attribute)))
+			# 	self.SetStringItem(row, ind, str(getattr(series, attribute)))
+			# 	ind +=1
+			# # self.InsertItem(info)
+			
+			# row+=1
+	
 
 	def GetSelection(self):
-		# print dir(self)
-		# for  ind in  range(len(self.modelObjects)):
-		# 	print self.getColumnText(ind, 0)
-		# 	if self.getColumnText(ind, 0)==True:
-
-		# 		return self.getColumnText(ind, 1)
-		# return None
-		print "in get selection"
+		#returns the one highlighted row in the table		
 		return self.GetFirstSelected()
 
 
@@ -105,23 +83,9 @@ class clsULC(ULC.UltimateListCtrl):
 		return item.GetText()
 
 
-	def OnRightPlot(self, event):
-		print "in OnRightPlot"
-
-	def OnRightEdit(self, event):
-		print "in OnRightEdit"
 	
-	def OnRightExData(self, event):
-		print "in OnRightExData"
 	
-	def OnRightExMeta(self, event):
-		print "in OnRightExMeta"
 	
-	def OnRightSelAll(self, event):
-		print "in OnRightSelAll"
-	
-	def OnRightSelNone(self, event):
-		print "in OnRightSelNone"
 	
 
 	# def SetObjects(self, modelObjects, preserveSelection=False):
@@ -144,77 +108,7 @@ class clsULC(ULC.UltimateListCtrl):
 	# 	#	 self.tableSeries.SetStringItem(ind, 0,"", it_kind=1)
 
 
-	# def SetColumns(self, columns, repopulate=True):
-	# 	# """
-	# 	# Set the list of columns that will be displayed.
-
-	# 	# The elements of the list can be either ColumnDefn objects or a tuple holding the values
-	# 	# to be given to the ColumnDefn constructor.
-
-	# 	# The first column is the primary column -- this will be shown in the the non-report views.
-
-		
-	# 	# """
-
-
-	# 	# self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_CENTRE, heading=u'',
-	# 	# 	 width=25) 
-	# 	# for c in self.columnstitle:
-	# 	# 	colnum+=1
-	# 	# 	self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
-	# 	# 		heading=c, width=140)
-		
-	# 	# ULC.UltimateListCtrl.ClearAll(self)
-	# 	# self.columns = []
-	# 	# for x in columns:
-	# 	# 	if isinstance(x, ColumnDefn):
-	# 	# 		self.AddColumnDefn(x)
-	# 	# 	else:
-	# 	# 		self.AddColumnDefn(ColumnDefn(*x))		
-	# 	# if repopulate:
-	# 	# 	self.RepopulateList()
-
-
-	# 	colnum = 0
-	# 	self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_CENTRE, heading=u'',
-	# 		 width=25) 
-	# 	for c in self.columns:
-	# 		colnum+=1
-	# 		self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
-	# 			heading=c, width=140)
-	# 	# self.SetColumns(self.columns)
-
-
-	# 	if repopulate:
-	# 		self.RepopulateList()
-
-	# # def AddColumnDefn(self, defn):
-	# # 	# """
-	# # 	# Append the given ColumnDefn object to our list of active columns.
-
-	# # 	# If this method is called directly, you must also call RepopulateList()
-	# # 	# to populate the new column with data.
-	# # 	# """
-	# # 	self.columns.append(defn)
-
-	# # 	info = ULC.UltimateListItem()
-	# # 	info.m_mask = wx.LIST_MASK_TEXT | wx.LIST_MASK_FORMAT
-	# # 	# if isinstance(defn.headerImage, basestring) and self.smallImageList is not None:
-	# # 	# 	info.m_image = self.smallImageList.GetImageIndex(defn.headerImage)
-	# # 	# else:
-	# # 	# 	info.m_image = defn.headerImage
-	# # 	# if info.m_image != -1:
-	# # 	# 	info.m_mask = info.m_mask | wx.LIST_MASK_IMAGE
-	# # 	# info.m_format = defn.GetAlignment()
-	# # 	# info.m_text = defn.title
-	# # 	# info.m_width = defn.width
-	# # 	self.InsertColumnInfo(len(self.columns)-1, info)
-
-	# # 	# Under Linux, the width doesn't take effect without this call
-	# # 	self.SetColumnWidth(len(self.columns)-1, defn.width)
-
-	# # 	# The first checkbox column becomes the check state column for the control
-	   
+	
 
  # 	def _BuildInnerList(self):
 	# 	# """
@@ -266,35 +160,9 @@ class clsULC(ULC.UltimateListCtrl):
 	# 	# why we set the item data to be the real index
 	# 	return self.innerList[self.GetItemData(index)]
 
- # 	def AddObjects(self, modelObjects):
-	# 	# """
-	# 	# Add the given collections of objects to our collection of objects.
-	# 	# """
-	# 	self.modelObjects.extend(modelObjects)
-	# 	# We don't want to call RepopulateList() here since that makes the whole
-	# 	# control redraw, which flickers slightly, which I *really* hate! So we
-	# 	# most of the work of RepopulateList() but only redraw from the first
-	# 	# added object down.
-	# 	# self._SortObjects()
-	# 	self._BuildInnerList()
-	# 	self.SetItemCount(len(self.innerList))
-
-	# 	# Find where the first added object appears and make that and everything
-	# 	# after it redraw
-	# 	first = self.GetItemCount()
-	# 	for x in modelObjects:
-	# 		# Because of filtering the added objects may not be in the list
-	# 		idx = self.GetIndexOf(x)
-	# 		if idx != -1:
-	# 			first = min(first, idx)
-	# 			if first == 0:
-	# 				break
-
-	# 	if first < self.GetItemCount():
-	# 		self.RefreshItems(first, self.GetItemCount() - 1)
 
 
- # 	def RepopulateList(self):
+# 	def RepopulateList(self):
 	# 	# """
 	# 	# Completely rebuild the contents of the list control
 	# 	# """
@@ -328,6 +196,38 @@ class clsULC(ULC.UltimateListCtrl):
 	# 		# self._FormatAllRows()
 	# 	finally:
 	# 		self.Thaw()	
+
+
+
+ # 	def AddObjects(self, modelObjects):
+	# 	# """
+	# 	# Add the given collections of objects to our collection of objects.
+	# 	# """
+	# 	self.modelObjects.extend(modelObjects)
+	# 	# We don't want to call RepopulateList() here since that makes the whole
+	# 	# control redraw, which flickers slightly, which I *really* hate! So we
+	# 	# most of the work of RepopulateList() but only redraw from the first
+	# 	# added object down.
+	# 	# self._SortObjects()
+	# 	self._BuildInnerList()
+	# 	self.SetItemCount(len(self.innerList))
+
+	# 	# Find where the first added object appears and make that and everything
+	# 	# after it redraw
+	# 	first = self.GetItemCount()
+	# 	for x in modelObjects:
+	# 		# Because of filtering the added objects may not be in the list
+	# 		idx = self.GetIndexOf(x)
+	# 		if idx != -1:
+	# 			first = min(first, idx)
+	# 			if first == 0:
+	# 				break
+
+	# 	if first < self.GetItemCount():
+	# 		self.RefreshItems(first, self.GetItemCount() - 1)
+
+
+ 
 
 
 	
