@@ -23,12 +23,12 @@ def create(parent):
  wxID_FRMQUERYBUILDERTXTMIN, 
 ] = [wx.NewId() for _init_ctrls in range(30)]
 
-class frmQueryBuilder(wx.Frame):
+class frmQueryBuilder(wx.Dialog):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
-        wx.Frame.__init__(self, id=wxID_FRMQUERYBUILDER,
+        wx.Dialog.__init__(self, id=wxID_FRMQUERYBUILDER,
               name=u'frmQueryBuilder', parent=prnt, pos=wx.Point(787, 299),
-              size=wx.Size(379, 469), style=wx.DEFAULT_FRAME_STYLE,
+              size=wx.Size(379, 469), style=wx.DEFAULT_DIALOG_STYLE,
               title=u'Advanced Query')
         self.SetClientSize(wx.Size(363, 431))
         self.SetMaxSize(wx.Size(379, 469))

@@ -20,12 +20,13 @@ def create(parent):
  wxID_FRMDATAFILTERTXTVCHANGETHRESH, 
 ] = [wx.NewId() for _init_ctrls in range(26)]
 
-class frmDataFilter(wx.Frame):
+class frmDataFilter(wx.Dialog):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
-        wx.Frame.__init__(self, id=wxID_FRMDATAFILTER, name=u'frmDataFilter',
+                
+        wx.Dialog.__init__(self, id=wxID_FRMDATAFILTER, name=u'frmDataFilter',
               parent=prnt, pos=wx.Point(599, 384), size=wx.Size(313, 384),
-              style=wx.DEFAULT_FRAME_STYLE, title=u'Data Filter')
+              style=wx.DEFAULT_DIALOG_STYLE, title=u'Data Filter')
         self.SetClientSize(wx.Size(297, 346))
 
         self.panel1 = wx.Panel(id=wxID_FRMDATAFILTERPANEL1, name='panel1',
@@ -91,7 +92,7 @@ class frmDataFilter(wx.Frame):
               name=u'txtGapsVal', parent=self.panel1, pos=wx.Point(80, 104),
               size=wx.Size(192, 21), style=0, value='')
 
-        self.cbGapTime = wx.ComboBox(choices=[], id=wxID_FRMDATAFILTERCBGAPTIME,
+        self.cbGapTime = wx.ComboBox(choices=['second', 'minute', 'hour', 'day'], id=wxID_FRMDATAFILTERCBGAPTIME,
               name=u'cbGapTime', parent=self.panel1, pos=wx.Point(96, 128),
               size=wx.Size(176, 21), style=0, value='')
 
