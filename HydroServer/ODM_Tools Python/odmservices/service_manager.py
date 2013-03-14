@@ -1,5 +1,6 @@
 from odmservices.series_service import SeriesService
 from odmservices.cv_service import CVService
+from odmservices.edit_service import EditService
 import os
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -8,7 +9,7 @@ class ServiceManager():
 		self.debug = debug
 		f = self._get_file('r')
 		self._connections = []
-		self._connection_format = "%s+pyodbc://%s:%s@%s/%s"
+		self._connection_format = "%s+%s://%s:%s@%s/%s"
 
 		# Read all lines (connections) in the file 
 		while True:
@@ -64,7 +65,6 @@ class ServiceManager():
 
 		return True
 
-
 	def delete_connection(self, conn_dict):
 		self._connections[:] = [x for x in self._connections if x != conn_dict]
 
@@ -77,7 +77,9 @@ class ServiceManager():
 		conn_string = self._build_connection_string(self._current_connection)
 		return CVService(conn_string, self.debug)
 
-
+	def get_edit_service(self, series):
+		conn_string = self._build_connection_string(self._current_connection)
+		return EditService(series, conn_string, self.debug)
 
 	# private
 	def _get_file(self, mode):
@@ -85,7 +87,13 @@ class ServiceManager():
 		return open(fn, mode)
 
 	def _build_connection_string(self, conn_dict):
-		conn_string = self._connection_format % (conn_dict['engine'], conn_dict['user'], conn_dict['password'], conn_dict['address'], conn_dict['db'])
+		driver = ""
+		if conn_dict['engine'] == 'mssql':
+			driver = "pyodbc"
+		if conn_dict['engine'] == 'mysql':
+			driver = "pymysql"
+
+		conn_string = self._connection_format % (conn_dict['engine'], driver, conn_dict['user'], conn_dict['password'], conn_dict['address'], conn_dict['db'])
 		return conn_string
 
 	def _save_connections(self):
