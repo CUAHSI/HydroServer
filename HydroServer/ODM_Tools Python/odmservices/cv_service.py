@@ -1,4 +1,5 @@
 # CV imports
+from odmdata.session_factory import SessionFactory
 from odmdata.vertical_datum_cv import VerticalDatumCV
 from odmdata.site_type_cv import SiteTypeCV
 from odmdata.variable_name_cv import VariableNameCV
@@ -10,6 +11,7 @@ from odmdata.general_category_cv import GeneralCategoryCV
 from odmdata.censor_code_cv import CensorCodeCV
 from odmdata.topic_category_cv import TopicCategoryCV
 from odmdata.sample_type_cv import SampleTypeCV
+from odmdata.offset_type import OffsetType
 
 class CVService():
 	# Accepts a string for creating a SessionFactory, default uses odmdata/connection.cfg
@@ -34,6 +36,12 @@ class CVService():
 	def get_variable_name_cvs(self):
 		session = self._session_factory.get_session()
 		result = session.query(VariableNameCV).order_by(VariableNameCV.term).all()
+		session.close()
+		return result
+
+	def get_offset_type_cvs(self):
+		session = self._session_factory.get_session()
+		result = session.query(OffsetType).order_by(OffsetType.id).all()
 		session.close()
 		return result
 

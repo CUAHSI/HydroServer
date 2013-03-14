@@ -7,6 +7,8 @@ from wx.lib.pubsub import Publisher
 import pnlDatePicker
 import frmDataFilters
 import frmChangeValue
+import frmAddPoint
+
 
 
 [wxID_PANEL1, wxID_RIBBONPLOTTIMESERIES, wxID_RIBBONPLOTPROB,
@@ -228,6 +230,7 @@ class mnuRibbon(RB.RibbonBar):
         
                              
     def __init__(self, parent, id, name):
+        self.parent=parent
         self._init_ctrls(parent)
         
     def BindEvents(self):
@@ -286,14 +289,15 @@ class mnuRibbon(RB.RibbonBar):
         pass
     def OnEditChangeValue(self, event):
         change_value=frmChangeValue.frmChangeValue(self)
-        change_value.Show()
+        change_value.ShowModal()
         pass
     def OnEditInterpolate(self, event):
         pass
     def OnEditFlag(self, event):
         pass
     def OnEditAddPoint(self, event):
-        pass
+        add_value=frmAddPoint.frmAddPoint(self)
+        add_value.ShowModal()
     def OnEditDelPoint(self, event):
         pass
 

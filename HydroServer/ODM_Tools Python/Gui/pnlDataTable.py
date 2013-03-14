@@ -2,7 +2,7 @@
 
 import wx
 import wx.grid
-from ObjectListView import ObjectListView, ColumnDefn
+from ObjectListView import ObjectListView, ColumnDefn, VirtualObjectListView
 from wx.lib.pubsub import Publisher
 import odmdata
 import sqlite3
@@ -19,7 +19,11 @@ class pnlDataTable(wx.Panel):
         wx.Panel.__init__(self, id=wxID_PNLDATATABLE, name=u'pnlDataTable',
               parent=prnt, pos=wx.Point(717, 342), size=wx.Size(677, 449),
               style=wx.TAB_TRAVERSAL)
-        self.myOlv =  ObjectListView(self, -1, style=wx.LC_REPORT)
+        self.myOlv = ObjectListView(self, -1, style=wx.LC_REPORT)#Virtual
+
+        
+
+        # self.myOlv.SetObjectGetter(self.fetchFromDatabase)
         self.myOlv.SetEmptyListMsg("")
 
         sizer_2 = wx.BoxSizer(wx.VERTICAL)
@@ -27,25 +31,29 @@ class pnlDataTable(wx.Panel):
         self.SetSizer(sizer_2)
         self.doneselecting=True
 
-
-
-
+        self.myOlv._highlightBrush=wx.Brush("red")
         self.myOlv.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnItemSelected )
         self.myOlv.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.OnItemDeSelected )
-        self.myOlv.Bind(wx.EVT_LIST_KEY_DOWN, self.OnLUp, id=wxID_PNLDATATABLE )
-        self.myOlv.Bind(wx.EVT_LEFT_DOWN, self.OnLDown, id=wxID_PNLDATATABLE)
+        # self.myOlv.Bind(wx.EVT_LIST_KEY_DOWN, self.OnLUp, id=wxID_PNLDATATABLE )
+        # self.myOlv.Bind(wx.EVT_LEFT_DOWN, self.OnLDown, id=wxID_PNLDATATABLE)
         Publisher().subscribe(self.OnChangeSelection, ("changeTableSelection"))
 
         self.Layout()
         
-              
+    def fetchFromDatabase(rowIndex):
+        print "in fetch from database row:", rowIndex    
+        if len(self.values):
+            rowIndex = self.values[rowIndex]
+        self.cursor.execute(self.SELECT_ONE_STMT, (rowIndex,))
+        return self.cursor.fetchone()          
+    
     def Init(self, DVConn):
-        cursor = DVConn
+        self.cursor = DVConn
         sql = "SELECT * FROM DataValuesEdit"
-        cursor.execute(sql)
+        self.cursor.execute(sql)
        
       
-        self.myOlv.SetColumns( ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(cursor.description))
+        self.myOlv.SetColumns( ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(self.cursor.description))
        
         #####table Settings
         self.myOlv.useAlternateBackColors = True
@@ -53,16 +61,18 @@ class pnlDataTable(wx.Panel):
         self.myOlv.AutoSizeColumns()      
 
 
-        self.values = [list(x) for x in cursor.fetchall()]  
+        self.values = [list(x) for x in self.cursor.fetchall()]  
         self.myOlv.SetObjects(self.values)
-    
-    def OnLUp (self, event):
-        print "in up"
-        self.doneselecting = True
 
-    def OnLDown(self, event):
-        print "in down"
-        self.doneselecting = False
+       
+    
+    # def OnLUp (self, event):
+    #     print "in up"
+    #     self.doneselecting = True
+
+    # def OnLDown(self, event):
+    #     print "in down"
+    #     self.doneselecting = False
 
     def OnItemSelected(self, event):
         print "in onItemSelected"
@@ -99,8 +109,13 @@ class pnlDataTable(wx.Panel):
         self.doneselecting = False  
         self.myOlv.SelectObjects(objlist, deselectOthers=True)
         self.doneselecting = True  
+        self.myOlv.SetFocus()
         
 
+# a) Call self.list_ctrl.SetFocus() right after you click the button;
+# b) Change the self._highlightUnfocusedBrush and self._highlightBrush
+# colours in the ULC source code to always return the brush colours you
+# want (not recommended). 
     
 
 

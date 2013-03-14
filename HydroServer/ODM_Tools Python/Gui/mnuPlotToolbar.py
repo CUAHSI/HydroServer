@@ -19,8 +19,9 @@ class MyCustomToolbar(NavigationToolbar):
         NavigationToolbar.__init__(self, plotCanvas)        
         # delete the toolbar button we don't want
         if (not multPlots):
-        	CONFIGURE_SUBPLOTS_TOOLBAR_BTN_POSITION = 6
-        	self.DeleteToolByPos(CONFIGURE_SUBPLOTS_TOOLBAR_BTN_POSITION)
+            CONFIGURE_SUBPLOTS_TOOLBAR_BTN_POSITION = 7
+            self.DeleteToolByPos(CONFIGURE_SUBPLOTS_TOOLBAR_BTN_POSITION)
+            
         # add the new toolbar buttons that we do want
         self.AddSimpleTool(self.ON_CUSTOM_LEFT, CreateBitmap("images\\scroll left.png"),
                            'Pan to the left', 'Pan graph to the left')

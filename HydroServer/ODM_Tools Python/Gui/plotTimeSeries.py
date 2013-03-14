@@ -240,9 +240,9 @@ class plotTimeSeries(wx.Panel):
         # if not((x+1) % 2==0): 
           # axes.append(axisData(x, self.timeSeries.twinx(),  -1.2*x, "left", leftadjust= .75*(x-1)))         
         if x==0 :
-          self.axes.append(axisData(x, self.timeSeries,  0))         
+          self.axes.append(axisData(x, self.timeSeries,  0, 'left', leftadjust = .10))         
         elif x == 1: 
-          self.axes.append(axisData(x, self.timeSeries.twinx(),  0))
+          self.axes.append(axisData(x, self.timeSeries.twinx(),  1, 'right', rightadjust= .90))
         elif x==2:
           self.axes.append(axisData(x, self.timeSeries.twinx(),  1.2, 'right', rightadjust= .9-(adj*x)))
         else:    
@@ -280,8 +280,10 @@ class plotTimeSeries(wx.Panel):
       for currPlot, ax  in zip (self.Plots, self.axes):
         print repr(ax)
         if ax.rightadjust:
+          print ax.rightadjust
           self.figure.subplots_adjust(right=ax.rightadjust)
         if ax.leftadjust:
+          print ax.leftadjust
           self.figure.subplots_adjust(left=ax.leftadjust)
         if ax.side:
           ax.axis.spines[ax.side].set_position(('axes', ax.position))
@@ -340,7 +342,8 @@ class plotTimeSeries(wx.Panel):
       # print "pickradius", dir(event.artist.get_pickradius)
       # print "get_snaP", dir(event.artist.get_snap)
       # ind = event.ind
-      self.selectedlist = [0] * len(self.editDataValues)
+      
+      self.selectedlist = [0] * len(self.editData.DataValues)
       print len(self.selectedlist)
       for ind in event.ind:
         self.selectedlist[ind]=1
