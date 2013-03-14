@@ -47,6 +47,8 @@ class plotSummary(wx.Panel):
         self.fillValues(Values, Filter, count-1)
         
     def remPlot(self, id):
+        #loop through each column and find position
+        # self.grdSummary.
         self.grdSummary.DeleteCols(pos = 0, numCols = 1,  updateLabels = True)
         
     def initPlot(self):

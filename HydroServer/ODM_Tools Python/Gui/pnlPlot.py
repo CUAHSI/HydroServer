@@ -71,6 +71,7 @@ class pnlPlot(fnb.FlatNotebook):
 
     def OnRemovePlot(self, seriesID): 
       self.pltTS.removePlot(seriesID.data)
+      self.pltSum.removePlot(seriesID.data)
 
     def OnNumBins(self , numBins):
       self.pltHist.ChangeNumOfBins(numBins.data)

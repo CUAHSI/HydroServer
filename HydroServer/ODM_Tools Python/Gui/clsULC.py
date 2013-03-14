@@ -20,15 +20,15 @@ class clsULC(ULC.UltimateListCtrl):
 
 
 	def SetColumns(self, columns):
-		# self.columns = columns	
+		# self.columns = columns
 		# # for c in columns:
 		# 	self.columns.append(c)
 		ULC.UltimateListCtrl.ClearAll(self)
 		colnum = 0
 		self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_CENTRE, heading=u'',
-			 width=25) 
+			 width=25)
 		for c in columns:
-			colnum+=1						
+			colnum+=1
 			self.columns.append({'title':c, 'colid':colnum})
 			if "ID" in c:
 				self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
@@ -36,7 +36,7 @@ class clsULC(ULC.UltimateListCtrl):
 			else:
 				self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
 					heading=c, width=140)
-		print self.GetColumn(0)
+		# print self.GetColumn(0)
 
 
 
@@ -59,35 +59,18 @@ class clsULC(ULC.UltimateListCtrl):
 		for series in self.innerList:
 			ind= self.GetItemCount()
 			# print ind
-			
-			# self.Append([False, series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
-			self.Append([False]+ series.getValues())
-			# # self.Append([False]+[str(getattr(series, attribute))for attribute in vars(series).keys() ])#series.id, series.site_id, series.site_code, series.site_name ,series.variable_id, series.variable_code, series.variable_name])
-			
-			self.SetStringItem(ind, 0, "", it_kind=1)
 
-			# row= self.GetItemCount()
-			# print row
-			# self.InsertStringItem(row, "", it_kind=1)
-			
-			# ind=1
-			# for attribute in vars(series).keys():
-			# 	print ind
-			# # 	# info = self.GetItem(row, ind)
-			# # 	info = ULC.UltimateListItem()
-			# # 	info._mask = wx.LIST_MASK_TEXT | wx.LIST_MASK_FORMAT
-			# # 	info._format = 0
-			# # 	info._text = str(getattr(series, attribute))
-			# # 	#print '%s = %s' % (attribute, str(getattr(series, attribute)))
-			# 	self.SetStringItem(row, ind, str(getattr(series, attribute)))
-			# 	ind +=1
-			# # self.InsertItem(info)
-			
-			# row+=1
-	
+			self.Append([False]+series.getValues())
+			self.SetStringItem(ind, 0, "", it_kind=1)
+			# item= ULC.CreateListItem(ind,0)
+			# item._checked= True
+			# item._kind = 1
+			# self.SetItem(item)
+
+
 
 	def GetSelection(self):
-		#returns the one highlighted row in the table		
+		#returns the one highlighted row in the table
 		return self.GetFirstSelected()
 
 	def GetObjectAt(self, index):
@@ -109,15 +92,19 @@ class clsULC(ULC.UltimateListCtrl):
 
 	def GetChecked(self):
 		#returns a list of the checked ids
+##        for i in range(self.GetItemCount()):
+##            self.GetItem(item, item._col)
 		pass
 
-	def isChecked(self, index):
-		item = self.GetItem(index, 0)
-		print item
-		pass
+	# def IsItemChecked(self, index):
+	# 	item = self.GetItem(index, 0)
+	# 	print item
+	# 	pass
 
 	def GetColumnText(self, index, colid):
+		print self.GetItemData(index)
 		item = self.GetItem(index, colid)
+		print item
 		return item.GetText()
 
 	def GetStringValue(self, modelObject, col):
@@ -137,10 +124,10 @@ class clsULC(ULC.UltimateListCtrl):
 
 
 
-	
-	
-	
-	
+
+
+
+
 
 	# def SetObjects(self, modelObjects, preserveSelection=False):
 	# 	"""
@@ -162,7 +149,7 @@ class clsULC(ULC.UltimateListCtrl):
 	# 	#	 self.tableSeries.SetStringItem(ind, 0,"", it_kind=1)
 
 
-	
+
 
  # 	def _BuildInnerList(self):
 	# 	# """
@@ -226,7 +213,7 @@ class clsULC(ULC.UltimateListCtrl):
 	# 	try:
 	# 		ULC.UltimateListCtrl.DeleteAllItems(self)
 	# 		if len(self.innerList) == 0 or len(self.columns) == 0:
-	# 			self.Refresh()				
+	# 			self.Refresh()
 	# 			return
 
 	# 	# 	# self.stEmptyListMsg.Hide()
@@ -238,7 +225,7 @@ class clsULC(ULC.UltimateListCtrl):
 	# 			item.Clear()
 	# 			self._InsertUpdateItem(item, i, x, True)
 
-		
+
 	# 		# for series in self.innerList:
 	# 		# 	ind = self.GetItemCount()
 	# 		# 	self.Append([False, series.site_name ,series.variable_name])
@@ -249,7 +236,7 @@ class clsULC(ULC.UltimateListCtrl):
 	# 		self.AutoSizeColumns()
 	# 		# self._FormatAllRows()
 	# 	finally:
-	# 		self.Thaw()	
+	# 		self.Thaw()
 
 
 
@@ -281,12 +268,12 @@ class clsULC(ULC.UltimateListCtrl):
 	# 		self.RefreshItems(first, self.GetItemCount() - 1)
 
 
- 
 
 
-	
 
-			 
+
+
+
 
  # 	def SetItemCount(self, count):
 	# 	# """
@@ -351,7 +338,7 @@ class clsULC(ULC.UltimateListCtrl):
 	# 		self.SetItem(listItem)
 
 
-		
+
 	# 	for iCol in range(1, len(self.columns)):
 	# 		self.SetStringItem(index, iCol, modelObject[iCol])
 
@@ -371,7 +358,7 @@ class clsULC(ULC.UltimateListCtrl):
 	# 	# """
 	# 	# Give the given row it's correct background color
 	# 	# """
-	# 	if self.useAlternateBackColors: 
+	# 	if self.useAlternateBackColors:
 	# 		if index & 1:
 	# 			item.SetBackgroundColour(self.oddRowsBackColor)
 	# 		else:
@@ -388,10 +375,10 @@ class clsULC(ULC.UltimateListCtrl):
 
 
 class TextSearch(object):
-	
+
 
 	def __init__(self, objectListView, columns=(), text=""):
-		
+
 		self.objectListView = objectListView
 		self.columns = columns
 		self.text = text
@@ -416,18 +403,18 @@ class TextSearch(object):
 
 		return [x for x in modelObjects if _containsText(x)]
 
-	def SetText(self, text):		
+	def SetText(self, text):
 		self.text = text
 
 
 class Chain(object):
-	
 
-	def __init__(self, *filters):		
+
+	def __init__(self, *filters):
 		self.filters = filters
 
 
-	def __call__(self, modelObjects):		
+	def __call__(self, modelObjects):
 		for filter in self.filters:
 			modelObjects = filter(modelObjects)
 		return modelObjects

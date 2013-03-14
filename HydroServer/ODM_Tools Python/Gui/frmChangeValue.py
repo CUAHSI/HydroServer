@@ -10,7 +10,7 @@ def create(parent):
  wxID_FRMCHANGEVALUEPANEL1, wxID_FRMCHANGEVALUETXTVALUE, 
 ] = [wx.NewId() for _init_ctrls in range(6)]
 
-class frmChangeValue(wx.Frame):
+class frmChangeValue(wx.Dialog):
     def _init_coll_gridSizer1_Items(self, parent):
         # generated method, don't edit
 
@@ -29,10 +29,14 @@ class frmChangeValue(wx.Frame):
 
     def _init_ctrls(self, prnt):
         # generated method, don't edit
-        wx.Frame.__init__(self, id=wxID_FRMCHANGEVALUE, name=u'frmChangeValue',
+
+        wx.Dialog.__init__(self, id=wxID_FRMCHANGEVALUE, name=u'frmChangeValue',
               parent=prnt, pos=wx.Point(732, 489), size=wx.Size(248, 109),
-              style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE,
-              title=u'Change Value')
+              style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE, title=u'Change Value')
+        # wx.Frame.__init__(self, id=wxID_FRMCHANGEVALUE, name=u'frmChangeValue',
+        #       parent=prnt, pos=wx.Point(732, 489), size=wx.Size(248, 109),
+        #       style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE,
+        #       title=u'Change Value')
         self.SetClientSize(wx.Size(232, 71))
         self.SetMinSize(wx.Size(248, 109))
         self.SetMaxSize(wx.Size(248, 109))
