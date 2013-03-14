@@ -129,12 +129,14 @@ class frmODMToolsMain(wx.Frame):
 
 
 ############# Script & Console ###############
+
         self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE,
                 name=u'txtPython', parent=self, rootObject=pnlDataTable, pos=wx.Point(72, 24),
                 size=wx.Size(500,800), style=0)
 ##        self.txtPythonConsole= wx.richtext.RichTextCtrl(id=wxID_TXTPYTHONCONSOLE,
 ##              parent=self, pos=wx.Point(72, 24), size=wx.Size(500,800),
 ##              style=wx.richtext.RE_MULTILINE, value='')
+
         self.txtPythonScript = pnlScript(id=wxID_TXTPYTHONSCRIPT,
               name=u'txtPython', parent=self, pos=wx.Point(72, 24),
               size=wx.Size(500,800))
@@ -158,12 +160,14 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.AddPane(self.pnlSelector, aui.AuiPaneInfo().Bottom().Name("Selector").
                 Layer(0).Caption('Series Selector').MinSize(wx.Size(100, 200)) )
         self._mgr.AddPane(self.txtPythonScript,  aui.AuiPaneInfo().Caption('Script').
-                Name("Script").Show(show=False).Layer(1).Float().MinSize(wx.Size(500,800)))
+                Name("Script").Show(show=False).Layer(0).Float().MinSize(wx.Size(200,200)))
         # self._mgr.CreateFloatingFrame(self.txtPythonScript,  aui.AuiPaneInfo().Caption('Script').
         #         Name("Script").MinSize(wx.Size(500,800)))
         self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
-                Name("Console").Layer(1).Show(show=False).Float())
+
+        Name("Console").Layer(1).Show(show=False).Float())
         # self.txtPythonConsole.ToggleTools()
+
         self._mgr.AddPane(self.pnlPlot,  aui.AuiPaneInfo().CenterPane().Name("Plot").Caption("Plot"))
 
         self.loadDockingSettings()
@@ -189,13 +193,14 @@ class frmODMToolsMain(wx.Frame):
             panedet=self._mgr.GetPane(self.txtPythonScript)
         elif Value.data == "Console":
 
-            self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE,
-                name=u'txtPython', parent=self,  pos=wx.Point(72, 24),
-                size=wx.Size(500,800), style=0)
-            self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
-                Name("Console").Layer(1).Show(show=False).Float())
+        # self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
+        #     name=u'txtPython', parent=self,  pos=wx.Point(72, 24),
+        #     size=wx.Size(500,800), style=0) 
+        # self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
+        #     Name("Console").Layer(1).Show(show=False).Float())
+
             panedet=self._mgr.GetPane(self.txtPythonConsole)
-            # print self.txtPythonConsole.fileMenu.MenuItems[11].IsEnabled()
+        # print self.txtPythonConsole.fileMenu.MenuItems[11].IsEnabled()
 
         # self._mgr.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
         #       False, u'Tahoma'))
@@ -232,6 +237,9 @@ class frmODMToolsMain(wx.Frame):
          self.pnlPlot.addEditPlot(Values.data)
          self.dataTable.Init(Values.data[0])
 
+         # TODO
+         # create edit service, send in Values.data[0]
+    
 
     def onChangeDBConn(self, event):
         db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)

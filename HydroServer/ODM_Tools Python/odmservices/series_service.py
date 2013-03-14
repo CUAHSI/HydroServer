@@ -6,6 +6,7 @@ from odmdata.series import Series
 from odmdata.data_value import DataValue
 from odmdata.quality_control_level import QualityControlLevel
 from odmdata.qualifier import Qualifier
+from odmdata.odm_version import ODMVersion
 
 from sqlalchemy import distinct
 

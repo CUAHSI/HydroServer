@@ -44,7 +44,7 @@ class pnlScript(wx.Frame):
         self.sizer2 = wx.BoxSizer(wx.HORIZONTAL)
         self.executeButton = wx.Button(self, ID_EXECUTE_BUTTON, "&Execute")
         self.executeButton.Bind(wx.EVT_BUTTON, self.OnExecute)
-        self.sizer2.Add(self.executeButton, 25, wx.ALIGN_LEFT)
+        self.sizer2.Add(self.executeButton, 1, wx.ALIGN_LEFT)
 
         self.executeSelectionButton = wx.Button(self, ID_EXECUTE_SELECTION_BUTTON, "Execute &Selection")
         self.executeSelectionButton.Bind(wx.EVT_BUTTON, self.OnExecuteSelection)

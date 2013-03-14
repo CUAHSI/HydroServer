@@ -180,7 +180,9 @@ class frmDBConfig(wx.Dialog):
       conn_dict = {}
 
       if self.comboBox1.GetValue() == 'Microsoft SQL Server':
-        conn_dict['engine']   = 'mssql'
+        conn_dict['engine'] = 'mssql'
+      if self.comboBox1.GetValue() == 'MySQL':
+        conn_dict['engine'] = 'mysql'
 
       conn_dict['user']     = self.txtUser.GetValue()
       conn_dict['password'] = self.txtPass.GetValue()
