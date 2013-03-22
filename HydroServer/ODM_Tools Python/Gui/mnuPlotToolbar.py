@@ -10,6 +10,7 @@ class MyCustomToolbar(NavigationToolbar):
 
     ON_CUSTOM_LEFT  = wx.NewId()
     ON_CUSTOM_RIGHT = wx.NewId()
+    ON_CUSTOM_SEL   = wx.NewId()
 
     # rather than copy and edit the whole (rather large) init function, we run
     # the super-classes init function as usual, then go back and delete the
@@ -29,6 +30,10 @@ class MyCustomToolbar(NavigationToolbar):
         self.AddSimpleTool(self.ON_CUSTOM_RIGHT, CreateBitmap("images\\scroll right.png"),
                            'Pan to the right', 'Pan graph to the right')
         wx.EVT_TOOL(self, self.ON_CUSTOM_RIGHT, self._on_custom_pan_right)
+        self.AddSimpleTool(self.ON_CUSTOM_SEL, CreateBitmap("images\\Exclamation.png"),
+                           'Select Points', 'Select Points')
+        wx.EVT_TOOL(self, self.ON_CUSTOM_SEL, self._on_custom_sel_point)
+
         self.SetToolBitmapSize(wx.Size(16, 16))        
         self.Realize()
 
@@ -40,7 +45,7 @@ class MyCustomToolbar(NavigationToolbar):
     #     if (not multPlots):
     #         print 'ERROR: This application does not support subplots'
 
-    # pan the graph to the left
+    # pan the graph to the left    
     def _on_custom_pan_left(self, evt):
         ONE_SCREEN = 7   # we default to 1 week
         axes = self.canvas.figure.axes[0]
@@ -57,6 +62,10 @@ class MyCustomToolbar(NavigationToolbar):
         ONE_SCREEN = (x2 - x1)/2
         axes.set_xlim(x1 + ONE_SCREEN, x2 + ONE_SCREEN)
         self.canvas.draw()
+
+    def _on_custom_sel_point(self, evt):
+        print "select points button"
+        pass
 
 
 

@@ -259,7 +259,7 @@ class pnlSeriesSelector(wx.Panel):
       # build pop-up menu for right-click display
         self.selectedIndex= event.m_itemIndex
         self.selectedID = self.tableSeries.GetColumnText(event.m_itemIndex, 1)
-        print self.selectedID
+        # print self.selectedID
         popup_edit_series = wx.NewId()
         popup_plot_series = wx.NewId()
         popup_export_data = wx.NewId()
@@ -282,7 +282,7 @@ class pnlSeriesSelector(wx.Panel):
 
         series_filter = frmQueryBuilder.frmQueryBuilder(self)
         self.filterlist = series_filter.ShowModal()        
-        print self.filterlist
+        # print self.filterlist
         event.Skip()
 
     def OnRbAllRadiobutton(self, event):
@@ -301,9 +301,9 @@ class pnlSeriesSelector(wx.Panel):
 
 
     def OnRightPlot(self, event):
-        print self.tableSeries.IsItemChecked(self.selectedIndex)
+        # print self.tableSeries.IsItemChecked(self.selectedIndex)
         # self.tableSeries.GetItem(self.selectedID, 0).Check = True
-        print "in OnRightPlot"
+        # print "in OnRightPlot"
         event.Skip()
 
     def OnRightEdit(self, event):
@@ -326,11 +326,11 @@ class pnlSeriesSelector(wx.Panel):
         Publisher().sendMessage(("edit.NewPlot"), [self.cursor, self.dbservice.get_series_by_id(seriesID)])
     
     def OnRightExData(self, event):
-        print "in OnRightExData"
+        # print "in OnRightExData"
         event.Skip()
     
     def OnRightExMeta(self, event):
-        print "in OnRightExMeta" 
+        # print "in OnRightExMeta" 
         event.Skip()
 
 
@@ -450,11 +450,11 @@ class pnlSeriesSelector(wx.Panel):
             self.tableSeries.ClearFilter()
 
         self.tableSeries.RepopulateList()
-        print self.tableSeries.GetItemCount()
+        # print self.tableSeries.GetItemCount()
 
   
     def OntableSeriesListItemSelected(self, event):
-        print"in item selected", event.m_itemIndex, self.tableSeries.IsItemChecked(event.m_itemIndex)
+        # print"in item selected", event.m_itemIndex, self.tableSeries.IsItemChecked(event.m_itemIndex)
 
         if not self.tableSeries.IsItemChecked(event.m_itemIndex):         
             Publisher().sendMessage(("removePlot"), self.tableSeries.innerList[event.m_itemIndex].id)

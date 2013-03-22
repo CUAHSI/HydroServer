@@ -86,26 +86,28 @@ class frmAddPoint(wx.Dialog):
     def _init_table(self, series=None):
 
 
-      self.grdDataValues.CreateGrid(1,15)
+      self.grdDataValues.CreateGrid(1,10)
       # self.Service = Publisher().sendMessage(("GetDBService"), None)
       DBConn=self.parent.parent.GetDBService()
       # print DBConn
       self.service = DBConn.get_cv_service()
 
+      otchoices = list(x.description for x in self.service.get_offset_type_cvs()) 
+      self.ot_choice_editor= wx.grid.GridCellChoiceEditor(["<None>"]+otchoices, False)
+      self.grdDataValues.SetCellEditor(0, 6, self.ot_choice_editor)
 
       ccchoices= list(x.term for x in self.service.get_censor_code_cvs())
-      self.cc_choice_editor = wx.grid.GridCellChoiceEditor(["None"]+ccchoices, False)
-      self.grdDataValues.SetCellEditor(0, 9, self.cc_choice_editor)
-
-      otchoices = list(x.description for x in self.service.get_offset_type_cvs()) 
-      self.ot_choice_editor= wx.grid.GridCellChoiceEditor(["None"]+otchoices, False)
-      self.grdDataValues.SetCellEditor(0, 8, self.ot_choice_editor)
+      self.cc_choice_editor = wx.grid.GridCellChoiceEditor(ccchoices, False)
+      self.grdDataValues.SetCellEditor(0, 7, self.cc_choice_editor)
 
       # qualchoices
+      qualchoices =list(x.code for x in self.service.get_qualifiers())
+      self.qual_choice_editor= wx.grid.GridCellChoiceEditor(["<None>", "<Create New...>"]+qualchoices, False)
+      self.grdDataValues.SetCellEditor(0, 8, self.qual_choice_editor)
 
-      sampchoices =list(x.term for x in self.service.get_sample_type_cvs())
-      self.samp_choice_editor= wx.grid.GridCellChoiceEditor(["None"]+sampchoices, False)
-      self.grdDataValues.SetCellEditor(0, 13, self.samp_choice_editor)
+      sampchoices =list(x.name for x in self.service.get_lab_methods())
+      self.samp_choice_editor= wx.grid.GridCellChoiceEditor(["<None>"]+sampchoices, False)
+      self.grdDataValues.SetCellEditor(0, 9, self.samp_choice_editor)
 
       self.grdDataValues.Font.Weight = wx.LIGHT
       
@@ -134,22 +136,13 @@ class frmAddPoint(wx.Dialog):
       self.grdDataValues.SetColLabelRenderer(3, MyColLabelRenderer(color))
       self.grdDataValues.SetColLabelValue(4, "DateTimeUTC")#Bold
       self.grdDataValues.SetColLabelRenderer(4, MyColLabelRenderer(color))
-      self.grdDataValues.SetColLabelValue(5, "SiteID")#Bold#prefill
-      self.grdDataValues.SetColLabelRenderer(5, MyColLabelRenderer(color))
-      self.grdDataValues.SetColLabelValue(6, "VariableID")#Bold#prefill
-      self.grdDataValues.SetColLabelRenderer(6, MyColLabelRenderer(color))
-      self.grdDataValues.SetColLabelValue(7, "OffsetValue")
-      self.grdDataValues.SetColLabelValue(8, "OffsetType")#DropDown
-      self.grdDataValues.SetColLabelValue(9, "CensorCode")#Bold
-      self.grdDataValues.SetColLabelRenderer(9, MyColLabelRenderer(color))
-      self.grdDataValues.SetColLabelValue(10, "QualifierID")#DropDown
-      self.grdDataValues.SetColLabelValue(11, "MethodID")#Bold#prefill
-      self.grdDataValues.SetColLabelRenderer(11, MyColLabelRenderer(color))
-      self.grdDataValues.SetColLabelValue(12, "SourceID")#Bold #prefill
-      self.grdDataValues.SetColLabelRenderer(12, MyColLabelRenderer(color))
-      self.grdDataValues.SetColLabelValue(13, "SampleID")
-      self.grdDataValues.SetColLabelValue(14, "QualityControlLevelID")#Bold#prefill
-      self.grdDataValues.SetColLabelRenderer(14, MyColLabelRenderer(color))
+      self.grdDataValues.SetColLabelValue(5, "OffsetValue")
+      self.grdDataValues.SetColLabelValue(6, "OffsetType")#DropDown
+      self.grdDataValues.SetColLabelValue(7, "CensorCode")#Bold
+      self.grdDataValues.SetColLabelRenderer(7, MyColLabelRenderer(color))#9
+      self.grdDataValues.SetColLabelValue(8, "QualifierCode")#DropDown      
+      self.grdDataValues.SetColLabelValue(9, "LabSampleCode")
+     
 
       self.grdDataValues.AutoSizeColumns()
 
@@ -192,13 +185,11 @@ class frmAddPoint(wx.Dialog):
         col = self.grdDataValues.XToCol(x, y)
         tip =""
 
-        if col == 0 or col == 1 or col ==3 or col ==7 :
+        if col == 0 or col == 1 or col ==3 or col ==5 :
             tip= "Decimal"
         elif col == 2 or col == 4:
             tip = "M/d/yyyy h:mm:ss tt"
-        elif col == 5 or col == 6 or col == 11 or col == 12 or col == 14:
-            tip = "Can't change"
-        elif col == 8 or col == 9 or col == 10 or col == 13:
+        elif col == 6 or col == 7 or col == 8 or col == 9:
             tip = "Controlled Vocabulary"        
         else:
             tip = "None"
@@ -221,10 +212,12 @@ class frmAddPoint(wx.Dialog):
         #if last row AND and all req cells from previous row are filled out
         if event.Row == self.grdDataValues.GetNumberRows()-1:
           self.grdDataValues.AppendRows(numRows= 1) 
-          ##format all of the cells with drop down boxes and fill in 5 identifiers       
-          self.grdDataValues.SetCellEditor(self.grdDataValues.GetNumberRows()-1, 9, self.cc_choice_editor)
-          self.grdDataValues.SetCellEditor(self.grdDataValues.GetNumberRows()-1, 8, self.ot_choice_editor)
-          self.grdDataValues.SetCellEditor(self.grdDataValues.GetNumberRows()-1, 13, self.samp_choice_editor)
+          ##format all of the cells with drop down boxes and fill in 5 identifiers  
+
+          self.grdDataValues.SetCellEditor(self.grdDataValues.GetNumberRows()-1, 6, self.ot_choice_editor)     
+          self.grdDataValues.SetCellEditor(self.grdDataValues.GetNumberRows()-1, 7, self.cc_choice_editor)
+          self.grdDataValues.SetCellEditor(self.grdDataValues.GetNumberRows()-1, 8, self.qual_choice_editor)
+          self.grdDataValues.SetCellEditor(self.grdDataValues.GetNumberRows()-1, 9, self.samp_choice_editor)
 
         
         event.Skip()
