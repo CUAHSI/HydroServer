@@ -51,7 +51,6 @@ class pnlDataTable(wx.Panel):
         self.cursor = DVConn
         sql = "SELECT * FROM DataValuesEdit"
         self.cursor.execute(sql)
-       
       
         self.myOlv.SetColumns( ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(self.cursor.description))
        

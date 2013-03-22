@@ -120,6 +120,12 @@ class plotProb(wx.Panel):
       self.setXaxis()
       self.canvas.draw()
 
+
+
+
+
+
+
  
   def setXaxis(self):
           
@@ -153,3 +159,16 @@ class plotProb(wx.Panel):
        
   def __init__(self, parent, id, pos, size, style, name):
       self._init_ctrls(parent)
+
+
+class plotData (object):
+  def __init__(self, sID, dValues, dTimes,  ylabel, title, color ):
+    self.SeriesID= sID
+    self.DataValues = dValues
+    self.DateTimes=dTimes
+
+    self.startDate= min(dTimes)
+    self.endDate=max(dTimes)
+    self.ylabel = ylabel
+    self.title = title
+    self.color = color

@@ -12,6 +12,8 @@ from odmdata.censor_code_cv import CensorCodeCV
 from odmdata.topic_category_cv import TopicCategoryCV
 from odmdata.sample_type_cv import SampleTypeCV
 from odmdata.offset_type import OffsetType
+from odmdata.lab_method import LabMethod
+from odmdata.qualifier import Qualifier
 
 class CVService():
 	# Accepts a string for creating a SessionFactory, default uses odmdata/connection.cfg
@@ -24,6 +26,18 @@ class CVService():
 	def get_vertical_datum_cvs(self):
 		session = self._session_factory.get_session()
 		result = session.query(VerticalDatumCV).order_by(VerticalDatumCV.term).all()
+		session.close()
+		return result
+
+	def get_lab_methods(self):
+		session = self._session_factory.get_session()
+		result = session.query(LabMethod).order_by(LabMethod.name).all()
+		session.close()
+		return result
+
+	def get_qualifiers(self):
+		session = self._session_factory.get_session()
+		result = session.query(Qualifier).order_by(Qualifier.code).all()
 		session.close()
 		return result
 
