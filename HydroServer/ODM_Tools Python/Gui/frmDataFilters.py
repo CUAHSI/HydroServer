@@ -2,6 +2,7 @@
 
 import wx
 
+
 def create(parent):
     return frmDataFilter(parent)
 
@@ -20,8 +21,10 @@ def create(parent):
  wxID_FRMDATAFILTERTXTVCHANGETHRESH, 
 ] = [wx.NewId() for _init_ctrls in range(26)]
 
-class frmDataFilter(wx.Dialog):
+class frmDataFilter(wx.Dialog, series):
     def _init_ctrls(self, prnt):
+        self.activeSeries = series
+
         # generated method, don't edit
         wx.Dialog.__init__(self, id=wxID_FRMDATAFILTER, name=u'frmDataFilter',
               parent=prnt, pos=wx.Point(599, 384), size=wx.Size(313, 384),
@@ -143,3 +146,5 @@ class frmDataFilter(wx.Dialog):
 
     def __init__(self, parent):
         self._init_ctrls(parent)
+
+    

@@ -312,7 +312,6 @@ class pnlSeriesSelector(wx.Panel):
 
     def OnEditButton(self, vals):
         self.SelectForEdit(self.tableSeries.GetColumnText(self.tableSeries.GetSelection(), 1))
-        event.Skip()
     
     def SelectForEdit(self, seriesID):
         self.DataValues = self.dbservice.get_data_values_by_series_id(seriesID)
