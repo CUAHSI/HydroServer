@@ -77,9 +77,9 @@ class ServiceManager():
 		conn_string = self._build_connection_string(self._current_connection)
 		return CVService(conn_string, self.debug)
 
-	def get_edit_service(self, series):
+	def get_edit_service(self, cursor):
 		conn_string = self._build_connection_string(self._current_connection)
-		return EditService(series, conn_string, self.debug)
+		return EditService(cursor, conn_string, self.debug)
 
 	# private
 	def _get_file(self, mode):
