@@ -23,8 +23,6 @@ def create(parent):
 
 class frmDataFilter(wx.Dialog, series):
     def _init_ctrls(self, prnt):
-        self.activeSeries = series
-
         # generated method, don't edit
         wx.Dialog.__init__(self, id=wxID_FRMDATAFILTER, name=u'frmDataFilter',
               parent=prnt, pos=wx.Point(599, 384), size=wx.Size(313, 384),
@@ -131,20 +129,40 @@ class frmDataFilter(wx.Dialog, series):
         self.btnClear = wx.Button(id=wxID_FRMDATAFILTERBTNCLEAR,
               label=u'Clear Filter', name=u'btnClear', parent=self.panel1,
               pos=wx.Point(8, 312), size=wx.Size(64, 23), style=0)
+        self.btnClear.Bind(wx.EVT_BUTTON, self.OnBtnClearButton,
+              id=wxID_FRMDATAFILTERBTNCLEAR)
 
         self.btnOK = wx.Button(id=wxID_FRMDATAFILTERBTNOK, label=u'OK',
               name=u'btnOK', parent=self.panel1, pos=wx.Point(128, 312),
               size=wx.Size(48, 23), style=0)
+        self.btnOK.Bind(wx.EVT_BUTTON, self.OnBtnOKButton,
+              id=wxID_FRMDATAFILTERBTNOK)
 
         self.btnCancel = wx.Button(id=wxID_FRMDATAFILTERBTNCANCEL,
               label=u'Cancel', name=u'btnCancel', parent=self.panel1,
               pos=wx.Point(184, 312), size=wx.Size(48, 23), style=0)
+        self.btnCancel.Bind(wx.EVT_BUTTON, self.OnBtnCancelButton,
+              id=wxID_FRMDATAFILTERBTNCANCEL)
 
         self.btnApply = wx.Button(id=wxID_FRMDATAFILTERBTNAPPLY, label=u'Apply',
               name=u'btnApply', parent=self.panel1, pos=wx.Point(240, 312),
               size=wx.Size(48, 23), style=0)
+        self.btnApply.Bind(wx.EVT_BUTTON, self.OnBtnApplyButton,
+              id=wxID_FRMDATAFILTERBTNAPPLY)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
+
+    def OnBtnClearButton(self, event):
+        event.Skip()
+
+    def OnBtnOKButton(self, event):
+        event.Skip()
+
+    def OnBtnCancelButton(self, event):
+        event.Skip()
+
+    def OnBtnApplyButton(self, event):
+        event.Skip()
 
     
