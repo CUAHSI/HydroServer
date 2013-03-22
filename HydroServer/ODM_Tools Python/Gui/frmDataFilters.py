@@ -191,8 +191,8 @@ class frmDataFilter(wx.Dialog):
         if self.rbDate.GetValue():
           dateAfter = self.dpAfter.GetValue()
           dateBefore = self.dpBefore.GetValue()
-          dtDateAfter = datetime(dateAfter.Year, dateAfter.Month, dateAfter.Day)
-          dtDateBefore = datetime(dateBefore.Year, dateBefore.Month, dateBefore.Day)
+          dtDateAfter = datetime(int(dateAfter.Year), int(dateAfter.Month), int(dateAfter.Day))
+          dtDateBefore = datetime(int(dateBefore.Year), int(dateBefore.Month), int(dateBefore.Day))
           self.editService.filter_date(dtDateBefore, dtDateAfter)
 
         if self.rbVChangeThresh.GetValue():
