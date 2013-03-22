@@ -239,7 +239,7 @@ class frmODMToolsMain(wx.Frame):
          self.pnlPlot.addEditPlot(Values.data)
          self.dataTable.Init(Values.data[0])
 
-         self.edit_service = EditService(cursor=Values.data[0])
+         self.edit_service = self.service_manager.get_edit_service(Values.data[0])
 
          # TODO
          # create edit service, send in Values.data[0]

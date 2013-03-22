@@ -1,6 +1,8 @@
 #Boa:Frame:frmDataFilter
 
+from datetime import datetime
 import wx
+from wx.lib.pubsub import Publisher
 
 
 def create(parent):
@@ -21,8 +23,9 @@ def create(parent):
  wxID_FRMDATAFILTERTXTVCHANGETHRESH, 
 ] = [wx.NewId() for _init_ctrls in range(26)]
 
-class frmDataFilter(wx.Dialog, series):
+class frmDataFilter(wx.Dialog):
     def _init_ctrls(self, prnt):
+
         # generated method, don't edit
         wx.Dialog.__init__(self, id=wxID_FRMDATAFILTER, name=u'frmDataFilter',
               parent=prnt, pos=wx.Point(599, 384), size=wx.Size(313, 384),
@@ -85,7 +88,7 @@ class frmDataFilter(wx.Dialog, series):
               name=u'txtThreshValGT', parent=self.panel1, pos=wx.Point(72, 24),
               size=wx.Size(200, 21), style=0, value='')
 
-        self.txtThresValLT = wx.TextCtrl(id=wxID_FRMDATAFILTERTXTTHRESVALLT,
+        self.txtThreshValLT = wx.TextCtrl(id=wxID_FRMDATAFILTERTXTTHRESVALLT,
               name=u'txtThresValLT', parent=self.panel1, pos=wx.Point(72, 48),
               size=wx.Size(200, 21), style=0, value='')
 
@@ -104,7 +107,7 @@ class frmDataFilter(wx.Dialog, series):
         self.cbGapTime = wx.ComboBox(choices=['second', 'minute', 'hour',
               'day'], id=wxID_FRMDATAFILTERCBGAPTIME, name=u'cbGapTime',
               parent=self.panel1, pos=wx.Point(96, 128), size=wx.Size(176, 21),
-              style=0, value='')
+              style=0, value='second')
 
         self.lblDateBefore = wx.StaticText(id=wxID_FRMDATAFILTERLBLDATEBEFORE,
               label=u'Before:', name=u'lblDateBefore', parent=self.panel1,
@@ -118,7 +121,7 @@ class frmDataFilter(wx.Dialog, series):
               name=u'dpBefore', parent=self.panel1, pos=wx.Point(24, 200),
               size=wx.Size(248, 21), style=wx.DP_DROPDOWN | wx.DP_SHOWCENTURY)
 
-        self.dbAfter = wx.DatePickerCtrl(id=wxID_FRMDATAFILTERDBAFTER,
+        self.dpAfter = wx.DatePickerCtrl(id=wxID_FRMDATAFILTERDBAFTER,
               name=u'dbAfter', parent=self.panel1, pos=wx.Point(24, 248),
               size=wx.Size(248, 21), style=wx.DP_DROPDOWN | wx.DP_SHOWCENTURY)
 
@@ -150,19 +153,60 @@ class frmDataFilter(wx.Dialog, series):
         self.btnApply.Bind(wx.EVT_BUTTON, self.OnBtnApplyButton,
               id=wxID_FRMDATAFILTERBTNAPPLY)
 
-    def __init__(self, parent):
+
+        self.setDates()
+
+    def __init__(self, parent, series):
+        self.editService = series
         self._init_ctrls(parent)
 
     def OnBtnClearButton(self, event):
-        event.Skip()
+        self.setDates()
+        self.txtThreshValGT.Clear()
+        self.txtThreshValLT.Clear()
+        self.txtGapsVal.Clear()
+        self.cbGapTime.SetStringSelection("second")
+        self.txtVChangeThresh.Clear()
+        self.editService.reset()
+
+        Publisher().sendMessage(("changePlotSelection"), self.editService.get_plot_list())
 
     def OnBtnOKButton(self, event):
-        event.Skip()
+        self.OnBtnApplyButton(event)
+        self.Close()
 
     def OnBtnCancelButton(self, event):
-        event.Skip()
+        self.Close()
 
     def OnBtnApplyButton(self, event):
-        event.Skip()
+        if self.rbThreshold.GetValue():
+          if self.txtThreshValGT.GetValue():
+            self.editService.filter_value(float(self.txtThreshValGT.GetValue()), '>')
+          if self.txtThreshValLT.GetValue():
+            self.editService.filter_value(float(self.txtThreshValLT.GetValue()), '<')
+
+        if self.rbDataGaps.GetValue():
+          pass
+
+        if self.rbDate.GetValue():
+          dateAfter = self.dpAfter.GetValue()
+          dateBefore = self.dpBefore.GetValue()
+          dtDateAfter = datetime(dateAfter.Year, dateAfter.Month, dateAfter.Day)
+          dtDateBefore = datetime(dateBefore.Year, dateBefore.Month, dateBefore.Day)
+          self.editService.filter_date(dtDateBefore, dtDateAfter)
+
+        if self.rbVChangeThresh.GetValue():
+          pass
+
+        Publisher().sendMessage(("changePlotSelection"), self.editService.get_plot_list())
 
     
+    def setDates(self):
+        dateAfter = self.editService.get_active_series()[0][2]
+        dateBefore = self.editService.get_active_series()[-1][2]
+        formattedDateAfter = wx.DateTimeFromDMY(int(dateAfter.day), int(dateAfter.month), int(dateAfter.year), 0, 0, 0)
+        formattedDateBefore = wx.DateTimeFromDMY(int(dateBefore.day), int(dateBefore.month), int(dateBefore.year), 0, 0, 0)
+        self.dpAfter.SetRange(formattedDateAfter, formattedDateBefore)
+        self.dpBefore.SetRange(formattedDateAfter, formattedDateBefore)
+        self.dpAfter.SetValue(formattedDateAfter)
+        self.dpBefore.SetValue(formattedDateBefore)
