@@ -141,7 +141,7 @@ class frmODMToolsMain(wx.Frame):
 
         self.txtPythonScript = pnlScript(id=wxID_TXTPYTHONSCRIPT,
               name=u'txtPython', parent=self, pos=wx.Point(72, 24),
-              size=wx.Size(500,800))
+              size=wx.Size(200,200))
 
 
         # print self.txtPythonConsole.fileMenu.MenuItems
@@ -157,7 +157,7 @@ class frmODMToolsMain(wx.Frame):
         self._mgr = aui.AuiManager()
         self._mgr.SetManagedWindow(self.pnlDocking)
         self._mgr.AddPane(self.dataTable, aui.AuiPaneInfo().Right().Name("Table").
-                Show(show=False).Caption('Table View').MinSize(wx.Size( 400, 400)))
+                Show(show=False).Caption('Table View').MinSize(wx.Size( 200, 200)))
         # DestroyOnClose(b=False)
         self._mgr.AddPane(self.pnlSelector, aui.AuiPaneInfo().Bottom().Name("Selector").
                 Layer(0).Caption('Series Selector').MinSize(wx.Size(100, 200)) )
@@ -166,8 +166,7 @@ class frmODMToolsMain(wx.Frame):
         # self._mgr.CreateFloatingFrame(self.txtPythonScript,  aui.AuiPaneInfo().Caption('Script').
         #         Name("Script").MinSize(wx.Size(500,800)))
         self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
-
-        Name("Console").Layer(1).Show(show=False).Float())
+                Name("Console").Layer(1).Show(show=False).Float())
         # self.txtPythonConsole.ToggleTools()
 
         self._mgr.AddPane(self.pnlPlot,  aui.AuiPaneInfo().CenterPane().Name("Plot").Caption("Plot"))

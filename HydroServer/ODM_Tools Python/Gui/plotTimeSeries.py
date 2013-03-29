@@ -53,7 +53,7 @@ class plotTimeSeries(wx.Panel):
       # self.timeSeries=self.figure.add_subplot(111)
       self.timeSeries = host_subplot(111, axes_class=AA.Axes)
 
-      self.timeSeries.axis([0, 1, 0, 1])#
+      # self.timeSeries.axis([0, 1, 0, 1])#
       self.timeSeries.plot([],[])
       self.timeSeries.set_title("No Data To Plot")
 
@@ -69,7 +69,9 @@ class plotTimeSeries(wx.Panel):
       self.toolbar.Realize()
 
 
-      
+      self.fontP = FontProperties()
+      self.fontP.set_size('small')
+
       self.format = '-o'
       self.SetColor("WHITE")
       #self.canvas.gca().xaxis.set_major_locator()
@@ -115,7 +117,7 @@ class plotTimeSeries(wx.Panel):
 
       #add plot with line only in black
 
-
+      # self.Plots.insert(0,self.editData)
 
       self.timeSeries.set_title(self.editData.title)
       self.timeSeries.set_ylabel(self.editData.ylabel, color =self.editData.color )
@@ -129,7 +131,7 @@ class plotTimeSeries(wx.Panel):
       # add scatterplot with colorlist as colorchart
       # self.colorlist = self.randBinList(len(self.editDataValues))
       self.selectedlist = [0] * len(self.editData.DataValues)
-      print len(self.editData.DataValues)
+      # print len(self.editData.DataValues)
 
       self.editPoint = self.timeSeries.scatter(self.editData.DateTimes, self.editData.DataValues, s= 20, c=['k' if x==0 else 'r' for x in self.selectedlist])
       #   self.isfirstplot = False
@@ -164,7 +166,15 @@ class plotTimeSeries(wx.Panel):
 
   def OnShowLegend(self, isVisible):
     # print self.timeSeries.show_legend
-    self.timeSeries.plot(legend= not isVisible)
+    if isVisible:
+      plt.subplots_adjust(bottom=.1+.1)
+      self.timeSeries.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+               ncol=2, prop = self.fontP)
+          
+    else:
+      plt.subplots_adjust(bottom=.1)
+      self.timeSeries.legend_=None
+    # self.timeSeries.plot(legend= not isVisible)
     self.canvas.draw()
 
 
@@ -262,8 +272,7 @@ class plotTimeSeries(wx.Panel):
           # ax.axis.patch.set_visible(False)
       # offset= 60
 
-      fontP = FontProperties()
-      fontP.set_size('small')
+      
       for currPlot, ax, val  in zip (self.Plots, self.axes, range(len(self.Plots))):
         if val >1:
           new_fixed_axis = ax.axis.get_grid_helper().new_fixed_axis
@@ -278,15 +287,20 @@ class plotTimeSeries(wx.Panel):
           plt.subplots_adjust(left=ax.leftadjust)
 
         ax.axis.set_ylabel(currPlot.ylabel)
+
+        # self.timeSeries.set_xlim(min(currPlot.DateTimes), max(currPlot.DateTimes))
+        # ax.axis.set_ylim(min(currPlot.DataValues), max(currPlot.DataValues))
+
         self.lines.append(ax.axis.plot_date(currPlot.DateTimes, currPlot.DataValues, self.format+currPlot.color, xdate = True, tz = None, label = currPlot.title ))
 
 
         if len(self.axes) >1:
           if val ==1:
-            self.timeSeries.set_title("Multiple Series plotted")
+            ax.axis.set_title("Multiple Series plotted")
             plt.subplots_adjust(bottom=.1+.1)
+           
           self.timeSeries.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
-               ncol=2, prop = fontP)
+               ncol=2, prop = self.fontP)
           
         else:
           ax.axis.set_title(currPlot.title)

@@ -145,9 +145,9 @@ class pnlScript(wx.Frame):
 
     def setTitle(self, title):
         Publisher().sendMessage("script.title", title)
-        if self.isFloating():
-            print "refreshing"
-            self.Refresh()
+        # if self.isFloating():
+        #     print "refreshing"
+        #     self.Refresh()
 
 
     def getStyle(self, c='black'):
