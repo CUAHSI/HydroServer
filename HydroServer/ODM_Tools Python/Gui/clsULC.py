@@ -102,9 +102,9 @@ class clsULC(ULC.UltimateListCtrl):
 	# 	pass
 
 	def GetColumnText(self, index, colid):
-		print self.GetItemData(index)
+		# print self.GetItemData(index)
 		item = self.GetItem(index, colid)
-		print item
+		# print item
 		return item.GetText()
 
 	def GetStringValue(self, modelObject, col):

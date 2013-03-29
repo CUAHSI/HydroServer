@@ -79,7 +79,7 @@ class ServiceManager():
 
 	def get_edit_service(self, cursor):
 		conn_string = self._build_connection_string(self._current_connection)
-		return EditService(cursor, conn_string, self.debug)
+		return EditService(0, cursor, conn_string, self.debug)
 
 	# private
 	def _get_file(self, mode):
@@ -94,6 +94,7 @@ class ServiceManager():
 			driver = "pymysql"
 
 		conn_string = self._connection_format % (conn_dict['engine'], driver, conn_dict['user'], conn_dict['password'], conn_dict['address'], conn_dict['db'])
+		print conn_string
 		return conn_string
 
 	def _save_connections(self):

@@ -105,7 +105,7 @@ class frmAddPoint(wx.Dialog):
       self.qual_choice_editor= wx.grid.GridCellChoiceEditor(["<None>", "<Create New...>"]+qualchoices, False)
       self.grdDataValues.SetCellEditor(0, 8, self.qual_choice_editor)
 
-      sampchoices =list(x.name for x in self.service.get_lab_methods())
+      sampchoices =list(x.lab_sample_code for x in self.service.get_lab_methods())
       self.samp_choice_editor= wx.grid.GridCellChoiceEditor(["<None>"]+sampchoices, False)
       self.grdDataValues.SetCellEditor(0, 9, self.samp_choice_editor)
 
@@ -198,8 +198,10 @@ class frmAddPoint(wx.Dialog):
 
     def OnBtnSaveButton(self, event):
         event.Skip()
+        self.Close()
 
     def OnBtnCancelButton(self, event):
+        self.Close()
         event.Skip()
 
     def OnGrdDataValuesGridSelectCell(self, event):

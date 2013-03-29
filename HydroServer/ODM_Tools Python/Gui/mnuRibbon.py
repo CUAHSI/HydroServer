@@ -23,8 +23,8 @@ import frmAddPoint
  wxID_RIBBONEDITSCRIPTSAVE, wxID_RIBBONVIEWPLOT, wxID_RIBBONVIEWTABLE,
  wxID_RIBBONVIEWSERIES, wxID_RIBBONVIEWCONSOLE, wxID_RIBBONVIEWSCRIPT,
  wxID_RIBBONPLOTDATESTART, wxID_FileMenu, wxID_STARTDPDATE, wxID_ENDDPDATE,
- wxID_FRAME1SPINCTRL1, wxID_RIBBONEDITFILTER,
- ] = [wx.NewId() for _init_ctrls in range(39)]
+ wxID_FRAME1SPINCTRL1, wxID_RIBBONEDITFILTER, wxID_RIBBONEDITRECORD
+ ] = [wx.NewId() for _init_ctrls in range(40)]
 
 def CreateBitmap(xpm):
     bmp = wx.Image(xpm, wx.BITMAP_TYPE_ANY).ConvertToBitmap()
@@ -191,7 +191,9 @@ class mnuRibbon(RB.RibbonBar):
         edit_bar.AddSimpleButton(wxID_RIBBONEDITADDPOINT, "Add Point",  
                                 CreateBitmap("images\\Add (2).png"), "")
         edit_bar.AddSimpleButton(wxID_RIBBONEDITDELPOINT, "Delete Point",  
-                                CreateBitmap("images\\Delete (3).png"), "")                                                                                                                                                              
+                                CreateBitmap("images\\Delete (3).png"), "") 
+        edit_bar.AddSimpleButton(wxID_RIBBONEDITRECORD, "Record",  
+                                CreateBitmap("images\\Record.png"), "")                                                                                                                                                             
 
                     
 
@@ -278,24 +280,35 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditInterpolate, id= wxID_RIBBONEDITINTEROPOLATE)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditFlag, id= wxID_RIBBONEDITFLAG) 
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditAddPoint, id= wxID_RIBBONEDITADDPOINT) 
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditDelPoint, id= wxID_RIBBONEDITDELPOINT)  
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditDelPoint, id= wxID_RIBBONEDITDELPOINT) 
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnRecord, id= wxID_RIBBONEDITRECORD) 
+         
 
         self.isLegendVisible = False;
 
 
+
+    def OnRecord(self, event):
+        pass
+    
     def OnEditFilter(self, event):
         data_filter = frmDataFilters.frmDataFilter(self, self.parent.getEditService())
         self.filterlist = data_filter.ShowModal()
+    
     def OnEditChangeValue(self, event):
         change_value=frmChangeValue.frmChangeValue(self)
         change_value.ShowModal()
+   
     def OnEditInterpolate(self, event):
         pass
+    
     def OnEditFlag(self, event):
         pass
+    
     def OnEditAddPoint(self, event):
         add_value=frmAddPoint.frmAddPoint(self)
         add_value.ShowModal()
+    
     def OnEditDelPoint(self, event):
         pass
 
@@ -328,15 +341,12 @@ class mnuRibbon(RB.RibbonBar):
     def onClose(self, event):
         Publisher.sendMessage(("onClose"), event)
 
-
     def onChangeDBConfig(self, event):
         Publisher().sendMessage(("change.dbConfig"), event)
-        self.SetActivePageByIndex(1)
-               
+        self.SetActivePageByIndex(1)               
         
     def onExecuteScript(self, event):
         Publisher().sendMessage(("execute.script"), event)
-
 
     def OnBoxTypeDropdown(self, event):
         menu = wx.Menu()
@@ -346,7 +356,6 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(wx.EVT_MENU,  self.OnBoxOverall, menu.Append(wx.ID_ANY, "Overall"))
 
         event.PopupMenu(menu)  
-
 
     def OnBoxMonthly(self, event):
         Publisher().sendMessage(("box.Monthly"), event)
@@ -377,7 +386,6 @@ class mnuRibbon(RB.RibbonBar):
     def OnPlotTypeBoth(self, event):
         Publisher().sendMessage(("onPlotType"), [event, "both"])
 
-
     def onPlotSelection(self, event):
         if event.Id == wxID_RIBBONPLOTTIMESERIES:       
             value = 0
@@ -392,7 +400,6 @@ class mnuRibbon(RB.RibbonBar):
         self.enableButtons(value)
         Publisher().sendMessage(("select.Plot"), value)
 
-
     def onDocking(self, event):
         
         if event.Id == wxID_RIBBONVIEWSCRIPT:
@@ -406,8 +413,7 @@ class mnuRibbon(RB.RibbonBar):
         elif event.Id == wxID_RIBBONVIEWPLOT:
             value= "Plot"       
                  
-        Publisher().sendMessage(("adjust.Docking"), value)
-            
+        Publisher().sendMessage(("adjust.Docking"), value)            
 
     def enableButtons(self, plot):
         ##tims series or probability

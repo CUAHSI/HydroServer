@@ -12,7 +12,8 @@ from odmdata.censor_code_cv import CensorCodeCV
 from odmdata.topic_category_cv import TopicCategoryCV
 from odmdata.sample_type_cv import SampleTypeCV
 from odmdata.offset_type import OffsetType
-from odmdata.lab_method import LabMethod
+# from odmdata.lab_method import LabMethod
+from odmdata.sample import Sample
 from odmdata.qualifier import Qualifier
 
 class CVService():
@@ -31,7 +32,7 @@ class CVService():
 
 	def get_lab_methods(self):
 		session = self._session_factory.get_session()
-		result = session.query(LabMethod).order_by(LabMethod.name).all()
+		result = session.query(Sample).order_by(Sample.lab_sample_code).all()
 		session.close()
 		return result
 

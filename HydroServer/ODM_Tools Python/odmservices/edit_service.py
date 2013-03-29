@@ -1,4 +1,5 @@
 from odmdata.session_factory import SessionFactory
+from odmservices.series_service import SeriesService
 from odmdata.site import Site
 from odmdata.variable import Variable
 from odmdata.unit import Unit
@@ -6,11 +7,12 @@ from odmdata.series import Series
 from odmdata.data_value import DataValue
 from odmdata.quality_control_level import QualityControlLevel
 from odmdata.qualifier import Qualifier
+import sqlite3
 
 
 class EditService():
 
-    def __init__(self, cursor=None, connection_string="", debug=False):
+    def __init__(self, series_id, cursor=None, connection_string="", debug=False):
         if (connection_string is not ""):
             self._session_factory = SessionFactory(connection_string, debug)
         elif (factory is not None):
@@ -26,6 +28,13 @@ class EditService():
         if cursor == None:
             # TODO
             # build it ourselves (series selector init)
+            series_service =SeriesService(connection_string, False)
+            self.DataValues = series_service.get_data_values_by_series_id(series_id)
+            self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
+            self._cursor = self.conn.cursor()
+            self.init_table()
+            self._cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
+            self.conn.commit()
             pass
         else:
             self._cursor = cursor
@@ -103,3 +112,29 @@ class EditService():
     def reconcile_dates(self, parent_series_id):
         # append new data to this series
         pass
+
+
+
+    def init_table(self):
+        self._cursor.execute("""CREATE TABLE DataValuesEdit
+                (ValueID INTEGER NOT NULL,
+                DataValue FLOAT NOT NULL,
+                ValueAccuracy FLOAT,
+                LocalDateTime TIMESTAMP NOT NULL,
+                UTCOffset FLOAT NOT NULL,
+                DateTimeUTC TIMESTAMP NOT NULL,
+                SiteID INTEGER NOT NULL,
+                VariableID INTEGER NOT NULL,
+                OffsetValue FLOAT,
+                OffsetTypeID INTEGER,
+                CensorCode VARCHAR(50) NOT NULL,
+                QualifierID INTEGER,
+                MethodID INTEGER NOT NULL,
+                SourceID INTEGER NOT NULL,
+                SampleID INTEGER,
+                DerivedFromID INTEGER,
+                QualityControlLevelID INTEGER NOT NULL,
+
+                PRIMARY KEY (ValueID),
+                UNIQUE (DataValue, LocalDateTime, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID))
+               """)
