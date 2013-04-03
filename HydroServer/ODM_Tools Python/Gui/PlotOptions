@@ -1,0 +1,78 @@
+
+
+class plotData (object):
+  def __init__(self, sID, dValues, dTimes,  ylabel, title, color ):
+    self.SeriesID= sID
+    self.DataValues = dValues
+    self.DateTimes=dTimes
+
+    self.startDate= min(dTimes)
+    self.endDate=max(dTimes)
+    self.ylabel = ylabel
+    self.title = title
+    self.color = color
+
+class axisData (object):
+  def __init__(self, axisid, axis,  position, side="", rightadjust="", leftadjust="", minx="", maxx=""):
+    self.axisid= axisid
+    self.axis = axis
+    self.rightadjust= rightadjust
+    self.leftadjust = leftadjust
+    self.position = position
+    self.side = side
+    self.minx= minx
+    self.maxx= maxx
+
+  def __repr__(self):
+    return "<AxisData(id:'%s', axis:'%s', pos:'%s', side:'%s', radj:'%s', ladj:'%s')>" % (self.axisid, self.axis, self.position, self.side, self.rightadjust, self.leftadjust)
+
+
+class OneSeriesPlotInfo(object):
+    data_table # link to sql database
+    cursor
+    site_name=""
+    variable_name=""
+    data_type=""
+    variable_units=""
+    plot_options=""
+    series_id=0
+    line_color = "Black"
+    point_color ="Black"# will currently be the same as the line color
+    statistics= Statistics()
+
+    def __init__ (self, prnt):
+        self.parent=prnt
+
+    def getPlotOptions(self):
+        return plot_options
+
+class SeriesPlotInfo(object):
+    _site_display_column = ""
+    _plot_options #= PlotOptions()
+    _series_infos #dictionary(integer(seriesID)/OneSeriesPlotInfo)
+    isColorsChanged= False
+
+    def __init__(self, siteDisplayColumn, plotOptions):
+        _site_display_column = siteDisplayColumn
+        _plot_options= plotOptions
+
+    def Update(self, e):
+        if not e.ischecked :
+            del _series_infos[e.series_id]
+        else
+            _series_infos[e.series_id]=""
+
+    def Update(self):            
+        for key, value in enumerate(_series_infos):
+            _series_infos[key]=""
+
+    def GetSeriesIDs():
+        return _series_infos.items()
+
+    def GetSeriesInfo():
+        lst= []
+
+
+
+
+
