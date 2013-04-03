@@ -1,12 +1,12 @@
-from odmdata.session_factory import SessionFactory
-from odmdata.site import Site
-from odmdata.variable import Variable
-from odmdata.unit import Unit
-from odmdata.series import Series
-from odmdata.data_value import DataValue
-from odmdata.quality_control_level import QualityControlLevel
-from odmdata.qualifier import Qualifier
-from odmdata.odm_version import ODMVersion
+from odmdata import SessionFactory
+from odmdata import Site
+from odmdata import Variable
+from odmdata import Unit
+from odmdata import Series
+from odmdata import DataValue
+from odmdata import QualityControlLevel
+from odmdata import Qualifier
+from odmdata import ODMVersion
 
 from sqlalchemy import distinct
 

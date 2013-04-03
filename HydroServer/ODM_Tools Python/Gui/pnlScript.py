@@ -72,7 +72,6 @@ class pnlScript(wx.Frame):
         self.filename = ''
         self.control.SetText('')
         # self.SetTitle("Editing a new file")
-        print "setting title to %s" % "Editing a new file"
         Publisher().sendMessage(("script.title"), "Editing a new file")
 
     def OnOpen(self, e):
@@ -145,10 +144,6 @@ class pnlScript(wx.Frame):
 
     def setTitle(self, title):
         Publisher().sendMessage("script.title", title)
-        # if self.isFloating():
-        #     print "refreshing"
-        #     self.Refresh()
-
 
     def getStyle(self, c='black'):
         """

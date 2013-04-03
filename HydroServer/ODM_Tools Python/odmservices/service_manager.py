@@ -1,13 +1,13 @@
-from odmservices.series_service import SeriesService
-from odmservices.cv_service import CVService
-from odmservices.edit_service import EditService
+from series_service import SeriesService
+from cv_service import CVService
+from edit_service import EditService
 import os
 from sqlalchemy.exc import SQLAlchemyError
 
 class ServiceManager():
 	def __init__(self, debug=False):
 		self.debug = debug
-		f = self._get_file('r')
+		f = self.__get_file('r')
 		self._connections = []
 		self._connection_format = "%s+%s://%s:%s@%s/%s"
 
@@ -52,10 +52,10 @@ class ServiceManager():
 		self._current_connection = self._connections[-1]
 
 		# write changes to connection file
-		self._save_connections()
+		self.__save_connections()
 
 	def test_connection(self, conn_dict):
-		conn_string = self._build_connection_string(conn_dict)
+		conn_string = self.__build_connection_string(conn_dict)
 		try:
 			service = SeriesService(conn_string, True)
 			site = service.get_test_data()
@@ -70,23 +70,23 @@ class ServiceManager():
 
 	# Create and return services based on the currently active connection
 	def get_series_service(self):
-		conn_string = self._build_connection_string(self._current_connection)
+		conn_string = self.__build_connection_string(self._current_connection)
 		return SeriesService(conn_string, self.debug)
 
 	def get_cv_service(self):
-		conn_string = self._build_connection_string(self._current_connection)
+		conn_string = self.__build_connection_string(self._current_connection)
 		return CVService(conn_string, self.debug)
 
-	def get_edit_service(self, cursor):
-		conn_string = self._build_connection_string(self._current_connection)
-		return EditService(0, cursor, conn_string, self.debug)
+	def get_edit_service(self, series_id, cursor):
+		conn_string = self.__build_connection_string(self._current_connection)
+		return EditService(series_id, cursor=cursor, connection_string=conn_string, debug=self.debug)
 
 	# private
-	def _get_file(self, mode):
+	def __get_file(self, mode):
 		fn = os.path.join(os.path.dirname(__file__), 'connection.cfg')
 		return open(fn, mode)
 
-	def _build_connection_string(self, conn_dict):
+	def __build_connection_string(self, conn_dict):
 		driver = ""
 		if conn_dict['engine'] == 'mssql':
 			driver = "pyodbc"
@@ -97,8 +97,8 @@ class ServiceManager():
 		print conn_string
 		return conn_string
 
-	def _save_connections(self):
-		f = self._get_file('w')
+	def __save_connections(self):
+		f = self.__get_file('w')
 		for conn in self._connections:
 			f.write("%s %s %s %s %s\n" % (conn['engine'], conn['user'], conn['password'], conn['address'], conn['db']) )
 		f.close()

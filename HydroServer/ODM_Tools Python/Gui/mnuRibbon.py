@@ -166,36 +166,46 @@ class mnuRibbon(RB.RibbonBar):
         
         main_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Main", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
-        main_bar = RB.RibbonButtonBar(main_panel)                                                                 
-        main_bar.AddSimpleButton(wxID_RIBBONEDITSERIES, "Edit Series",  
+        self.main_bar = RB.RibbonButtonBar(main_panel)                                                                 
+        self.main_bar.AddSimpleButton(wxID_RIBBONEDITSERIES, "Edit Series",  
                                 CreateBitmap("images\\Edit (2).png"), "")                                                                                            
-        main_bar.AddSimpleButton(wxID_RIBBONEDITDERIVE, "Derive New Series",  
-                                CreateBitmap("images\\DeriveNewSeries.png"), "")                                                                                            
-        main_bar.AddSimpleButton(wxID_RIBBONEDITRESTORE, "Restore",  
+        # main_bar.AddSimpleButton(wxID_RIBBONEDITDERIVE, "Derive New Series",  
+        #                        CreateBitmap("images\\DeriveNewSeries.png"), "")                                                                                            
+        self.main_bar.AddSimpleButton(wxID_RIBBONEDITRESTORE, "Restore",  
                                 CreateBitmap("images\\Restore.png"), "")                                                                                            
-        main_bar.AddHybridButton(wxID_RIBBONEDITSAVE, "Save",  
-                                CreateBitmap("images\\Save Data.png"), "")                                                                                            
+        self.main_bar.AddHybridButton(wxID_RIBBONEDITSAVE, "Save",  
+                                CreateBitmap("images\\Save Data.png"), "")    
+
+
+        self.main_bar.EnableButton(wxID_RIBBONEDITRESTORE, False)
+        self.main_bar.EnableButton(wxID_RIBBONEDITSAVE, False)                                                                                        
  
  #------------------------------------------------------------------------------
         edit_panel = RB.RibbonPanel( editPage, wx.ID_ANY, "Edit Functions" , wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
-        edit_bar= RB.RibbonButtonBar(edit_panel)
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITFILTER, "Filter Points", 
+        self.edit_bar= RB.RibbonButtonBar(edit_panel)
+        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITFILTER, "Filter Points", 
                                 CreateBitmap("images\\Filter List.png"), "") 
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITCHGVALUE, "Change Value", 
+        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITCHGVALUE, "Change Value", 
                                 CreateBitmap("images\\EditView_icon.png"), "")                                
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITINTEROPOLATE, "Interpolate", 
+        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITINTEROPOLATE, "Interpolate", 
                                 CreateBitmap("images\\Interpolate.png"), "") 
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITFLAG, "Flag",  
+        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITFLAG, "Flag",  
                                 CreateBitmap("images\\Flag.png"), "")  
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITADDPOINT, "Add Point",  
+        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITADDPOINT, "Add Point",  
                                 CreateBitmap("images\\Add (2).png"), "")
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITDELPOINT, "Delete Point",  
+        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITDELPOINT, "Delete Point",  
                                 CreateBitmap("images\\Delete (3).png"), "") 
-        edit_bar.AddSimpleButton(wxID_RIBBONEDITRECORD, "Record",  
+        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITRECORD, "Record",  
                                 CreateBitmap("images\\Record.png"), "")                                                                                                                                                             
 
-                    
+        self.edit_bar.EnableButton(wxID_RIBBONEDITFILTER, False) 
+        self.edit_bar.EnableButton(wxID_RIBBONEDITCHGVALUE, False) 
+        self.edit_bar.EnableButton(wxID_RIBBONEDITINTEROPOLATE, False) 
+        self.edit_bar.EnableButton(wxID_RIBBONEDITFLAG, False)
+        self.edit_bar.EnableButton(wxID_RIBBONEDITADDPOINT, False)
+        self.edit_bar.EnableButton(wxID_RIBBONEDITDELPOINT, False)
+        self.edit_bar.EnableButton(wxID_RIBBONEDITRECORD, False)
 
 #------------------------------------------------------------------------------- 
         # script_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Script", wx.NullBitmap, wx.DefaultPosition,
@@ -228,7 +238,8 @@ class mnuRibbon(RB.RibbonBar):
                                 
         self.SetActivePageByIndex(1)
 
-        self.BindEvents()  
+        self.BindEvents()          
+        Publisher().subscribe(self.toggleEditButtons, ("edit.EnableButtons"))
         
                              
     def __init__(self, parent, id, name):
@@ -446,7 +457,17 @@ class mnuRibbon(RB.RibbonBar):
             self.spnBins.Enabled = False
 
 
+    def toggleEditButtons(self, state):
+        self.main_bar.EnableButton(wxID_RIBBONEDITRESTORE, state)
+        self.main_bar.EnableButton(wxID_RIBBONEDITSAVE, state) 
 
+        self.edit_bar.EnableButton(wxID_RIBBONEDITFILTER, state) 
+        self.edit_bar.EnableButton(wxID_RIBBONEDITCHGVALUE, state) 
+        self.edit_bar.EnableButton(wxID_RIBBONEDITINTEROPOLATE, state) 
+        self.edit_bar.EnableButton(wxID_RIBBONEDITFLAG, state)
+        self.edit_bar.EnableButton(wxID_RIBBONEDITADDPOINT, state)
+        self.edit_bar.EnableButton(wxID_RIBBONEDITDELPOINT, state)
+        self.edit_bar.EnableButton(wxID_RIBBONEDITRECORD, state)
         
             
 ##        
