@@ -383,35 +383,6 @@ class plotTimeSeries(wx.Panel):
 
 
 
-class plotData (object):
-  def __init__(self, sID, dValues, dTimes,  ylabel, title, color ):
-    self.SeriesID= sID
-    self.DataValues = dValues
-    self.DateTimes=dTimes
-
-    self.startDate= min(dTimes)
-    self.endDate=max(dTimes)
-    self.ylabel = ylabel
-    self.title = title
-    self.color = color
-
-class axisData (object):
-  def __init__(self, axisid, axis,  position, side="", rightadjust="", leftadjust="", minx="", maxx=""):
-    self.axisid= axisid
-    self.axis = axis
-    self.rightadjust= rightadjust
-    self.leftadjust = leftadjust
-    self.position = position
-    self.side = side
-    self.minx= minx
-    self.maxx= maxx
-
-  def __repr__(self):
-    return "<AxisData(id:'%s', axis:'%s', pos:'%s', side:'%s', radj:'%s', ladj:'%s')>" % (self.axisid, self.axis, self.position, self.side, self.rightadjust, self.leftadjust)
-
-
-
-
 
 
 
