@@ -1,22 +1,29 @@
-from odmdata.session_factory import SessionFactory
-from odmservices.series_service import SeriesService
-from odmdata.site import Site
-from odmdata.variable import Variable
-from odmdata.unit import Unit
-from odmdata.series import Series
-from odmdata.data_value import DataValue
-from odmdata.quality_control_level import QualityControlLevel
-from odmdata.qualifier import Qualifier
+from odmdata import SessionFactory
+from odmdata import Site
+from odmdata import Variable
+from odmdata import Unit
+from odmdata import Series
+from odmdata import DataValue
+from odmdata import QualityControlLevel
+from odmdata import Qualifier
+
+from series_service import SeriesService
+
 import sqlite3
 
-
 class EditService():
+    # Mutual exclusion: cursor, or connection_string
+    def __init__(self, series_id, cursor=None, connection_string="",  debug=False):
+        print "Series id: ", series_id
+        self._series_id = series_id
 
-    def __init__(self, series_id, cursor=None, connection_string="", debug=False):
         if (connection_string is not ""):
             self._session_factory = SessionFactory(connection_string, debug)
+            self._series_service = SeriesService(connection_string, debug)
         elif (factory is not None):
             self._session_factory = factory
+            service_manager = ServiceManager()
+            self._series_service = service_manager.get_series_service()
         else:
             # One or the other must be set
             print "Must have either a connection string or session factory"
@@ -40,7 +47,7 @@ class EditService():
             self._cursor = cursor
 
         # [(ID, value, datetime), ...]
-        self._cursor.execute("SELECT  ValueID, DataValue, LocalDateTime FROM DataValuesEdit ORDER BY LocalDateTime")
+        self._cursor.execute("SELECT ValueID, DataValue, LocalDateTime FROM DataValuesEdit ORDER BY LocalDateTime")
         results = self._cursor.fetchall()
 
         self._active_series = results
@@ -76,14 +83,44 @@ class EditService():
                     tmp.append(x)
             self._active_points = tmp
 
+    # Data Gaps
+    def data_gaps(self, value, time_period):
+        if time_period == 'second':
+            pass
+        for i in xrange(len(self._active_points)):
+            pass
 
+    def value_change_threshold(self, value):
+        points = []
+        length = len(self._active_points)
+        for i in xrange(length):
+            if i + 1 < length:         # make sure we stay in bounds
+                point1 = self._active_points[i]
+                point2 = self._active_points[i+1]
+                if abs(point1[1] - point2[1]) >= value:
+                    points.append(point1)
+                    points.append(point2)
+
+        self._active_points = points
+
+
+    # TODO change name to reset_filter
     def reset(self):
         self._active_points = self._active_series
+
+    def rollback(self):
+        self._active_series = self._original_series
+        self.reset()
+
     def save(self):
         # Save to sqlite memory DB, not real DB
+
+        for point in self._active_series:
+            # make a query
+            pass
         pass
 
-    def full_save(self):
+    def write_to_db(self):
         # Save to real DB
         pass
 

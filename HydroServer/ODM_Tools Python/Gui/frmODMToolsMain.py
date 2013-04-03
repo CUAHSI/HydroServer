@@ -23,8 +23,8 @@ import wx.py.crust
 from numpy import arange, sin, cos, exp, pi
 import frmDBConfiguration
 
-from odmservices.service_manager import ServiceManager
-from odmservices.edit_service import EditService
+from odmservices import ServiceManager
+from odmservices import EditService
 from pnlScript import pnlScript
 import pnlSeriesSelector
 import pnlPlot
@@ -229,19 +229,18 @@ class frmODMToolsMain(wx.Frame):
         scriptPane = self._mgr.GetPane(self.txtPythonScript)
         scriptPane.Caption(title.data)
         if scriptPane.IsFloating():
-            print "script is floating"
+            # print "script is floating"
             scriptPane.Restore()
         self._mgr.Update()
 
 
     def addEdit(self, Values):
-         self.pnlPlot.addEditPlot(Values.data)
-         self.dataTable.Init(Values.data[0])
-
-         self.edit_service = self.service_manager.get_edit_service(Values.data[0])
-
-         # TODO
-         # create edit service, send in Values.data[0]
+        self.pnlPlot.addEditPlot(Values.data)
+        self.dataTable.Init(Values.data[0])
+        self.edit_service = self.service_manager.get_edit_service(Values.data[1].id, Values.data[0])
+        
+        # TODO
+        # create edit service, send in Values.data[0]
 
     def getEditService(self):
         return self.edit_service

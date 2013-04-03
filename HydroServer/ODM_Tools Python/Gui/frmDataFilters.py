@@ -186,27 +186,33 @@ class frmDataFilter(wx.Dialog):
             self.editService.filter_value(float(self.txtThreshValLT.GetValue()), '<')
 
         if self.rbDataGaps.GetValue():
-          pass
+          if self.txtGapsVal.GetValue():
+            self.editService.data_gaps(float(self.txtGapsVal.GetValue()), self.cbGapTime.GetValue())
 
         if self.rbDate.GetValue():
           dateAfter = self.dpAfter.GetValue()
           dateBefore = self.dpBefore.GetValue()
-          dtDateAfter = datetime(int(dateAfter.Year), int(dateAfter.Month), int(dateAfter.Day))
-          dtDateBefore = datetime(int(dateBefore.Year), int(dateBefore.Month), int(dateBefore.Day))
+          print "year: ", dateAfter.Year
+          print "mon: ", dateAfter.Month
+          print "day: ", dateAfter.Day
+
+          dtDateAfter = datetime(int(dateAfter.Year), int(dateAfter.Month) + 1, int(dateAfter.Day))
+          dtDateBefore = datetime(int(dateBefore.Year), int(dateBefore.Month) + 1, int(dateBefore.Day))
           self.editService.filter_date(dtDateBefore, dtDateAfter)
 
         if self.rbVChangeThresh.GetValue():
-          pass
+          if self.txtVChangeThresh.GetValue():
+            self.editService.value_change_threshold(float(self.txtVChangeThresh.GetValue()))
 
         Publisher().sendMessage(("changePlotSelection"), self.editService.get_plot_list())
 
     
     def setDates(self):
-        dateAfter = self.editService.get_active_series()[0][2]
-        dateBefore = self.editService.get_active_series()[-1][2]
-        formattedDateAfter = wx.DateTimeFromDMY(int(dateAfter.day), int(dateAfter.month), int(dateAfter.year), 0, 0, 0)
-        formattedDateBefore = wx.DateTimeFromDMY(int(dateBefore.day), int(dateBefore.month), int(dateBefore.year), 0, 0, 0)
-        self.dpAfter.SetRange(formattedDateAfter, formattedDateBefore)
-        self.dpBefore.SetRange(formattedDateAfter, formattedDateBefore)
-        self.dpAfter.SetValue(formattedDateAfter)
-        self.dpBefore.SetValue(formattedDateBefore)
+      dateAfter = self.editService.get_active_series()[0][2]
+      dateBefore = self.editService.get_active_series()[-1][2]
+      formattedDateAfter = wx.DateTimeFromDMY(int(dateAfter.day), int(dateAfter.month), int(dateAfter.year), 0, 0, 0)
+      formattedDateBefore = wx.DateTimeFromDMY(int(dateBefore.day), int(dateBefore.month), int(dateBefore.year), 0, 0, 0)
+      self.dpAfter.SetRange(formattedDateAfter, formattedDateBefore)
+      self.dpBefore.SetRange(formattedDateAfter, formattedDateBefore)
+      self.dpAfter.SetValue(formattedDateAfter)
+      self.dpBefore.SetValue(formattedDateBefore)

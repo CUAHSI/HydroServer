@@ -323,6 +323,7 @@ class pnlSeriesSelector(wx.Panel):
         # Publisher().sendMessage(("add.NewPlot"), [self.cursor, self.seriesList[event.m_itemIndex]])
 
         Publisher().sendMessage(("edit.NewPlot"), [self.cursor, self.dbservice.get_series_by_id(seriesID)])
+        Publisher().sendMessage(("edit.EnableButtons"), True)
     
     def OnRightExData(self, event):
         # print "in OnRightExData"
