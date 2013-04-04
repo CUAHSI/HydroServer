@@ -38,7 +38,9 @@ class clsULC(ULC.UltimateListCtrl):
 					heading=c, width=140)
 		# print self.GetColumn(0)
 
-
+	def EmptyTable(self):
+		self.ModelObjects= None
+		self.RepopulateList()
 
 	def SetObjects(self, modelObjects):
 		self.modelObjects = modelObjects

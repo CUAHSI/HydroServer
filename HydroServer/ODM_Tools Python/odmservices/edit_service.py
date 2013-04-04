@@ -14,7 +14,7 @@ import sqlite3
 class EditService():
     # Mutual exclusion: cursor, or connection_string
     def __init__(self, series_id, cursor=None, connection_string="",  debug=False):
-        print "Series id: ", series_id
+        # print "Series id: ", series_id
         self._series_id = series_id
 
         if (connection_string is not ""):

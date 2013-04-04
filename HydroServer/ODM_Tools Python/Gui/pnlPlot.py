@@ -8,7 +8,8 @@ try:
 except ImportError: # if it's not there locally, try the wxPython lib.
     import wx.lib.agw.flatnotebook as fnb
 
-
+import matplotlib
+matplotlib.use('WXAgg')
 import plotTimeSeries
 import plotSummary
 import plotHistogram
@@ -20,9 +21,7 @@ wxID_PAGESUMMARY, wxID_PAGETIMESERIES, wxID_TABPLOTS
 ] = [wx.NewId() for _init_ctrls in range(7)]
 
 
-class pnlPlot(fnb.FlatNotebook):  
-    
-    
+class pnlPlot(fnb.FlatNotebook): 
     
     def _init_ctrls(self, prnt):
         fnb.FlatNotebook.__init__(self, id=wxID_TABPLOTS, name=u'tabPlots',
@@ -88,23 +87,30 @@ class pnlPlot(fnb.FlatNotebook):
       event, isVisible = Args.data[0], Args.data[1]
       self.pltTS.OnShowLegend(isVisible)
       
-    def addEditPlot(self, Values):
+    def addEditPlot(self, cursor, series):
         Filter = " WHERE CensorCode = 'nc'"
         # print Values
-        # self.pltTS.editSeries(Values.data, " WHERE CensorCode = 'nc'")
-        self.pltTS.editSeries(Values, Filter)
-    
-    def addPlot(self, Values):
-    
-        self.cursor = Values[0]
+        # self.pltTS.editSeries(Values, Filter)
+        self.pltTS.editSeries(cursor, series, Filter)
 
-
+    def stopEdit(self):
+        self.pltTS.stopEdit()
+    
+    def addPlot(self, cursor, series):
+        
         Filter = " WHERE DataValue <> -9999 AND CensorCode = 'nc'"
-        self.pltSum.addPlot(Values, Filter)
-        self.pltHist.addPlot(Values, Filter)
-        self.pltProb.addPlot(Values, Filter)
-        self.pltBox.addPlot(Values, Filter)
-        self.pltTS.addPlot(Values, Filter)
+        self.pltSum.addPlot(cursor, series, Filter)
+        self.pltHist.addPlot(cursor, series, Filter)
+        self.pltProb.addPlot(cursor, series, Filter)
+        self.pltBox.addPlot(cursor, series, Filter)
+        self.pltTS.addPlot(cursor, series, Filter)
+        
+        
+        # self.pltSum.addPlot(Values, Filter)
+        # self.pltHist.addPlot(Values, Filter)
+        # self.pltProb.addPlot(Values, Filter)
+        # self.pltBox.addPlot(Values, Filter)
+        # self.pltTS.addPlot(Values, Filter)
         
 
 
@@ -113,6 +119,9 @@ class pnlPlot(fnb.FlatNotebook):
 
     def getActivePlotID(self):
         return self.GetSelection()
+
+    def Close(self):
+        self.pltTS.Close()
        
         
     def __init__(self, parent, id, pos, size, style, name):

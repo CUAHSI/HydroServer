@@ -59,7 +59,7 @@ class ServiceManager():
 		try:
 			service = SeriesService(conn_string, True)
 			site = service.get_test_data()
-			print site
+			# print site
 		except SQLAlchemyError:
 			return False
 
@@ -96,7 +96,7 @@ class ServiceManager():
 			driver = "pymysql"
 
 		conn_string = self._connection_format % (conn_dict['engine'], driver, conn_dict['user'], conn_dict['password'], conn_dict['address'], conn_dict['db'])
-		print conn_string
+		# print conn_string
 		return conn_string
 
 	def __save_connections(self):

@@ -88,7 +88,7 @@ class pnlSeriesSelector(wx.Panel):
         self.panel2.SetSizer(self.boxSizer2)
         self.pnlSimple.SetSizer(self.boxSizer6)
         self.pnlSplitter.SetSizer(self.boxSizer3)
-        self.pnlRadio.SetSizer(self.boxSizer5)
+        # self.pnlRadio.SetSizer(self.boxSizer5)
 
     def _init_ctrls(self, prnt):
         # generated method, don't edit
@@ -226,7 +226,12 @@ class pnlSeriesSelector(wx.Panel):
 
         ### INIT Series Catalog        
         self.cursor.executemany("INSERT INTO SeriesCatalog VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.dbservice.get_series_test())
+        
+        self.cursor.execute("ALTER TABLE SeriesCatalog ADD COLUMN isSelected INTEGER ")
+        
+        self.cursor.execute("UPDATE SeriesCatalog SET isSelected=0")
         self.conn.commit()
+
         sql = "SELECT * FROM SeriesCatalog"
         self.cursor.execute(sql)        
         # self.Series = [list(x) for x in self.cursor.fetchall()]
@@ -313,17 +318,7 @@ class pnlSeriesSelector(wx.Panel):
     def OnEditButton(self, vals):
         self.SelectForEdit(self.tableSeries.GetColumnText(self.tableSeries.GetSelection(), 1))
     
-    def SelectForEdit(self, seriesID):
-        self.DataValues = self.dbservice.get_data_values_by_series_id(seriesID)
-            
-        self.cursor.execute("DELETE FROM DataValuesEdit")
-        self.conn.commit()
-        self.cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
-        self.conn.commit()
-        # Publisher().sendMessage(("add.NewPlot"), [self.cursor, self.seriesList[event.m_itemIndex]])
-
-        Publisher().sendMessage(("edit.NewPlot"), [self.cursor, self.dbservice.get_series_by_id(seriesID)])
-        Publisher().sendMessage(("edit.EnableButtons"), True)
+    
     
     def OnRightExData(self, event):
         # print "in OnRightExData"
@@ -466,16 +461,36 @@ class pnlSeriesSelector(wx.Panel):
             self.DataValues = self.dbservice.get_data_values_by_series_id(self.tableSeries.GetColumnText(event.m_itemIndex, 1))
          
             self.cursor.execute("DELETE FROM DataValues")
-            self.conn.commit()
             self.cursor.executemany("INSERT INTO DataValues VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
             self.conn.commit()
 
 
-            Publisher().sendMessage(("add.NewPlot"), [self.cursor,self.tableSeries.innerList[event.m_itemIndex]])
-
+            # Publisher().sendMessage(("add.NewPlot"), [self.cursor,self.tableSeries.innerList[event.m_itemIndex]])
+            self.parent.Parent.addPlot(self.cursor,self.tableSeries.innerList[event.m_itemIndex])
         self.Refresh()
         event.Skip()
+
+    def SelectForEdit(self, seriesID):
+        self.DataValues = self.dbservice.get_data_values_by_series_id(seriesID)
+            
+        # self.cursor.execute("DELETE FROM DataValuesEdit")
+        # self.conn.commit()
+        
+        self.cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
+        self.conn.commit()
+        self.cursor.execute("ALTER TABLE DataValuesEdit ADD COLUMN isSelected INTEGER ")
+        self.conn.commit()
+        self.cursor.execute("UPDATE DataValuesEdit SET isSelected=0")
+        self.conn.commit()
+        # print type(self.parent.Parent), dir (self.parent.Parent)
+        self.parent.Parent.addEdit(self.cursor, self.dbservice.get_series_by_id(seriesID))
+        # Publisher().sendMessage(("edit.NewPlot"), [self.cursor, self.dbservice.get_series_by_id(seriesID)])
+        
    
+    def stopEdit(self):
+        self.cursor.execute("DROP TABLE DataValuesEdit")
+        self.conn.commit()
+        self.createEditTable()
 
     def initDB(self):
         self.cursor.execute("""CREATE TABLE SeriesCatalog
@@ -538,8 +553,9 @@ class pnlSeriesSelector(wx.Panel):
                 PRIMARY KEY (ValueID),
                 UNIQUE (DataValue, LocalDateTime, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID))
                """)
+        self.createEditTable()
 
-
+    def createEditTable(self):
         self.cursor.execute("""CREATE TABLE DataValuesEdit
                 (ValueID INTEGER NOT NULL,
                 DataValue FLOAT NOT NULL,

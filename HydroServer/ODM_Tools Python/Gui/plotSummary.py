@@ -37,14 +37,14 @@ class plotSummary(wx.Panel):
         self.initPlot()
         self._init_sizers()
 
-    def addPlot(self, Values, Filter):
+    def addPlot(self, cursor, series, Filter):
 
-        series=Values[1]
+        # series=Values[1]
 
         self.grdSummary.AppendCols(numCols = 1, updateLabels = True)
         count = self.grdSummary.GetNumberCols()
         self.grdSummary.SetColLabelValue(count-1, series.site_name +"-"+ series.variable_name)
-        self.fillValues(Values, Filter, count-1)
+        self.fillValues(cursor, series, Filter, count-1)
         
     def removePlot(self, id):
         #loop through each column and find position
@@ -72,10 +72,11 @@ class plotSummary(wx.Panel):
         self.grdSummary.SetRowLabelValue(14, "90%")
         
         
-    def fillValues(self, Values, Filter, col):
+    def fillValues(self, cursor, series, Filter, col):
         #SetCellValue(int row, int col, const wxString& s)  
 
-        self.cursor = Values[0]        
+        # self.cursor = Values[0] 
+        self.cursor = cursor       
 
 
         self.cursor.execute("SELECT DataValue FROM DataValues"+Filter)
@@ -87,7 +88,7 @@ class plotSummary(wx.Panel):
         data= sorted(dataValues)
         count=len(data)
 
-        self.grdSummary.SetCellValue(0, col, repr(Values[1].id))  
+        self.grdSummary.SetCellValue(0, col, repr(series.id))  
         self.grdSummary.SetCellValue(1, col, repr(count))        
         self.grdSummary.SetCellValue(2, col, repr(val))
         self.grdSummary.SetCellValue(3, col, repr(round(numpy.mean(data),5)))  

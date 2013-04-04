@@ -20,4 +20,4 @@ class SessionFactory():
 # for testing
 if (__name__ == "__main__"):
 	sf = SessionFactory()
-	print sf
+	# print sf
