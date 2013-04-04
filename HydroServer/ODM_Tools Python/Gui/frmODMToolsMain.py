@@ -85,8 +85,8 @@ class frmODMToolsMain(wx.Frame):
               style=wx.DEFAULT_FRAME_STYLE, title=u'ODM Tools')
         self.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
               False, u'Tahoma'))
-        Publisher().subscribe(self.addPlot, ("add.NewPlot"))
-        Publisher().subscribe(self.addEdit, ("edit.NewPlot"))
+        # Publisher().subscribe(self.addPlot, ("add.NewPlot"))
+        # Publisher().subscribe(self.addEdit, ("edit.NewPlot"))
         Publisher().subscribe(self.onDocking, ("adjust.Docking"))
 
         Publisher().subscribe(self.onDocking, ("adjust.Docking"))
@@ -220,10 +220,15 @@ class frmODMToolsMain(wx.Frame):
         self.pnlPlot.selectPlot(value)
 
 
-    def addPlot(self, Values):
+    def addPlot(self, cursor, series):
     #     self.dataTable.Init(Values.data[0])
-        self.pnlPlot.addPlot(Values.data)
+        # self.pnlPlot.addPlot(Values.data)
+
+        self.pnlPlot.addPlot(cursor, series)
+
         self._ribbon.enableButtons(self.pnlPlot.getActivePlotID() )
+
+
 
     def onSetScriptTitle(self, title):
         scriptPane = self._mgr.GetPane(self.txtPythonScript)
@@ -234,13 +239,29 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.Update()
 
 
-    def addEdit(self, Values):
-        self.pnlPlot.addEditPlot(Values.data)
-        self.dataTable.Init(Values.data[0])
-        self.edit_service = self.service_manager.get_edit_service(Values.data[1].id, Values.data[0])
+    def addEdit(self, cursor, series):
+        # Publisher().sendMessage(("edit.EnableButtons"), True)
+        # self.pnlPlot.addEditPlot(Values.data)
+        # self.dataTable.Init(Values.data[0])
+        # self.edit_service = self.service_manager.get_edit_service(Values.data[1].id, Values.data[0])
+        
+        print cursor, series
+        self.pnlPlot.addEditPlot(cursor, series)
+        self.dataTable.Init(cursor)
+        self.edit_service = self.service_manager.get_edit_service(series.id, cursor)
+        self._ribbon.toggleEditButtons(True)
         
         # TODO
         # create edit service, send in Values.data[0]
+   
+    def stopEdit(self):
+        
+        self.pnlPlot.stopEdit()
+        self.dataTable.stopEdit()
+        self.edit_service = None
+        self.pnlSelector.stopEdit()
+        self._ribbon.toggleEditButtons(False)
+        
 
 
     def getEditService(self):
@@ -282,6 +303,7 @@ class frmODMToolsMain(wx.Frame):
 
     def OnClose(self, event):
         # deinitialize the frame manager
+        self.pnlPlot.Close()
         try:
             f= open('ODMTools.config', 'w')
             f.write(self._mgr.SavePerspective())

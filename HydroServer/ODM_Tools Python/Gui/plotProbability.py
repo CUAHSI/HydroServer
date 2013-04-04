@@ -4,7 +4,6 @@ import wx
 from wx.lib.pubsub import Publisher
 
 import matplotlib
-matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from matplotlib.widgets import Lasso
@@ -80,16 +79,18 @@ class plotProb(wx.Panel):
 
     self.canvas.draw()
 
-  def addPlot(self, Values, Filter):
+  def addPlot(self, cursor, series, Filter):
 
-      self.cursor = Values[0]
+      # self.cursor = Values[0]
+      self.cursor=cursor
 
 
       self.cursor.execute("SELECT DataValue FROM DataValues"+Filter)
       self.dataValues =[x[0] for x in self.cursor.fetchall()]
 
      
-      self.Series= Values[1]
+      # self.Series= Values[1]
+      self.Series= series
 
       self.plot.clear()
      

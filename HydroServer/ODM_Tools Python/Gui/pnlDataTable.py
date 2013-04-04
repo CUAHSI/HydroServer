@@ -2,7 +2,7 @@
 
 import wx
 import wx.grid
-from ObjectListView import ObjectListView, ColumnDefn, VirtualObjectListView
+from ObjectListView import ObjectListView, ColumnDefn, FastObjectListView
 from wx.lib.pubsub import Publisher
 import odmdata
 import sqlite3
@@ -19,7 +19,7 @@ class pnlDataTable(wx.Panel):
         wx.Panel.__init__(self, id=wxID_PNLDATATABLE, name=u'pnlDataTable',
               parent=prnt, pos=wx.Point(717, 342), size=wx.Size(677, 449),
               style=wx.TAB_TRAVERSAL)
-        self.myOlv = ObjectListView(self, -1, style=wx.LC_REPORT)#Virtual
+        self.myOlv = FastObjectListView(self, -1, style=wx.LC_REPORT)#Virtual
 
         
 
@@ -74,7 +74,7 @@ class pnlDataTable(wx.Panel):
     #     self.doneselecting = False
 
     def OnItemSelected(self, event):
-        print "in onItemSelected"
+        # print "in onItemSelected"
         # print 
 
         # if  not (event.m_itemIndex in self.selectedpoints):
@@ -109,6 +109,9 @@ class pnlDataTable(wx.Panel):
         self.myOlv.SelectObjects(objlist, deselectOthers=True)
         self.doneselecting = True  
         self.myOlv.SetFocus()
+
+    def stopEdit(self):
+        self.myOlv.SetObjects(None)
         
 
 # a) Call self.list_ctrl.SetFocus() right after you click the button;

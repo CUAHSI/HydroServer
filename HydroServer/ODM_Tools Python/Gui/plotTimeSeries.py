@@ -10,7 +10,6 @@ from wx.lib.pubsub import Publisher
 
 import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 # from matplotlib.widgets import Lasso
@@ -80,7 +79,7 @@ class plotTimeSeries(wx.Panel):
       self.Plots = []
       self.lines=[]
       self.axes = []
-      self.colorlist = ('b', 'g', 'r', 'c', 'm', 'y')
+      self.colorlist = ('orange','blue', 'green', 'red', 'cyan', 'magenta', 'yellow')
 
       # self.canvas.mpl_connect('button_press_event', self.onclick)
 
@@ -89,16 +88,26 @@ class plotTimeSeries(wx.Panel):
       self.canvas.draw()
       self._init_sizers()
 
+  def stopEdit(self):
+      self.timeSeries.clear()
+      self.editDataFilter = None
+      self.editCursor =None
+      self.editSeries= None
+      self.editData = None
+      self.editline = None
+      self.selectedlist = None
+      self.editPoint =None
+      self.RefreshPlot()
 
-  def editSeries(self, Values, Filter):
+  def editSeries(self, cursor, series, Filter):
       print "in edit series"
       self.timeSeries.clear()
 
-      print Values[1]
-
       self.editDataFilter = Filter
-      self.editCursor = Values[0]
-      self.editSeries= Values[1]
+      # self.editCursor = Values[0]
+      # self.editSeries= Values[1]
+      self.editCursor = cursor
+      self.editSeries= series
 
 
       #####include NoDV in plot
@@ -199,13 +208,13 @@ class plotTimeSeries(wx.Panel):
     self.canvas.draw()
 
 
-  def addPlot(self, Values, Filter):
+  def addPlot(self, cursor, series, Filter):
     self.dataFilter = Filter
-    self.cursor = Values[0]
+    self.cursor = cursor
     # print Values[1]
-    series= Values[1]
+    # series= Values[1]
 
-    print Values[1]
+    # print series
     isplotted= False
     for ind  in range(len(self.Plots)):
         if self.Plots[ind].SeriesID == series.id:
@@ -250,7 +259,7 @@ class plotTimeSeries(wx.Panel):
           self.axes.append(axisData(x, self.timeSeries.twinx(),  1, 'right', rightadjust= .90))
         elif x==2:
           self.axes.append(axisData(x, self.timeSeries.twinx(),  60, 'right', rightadjust= .9-(adj*x)))
-          print .9-(adj*x)
+          # print .9-(adj*x)
         else:
           # axes.append(axisData(x, self.timeSeries.twinx(),  1.2*(x-1), 'right', rightadjust= .75*(x-1)))
           self.axes.append(axisData(x, self.timeSeries.twinx(),  -60, 'left', leftadjust= .10+(adj*2)))
@@ -291,7 +300,7 @@ class plotTimeSeries(wx.Panel):
         # self.timeSeries.set_xlim(min(currPlot.DateTimes), max(currPlot.DateTimes))
         # ax.axis.set_ylim(min(currPlot.DataValues), max(currPlot.DataValues))
 
-        self.lines.append(ax.axis.plot_date(currPlot.DateTimes, currPlot.DataValues, self.format+currPlot.color, xdate = True, tz = None, label = currPlot.title ))
+        self.lines.append(ax.axis.plot_date(currPlot.DateTimes, currPlot.DataValues, self.format, color=currPlot.color, xdate = True, tz = None, label = currPlot.title ))
 
 
         if len(self.axes) >1:
@@ -307,25 +316,23 @@ class plotTimeSeries(wx.Panel):
           plt.subplots_adjust(bottom=.1)
           self.timeSeries.legend_=None
 
-        
-
-
       self.timeSeries.set_xlabel("Date Time")
-
+      
       self.canvas.draw()
+      # plt.close()
 
   def removePlot(self, seriesID):
      #if series id matches a key in the dictionary
 
       for ind  in range(len(self.Plots)):
         if self.Plots[ind].SeriesID == seriesID:
-          print ind
+          # print ind
           self.axes[ind].axis.clear()
           self.Plots.pop(ind)
 
           # self.timeSeries.lines.pop(ind).remove()
-      for p in self.Plots:
-        print p.SeriesID
+      # for p in self.Plots:
+      #   print p.SeriesID
       self.RefreshPlot()
 
 
@@ -356,7 +363,8 @@ class plotTimeSeries(wx.Panel):
 
       # print(event.ind, np.take(self.editDateTimes, event.ind), np.take(self.editDataValues, event.ind))
 
-
+  def Close(self):
+    plt.close()
 
 
 
@@ -383,6 +391,32 @@ class plotTimeSeries(wx.Panel):
 
 
 
+
+class plotData (object):
+  def __init__(self, sID, dValues, dTimes,  ylabel, title, color ):
+    self.SeriesID= sID
+    self.DataValues = dValues
+    self.DateTimes=dTimes
+
+    self.startDate= min(dTimes)
+    self.endDate=max(dTimes)
+    self.ylabel = ylabel
+    self.title = title
+    self.color = color
+
+class axisData (object):
+  def __init__(self, axisid, axis,  position, side="", rightadjust="", leftadjust="", minx="", maxx=""):
+    self.axisid= axisid
+    self.axis = axis
+    self.rightadjust= rightadjust
+    self.leftadjust = leftadjust
+    self.position = position
+    self.side = side
+    self.minx= minx
+    self.maxx= maxx
+
+  def __repr__(self):
+    return "<AxisData(id:'%s', axis:'%s', pos:'%s', side:'%s', radj:'%s', ladj:'%s')>" % (self.axisid, self.axis, self.position, self.side, self.rightadjust, self.leftadjust)
 
 
 

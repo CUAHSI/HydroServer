@@ -4,7 +4,6 @@ import wx
 from wx.lib.pubsub import Publisher
 
 import matplotlib
-matplotlib.use('WXAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
@@ -65,13 +64,15 @@ class plotBox(wx.Panel):
 
    
 
-  def addPlot(self, Values, Filter):
+  def addPlot(self, cursor, series, Filter):
 
-      self.cursor = Values[0]
+      # self.cursor = Values[0]
+      self.cursor = cursor
       self.cursor.execute("SELECT  DataValue, CAST(strftime('%m', LocalDateTime) AS INTEGER) AS Month, CAST(strftime('%Y', LocalDateTime)AS INTEGER) As Year FROM DataValues "+Filter)
       self.Data= self.cursor.fetchall() 
 
-      self.Series= Values[1]
+      # self.Series= Values[1]
+      self.Series = series
       self.overall("")             
 
 
