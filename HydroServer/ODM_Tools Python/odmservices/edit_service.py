@@ -129,14 +129,16 @@ class EditService():
         return self._active_points
 
     def get_plot_list(self):
-        dv_list = [0] * len(self._active_series)
-        if self._active_points != self._active_series:
-            id_list = [x[0] for x in self._active_points]
-            for i in range(len(self._active_series)):
-                if self._active_series[i][0] in id_list:
-                    dv_list[i] = 1
+        # dv_list = [0] * len(self._active_series)
+        # if self._active_points != self._active_series:
+        #     id_list = [x[0] for x in self._active_points]
+        #     for i in range(len(self._active_series)):
+        #         if self._active_series[i][0] in id_list:
+        #             dv_list[i] = 1
 
-        return dv_list
+        # return dv_list
+
+        return [(x[2], x[1]) for x in self.get_active_points()]
 
     def add_point(self, point):
         # add to active_series and _points,
