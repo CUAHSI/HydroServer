@@ -1,6 +1,7 @@
 from series_service import SeriesService
 from cv_service import CVService
 from edit_service import EditService
+from record_service import RecordService
 import os
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -82,6 +83,8 @@ class ServiceManager():
 		conn_string = self.__build_connection_string(self._current_connection)
 		return EditService(series_id, cursor=cursor, connection_string=conn_string, debug=self.debug)
 
+	def get_record_service(self, script, series_id, cursor):
+		return RecordService(script, self.get_edit_service(series_id, cursor), self.__build_connection_string(self.get_current_connection()))
 
 	# private
 	def __get_file(self, mode):

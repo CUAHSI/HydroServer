@@ -33,8 +33,6 @@ class EditService():
         self._debug = debug
 
         if cursor == None:
-            # TODO
-            # build it ourselves (series selector init)
             series_service =SeriesService(connection_string, False)
             self.DataValues = series_service.get_data_values_by_series_id(series_id)
             self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)

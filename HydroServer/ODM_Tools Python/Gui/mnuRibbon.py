@@ -304,10 +304,19 @@ class mnuRibbon(RB.RibbonBar):
 
 
     def OnRecord(self, event):
-        pass
+        panedet=self.parent._mgr.GetPane(self.parent.txtPythonScript)
+        if not panedet.IsShown():
+            panedet.Show(show=True)
+
+        script = self.parent.txtPythonScript
+        script.OnNew(event)
+
+        record_service = self.parent.getRecordService()
+        record_service.toggle_record()
+        record_service.write_header()
     
     def OnEditFilter(self, event):
-        data_filter = frmDataFilters.frmDataFilter(self, self.parent.getEditService())
+        data_filter = frmDataFilters.frmDataFilter(self, self.parent.getRecordService())
         self.filterlist = data_filter.ShowModal()
     
     def OnEditChangeValue(self, event):

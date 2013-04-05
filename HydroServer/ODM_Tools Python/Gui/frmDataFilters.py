@@ -192,9 +192,6 @@ class frmDataFilter(wx.Dialog):
         if self.rbDate.GetValue():
           dateAfter = self.dpAfter.GetValue()
           dateBefore = self.dpBefore.GetValue()
-          print "year: ", dateAfter.Year
-          print "mon: ", dateAfter.Month
-          print "day: ", dateAfter.Day
 
           dtDateAfter = datetime(int(dateAfter.Year), int(dateAfter.Month) + 1, int(dateAfter.Day))
           dtDateBefore = datetime(int(dateBefore.Year), int(dateBefore.Month) + 1, int(dateBefore.Day))

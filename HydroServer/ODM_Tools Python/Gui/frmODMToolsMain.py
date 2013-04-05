@@ -24,7 +24,7 @@ from numpy import arange, sin, cos, exp, pi
 import frmDBConfiguration
 
 from odmservices import ServiceManager
-from odmservices import EditService
+from odmservices import RecordService
 from pnlScript import pnlScript
 import pnlSeriesSelector
 import pnlPlot
@@ -51,7 +51,7 @@ class frmODMToolsMain(wx.Frame):
 
     def __init__(self, parent):
         self.service_manager = ServiceManager()
-        self.edit_service = None
+        self.record_service = None
         if self.service_manager.get_current_connection() == None:
             # Create a DB form which will set a connection for the service manager
             db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)
@@ -248,7 +248,7 @@ class frmODMToolsMain(wx.Frame):
         print cursor, series
         self.pnlPlot.addEditPlot(cursor, series)
         self.dataTable.Init(cursor)
-        self.edit_service = self.service_manager.get_edit_service(series.id, cursor)
+        self.record_service = self.service_manager.get_record_service(self.txtPythonScript, series.id, cursor)
         self._ribbon.toggleEditButtons(True)
         
         # TODO
@@ -258,14 +258,14 @@ class frmODMToolsMain(wx.Frame):
         
         self.pnlPlot.stopEdit()
         self.dataTable.stopEdit()
-        self.edit_service = None
+        self.record_service = None
         self.pnlSelector.stopEdit()
         self._ribbon.toggleEditButtons(False)
         
 
 
-    def getEditService(self):
-        return self.edit_service
+    def getRecordService(self):
+        return self.record_service
     
 
     def onChangeDBConn(self, event):
