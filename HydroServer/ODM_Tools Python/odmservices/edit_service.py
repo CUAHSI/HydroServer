@@ -83,10 +83,32 @@ class EditService():
 
     # Data Gaps
     def data_gaps(self, value, time_period):
+        points = []
+        length = len(self._active_points)
+
+        value_sec = 0
+
         if time_period == 'second':
-            pass
-        for i in xrange(len(self._active_points)):
-            pass
+            value_sec = value
+        if time_period == 'minute':
+            value_sec = value * 60
+        if time_period == 'hour':
+            value_sec = value * 60 * 60
+        if time_period == 'day':
+            value_sec = value * 60 * 60 * 24
+
+        for i in xrange(length):
+            if i + 1 < length:      # make sure we stay in bounds
+                point1 = self._active_points[i]
+                point2 = self._active_points[i+1]
+                interval = point2[2] - point1[2]
+                interval__total_sec = interval.total_seconds()
+
+                if interval__total_sec >= value_sec:
+                    points.append(point1)
+                    points.append(point2)
+
+        self._active_points = points
 
     def value_change_threshold(self, value):
         points = []
@@ -129,16 +151,16 @@ class EditService():
         return self._active_points
 
     def get_plot_list(self):
-        # dv_list = [0] * len(self._active_series)
-        # if self._active_points != self._active_series:
-        #     id_list = [x[0] for x in self._active_points]
-        #     for i in range(len(self._active_series)):
-        #         if self._active_series[i][0] in id_list:
-        #             dv_list[i] = 1
+        dv_list = [0] * len(self._active_series)
+        if self._active_points != self._active_series:
+            id_list = [x[0] for x in self._active_points]
+            for i in range(len(self._active_series)):
+                if self._active_series[i][0] in id_list:
+                    dv_list[i] = 1
 
-        # return dv_list
+        return dv_list
 
-        return [(x[2], x[1]) for x in self.get_active_points()]
+        # return [(x[2], x[1]) for x in self._active_points]
 
     def add_point(self, point):
         # add to active_series and _points,
