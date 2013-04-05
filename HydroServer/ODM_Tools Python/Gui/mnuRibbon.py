@@ -69,8 +69,8 @@ class mnuRibbon(RB.RibbonBar):
         self.PlotsOptions_bar.AddDropdownButton(wxID_RIBBONPLOTTSTYPE, "Plot Type",  
                                 CreateBitmap("images\\PlotType.png"), "")
 
-        self.PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSCOLOR, "Color Setting",  
-                                CreateBitmap("images\\ColorSetting.png"), "")
+        # self.PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSCOLOR, "Color Setting",  
+        #                         CreateBitmap("images\\ColorSetting.png"), "")
         self.PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
                                 CreateBitmap("images\\Legend.png"), "")
 
@@ -90,7 +90,7 @@ class mnuRibbon(RB.RibbonBar):
                                 CreateBitmap("images\\BoxWhiskerType.png"), "")
         
         self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, False) 
-        self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
+        # self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
         self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, False) 
         self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False)
                                 
@@ -439,28 +439,28 @@ class mnuRibbon(RB.RibbonBar):
         ##tims series or probability
         if plot == 0 or plot == 1:
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, True) 
-            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, True) 
+            # self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, True) 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, True) 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False) 
             self.spnBins.Enabled = False
         ##HIstogram
         elif plot == 2:
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, False) 
-            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
+            # self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, False) 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False) 
             self.spnBins.Enabled = True
         ##Box Plot
         elif plot == 3:
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, False) 
-            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
+            # self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, False) 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, True) 
             self.spnBins.Enabled = False
          #Summary   
         elif plot == 4: 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSTYPE, False) 
-            self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
+            # self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSCOLOR, False) 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTTSLEGEND, False) 
             self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTBOXTYPE, False)   
             self.spnBins.Enabled = False

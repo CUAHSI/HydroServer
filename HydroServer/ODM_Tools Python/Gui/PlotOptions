@@ -26,6 +26,51 @@ class axisData (object):
   def __repr__(self):
     return "<AxisData(id:'%s', axis:'%s', pos:'%s', side:'%s', radj:'%s', ladj:'%s')>" % (self.axisid, self.axis, self.position, self.side, self.rightadjust, self.leftadjust)
 
+class PlotOptions(object):
+    def enum( **enums):
+        return type('Enum', (), enums)
+    TimeSeriesType= enum('Both'=3, 'Line'=2, 'Point'=1, 'None'=0)
+    BoxWhiskerType = enum('Monthly'=0, 'Seasonal'= 2, 'Yearly'=3, 'Overall'=4)
+
+    timeSeriesMethod =TimeSeriesType.Both
+    numBins = 25
+    binWidth=1.5
+    xMax
+    xMin
+    yMax
+    yMin
+    xMajor
+    boxWhiskerMethod = BosWhiskerType.Monthly
+    isPlotCensored = True
+    colorList = []
+    showLegend =True
+    useCensoredData = False
+    displayFullDate=True
+    _startDateTime
+    def setStartDate(self, datetime):
+        _startDateTime = datetime
+    def getStartDate(self):
+        return _startDateTime    
+    _endDateTime
+    def setEndDate(self, datetime):
+        _endDateTime = datetime
+    def getEndDate(self):
+        return _endDateTime
+
+    _startDateLimit
+    def setStartDateLimit(self, datelimit):
+        _startDateLimit = datelimit
+    def getStartDateLimit(self):
+        return _startDateLimit   
+    _endDateLimit
+    def setEndDate(self, datelimit):
+        _endDateL = datelimit
+    def getEndDate(self):
+        return _endDateLimit
+
+    def setColorCollections(self):
+        colorlist = ('b', 'g', 'r', 'c', 'm', 'y')
+    
 
 class OneSeriesPlotInfo(object):
     data_table # link to sql database
@@ -37,7 +82,7 @@ class OneSeriesPlotInfo(object):
     plot_options=""
     series_id=0
     line_color = "Black"
-    point_color ="Black"# will currently be the same as the line color
+    point_color =line_color# will currently be the same as the line color
     statistics= Statistics()
 
     def __init__ (self, prnt):

@@ -15,7 +15,7 @@ class MyCustomToolbar(NavigationToolbar):
     # rather than copy and edit the whole (rather large) init function, we run
     # the super-classes init function as usual, then go back and delete the
     # button we don't want
-    def __init__(self, plotCanvas, multPlots= False):
+    def __init__(self, plotCanvas, multPlots= False, allowselect = False):
         
         NavigationToolbar.__init__(self, plotCanvas)        
         # delete the toolbar button we don't want
@@ -24,18 +24,29 @@ class MyCustomToolbar(NavigationToolbar):
             self.DeleteToolByPos(CONFIGURE_SUBPLOTS_TOOLBAR_BTN_POSITION)
             
         # add the new toolbar buttons that we do want
+        if allowselect:
+            self.selectbutton= self.AddSimpleTool(self.ON_CUSTOM_SEL, CreateBitmap("images\\select.png"),
+                           'Select Points', 'Select Points')
+            wx.EVT_TOOL(self, self.ON_CUSTOM_SEL, self._on_custom_sel_point)
+            self.selectbutton.Enable(False)
+            
         self.AddSimpleTool(self.ON_CUSTOM_LEFT, CreateBitmap("images\\scroll left.png"),
                            'Pan to the left', 'Pan graph to the left')
         wx.EVT_TOOL(self, self.ON_CUSTOM_LEFT, self._on_custom_pan_left)
         self.AddSimpleTool(self.ON_CUSTOM_RIGHT, CreateBitmap("images\\scroll right.png"),
                            'Pan to the right', 'Pan graph to the right')
         wx.EVT_TOOL(self, self.ON_CUSTOM_RIGHT, self._on_custom_pan_right)
-        self.AddSimpleTool(self.ON_CUSTOM_SEL, CreateBitmap("images\\Exclamation.png"),
-                           'Select Points', 'Select Points')
-        wx.EVT_TOOL(self, self.ON_CUSTOM_SEL, self._on_custom_sel_point)
+        
 
         self.SetToolBitmapSize(wx.Size(16, 16))        
         self.Realize()
+    def editSeries(self):
+        #enable select button
+        self.selectbutton.Enable(True)
+
+    def stopEdit(self):
+       #disable select button
+        self.selectbutton.Enable(False)
 
     # in theory this should never get called, because we delete the toolbar
     #  button that calls it. but in case it does get called (e.g. if there
@@ -65,6 +76,7 @@ class MyCustomToolbar(NavigationToolbar):
 
     def _on_custom_sel_point(self, evt):
         print "select points button"
+        # self.canvas.mpl_connect('button_press_event', onclick)
         pass
 
 
