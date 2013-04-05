@@ -64,7 +64,7 @@ class plotTimeSeries(wx.Panel):
       self.canvas.mpl_connect('pick_event', self.on_pick)
 
       # Create the navigation toolbar, tied to the canvas
-      self.toolbar = NavigationToolbar(self.canvas)
+      self.toolbar = NavigationToolbar(self.canvas, allowselect=True)
       self.toolbar.Realize()
 
 
@@ -97,6 +97,7 @@ class plotTimeSeries(wx.Panel):
       self.editline = None
       self.selectedlist = None
       self.editPoint =None
+      self.toolbar.stopEdit()
       self.RefreshPlot()
 
   def editSeries(self, cursor, series, Filter):
@@ -108,6 +109,7 @@ class plotTimeSeries(wx.Panel):
       # self.editSeries= Values[1]
       self.editCursor = cursor
       self.editSeries= series
+      self.toolbar.editSeries()
 
 
       #####include NoDV in plot
@@ -145,6 +147,7 @@ class plotTimeSeries(wx.Panel):
       self.editPoint = self.timeSeries.scatter(self.editData.DateTimes, self.editData.DataValues, s= 20, c=['k' if x==0 else 'r' for x in self.selectedlist])
       #   self.isfirstplot = False
       self.editPoint.set_picker(True)
+      
 
       self.timeSeries.set_xlabel("Date Time")
 
