@@ -64,6 +64,8 @@ class pnlScript(wx.Frame):
 
         self.dirname = ''
         self.filename = ''
+        self._styles = [None] * 32
+        self._free = 1
 
     def OnNew(self, e):
         if self.control.GetText() != '':
@@ -147,11 +149,12 @@ class pnlScript(wx.Frame):
 
     def getStyle(self, c='black'):
         """
-        Returns a style for a given color if one exists. If no style
-        exists for the color, make a new style.
-
-        If we run out of styles (only 32 allowed here) we go to the top
+        Returns a style for a given colour if one exists.  If no style
+        exists for the colour, make a new style.
+        
+        If we run out of styles, (only 32 allowed here) we go to the top
         of the list and reuse previous styles.
+
         """
         free = self._free
         if c and isinstance(c, (str, unicode)):
@@ -159,17 +162,17 @@ class pnlScript(wx.Frame):
         else:
             c = 'black'
 
-        try:    
+        try:
             style = self._styles.index(c)
             return style
 
         except ValueError:
             style = free
             self._styles[style] = c
-            self.StyleSetForeground(style, wx.NamedColour(c))
+            self.control.StyleSetForeground(style, wx.NamedColour(c))
 
             free += 1
-            if free > 31:
+            if free >31:
                 free = 0
             self._free = free
             return style
@@ -183,11 +186,11 @@ class pnlScript(wx.Frame):
         """
         style = self.getStyle(c)
         lenText = len(text.encode('utf8'))
-        end = self.GetLength()
-        self.AddText(text)
-        self.StartStyling(end, 31)
-        self.SetStyling(lenText, style)
-        self.EnsureCaretVisible()
-
+        end = self.control.GetLength()
+        self.control.AddText(text)
+        self.control.StartStyling(end, 31)
+        self.control.SetStyling(lenText, style)
+        self.control.EnsureCaretVisible()
+        self.control.onUpdateUI(None)
 
     __call__ = write
