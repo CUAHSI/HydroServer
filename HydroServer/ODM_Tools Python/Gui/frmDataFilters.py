@@ -20,22 +20,22 @@ def create(parent):
  wxID_FRMDATAFILTERSBDATE, wxID_FRMDATAFILTERSBGAPS, 
  wxID_FRMDATAFILTERSBTHRESHOLD, wxID_FRMDATAFILTERTXTGAPSVAL, 
  wxID_FRMDATAFILTERTXTTHRESHVALGT, wxID_FRMDATAFILTERTXTTHRESVALLT, 
- wxID_FRMDATAFILTERTXTVCHANGETHRESH, 
-] = [wx.NewId() for _init_ctrls in range(26)]
+ wxID_FRMDATAFILTERTXTVCHANGETHRESH, wxID_FRMDATAFILTERCHKFILTER,
+] = [wx.NewId() for _init_ctrls in range(27)]
 
 class frmDataFilter(wx.Dialog):
     def _init_ctrls(self, prnt):
 
         # generated method, don't edit
         wx.Dialog.__init__(self, id=wxID_FRMDATAFILTER, name=u'frmDataFilter',
-              parent=prnt, pos=wx.Point(599, 384), size=wx.Size(313, 384),
+              parent=prnt, pos=wx.Point(599, 384), size=wx.Size(313, 400),
               style=wx.DEFAULT_DIALOG_STYLE, title=u'Data Filter')
-        self.SetClientSize(wx.Size(297, 346))
+        self.SetClientSize(wx.Size(297, 370))
         self.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
               u'MS Shell Dlg 2'))
 
         self.panel1 = wx.Panel(id=wxID_FRMDATAFILTERPANEL1, name='panel1',
-              parent=self, pos=wx.Point(0, 0), size=wx.Size(297, 346),
+              parent=self, pos=wx.Point(0, 0), size=wx.Size(297, 370),
               style=wx.TAB_TRAVERSAL)
 
         self.sbThreshold = wx.StaticBox(id=wxID_FRMDATAFILTERSBTHRESHOLD,
@@ -109,46 +109,53 @@ class frmDataFilter(wx.Dialog):
               parent=self.panel1, pos=wx.Point(96, 128), size=wx.Size(176, 21),
               style=0, value='second')
 
-        self.lblDateBefore = wx.StaticText(id=wxID_FRMDATAFILTERLBLDATEBEFORE,
-              label=u'Before:', name=u'lblDateBefore', parent=self.panel1,
-              pos=wx.Point(24, 184), size=wx.Size(37, 13), style=0)
-
         self.lblDateAfter = wx.StaticText(id=wxID_FRMDATAFILTERLBLDATEAFTER,
               label=u'After:', name=u'lblDateAfter', parent=self.panel1,
               pos=wx.Point(24, 232), size=wx.Size(30, 13), style=0)
 
-        self.dpBefore = wx.DatePickerCtrl(id=wxID_FRMDATAFILTERDPBEFORE,
-              name=u'dpBefore', parent=self.panel1, pos=wx.Point(24, 200),
-              size=wx.Size(248, 21), style=wx.DP_DROPDOWN | wx.DP_SHOWCENTURY)
+        self.lblDateBefore = wx.StaticText(id=wxID_FRMDATAFILTERLBLDATEBEFORE,
+              label=u'Before:', name=u'lblDateBefore', parent=self.panel1,
+              pos=wx.Point(24, 184), size=wx.Size(37, 13), style=0)
 
         self.dpAfter = wx.DatePickerCtrl(id=wxID_FRMDATAFILTERDBAFTER,
               name=u'dbAfter', parent=self.panel1, pos=wx.Point(24, 248),
               size=wx.Size(248, 21), style=wx.DP_DROPDOWN | wx.DP_SHOWCENTURY)
 
+        self.dpBefore = wx.DatePickerCtrl(id=wxID_FRMDATAFILTERDPBEFORE,
+              name=u'dpBefore', parent=self.panel1, pos=wx.Point(24, 200),
+              size=wx.Size(248, 21), style=wx.DP_DROPDOWN | wx.DP_SHOWCENTURY)
+
         self.txtVChangeThresh = wx.TextCtrl(id=wxID_FRMDATAFILTERTXTVCHANGETHRESH,
-              name=u'', parent=self.panel1, pos=wx.Point(168, 280),
+              name=u'changeThresh', parent=self.panel1, pos=wx.Point(168, 280),
               size=wx.Size(100, 21), style=0, value='')
 
+        self.chkToggleFilterSelection = wx.CheckBox(id=wxID_FRMDATAFILTERCHKFILTER,
+              name=u'checkbox', label=u'Filter from previous filter', 
+              parent=self.panel1, pos=wx.Point(8, 306),
+              size=wx.Size(232,25), style=0)
+        self.chkToggleFilterSelection.Bind(wx.EVT_CHECKBOX, self.OnCheckbox,
+              id=wxID_FRMDATAFILTERCHKFILTER)
+        
         self.btnClear = wx.Button(id=wxID_FRMDATAFILTERBTNCLEAR,
               label=u'Clear Filter', name=u'btnClear', parent=self.panel1,
-              pos=wx.Point(8, 312), size=wx.Size(64, 23), style=0)
+              pos=wx.Point(8, 335), size=wx.Size(64, 23), style=0)
         self.btnClear.Bind(wx.EVT_BUTTON, self.OnBtnClearButton,
               id=wxID_FRMDATAFILTERBTNCLEAR)
 
         self.btnOK = wx.Button(id=wxID_FRMDATAFILTERBTNOK, label=u'OK',
-              name=u'btnOK', parent=self.panel1, pos=wx.Point(128, 312),
+              name=u'btnOK', parent=self.panel1, pos=wx.Point(128, 335),
               size=wx.Size(48, 23), style=0)
         self.btnOK.Bind(wx.EVT_BUTTON, self.OnBtnOKButton,
               id=wxID_FRMDATAFILTERBTNOK)
 
         self.btnCancel = wx.Button(id=wxID_FRMDATAFILTERBTNCANCEL,
               label=u'Cancel', name=u'btnCancel', parent=self.panel1,
-              pos=wx.Point(184, 312), size=wx.Size(48, 23), style=0)
+              pos=wx.Point(184, 335), size=wx.Size(48, 23), style=0)
         self.btnCancel.Bind(wx.EVT_BUTTON, self.OnBtnCancelButton,
               id=wxID_FRMDATAFILTERBTNCANCEL)
 
         self.btnApply = wx.Button(id=wxID_FRMDATAFILTERBTNAPPLY, label=u'Apply',
-              name=u'btnApply', parent=self.panel1, pos=wx.Point(240, 312),
+              name=u'btnApply', parent=self.panel1, pos=wx.Point(240, 335),
               size=wx.Size(48, 23), style=0)
         self.btnApply.Bind(wx.EVT_BUTTON, self.OnBtnApplyButton,
               id=wxID_FRMDATAFILTERBTNAPPLY)
@@ -159,6 +166,9 @@ class frmDataFilter(wx.Dialog):
     def __init__(self, parent, series):
         self.editService = series
         self._init_ctrls(parent)
+
+    def OnCheckbox(self, event):
+      self.editService.toggle_filter_set()
 
     def OnBtnClearButton(self, event):
         self.setDates()
