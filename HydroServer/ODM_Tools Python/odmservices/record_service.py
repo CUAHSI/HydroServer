@@ -39,7 +39,13 @@ class RecordService():
     def delete_points(self):
         self._edit_service.delete_points()
         if self._record:
-            self._script("series.delete_points()\n")
+            self._script("series.delete_points()\n", 'black')
+
+    def change_values(self, operator, value):
+        self._edit_service.change_values(operator, value)
+        if self._record:
+            self._script("series.change_values(%s, %s\n" % (operator, value), 'black')
+
 
     def reset(self):
         self._edit_service.reset()

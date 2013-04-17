@@ -182,13 +182,27 @@ class EditService():
         return dv_list
 
     def add_point(self, point):
-        # add to active_series and _points,
+        # add to active_series
         # save to sqlite DB
         pass
 
     def delete_points(self):
         tmp = [x for x in self._active_series if x not in self._active_points]
         self._active_series = tmp
+        self._active_points = []       # clear the filter
+
+    def change_values(self, operator, value):
+        if operator == '+':
+            for point in self._active_points:
+                point[1] += value
+
+        if operator == '-':
+            for point in self._active_points:
+                point[1] -= value
+
+        if operator == '*':
+            for point in self._active_points:
+                point[1] *= value
 
     def reconcile_dates(self, parent_series_id):
         # append new data to this series
