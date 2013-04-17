@@ -334,7 +334,8 @@ class mnuRibbon(RB.RibbonBar):
         add_value.ShowModal()
     
     def OnEditDelPoint(self, event):
-        pass
+        record_service = self.parent.getRecordService()
+        record_service.delete_points()
 
     def OnStopEdit(self, event):
         # print type(self.parent), dir(self.parent)

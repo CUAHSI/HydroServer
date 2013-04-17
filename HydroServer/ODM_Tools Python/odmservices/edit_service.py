@@ -16,6 +16,7 @@ class EditService():
     def __init__(self, series_id, cursor=None, connection_string="",  debug=False):
         # print "Series id: ", series_id
         self._series_id = series_id
+        self._filter_from_selection = False
 
         if (connection_string is not ""):
             self._session_factory = SessionFactory(connection_string, debug)
@@ -48,41 +49,48 @@ class EditService():
         self._cursor.execute("SELECT ValueID, DataValue, LocalDateTime FROM DataValuesEdit ORDER BY LocalDateTime")
         results = self._cursor.fetchall()
 
-        self._active_series = results
-        self._active_points = results
-
+        self._original_series = results
+        self._active_series = self._original_series
+        self._active_points = []
 
     # operator is a character, either '<' or '>'
     def filter_value(self, value, operator):
+        filter_set = self.get_filter_set()
         if operator == '<': # less than
             tmp = []
-            for x in self._active_points:
+            for x in filter_set:
                 if x[1] < value:
                     tmp.append(x)
             self._active_points = tmp
         if operator == '>': # greater than
             tmp = []
-            for x in self._active_points:
+            for x in filter_set:
                 if x[1] > value:
                     tmp.append(x)
             self._active_points = tmp
 
     def filter_date(self, before, after):
+        previous_date_filter = False
+        filter_set = self.get_filter_set()
         if before != None:
             tmp = []
-            for x in self._active_points:
+            for x in filter_set:
                 if x[2] < before:
                     tmp.append(x)
             self._active_points = tmp
+            previous_date_filter = True        # We've done a previous date filter, so we've got to decide which set use
         if after != None:
             tmp = []
-            for x in self._active_points:
+            if previous_date_filter:
+                filter_set = self._active_points
+            for x in filter_set:
                 if x[2] > after:
                     tmp.append(x)
             self._active_points = tmp
 
     # Data Gaps
     def data_gaps(self, value, time_period):
+        filter_set = self.get_filter_set()
         points = []
         length = len(self._active_points)
 
@@ -99,8 +107,8 @@ class EditService():
 
         for i in xrange(length):
             if i + 1 < length:      # make sure we stay in bounds
-                point1 = self._active_points[i]
-                point2 = self._active_points[i+1]
+                point1 = filter_set[i]
+                point2 = filter_set[i+1]
                 interval = point2[2] - point1[2]
                 interval__total_sec = interval.total_seconds()
 
@@ -111,12 +119,13 @@ class EditService():
         self._active_points = points
 
     def value_change_threshold(self, value):
+        filter_set = self.get_filter_set()
         points = []
         length = len(self._active_points)
         for i in xrange(length):
             if i + 1 < length:         # make sure we stay in bounds
-                point1 = self._active_points[i]
-                point2 = self._active_points[i+1]
+                point1 = filter_set[i]
+                point2 = filter_set[i+1]
                 if abs(point1[1] - point2[1]) >= value:
                     points.append(point1)
                     points.append(point2)
@@ -127,6 +136,12 @@ class EditService():
     # TODO change name to reset_filter
     def reset(self):
         self._active_points = self._active_series
+
+    def toggle_filter_set(self):
+        if self._filter_from_selection:
+            self._filter_from_selection = False
+        else:
+            self._filter_from_selection = True
 
     def rollback(self):
         self._active_series = self._original_series
@@ -150,6 +165,12 @@ class EditService():
     def get_active_points(self):
         return self._active_points
 
+    def get_filter_set(self):
+        if self._filter_from_selection:
+            return self._active_points
+        else:
+            return self._active_series
+
     def get_plot_list(self):
         dv_list = [0] * len(self._active_series)
         if self._active_points != self._active_series:
@@ -160,13 +181,14 @@ class EditService():
 
         return dv_list
 
-        # return [(x[2], x[1]) for x in self._active_points]
-
     def add_point(self, point):
         # add to active_series and _points,
         # save to sqlite DB
         pass
 
+    def delete_points(self):
+        tmp = [x for x in self._active_series if x not in self._active_points]
+        self._active_series = tmp
 
     def reconcile_dates(self, parent_series_id):
         # append new data to this series

@@ -30,6 +30,17 @@ class RecordService():
         if self._record:
             self._script("series.value_change_threshold(%s)\n" % (value), 'black')
 
+    def toggle_filter_set(self):
+        self._edit_service.toggle_filter_set()
+
+    def add_point(self):
+        pass
+
+    def delete_points(self):
+        self._edit_service.delete_points()
+        if self._record:
+            self._script("series.delete_points()\n")
+
     def reset(self):
         self._edit_service.reset()
         if self._record:
