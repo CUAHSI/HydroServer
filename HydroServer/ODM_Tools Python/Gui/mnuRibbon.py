@@ -78,11 +78,12 @@ class mnuRibbon(RB.RibbonBar):
         self.PlotsOptions_bar.AddSimpleButton( wxID_RIBBONPLOTDATESTART, "# Hist Bins" ,CreateBitmap("images\\Blank.png"), "") #,wx.Size(100, 21))
         self.PlotsOptions_bar.EnableButton(wxID_RIBBONPLOTDATESTART, False)
 
-        self.spnBins = wx.SpinCtrl(id=wxID_FRAME1SPINCTRL1, initial=0,
-              max=100, min=0, name='spnBins', parent=self.PlotsOptions_bar,
-              pos=wx.Point(126, 6), size=wx.Size(43, 25),
-              style=wx.SP_ARROW_KEYS)
-        self.spnBins.SetValue(50)
+        self.spnBins = wx.SpinCtrl(id=wxID_FRAME1SPINCTRL1, initial=50,
+              max=100, min=1, name='spnBins', parent=self.PlotsOptions_bar,
+              #pos=wx.Point(126, 6), #with color button included
+              pos= wx.Point(84,6), #without color button
+              size=wx.Size(43, 25),style=wx.SP_ARROW_KEYS)
+        # self.spnBins.SetValue(50)
         self.spnBins.Enabled = False
 
         
