@@ -46,10 +46,9 @@ class frmChangeValue(wx.Dialog):
               style=wx.TAB_TRAVERSAL)
         self.panel1.SetLabel(u'panel1')
 
-        self.cbValue = wx.ComboBox(choices=[], id=wxID_FRMCHANGEVALUECBVALUE,
+        self.cbValue = wx.ComboBox(choices=['Add', 'Subtract', 'Multiply', 'Set to'], id=wxID_FRMCHANGEVALUECBVALUE,
               name=u'cbValue', parent=self.panel1, pos=wx.Point(5, 5),
               size=wx.Size(104, 21), style=0, value=u'Add')
-        self.cbValue.SetLabel(u'Add')
 
         self.txtValue = wx.TextCtrl(id=wxID_FRMCHANGEVALUETXTVALUE,
               name=u'txtValue', parent=self.panel1, pos=wx.Point(121, 5),
@@ -57,16 +56,39 @@ class frmChangeValue(wx.Dialog):
 
         self.btnApply = wx.Button(id=wxID_FRMCHANGEVALUEBTNAPPLY,
               label=u'Apply', name=u'btnApply', parent=self.panel1,
-              pos=wx.Point(5, 40), size=wx.Size(104, 23), style=0)
+              pos=wx.Point(5, 40), size=wx.Size(104, 23), style=0)        
+        self.btnApply.Bind(wx.EVT_BUTTON, self.OnBtnApplyButton,
+              id=wxID_FRMCHANGEVALUEBTNAPPLY)
 
         self.btnCancel = wx.Button(id=wxID_FRMCHANGEVALUEBTNCANCEL,
               label=u'Cancel', name=u'btnCancel', parent=self.panel1,
-              pos=wx.Point(121, 40), size=wx.Size(99, 23), style=0)
+              pos=wx.Point(121, 40), size=wx.Size(99, 23), style=0)        
+        self.btnCancel.Bind(wx.EVT_BUTTON, self.OnBtnCancelButton,
+              id=wxID_FRMCHANGEVALUEBTNCANCEL)
 
         self._init_sizers()
 
-    def __init__(self, parent):
-        self._init_ctrls(parent)
+    def __init__(self, parent, record_service):
+      self.record_service = record_service
+      self._init_ctrls(parent)
+
+    def OnBtnCancelButton(self, event):
+      self.Close()
+      event.Skip()
+
+    def OnBtnApplyButton(self, event):
+      operator = self.cbValue.GetValue()
+      value = self.txtValue.GetValue()
+      if operator == 'Add':
+        operator = '+'
+      if operator == 'Subtract':
+        operator = '-'
+      if operator == 'Multiply':
+        operator = '*'
+      if operator == 'Set to':
+        operator = '='
+
+      self.record_service.change_values(value, operator)
 
 
 if __name__ == '__main__':

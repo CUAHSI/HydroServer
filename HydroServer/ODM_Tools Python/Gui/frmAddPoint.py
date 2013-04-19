@@ -213,6 +213,7 @@ class frmAddPoint(wx.Dialog):
 
         #if last row AND and all req cells from previous row are filled out
         if event.Row == self.grdDataValues.GetNumberRows()-1:
+          # TODO Test that all yellow boxes of previous row are filled first
           self.grdDataValues.AppendRows(numRows= 1) 
           ##format all of the cells with drop down boxes and fill in 5 identifiers  
 

@@ -15,6 +15,11 @@ class RecordService():
         if self._record:
             self._script("series.filter_value(%s, '%s')\n" % (value, operator), 'black')
 
+    def change_values(self, value, operator):
+        self._edit_service.change_values(operator, value)
+        if self._record:
+            self._script("series.change_values(%s, '%s'\n" % (value, operator), 'black')
+
     def filter_date(self, before, after):
         self._edit_service.filter_date(before, after)
         if self._record:

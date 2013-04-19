@@ -320,7 +320,7 @@ class mnuRibbon(RB.RibbonBar):
         self.filterlist = data_filter.ShowModal()
     
     def OnEditChangeValue(self, event):
-        change_value=frmChangeValue.frmChangeValue(self)
+        change_value=frmChangeValue.frmChangeValue(self, self.parent.getRecordService())
         change_value.ShowModal()
    
     def OnEditInterpolate(self, event):
