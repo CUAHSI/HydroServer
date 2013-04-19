@@ -24,11 +24,11 @@ class MyCustomToolbar(NavigationToolbar):
             self.DeleteToolByPos(CONFIGURE_SUBPLOTS_TOOLBAR_BTN_POSITION)
             
         # add the new toolbar buttons that we do want
-        if allowselect:
-            self.selectbutton= self.AddSimpleTool(self.ON_CUSTOM_SEL, CreateBitmap("images\\select.png"),
-                           'Select Points', 'Select Points')
-            wx.EVT_TOOL(self, self.ON_CUSTOM_SEL, self._on_custom_sel_point)
-            self.selectbutton.Enable(False)
+        # if allowselect:
+        #     self.selectbutton= self.AddSimpleTool(self.ON_CUSTOM_SEL, CreateBitmap("images\\select.png"),
+        #                    'Select Points', 'Select Points')
+        #     wx.EVT_TOOL(self, self.ON_CUSTOM_SEL, self._on_custom_sel_point)
+        #     self.selectbutton.Enable(False)
             
         self.AddSimpleTool(self.ON_CUSTOM_LEFT, CreateBitmap("images\\scroll left.png"),
                            'Pan to the left', 'Pan graph to the left')
@@ -42,11 +42,13 @@ class MyCustomToolbar(NavigationToolbar):
         self.Realize()
     def editSeries(self):
         #enable select button
-        self.selectbutton.Enable(True)
+        # self.selectbutton.Enable(True)
+        self.Realize()
 
     def stopEdit(self):
        #disable select button
-        self.selectbutton.Enable(False)
+        # self.selectbutton.Enable(False)
+        self.Realize()
 
     # in theory this should never get called, because we delete the toolbar
     #  button that calls it. but in case it does get called (e.g. if there

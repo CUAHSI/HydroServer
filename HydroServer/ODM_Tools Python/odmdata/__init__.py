@@ -26,6 +26,7 @@ __all__ = [
     'Variable',
     'VariableNameCV',
     'VerticalDatumCV',
+    'MemoryDatabase',
 ]
 
 from censor_code_cv import CensorCodeCV
@@ -55,3 +56,4 @@ from value_type_cv import ValueTypeCV
 from variable import Variable
 from variable_name_cv import VariableNameCV
 from vertical_datum_cv import VerticalDatumCV
+from memoryDatabase import memoryDatabase

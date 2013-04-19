@@ -5,13 +5,17 @@ import wx
 # from ObjectListView import ObjectListView, ColumnDefn, Filter
 
 from wx.lib.pubsub import Publisher
+
 import sqlite3
 # from ObjectListView import Filter
 import wx.lib.agw.ultimatelistctrl as ULC
-
+from clsULC import clsULC, TextSearch, Chain
 import frmODMToolsMain
 import frmQueryBuilder
-from clsULC import clsULC, TextSearch, Chain
+
+from odmdata import memoryDatabase
+# import memoryDatabase
+
 # import wx.lib.agw.ultimatelistctrl as ULC
 
 [wxID_PNLSERIESSELECTOR, wxID_PNLSERIESSELECTORCBSITES, wxID_PNLSERIESSELECTORCBVARIABLES,
@@ -219,14 +223,13 @@ class pnlSeriesSelector(wx.Panel):
 
         #####INIT DB Connection
         self.dbservice = dbservice
+        # self.dataRep=memoryDatabase(dbservice)
         self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
         self.cursor = self.conn.cursor()
         self.initDB()
 
-
         ### INIT Series Catalog        
         self.cursor.executemany("INSERT INTO SeriesCatalog VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.dbservice.get_series_test())
-        
         self.cursor.execute("ALTER TABLE SeriesCatalog ADD COLUMN isSelected INTEGER ")
         
         self.cursor.execute("UPDATE SeriesCatalog SET isSelected=0")
@@ -237,11 +240,15 @@ class pnlSeriesSelector(wx.Panel):
         # self.Series = [list(x) for x in self.cursor.fetchall()]
         # self.tableSeries.SetObjects(self.Series)
         self.tableSeries.SetColumns(x[0] for (i,x) in enumerate(self.cursor.description))
+        # self.tableSeries.SetCursor(self.cursor)
     
 
         # self.seriesList= 
-        self.tableSeries.SetObjects(self.dbservice.get_series())
+        # self.tableSeries.SetObjects(self.dbservice.get_series())
+        self.tableSeries.SetObjects([list(x) for x in self.cursor.fetchall()])
 
+        # self.tableSeries.SetColumns(self.dataRep.getSeriesColumns())
+        # self.tableSeries.SetObjects(self.dataRep.getSeriesCatalog())
 
 
 
@@ -380,7 +387,6 @@ class pnlSeriesSelector(wx.Panel):
         
         self.cbVariables.Enabled =True
         self.cbSites.Enabled = True
-        event.Skip()
 
         
         
@@ -393,7 +399,7 @@ class pnlSeriesSelector(wx.Panel):
         
         self.site_code =  self.siteList[self.cbSites.Selection].site_code
         self.SetFilter(site_code = self.site_code) 
-        event.Skip()  
+       
 
         
 
@@ -411,7 +417,6 @@ class pnlSeriesSelector(wx.Panel):
         self.variable_code=self.varList[0].variable_code
 
         self.SetFilter( var_code = self.variable_code)
-        event.Skip()
                
 
 
@@ -450,23 +455,33 @@ class pnlSeriesSelector(wx.Panel):
   
     def OntableSeriesListItemSelected(self, event):
         # print"in item selected", event.m_itemIndex, self.tableSeries.IsItemChecked(event.m_itemIndex)
-
+        # print dir(event)
+        sid= self.tableSeries.innerList[event.m_itemIndex][0]
         if not self.tableSeries.IsItemChecked(event.m_itemIndex):         
-            Publisher().sendMessage(("removePlot"), self.tableSeries.innerList[event.m_itemIndex].id)
-        
-        else:            
-            #get DataValues
+            Publisher().sendMessage(("removePlot"), sid)
+            #set isselected value to False
+            # self.cursor.execute("UPDATE SeriesCatalog SET isSelected = 0 WHERE SeriesID =", self.tableSeries.innerList[event.m_itemIndex].id)
+            # self.tableSeries.innerList[event.m_itemIndex]
+            # self.tableSeries.CheckItem(event.GetItem())
+            self.tableSeries.innerList[event.m_itemIndex][-1]= False
 
-            # self.DataValues = self.dbservice.get_data_values_by_series(self.tableSeries.innerList[event.m_itemIndex])
-            self.DataValues = self.dbservice.get_data_values_by_series_id(self.tableSeries.GetColumnText(event.m_itemIndex, 1))
+
+        else:  
+            #set isselected value to True 
+            self.tableSeries.innerList[event.m_itemIndex][-1]= True
+
+                    
+            # get DataValues
+            self.DataValues = self.dbservice.get_data_values_by_series_id(sid)
          
             self.cursor.execute("DELETE FROM DataValues")
             self.cursor.executemany("INSERT INTO DataValues VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
             self.conn.commit()
 
+            Publisher().sendMessage(("add.NewPlot"), [self.cursor,self.tableSeries.innerList[event.m_itemIndex]])
+            self.parent.Parent.addPlot(self.cursor, self.dbservice.get_series_by_id( sid))
+            # self.parent.Parent.addPlot(self.dataRep ,sid)
 
-            # Publisher().sendMessage(("add.NewPlot"), [self.cursor,self.tableSeries.innerList[event.m_itemIndex]])
-            self.parent.Parent.addPlot(self.cursor,self.tableSeries.innerList[event.m_itemIndex])
         self.Refresh()
         event.Skip()
 

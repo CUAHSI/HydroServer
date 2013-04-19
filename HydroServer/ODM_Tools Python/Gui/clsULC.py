@@ -13,6 +13,8 @@ class clsULC(ULC.UltimateListCtrl):
 		self.useAlternateBackColors = True
 		self.evenRowsBackColor = "White" #wx.Colour(240, 248, 255) # ALICE BLUE
 		self.oddRowsBackColor = "SlateGray" #wx.Colour(255, 250, 205) # LEMON CHIFFON
+		self.cursor = None
+
 
 		# wx.ListCtrl.__init__(self, *args, **kwargs)
 
@@ -33,6 +35,9 @@ class clsULC(ULC.UltimateListCtrl):
 			if "ID" in c:
 				self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
 					heading=c, width=50)
+			elif "Selected" in c:
+				pass
+				#do nothing this is the isSelected column
 			else:
 				self.InsertColumn(col=colnum, format=wx.LIST_FORMAT_LEFT,
 					heading=c, width=140)
@@ -41,6 +46,14 @@ class clsULC(ULC.UltimateListCtrl):
 	def EmptyTable(self):
 		self.ModelObjects= None
 		self.RepopulateList()
+
+	# def SetCursor(self, cursor):
+	# 	self.cursor = cursor
+
+	# def RefreshObjects(self):
+	# 	sql = "SELECT * FROM SeriesCatalog"
+	# 	self.cursor.execute(sql)
+	# 	self.SetObjects(self.cursor.fetchall())
 
 	def SetObjects(self, modelObjects):
 		self.modelObjects = modelObjects
@@ -60,14 +73,14 @@ class clsULC(ULC.UltimateListCtrl):
 
 		for series in self.innerList:
 			ind= self.GetItemCount()
-			# print ind
 
-			self.Append([False]+series.getValues())
+			self.Append([False]+series[:-1])
 			self.SetStringItem(ind, 0, "", it_kind=1)
-			# item= ULC.CreateListItem(ind,0)
-			# item._checked= True
-			# item._kind = 1
-			# self.SetItem(item)
+
+			#if item isSelected is true check the box when drawing the row
+			if series[-1] ==1:
+				self._mainWin.CheckItem(self.GetItem(ind, 0), True, False)
+			
 
 
 
@@ -86,22 +99,18 @@ class clsULC(ULC.UltimateListCtrl):
 	# 	# why we set the item data to be the real index
 	# 	return self.innerList[self.GetItemData(index)]
 
-	def AddCheckedItem(self, id):
-		pass
+	# def AddCheckedItem(self, id):
+	# 	pass
 
-	def RemoveCheckedItem(self, id):
-		pass
+	# def RemoveCheckedItem(self, id):
+	# 	pass
 
 	def GetChecked(self):
 		#returns a list of the checked ids
-##        for i in range(self.GetItemCount()):
-##            self.GetItem(item, item._col)
-		pass
-
-	# def IsItemChecked(self, index):
-	# 	item = self.GetItem(index, 0)
-	# 	print item
-	# 	pass
+		return [x[0] for x in modelObjects if x[-1]]
+	
+	
+	
 
 	def GetColumnText(self, index, colid):
 		# print self.GetItemData(index)
@@ -109,8 +118,17 @@ class clsULC(ULC.UltimateListCtrl):
 		# print item
 		return item.GetText()
 
-	def GetStringValue(self, modelObject, col):
-		return modelObject.getValue(col['title'])
+	def GetStringValue(self, col, modelObject=None, row= None ):
+		if modelObject:
+			return modelObject[self.getColID(col['title'])]
+		else :
+			return self.modelObjects[row][self.getColID(col['title'])]
+
+	def SetStringValue(self, col, Value, modelObject=None, row= None):
+		if modelObject:
+			modelObject[self.getColID(col['title'])] = Value
+		else: 
+			self.modelObjects[row][self.getColID(col['title'])]= Value
 
 	def GetFilter(self):
 		return self.filter
@@ -123,6 +141,71 @@ class clsULC(ULC.UltimateListCtrl):
 
 	def ClearFilter(self):
 		self.filter = None
+
+	def getColID(self, element):
+		if element == 'SeriesID':
+			return 0
+		elif element == 'SiteID':
+			return 1
+		elif element =='SiteCode':
+			return 2 
+		elif element =='SiteName':
+			return 3
+		elif element =='VariableID': 
+			return 4
+		elif element =='VariableCode': 
+			return 5
+		elif element =='VariableName':
+			return 6
+		elif element =='Speciation':
+			return 7
+		elif element =='VariableUnitsID':
+			return 8
+		elif element =='VariableUnitsName':
+			return 9
+		elif element =='SampleMedium':
+			return 10
+		elif element =='ValueType':
+			return 11
+		elif element =='TimeSupport':
+			return 12			
+		elif element =='TimeUnitsID':
+			return 13		
+		elif element =='TimeUnitsName':
+			return 14
+		elif element =='DataType':
+			return 15
+		elif element =='GeneralCategory':
+			return 16
+		elif element == 'MethodID':
+			return 17
+		elif element =='MethodDescription':
+			return 18
+		elif element =='SourceID':
+			return 19
+		elif element =='SourceDescription':
+			return 20
+		elif element =='Organization':
+			return 21
+		elif element =='Citation':
+			return 22
+		elif element =='QualityControlLevelID':
+			return 23
+		elif element =='QualityControlLevelCode':
+			return 24
+		elif element =='BeginDateTime':
+			return 25
+		elif element =='EndDateTime':
+			return 26
+		elif element =='BeginDateTimeUTC':
+			return 27
+		elif element =='EndDateTimeUTC':
+			return 28
+		elif element =='ValueCount':
+			return 29
+		elif element =='isSelected':
+			return 30
+		else: return None
 
 
 
@@ -271,12 +354,6 @@ class clsULC(ULC.UltimateListCtrl):
 
 
 
-
-
-
-
-
-
  # 	def SetItemCount(self, count):
 	# 	# """
 	# 	# Change the number of items visible in the list
@@ -339,11 +416,8 @@ class clsULC(ULC.UltimateListCtrl):
 	# 	else:
 	# 		self.SetItem(listItem)
 
-
-
 	# 	for iCol in range(1, len(self.columns)):
 	# 		self.SetStringItem(index, iCol, modelObject[iCol])
-
 
 
  # 	def _FormatAllRows(self):
@@ -354,7 +428,6 @@ class clsULC(ULC.UltimateListCtrl):
 	# 		item = self.GetItem(i)
 	# 		self._FormatOneItem(item, i, self.GetObjectAt(i))
 	# 		self.SetItem(item)
-
 
  # 	def _FormatOneItem(self, item, index, model):
 	# 	# """
@@ -398,8 +471,9 @@ class TextSearch(object):
 		textToFind = self.text.lower()
 
 		def _containsText(modelObject):
+
 			for col in cols:
-				if textToFind in self.objectListView.GetStringValue(modelObject, col).lower(): #col.GetStringValue(modelObject).lower():
+				if textToFind in self.objectListView.GetStringValue(modelObject= modelObject, col = col).lower(): #col.GetStringValue(modelObject).lower():
 					return True
 			return False
 
