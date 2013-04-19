@@ -132,6 +132,25 @@ class EditService():
 
         self._active_points = points
 
+    def change_values(self, value, operator):
+        print "in change values"
+        print value
+        print operator
+        if operator == '+':
+            for point in self._active_points:
+                point[1] += value
+
+        if operator == '-':
+            for point in self._active_points:
+                point[1] -= value
+
+        if operator == '*':
+            for point in self._active_points:
+                point[1] *= value
+
+        if operator == '=':
+            for point in self._active_points:
+                point[1] = value
 
     # TODO change name to reset_filter
     def reset(self):
@@ -191,18 +210,9 @@ class EditService():
         self._active_series = tmp
         self._active_points = []       # clear the filter
 
-    def change_values(self, operator, value):
-        if operator == '+':
-            for point in self._active_points:
-                point[1] += value
+    def select_points(self, id_list=[], datetime_list=[]):
+        pass
 
-        if operator == '-':
-            for point in self._active_points:
-                point[1] -= value
-
-        if operator == '*':
-            for point in self._active_points:
-                point[1] *= value
 
     def reconcile_dates(self, parent_series_id):
         # append new data to this series
