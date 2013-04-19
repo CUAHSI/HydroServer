@@ -40,12 +40,12 @@ class pnlDataTable(wx.Panel):
 
         self.Layout()
         
-    def fetchFromDatabase(rowIndex):
-        print "in fetch from database row:", rowIndex    
-        if len(self.values):
-            rowIndex = self.values[rowIndex]
-        self.cursor.execute(self.SELECT_ONE_STMT, (rowIndex,))
-        return self.cursor.fetchone()          
+    # def fetchFromDatabase(rowIndex):
+    #     print "in fetch from database row:", rowIndex    
+    #     if len(self.values):
+    #         rowIndex = self.values[rowIndex]
+    #     self.cursor.execute(self.SELECT_ONE_STMT, (rowIndex,))
+    #     return self.cursor.fetchone()          
     
     def Init(self, DVConn):
         self.cursor = DVConn
@@ -89,9 +89,9 @@ class pnlDataTable(wx.Panel):
         # self.selectedpoints.remove(event.m_itemIndex)
 
     def getSelectedIDs(self, selobjects):        
-        idlist= [0] * len(self.values)
+        idlist= [False] * len(self.values)
         for sel in selobjects:
-            idlist[self.myOlv.GetIndexOf(sel)]=1
+            idlist[self.myOlv.GetIndexOf(sel)]=True
         # print idlist
         return idlist
 

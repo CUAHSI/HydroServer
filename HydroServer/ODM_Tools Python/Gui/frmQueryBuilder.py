@@ -27,7 +27,7 @@ class frmQueryBuilder(wx.Dialog):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
         wx.Dialog.__init__(self, id=wxID_FRMQUERYBUILDER,
-              name=u'frmQueryBuilder', parent=prnt, pos=wx.Point(787, 299),
+              name=u'frmQueryBuilder', parent=prnt, pos=wx.Point(547, 281),
               size=wx.Size(379, 469), style=wx.DEFAULT_DIALOG_STYLE,
               title=u'Advanced Query')
         self.SetClientSize(wx.Size(363, 431))
@@ -38,7 +38,11 @@ class frmQueryBuilder(wx.Dialog):
               parent=self, pos=wx.Point(0, 0), size=wx.Size(363, 431),
               style=wx.TAB_TRAVERSAL)
 
-        self.listColumns = wx.ListBox(choices=[],
+        self.listColumns = wx.ListBox(choices=["SeriesID", "SiteID", "VariableID", "MethodID", "SourceID", "QualityControlLevelID",
+            "SiteName", "SiteCode", "Latitude", "Longitude", "VariableName", "VariableCode", "DataType", "Value Type", "Speciation",
+            "SampleMedium", "TimeSupport", "GeneralCategory", "NoDataValue", "VarialbeUnitsName", "TimeUnitsName", "MethodDescription",
+            "SourceDescription", "Organization", "Citation", "QualityControlLevelCode", "QualityControlLevelDefinition", "BeginDateTime",
+            "EndDateTime", "BeginDateTimeUTC", "EndDateTimeUTC", "ValueCount", "Checked"],
               id=wxID_FRMQUERYBUILDERLISTCOLUMNS, name=u'listColumns',
               parent=self.panel1, pos=wx.Point(16, 24), size=wx.Size(152, 152),
               style=0)
@@ -112,6 +116,8 @@ class frmQueryBuilder(wx.Dialog):
         self.btnEqual = wx.Button(id=wxID_FRMQUERYBUILDERBTNEQUAL, label=u'=',
               name=u'btnEqual', parent=self.panel1, pos=wx.Point(176, 24),
               size=wx.Size(32, 23), style=0)
+        self.btnEqual.Bind(wx.EVT_BUTTON, self.OnBtnEqualButton,
+              id=wxID_FRMQUERYBUILDERBTNEQUAL)
 
         self.btnParen = wx.Button(id=wxID_FRMQUERYBUILDERBTNPAREN, label=u'( )',
               name=u'btnParen', parent=self.panel1, pos=wx.Point(136, 184),
@@ -132,6 +138,8 @@ class frmQueryBuilder(wx.Dialog):
         self.btnNotEqual = wx.Button(id=wxID_FRMQUERYBUILDERBTNNOTEQUAL,
               label=u'<>', name=u'btnNotEqual', parent=self.panel1,
               pos=wx.Point(176, 56), size=wx.Size(32, 23), style=0)
+        self.btnNotEqual.Bind(wx.EVT_BUTTON, self.OnBtnNotEqualButton,
+              id=wxID_FRMQUERYBUILDERBTNNOTEQUAL)
 
         self.btnLessThan = wx.Button(id=wxID_FRMQUERYBUILDERBTNLESSTHAN,
               label=u'<', name=u'btnLessThan', parent=self.panel1,
@@ -177,6 +185,12 @@ class frmQueryBuilder(wx.Dialog):
 
     def OnBtnClearButton(self, event):
         self.tbQuery.text=""
+        event.Skip()
+
+    def OnBtnEqualButton(self, event):
+        event.Skip()
+
+    def OnBtnNotEqualButton(self, event):
         event.Skip()
 
 

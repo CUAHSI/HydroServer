@@ -10,7 +10,7 @@ from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
 import matplotlib.pyplot as plt
 import math
 import textwrap
-import numpy as np
+import numpy 
 
 
 class plotBox(wx.Panel):
@@ -62,6 +62,30 @@ class plotBox(wx.Panel):
       self.canvas.draw()
       self._init_sizers()
 
+  # def Clear(self):
+  #     self.figure.clear()
+
+  # def GridSize(self, cells):
+  #     rows = 1
+  #     cols = 1
+  #     while rows * cols < cells:
+  #       if rows == cols:
+  #         cols = cols + 1
+  #       else:
+  #         rows = rows + 1
+  #     return rows, cols
+
+  # def Plot(self, seriesPlotInfo):
+  #     self.Clear()
+  #     count = seriesPlotInfo.count()
+  #     rows, cols = self.GridSize(count)
+      
+  #     self.plot=self.figure.add_subplot(repr(rows)+repr(cols)+'1')
+  #     for oneSeries in seriesPlotInfo.GetSeriesInfo():
+  #       print oneSeries.siteName
+        
+  
+
    
 
   def addPlot(self, cursor, series, Filter):
@@ -78,7 +102,7 @@ class plotBox(wx.Panel):
 
  
   def SetColor( self, color):
-      """Set figure and canvas colours to be the same."""        
+      # """Set figure and canvas colours to be the same."""        
       self.figure.set_facecolor( color )
       self.figure.set_edgecolor( color )
       self.canvas.SetBackgroundColour( color )
@@ -86,7 +110,7 @@ class plotBox(wx.Panel):
 
 
   def monthly(self, str):
-
+    # print "monthly"
       self.updatePlot("Monthly",  [[x[0] for x in self.Data if x[1]==1], [x[0] for x in self.Data if x[1]==2], [x[0] for x in self.Data if x[1]==3],[x[0] for x in self.Data if x[1]==4], [x[0] for x in self.Data if x[1]==5], [x[0] for x in self.Data if x[1]==6], [x[0] for x in self.Data if x[1]==7], [x[0] for x in self.Data if x[1]==8], [x[0] for x in self.Data if x[1]==9], [x[0] for x in self.Data if x[1]==10], [x[0] for x in self.Data if x[1]==11], [x[0] for x in self.Data if x[1]==12]])
       
       self.plot.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
@@ -95,8 +119,9 @@ class plotBox(wx.Panel):
 
 
   def seasonaly(self, str):
+    # print"seasonal"
 
-      self.updatePlot("Seasonally",  [[x[0] for x in self.Data if x[1] in (1,2,3)], [x[0] for x in self.Data if x[1]in (4,5,6)], [x[0] for x in self.Data if x[1]in (6,7,8)],[x[0] for x in self.Data if x[1]in (10,11,12)]])
+      self.updatePlot("Seasonally",  )
      
       self.plot.set_xticklabels( ['Winter', 'Spring', 'Summer', 'Fall'])
       self.canvas.draw()
@@ -104,6 +129,7 @@ class plotBox(wx.Panel):
 
 
   def yearly(self, str):
+    # print "yearly"
       
       years = sorted(list(set([x[2] for x in self.Data] )))      
       histlist = []
@@ -116,7 +142,8 @@ class plotBox(wx.Panel):
 
 
 
-  def overall(self, str): 
+  def overall(self, str):
+    # print "overall" 
             
       self.updatePlot("Overall", [x[0] for x in self.Data])
       self.plot.set_xticklabels( [''])
@@ -160,8 +187,6 @@ class plotBox(wx.Panel):
 
       self.canvas.draw()
 
-
-
   def calcConfInterval(self, PlotData):
       medians = []
       confint = []
@@ -190,9 +215,9 @@ class plotBox(wx.Panel):
 
   def indivConfInter(self, data):
       if len(data)>0:
-        med = np.median(data)
-        mean = np.mean(data)
-        stdDev = math.sqrt(np.var(data))
+        med = numpy.median(data)
+        mean = numpy.mean(data)
+        stdDev = math.sqrt(numpy.var(data))
         ci95low = mean - 10*(1.96 *(stdDev/math.sqrt(len(data))))
         ci95up = mean + 10*(1.96 *(stdDev/math.sqrt(len(data))))
 
@@ -201,6 +226,8 @@ class plotBox(wx.Panel):
       
         return [med, mean, ci95low, ci95up, cl95low, cl95up]
       else: return [ None, None, None, None, None, None]
+
+  
      
 
        

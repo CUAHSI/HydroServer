@@ -220,11 +220,18 @@ class frmODMToolsMain(wx.Frame):
         self.pnlPlot.selectPlot(value)
 
 
-    def addPlot(self, cursor, series):
-    #     self.dataTable.Init(Values.data[0])
-        # self.pnlPlot.addPlot(Values.data)
+    # def addPlot(self, cursor, series):
+    # #     self.dataTable.Init(Values.data[0])
+    #     # self.pnlPlot.addPlot(Values.data)
 
-        self.pnlPlot.addPlot(cursor, series)
+    #     self.pnlPlot.addPlot(cursor, series)
+
+    #     self._ribbon.enableButtons(self.pnlPlot.getActivePlotID() )
+    def addPlot(self, dataRep, seriesID):
+    # #     self.dataTable.Init(Values.data[0])
+    #     # self.pnlPlot.addPlot(Values.data)
+
+        self.pnlPlot.addPlot(dataRep, seriesID)
 
         self._ribbon.enableButtons(self.pnlPlot.getActivePlotID() )
 

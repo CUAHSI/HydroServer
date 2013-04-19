@@ -43,10 +43,25 @@ class SeriesService():
 				distinct(Series.variable_id), Series.variable_code, Series.variable_name).filter_by(site_code=site_code).order_by(Series.variable_code
 			).all()
 		else:
-			result = session.query(distinct(Series.variable_id), Series.variable_code, Series.variable_name).order_by(Series.variable_code).all()
+			result = session.query(distinct(Variable.variable_id), Series.variable_code, Series.variable_name).order_by(Series.variable_code).all()
 
 		session.close()
 		return result
+
+	def get_variable_by_id(self, variable_id):
+		session = self._session_factory.get_session()
+		result = session.query(Variable).filter_by(id=variable_id).one()
+
+		session.close()
+		return result
+		
+	def get_no_data_value(self, variable_id):
+		session = self._session_factory.get_session()
+		result = session.query(Variable.no_data_value).filter_by(id = variable_id).one()
+
+		session.close()
+		return result
+
 
 	# Unit methods
 	def get_unit_by_name(self, unit_name):

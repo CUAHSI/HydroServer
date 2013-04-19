@@ -1,4 +1,4 @@
-
+#!/usr/bin/python
 import wx
 
 
@@ -17,6 +17,13 @@ from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
 from mpl_toolkits.axes_grid1 import host_subplot
 import mpl_toolkits.axisartist as AA
 from matplotlib.font_manager import FontProperties
+
+from matplotlib.widgets import Lasso
+from matplotlib import path
+
+
+
+
 
 from random import *
 from wx.lib.pubsub import Publisher
@@ -61,7 +68,8 @@ class plotTimeSeries(wx.Panel):
 
       self.canvas.SetFont(wx.Font(20, wx.SWISS, wx.NORMAL, wx.NORMAL,
             False, u'Tahoma'))
-      self.canvas.mpl_connect('pick_event', self.on_pick)
+      # self.canvas.mpl_connect('pick_event', self.on_pick)
+      
 
       # Create the navigation toolbar, tied to the canvas
       self.toolbar = NavigationToolbar(self.canvas, allowselect=True)
@@ -79,7 +87,7 @@ class plotTimeSeries(wx.Panel):
       self.Plots = []
       self.lines=[]
       self.axes = []
-      self.colorlist = ('orange','blue', 'green', 'red', 'cyan', 'magenta', 'yellow')
+      self.colorlist = ('blue', 'green', 'red', 'cyan', 'orange', 'magenta', 'yellow')
 
       # self.canvas.mpl_connect('button_press_event', self.onclick)
 
@@ -88,78 +96,30 @@ class plotTimeSeries(wx.Panel):
       self.canvas.draw()
       self._init_sizers()
 
-  def stopEdit(self):
-      self.timeSeries.clear()
-      self.editDataFilter = None
-      self.editCursor =None
-      self.editSeries= None
-      self.editData = None
-      self.editline = None
-      self.selectedlist = None
-      self.editPoint =None
-      self.toolbar.stopEdit()
-      self.RefreshPlot()
+ 
 
-  def editSeries(self, cursor, series, Filter):
-      print "in edit series"
-      self.timeSeries.clear()
-
-      self.editDataFilter = Filter
-      # self.editCursor = Values[0]
-      # self.editSeries= Values[1]
-      self.editCursor = cursor
-      self.editSeries= series
-      self.toolbar.editSeries()
-
-
-      #####include NoDV in plot
-      # remove from regular 'lines'
-      self.removePlot(self.editSeries.id)
-
-
-
-
-      self.editCursor.execute("SELECT  DataValue, LocalDateTime FROM DataValuesEdit "+self.editDataFilter + " ORDER BY LocalDateTime")
-      results = self.editCursor.fetchall()
-
-      self.editData = plotData(self.editSeries.id, [x[0] for x in results], [x[1] for x in results],
-              "\n".join(textwrap.wrap(self.editSeries.variable_name+ "("+self.editSeries.variable_units_name+")",50)),
-              "\n".join(textwrap.wrap(self.editSeries.site_name+" "+self.editSeries.variable_name,55)), 'k')
-
-      #add plot with line only in black
-
-      # self.Plots.insert(0,self.editData)
-
-      self.timeSeries.set_title(self.editData.title)
-      self.timeSeries.set_ylabel(self.editData.ylabel, color =self.editData.color )
-      self.editline= self.timeSeries.plot_date(self.editData.DateTimes, self.editData.DataValues, '-'+self.editData.color, xdate = True, tz = None, label = self.editData.title )
-
-
-      # self.timeSeries.set_ylabel("\n".join(textwrap.wrap(self.editSeries.variable_name+ "("+self.editSeries.variable_units_name+")",50)))
-      # self.timeSeries.set_title("\n".join(textwrap.wrap(self.editSeries.site_name+" "+self.editSeries.variable_name, 55)))
-      # self.timeSeries.plot_date( self.editDateTimes, self.editDataValues,'-k', xdate = True, tz = None )
-
-      # add scatterplot with colorlist as colorchart
-      # self.colorlist = self.randBinList(len(self.editDataValues))
-      self.selectedlist = [0] * len(self.editData.DataValues)
-      # print len(self.editData.DataValues)
-
-      self.editPoint = self.timeSeries.scatter(self.editData.DateTimes, self.editData.DataValues, s= 20, c=['k' if x==0 else 'r' for x in self.selectedlist])
-      #   self.isfirstplot = False
-      self.editPoint.set_picker(True)
+  def changeSelectionDT(self, sellist):
+     
+      # print sellist
       
-
-      self.timeSeries.set_xlabel("Date Time")
-
-      self.canvas.draw()
-
-
-  def changeSelection(self, sellist=""):
-      if sellist:
-        self.selectedlist= sellist
+      sellist = self.selFormat(sellist)
+      self.changeSelection(sellist)
+      # self.selectedlist= sellist
       # print ['k' if x==0 else 'r' for x in self.selectedlist]
       # print type(self.selectedlist)
-      self.editPoint.set_color(['k' if x==0 else 'r' for x in self.selectedlist])
+  def selFormat(self, pairs):
+      print len(pairs)
+      if len(pairs) ==0:
+        return [False] * len(self.editData.DataValues)
+      verts =[ (matplotlib.dates.date2num(x), y) for x,y  in pairs]
+      p = path.Path(verts)
+
+      ind = p.contains_points(self.xys)
+      return ind
+
+
+  def changeSelection(self, sellist ):
+      self.editPoint.set_color(['k' if x==0 else 'r' for x in sellist])
       self.canvas.draw()
 
   def onDateChanged(self, date, time):
@@ -210,6 +170,62 @@ class plotTimeSeries(wx.Panel):
 
     self.canvas.draw()
 
+  def stopEdit(self):
+      self.timeSeries.clear()
+      self.editDataFilter = None
+      self.editCursor =None
+      self.editSeries= None
+      self.editData = None
+      self.editline = None
+      self.selectedlist = None
+      self.editPoint =None
+      self.lman= None
+      self.cid=None
+      self.toolbar.stopEdit()
+      self.RefreshPlot()
+
+  def editSeries(self, cursor, series, Filter):
+      print "in edit series"
+      self.timeSeries.clear()
+
+      self.editDataFilter = Filter
+      self.editCursor = cursor
+      self.editSeries= series
+      self.toolbar.editSeries()
+      #####include NoDV in plot
+      # remove from regular 'lines'
+      self.removePlot(self.editSeries.id)
+
+
+      self.editCursor.execute("SELECT  DataValue, LocalDateTime FROM DataValuesEdit "+self.editDataFilter + " ORDER BY LocalDateTime")
+      results = self.editCursor.fetchall()
+
+      self.editData = plotData(self.editSeries.id, [x[0] for x in results], [x[1] for x in results],
+              "\n".join(textwrap.wrap(self.editSeries.variable_name+ "("+self.editSeries.variable_units_name+")",50)),
+              "\n".join(textwrap.wrap(self.editSeries.site_name+" "+self.editSeries.variable_name,55)), 'k')
+
+      #add plot with line only in black
+      self.timeSeries.set_title(self.editData.title)
+      self.timeSeries.set_ylabel(self.editData.ylabel, color =self.editData.color )
+      self.editline= self.timeSeries.plot_date(self.editData.DateTimes, self.editData.DataValues, '-'+self.editData.color, xdate = True, tz = None, label = self.editData.title )
+
+      # add scatterplot with colorlist as colorchart
+      self.selectedlist = [False] * len(self.editData.DataValues)
+      
+
+      self.editPoint = self.timeSeries.scatter(self.editData.DateTimes, self.editData.DataValues, s= 20, c=['k' if x==0 else 'r' for x in self.selectedlist])
+      self.xys = [(matplotlib.dates.date2num(x), y) for x, y in zip(self.editData.DateTimes, self.editData.DataValues) ]
+      
+
+      self.cid = self.canvas.mpl_connect('button_press_event', self.onpress)
+      # self.editPoint.set_picker(True)
+      # self.lman = LassoManager(self.timeSeries, self.editData.DateTimes, self.editData.DataValues, self.selectedlist)
+      
+
+      self.timeSeries.set_xlabel("Date Time")
+
+      self.canvas.draw()
+
 
   def addPlot(self, cursor, series, Filter):
     self.dataFilter = Filter
@@ -231,7 +247,6 @@ class plotTimeSeries(wx.Panel):
       self.Plots.append(plotData(series.id, [x[0] for x in results], [x[1] for x in results],
               "\n".join(textwrap.wrap(series.variable_name+ "("+series.variable_units_name+")",45)),
               "\n".join(textwrap.wrap(series.site_name+" "+series.variable_name,50)), self.colorlist[len(self.Plots)]))
-
 
 
       self.RefreshPlot()
@@ -267,24 +282,7 @@ class plotTimeSeries(wx.Panel):
           # axes.append(axisData(x, self.timeSeries.twinx(),  1.2*(x-1), 'right', rightadjust= .75*(x-1)))
           self.axes.append(axisData(x, self.timeSeries.twinx(),  -60, 'left', leftadjust= .10+(adj*2)))
 
-
-
-      # #add plots to the table
-      # for currPlot, ax  in zip (self.Plots, self.axes):
-      #   print repr(ax)
-      #   if ax.rightadjust:
-      #     print ax.rightadjust
-      #     self.figure.subplots_adjust(right=ax.rightadjust)
-      #   if ax.leftadjust:
-      #     print ax.leftadjust
-      #     self.figure.subplots_adjust(left=ax.leftadjust)
-      #   if ax.side:
-      #     ax.axis.spines[ax.side].set_position(('axes', ax.position))
-          # ax.axis.set_frame_on(True)
-          # ax.axis.patch.set_visible(False)
-      # offset= 60
-
-      
+     
       for currPlot, ax, val  in zip (self.Plots, self.axes, range(len(self.Plots))):
         if val >1:
           new_fixed_axis = ax.axis.get_grid_helper().new_fixed_axis
@@ -324,6 +322,37 @@ class plotTimeSeries(wx.Panel):
       self.canvas.draw()
       # plt.close()
 
+  def callback(self, verts):
+        
+        # print verts 
+
+
+        p = path.Path(verts)
+        ind = p.contains_points(self.xys)
+        self.changeSelection(ind)
+
+        # xys= [(matplotlib.dates.num2date(x), y) for x, y in zip(self.editData.DateTimes, self.editData.DataValues) ]
+        # vals = [(matplotlib.dates.num2date(x), y) for x,y in verts]
+
+        # p = path.Path(vals)
+        # ind = p.contains_points(xys)
+
+        # self.changeSelection(ind)
+        # print vals
+
+        self.canvas.draw_idle()
+        self.canvas.widgetlock.release(self.lasso)
+        del self.lasso
+
+
+  def onpress(self, event):
+        if self.canvas.widgetlock.locked(): return
+        if event.inaxes is None: return
+        self.lasso = Lasso(event.inaxes, (event.xdata, event.ydata), self.callback)
+        # acquire a lock on the widget drawing
+        self.canvas.widgetlock(self.lasso)
+
+
   def removePlot(self, seriesID):
      #if series id matches a key in the dictionary
 
@@ -354,14 +383,14 @@ class plotTimeSeries(wx.Panel):
       # print "get_snaP", dir(event.artist.get_snap)
       # ind = event.ind
 
-      self.selectedlist = [0] * len(self.editData.DataValues)
-      print len(self.selectedlist)
+      selectedlist = [False] * len(self.editData.DataValues)
+      print len(selectedlist)
       for ind in event.ind:
-        self.selectedlist[ind]=1
+        self.selectedlist[ind]=True
       #change slecteion on plot
-      self.changeSelection()
+      self.changeSelection(selectedlist)
       #change selection in table
-      Publisher().sendMessage(("changeTableSelection"), self.selectedlist)
+      Publisher().sendMessage(("changeTableSelection"), selectedlist)
 
 
       # print(event.ind, np.take(self.editDateTimes, event.ind), np.take(self.editDataValues, event.ind))
@@ -390,7 +419,6 @@ class plotTimeSeries(wx.Panel):
 
   def __init__(self, parent, id, pos, size, style, name):
       self._init_ctrls(parent)
-
 
 
 
