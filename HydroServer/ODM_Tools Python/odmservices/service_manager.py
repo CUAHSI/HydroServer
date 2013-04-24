@@ -79,12 +79,12 @@ class ServiceManager():
 		return CVService(conn_string, self.debug)
 
 
-	def get_edit_service(self, series_id, cursor):
+	def get_edit_service(self, series_id, connection):
 		conn_string = self.__build_connection_string(self._current_connection)
-		return EditService(series_id, cursor=cursor, connection_string=conn_string, debug=self.debug)
+		return EditService(series_id, connection=connection, connection_string=conn_string, debug=self.debug)
 
-	def get_record_service(self, script, series_id, cursor):
-		return RecordService(script, self.get_edit_service(series_id, cursor), self.__build_connection_string(self.get_current_connection()))
+	def get_record_service(self, script, series_id, connection):
+		return RecordService(script, self.get_edit_service(series_id, connection), self.__build_connection_string(self.get_current_connection()))
 
 	# private
 	def __get_file(self, mode):

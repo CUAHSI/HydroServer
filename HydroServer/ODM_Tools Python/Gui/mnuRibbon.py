@@ -284,7 +284,7 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.onExecuteScript, id= wxID_RIBBONEDITSCRIPTEXECUTE)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnEditSeries, id= wxID_RIBBONEDITSERIES)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnStopEdit, id= wxID_RIBBONSTOPEDITSERIES)
-
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnRestore, id= wxID_RIBBONEDITRESTORE)
 
 
 
@@ -337,10 +337,16 @@ class mnuRibbon(RB.RibbonBar):
     def OnEditDelPoint(self, event):
         record_service = self.parent.getRecordService()
         record_service.delete_points()
+        Publisher.sendMessage(("updateValues"), event)
 
     def OnStopEdit(self, event):
         # print type(self.parent), dir(self.parent)
         self.parent.stopEdit()
+
+    def OnRestore(self, event):
+        record_service = self.parent.getRecordService()
+        record_service.restore()
+        Publisher.sendMessage(("updateValues"), event)
 
     def OnEditSeries(self, event):
         # self.parent.

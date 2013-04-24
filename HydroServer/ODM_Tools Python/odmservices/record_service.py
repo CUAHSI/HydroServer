@@ -9,7 +9,9 @@ class RecordService():
         self._connection_string = connection_string
         self._record = record
 
-
+    ###################
+    # Filters
+    ###################
     def filter_value(self, value, operator):
         self._edit_service.filter_value(value, operator)
         if self._record:
@@ -35,9 +37,13 @@ class RecordService():
         if self._record:
             self._script("series.value_change_threshold(%s)\n" % (value), 'black')
 
-    def toggle_filter_set(self):
-        self._edit_service.toggle_filter_set()
+    def toggle_filter_previous(self):
+        self._edit_service.toggle_filter_previous()
 
+
+    ###################
+    # Editing
+    ###################
     def add_point(self):
         pass
 
@@ -51,16 +57,15 @@ class RecordService():
         if self._record:
             self._script("series.change_values(%s, %s\n" % (operator, value), 'black')
 
-
     def reset(self):
         self._edit_service.reset()
         if self._record:
             self._script("series.reset()\n", 'black')
 
-    def rollback(self):
-        self._edit_service.rollback()
+    def restore(self):
+        self._edit_service.restore()
         if self._record:
-            self._script("series.rollback()\n", 'black')
+            self._script("series.restore()\n", 'black')
 
     def save(self):
         self._edit_service.save()

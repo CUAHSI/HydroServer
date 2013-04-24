@@ -498,7 +498,7 @@ class pnlSeriesSelector(wx.Panel):
         self.cursor.execute("UPDATE DataValuesEdit SET isSelected=0")
         self.conn.commit()
         # print type(self.parent.Parent), dir (self.parent.Parent)
-        self.parent.Parent.addEdit(self.cursor, self.dbservice.get_series_by_id(seriesID))
+        self.parent.Parent.addEdit(self.cursor, self.dbservice.get_series_by_id(seriesID), connection=self.conn)
         # Publisher().sendMessage(("edit.NewPlot"), [self.cursor, self.dbservice.get_series_by_id(seriesID)])
         
    

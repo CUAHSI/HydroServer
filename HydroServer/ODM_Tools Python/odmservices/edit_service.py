@@ -13,10 +13,12 @@ import sqlite3
 
 class EditService():
     # Mutual exclusion: cursor, or connection_string
-    def __init__(self, series_id, cursor=None, connection_string="",  debug=False):
+    def __init__(self, series_id, connection=None, connection_string="",  debug=False):
         # print "Series id: ", series_id
+        self._connection = connection
         self._series_id = series_id
         self._filter_from_selection = False
+        self._debug = debug
 
         if (connection_string is not ""):
             self._session_factory = SessionFactory(connection_string, debug)
@@ -29,29 +31,33 @@ class EditService():
             # One or the other must be set
             print "Must have either a connection string or session factory"
             # TODO throw an exception
-
+        
         self._edit_session = self._session_factory.get_session()
-        self._debug = debug
 
-        if cursor == None:
-            self._series_service =SeriesService(connection_string, False)
-            self.DataValues = series_service.get_data_values_by_series_id(series_id)
-            self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
-            self._cursor = self.conn.cursor()
-            self.init_table()
-            self._cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
-            self.conn.commit()
-        else:
-            self._cursor = cursor
+        if self._connection == None:
+            series_service = SeriesService(connection_string, False)
+            DataValues = series_service.get_data_values_by_series_id(series_id)
+            self._connection = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
+            tmpCursor = self._connection.cursor()
+            self.init_table(tmpCursor)
+            tmpCursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", DataValues)
 
+        self._connection.commit()
+        self._cursor = self._connection.cursor()
+
+        self._populate_series()
+
+    def _populate_series(self):
         # [(ID, value, datetime), ...]
         self._cursor.execute("SELECT ValueID, DataValue, LocalDateTime FROM DataValuesEdit ORDER BY LocalDateTime")
         results = self._cursor.fetchall()
 
-        self._original_series = results
-        self._active_series = self._original_series
+        self._active_series = results
         self._active_points = []
 
+    ###################
+    # Filters    
+    ###################
     # operator is a character, either '<' or '>'
     def filter_value(self, value, operator):
         filter_set = self.get_filter_set()
@@ -151,27 +157,22 @@ class EditService():
             for point in self._active_points:
                 point[1] = value
 
-    # TODO change name to reset_filter
-    def reset(self):
+    def reset_filter(self):
         self._active_points = self._active_series
 
-    def toggle_filter_set(self):
+    def toggle_filter_previous(self):
         if self._filter_from_selection:
             self._filter_from_selection = False
         else:
             self._filter_from_selection = True
 
-    def rollback(self):
-        self._active_series = self._original_series
-        self.reset()
+    def restore(self):
+        self._connection.rollback()
+        self._populate_series()
 
     def save(self):
         # Save to sqlite memory DB, not real DB
-
-        for point in self._active_series:
-            # make a query
-            pass
-        pass
+        self._connection.commit()
 
     def write_to_db(self):
         # Save to real DB
@@ -208,13 +209,20 @@ class EditService():
 
     def delete_points(self):
         #TODO delete selected points from cursor
-        execute_string = "DELETE FROM DataValuesEdit VALUES ("
-        self._cursor.executemany("DELETE FROM DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
+        execute_string = "DELETE FROM DataValuesEdit WHERE ValueID IN ("
+        num_active_points = len(self._active_points)
+        if num_active_points > 0:
+            for i in range(num_active_points-1):        # loop through the second-to-last active point
+                execute_string += "%s," % (self._active_points[i][0])   # append its ID
+            execute_string += "%s)" % (self._active_points[-1][0])  # append the final point's ID and close the set
 
-        tmp = [x for x in self._active_series if x not in self._active_points]
-        self._active_series = tmp
-        self._active_points = []       # clear the filter
-        #
+            # Delete the points from the cursor
+            self._cursor.execute(execute_string)
+
+            tmp = [x for x in self._active_series if x not in self._active_points]
+            self._active_series = tmp
+            self._active_points = []       # clear the filter
+
 
     def select_points(self, id_list=[], datetime_list=[]):
         pass
@@ -226,8 +234,8 @@ class EditService():
 
 
 
-    def init_table(self):
-        self._cursor.execute("""CREATE TABLE DataValuesEdit
+    def init_table(self, cursor):
+        cursor.execute("""CREATE TABLE DataValuesEdit
                 (ValueID INTEGER NOT NULL,
                 DataValue FLOAT NOT NULL,
                 ValueAccuracy FLOAT,

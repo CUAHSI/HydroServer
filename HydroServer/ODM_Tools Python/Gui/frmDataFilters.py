@@ -168,7 +168,7 @@ class frmDataFilter(wx.Dialog):
         self._init_ctrls(parent)
 
     def OnCheckbox(self, event):
-      self.editService.toggle_filter_set()
+      self.editService.toggle_filter_previous()
 
     def OnBtnClearButton(self, event):
         self.setDates()
