@@ -26,8 +26,16 @@ class ConsoleTools(object):
         else:
             return "Cannot record: %s" % (self._edit_error)
 
+    def toggle_filter_previous(self):
+        if self._record_service:
+            self._record_service.toggle_filter_previous()
+
+    def restore(self):
+        if self._record_service:
+            self._record_service.restore()
+
     ################
-    # Edit methods
+    # Filter methods
     ################
     def filter_value(self, value, operator):
         if self._record_service:
@@ -42,6 +50,16 @@ class ConsoleTools(object):
             self.refresh_plot()
         else:
             return "Cannot filter: %s" % (self._edit_error)
+
+    def data_gaps(self, value, time_period):
+        if self._record_service:
+            self._record_service.data_gaps(value, time_period)
+            self.refresh_plot()
+
+    def value_change_threshold(self, value):
+        if self._record_service:
+            self._record_service.value_change_threshold(value)
+            self.refresh_plot()
 
     ###############
     # UI methods

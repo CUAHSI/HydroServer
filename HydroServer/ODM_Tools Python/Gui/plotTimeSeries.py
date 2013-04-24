@@ -20,11 +20,6 @@ from matplotlib.font_manager import FontProperties
 
 from matplotlib.widgets import Lasso
 from matplotlib import path
-
-
-
-
-
 from random import *
 from wx.lib.pubsub import Publisher
 
@@ -184,7 +179,7 @@ class plotTimeSeries(wx.Panel):
       self.toolbar.stopEdit()
       self.RefreshPlot()
 
-  def editSeries(self, cursor, series, Filter):
+  def addEdit(self, cursor, series, Filter):
       print "in edit series"
       self.timeSeries.clear()
 
@@ -226,6 +221,9 @@ class plotTimeSeries(wx.Panel):
 
       self.canvas.draw()
 
+
+  def updateValues(self):
+    self.addEdit(self.editCursor, self.editSeries, self.editDataFilter)
 
   def addPlot(self, cursor, series, Filter):
     self.dataFilter = Filter

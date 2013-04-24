@@ -248,16 +248,15 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.Update()
 
 
-    def addEdit(self, cursor, series):
+    def addEdit(self, cursor, series, connection=None):
         # Publisher().sendMessage(("edit.EnableButtons"), True)
         # self.pnlPlot.addEditPlot(Values.data)
         # self.dataTable.Init(Values.data[0])
         # self.edit_service = self.service_manager.get_edit_service(Values.data[1].id, Values.data[0])
         
-        print cursor, series
         self.pnlPlot.addEditPlot(cursor, series)
         self.dataTable.Init(cursor)
-        self.record_service = self.service_manager.get_record_service(self.txtPythonScript, series.id, cursor)
+        self.record_service = self.service_manager.get_record_service(self.txtPythonScript, series.id, connection)
         self._ribbon.toggleEditButtons(True)
 
         # set record service for console

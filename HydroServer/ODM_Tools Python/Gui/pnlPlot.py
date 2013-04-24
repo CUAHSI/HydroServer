@@ -64,12 +64,14 @@ class pnlPlot(fnb.FlatNotebook):
         Publisher().subscribe(self.OnNumBins, ("OnNumBins"))
         Publisher().subscribe(self.OnRemovePlot, ("removePlot"))
         Publisher().subscribe(self.OnChangeSelection, ("changePlotSelection"))
-        Publisher().subscribe(self.OnChangeSelectionDT, ("changePlotSelectionDT"))
-
+        Publisher().subscribe(self.OnChangeSelectionDT, ("changePlotSelectionDT"))        
+        Publisher().subscribe(self.onUpdateValues, ("updateValues"))
 
         self.selectedSerieslist = []
         self._seriesPlotInfo= []
 
+    def onUpdateValues(self, event):
+        self.pltTS.updateValues()
 
     def OnChangeSelection(self, sellist):
       self.pltTS.changeSelection(sellist.data)
@@ -100,8 +102,8 @@ class pnlPlot(fnb.FlatNotebook):
     def addEditPlot(self, cursor, series):
         Filter = " WHERE CensorCode = 'nc'"
         # print Values
-        # self.pltTS.editSeries(Values, Filter)
-        self.pltTS.editSeries(cursor, series, Filter)
+        # self.pltTS.addEdit(Values, Filter)
+        self.pltTS.addEdit(cursor, series, Filter)
 
     def stopEdit(self):
         self.pltTS.stopEdit()
