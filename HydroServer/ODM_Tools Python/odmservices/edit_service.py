@@ -34,14 +34,13 @@ class EditService():
         self._debug = debug
 
         if cursor == None:
-            series_service =SeriesService(connection_string, False)
+            self._series_service =SeriesService(connection_string, False)
             self.DataValues = series_service.get_data_values_by_series_id(series_id)
             self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
             self._cursor = self.conn.cursor()
             self.init_table()
             self._cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
             self.conn.commit()
-            pass
         else:
             self._cursor = cursor
 
@@ -208,9 +207,14 @@ class EditService():
         pass
 
     def delete_points(self):
+        #TODO delete selected points from cursor
+        execute_string = "DELETE FROM DataValuesEdit VALUES ("
+        self._cursor.executemany("DELETE FROM DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
+
         tmp = [x for x in self._active_series if x not in self._active_points]
         self._active_series = tmp
         self._active_points = []       # clear the filter
+        #
 
     def select_points(self, id_list=[], datetime_list=[]):
         pass

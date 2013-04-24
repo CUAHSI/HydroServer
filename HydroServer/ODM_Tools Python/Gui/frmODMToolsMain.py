@@ -31,6 +31,7 @@ import pnlPlot
 import mnuRibbon
 import pnlDataTable
 
+from odmconsole import ConsoleTools
 
 # import sys
 # sys.path.append('C:\DEV\ODM\HydroServer\ODM_Tools Python')
@@ -133,11 +134,12 @@ class frmODMToolsMain(wx.Frame):
 ############# Script & Console ###############
 
         self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE,
-                name=u'txtPython', parent=self, rootObject=pnlDataTable, pos=wx.Point(72, 24),
+                name=u'txtPython', parent=self, rootObject=self, rootLabel="Main Window", pos=wx.Point(72, 24),
                 size=wx.Size(500,800), style=0)
-##        self.txtPythonConsole= wx.richtext.RichTextCtrl(id=wxID_TXTPYTHONCONSOLE,
-##              parent=self, pos=wx.Point(72, 24), size=wx.Size(500,800),
-##              style=wx.richtext.RE_MULTILINE, value='')
+
+        # Console tools object for usability
+        self.console_tools = ConsoleTools(self._ribbon)
+        self.txtPythonConsole.shell.run("Tools = app.TopWindow.console_tools", prompt=False, verbose=False)
 
         self.txtPythonScript = pnlScript(id=wxID_TXTPYTHONSCRIPT,
               name=u'txtPython', parent=self, pos=wx.Point(72, 24),
@@ -257,6 +259,9 @@ class frmODMToolsMain(wx.Frame):
         self.dataTable.Init(cursor)
         self.record_service = self.service_manager.get_record_service(self.txtPythonScript, series.id, cursor)
         self._ribbon.toggleEditButtons(True)
+
+        # set record service for console
+        self.console_tools.set_record_service(self.record_service)
         
         # TODO
         # create edit service, send in Values.data[0]
