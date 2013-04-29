@@ -61,6 +61,11 @@ class ConsoleTools(object):
             self._record_service.value_change_threshold(value)
             self.refresh_plot()
 
+    def reset_filter(self):
+        if self._record_service:
+            self._record_service.reset_filter()
+            self.refresh_plot()
+
     ###############
     # UI methods
     ###############

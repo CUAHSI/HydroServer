@@ -227,12 +227,9 @@ class EditService():
     def select_points(self, id_list=[], datetime_list=[]):
         pass
 
-
     def reconcile_dates(self, parent_series_id):
         # append new data to this series
         pass
-
-
 
     def init_table(self, cursor):
         cursor.execute("""CREATE TABLE DataValuesEdit
