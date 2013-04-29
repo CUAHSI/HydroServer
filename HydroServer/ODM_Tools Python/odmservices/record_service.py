@@ -57,10 +57,10 @@ class RecordService():
         if self._record:
             self._script("series.change_values(%s, %s\n" % (operator, value), 'black')
 
-    def reset(self):
-        self._edit_service.reset()
+    def reset_filter(self):
+        self._edit_service.reset_filter()
         if self._record:
-            self._script("series.reset()\n", 'black')
+            self._script("series.reset_filter()\n", 'black')
 
     def restore(self):
         self._edit_service.restore()
