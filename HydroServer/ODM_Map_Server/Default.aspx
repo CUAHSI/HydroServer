@@ -5,10 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>ODM Map Server</title>
-    <link href="/odmmap/styles/Styles.css" rel="stylesheet" type="text/css">
-	<script language="javascript" src="/odmmap/scripts/preloadImages.js"></script>
-	<script language="javascript" src="/odmmap/scripts/mapWindow.js"></script>
-	<script language="javascript" src="/odmmap/scripts/analystPopup.js"></script>
+    <link href="styles/Styles.css" rel="stylesheet" type="text/css">
+	<script language="javascript" src="scripts/preloadImages.js"></script>
+	<script language="javascript" src="scripts/mapWindow.js"></script>
+	<script language="javascript" src="scripts/analystPopup.js"></script>
 </head>
 <body onload="initialize()" onunload="GUnload()">
 	<!-- Specify the Google Maps API Key -->
@@ -68,7 +68,7 @@
 		</asp:Panel>
 		<asp:Panel Id="pnlQueryOptions" Visible="True" Runat="server">
 			<DIV class="leftpanel" id="leftpanelcontents" style="width: 250px">
-				<P style="MARGIN-LEFT: 50px"><IMG src="/odmmap/images/logo.gif"></P><B>Network Query</B> 
+				<P style="MARGIN-LEFT: 50px"><IMG src="images/logo.gif"></P><B>Network Query</B> 
 				<P style="MARGIN-TOP: 10px">Select an observation Network from the list to display the sites for that network.</P>
 				<asp:DropDownList id="ddlNetworks" style="MARGIN-TOP: 10px; WIDTH: 220px" runat="server" autopostback="True"></asp:DropDownList>
 				<P style="MARGIN-TOP: 20px"><B>Site Query</B></P>
@@ -91,7 +91,7 @@
 			</table>
 		</div>
 		<div class="logo">
-			<a href="http://www.usu.edu" target="_blank"><img src="/odmmap/images/small-wordmark.gif" border="0" ></a>
+			<a href="http://www.usu.edu" target="_blank"><img src="images/small-wordmark.gif" border="0" ></a>
 		</div>
     </form>
 </body>
