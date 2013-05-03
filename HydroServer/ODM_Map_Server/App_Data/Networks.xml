@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<String>
+	<Networks count="1">
+		<Network>
+			<NetworkID>1</NetworkID>
+			<NetworkName>My Network Name</NetworkName>
+			<DatabaseName>My SQL Server Database Name</DatabaseName>
+			<DBConnection>Data Source=myserver.mydomain.edu;Database=MyDatabaseName;user=MySQLServerUserName;password=MySQLServerPassword</DBConnection>
+			<Icon>green-dot.png</Icon>
+		</Network>
+	</Networks>
+</String>
