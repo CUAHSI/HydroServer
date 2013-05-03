@@ -18,9 +18,10 @@ Partial Class _Default
             SessionFunctions.Load(strNetworksPath)
         End If
 
-        If Request.UserHostAddress = "127.0.0.1" Then 'Request from the localhost
+        If Request.UserHostAddress = "127.0.0.1" Then 'Request from the localhost and you are debugging.
             ltlMaps.Text = "<script src=""http://maps.google.com/maps?file=api&v=2;&key=ABQIAAAAqDXqSq472xFWgkbKasg44BQs8u-UdKdxhZZWKfbbdRG1NjAJChQF1KtY9U7N19uCJcEc9rpBu-nXjw"" type=""text/javascript""></script>"
         Else
+            'The request is from an outside user.  The Google maps key must be replaced here for whatever domain the site is to be used for.
             ltlMaps.Text = "<script src=""http://maps.google.com/maps?file=api&v=2;&key=ABQIAAAAqDXqSq472xFWgkbKasg44BSTNIMltmWs3yQcKby0sd43XLUGcxRDWViYcyDTeYDKKxRDUJTB6eHylw"" type=""text/javascript""></script>"
         End If
 
@@ -58,7 +59,7 @@ Partial Class _Default
                 ddlNetworks.Items.Add(objListItem)
 
                 'Create the legend item
-                strLegendHTML = strLegendHTML & "<img src=" & """" & "/odmmap/icons/" & objNetwork.Icon & """" & " ></img>" & objNetwork.NetworkName & "<br>"
+                strLegendHTML = strLegendHTML & "<img src=" & """" & "icons/" & objNetwork.Icon & """" & " ></img>" & objNetwork.NetworkName & "<br>"
             Next
 
             'set the legend literal control
@@ -241,28 +242,9 @@ Partial Class _Default
         Dim strIconName As String = objNetwork.Icon.ToString
         Dim strDatabaseName As String = objNetwork.DatabaseName.ToString
 
-        'For Each objDataRow In objDataTable.Select
-        '    i = i + 1
-        '    markerHTML = "<table><tr><td><img src='images/spacer.gif' width=100 height=1</td><td><img src='images/spacer.gif' width=10 height=1</td><td><img src='images/spacer.gif' width=100 height=1</td></tr>" & _
-        '        "<tr valign='top'>" & _
-        '        "<td padding='10px' width=200><b>SiteCode: </b>" & Convert.ToString(objDataRow.Item("SiteCode")) & "<br>" & _
-        '        "<b>SiteName: </b>" & Convert.ToString(objDataRow.Item("SiteName")) & "<br>" & _
-        '        "<b>Latitude: </b>" & Convert.ToString(objDataRow.Item("Latitude")) & "<br>" & _
-        '        "<b>Longitude: </b>" & Convert.ToString(objDataRow.Item("Longitude")) & "<br><br>" & _
-        '        "<table><tr><td><img src='images/ploticon.gif'></td><td><img src='images/spacer.gif' width=5></td>" & _
-        '        "<td><a href='http://water.usu.edu/odmanalyst/default.aspx?Database=LittleBearRiver&SiteID=" & Convert.ToString(objDataRow.Item("SiteID")) & "' target='_blank'>View and download data</a>" & "</td></tr>" & _
-        '        "<tr><td><img src='images/ploticonwpoint.gif'></td><td><img src='images/spacer.gif' width=5></td>" & _
-        '        "<td><a href='current/default.aspx?SiteCode=" & Convert.ToString(objDataRow.Item("SiteCode")) & "' target='_blank'>View current conditions</a></td></tr></table>" & _
-        '        "<td><img src='images/spacer.gif' width=10 height=1</td>" & _
-        '        "<td><a href='images/" & Convert.ToString(objDataRow.Item("SiteCode")) & ".jpg' target='_blank'>" & "<img src=" & "images/" & Convert.ToString(objDataRow.Item("SiteCode")) & "-small.jpg" & " width=125 border=0></a></td>" & _
-        '        "</tr></table>"
-        '    ScriptString = ScriptString & "var point = new GLatLng(" & Convert.ToString(objDataRow.Item("Latitude")) & ", " & Convert.ToString(objDataRow.Item("Longitude")) & ");" & ControlChars.NewLine
-        '    ScriptString = ScriptString & "map.addOverlay(createMarker(point, " & """" & markerHTML & """" & "));" & ControlChars.NewLine
-        'Next
-
         ScriptString = ScriptString & "var Icon" & strNetworkID & " = new GIcon();" & ControlChars.NewLine
-        ScriptString = ScriptString & "Icon" & strNetworkID & ".image = " & """" & "/odmmap/icons/" & strIconName & """" & ";" & ControlChars.NewLine
-        ScriptString = ScriptString & "Icon" & strNetworkID & ".shadow = " & """" & "/odmmap/icons/" & Split(strIconName, ".")(0) & "_shadow.png" & """" & ";" & ControlChars.NewLine
+        ScriptString = ScriptString & "Icon" & strNetworkID & ".image = " & """" & "icons/" & strIconName & """" & ";" & ControlChars.NewLine
+        ScriptString = ScriptString & "Icon" & strNetworkID & ".shadow = " & """" & "icons/" & Split(strIconName, ".")(0) & "_shadow.png" & """" & ";" & ControlChars.NewLine
         ScriptString = ScriptString & "Icon" & strNetworkID & ".iconSize = new GSize(32, 32);" & ControlChars.NewLine
         ScriptString = ScriptString & "Icon" & strNetworkID & ".shadowSize = new GSize(56, 32);" & ControlChars.NewLine
         ScriptString = ScriptString & "Icon" & strNetworkID & ".iconAnchor = new GPoint(16, 32);" & ControlChars.NewLine
