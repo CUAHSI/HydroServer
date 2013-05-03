@@ -56,7 +56,7 @@ class EditService():
         self._active_points = []
 
     ###################
-    # Filters    
+    # Filters
     ###################
     # operator is a character, either '<' or '>'
     def filter_value(self, value, operator):
@@ -137,25 +137,18 @@ class EditService():
 
         self._active_points = points
 
-    def change_values(self, value, operator):
-        print "in change values"
-        print value
-        print operator
-        if operator == '+':
-            for point in self._active_points:
-                point[1] += value
+    def select_points(self, id_list=[], datetime_list=[]):
+        # This should be either one or the other. If it's both, id is used first.
+        # If neither are set this function does nothing.
+        if id_list != None:
+            tmp = [x for x in self._active_series if x[0] in id_list]
+            self._active_points = tmp
+        elif datetime_list != None:
+            tmp = [x for x in self._active_series if x[2] in datetime_list]
+            self._active_points = tmp
+        else:
+            pass
 
-        if operator == '-':
-            for point in self._active_points:
-                point[1] -= value
-
-        if operator == '*':
-            for point in self._active_points:
-                point[1] *= value
-
-        if operator == '=':
-            for point in self._active_points:
-                point[1] = value
 
     def reset_filter(self):
         self._active_points = self._active_series
@@ -166,18 +159,10 @@ class EditService():
         else:
             self._filter_from_selection = True
 
-    def restore(self):
-        self._connection.rollback()
-        self._populate_series()
 
-    def save(self):
-        # Save to sqlite memory DB, not real DB
-        self._connection.commit()
-
-    def write_to_db(self):
-        # Save to real DB
-        pass
-
+    ###################
+    # Gets
+    ###################
     def get_active_series(self):
         return self._active_series
 
@@ -200,10 +185,38 @@ class EditService():
 
         return dv_list
         if len(self._active_points)==len(self._active_series):
-            return []
+            return []   
+
+    
+    #################
+    # Edits
+    #################
+
+    def change_value(self, value, operator):
+        execute_string = "UPDATE DataValuesEdit SET DataValue = "
+        if operator == '+':
+            execute_string += " DataValue + %s " % (value)
+
+        if operator == '-':
+            execute_string += " DataValue - %s " % (value)
+
+        if operator == '*':
+            execute_string += " DataValue * %s " % (value)
+
+        if operator == '=':
+            execute_string += "%s " % (value)
+
+        execute_string += "WHERE ValueID IN ("
+        for i in range(len(self._active_points) - 1):
+            execute_string += "%s," % (self._active_points[i][0])
+        execute_string += "%s)" % (self._active_points[-1][0])
+        self._cursor.execute(execute_string)
+
+        self._populate_series()
 
     def add_point(self, point):
-        # add to active_series
+        # cursor execute_many
+        # execute_string = "INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", DataValues
         # save to sqlite DB
         pass
 
@@ -222,9 +235,21 @@ class EditService():
             tmp = [x for x in self._active_series if x not in self._active_points]
             self._active_series = tmp
             self._active_points = []       # clear the filter
+    
+    ###################
+    # Save/Restore
+    ###################
 
+    def restore(self):
+        self._connection.rollback()
+        self._populate_series()
 
-    def select_points(self, id_list=[], datetime_list=[]):
+    def save(self):
+        # Save to sqlite memory DB, not real DB
+        self._connection.commit()
+
+    def write_to_db(self):
+        # Save to real DB
         pass
 
     def reconcile_dates(self, parent_series_id):

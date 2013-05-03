@@ -65,6 +65,28 @@ class ConsoleTools(object):
         if self._record_service:
             self._record_service.reset_filter()
             self.refresh_plot()
+    
+    ################
+    # Edit methods
+    ################
+
+    def change_value(self, value, operator):
+        if self._record_service:
+            self._record_service.change_value(value, operator)
+            self.refresh_plot()
+            Publisher().sendMessage(("updateValues"), None)
+
+    def delete_points(self):
+        if self._record_service:
+            self._record_service.delete_points()
+            self.refresh_plot()
+            Publisher().sendMessage(("updateValues"), None)
+
+    def restore(self):
+        if self._record_service:
+            self._record_service.restore()
+            self.refresh_plot()
+            Publisher.sendMessage(("updateValues"), None)
 
     ###############
     # UI methods
