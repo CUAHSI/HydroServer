@@ -180,7 +180,6 @@ class plotTimeSeries(wx.Panel):
       self.RefreshPlot()
 
   def addEdit(self, cursor, series, Filter):
-      print "in edit series"
       self.timeSeries.clear()
 
       self.editDataFilter = Filter

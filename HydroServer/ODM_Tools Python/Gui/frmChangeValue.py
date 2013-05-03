@@ -1,6 +1,7 @@
 #Boa:Frame:frmChangeValue
 
 import wx
+from wx.lib.pubsub import Publisher
 
 def create(parent):
     return frmChangeValue(parent)
@@ -16,7 +17,7 @@ class frmChangeValue(wx.Dialog):
 
         parent.AddWindow(self.cbValue, 50, border=5, flag=wx.ALL)
         parent.AddWindow(self.txtValue, 50, border=5, flag=wx.ALL)
-        parent.AddWindow(self.btnApply, 50, border=5, flag=wx.ALL)
+        parent.AddWindow(self.btnOk, 50, border=5, flag=wx.ALL)
         parent.AddWindow(self.btnCancel, 50, border=5, flag=wx.ALL)
 
     def _init_sizers(self):
@@ -52,12 +53,12 @@ class frmChangeValue(wx.Dialog):
 
         self.txtValue = wx.TextCtrl(id=wxID_FRMCHANGEVALUETXTVALUE,
               name=u'txtValue', parent=self.panel1, pos=wx.Point(121, 5),
-              size=wx.Size(100, 21), style=50, value=u'')
+              size=wx.Size(100, 21), style=0, value=u'')
 
-        self.btnApply = wx.Button(id=wxID_FRMCHANGEVALUEBTNAPPLY,
-              label=u'Apply', name=u'btnApply', parent=self.panel1,
+        self.btnOk = wx.Button(id=wxID_FRMCHANGEVALUEBTNAPPLY,
+              label=u'Ok', name=u'btnOk', parent=self.panel1,
               pos=wx.Point(5, 40), size=wx.Size(104, 23), style=0)        
-        self.btnApply.Bind(wx.EVT_BUTTON, self.OnBtnApplyButton,
+        self.btnOk.Bind(wx.EVT_BUTTON, self.OnBtnOkButton,
               id=wxID_FRMCHANGEVALUEBTNAPPLY)
 
         self.btnCancel = wx.Button(id=wxID_FRMCHANGEVALUEBTNCANCEL,
@@ -76,9 +77,11 @@ class frmChangeValue(wx.Dialog):
       self.Close()
       event.Skip()
 
-    def OnBtnApplyButton(self, event):
+    def OnBtnOkButton(self, event):
       operator = self.cbValue.GetValue()
       value = self.txtValue.GetValue()
+      print operator
+      print value
       if operator == 'Add':
         operator = '+'
       if operator == 'Subtract':
@@ -88,7 +91,9 @@ class frmChangeValue(wx.Dialog):
       if operator == 'Set to':
         operator = '='
 
-      self.record_service.change_values(value, operator)
+      self.record_service.change_value(value, operator)
+      Publisher.sendMessage(("updateValues"), event)
+      self.Close()
 
 
 if __name__ == '__main__':
