@@ -71,6 +71,9 @@ class pnlDataTable(wx.Panel):
         # self.values = [list(x) for x in self.cursor.fetchall()]  
         self.myOlv.SetObjects(self.dataRep.getDataValuesforEdit())
 
+    def Refresh(self):
+        self.myOlv.SetObjects(self.dataRep.getDataValuesforEdit())
+
     def Clear(self):
         self.cursor= None
         self.values = None
