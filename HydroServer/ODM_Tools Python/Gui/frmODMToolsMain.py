@@ -1,8 +1,12 @@
 #Boa:Frame:ODMTools
 
+import sys
+import os
+working_directory = os.path.dirname(os.getcwd())
+sys.path.append(working_directory)
+
 import wx
 import wx.grid
-import wx.lib.agw.ribbon as RB
 import wx.aui
 # import wx.aui
 
@@ -15,12 +19,9 @@ except ImportError: # if it's not there locally, try the wxPython lib.
 
 import wx.richtext
 import wx.stc
-import datetime
 import wx.lib.agw.aui as aui
-from wx.lib.agw.aui import aui_switcherdialog as ASD
 from wx.lib.pubsub import Publisher
 import wx.py.crust
-from numpy import arange, sin, cos, exp, pi
 import frmDBConfiguration
 
 from odmservices import ServiceManager
@@ -33,8 +34,6 @@ import pnlDataTable
 
 from odmconsole import ConsoleTools
 
-# import sys
-# sys.path.append('C:\DEV\ODM\HydroServer\ODM_Tools Python')
 
 
 def create(parent):
@@ -196,9 +195,9 @@ class frmODMToolsMain(wx.Frame):
             panedet=self._mgr.GetPane(self.txtPythonScript)
         elif Value.data == "Console":
 
-        # self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE, 
+        # self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE,
         #     name=u'txtPython', parent=self,  pos=wx.Point(72, 24),
-        #     size=wx.Size(500,800), style=0) 
+        #     size=wx.Size(500,800), style=0)
         # self._mgr.AddPane(self.txtPythonConsole,  aui.AuiPaneInfo().Caption('Python Console').
         #     Name("Console").Layer(1).Show(show=False).Float())
 
@@ -248,43 +247,59 @@ class frmODMToolsMain(wx.Frame):
         self._mgr.Update()
 
 
-    def addEdit(self, cursor, series, connection=None):
-        # Publisher().sendMessage(("edit.EnableButtons"), True)
-        # self.pnlPlot.addEditPlot(Values.data)
-        # self.dataTable.Init(Values.data[0])
-        # self.edit_service = self.service_manager.get_edit_service(Values.data[1].id, Values.data[0])
-        
-        self.pnlPlot.addEditPlot(cursor, series)
-        self.dataTable.Init(cursor)
-        self.record_service = self.service_manager.get_record_service(self.txtPythonScript, series.id, connection)
+    # def addEdit(self, cursor, series, connection=None):
+    #     # Publisher().sendMessage(("edit.EnableButtons"), True)
+    #     # self.pnlPlot.addEditPlot(Values.data)
+    #     # self.dataTable.Init(Values.data[0])
+    #     # self.edit_service = self.service_manager.get_edit_service(Values.data[1].id, Values.data[0])
+
+    #     self.pnlPlot.addEditPlot(cursor, series)
+    #     self.dataTable.Init(cursor)
+    #     self.record_service = self.service_manager.get_record_service(self.txtPythonScript, series.id, connection)
+    #     self._ribbon.toggleEditButtons(True)
+
+    #     # set record service for console
+    #     self.console_tools.set_record_service(self.record_service)
+
+    #     # TODO
+    #     # create edit service, send in Values.data[0]
+
+
+
+    def addEdit(self, seriesID, dataRep):
+
+        self.pnlPlot.addEditPlot(dataRep, seriesID)
+        self.dataTable.Init(dataRep)
+        self.record_service = self.service_manager.get_record_service(self.txtPythonScript, seriesID, dataRep.conn)
         self._ribbon.toggleEditButtons(True)
 
         # set record service for console
         self.console_tools.set_record_service(self.record_service)
-        
-        # TODO
-        # create edit service, send in Values.data[0]
-   
+
     def stopEdit(self):
-        
         self.pnlPlot.stopEdit()
         self.dataTable.stopEdit()
-        self.record_service = None
         self.pnlSelector.stopEdit()
+        self.record_service = None
         self._ribbon.toggleEditButtons(False)
-        
-
 
     def getRecordService(self):
         return self.record_service
-    
 
     def onChangeDBConn(self, event):
         db_config = frmDBConfiguration.frmDBConfig(None, self.service_manager, False)
-        db_config.ShowModal()
-        #clear editseries
-        #clear all plots
-        #clear table
+        value = db_config.ShowModal()
+        if value == wx.ID_OK:
+            #reset Series Selector
+            self.pnlSelector.resetDB(self.sc)
+            #clear editseries
+            #clear all plots
+            self.pnlPlot.Clear()
+            #clear table
+            self.dataTable.Clear()
+
+
+
 
 
     def createService(self):

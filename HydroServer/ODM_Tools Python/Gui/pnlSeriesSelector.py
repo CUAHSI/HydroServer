@@ -23,7 +23,7 @@ from odmdata import memoryDatabase
  wxID_PNLSERIESSELECTORLBLSITE, wxID_PNLSERIESSELECTORLBLVARIABLE,
  wxID_PNLSERIESSELECTORtableSeries, wxID_PNLSERIESSELECTORPANEL1,
  wxID_PNLSERIESSELECTORPANEL2, wxID_PNLSIMPLE, wxID_PNLRADIO,
- wxID_FRAME1RBADVANCED, wxID_FRAME1RBALL, 
+ wxID_FRAME1RBADVANCED, wxID_FRAME1RBALL,
  wxID_FRAME1RBSIMPLE, wxID_FRAME1SPLITTER,wxID_PNLSPLITTER,
 ] = [wx.NewId() for _init_ctrls in range(17)]
 
@@ -54,23 +54,23 @@ class pnlSeriesSelector(wx.Panel):
         # generated method, don't edit
         parent.AddWindow(self.checkSite, 3, border=3, flag=wx.ALL)
         parent.AddWindow(self.lblSite, 10, border=3, flag=wx.ALL)
-        parent.AddWindow(self.cbSites, 85, border=3, flag=wx.ALL | wx.EXPAND)        
-        
+        parent.AddWindow(self.cbSites, 85, border=3, flag=wx.ALL | wx.EXPAND)
+
     ## Variable Sizer
     def _init_coll_boxSizer2_Items(self, parent):
         # generated method, don't edit
         parent.AddWindow(self.checkVariable, 3, border=3, flag=wx.ALL)
         parent.AddWindow(self.lblVariable, 10, border=3, flag=wx.ALL)
-        parent.AddWindow(self.cbVariables, 85, border=3, flag=wx.ALL | wx.EXPAND) 
+        parent.AddWindow(self.cbVariables, 85, border=3, flag=wx.ALL | wx.EXPAND)
 
-    ##  Simple Filter Sizer    
+    ##  Simple Filter Sizer
     def _init_coll_boxSizer6_Items(self, parent):
         parent.AddWindow(self.panel1, 0, border=3, flag=wx.ALL | wx.EXPAND)
         parent.AddWindow(self.panel2, 0, border=3, flag=wx.ALL | wx.EXPAND)
         # parent.AddSizer(self.boxSizer4, 0, border=5, flag=wx.EXPAND)
         # parent.AddSizer(self.boxSizer2, 0, border=5, flag=wx.EXPAND)
-   
-   
+
+
     def _init_sizers(self):
         # generated method, don't edit
         self.boxSizer1 = wx.BoxSizer(orient=wx.VERTICAL)
@@ -87,7 +87,7 @@ class pnlSeriesSelector(wx.Panel):
         self._init_coll_boxSizer5_Items(self.boxSizer5)
         self._init_coll_boxSizer6_Items(self.boxSizer6)
 
-        self.SetSizer(self.boxSizer1)        
+        self.SetSizer(self.boxSizer1)
         self.panel1.SetSizer(self.boxSizer4)
         self.panel2.SetSizer(self.boxSizer2)
         self.pnlSimple.SetSizer(self.boxSizer6)
@@ -102,12 +102,12 @@ class pnlSeriesSelector(wx.Panel):
               size=wx.Size(935, 270), style=wx.TAB_TRAVERSAL)
         self.SetClientSize(wx.Size(919, 232))
         self.Enable(True)
-        
+
         ## Radio panel
         self.pnlRadio = wx.Panel(id=wxID_PNLRADIO, name='pnlRadio',
               parent=self, pos=wx.Point(3, 3), size=wx.Size(919, 20),
               style=wx.TAB_TRAVERSAL)
-              
+
         self.rbAll = wx.RadioButton(id=wxID_FRAME1RBALL, label=u'All',
               name=u'rbAll', parent=self.pnlRadio, pos=wx.Point(0, 0),
               size=wx.Size(81, 20), style=0)
@@ -125,29 +125,29 @@ class pnlSeriesSelector(wx.Panel):
               label=u'Advanced Filter', name=u'rbAdvanced', parent=self.pnlRadio,
               pos=wx.Point(193, 0), size=wx.Size(104, 20), style=0)
         self.rbAdvanced.Bind(wx.EVT_RADIOBUTTON, self.OnRbAdvancedRadiobutton,
-              id=wxID_FRAME1RBADVANCED)  
+              id=wxID_FRAME1RBADVANCED)
         # self.rbAdvanced.Enable(False)
-        
-              
-        
+
+
+
         ## Splitter panel
         self.pnlSplitter = wx.Panel(id=wxID_PNLSPLITTER, name='pnlSplitter',
               parent=self, pos=wx.Point(3, 3), size=wx.Size(919, 349),
               style=wx.TAB_TRAVERSAL)
-              
+
         self.splitter = wx.SplitterWindow(id=wxID_FRAME1SPLITTER,
               name=u'splitter', parent=self.pnlSplitter, pos=wx.Point(0, 0),
               size=wx.Size(604, 137), style=wx.SP_3D)
         self.splitter.SetMinSize(wx.Size(-1, -1))
-              
-               
+
+
         ## panel for simple filter(top of splitter)
         self.pnlSimple = wx.Panel(id=wxID_PNLSIMPLE, name='panel3',
               parent=self.splitter, pos=wx.Point(0, 0), size=wx.Size(919, 300),
               style=wx.TAB_TRAVERSAL)
-        
-        
-        ## Site Panel   
+
+
+        ## Site Panel
         self.panel1 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL1, name='panel1',
               parent=self.pnlSimple, pos=wx.Point(3, 3), size=wx.Size(919, 30),
               style=wx.TAB_TRAVERSAL)
@@ -175,7 +175,7 @@ class pnlSeriesSelector(wx.Panel):
         self.panel2 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL2, name='panel2',
               parent=self.pnlSimple, pos=wx.Point(3, 39), size=wx.Size(919, 30),
               style=wx.TAB_TRAVERSAL)
-              
+
         self.lblVariable = wx.StaticText(id=wxID_PNLSERIESSELECTORLBLVARIABLE,
               label=u'Variable', name=u'lblVariable', parent=self.panel2,
               pos=wx.Point(30, 3), size=wx.Size(87, 13), style=0)
@@ -197,7 +197,7 @@ class pnlSeriesSelector(wx.Panel):
 
         self.tableSeries = clsULC(id=wxID_PNLSERIESSELECTORtableSeries,
               name=u'tableSeries', parent=self.splitter, pos=wx.Point(5, 5),
-              size=wx.Size(903, 108),              
+              size=wx.Size(903, 108),
               agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES | ULC.ULC_HAS_VARIABLE_ROW_HEIGHT |ULC.ULC_SINGLE_SEL)
 
         self.splitter.SplitHorizontally(self.pnlSimple, self.tableSeries, 1)
@@ -205,7 +205,7 @@ class pnlSeriesSelector(wx.Panel):
         self.tableSeries.Bind(ULC.EVT_LIST_ITEM_CHECKED,
               self.OntableSeriesListItemSelected,
               id=wxID_PNLSERIESSELECTORtableSeries)
-        
+
         self.tableSeries.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK,
               self.OnTableRightDown,
               id=wxID_PNLSERIESSELECTORtableSeries)
@@ -213,48 +213,44 @@ class pnlSeriesSelector(wx.Panel):
         Publisher().subscribe(self.OnEditButton, ("selectEdit"))
         self._init_sizers()
 
-    
+
 
     def __init__(self, parent, id, pos, size, style, name, dbservice):
         self.parent= parent
         self._init_ctrls(parent)
-        self.site_code = None
-        self.variable_code = None
+
+        self.dbservice = dbservice
+        self.initTableSeries()
+        self.initSVBoxes()
+
+
+    def resetDB(self, dbservice):
 
         #####INIT DB Connection
         self.dbservice = dbservice
-        # self.dataRep=memoryDatabase(dbservice)
-        self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
-        self.cursor = self.conn.cursor()
-        self.initDB()
+        self.tableSeries.Clear()
+        self.siteList = None
+        self.varList   =None
 
-        ### INIT Series Catalog        
-        self.cursor.executemany("INSERT INTO SeriesCatalog VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.dbservice.get_series_test())
-        self.cursor.execute("ALTER TABLE SeriesCatalog ADD COLUMN isSelected INTEGER ")
-        
-        self.cursor.execute("UPDATE SeriesCatalog SET isSelected=0")
-        self.conn.commit()
-
-        sql = "SELECT * FROM SeriesCatalog"
-        self.cursor.execute(sql)        
-        # self.Series = [list(x) for x in self.cursor.fetchall()]
-        # self.tableSeries.SetObjects(self.Series)
-        self.tableSeries.SetColumns(x[0] for (i,x) in enumerate(self.cursor.description))
-        # self.tableSeries.SetCursor(self.cursor)
-    
-
-        # self.seriesList= 
-        # self.tableSeries.SetObjects(self.dbservice.get_series())
-        self.tableSeries.SetObjects([list(x) for x in self.cursor.fetchall()])
-
-        # self.tableSeries.SetColumns(self.dataRep.getSeriesColumns())
-        # self.tableSeries.SetObjects(self.dataRep.getSeriesCatalog())
+        self.initTableSeries()
+        self.initSVBoxes()
 
 
+    def initTableSeries(self):
+        self.dataRep=memoryDatabase(self.dbservice)
 
+
+        self.tableSeries.SetColumns(self.dataRep.getSeriesColumns())
+        self.tableSeries.SetObjects(self.dataRep.getSeriesCatalog())
+
+
+    def initSVBoxes(self):
+
+        self.site_code = None
+        self.variable_code = None
         #####INIT drop down boxes for Simple Filter
         self.siteList=self.dbservice.get_sites()
-        
+
         for site in self.siteList:
             self.cbSites.Append(site.site_code+'-'+site.site_name)
         self.cbSites.SetSelection(0)
@@ -265,9 +261,8 @@ class pnlSeriesSelector(wx.Panel):
             self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
         self.cbVariables.SetSelection(0)
 
-
     def OnTableRightDown(self, event):
-       
+
       # build pop-up menu for right-click display
         self.selectedIndex= event.m_itemIndex
         self.selectedID = self.tableSeries.GetColumnText(event.m_itemIndex, 1)
@@ -293,23 +288,22 @@ class pnlSeriesSelector(wx.Panel):
         self.splitter.SetSashPosition(1)
 
         series_filter = frmQueryBuilder.frmQueryBuilder(self)
-        self.filterlist = series_filter.ShowModal()        
+        self.filterlist = series_filter.ShowModal()
         # print self.filterlist
         event.Skip()
 
     def OnRbAllRadiobutton(self, event):
         #Hide top panel
-        self.splitter.SetSashPosition(1) 
+        self.splitter.SetSashPosition(1)
         self.SetFilter()
         event.Skip()
-        
+
 
     def OnRbSimpleRadiobutton(self, event):
         #show top Panel
-        self.splitter.SetSashPosition(70)       
+        self.splitter.SetSashPosition(70)
         self.SetFilter(self.site_code, self.variable_code)
         event.Skip()
-       
 
 
     def OnRightPlot(self, event):
@@ -324,15 +318,15 @@ class pnlSeriesSelector(wx.Panel):
 
     def OnEditButton(self, vals):
         self.SelectForEdit(self.tableSeries.GetColumnText(self.tableSeries.GetSelection(), 1))
-    
-    
-    
+
+
+
     def OnRightExData(self, event):
         # print "in OnRightExData"
         event.Skip()
-    
+
     def OnRightExMeta(self, event):
-        # print "in OnRightExMeta" 
+        # print "in OnRightExMeta"
         event.Skip()
 
 
@@ -355,7 +349,7 @@ class pnlSeriesSelector(wx.Panel):
 
         self.SetFilter(site_code = self.site_code, var_code = self.variable_code)
         event.Skip()
-       
+
 
 
     def OnCbVariablesCombobox(self, event):
@@ -368,40 +362,40 @@ class pnlSeriesSelector(wx.Panel):
         event.Skip()
 
 
-      
+
 
 
     def siteAndVariables(self):
         self.cbVariables.Clear()
         self.varList= self.dbservice.get_variables(self.site_code)
-        for var in self.varList:            
+        for var in self.varList:
             self.cbVariables.Append(var.variable_code+'-'+var.variable_name)
         self.cbVariables.SetSelection(0)
 
 
-        
+
         self.variable_code=self.varList[self.cbVariables.Selection].variable_code
         self.site_code = self.siteList[self.cbSites.Selection].site_code
 
         self.SetFilter(site_code = self.site_code, var_code = self.variable_code)
-        
+
         self.cbVariables.Enabled =True
         self.cbSites.Enabled = True
 
-        
-        
+
+
 
     def siteOnly(self):
         self.cbVariables.Enabled = False
         self.cbSites.Enabled = True
         self.variable_code = None
-        
-        
-        self.site_code =  self.siteList[self.cbSites.Selection].site_code
-        self.SetFilter(site_code = self.site_code) 
-       
 
-        
+
+        self.site_code =  self.siteList[self.cbSites.Selection].site_code
+        self.SetFilter(site_code = self.site_code)
+
+
+
 
     def variableOnly(self):
         self.site_code = None
@@ -413,11 +407,11 @@ class pnlSeriesSelector(wx.Panel):
         self.cbSites.Enabled = False
         self.cbVariables.Enabled = True
 
-       
+
         self.variable_code=self.varList[0].variable_code
 
         self.SetFilter( var_code = self.variable_code)
-               
+
 
 
     def OnCheck(self, event):
@@ -435,7 +429,7 @@ class pnlSeriesSelector(wx.Panel):
                 self.cbVariables.Enabled = False
         event.Skip()
 
-    def SetFilter(self, site_code = '', var_code = '', advfilter = ''):        
+    def SetFilter(self, site_code = '', var_code = '', advfilter = ''):
         if (site_code and var_code):
             self.siteFilter= TextSearch(self.tableSeries, columns = self.tableSeries.columns[2:4], text = site_code )
             self.variableFilter = TextSearch(self.tableSeries, columns = self.tableSeries.columns[5:7], text = var_code)
@@ -452,146 +446,29 @@ class pnlSeriesSelector(wx.Panel):
         self.tableSeries.RepopulateList()
         # print self.tableSeries.GetItemCount()
 
-  
+
     def OntableSeriesListItemSelected(self, event):
         # print"in item selected", event.m_itemIndex, self.tableSeries.IsItemChecked(event.m_itemIndex)
         # print dir(event)
         sid= self.tableSeries.innerList[event.m_itemIndex][0]
-        if not self.tableSeries.IsItemChecked(event.m_itemIndex):         
+        if not self.tableSeries.IsItemChecked(event.m_itemIndex):
             Publisher().sendMessage(("removePlot"), sid)
-            #set isselected value to False
-            # self.cursor.execute("UPDATE SeriesCatalog SET isSelected = 0 WHERE SeriesID =", self.tableSeries.innerList[event.m_itemIndex].id)
-            # self.tableSeries.innerList[event.m_itemIndex]
-            # self.tableSeries.CheckItem(event.GetItem())
             self.tableSeries.innerList[event.m_itemIndex][-1]= False
 
-
-        else:  
-            #set isselected value to True 
+        else:
+            #set isselected value to True
             self.tableSeries.innerList[event.m_itemIndex][-1]= True
-
-                    
-            # get DataValues
-            self.DataValues = self.dbservice.get_data_values_by_series_id(sid)
-         
-            self.cursor.execute("DELETE FROM DataValues")
-            self.cursor.executemany("INSERT INTO DataValues VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
-            self.conn.commit()
-
-            Publisher().sendMessage(("add.NewPlot"), [self.cursor,self.tableSeries.innerList[event.m_itemIndex]])
-            self.parent.Parent.addPlot(self.cursor, self.dbservice.get_series_by_id( sid))
-            # self.parent.Parent.addPlot(self.dataRep ,sid)
+            self.parent.Parent.addPlot(self.dataRep ,sid)
 
         self.Refresh()
         event.Skip()
 
     def SelectForEdit(self, seriesID):
-        self.DataValues = self.dbservice.get_data_values_by_series_id(seriesID)
-            
-        # self.cursor.execute("DELETE FROM DataValuesEdit")
-        # self.conn.commit()
-        
-        self.cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValues)
-        self.conn.commit()
-        self.cursor.execute("ALTER TABLE DataValuesEdit ADD COLUMN isSelected INTEGER ")
-        self.conn.commit()
-        self.cursor.execute("UPDATE DataValuesEdit SET isSelected=0")
-        self.conn.commit()
-        # print type(self.parent.Parent), dir (self.parent.Parent)
-        self.parent.Parent.addEdit(self.cursor, self.dbservice.get_series_by_id(seriesID), connection=self.conn)
-        # Publisher().sendMessage(("edit.NewPlot"), [self.cursor, self.dbservice.get_series_by_id(seriesID)])
-        
-   
+        self.dataRep.initEditValues(seriesID)
+        self.parent.Parent.addEdit(seriesID, self.dataRep)
+
+
     def stopEdit(self):
-        self.cursor.execute("DROP TABLE DataValuesEdit")
-        self.conn.commit()
-        self.createEditTable()
+        self.dataRep.stopEdit()
 
-    def initDB(self):
-        self.cursor.execute("""CREATE TABLE SeriesCatalog
-                (SeriesID INTEGER NOT NULL,
-                SiteID INTEGER,
-                SiteCode VARCHAR(50),
-                SiteName VARCHAR(255),
-                VariableID INTEGER, 
-                VariableCode VARCHAR(50), 
-                VariableName VARCHAR(255),
-                Speciation VARCHAR(255),
-                VariableUnitsID INTEGER,
-                VariableUnitsName VARCHAR(255),
-                SampleMedium VARCHAR(255),
-                ValueType VARCHAR(255),
-                TimeSupport FLOAT, 
-                TimeUnitsID INTEGER, 
-                TimeUnitsName VARCHAR(255),
-                DataType VARCHAR(255), 
-                GeneralCategory VARCHAR(255), 
-                MethodID INTEGER, 
-                MethodDescriptions VARCHAR(255),
-                SourceID INTEGER, 
-                Organization VARCHAR(255),
-                SourceDescription VARCHAR(255),
-                Citation VARCHAR(255), 
-                QualityControlLevelID INTEGER, 
-                QualityControlLevelCode VARCHAR(50),
-                BeginDateTime TIMESTAMP, 
-                EndDateTime TIMESTAMP, 
-                BeginDateTimeUTC TIMESTAMP, 
-                EndDateTimeUTC TIMESTAMP, 
-                ValueCount INTEGER,
 
-                PRIMARY KEY (SeriesID))
-                
-               """)
-
-#isSelected INTEGER NOT NULL,
-
-        self.cursor.execute("""CREATE TABLE DataValues
-                (ValueID INTEGER NOT NULL,
-                DataValue FLOAT NOT NULL,
-                ValueAccuracy FLOAT,
-                LocalDateTime TIMESTAMP NOT NULL,
-                UTCOffset FLOAT NOT NULL,
-                DateTimeUTC TIMESTAMP NOT NULL,
-                SiteID INTEGER NOT NULL,
-                VariableID INTEGER NOT NULL,
-                OffsetValue FLOAT,
-                OffsetTypeID INTEGER,
-                CensorCode VARCHAR(50) NOT NULL,
-                QualifierID INTEGER,
-                MethodID INTEGER NOT NULL,
-                SourceID INTEGER NOT NULL,
-                SampleID INTEGER,
-                DerivedFromID INTEGER,
-                QualityControlLevelID INTEGER NOT NULL,
-
-                PRIMARY KEY (ValueID),
-                UNIQUE (DataValue, LocalDateTime, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID))
-               """)
-        self.createEditTable()
-
-    def createEditTable(self):
-        self.cursor.execute("""CREATE TABLE DataValuesEdit
-                (ValueID INTEGER NOT NULL,
-                DataValue FLOAT NOT NULL,
-                ValueAccuracy FLOAT,
-                LocalDateTime TIMESTAMP NOT NULL,
-                UTCOffset FLOAT NOT NULL,
-                DateTimeUTC TIMESTAMP NOT NULL,
-                SiteID INTEGER NOT NULL,
-                VariableID INTEGER NOT NULL,
-                OffsetValue FLOAT,
-                OffsetTypeID INTEGER,
-                CensorCode VARCHAR(50) NOT NULL,
-                QualifierID INTEGER,
-                MethodID INTEGER NOT NULL,
-                SourceID INTEGER NOT NULL,
-                SampleID INTEGER,
-                DerivedFromID INTEGER,
-                QualityControlLevelID INTEGER NOT NULL,
-
-                PRIMARY KEY (ValueID),
-                UNIQUE (DataValue, LocalDateTime, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID))
-               """)
-
-    

@@ -9,6 +9,8 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from matplotlib.widgets import Lasso
 from mnuPlotToolbar import MyCustomToolbar as NavigationToolbar
 import matplotlib.pyplot as plt
+import mpl_toolkits.axisartist as AA
+from matplotlib.font_manager import FontProperties
 import textwrap
 
 
@@ -29,7 +31,9 @@ class plotProb(wx.Panel):
       self.SetSizer(self.boxSizer1)
    
    
-   
+  def Clear(self):
+    self.plot.clear()
+
   def _init_ctrls(self, prnt):
       #matplotlib.figure.Figure.__init__(self)
       wx.Panel.__init__(self, prnt, -1)
@@ -51,8 +55,9 @@ class plotProb(wx.Panel):
       self.SetColor("WHITE")
       self.canvas.SetFont(wx.Font(20, wx.SWISS, wx.NORMAL, wx.NORMAL,
             False, u'Tahoma'))
-       
-       
+
+      self.fontP = FontProperties()
+      self.fontP.set_size('small')
       
        
       self.canvas.draw()
@@ -67,10 +72,10 @@ class plotProb(wx.Panel):
       m='None'
     elif ptype == "point":
       ls='None'
-      m='o'      
+      m='s'      
     else:
       ls = '-'
-      m='o'
+      m='s'
     # print plt.setp(self.lines)
     # print(len(self.lines))
     format = ls+m
@@ -78,6 +83,60 @@ class plotProb(wx.Panel):
       plt.setp(line, linestyle = ls, marker =  m)
 
     self.canvas.draw()
+
+  def OnShowLegend(self, isVisible):
+    # print self.timeSeries.show_legend
+    if isVisible:
+      plt.subplots_adjust(bottom=.1+.1)
+      self.plot.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+               ncol=2, prop = self.fontP)
+
+    else:
+      plt.subplots_adjust(bottom=.1)
+      self.plot.legend_=None
+    # self.timeSeries.plot(legend= not isVisible)
+    self.canvas.draw()
+
+
+  def Plot(self, seriesPlotInfo):
+      self.seriesPlotInfo= seriesPlotInfo
+      self.updatePlot()
+
+
+  def updatePlot(self):
+      self.Clear() 
+      count = self.seriesPlotInfo.count()   
+      self.lines=[]
+      self.plot=self.figure.add_subplot(111)
+      for oneSeries in self.seriesPlotInfo.GetSeriesInfo():
+
+        self.plot.set_xlabel("Cumulative Frequency < Stated Value %")
+        if count > 1: 
+          self.plot.set_ylabel("\n".join(textwrap.wrap(oneSeries.axisTitle,50)))
+          self.plot.set_title("")
+
+        else: 
+          self.plot.set_ylabel("\n".join(textwrap.wrap(oneSeries.axisTitle,50)))
+          self.plot.set_title("\n".join(textwrap.wrap(oneSeries.plotTitle,55)))            
+        
+        self.lines.append(self.plot.plot( oneSeries.Probability.Xaxis, oneSeries.Probability.Yaxis, 'bs', color = oneSeries.color, label = oneSeries.plotTitle))
+       
+      self.setXaxis()
+
+      if count >1:
+        plt.subplots_adjust(bottom=.1+.1)
+        self.plot.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+             ncol=2, prop = self.fontP)
+
+      else:
+        plt.subplots_adjust(bottom=.1)
+        self.plot.legend_=None
+      self.canvas.draw()
+
+
+
+
+
 
   def addPlot(self, cursor, series, Filter):
 

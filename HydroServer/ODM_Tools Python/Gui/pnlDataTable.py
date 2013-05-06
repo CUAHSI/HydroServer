@@ -39,20 +39,28 @@ class pnlDataTable(wx.Panel):
         Publisher().subscribe(self.OnChangeSelection, ("changeTableSelection"))
 
         self.Layout()
-        
-    # def fetchFromDatabase(rowIndex):
-    #     print "in fetch from database row:", rowIndex    
-    #     if len(self.values):
-    #         rowIndex = self.values[rowIndex]
-    #     self.cursor.execute(self.SELECT_ONE_STMT, (rowIndex,))
-    #     return self.cursor.fetchone()          
-    
-    def Init(self, DVConn):
-        self.cursor = DVConn
-        sql = "SELECT * FROM DataValuesEdit"
-        self.cursor.execute(sql)
+
+    # def Init(self, DVConn):
+    #     self.cursor = DVConn
+    #     sql = "SELECT * FROM DataValuesEdit"
+    #     self.cursor.execute(sql)
       
-        self.myOlv.SetColumns( ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(self.cursor.description))
+    #     self.myOlv.SetColumns( ColumnDefn(x[0], valueGetter=i, minimumWidth=40) for (i,x) in enumerate(self.cursor.description))
+       
+    #     #####table Settings
+    #     self.myOlv.useAlternateBackColors = True
+    #     self.myOlv.oddRowsBackColor = "SlateGray"
+    #     self.myOlv.AutoSizeColumns()      
+
+
+    #     self.values = [list(x) for x in self.cursor.fetchall()]  
+    #     self.myOlv.SetObjects(self.values)
+
+
+    def Init(self, dataRep):
+        self.dataRep = dataRep
+        
+        self.myOlv.SetColumns( ColumnDefn(x, valueGetter=i, minimumWidth=40) for x, i in self.dataRep.getEditColumns())
        
         #####table Settings
         self.myOlv.useAlternateBackColors = True
@@ -60,10 +68,14 @@ class pnlDataTable(wx.Panel):
         self.myOlv.AutoSizeColumns()      
 
 
-        self.values = [list(x) for x in self.cursor.fetchall()]  
-        self.myOlv.SetObjects(self.values)
+        # self.values = [list(x) for x in self.cursor.fetchall()]  
+        self.myOlv.SetObjects(self.dataRep.getDataValuesforEdit())
 
-       
+    def Clear(self):
+        self.cursor= None
+        self.values = None
+        # self.myOlv.ClearObjects()
+        self.myOlv.SetObjects(None)
     
     # def OnLUp (self, event):
     #     print "in up"

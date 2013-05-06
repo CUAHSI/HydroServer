@@ -1,7 +1,5 @@
 # This class is intended for users to simplify console interaction
 
-import wx.py.crust
-from odmservices import RecordService
 from wx.lib.pubsub import Publisher
 
 
