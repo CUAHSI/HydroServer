@@ -239,8 +239,8 @@ class mnuRibbon(RB.RibbonBar):
                                 CreateBitmap("images\\Window Command Line.png"), "")
         view_bar.AddSimpleButton(wxID_RIBBONVIEWSCRIPT, "PythonScript",  
                                 CreateBitmap("images\\Script.png"), "") 
-                                
-        self.SetActivePageByIndex(1)
+        self.CurrPage = 1                        
+        self.SetActivePageByIndex(self.CurrPage)
 
         self.BindEvents()          
         Publisher().subscribe(self.toggleEditButtons, ("edit.EnableButtons"))
@@ -285,11 +285,6 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnEditSeries, id= wxID_RIBBONEDITSERIES)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnStopEdit, id= wxID_RIBBONSTOPEDITSERIES)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED,  self.OnRestore, id= wxID_RIBBONEDITRESTORE)
-
-
-
-        ###Ribbon Event
-        self.Bind(RB.EVT_RIBBONBAR_PAGE_CHANGED, self.OnFileMenu, id=wxID_PANEL1)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnShowLegend, id=wxID_RIBBONPLOTTSLEGEND)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditFilter, id= wxID_RIBBONEDITFILTER)  
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditChangeValue, id= wxID_RIBBONEDITCHGVALUE)                               
@@ -298,6 +293,14 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditAddPoint, id= wxID_RIBBONEDITADDPOINT) 
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditDelPoint, id= wxID_RIBBONEDITDELPOINT) 
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnRecord, id= wxID_RIBBONEDITRECORD) 
+
+
+
+        ###Ribbon Event
+        self.Bind(RB.EVT_RIBBONBAR_PAGE_CHANGED, self.OnFileMenu, id=wxID_PANEL1)
+        # self.Bind(RB.EVT_RIBBONBAR_PAGE_CHANGED, self.OnFileMenutest, id=wxID_PANEL1)
+        
+        
          
 
         self.isLegendVisible = False;
@@ -367,20 +370,31 @@ class mnuRibbon(RB.RibbonBar):
         # print event.Date
         Publisher.sendMessage(("onDateChanged"), [event.Date, "start"])
 
+    # def OnFileMenutest(self, event):
+    #     print dir(event)
+        
     def OnFileMenu(self, event):
+        
+        if not self.GetActivePage()==0:            
+            self.CurrPage = self.GetActivePage()
+
         if self.GetActivePage()==0:
+            #reset activepage to original 
+            self.SetActivePageByIndex(self.CurrPage) 
             menu = wx.Menu()
             self.Bind(wx.EVT_MENU,  self.onChangeDBConfig, menu.Append(wx.ID_ANY, "Change DB Configuration"))
             self.Bind(wx.EVT_MENU, self.onClose, menu.Append(wx.ID_ANY, "Close"))
 
-            self.PopupMenu(menu) 
+            self.PopupMenu(menu, wx.Point(50, 25)) 
+
 
     def onClose(self, event):
         Publisher.sendMessage(("onClose"), event)
 
     def onChangeDBConfig(self, event):
         Publisher().sendMessage(("change.dbConfig"), event)
-        self.SetActivePageByIndex(1)               
+        self.CurrPage = 1
+        self.SetActivePageByIndex(self.CurrPage)               
         
     def onExecuteScript(self, event):
         Publisher().sendMessage(("execute.script"), event)

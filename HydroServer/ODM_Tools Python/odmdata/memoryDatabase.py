@@ -8,33 +8,44 @@ class memoryDatabase(object):
         self.dbservice = dbservice        
         self.conn = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
         self.cursor = self.conn.cursor()
+        self.editLoaded= False
         self.initDB()
         self.initSC()
 
-    def stopEdit(self):       
-        self.DataValuesEdit= None
-        self.cursor.execute("DROP TABLE DataValuesEdit")
-        self.conn.commit()
-        self.createEditTable()
+    ###########
+    #getters
+    ###########
+    def getCursor(self):
+        return self.cursor
 
-    def initEditValues(self, seriesID):
-        self.DataValuesEdit = self.dbservice.get_data_values_by_series_id(seriesID)         
-        self.cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValuesEdit)
-        self.conn.commit()
-        self.cursor.execute("ALTER TABLE DataValuesEdit ADD COLUMN isSelected INTEGER ")
-        self.conn.commit()
-        self.cursor.execute("UPDATE DataValuesEdit SET isSelected=0")
-        self.conn.commit()
+    def getConnection(self):
+        return self.conn
 
-    def getDataValuesforEdit(self, seriesID):        
 
-        # query = "SELECT ValueID, SeriesID, DataValue, ValueAccuracy, LocalDateTime, UTCOffset, " +
-        #             "DateTimeUTC, QualifierCode, OffsetValue, OffsetTypeID, CensorCode, SampleID, " +
-        #             "FROM DataValuesEdit AS d LEFT JOIN Qualifiers AS q ON (d.QualifierID = q.QualifierID) "
-        query = "SELECT DataValue, LocalDateTime from DataValuesEdit"
+     ############
+     #DB Queries
+     ###########   
+    def deletePoints(self, filter):
+        pass
+    def addPoints(self, filter):
+        pass
+    def updatePoints(self, filter, values):
+        pass
+
+
+    def getDataValuesforEdit(self):        
+
+        # query = "SELECT ValueID, SeriesID, DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, QualifierCode, OffsetValue, OffsetTypeID, CensorCode, SampleID FROM DataValuesEdit AS d LEFT JOIN Qualifiers AS q ON (d.QualifierID = q.QualifierID) "
+        query = "SELECT * from DataValuesEdit"
                       
         self.cursor.execute(query)
         return [list(x) for x in  self.cursor.fetchall()]
+
+    def getEditColumns(self):
+        sql = "SELECT * FROM DataValuesEdit WHERE 1=0"
+        # sql= "SELECT ValueID, SeriesID, DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, QualifierCode, OffsetValue, OffsetTypeID, CensorCode, SampleID FROM DataValuesEdit AS d LEFT JOIN Qualifiers AS q ON (d.QualifierID = q.QualifierID) WHERE 1=0"
+        self.cursor.execute(sql)  
+        return [(x[0],i) for (i,x) in enumerate(self.cursor.description)]
 
     def getDataValuesforGraph(self, seriesID, strNoDataValue, strStartDate, strEndDate):
 
@@ -51,15 +62,6 @@ class memoryDatabase(object):
         
         self.cursor.execute(query)
         return [list(x) for x in  self.cursor.fetchall()]# return a list of lists orig returns a list of cursors
-                
-
-    def initSC(self):
-        self.SeriesCatalog =self.dbservice.get_series_test()
-        self.cursor.executemany("INSERT INTO SeriesCatalog VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.SeriesCatalog)
-        self.cursor.execute("ALTER TABLE SeriesCatalog ADD COLUMN isSelected INTEGER ")
-        
-        self.cursor.execute("UPDATE SeriesCatalog SET isSelected=0")
-        self.conn.commit()
 
     def getSeriesCatalog(self):
         sql = "SELECT * FROM SeriesCatalog"
@@ -72,6 +74,8 @@ class memoryDatabase(object):
         self.cursor.execute(sql)  
         return (x[0] for (i,x) in enumerate(self.cursor.description))
 
+
+
     def resetDB(self, dbservice):
         self.dbservice = dbservice
 
@@ -82,6 +86,39 @@ class memoryDatabase(object):
         self.DataValuesEdit= None
         self.SeriesCatalog = None
 
+    def commit():
+        self.conn.commit()
+
+    def rollback():
+        self.conn.rollback()
+
+    def stopEdit(self):       
+        self.DataValuesEdit= None
+        self.editLoaded= False
+        self.cursor.execute("DROP TABLE DataValuesEdit")
+        self.conn.commit()
+        self.createEditTable()
+
+
+    def initEditValues(self, seriesID):
+        if not self.editLoaded:
+            self.DataValuesEdit = self.dbservice.get_data_values_by_series_id(seriesID)         
+            self.cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValuesEdit)
+            self.conn.commit()
+            self.editLoaded = True
+        # self.cursor.execute("ALTER TABLE DataValuesEdit ADD COLUMN isSelected INTEGER ")
+        # self.conn.commit()
+        # self.cursor.execute("UPDATE DataValuesEdit SET isSelected=0")
+        # self.conn.commit()
+
+
+    def initSC(self):
+        self.SeriesCatalog =self.dbservice.get_series_test()
+        self.cursor.executemany("INSERT INTO SeriesCatalog VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.SeriesCatalog)
+        self.cursor.execute("ALTER TABLE SeriesCatalog ADD COLUMN isSelected INTEGER ")
+        
+        self.cursor.execute("UPDATE SeriesCatalog SET isSelected=0")
+        self.conn.commit()
 
     def initDB(self):
         self.cursor.execute("""CREATE TABLE SeriesCatalog

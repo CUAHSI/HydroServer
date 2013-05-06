@@ -20,6 +20,8 @@ class clsULC(ULC.UltimateListCtrl):
 
 		ULC.UltimateListCtrl.__init__(self, *args, **kwargs )
 
+	def Clear(self):
+		self.EmptyTable()
 
 	def SetColumns(self, columns):
 		# self.columns = columns
@@ -80,7 +82,7 @@ class clsULC(ULC.UltimateListCtrl):
 			#if item isSelected is true check the box when drawing the row
 			if series[-1] ==1:
 				self._mainWin.CheckItem(self.GetItem(ind, 0), True, False)
-			
+
 
 
 
@@ -108,9 +110,9 @@ class clsULC(ULC.UltimateListCtrl):
 	def GetChecked(self):
 		#returns a list of the checked ids
 		return [x[0] for x in modelObjects if x[-1]]
-	
-	
-	
+
+
+
 
 	def GetColumnText(self, index, colid):
 		# print self.GetItemData(index)
@@ -127,7 +129,7 @@ class clsULC(ULC.UltimateListCtrl):
 	def SetStringValue(self, col, Value, modelObject=None, row= None):
 		if modelObject:
 			modelObject[self.getColID(col['title'])] = Value
-		else: 
+		else:
 			self.modelObjects[row][self.getColID(col['title'])]= Value
 
 	def GetFilter(self):
@@ -148,12 +150,12 @@ class clsULC(ULC.UltimateListCtrl):
 		elif element == 'SiteID':
 			return 1
 		elif element =='SiteCode':
-			return 2 
+			return 2
 		elif element =='SiteName':
 			return 3
-		elif element =='VariableID': 
+		elif element =='VariableID':
 			return 4
-		elif element =='VariableCode': 
+		elif element =='VariableCode':
 			return 5
 		elif element =='VariableName':
 			return 6
@@ -168,9 +170,9 @@ class clsULC(ULC.UltimateListCtrl):
 		elif element =='ValueType':
 			return 11
 		elif element =='TimeSupport':
-			return 12			
+			return 12
 		elif element =='TimeUnitsID':
-			return 13		
+			return 13
 		elif element =='TimeUnitsName':
 			return 14
 		elif element =='DataType':

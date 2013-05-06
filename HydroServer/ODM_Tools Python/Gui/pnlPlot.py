@@ -64,14 +64,18 @@ class pnlPlot(fnb.FlatNotebook):
         Publisher().subscribe(self.OnNumBins, ("OnNumBins"))
         Publisher().subscribe(self.OnRemovePlot, ("removePlot"))
         Publisher().subscribe(self.OnChangeSelection, ("changePlotSelection"))
-        Publisher().subscribe(self.OnChangeSelectionDT, ("changePlotSelectionDT"))        
+        Publisher().subscribe(self.OnChangeSelectionDT, ("changePlotSelectionDT"))
         Publisher().subscribe(self.onUpdateValues, ("updateValues"))
 
+
         self.selectedSerieslist = []
-        self._seriesPlotInfo= []
+        self._seriesPlotInfo= None
+        self.editID = None
+
 
     def onUpdateValues(self, event):
         self.pltTS.updateValues()
+
 
     def OnChangeSelection(self, sellist):
       self.pltTS.changeSelection(sellist.data)
@@ -80,9 +84,14 @@ class pnlPlot(fnb.FlatNotebook):
       self.pltTS.changeSelectionDT(sellist.data)
 
     def OnRemovePlot(self, seriesID):
-      # self._seriesPlotInfo.Update(seriesID.data, False)
-      self.pltTS.removePlot(seriesID.data)
-      self.pltSum.removePlot(self._seriesPlotInfo)
+
+      # self.selectedSerieslist.remove(seriesID)
+      self._seriesPlotInfo.Update(seriesID.data, False)
+      self.pltTS.Plot(self._seriesPlotInfo)
+      self.pltSum.Plot(self._seriesPlotInfo)
+      self.pltBox.Plot(self._seriesPlotInfo)
+      self.pltHist.Plot(self._seriesPlotInfo)
+      self.pltProb.Plot(self._seriesPlotInfo)
 
     def OnNumBins(self , numBins):
       self.pltHist.ChangeNumOfBins(numBins.data)
@@ -98,67 +107,39 @@ class pnlPlot(fnb.FlatNotebook):
     def OnShowLegend(self, Args):
       event, isVisible = Args.data[0], Args.data[1]
       self.pltTS.OnShowLegend(isVisible)
+      self.pltProb.OnShowLegend(isVisible)
 
-    def addEditPlot(self, cursor, series):
-        Filter = " WHERE CensorCode = 'nc'"
-        # print Values
-        # self.pltTS.addEdit(Values, Filter)
-        self.pltTS.addEdit(cursor, series, Filter)
 
     def stopEdit(self):
+        self._seriesPlotInfo.StopEditSeries()
+        self.editID = None
         self.pltTS.stopEdit()
 
-    def addPlot(self, cursor, series):
+    def addEditPlot(self, dataRep, seriesID):
+        if not self._seriesPlotInfo:
+            options = PlotOptions("Both", 0, False, False, True)
+            self._seriesPlotInfo= SeriesPlotInfo(dataRep, options )
+        self.editID= seriesID
+        self._seriesPlotInfo.SetEditSeries(self.editID)
+        self.pltTS.setEdit(self.editID)
 
-        Filter = " WHERE DataValue <> -9999 AND CensorCode = 'nc'"
-        self.pltSum.addPlot(cursor, series, Filter)
-        self.pltHist.addPlot(cursor, series, Filter)
-        self.pltProb.addPlot(cursor, series, Filter)
-        self.pltBox.addPlot(cursor, series, Filter)
-        self.pltTS.addPlot(cursor, series, Filter)
+    def addPlot(self, dataRep, seriesID):
 
+        if not self._seriesPlotInfo:
+            options = PlotOptions("Both", 0, False, False, True)
+            self._seriesPlotInfo= SeriesPlotInfo(dataRep, options )
 
-        # self.pltSum.addPlot(Values, Filter)
-        # self.pltHist.addPlot(Values, Filter)
-        # self.pltProb.addPlot(Values, Filter)
-        # self.pltBox.addPlot(Values, Filter)
-        # self.pltTS.addPlot(Values, Filter)
+        self._seriesPlotInfo.Update(seriesID, True)
+        self.selectedSerieslist.append(seriesID)
 
+        self.pltSum.Plot(self._seriesPlotInfo)
+        self.pltHist.Plot(self._seriesPlotInfo)
+        self.pltProb.Plot(self._seriesPlotInfo)
+        self.pltBox.Plot(self._seriesPlotInfo)
+        self.pltTS.Plot(self._seriesPlotInfo)
 
-    # def addPlot(self, dataRep, seriesID):
+    #     self.PlotGraph()
 
-    #     if not self._seriesPlotInfo:
-    #         options = PlotOptions("Both", 0, False, False, True)
-    #         self._seriesPlotInfo= SeriesPlotInfo(dataRep, options )
-
-    #     self._seriesPlotInfo.Update(seriesID, True)
-
-    #     # if self.selectedSerieslist.index(seriesID):
-    #     self.selectedSerieslist.append(seriesID)
-
-    #     # else:
-    #     #     return
-    #     self.pltSum.Plot(self._seriesPlotInfo)
-    #     # self.pltHist.addPlot(self._seriesPlotInfo)
-    #     # self.pltProb.addPlot(self._seriesPlotInfo)
-    #     self.pltBox.Plot(self._seriesPlotInfo)
-    #     # self.pltTS.addPlot(self._seriesPlotInfo)
-
-    # #     self.PlotGraph()
-
-
-    # def PlotGraph():
-    #     self.Clear()
-    #     for oneSeries in _seriesPlotInfo.GetSeriesInfo():
-
-    #     options = plotOptions(plotOptions.TimeSeriesType.Both, 0, False, False, True)
-    #     series = self.dataRep.dbservice.get_series_by_id(seriesID)
-
-
-
-    def remPlot(self, seriesID):
-        _seriesPlotInfo.Update(seriesID, False)
-        selectedSerieslist.remove(seriesID)
 
 
 
@@ -170,6 +151,15 @@ class pnlPlot(fnb.FlatNotebook):
 
     def Close(self):
         self.pltTS.Close()
+
+    def Clear(self):
+        self.pltSum.Clear()
+        self.pltHist.Clear()
+        self.pltProb.Clear()
+        self.pltBox.Clear()
+        self.pltTS.Clear()
+        self._seriesPlotInfo= None
+
 
 
     def __init__(self, parent, id, pos, size, style, name):
