@@ -33,13 +33,22 @@ class memoryDatabase(object):
         pass
 
 
-    def getDataValuesforEdit(self):        
-
+    def getDataValuesforEdit(self):  
         # query = "SELECT ValueID, SeriesID, DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, QualifierCode, OffsetValue, OffsetTypeID, CensorCode, SampleID FROM DataValuesEdit AS d LEFT JOIN Qualifiers AS q ON (d.QualifierID = q.QualifierID) "
-        query = "SELECT * from DataValuesEdit"
-                      
+        query = "SELECT * from DataValuesEdit"                      
         self.cursor.execute(query)
         return [list(x) for x in  self.cursor.fetchall()]
+
+    def getEditDataValuesforGraph(self):   
+        query ="SELECT DataValue, LocalDateTime, CensorCode, strftime('%m', LocalDateTime) as DateMonth, strftime('%Y', LocalDateTime) as DateYear FROM DataValuesEdit ORDER BY LocalDateTime"
+        self.cursor.execute(query)
+        return [list(x) for x in  self.cursor.fetchall()]# return a list of lists orig returns a list of cursors
+    
+    def getEditRowCount(self):
+        query ="SELECT COUNT(ValueID) FROM DataValuesEdit "
+        self.cursor.execute(query)
+        return self.cursor.fetchone()[0]
+
 
     def getEditColumns(self):
         sql = "SELECT * FROM DataValuesEdit WHERE 1=0"
@@ -49,18 +58,19 @@ class memoryDatabase(object):
 
     def getDataValuesforGraph(self, seriesID, strNoDataValue, strStartDate, strEndDate):
 
-        DataValues = self.dbservice.get_data_values_by_series_id(seriesID)
-         
+        DataValues = self.dbservice.get_data_values_by_series_id(seriesID)  
+
+        #clear any previous queries from table
         self.cursor.execute("DELETE FROM DataValues")
+
+        #fill temporary table with values from requested series
         self.cursor.executemany("INSERT INTO DataValues VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", DataValues)
         self.conn.commit()
 
-
-        # query ="SELECT DataValue, LocalDateTime, CensorCode, strftime('%m', LocalDateTime) as DateMonth, strftime('%Y', LocalDateTime) as DateYear FROM DataValues WHERE (DataValue <> "+ strNoDataValue + ") AND (LocalDateTime between '" + strStartDate+ "' AND '" + strEndDate + "')  ORDER BY LocalDateTime"
-        # print query
+        #select values for plotting
         query ="SELECT DataValue, LocalDateTime, CensorCode, strftime('%m', LocalDateTime) as DateMonth, strftime('%Y', LocalDateTime) as DateYear FROM DataValues WHERE (DataValue <> "+ strNoDataValue + ") ORDER BY LocalDateTime"
-        
         self.cursor.execute(query)
+
         return [list(x) for x in  self.cursor.fetchall()]# return a list of lists orig returns a list of cursors
 
     def getSeriesCatalog(self):
@@ -106,10 +116,7 @@ class memoryDatabase(object):
             self.cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValuesEdit)
             self.conn.commit()
             self.editLoaded = True
-        # self.cursor.execute("ALTER TABLE DataValuesEdit ADD COLUMN isSelected INTEGER ")
-        # self.conn.commit()
-        # self.cursor.execute("UPDATE DataValuesEdit SET isSelected=0")
-        # self.conn.commit()
+
 
 
     def initSC(self):

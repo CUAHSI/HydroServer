@@ -33,10 +33,11 @@ class pnlDataTable(wx.Panel):
 
         self.myOlv._highlightBrush=wx.Brush("red")
         self.myOlv.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnItemSelected )
-        self.myOlv.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.OnItemDeSelected )
-        # self.myOlv.Bind(wx.EVT_LIST_KEY_DOWN, self.OnLUp, id=wxID_PNLDATATABLE )
-        # self.myOlv.Bind(wx.EVT_LEFT_DOWN, self.OnLDown, id=wxID_PNLDATATABLE)
+        # self.myOlv.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.OnItemDeSelected )
+        self.myOlv.Bind(wx.EVT_LEFT_UP, self.OnLUp, id=wxID_PNLDATATABLE )
+        self.myOlv.Bind(wx.EVT_LEFT_DOWN, self.OnLDown, id=wxID_PNLDATATABLE)
         Publisher().subscribe(self.OnChangeSelection, ("changeTableSelection"))
+        Publisher().subscribe(self.OnRefresh, ("refreshTable"))
 
         self.Layout()
 
@@ -57,8 +58,9 @@ class pnlDataTable(wx.Panel):
     #     self.myOlv.SetObjects(self.values)
 
 
-    def Init(self, dataRep):
+    def Init(self, dataRep, record_service):
         self.dataRep = dataRep
+        self.record_service = record_service
         
         self.myOlv.SetColumns( ColumnDefn(x, valueGetter=i, minimumWidth=40) for x, i in self.dataRep.getEditColumns())
        
@@ -71,25 +73,24 @@ class pnlDataTable(wx.Panel):
         # self.values = [list(x) for x in self.cursor.fetchall()]  
         self.myOlv.SetObjects(self.dataRep.getDataValuesforEdit())
 
-    def Refresh(self):
+    def OnRefresh(self, e):
         self.myOlv.SetObjects(self.dataRep.getDataValuesforEdit())
 
     def Clear(self):
-        self.cursor= None
-        self.values = None
-        # self.myOlv.ClearObjects()
+        self.dataRep= None
+        self.record_service = None
         self.myOlv.SetObjects(None)
     
-    # def OnLUp (self, event):
-    #     print "in up"
-    #     self.doneselecting = True
+    def OnLUp (self, event):
+        print "in up"
+        self.doneselecting = True
 
-    # def OnLDown(self, event):
-    #     print "in down"
-    #     self.doneselecting = False
+    def OnLDown(self, event):
+        print "in down"
+        self.doneselecting = False
 
     def OnItemSelected(self, event):
-        # print "in onItemSelected"
+        print "in onItemSelected"
         # print 
 
         # if  not (event.m_itemIndex in self.selectedpoints):
@@ -104,7 +105,7 @@ class pnlDataTable(wx.Panel):
         # self.selectedpoints.remove(event.m_itemIndex)
 
     def getSelectedIDs(self, selobjects):        
-        idlist= [False] * len(self.values)
+        idlist=[False] * self.dataRep.getEditRowCount()
         for sel in selobjects:
             idlist[self.myOlv.GetIndexOf(sel)]=True
         # print idlist
@@ -126,7 +127,7 @@ class pnlDataTable(wx.Panel):
         self.myOlv.SetFocus()
 
     def stopEdit(self):
-        self.myOlv.SetObjects(None)
+        self.Clear()
         
 
 # a) Call self.list_ctrl.SetFocus() right after you click the button;

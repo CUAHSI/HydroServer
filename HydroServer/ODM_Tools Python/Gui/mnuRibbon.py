@@ -23,8 +23,9 @@ import frmAddPoint
  wxID_RIBBONEDITSCRIPTSAVE, wxID_RIBBONVIEWPLOT, wxID_RIBBONVIEWTABLE,
  wxID_RIBBONVIEWSERIES, wxID_RIBBONVIEWCONSOLE, wxID_RIBBONVIEWSCRIPT,
  wxID_RIBBONPLOTDATESTART, wxID_FileMenu, wxID_STARTDPDATE, wxID_ENDDPDATE,
- wxID_FRAME1SPINCTRL1, wxID_RIBBONEDITFILTER, wxID_RIBBONEDITRECORD, wxID_RIBBONSTOPEDITSERIES
- ] = [wx.NewId() for _init_ctrls in range(41)]
+ wxID_FRAME1SPINCTRL1, wxID_RIBBONEDITFILTER, wxID_RIBBONEDITRECORD, wxID_RIBBONSTOPEDITSERIES,
+ wxID_RIBBONEDITLINFILTER
+ ] = [wx.NewId() for _init_ctrls in range(42)]
 
 def CreateBitmap(xpm):
     bmp = wx.Image(xpm, wx.BITMAP_TYPE_ANY).ConvertToBitmap()
@@ -71,7 +72,7 @@ class mnuRibbon(RB.RibbonBar):
 
         # self.PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSCOLOR, "Color Setting",  
         #                         CreateBitmap("images\\ColorSetting.png"), "")
-        self.PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
+        self.PlotsOptions_bar.AddToggleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
                                 CreateBitmap("images\\Legend.png"), "")
 
 
@@ -168,7 +169,7 @@ class mnuRibbon(RB.RibbonBar):
         main_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Main", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
         self.main_bar = RB.RibbonButtonBar(main_panel)                                                                 
-        self.main_bar.AddSimpleButton(wxID_RIBBONEDITSERIES, "Edit Series",  
+        self.main_bar.AddToggleButton(wxID_RIBBONEDITSERIES, "Edit Series",  
                                 CreateBitmap("images\\Edit (2).png"), "") 
         self.main_bar.AddSimpleButton(wxID_RIBBONSTOPEDITSERIES, "Stop Editing",  
                                 CreateBitmap("images\\StopEdit.png"), "")                                                                                           
@@ -194,13 +195,15 @@ class mnuRibbon(RB.RibbonBar):
                                 CreateBitmap("images\\EditView_icon.png"), "")                                
         self.edit_bar.AddSimpleButton(wxID_RIBBONEDITINTEROPOLATE, "Interpolate", 
                                 CreateBitmap("images\\Interpolate.png"), "") 
+        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITLINFILTER, "Linear Drift", 
+                                CreateBitmap("images\\LinDrift.png"), "") 
         self.edit_bar.AddSimpleButton(wxID_RIBBONEDITFLAG, "Flag",  
                                 CreateBitmap("images\\Flag.png"), "")  
         self.edit_bar.AddSimpleButton(wxID_RIBBONEDITADDPOINT, "Add Point",  
                                 CreateBitmap("images\\Add (2).png"), "")
         self.edit_bar.AddSimpleButton(wxID_RIBBONEDITDELPOINT, "Delete Point",  
                                 CreateBitmap("images\\Delete (3).png"), "") 
-        self.edit_bar.AddSimpleButton(wxID_RIBBONEDITRECORD, "Record",  
+        self.edit_bar.AddToggleButton(wxID_RIBBONEDITRECORD, "Record",  
                                 CreateBitmap("images\\Record.png"), "")                                                                                                                                                             
 
         self.edit_bar.EnableButton(wxID_RIBBONEDITFILTER, False) 

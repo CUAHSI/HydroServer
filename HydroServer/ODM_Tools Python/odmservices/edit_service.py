@@ -72,6 +72,7 @@ class EditService():
             for x in filter_set:
                 if x[1] > value:
                     tmp.append(x)
+            # print tmp
             self._active_points = tmp
 
     def filter_date(self, before, after):
@@ -222,6 +223,7 @@ class EditService():
 
     def delete_points(self):
         #TODO delete selected points from cursor
+
         execute_string = "DELETE FROM DataValuesEdit WHERE ValueID IN ("
         num_active_points = len(self._active_points)
         if num_active_points > 0:

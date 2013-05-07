@@ -113,14 +113,14 @@ class SeriesPlotInfo(object):
 
     def UpdateEditSeries(self):
         if self.editID in self._seriesInfos:
-            series =  self.dbConn.dbservice.get_series_by_id(self.editID)
-            strStartDate= series.begin_date_time#self._plotOptions._startDateTime
-            strEndDate = series.end_date_time#self._plotOptions._endDateTime#+1 day - 1 millisecond       
-            noDataValue = self.dbConn.dbservice.get_no_data_value(series.variable_id)[0]#variable.no_data_value
-            self._seriesInfos[self.editID].data= self.dbConn.getDataValuesforGraph(self.editID, repr(noDataValue), strStartDate.strftime('%y-%m-%d %H:%M:%S'), strEndDate.strftime('%y-%m-%d %H:%M:%S'))
-            
+            self._seriesInfos[self.editID].dataTable= self.dbConn.getEditDataValuesforGraph()          
 
 
+    def IsPlotted(self, sid ):
+        if int(sid) in self._seriesInfos:
+            return True
+        else:
+            return False
 
     def GetEditSeriesID(self):
         if self.editID:
@@ -196,8 +196,10 @@ class SeriesPlotInfo(object):
                 siteName = series.site_name
                 dataType = series.data_type
                 noDataValue = self.dbConn.dbservice.get_no_data_value(series.variable_id)[0]#variable.no_data_value
-
-                data = self.dbConn.getDataValuesforGraph(seriesID, repr(noDataValue), strStartDate.strftime('%y-%m-%d %H:%M:%S'), strEndDate.strftime('%y-%m-%d %H:%M:%S'))
+                if self.editID == seriesID:
+                    data = self.dbConn.getEditDataValuesforGraph()
+                else:
+                    data = self.dbConn.getDataValuesforGraph(seriesID, repr(noDataValue), strStartDate.strftime('%y-%m-%d %H:%M:%S'), strEndDate.strftime('%y-%m-%d %H:%M:%S'))
 
                 seriesInfo.seriesID = seriesID
                 seriesInfo.series = series
@@ -209,7 +211,7 @@ class SeriesPlotInfo(object):
                 seriesInfo.plotTitle = siteName+" "+variableName
                 seriesInfo.axisTitle = variableName+ "("+unitsName+")"
                 seriesInfo.Probability = Probability(data)
-                seriesInfo.statistics =  Statistics( data, self._plotOptions.useCensoredData)
+                seriesInfo.statistics =  Statistics(data, self._plotOptions.useCensoredData)
                 seriesInfo.BoxWhisker = BoxWhisker(data, self._plotOptions.boxWhiskerMethod)
             else:
                 seriesinfo = self._seriesInfos[key]
@@ -233,16 +235,9 @@ class Statistics(object):
             dataValues =[x[0] for x in dataTable ]
         else:
             dataValues =[x[0] for x in dataTable if x[2] =='nc']
-
-
-
         data=sorted(dataValues)
-
         count = self.NumberofObservations = len(data)
-
-
         self.NumberofCensoredObservations=  [x[2] for x in dataTable].count('nc') #self.cursor.fetchone()[0]
-
         self.ArithemticMean=round(numpy.mean(data),5)
 
         sumval = 0

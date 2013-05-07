@@ -44,9 +44,10 @@ class plotTimeSeries(wx.Panel):
 
 
 
-  def _init_ctrls(self, prnt):
+  def _init_ctrls(self, parent):
       #matplotlib.figure.Figure.__init__(self)
-      wx.Panel.__init__(self, prnt, -1)
+      wx.Panel.__init__(self, parent, -1)
+      self.parent = parent
 
       # self.figure = Figure()#matplotlib.figure.Figure()
 
@@ -80,48 +81,46 @@ class plotTimeSeries(wx.Panel):
       #self.canvas.gca().xaxis.set_major_locator()
 
       #init lists
-      # self.Plots = []
+
       self.lines=[]
       self.axislist={}
       self.curveindex = -1
+      self.editseriesID = -1
       self.editCurve =None
-      # self.axes = []
-      # self.colorlist = ('blue', 'green', 'red', 'cyan', 'orange', 'magenta', 'yellow')
 
-      # self.canvas.mpl_connect('button_press_event', self.onclick)
-
-
-      # self.BuildPopup()
       self.canvas.draw()
       self._init_sizers()
 
 
 
-  def changeSelectionDT(self, sellist):
+  # def changeSelectionDT(self, sellist):
+  #     #list of DateTimes
 
-      # print sellist
+  #     print sellist
+  #     self.parent.record_service.select_points(datetime_list= sellist)
+  #     sellist = self.selFormat(sellist)
+  #     self.changeSelection(sellist)
+  #     print sellist
+      
+      
+  # def selFormat(self, pairs):
+  #   #convert selectionlist from datetimes to true false
+  #     print len(pairs)
+  #     if len(pairs) ==0:
+  #       return [False] * len(self.editData.DataValues)
+  #     verts =[ (matplotlib.dates.date2num(x), y) for x,y  in pairs]
+  #     p = path.Path(verts)
 
-      sellist = self.selFormat(sellist)
-      self.changeSelection(sellist)
-      # self.selectedlist= sellist
-      # print ['k' if x==0 else 'r' for x in self.selectedlist]
-      # print type(self.selectedlist)
-
-
-  def selFormat(self, pairs):
-      print len(pairs)
-      if len(pairs) ==0:
-        return [False] * len(self.editData.DataValues)
-      verts =[ (matplotlib.dates.date2num(x), y) for x,y  in pairs]
-      p = path.Path(verts)
-
-      ind = p.contains_points(self.xys)
-      return ind
+  #     ind = p.contains_points(self.xys)
+  #     return ind
 
 
   def changeSelection(self, sellist ):
+    #list of True False
       self.editPoint.set_color(['k' if x==0 else 'r' for x in sellist])
+      #self.parent.record_service.select_points(datetime_list= self.xys)
       Publisher().sendMessage(("changeTableSelection"), sellist)
+      
       self.canvas.draw()
 
   def onDateChanged(self, date, time):
@@ -182,16 +181,20 @@ class plotTimeSeries(wx.Panel):
 
   def stopEdit(self):
       self.Clear()
-      self.curveindex = -1
       self.selectedlist = None
       self.editPoint =None
       self.lman= None
+      self.canvas.mpl_disconnect(self.cid)
       self.cid=None
-      self.xys = None
-      # self.toolbar.stopEdit()
+      self.xys = None     
+      
+      self.curveindex = -1
+      self.editCurve =None
       # self.RefreshPlot()
-      if self.seriesPlotInfo:
-        self.updatePlot()
+      if self.seriesPlotInfo and self.seriesPlotInfo.IsPlotted(self.editseriesID):
+        self.updatePlot()    
+      self.editseriesID = -1  
+      
 
 
 
@@ -241,21 +244,27 @@ class plotTimeSeries(wx.Panel):
 
   def updateValues(self):
     # self.addEdit(self.editCursor, self.editSeries, self.editDataFilter)
+
     #clear current edit points and curve
-    # del()
-    #redraw editpoints and curve
-    print "before", len(self.editCurve.dataTable)
+    curraxis= self.axislist[self.editCurve.axisTitle]
+    for l in curraxis.lines:
+      if l.get_label() == self.editCurve.plotTitle:
+        curraxis.lines.remove(l)
+    self.editPoint.remove()         
+
+
+    #redraw editpoints and curve    
     self.seriesPlotInfo.UpdateEditSeries()
-    self.editCurve= self.seriesPlotInfo.GetEditSeriesInfo()
-    print "after", len(self.editCurve.dataTable)
+    self.editCurve= self.seriesPlotInfo.GetEditSeriesInfo() 
     self.drawEditPlot(self.editCurve)
+    Publisher().sendMessage(("refreshTable"), None)
+    # self.parent.parent.dataTable.Refresh()
+    self.canvas.draw()
 
 
 
 
   # def on_pick(self, event):
-
-
   #     selectedlist = [False] * len(self.editData.DataValues)
   #     print len(selectedlist)
   #     for ind in event.ind:
@@ -267,9 +276,7 @@ class plotTimeSeries(wx.Panel):
 
 
 
-  def drawEditPlot(self, oneSeries):
-      
-      print self.curveindex
+  def drawEditPlot(self, oneSeries):      
       curraxis= self.axislist[oneSeries.axisTitle]
       self.lines[self.curveindex]=curraxis.plot_date([x[1] for x in oneSeries.dataTable], [x[0] for x in oneSeries.dataTable], "-", color=oneSeries.color, xdate = True, tz = None, label = oneSeries.plotTitle )
 
@@ -355,7 +362,7 @@ class plotTimeSeries(wx.Panel):
 
   def setEdit(self, id):
       self.editseriesID = id
-      if self.seriesPlotInfo:
+      if self.seriesPlotInfo and self.seriesPlotInfo.IsPlotted(self.editseriesID):
         self.editCurve = self.seriesPlotInfo.GetSeries(self.editseriesID)
         self.updatePlot()
         # print self.editCurve
@@ -405,23 +412,27 @@ class plotTimeSeries(wx.Panel):
 
 
   def callback(self, verts):
+      seldatetimes= [matplotlib.dates.num2date(x[0]) for x in verts]
+      #print seldatetimes
 
-        p = path.Path(verts)
-        ind = p.contains_points(self.xys)
-        self.changeSelection(ind)
+      self.parent.record_service.select_points(datetime_list=seldatetimes)
 
-        self.canvas.draw_idle()
-        self.canvas.widgetlock.release(self.lasso)
-        del self.lasso
+      p = path.Path(verts)
+      ind = p.contains_points(self.xys)
+      self.changeSelection(ind)
+
+      self.canvas.draw_idle()
+      self.canvas.widgetlock.release(self.lasso)
+      del self.lasso
         
 
 
   def onpress(self, event):
-        if self.canvas.widgetlock.locked(): return
-        if event.inaxes is None: return
-        self.lasso = Lasso(event.inaxes, (event.xdata, event.ydata), self.callback)
-        # acquire a lock on the widget drawing
-        self.canvas.widgetlock(self.lasso)
+      if self.canvas.widgetlock.locked(): return
+      if event.inaxes is None: return
+      self.lasso = Lasso(event.inaxes, (event.xdata, event.ydata), self.callback)
+      # acquire a lock on the widget drawing
+      self.canvas.widgetlock(self.lasso)
 
 
   def __init__(self, parent, id, pos, size, style, name):

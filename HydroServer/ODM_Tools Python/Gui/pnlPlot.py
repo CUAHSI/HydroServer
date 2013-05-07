@@ -24,9 +24,9 @@ wxID_PAGESUMMARY, wxID_PAGETIMESERIES, wxID_TABPLOTS
 
 class pnlPlot(fnb.FlatNotebook):
 
-    def _init_ctrls(self, prnt):
+    def _init_ctrls(self, parent):
         fnb.FlatNotebook.__init__(self, id=wxID_TABPLOTS, name=u'tabPlots',
-              parent=prnt, pos=wx.Point(0, 0), size=wx.Size(491, 288),
+              parent=parent, pos=wx.Point(0, 0), size=wx.Size(491, 288),
               agwStyle=fnb.FNB_NODRAG | fnb.FNB_HIDE_TABS)
         # style |= fnb.FNB_HIDE_TABS
         # self.book.SetAGWWindowStyleFlag(style)
@@ -115,7 +115,8 @@ class pnlPlot(fnb.FlatNotebook):
         self.editID = None
         self.pltTS.stopEdit()
 
-    def addEditPlot(self, dataRep, seriesID):
+    def addEditPlot(self, dataRep, seriesID, record_service):
+        self.record_service = record_service
         if not self._seriesPlotInfo:
             options = PlotOptions("Both", 0, False, False, True)
             self._seriesPlotInfo= SeriesPlotInfo(dataRep, options )
@@ -164,3 +165,4 @@ class pnlPlot(fnb.FlatNotebook):
 
     def __init__(self, parent, id, pos, size, style, name):
         self._init_ctrls(parent)
+        self.parent = parent
