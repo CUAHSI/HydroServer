@@ -40,6 +40,11 @@ class RecordService():
     def toggle_filter_previous(self):
         self._edit_service.toggle_filter_previous()
 
+    def  select_points(self, id_list=[], datetime_list=[]):
+        self._edit_service.select_points(id_list, datetime_list)
+        if self._record:
+            self._script("#Lasso selection")
+
 
     ###################
     # Editing
