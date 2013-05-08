@@ -5,6 +5,7 @@ import wx.lib.buttons
 import wx.grid
 import wx.lib.mixins.gridlabelrenderer as glr
 from wx.lib.pubsub import pub as Publisher
+import datetime
 
 def create(parent):
     return frmAddPoint(parent)
@@ -146,12 +147,6 @@ class frmAddPoint(wx.Dialog):
 
       self.grdDataValues.AutoSizeColumns()
 
-      # self.grdDataValues.AppendCols(numCols = 1, updateLabels = True)
-      # count = self.grdSummary.GetNumberCols()
-      # self.grdDataValues.SetColLabelValue(count-1, series.site_name +"-"+ series.variable_name)
-
-      pass
-
     def __init__(self, parent):
         self.parent = parent
         self._init_ctrls(parent)
@@ -185,10 +180,10 @@ class frmAddPoint(wx.Dialog):
         col = self.grdDataValues.XToCol(x, y)
         tip =""
 
-        if col == 0 or col == 1 or col ==3 or col ==5 :
+        if col == 0 or col == 1 or col == 3 or col == 5 :
             tip= "Decimal"
         elif col == 2 or col == 4:
-            tip = "M/d/yyyy h:mm:ss tt"
+            tip = "mm/dd/yyyy h:mm:ss am"
         elif col == 6 or col == 7 or col == 8 or col == 9:
             tip = "Controlled Vocabulary"        
         else:
@@ -197,6 +192,9 @@ class frmAddPoint(wx.Dialog):
         event.Skip()
 
     def OnBtnSaveButton(self, event):
+        # for row in self.grdDataValues
+
+
         event.Skip()
         self.Close()
 
@@ -212,7 +210,7 @@ class frmAddPoint(wx.Dialog):
 
 
         #if last row AND and all req cells from previous row are filled out
-        if event.Row == self.grdDataValues.GetNumberRows()-1:
+        if event.Row == self.grdDataValues.GetNumberRows()-1 and self.IsRowFilled(event.Row):
           # TODO Test that all yellow boxes of previous row are filled first
           self.grdDataValues.AppendRows(numRows= 1) 
           ##format all of the cells with drop down boxes and fill in 5 identifiers  
@@ -225,6 +223,33 @@ class frmAddPoint(wx.Dialog):
         
         event.Skip()
 
+    def IsRowFilled(self, row):
+      val = False
+      datetime_format = "%m/%d/%Y %I:%M:%S %p"
+
+      if (self.grdDataValues.GetCellValue(row, 0) != "" and   # Data Value
+          self.grdDataValues.GetCellValue(row, 2) != "" and   # LocalDatetime
+          self.grdDataValues.GetCellValue(row, 3) != "" and   # UTC Offset
+          self.grdDataValues.GetCellValue(row, 4) != "" and   # UTCDateTime
+          self.grdDataValues.GetCellValue(row, 7) != ""):     # Censor Code
+        # Test date formats
+        try:
+          local_datetime = self.grdDataValues.GetCellValue(row, 2)
+          utc_datetime = self.grdDataValues.GetCellValue(row, 4)
+
+          print local_datetime
+          print utc_datetime
+
+          datetime.datetime.strptime(local_datetime, datetime_format)
+          datetime.datetime.strptime(utc_datetime, datetime_format)
+
+          # If no exceptions were thrown, both dates are in the correct format
+          val = True
+        except ValueError as err:
+          # Do nothing, the return value will stay false
+          print err
+
+      return val
 
 class MyColLabelRenderer(glr.GridLabelRenderer):
     def __init__(self, bgcolor):

@@ -49,8 +49,10 @@ class RecordService():
     ###################
     # Editing
     ###################
-    def add_point(self):
-        pass
+    def add_points(self, points):
+        self._edit_service.add_points(points)
+        if self._record:
+            self._script("# add points")
 
     def delete_points(self):
         self._edit_service.delete_points()
