@@ -1,7 +1,7 @@
 #Boa:Frame:frmChangeValue
 
 import wx
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 def create(parent):
     return frmChangeValue(parent)
@@ -96,9 +96,4 @@ class frmChangeValue(wx.Dialog):
       self.Close()
 
 
-if __name__ == '__main__':
-    app = wx.PySimpleApp()
-    frame = create(None)
-    frame.Show()
 
-    app.MainLoop()

@@ -4,7 +4,7 @@ import wx
 # import wx.lib.agw.ultimatelistctrl as ULC
 # from ObjectListView import ObjectListView, ColumnDefn, Filter
 
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 import sqlite3
 # from ObjectListView import Filter
@@ -210,7 +210,7 @@ class pnlSeriesSelector(wx.Panel):
               self.OnTableRightDown,
               id=wxID_PNLSERIESSELECTORtableSeries)
 
-        Publisher().subscribe(self.OnEditButton, ("selectEdit"))
+        Publisher.subscribe(self.OnEditButton, ("selectEdit"))
         self._init_sizers()
 
 
@@ -316,7 +316,7 @@ class pnlSeriesSelector(wx.Panel):
         self.SelectForEdit(self.tableSeries.GetColumnText(self.selectedIndex, 1))
         event.Skip()
 
-    def OnEditButton(self, vals):
+    def OnEditButton(self, event):
         self.SelectForEdit(self.tableSeries.GetColumnText(self.tableSeries.GetSelection(), 1))
 
 
@@ -452,7 +452,7 @@ class pnlSeriesSelector(wx.Panel):
         # print dir(event)
         sid= self.tableSeries.innerList[event.m_itemIndex][0]
         if not self.tableSeries.IsItemChecked(event.m_itemIndex):
-            Publisher().sendMessage(("removePlot"), sid)
+            Publisher.sendMessage(("removePlot"), seriesID=id)
             self.tableSeries.innerList[event.m_itemIndex][-1]= False
 
         else:

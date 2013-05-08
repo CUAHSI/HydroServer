@@ -5,7 +5,7 @@ import wx
 import textwrap
 import datetime
 import numpy as np
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 
 import matplotlib
@@ -21,7 +21,7 @@ from matplotlib.font_manager import FontProperties
 from matplotlib.widgets import Lasso
 from matplotlib import path
 from random import *
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 
 
@@ -119,7 +119,7 @@ class plotTimeSeries(wx.Panel):
     #list of True False
       self.editPoint.set_color(['k' if x==0 else 'r' for x in sellist])
       #self.parent.record_service.select_points(datetime_list= self.xys)
-      Publisher().sendMessage(("changeTableSelection"), sellist)
+      Publisher.sendMessage(("changeTableSelection"), sellist=sellist)
       
       self.canvas.draw()
 
@@ -257,7 +257,7 @@ class plotTimeSeries(wx.Panel):
     self.seriesPlotInfo.UpdateEditSeries()
     self.editCurve= self.seriesPlotInfo.GetEditSeriesInfo() 
     self.drawEditPlot(self.editCurve)
-    Publisher().sendMessage(("refreshTable"), None)
+    Publisher.sendMessage(("refreshTable"), e=None)
     # self.parent.parent.dataTable.Refresh()
     self.canvas.draw()
 
@@ -272,7 +272,7 @@ class plotTimeSeries(wx.Panel):
   #     #change slecteion on plot
   #     self.changeSelection(selectedlist)
   #     #change selection in table
-  #     Publisher().sendMessage(("changeTableSelection"), selectedlist)
+  #     Publisher.sendMessage(("changeTableSelection"), selectedlist)
 
 
 

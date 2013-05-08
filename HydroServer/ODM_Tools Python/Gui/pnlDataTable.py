@@ -3,7 +3,7 @@
 import wx
 import wx.grid
 from ObjectListView import ObjectListView, ColumnDefn, FastObjectListView
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 import odmdata
 import sqlite3
     
@@ -36,8 +36,8 @@ class pnlDataTable(wx.Panel):
         # self.myOlv.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.OnItemDeSelected )
         self.myOlv.Bind(wx.EVT_LEFT_UP, self.OnLUp, id=wxID_PNLDATATABLE )
         self.myOlv.Bind(wx.EVT_LEFT_DOWN, self.OnLDown, id=wxID_PNLDATATABLE)
-        Publisher().subscribe(self.OnChangeSelection, ("changeTableSelection"))
-        Publisher().subscribe(self.OnRefresh, ("refreshTable"))
+        Publisher.subscribe(self.OnChangeSelection, ("changeTableSelection"))
+        Publisher.subscribe(self.OnRefresh, ("refreshTable"))
 
         self.Layout()
 
@@ -90,15 +90,14 @@ class pnlDataTable(wx.Panel):
         self.doneselecting = False
 
     def OnItemSelected(self, event):
-        print "in onItemSelected"
-        # print 
-
+        # print "in onItemSelected"
+        
         # if  not (event.m_itemIndex in self.selectedpoints):
         #     self.selectedpoints.Add(event.m_itemIndex)
 
         if self.doneselecting:
             selectedids = self.getSelectedIDs(self.myOlv.GetSelectedObjects())
-            Publisher().sendMessage(("changePlotSelection"), selectedids)
+            Publisher.sendMessage(("changePlotSelection"), sellist = selectedids)
 
     def OnItemDeSelected(self, event):
         print event.m_itemIndex
@@ -114,11 +113,11 @@ class pnlDataTable(wx.Panel):
     
     def OnChangeSelection(self, sellist):
         objlist=[]
-        # print sellist.data
-        # print type(sellist.data)
+        # print sellist
+        # print type(sellist)
 
-        for i in range(len(sellist.data)):
-            if sellist.data[i]:
+        for i in range(len(sellist)):
+            if sellist[i]:
                 objlist.append(self.myOlv.GetObjectAt(i))
         # print objlist
         self.doneselecting = False  

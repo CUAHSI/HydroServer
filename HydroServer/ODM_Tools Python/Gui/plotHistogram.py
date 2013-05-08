@@ -2,8 +2,7 @@
 import wx
 import numpy
 import math
-
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 import matplotlib
 import matplotlib.pyplot as plt

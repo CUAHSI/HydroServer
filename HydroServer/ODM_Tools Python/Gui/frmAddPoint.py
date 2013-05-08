@@ -4,7 +4,7 @@ import wx
 import wx.lib.buttons
 import wx.grid
 import wx.lib.mixins.gridlabelrenderer as glr
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 def create(parent):
     return frmAddPoint(parent)
@@ -87,7 +87,7 @@ class frmAddPoint(wx.Dialog):
 
 
       self.grdDataValues.CreateGrid(1,10)
-      # self.Service = Publisher().sendMessage(("GetDBService"), None)
+      # self.Service = Publisher.sendMessage(("GetDBService"), None)
       DBConn=self.parent.parent.GetDBService()
       # print DBConn
       self.service = DBConn.get_cv_service()

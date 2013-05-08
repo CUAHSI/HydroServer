@@ -1,7 +1,7 @@
 import wx
 import wx.stc as stc
 import os
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 from highlightSTC import highlightSTC
 
@@ -74,7 +74,7 @@ class pnlScript(wx.Frame):
         self.filename = ''
         self.control.SetText('')
         # self.SetTitle("Editing a new file")
-        Publisher().sendMessage(("script.title"), "Editing a new file")
+        Publisher.sendMessage(("script.title"), title="Editing a new file")
 
     def OnOpen(self, e):
         dlg = wx.FileDialog(self, "Choose a file", self.dirname, "", "*.*", wx.OPEN)
@@ -89,7 +89,7 @@ class pnlScript(wx.Frame):
             filehandle.close()
 
             # self.SetTitle("Editing: %s" % self.filename)
-            Publisher().sendMessage(("script.title"), "Editing: %s" % self.filename)
+            Publisher.sendMessage(("script.title"), title="Editing: %s" % self.filename)
 
         dlg.Destroy()
 
@@ -145,7 +145,7 @@ class pnlScript(wx.Frame):
             self.setTitle(title)
 
     def setTitle(self, title):
-        Publisher().sendMessage("script.title", title)
+        Publisher.sendMessage("script.title", title=title)
 
     def getStyle(self, c='black'):
         """
