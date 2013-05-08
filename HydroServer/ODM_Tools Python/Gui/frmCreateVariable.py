@@ -216,10 +216,3 @@ class frmCreateVariable(wx.Frame):
         self._init_ctrls(parent)
 
 
-
-if __name__ == '__main__':
-    app = wx.PySimpleApp()
-    frame = create(None)
-    frame.Show()
-
-    app.MainLoop()

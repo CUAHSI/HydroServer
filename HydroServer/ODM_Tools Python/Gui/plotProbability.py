@@ -1,7 +1,7 @@
 
 import wx
 
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 import matplotlib
 from matplotlib.figure import Figure

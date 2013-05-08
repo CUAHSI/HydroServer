@@ -2,7 +2,7 @@
 
 from datetime import datetime
 import wx
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 
 def create(parent):
@@ -179,7 +179,7 @@ class frmDataFilter(wx.Dialog):
         self.txtVChangeThresh.Clear()
         self.editService.reset()
 
-        Publisher().sendMessage(("changePlotSelection"), self.editService.get_plot_list())
+        Publisher.sendMessage(("changePlotSelection"), sellist=self.editService.get_plot_list())
 
     def OnBtnOKButton(self, event):
         self.OnBtnApplyButton(event)
@@ -211,7 +211,7 @@ class frmDataFilter(wx.Dialog):
           if self.txtVChangeThresh.GetValue():
             self.editService.value_change_threshold(float(self.txtVChangeThresh.GetValue()))
 
-        Publisher().sendMessage(("changePlotSelection"), self.editService.get_plot_list())
+        Publisher.sendMessage(("changePlotSelection"), sellist=self.editService.get_plot_list())
 
     
     def setDates(self):

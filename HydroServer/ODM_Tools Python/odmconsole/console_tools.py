@@ -1,6 +1,6 @@
 # This class is intended for users to simplify console interaction
 
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 
 class ConsoleTools(object):
@@ -72,13 +72,13 @@ class ConsoleTools(object):
         if self._record_service:
             self._record_service.change_value(value, operator)
             self.refresh_plot()
-            Publisher().sendMessage(("updateValues"), None)
+            Publisher.sendMessage(("updateValues"), None)
 
     def delete_points(self):
         if self._record_service:
             self._record_service.delete_points()
             self.refresh_plot()
-            Publisher().sendMessage(("updateValues"), None)
+            Publisher.sendMessage(("updateValues"), None)
 
     def restore(self):
         if self._record_service:
@@ -90,4 +90,4 @@ class ConsoleTools(object):
     # UI methods
     ###############
     def refresh_plot(self):
-        Publisher().sendMessage(("changePlotSelection"), self._record_service.get_plot_list())
+        Publisher.sendMessage(("changePlotSelection"), self._record_service.get_plot_list())

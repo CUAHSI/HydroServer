@@ -1,7 +1,7 @@
 
 import wx
 
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 import matplotlib
 from matplotlib.figure import Figure
@@ -37,10 +37,10 @@ class plotBox(wx.Panel):
       wx.Panel.__init__(self, prnt, -1)
 
 
-      Publisher().subscribe(self.monthly, ("box.Monthly"))
-      Publisher().subscribe(self.yearly, ("box.Yearly"))
-      Publisher().subscribe(self.seasonaly, ("box.Seasonal"))
-      Publisher().subscribe(self.overall, ("box.Overall"))
+      Publisher.subscribe(self.monthly, ("box.Monthly"))
+      Publisher.subscribe(self.yearly, ("box.Yearly"))
+      Publisher.subscribe(self.seasonaly, ("box.Seasonal"))
+      Publisher.subscribe(self.overall, ("box.Overall"))
 
 
       self.figure = matplotlib.figure.Figure()
@@ -107,9 +107,6 @@ class plotBox(wx.Panel):
         cl= oneSeries.BoxWhisker.currinterval.confint
         mean= oneSeries.BoxWhisker.currinterval.means
         ci = oneSeries.BoxWhisker.currinterval.conflimit
-        # print len(oneSeries.BoxWhisker.currinterval.data)
-        # print len(cl) , cl
-
         bp=self.plots[i-1].boxplot(oneSeries.BoxWhisker.currinterval.data,  sym = "-gs", notch = True, bootstrap = 5000,  conf_intervals = cl)
 
 

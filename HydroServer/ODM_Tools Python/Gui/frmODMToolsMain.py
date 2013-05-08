@@ -20,7 +20,7 @@ except ImportError: # if it's not there locally, try the wxPython lib.
 import wx.richtext
 import wx.stc
 import wx.lib.agw.aui as aui
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 import wx.py.crust
 import frmDBConfiguration
 
@@ -85,19 +85,19 @@ class frmODMToolsMain(wx.Frame):
               style=wx.DEFAULT_FRAME_STYLE, title=u'ODM Tools')
         self.SetFont(wx.Font(9, wx.SWISS, wx.NORMAL, wx.NORMAL,
               False, u'Tahoma'))
-        # Publisher().subscribe(self.addPlot, ("add.NewPlot"))
-        # Publisher().subscribe(self.addEdit, ("edit.NewPlot"))
-        Publisher().subscribe(self.onDocking, ("adjust.Docking"))
+        # Publisher.subscribe(self.addPlot, ("add.NewPlot"))
+        # Publisher.subscribe(self.addEdit, ("edit.NewPlot"))
+        Publisher.subscribe(self.onDocking, ("adjust.Docking"))
 
-        Publisher().subscribe(self.onDocking, ("adjust.Docking"))
-        Publisher().subscribe(self.onPlotSelection, ("select.Plot"))
-        Publisher().subscribe(self.onExecuteScript, ("execute.script"))
+        Publisher.subscribe(self.onDocking, ("adjust.Docking"))
+        Publisher.subscribe(self.onPlotSelection, ("select.Plot"))
+        Publisher.subscribe(self.onExecuteScript, ("execute.script"))
 
 
-        Publisher().subscribe(self.onExecuteScript, ("execute.script"))
-        Publisher().subscribe(self.onChangeDBConn, ("change.dbConfig"))
-        Publisher().subscribe(self.onSetScriptTitle, ("script.title"))
-        Publisher().subscribe(self.OnClose, ("onClose"))
+        Publisher.subscribe(self.onExecuteScript, ("execute.script"))
+        Publisher.subscribe(self.onChangeDBConn, ("change.dbConfig"))
+        Publisher.subscribe(self.onSetScriptTitle, ("script.title"))
+        Publisher.subscribe(self.OnClose, ("onClose"))
 
 
 ############### Ribbon ###################
@@ -184,16 +184,16 @@ class frmODMToolsMain(wx.Frame):
 
 
 
-    def onDocking(self, Value):
+    def onDocking(self, value):
 
         panedet=self._mgr.GetPane(self.pnlPlot)
-        if Value.data == "Table":
+        if value == "Table":
             panedet=self._mgr.GetPane(self.dataTable)
-        elif Value.data == "Selector":
+        elif value == "Selector":
             panedet=self._mgr.GetPane(self.pnlSelector)
-        elif Value.data == "Script":
+        elif value == "Script":
             panedet=self._mgr.GetPane(self.txtPythonScript)
-        elif Value.data == "Console":
+        elif value == "Console":
 
         # self.txtPythonConsole = wx.py.crust.CrustFrame(id=wxID_TXTPYTHONCONSOLE,
         #     name=u'txtPython', parent=self,  pos=wx.Point(72, 24),
@@ -221,16 +221,8 @@ class frmODMToolsMain(wx.Frame):
         self.pnlPlot.selectPlot(value)
 
 
-    # def addPlot(self, cursor, series):
-    # #     self.dataTable.Init(Values.data[0])
-    #     # self.pnlPlot.addPlot(Values.data)
 
-    #     self.pnlPlot.addPlot(cursor, series)
-
-    #     self._ribbon.enableButtons(self.pnlPlot.getActivePlotID() )
     def addPlot(self, dataRep, seriesID):
-    # #     self.dataTable.Init(Values.data[0])
-    #     # self.pnlPlot.addPlot(Values.data)
 
         self.pnlPlot.addPlot(dataRep, seriesID)
 
@@ -240,34 +232,17 @@ class frmODMToolsMain(wx.Frame):
 
     def onSetScriptTitle(self, title):
         scriptPane = self._mgr.GetPane(self.txtPythonScript)
-        scriptPane.Caption(title.data)
+        scriptPane.Caption(title)
         if scriptPane.IsFloating():
             # print "script is floating"
             scriptPane.Restore()
         self._mgr.Update()
 
 
-    # def addEdit(self, cursor, series, connection=None):
-    #     # Publisher().sendMessage(("edit.EnableButtons"), True)
-    #     # self.pnlPlot.addEditPlot(Values.data)
-    #     # self.dataTable.Init(Values.data[0])
-    #     # self.edit_service = self.service_manager.get_edit_service(Values.data[1].id, Values.data[0])
-
-    #     self.pnlPlot.addEditPlot(cursor, series)
-    #     self.dataTable.Init(cursor)
-    #     self.record_service = self.service_manager.get_record_service(self.txtPythonScript, series.id, connection)
-    #     self._ribbon.toggleEditButtons(True)
-
-    #     # set record service for console
-    #     self.console_tools.set_record_service(self.record_service)
-
-    #     # TODO
-    #     # create edit service, send in Values.data[0]
 
 
 
     def addEdit(self, seriesID, memDB):
-
         
         self.record_service = self.service_manager.get_record_service(self.txtPythonScript, seriesID, connection=memDB.conn)
         self.pnlPlot.addEditPlot(memDB, seriesID, self.record_service)
@@ -342,7 +317,7 @@ class frmODMToolsMain(wx.Frame):
 
 
 if __name__ == '__main__':
-    app = wx.PySimpleApp()
+    app = wx.App(False)
     frame = create(None)
     frame.Show()
 

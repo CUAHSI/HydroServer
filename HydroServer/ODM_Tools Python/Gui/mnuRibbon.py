@@ -2,7 +2,7 @@
 
 import wx
 import wx.lib.agw.ribbon as RB
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 import pnlDatePicker
 import frmDataFilters
@@ -72,8 +72,8 @@ class mnuRibbon(RB.RibbonBar):
 
         # self.PlotsOptions_bar.AddSimpleButton(wxID_RIBBONPLOTTSCOLOR, "Color Setting",  
         #                         CreateBitmap("images\\ColorSetting.png"), "")
-        self.PlotsOptions_bar.AddToggleButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
-                                CreateBitmap("images\\Legend.png"), "")
+        self.PlotsOptions_bar.AddButton(wxID_RIBBONPLOTTSLEGEND, "Show Legend",  
+                                CreateBitmap("images\\Legend.png"), help_string="show legend on plot", kind = 0x4)
 
 
         self.PlotsOptions_bar.AddSimpleButton( wxID_RIBBONPLOTDATESTART, "# Hist Bins" ,CreateBitmap("images\\Blank.png"), "") #,wx.Size(100, 21))
@@ -169,8 +169,12 @@ class mnuRibbon(RB.RibbonBar):
         main_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Main", wx.NullBitmap, wx.DefaultPosition,
                                         wx.DefaultSize, RB.RIBBON_PANEL_NO_AUTO_MINIMISE)
         self.main_bar = RB.RibbonButtonBar(main_panel)                                                                 
-        self.main_bar.AddToggleButton(wxID_RIBBONEDITSERIES, "Edit Series",  
-                                CreateBitmap("images\\Edit (2).png"), "") 
+        self.main_bar.AddSimpleButton(wxID_RIBBONEDITSERIES, "Edit Series",  
+                                bitmap=CreateBitmap("images\\Edit (2).png"), help_string="") 
+
+#self.main_bar.AddButton(wxID_RIBBONEDITSERIES, "Edit Series",  
+#                                bitmap=CreateBitmap("images\\Edit (2).png"), help_string="", kind = 0x4) 
+
         self.main_bar.AddSimpleButton(wxID_RIBBONSTOPEDITSERIES, "Stop Editing",  
                                 CreateBitmap("images\\StopEdit.png"), "")                                                                                           
         # main_bar.AddSimpleButton(wxID_RIBBONEDITDERIVE, "Derive New Series",  
@@ -203,8 +207,8 @@ class mnuRibbon(RB.RibbonBar):
                                 CreateBitmap("images\\Add (2).png"), "")
         self.edit_bar.AddSimpleButton(wxID_RIBBONEDITDELPOINT, "Delete Point",  
                                 CreateBitmap("images\\Delete (3).png"), "") 
-        self.edit_bar.AddToggleButton(wxID_RIBBONEDITRECORD, "Record",  
-                                CreateBitmap("images\\Record.png"), "")                                                                                                                                                             
+        self.edit_bar.AddButton(wxID_RIBBONEDITRECORD, "Record",  
+                                bitmap= CreateBitmap("images\\Record.png"), help_string="", kind = 0x4)                                                                                                                                                             
 
         self.edit_bar.EnableButton(wxID_RIBBONEDITFILTER, False) 
         self.edit_bar.EnableButton(wxID_RIBBONEDITCHGVALUE, False) 
@@ -212,7 +216,8 @@ class mnuRibbon(RB.RibbonBar):
         self.edit_bar.EnableButton(wxID_RIBBONEDITFLAG, False)
         self.edit_bar.EnableButton(wxID_RIBBONEDITADDPOINT, False)
         self.edit_bar.EnableButton(wxID_RIBBONEDITDELPOINT, False)
-        self.edit_bar.EnableButton(wxID_RIBBONEDITRECORD, False)
+        self.edit_bar.EnableButton(wxID_RIBBONEDITRECORD, True)
+        # self.edit_bar.ToggleButton(wxID_RIBBONEDITRECORD, checked=True)
 
 #------------------------------------------------------------------------------- 
         # script_panel = RB.RibbonPanel(editPage, wx.ID_ANY, "Script", wx.NullBitmap, wx.DefaultPosition,
@@ -246,7 +251,7 @@ class mnuRibbon(RB.RibbonBar):
         self.SetActivePageByIndex(self.CurrPage)
 
         self.BindEvents()          
-        Publisher().subscribe(self.toggleEditButtons, ("edit.EnableButtons"))
+        Publisher.subscribe(self.toggleEditButtons, ("edit.EnableButtons"))
         
                              
     def __init__(self, parent, id, name):
@@ -294,8 +299,12 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditInterpolate, id= wxID_RIBBONEDITINTEROPOLATE)
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditFlag, id= wxID_RIBBONEDITFLAG) 
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditAddPoint, id= wxID_RIBBONEDITADDPOINT) 
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditDelPoint, id= wxID_RIBBONEDITDELPOINT) 
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnRecord, id= wxID_RIBBONEDITRECORD) 
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditDelPoint, id= wxID_RIBBONEDITDELPOINT)
+
+        #button.Bind(wx.EVT_TOGGLEBUTTON, self.onToggle) 
+       # self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnRecord, id= wxID_RIBBONEDITRECORD) 
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED, self.OnRecord, id= wxID_RIBBONEDITRECORD)
+
 
 
 
@@ -343,7 +352,7 @@ class mnuRibbon(RB.RibbonBar):
     def OnEditDelPoint(self, event):
         record_service = self.parent.getRecordService()
         record_service.delete_points()
-        Publisher.sendMessage(("updateValues"), event)
+        Publisher.sendMessage(("updateValues"), event=event)
 
     def OnStopEdit(self, event):
         # print type(self.parent), dir(self.parent)
@@ -352,26 +361,26 @@ class mnuRibbon(RB.RibbonBar):
     def OnRestore(self, event):
         record_service = self.parent.getRecordService()
         record_service.restore()
-        Publisher.sendMessage(("updateValues"), event)
+        Publisher.sendMessage(("updateValues"), event=event)
 
     def OnEditSeries(self, event):
         # self.parent.
-        Publisher.sendMessage(("selectEdit"), event)
+        Publisher.sendMessage(("selectEdit"), event=event, )
 
     def OnNumBins(self, event):
-        Publisher.sendMessage(("OnNumBins"), event.Selection)
+        Publisher.sendMessage(("OnNumBins"), numBins=event.Selection)
 
     def OnShowLegend(self, event):
-        Publisher.sendMessage(("OnShowLegend"), [event, self.isLegendVisible])        
+        Publisher.sendMessage(("OnShowLegend"), event= event, isVisible=self.isLegendVisible)        
         self.isLegendVisible = not self.isLegendVisible
 
     def oneDateChanged(self,event):
         # print dir(event)
-        Publisher.sendMessage(("onDateChanged"), [event.Date, "end"])
+        Publisher.sendMessage(("onDateChanged"), date=event.Date, time="end")
 
     def onsDateChanged(self,event):
         # print event.Date
-        Publisher.sendMessage(("onDateChanged"), [event.Date, "start"])
+        Publisher.sendMessage(("onDateChanged"), date=event.Date, time="start")
 
     # def OnFileMenutest(self, event):
     #     print dir(event)
@@ -392,15 +401,15 @@ class mnuRibbon(RB.RibbonBar):
 
 
     def onClose(self, event):
-        Publisher.sendMessage(("onClose"), event)
+        Publisher.sendMessage(("onClose"), event=event)
 
     def onChangeDBConfig(self, event):
-        Publisher().sendMessage(("change.dbConfig"), event)
+        Publisher.sendMessage(("change.dbConfig"), event=event)
         self.CurrPage = 1
         self.SetActivePageByIndex(self.CurrPage)               
         
     def onExecuteScript(self, event):
-        Publisher().sendMessage(("execute.script"), event)
+        Publisher.sendMessage(("execute.script"), event=event)
 
     def OnBoxTypeDropdown(self, event):
         menu = wx.Menu()
@@ -412,16 +421,16 @@ class mnuRibbon(RB.RibbonBar):
         event.PopupMenu(menu)  
 
     def OnBoxMonthly(self, event):
-        Publisher().sendMessage(("box.Monthly"), event)
+        Publisher.sendMessage(("box.Monthly"), event=event)
 
     def OnBoxYearly(self, event):
-        Publisher().sendMessage(("box.Yearly"), event)
+        Publisher.sendMessage(("box.Yearly"), event=event)
 
     def OnBoxSeasonal(self, event):
-        Publisher().sendMessage(("box.Seasonal"), event)
+        Publisher.sendMessage(("box.Seasonal"), event=event)
 
     def OnBoxOverall(self, event):
-        Publisher().sendMessage(("box.Overall"), event)      
+        Publisher.sendMessage(("box.Overall"), event=event)      
 
     def OnPlotTypeDropdown(self, event):
         menu = wx.Menu()
@@ -432,13 +441,13 @@ class mnuRibbon(RB.RibbonBar):
         event.PopupMenu(menu) 
 
     def OnPlotTypeLine(self, event):
-        Publisher().sendMessage(("onPlotType"), [event, "line"])
+        Publisher.sendMessage(("onPlotType"), event=event, ptype="line")
 
     def OnPlotTypePoint(self, event):
-        Publisher().sendMessage(("onPlotType"), [event, "point"])
+        Publisher.sendMessage(("onPlotType"), event=event, ptype="point")
 
     def OnPlotTypeBoth(self, event):
-        Publisher().sendMessage(("onPlotType"), [event, "both"])
+        Publisher.sendMessage(("onPlotType"), event=event, ptype="both")
 
     def onPlotSelection(self, event):
         if event.Id == wxID_RIBBONPLOTTIMESERIES:       
@@ -452,7 +461,7 @@ class mnuRibbon(RB.RibbonBar):
         elif event.Id == wxID_RIBBONPLOTSUMMARY:
             value= 4
         self.enableButtons(value)
-        Publisher().sendMessage(("select.Plot"), value)
+        Publisher.sendMessage(("select.Plot"), value=value)
 
     def onDocking(self, event):
         
@@ -467,7 +476,7 @@ class mnuRibbon(RB.RibbonBar):
         elif event.Id == wxID_RIBBONVIEWPLOT:
             value= "Plot"       
                  
-        Publisher().sendMessage(("adjust.Docking"), value)            
+        Publisher.sendMessage(("adjust.Docking"), value=value)            
 
     def enableButtons(self, plot):
         ##tims series or probability

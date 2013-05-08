@@ -192,9 +192,3 @@ class frmDBConfig(wx.Dialog):
       return conn_dict
 
 
-if __name__ == '__main__':
-    app = wx.PySimpleApp()
-    frame = create(None, ServiceManager(), True)
-    frame.Show()
-
-    app.MainLoop()

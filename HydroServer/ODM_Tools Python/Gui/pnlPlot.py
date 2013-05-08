@@ -1,7 +1,7 @@
 #Boa:FramePanel:Panel1
 
 import wx
-from wx.lib.pubsub import Publisher
+from wx.lib.pubsub import pub as Publisher
 
 try:
     from agw import flatnotebook as fnb
@@ -58,14 +58,14 @@ class pnlPlot(fnb.FlatNotebook):
 
 
 
-        Publisher().subscribe(self.onDateChanged, ("onDateChanged"))
-        Publisher().subscribe(self.OnPlotType, ("onPlotType"))
-        Publisher().subscribe(self.OnShowLegend, ("OnShowLegend"))
-        Publisher().subscribe(self.OnNumBins, ("OnNumBins"))
-        Publisher().subscribe(self.OnRemovePlot, ("removePlot"))
-        Publisher().subscribe(self.OnChangeSelection, ("changePlotSelection"))
-        Publisher().subscribe(self.OnChangeSelectionDT, ("changePlotSelectionDT"))
-        Publisher().subscribe(self.onUpdateValues, ("updateValues"))
+        Publisher.subscribe(self.onDateChanged, ("onDateChanged"))
+        Publisher.subscribe(self.OnPlotType, ("onPlotType"))
+        Publisher.subscribe(self.OnShowLegend, ("OnShowLegend"))
+        Publisher.subscribe(self.OnNumBins, ("OnNumBins"))
+        Publisher.subscribe(self.OnRemovePlot, ("removePlot"))
+        Publisher.subscribe(self.OnChangeSelection, ("changePlotSelection"))
+        Publisher.subscribe(self.OnChangeSelectionDT, ("changePlotSelectionDT"))
+        Publisher.subscribe(self.onUpdateValues, ("updateValues"))
 
 
         self.selectedSerieslist = []
@@ -78,15 +78,15 @@ class pnlPlot(fnb.FlatNotebook):
 
 
     def OnChangeSelection(self, sellist):
-      self.pltTS.changeSelection(sellist.data)
+      self.pltTS.changeSelection(sellist)
 
     def OnChangeSelectionDT(self, sellist):
-      self.pltTS.changeSelectionDT(sellist.data)
+      self.pltTS.changeSelectionDT(sellist)
 
     def OnRemovePlot(self, seriesID):
 
       # self.selectedSerieslist.remove(seriesID)
-      self._seriesPlotInfo.Update(seriesID.data, False)
+      self._seriesPlotInfo.Update(seriesID, False)
       self.pltTS.Plot(self._seriesPlotInfo)
       self.pltSum.Plot(self._seriesPlotInfo)
       self.pltBox.Plot(self._seriesPlotInfo)
@@ -94,18 +94,17 @@ class pnlPlot(fnb.FlatNotebook):
       self.pltProb.Plot(self._seriesPlotInfo)
 
     def OnNumBins(self , numBins):
-      self.pltHist.ChangeNumOfBins(numBins.data)
+      self.pltHist.ChangeNumOfBins(numBins)
 
-    def onDateChanged(self, Args):
-      self.pltTS.onDateChanged(Args.data[0], Args.data[1])
+    def onDateChanged(self, date, time):
+      self.pltTS.onDateChanged(date, time)
 
-    def OnPlotType(self, Args):
-      self.pltTS.OnPlotType( Args.data[1])
-      self.pltProb.OnPlotType( Args.data[1])
+    def OnPlotType(self, event, ptype):
+      self.pltTS.OnPlotType(ptype)
+      self.pltProb.OnPlotType(ptype)
 
 
-    def OnShowLegend(self, Args):
-      event, isVisible = Args.data[0], Args.data[1]
+    def OnShowLegend(self, event, isVisible):
       self.pltTS.OnShowLegend(isVisible)
       self.pltProb.OnShowLegend(isVisible)
 
@@ -145,7 +144,7 @@ class pnlPlot(fnb.FlatNotebook):
 
 
     def selectPlot(self, value):
-        self.SetSelection(value.data)
+        self.SetSelection(value)
 
     def getActivePlotID(self):
         return self.GetSelection()
