@@ -215,14 +215,11 @@ class EditService():
 
         self._populate_series()
 
-    def add_point(self, point):
-        # cursor execute_many
-        # execute_string = "INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", DataValues
-        # save to sqlite DB
-        pass
+    def add_points(self, points):
+        self._cursor.execute_many("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", points)
+        self._populate_series()
 
     def delete_points(self):
-        #TODO delete selected points from cursor
 
         execute_string = "DELETE FROM DataValuesEdit WHERE ValueID IN ("
         num_active_points = len(self._active_points)
@@ -238,6 +235,9 @@ class EditService():
             self._active_series = tmp
             self._active_points = []       # clear the filter
     
+    def interpolate(self):
+        pass
+
     ###################
     # Save/Restore
     ###################
