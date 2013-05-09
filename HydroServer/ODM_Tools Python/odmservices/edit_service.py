@@ -164,6 +164,9 @@ class EditService():
     ###################
     # Gets
     ###################
+    def get_series(self):
+        return self._series_service.get_series_by_id(self._series_id)
+
     def get_active_series(self):
         return self._active_series
 
@@ -216,7 +219,10 @@ class EditService():
         self._populate_series()
 
     def add_points(self, points):
-        self._cursor.execute_many("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", points)
+        query = "INSERT INTO DataValuesEdit (DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, OffsetValue, OffsetTypeID, "
+        query += "CensorCode, QualifierID, SampleID, SiteID, VariableID, MethodID, SourceID, QualityControlLevelID) "
+        query += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        self._cursor.executemany(query, points)
         self._populate_series()
 
     def delete_points(self):
