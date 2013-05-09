@@ -40,7 +40,7 @@ class RecordService():
     def toggle_filter_previous(self):
         self._edit_service.toggle_filter_previous()
 
-    def  select_points(self, id_list=[], datetime_list=[]):
+    def select_points(self, id_list=[], datetime_list=[]):
         self._edit_service.select_points(id_list, datetime_list)
         if self._record:
             self._script("#Lasso selection")
@@ -83,6 +83,9 @@ class RecordService():
         self._edit_service.write_to_db()       
         if self._record:
             self._script("series.write_to_db()\n", 'black')
+
+    def get_series(self):
+        return self._edit_service.get_series()
 
     def get_active_series(self):
         return self._edit_service.get_active_series()

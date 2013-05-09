@@ -8,6 +8,7 @@ class ConsoleTools(object):
     def __init__(self, ribbon, record_service=None):
         self._edit_error = "no series selected for editing"
         self._add_point_req_error = "A required field was left empty"
+        self._add_point_req_error = "A date is not formatted correctly"
 
         self._ribbon = ribbon
         self._record_service = record_service
@@ -94,6 +95,10 @@ class ConsoleTools(object):
             if (point[0] == None or point[2] == None or point[3] == None or
                 point[4] == None or point[7] == None or point[7] == ""):
                 return "Error adding point: %s" % (self._add_point_req_error)
+
+            if (type(point[2]) is not datetime or
+                type(point[4]) is not datetime):
+                return "Error adding point: %s" % (self._add_point_format_error)
 
         if self._record_service:
             self._record_service.add_points(point_list)

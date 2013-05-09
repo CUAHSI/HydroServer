@@ -351,6 +351,7 @@ class mnuRibbon(RB.RibbonBar):
     def OnEditAddPoint(self, event):
         add_value=frmAddPoint.frmAddPoint(self)
         add_value.ShowModal()
+        Publisher.sendMessage(("updateValues"), event=event)
         event.Skip()
     
     def OnEditDelPoint(self, event):

@@ -217,8 +217,8 @@ class frmDataFilter(wx.Dialog):
     def setDates(self):
       dateAfter = self.editService.get_active_series()[0][2]
       dateBefore = self.editService.get_active_series()[-1][2]
-      formattedDateAfter = wx.DateTimeFromDMY(int(dateAfter.day), int(dateAfter.month), int(dateAfter.year), 0, 0, 0)
-      formattedDateBefore = wx.DateTimeFromDMY(int(dateBefore.day), int(dateBefore.month), int(dateBefore.year), 0, 0, 0)
+      formattedDateAfter = wx.DateTimeFromDMY(int(dateAfter.day) - 1, int(dateAfter.month), int(dateAfter.year), 0, 0, 0)
+      formattedDateBefore = wx.DateTimeFromDMY(int(dateBefore.day) + 1, int(dateBefore.month), int(dateBefore.year), 0, 0, 0)
       self.dpAfter.SetRange(formattedDateAfter, formattedDateBefore)
       self.dpBefore.SetRange(formattedDateAfter, formattedDateBefore)
       self.dpAfter.SetValue(formattedDateAfter)
