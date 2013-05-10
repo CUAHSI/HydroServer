@@ -342,11 +342,9 @@ class mnuRibbon(RB.RibbonBar):
    
     def OnEditInterpolate(self, event):
         event.Skip()
-        pass
     
     def OnEditFlag(self, event):
         event.Skip()
-        pass
     
     def OnEditAddPoint(self, event):
         add_value=frmAddPoint.frmAddPoint(self)

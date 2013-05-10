@@ -52,53 +52,65 @@ class EditService():
         self._cursor.execute("SELECT ValueID, DataValue, LocalDateTime FROM DataValuesEdit ORDER BY LocalDateTime")
         results = self._cursor.fetchall()
 
-        self._active_series = results
-        self._active_points = []
+        self._series_points = results
+        self.reset_filter()
+
+    def _test_filter_previous(self):
+        if not self._filter_from_selection:
+            self.reset_filter()
 
     ###################
     # Filters
     ###################
     # operator is a character, either '<' or '>'
     def filter_value(self, value, operator):
-        filter_set = self.get_filter_set()
+        self._test_filter_previous()
+
         if operator == '<': # less than
-            tmp = []
-            for x in filter_set:
-                if x[1] < value:
-                    tmp.append(x)
-            self._active_points = tmp
+            for i in range(len(self._series_points)):
+                # If it's not already in the selection, skip it
+                if (self._filter_from_selection and not self._filter_list[i]):
+                    continue
+                if self._series_points[i][1] < value:
+                    self._filter_list[i] = True
+                else:
+                    self._filter_list[i] = False
         if operator == '>': # greater than
-            tmp = []
-            for x in filter_set:
-                if x[1] > value:
-                    tmp.append(x)
-            # print tmp
-            self._active_points = tmp
+            for i in range(len(self._series_points)):
+                if (self._filter_from_selection and not self._filter_list[i]):
+                    continue
+                if self._series_points[i][1] > value:
+                    self._filter_list[i] = True
+                else:
+                    self._filter_list[i] = False
 
     def filter_date(self, before, after):
+        self._test_filter_previous()
+
         previous_date_filter = False
-        filter_set = self.get_filter_set()
         if before != None:
             tmp = []
-            for x in filter_set:
-                if x[2] < before:
-                    tmp.append(x)
-            self._active_points = tmp
-            previous_date_filter = True        # We've done a previous date filter, so we've got to decide which set use
+            for i in range(len(self._series_points)):
+                if (self._filter_from_selection and not self._filter_list[i]):
+                    continue
+                if self._series_points[i][2] < before:
+                    self._filter_list[i] = True
+                else:
+                    self._filter_list[i] = False
+            previous_date_filter = True        # We've done a previous date filter
         if after != None:
-            tmp = []
-            if previous_date_filter:
-                filter_set = self._active_points
-            for x in filter_set:
-                if x[2] > after:
-                    tmp.append(x)
-            self._active_points = tmp
+            for i in range(len(self._series_points)):
+                if ((previous_date_filter or self._filter_from_selection)
+                     and not self._filter_list[i]):
+                    continue
+                if self._series_points[i][2] > after:
+                    self._filter_list[i] = True
+                else:
+                    self._filter_list[i] = False
 
     # Data Gaps
     def data_gaps(self, value, time_period):
-        filter_set = self.get_filter_set()
-        points = []
-        length = len(self._active_points)
+        length = len(self._series_points)
 
         value_sec = 0
 
@@ -111,54 +123,72 @@ class EditService():
         if time_period == 'day':
             value_sec = value * 60 * 60 * 24
 
+        tmp = {}
+
         for i in xrange(length):
+            if (self._filter_from_selection and 
+                not self._filter_list[i]):
+                continue
+
             if i + 1 < length:      # make sure we stay in bounds
-                point1 = filter_set[i]
-                point2 = filter_set[i+1]
+                point1 = self._series_points[i]
+                point2 = self._series_points[i+1]
                 interval = point2[2] - point1[2]
-                interval__total_sec = interval.total_seconds()
+                interval_total_sec = interval.total_seconds()
 
-                if interval__total_sec >= value_sec:
-                    points.append(point1)
-                    points.append(point2)
-
-        self._active_points = points
+                if interval_total_sec >= value_sec:
+                    tmp[i] = True
+                    tmp[i+1] = True
+        
+        self.reset_filter()
+        for key in tmp.keys():
+            self._filter_list[key] = True
 
     def value_change_threshold(self, value):
-        filter_set = self.get_filter_set()
-        points = []
-        length = len(self._active_points)
-        for i in xrange(length):
-            if i + 1 < length:         # make sure we stay in bounds
-                point1 = filter_set[i]
-                point2 = filter_set[i+1]
-                if abs(point1[1] - point2[1]) >= value:
-                    points.append(point1)
-                    points.append(point2)
 
-        self._active_points = points
+        length = len(self._series_points)
+        tmp = {}
+        for i in xrange(length):
+            if (self._filter_from_selection and 
+                not self._filter_list[i]):
+                continue
+
+            if i + 1 < length:         # make sure we stay in bounds
+                point1 = self._series_points[i]
+                point2 = self._series_points[i+1]
+                if abs(point1[1] - point2[1]) >= value:
+                    tmp[i] = True
+                    tmp[i + 1] = True
+
+        self.reset_filter()
+        for key in tmp.keys():
+            self._filter_list[key] = True
+
+    def select_points_tf(self, tf_list):
+        self._filter_list = tf_list
 
     def select_points(self, id_list=[], datetime_list=[]):
+        self.reset_filter()
+
         # This should be either one or the other. If it's both, id is used first.
         # If neither are set this function does nothing.
         if id_list != None:
-            tmp = [x for x in self._active_series if x[0] in id_list]
-            self._active_points = tmp
+            for i in range(len(self._series_points)):
+                if self._series_points[i][0] in id_list:
+                    self._filter_list[i] = True
         elif datetime_list != None:
-            tmp = [x for x in self._active_series if x[2] in datetime_list]
-            self._active_points = tmp
+            for i in range(len(self._series_points)):
+                if self._series_points[i][2] in datetime_list:
+                    self._filter_list[i] = True
         else:
             pass
 
 
     def reset_filter(self):
-        self._active_points = self._active_series
+        self._filter_list = [False] * len(self._series_points)
 
     def toggle_filter_previous(self):
-        if self._filter_from_selection:
-            self._filter_from_selection = False
-        else:
-            self._filter_from_selection = True
+        self._filter_from_selection = not self._filter_from_selection
 
 
     ###################
@@ -167,29 +197,19 @@ class EditService():
     def get_series(self):
         return self._series_service.get_series_by_id(self._series_id)
 
-    def get_active_series(self):
-        return self._active_series
+    def get_series_points(self):
+        return self._series_points
 
-    def get_active_points(self):
-        return self._active_points
+    def get_filtered_points(self):
+        tmp = []
+        for i in range(len(self._series_points)):
+            if self._filter_list[i]:
+                tmp.append(self._series_points[i])
 
-    def get_filter_set(self):
-        if self._filter_from_selection:
-            return self._active_points
-        else:
-            return self._active_series
+        return tmp
 
-    def get_plot_list(self):
-        dv_list = [False] * len(self._active_series)
-        if self._active_points != self._active_series:
-            id_list = [x[0] for x in self._active_points]
-            for i in range(len(self._active_series)):
-                if self._active_series[i][0] in id_list:
-                    dv_list[i] = True
-
-        return dv_list
-        if len(self._active_points)==len(self._active_series):
-            return []   
+    def get_filter_list(self):
+        return self._filter_list
 
     
     #################
@@ -197,6 +217,8 @@ class EditService():
     #################
 
     def change_value(self, value, operator):
+        filtered_points = self.get_filtered_points()
+        tmp_filtered_list = self._filter_list
         execute_string = "UPDATE DataValuesEdit SET DataValue = "
         if operator == '+':
             execute_string += " DataValue + %s " % (value)
@@ -211,12 +233,13 @@ class EditService():
             execute_string += "%s " % (value)
 
         execute_string += "WHERE ValueID IN ("
-        for i in range(len(self._active_points) - 1):
-            execute_string += "%s," % (self._active_points[i][0])
-        execute_string += "%s)" % (self._active_points[-1][0])
+        for i in range(len(filtered_points) - 1):
+            execute_string += "%s," % (filtered_points[i][0])
+        execute_string += "%s)" % (filtered_points[-1][0])
         self._cursor.execute(execute_string)
 
         self._populate_series()
+        self._filter_list = tmp_filtered_list
 
     def add_points(self, points):
         query = "INSERT INTO DataValuesEdit (DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, OffsetValue, OffsetTypeID, "
@@ -226,23 +249,26 @@ class EditService():
         self._populate_series()
 
     def delete_points(self):
-
         execute_string = "DELETE FROM DataValuesEdit WHERE ValueID IN ("
-        num_active_points = len(self._active_points)
-        if num_active_points > 0:
-            for i in range(num_active_points-1):        # loop through the second-to-last active point
-                execute_string += "%s," % (self._active_points[i][0])   # append its ID
-            execute_string += "%s)" % (self._active_points[-1][0])  # append the final point's ID and close the set
+        filtered_points = self.get_filtered_points()
+        num_filtered_points = len(filtered_points)
+        if num_filtered_points > 0:
+            for i in range(num_filtered_points-1):        # loop through the second-to-last active point
+                execute_string += "%s," % (filtered_points[i][0])   # append its ID
+            execute_string += "%s)" % (filtered_points[-1][0])  # append the final point's ID and close the set
 
             # Delete the points from the cursor
             self._cursor.execute(execute_string)
 
-            tmp = [x for x in self._active_series if x not in self._active_points]
-            self._active_series = tmp
-            self._active_points = []       # clear the filter
+            self._populate_series()
     
     def interpolate(self):
         pass
+
+    def flag(self, qualifier_id):
+        filtered_points = self.get_filtered_points()
+        query = "UPDATE DavaValuesEdit SET QualifierID = %s WHERE ValueID = ?" % (qualifier_id)
+        self._cursor.executemany(query, [x[0] for x in filtered_points])
 
     ###################
     # Save/Restore
