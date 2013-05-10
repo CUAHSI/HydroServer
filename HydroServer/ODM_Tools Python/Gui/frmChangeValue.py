@@ -80,8 +80,6 @@ class frmChangeValue(wx.Dialog):
     def OnBtnOkButton(self, event):
       operator = self.cbValue.GetValue()
       value = self.txtValue.GetValue()
-      print operator
-      print value
       if operator == 'Add':
         operator = '+'
       if operator == 'Subtract':
@@ -92,7 +90,7 @@ class frmChangeValue(wx.Dialog):
         operator = '='
 
       self.record_service.change_value(value, operator)
-      Publisher.sendMessage(("updateValues"), event)
+      Publisher.sendMessage(("updateValues"), event=event)
       self.Close()
 
 

@@ -1,6 +1,6 @@
 
 •	Python-2.7 32 bit(http://www.python.org/download/releases/2.7.3/)
-•	Wxpython-2.8.12.1(http://www.wxpython.org/download.php)
+•	Wxpython-2.9.4(http://www.wxpython.org/download.php)
 •	Sqlalchemy-7.9(http://pypi.python.org/pypi/SQLAlchemy/0.7.9)
 	•	Pyodbc-3.0.6(http://code.google.com/p/pyodbc/downloads/list) 
 •	Matplotlib-1.1.1(https://github.com/matplotlib/matplotlib/downloads)

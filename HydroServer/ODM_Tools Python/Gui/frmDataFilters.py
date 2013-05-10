@@ -164,11 +164,11 @@ class frmDataFilter(wx.Dialog):
         self.setDates()
 
     def __init__(self, parent, series):
-        self.editService = series
+        self.recordService = series
         self._init_ctrls(parent)
 
     def OnCheckbox(self, event):
-      self.editService.toggle_filter_previous()
+      self.recordService.toggle_filter_previous()
 
     def OnBtnClearButton(self, event):
         self.setDates()
@@ -177,9 +177,9 @@ class frmDataFilter(wx.Dialog):
         self.txtGapsVal.Clear()
         self.cbGapTime.SetStringSelection("second")
         self.txtVChangeThresh.Clear()
-        self.editService.reset()
+        self.recordService.reset_filter()
 
-        Publisher.sendMessage(("changePlotSelection"), sellist=self.editService.get_plot_list())
+        Publisher.sendMessage(("changePlotSelection"), sellist=self.recordService.get_filter_list())
 
     def OnBtnOKButton(self, event):
         self.OnBtnApplyButton(event)
@@ -191,13 +191,13 @@ class frmDataFilter(wx.Dialog):
     def OnBtnApplyButton(self, event):
         if self.rbThreshold.GetValue():
           if self.txtThreshValGT.GetValue():
-            self.editService.filter_value(float(self.txtThreshValGT.GetValue()), '>')
+            self.recordService.filter_value(float(self.txtThreshValGT.GetValue()), '>')
           if self.txtThreshValLT.GetValue():
-            self.editService.filter_value(float(self.txtThreshValLT.GetValue()), '<')
+            self.recordService.filter_value(float(self.txtThreshValLT.GetValue()), '<')
 
         if self.rbDataGaps.GetValue():
           if self.txtGapsVal.GetValue():
-            self.editService.data_gaps(float(self.txtGapsVal.GetValue()), self.cbGapTime.GetValue())
+            self.recordService.data_gaps(float(self.txtGapsVal.GetValue()), self.cbGapTime.GetValue())
 
         if self.rbDate.GetValue():
           dateAfter = self.dpAfter.GetValue()
@@ -205,18 +205,18 @@ class frmDataFilter(wx.Dialog):
 
           dtDateAfter = datetime(int(dateAfter.Year), int(dateAfter.Month) + 1, int(dateAfter.Day))
           dtDateBefore = datetime(int(dateBefore.Year), int(dateBefore.Month) + 1, int(dateBefore.Day))
-          self.editService.filter_date(dtDateBefore, dtDateAfter)
+          self.recordService.filter_date(dtDateBefore, dtDateAfter)
 
         if self.rbVChangeThresh.GetValue():
           if self.txtVChangeThresh.GetValue():
-            self.editService.value_change_threshold(float(self.txtVChangeThresh.GetValue()))
+            self.recordService.value_change_threshold(float(self.txtVChangeThresh.GetValue()))
 
-        Publisher.sendMessage(("changePlotSelection"), sellist=self.editService.get_plot_list())
+        Publisher.sendMessage(("changePlotSelection"), sellist=self.recordService.get_filter_list())
 
     
     def setDates(self):
-      dateAfter = self.editService.get_active_series()[0][2]
-      dateBefore = self.editService.get_active_series()[-1][2]
+      dateAfter = self.recordService.get_series_points()[0][2]
+      dateBefore = self.recordService.get_series_points()[-1][2]
       formattedDateAfter = wx.DateTimeFromDMY(int(dateAfter.day) - 1, int(dateAfter.month), int(dateAfter.year), 0, 0, 0)
       formattedDateBefore = wx.DateTimeFromDMY(int(dateBefore.day) + 1, int(dateBefore.month), int(dateBefore.year), 0, 0, 0)
       self.dpAfter.SetRange(formattedDateAfter, formattedDateBefore)

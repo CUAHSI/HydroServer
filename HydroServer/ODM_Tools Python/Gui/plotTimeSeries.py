@@ -118,7 +118,7 @@ class plotTimeSeries(wx.Panel):
   def changeSelection(self, sellist ):
     #list of True False
       self.editPoint.set_color(['k' if x==0 else 'r' for x in sellist])
-      #self.parent.record_service.select_points(datetime_list= self.xys)
+      self.parent.record_service.select_points_tf(sellist)
       Publisher.sendMessage(("changeTableSelection"), sellist=sellist)
       
       self.canvas.draw()
@@ -280,7 +280,7 @@ class plotTimeSeries(wx.Panel):
       curraxis= self.axislist[oneSeries.axisTitle]
       self.lines[self.curveindex]=curraxis.plot_date([x[1] for x in oneSeries.dataTable], [x[0] for x in oneSeries.dataTable], "-", color=oneSeries.color, xdate = True, tz = None, label = oneSeries.plotTitle )
 
-      self.selectedlist = [False] * len(oneSeries.dataTable)
+      self.selectedlist = self.parent.record_service.get_filter_list()
       self.editPoint = curraxis.scatter([x[1] for x in oneSeries.dataTable], [x[0] for x in oneSeries.dataTable], s= 20, c=['k' if x==0 else 'r' for x in self.selectedlist])
       self.xys = [(matplotlib.dates.date2num(x[1]), x[0]) for x in oneSeries.dataTable ]
       self.cid = self.canvas.mpl_connect('button_press_event', self.onpress)
@@ -415,7 +415,7 @@ class plotTimeSeries(wx.Panel):
       seldatetimes= [matplotlib.dates.num2date(x[0]) for x in verts]
       #print seldatetimes
 
-      self.parent.record_service.select_points(datetime_list=seldatetimes)
+      # self.parent.record_service.select_points(datetime_list=seldatetimes)
 
       p = path.Path(verts)
       ind = p.contains_points(self.xys)

@@ -42,6 +42,10 @@ class CVService():
 		session.close()
 		return result
 
+	def create_qualifier(self, qualifier):
+		session = self._session_factory.get_session()
+
+
 	def get_site_type_cvs(self):
 		session = self._session_factory.get_session()
 		result = session.query(SiteTypeCV).order_by(SiteTypeCV.term).all()
