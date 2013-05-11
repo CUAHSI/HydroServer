@@ -8,6 +8,7 @@ import pnlDatePicker
 import frmDataFilters
 import frmChangeValue
 import frmAddPoint
+import frmFlagValues
 
 
 
@@ -344,8 +345,13 @@ class mnuRibbon(RB.RibbonBar):
         event.Skip()
     
     def OnEditFlag(self, event):
+        add_flag= frmFlagValues.frmFlagValues(self)
+        add_flag.ShowModal()
         event.Skip()
-    
+
+        #series id returned- call record service to flag slected points with the id
+
+
     def OnEditAddPoint(self, event):
         add_value=frmAddPoint.frmAddPoint(self)
         add_value.ShowModal()

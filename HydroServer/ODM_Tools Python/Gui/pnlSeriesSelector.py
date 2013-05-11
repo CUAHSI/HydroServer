@@ -137,7 +137,7 @@ class pnlSeriesSelector(wx.Panel):
 
         self.splitter = wx.SplitterWindow(id=wxID_FRAME1SPLITTER,
               name=u'splitter', parent=self.pnlSplitter, pos=wx.Point(0, 0),
-              size=wx.Size(604, 137), style=wx.SP_3D)
+              size=wx.Size(604, 137), style=wx.NO_BORDER)
         self.splitter.SetMinSize(wx.Size(-1, -1))
 
 
@@ -199,8 +199,8 @@ class pnlSeriesSelector(wx.Panel):
               name=u'tableSeries', parent=self.splitter, pos=wx.Point(5, 5),
               size=wx.Size(903, 108),
               agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES | ULC.ULC_HAS_VARIABLE_ROW_HEIGHT |ULC.ULC_SINGLE_SEL)
-
-        self.splitter.SplitHorizontally(self.pnlSimple, self.tableSeries, 1)
+        self.splitter.Initialize(self.tableSeries)
+        # self.splitter.SplitHorizontally(self.pnlSimple, self.tableSeries, 1)
 
         self.tableSeries.Bind(ULC.EVT_LIST_ITEM_CHECKED,
               self.OntableSeriesListItemSelected,
@@ -285,8 +285,9 @@ class pnlSeriesSelector(wx.Panel):
 
     def OnRbAdvancedRadiobutton(self, event):
         #open filter window and hide top Panel
-        self.splitter.SetSashPosition(1)
-
+        # self.splitter.SetSashPosition(1)
+        if self.splitter.IsSplit():            
+            self.splitter.Unsplit(self.pnlSimple)
         series_filter = frmQueryBuilder.frmQueryBuilder(self)
         self.filterlist = series_filter.ShowModal()
         # print self.filterlist
@@ -294,14 +295,18 @@ class pnlSeriesSelector(wx.Panel):
 
     def OnRbAllRadiobutton(self, event):
         #Hide top panel
-        self.splitter.SetSashPosition(1)
+        if self.splitter.IsSplit():
+            self.splitter.Unsplit(self.pnlSimple)
+        # self.splitter.SetSashPosition(1)
         self.SetFilter()
         event.Skip()
 
 
     def OnRbSimpleRadiobutton(self, event):
         #show top Panel
-        self.splitter.SetSashPosition(70)
+        if not self.splitter.IsSplit():
+            self.splitter.SplitHorizontally(self.pnlSimple, self.tableSeries, 30)
+        # self.splitter.SetSashPosition(70)
         self.SetFilter(self.site_code, self.variable_code)
         event.Skip()
 
