@@ -189,6 +189,7 @@ class frmDBConfig(wx.Dialog):
       conn_dict['address']  = self.txtServer.GetValue()
       conn_dict['db']       = self.txtDBName.GetValue()
 
+      print conn_dict
       return conn_dict
 
 
