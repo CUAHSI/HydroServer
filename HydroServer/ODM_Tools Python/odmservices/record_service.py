@@ -69,6 +69,11 @@ class RecordService():
         if self._record:
             self._script("series.change_values(%s, %s\n" % (operator, value), 'black')
 
+    def interpolate(self):
+        self._edit_service.interpolate()
+        if self._record:
+            self._script("series.interpolate()", 'black')
+
     def reset_filter(self):
         self._edit_service.reset_filter()
         if self._record:
@@ -108,6 +113,9 @@ class RecordService():
 
     def get_filter_list(self):
         return self._edit_service.get_filter_list()
+
+    def get_selection_groups(self):
+        return self._edit_service.get_selection_groups()
 
     def toggle_record(self):
         if self._record:
