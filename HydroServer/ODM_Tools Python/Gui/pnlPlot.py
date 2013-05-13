@@ -139,10 +139,6 @@ class pnlPlot(fnb.FlatNotebook):
         self.pltTS.Plot(self._seriesPlotInfo)
 
     #     self.PlotGraph()
-
-
-
-
     def selectPlot(self, value):
         self.SetSelection(value)
 

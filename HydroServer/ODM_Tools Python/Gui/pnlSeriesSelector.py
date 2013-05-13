@@ -128,8 +128,6 @@ class pnlSeriesSelector(wx.Panel):
               id=wxID_FRAME1RBADVANCED)
         # self.rbAdvanced.Enable(False)
 
-
-
         ## Splitter panel
         self.pnlSplitter = wx.Panel(id=wxID_PNLSPLITTER, name='pnlSplitter',
               parent=self, pos=wx.Point(3, 3), size=wx.Size(919, 349),
@@ -140,12 +138,10 @@ class pnlSeriesSelector(wx.Panel):
               size=wx.Size(604, 137), style=wx.NO_BORDER)
         self.splitter.SetMinSize(wx.Size(-1, -1))
 
-
         ## panel for simple filter(top of splitter)
         self.pnlSimple = wx.Panel(id=wxID_PNLSIMPLE, name='panel3',
               parent=self.splitter, pos=wx.Point(0, 0), size=wx.Size(919, 300),
               style=wx.TAB_TRAVERSAL)
-
 
         ## Site Panel
         self.panel1 = wx.Panel(id=wxID_PNLSERIESSELECTORPANEL1, name='panel1',
@@ -200,6 +196,7 @@ class pnlSeriesSelector(wx.Panel):
               size=wx.Size(903, 108),
               agwStyle= ULC.ULC_REPORT | ULC.ULC_HRULES | ULC.ULC_VRULES | ULC.ULC_HAS_VARIABLE_ROW_HEIGHT |ULC.ULC_SINGLE_SEL)
         self.splitter.Initialize(self.tableSeries)
+        self.pnlSimple.Show(False)
         # self.splitter.SplitHorizontally(self.pnlSimple, self.tableSeries, 1)
 
         self.tableSeries.Bind(ULC.EVT_LIST_ITEM_CHECKED,
@@ -322,8 +319,12 @@ class pnlSeriesSelector(wx.Panel):
         event.Skip()
 
     def OnEditButton(self, event):
-        self.SelectForEdit(self.tableSeries.GetColumnText(self.tableSeries.GetSelection(), 1))
-
+        #
+        if self.tableSeries.GetSelectedItemCount()>0:
+            self.SelectForEdit(self.tableSeries.GetColumnText(self.tableSeries.GetSelection(), 1))
+        else:
+            #toggle ribbon button to be unpressed
+            print "no series selected"
 
 
     def OnRightExData(self, event):
@@ -457,7 +458,7 @@ class pnlSeriesSelector(wx.Panel):
         # print dir(event)
         sid= self.tableSeries.innerList[event.m_itemIndex][0]
         if not self.tableSeries.IsItemChecked(event.m_itemIndex):
-            Publisher.sendMessage(("removePlot"), seriesID=id)
+            Publisher.sendMessage(("removePlot"), seriesID=sid)
             self.tableSeries.innerList[event.m_itemIndex][-1]= False
 
         else:

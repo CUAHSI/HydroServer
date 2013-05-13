@@ -101,9 +101,9 @@ class frmAddPoint(wx.Dialog):
 
       # qualchoices
 
-      =======
+      
       self.qualchoices = {x.code: x.id for x in self.service.get_qualifiers()}
-	  self.qual_choice_editor= wx.grid.GridCellChoiceEditor(["<None>"]+self.qualchoices.keys()+ ["<Create New...>"], False)
+      self.qual_choice_editor= wx.grid.GridCellChoiceEditor(["<None>"]+self.qualchoices.keys()+ ["<Create New...>"], False)
 
       self.grdDataValues.SetCellEditor(0, 8, self.qual_choice_editor)
 

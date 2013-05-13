@@ -9,6 +9,7 @@ import frmDataFilters
 import frmChangeValue
 import frmAddPoint
 import frmFlagValues
+import frmLinearDrift
 
 
 
@@ -303,7 +304,7 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnEditDelPoint, id= wxID_RIBBONEDITDELPOINT)
 
         self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnRecord, id= wxID_RIBBONEDITRECORD)
-        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnRecord, id= wxID_RIBBONEDITLINFILTER)
+        self.Bind(RB.EVT_RIBBONBUTTONBAR_CLICKED, self.OnLineDrift, id= wxID_RIBBONEDITLINFILTER)
         
         self.edit_bar.EnableButton(wxID_RIBBONEDITLINFILTER, False)
 
@@ -311,10 +312,11 @@ class mnuRibbon(RB.RibbonBar):
         self.Bind(RB.EVT_RIBBONBAR_PAGE_CHANGED, self.OnFileMenu, id=wxID_PANEL1)
         # self.Bind(RB.EVT_RIBBONBAR_PAGE_CHANGED, self.OnFileMenutest, id=wxID_PANEL1)
         
-
         self.isLegendVisible = False;
 
     def OnLineDrift(self, event):
+        lin_drift = frmLinearDrift.frmLinearDrift(self)
+        lin_drift.ShowModal()
         event.Skip()
 
     def OnRecord(self, event):
@@ -347,9 +349,13 @@ class mnuRibbon(RB.RibbonBar):
     def OnEditFlag(self, event):
         add_flag= frmFlagValues.frmFlagValues(self)
         add_flag.ShowModal()
-        event.Skip()
 
-        #series id returned- call record service to flag slected points with the id
+        record_service = self.parent.getRecordService() 
+        record_service.flag(add_flag.GetValue())
+        add_flag.Destroy()
+
+        Publisher.sendMessage(("updateValues"), event = event)
+        event.Skip()
 
 
     def OnEditAddPoint(self, event):
@@ -382,6 +388,7 @@ class mnuRibbon(RB.RibbonBar):
             self.parent.stopEdit()
         # Publisher.sendMessage(("selectEdit"), event=event)
         event.Skip()
+
 
     def OnNumBins(self, event):
         Publisher.sendMessage(("OnNumBins"), numBins=event.Selection)

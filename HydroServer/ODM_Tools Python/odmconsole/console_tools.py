@@ -1,6 +1,8 @@
 # This class is intended for users to simplify console interaction
 
 from wx.lib.pubsub import pub as Publisher
+from odmservices import ServiceManager
+from odmdata import Qualifier
 
 
 class ConsoleTools(object):
@@ -113,6 +115,12 @@ class ConsoleTools(object):
             self.refresh_plot()
             Publisher().sendMessage(("updateValues"), event=None)
 
+    def flag(self, qualifier_id):
+        if self._record_service:
+            self._record_service.flag(qualifier_id)
+            self.refresh_plot()
+            Publisher.sendMessage(("updateValues"), event=None)
+
     def delete_points(self):
         if self._record_service:
             self._record_service.delete_points()
@@ -124,6 +132,19 @@ class ConsoleTools(object):
             self._record_service.restore()
             self.refresh_plot()
             Publisher.sendMessage(("updateValues"), event=None)
+
+    ###############
+    # Create stuffs
+    ###############
+
+    def create_qualifer(self, code, description):
+        serv_man = ServiceManager()
+        cv_service = serv_man.get_cv_service()
+        q = Qualifier()
+        q.code = code
+        q.description = description
+        cv_service.create_qualifer(q)
+        return q.id
 
     ###############
     # UI methods

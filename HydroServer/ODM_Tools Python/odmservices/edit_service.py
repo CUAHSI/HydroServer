@@ -267,8 +267,8 @@ class EditService():
 
     def flag(self, qualifier_id):
         filtered_points = self.get_filtered_points()
-        query = "UPDATE DavaValuesEdit SET QualifierID = %s WHERE ValueID = ?" % (qualifier_id)
-        self._cursor.executemany(query, [x[0] for x in filtered_points])
+        query = "UPDATE DataValuesEdit SET QualifierID = %s WHERE ValueID = ?" % (qualifier_id)
+        self._cursor.executemany(query, [(str(x[0]),) for x in filtered_points])
 
     ###################
     # Save/Restore
