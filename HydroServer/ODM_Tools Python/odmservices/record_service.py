@@ -74,6 +74,11 @@ class RecordService():
         if self._record:
             self._script("series.reset_filter()\n", 'black')
 
+    def flag(self, qualifier_id):
+        self._edit_service.flag(qualifier_id)
+        if self._record:
+            self._script("series.flag(%s)\n" % qualifier_id, 'black')
+
     def restore(self):
         self._edit_service.restore()
         if self._record:

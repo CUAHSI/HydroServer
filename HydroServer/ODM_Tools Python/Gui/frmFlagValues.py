@@ -65,7 +65,7 @@ class frmFlagValues(wx.Dialog):
               label=u'Qualifier:', name=u'lblQualifier', parent=self.pnlSelect,
               pos=wx.Point(16, 8), size=wx.Size(45, 13), style=0)
 
-        self.cbQualif = wx.ComboBox(choices=[value for key, value in self.qualchoices.items()]+["Create New....."],
+        self.cbQualif = wx.ComboBox(choices=[key for key in self.qualchoices.keys()]+["Create New....."],
               id=wxID_FRMFLAGVALUESCBQUALIF, name=u'cbQualif',
               parent=self.pnlSelect, pos=wx.Point(16, 25), size=wx.Size(376, 21),
               style=wx.CB_READONLY, value=u'')
@@ -120,11 +120,16 @@ class frmFlagValues(wx.Dialog):
         service_man=parent.parent.GetDBService()
         self.cv_service = service_man.get_cv_service()
         #populate dropdown id-code
-        self.qualchoices ={x.id:x.code +"-"+x.description for x in self.cv_service.get_qualifiers()}
+        self.qualchoices ={x.code +"-"+x.description:x.id for x in self.cv_service.get_qualifiers()}
       
 
         self._init_ctrls(parent)
 
+    def GetValue(self):
+      return self.qid
+
+    def Destory(self):
+      self.Destroy()
 
     def OnCbQualifCombobox(self, event):
         if self.cbQualif.GetValue()== "Create New.....":            
@@ -143,19 +148,16 @@ class frmFlagValues(wx.Dialog):
           q.description=self.txtDesc.GetValue()
 
           self.cv_service.create_qualifier(q)
-          sid=q.id
+          self.qid=q.id
 
         else:
-          sid =   self.qualchoices[self.cbQualif.GetValue()]
+          self.qid = self.qualchoices[self.cbQualif.GetValue()]
 
-        print sid
         event.Skip()
         self.Close()
-        self.Destroy()
 
     def OnBtnCancelButton(self, event):
         event.Skip()
         self.Close()
-        self.Destroy()
 
 

@@ -82,6 +82,7 @@ class clsULC(ULC.UltimateListCtrl):
 			#if item isSelected is true check the box when drawing the row
 			if series[-1] ==1:
 				self._mainWin.CheckItem(self.GetItem(ind, 0), True, False)
+		self.Select(0, True)
 
 
 

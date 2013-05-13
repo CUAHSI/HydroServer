@@ -23,7 +23,7 @@ class CVService():
 		self._edit_session = self._session_factory.get_session()
 		self._debug = debug
 
-		getverdcv
+		# getverdcv
 
 	# Controlled Vocabulary get methods
 	def get_vertical_datum_cvs(self):
