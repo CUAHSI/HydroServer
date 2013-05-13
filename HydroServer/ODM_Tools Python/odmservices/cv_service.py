@@ -23,6 +23,8 @@ class CVService():
 		self._edit_session = self._session_factory.get_session()
 		self._debug = debug
 
+		getverdcv
+
 	# Controlled Vocabulary get methods
 	def get_vertical_datum_cvs(self):
 		session = self._session_factory.get_session()
@@ -44,7 +46,9 @@ class CVService():
 
 	def create_qualifier(self, qualifier):
 		session = self._session_factory.get_session()
+		session.add(qualifier)
 
+		session.commit()
 
 	def get_site_type_cvs(self):
 		session = self._session_factory.get_session()
