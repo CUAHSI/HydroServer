@@ -344,17 +344,16 @@ class mnuRibbon(RB.RibbonBar):
         event.Skip()
    
     def OnEditInterpolate(self, event):
+        self.parent.getRecordService().interpolate()
+        Publisher.sendMessage(("updateValues"), event=event)
         event.Skip()
     
     def OnEditFlag(self, event):
         add_flag= frmFlagValues.frmFlagValues(self)
-        add_flag.ShowModal()
-
-        record_service = self.parent.getRecordService() 
-        record_service.flag(add_flag.GetValue())
+        if add_flag.ShowModal() == wx.ID_OK:
+            self.parent.getRecordService().flag(add_flag.GetValue())
+            Publisher.sendMessage(("updateValues"), event = event)
         add_flag.Destroy()
-
-        Publisher.sendMessage(("updateValues"), event = event)
         event.Skip()
 
 
@@ -365,8 +364,7 @@ class mnuRibbon(RB.RibbonBar):
         event.Skip()
     
     def OnEditDelPoint(self, event):
-        record_service = self.parent.getRecordService()
-        record_service.delete_points()
+        self.parent.getRecordService().delete_points()
         Publisher.sendMessage(("updateValues"), event=event)
         event.Skip()
 
@@ -375,8 +373,7 @@ class mnuRibbon(RB.RibbonBar):
     #     self.parent.stopEdit()
 
     def OnRestore(self, event):
-        record_service = self.parent.getRecordService()
-        record_service.restore()
+        self.parent.getRecordService().restore()
         Publisher.sendMessage(("updateValues"), event=event)
         event.Skip()
 

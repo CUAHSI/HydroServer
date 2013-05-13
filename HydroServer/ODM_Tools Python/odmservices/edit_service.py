@@ -218,28 +218,28 @@ class EditService():
 
     def change_value(self, value, operator):
         filtered_points = self.get_filtered_points()
-        tmp_filtered_list = self._filter_list
-        execute_string = "UPDATE DataValuesEdit SET DataValue = "
+        tmp_filter_list = self._filter_list
+        query = "UPDATE DataValuesEdit SET DataValue = "
         if operator == '+':
-            execute_string += " DataValue + %s " % (value)
+            query += " DataValue + %s " % (value)
 
         if operator == '-':
-            execute_string += " DataValue - %s " % (value)
+            query += " DataValue - %s " % (value)
 
         if operator == '*':
-            execute_string += " DataValue * %s " % (value)
+            query += " DataValue * %s " % (value)
 
         if operator == '=':
-            execute_string += "%s " % (value)
+            query += "%s " % (value)
 
-        execute_string += "WHERE ValueID IN ("
+        query += "WHERE ValueID IN ("
         for i in range(len(filtered_points) - 1):
-            execute_string += "%s," % (filtered_points[i][0])
-        execute_string += "%s)" % (filtered_points[-1][0])
-        self._cursor.execute(execute_string)
+            query += "%s," % (filtered_points[i][0])
+        query += "%s)" % (filtered_points[-1][0])
+        self._cursor.execute(query)
 
         self._populate_series()
-        self._filter_list = tmp_filtered_list
+        self._filter_list = tmp_filter_list
 
     def add_points(self, points):
         query = "INSERT INTO DataValuesEdit (DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, OffsetValue, OffsetTypeID, "
@@ -249,21 +249,74 @@ class EditService():
         self._populate_series()
 
     def delete_points(self):
-        execute_string = "DELETE FROM DataValuesEdit WHERE ValueID IN ("
+        query = "DELETE FROM DataValuesEdit WHERE ValueID IN ("
         filtered_points = self.get_filtered_points()
         num_filtered_points = len(filtered_points)
         if num_filtered_points > 0:
             for i in range(num_filtered_points-1):        # loop through the second-to-last active point
-                execute_string += "%s," % (filtered_points[i][0])   # append its ID
-            execute_string += "%s)" % (filtered_points[-1][0])  # append the final point's ID and close the set
+                query += "%s," % (filtered_points[i][0])   # append its ID
+            query += "%s)" % (filtered_points[-1][0])  # append the final point's ID and close the set
 
             # Delete the points from the cursor
-            self._cursor.execute(execute_string)
+            self._cursor.execute(query)
 
             self._populate_series()
     
     def interpolate(self):
+        tmp_filter_list = self._filter_list
+        groups = self.get_selection_groups()
+
+        for group in groups:
+            # determine first and last point for the interpolation
+            first_index = group[0] - 1
+            last_index  = group[-1] + 1
+            # ignore this group (which is actually the whole set)
+            # if it includes the first or last point of the series
+            if first_index <= 0 or last_index == len(self._series_points):
+                continue
+
+            first_point = self._series_points[first_index]
+            last_point  = self._series_points[last_index]
+            a = 0
+            c = (last_point[2] - first_point[2]).total_seconds()
+            f_a = first_point[1]
+            f_c = last_point[1]
+            update_list = []
+            for i in group:
+                b = (self._series_points[i][2] - first_point[2]).total_seconds()
+                # linear interpolation formula: f(b) = f(a) + ((b-a)/(c-a))*(f(c) - f(a))
+                new_val = f_a + ((b - a)/(c-a))*(f_c - f_a)
+                point_id = self._series_points[i][0]
+                update_list.append((new_val, point_id))
+            query = "UPDATE DataValuesEdit SET DataValue = ? WHERE ValueID = ?"
+            self._cursor.executemany(query, update_list)
+
+        self._populate_series()
+        self._filter_list = tmp_filter_list
+
+    def drift_correction(self):
         pass
+
+    def get_selection_groups(self):
+        length = len(self._series_points)
+        found_group = False
+        groups = []
+        cur_group = []
+        for i in range(length):
+            if self._filter_list[i]:
+                if not found_group:
+                    found_group = True
+                cur_group.append(i)         # Append the actual index to the point
+                if i == length - 1:
+                    groups.append(cur_group)
+            elif not self._filter_list[i] and found_group:
+                found_group = False
+                groups.append(cur_group)
+                cur_group = []
+            else:
+                continue
+        
+        return groups
 
     def flag(self, qualifier_id):
         filtered_points = self.get_filtered_points()

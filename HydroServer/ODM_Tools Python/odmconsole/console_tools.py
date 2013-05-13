@@ -84,7 +84,6 @@ class ConsoleTools(object):
         if self._record_service:
             self._record_service.change_value(value, operator)
             self.refresh_plot()
-            Publisher.sendMessage(("updateValues"), event=None)
 
     def add_point(self, data_value, value_accuracy, local_datetime, utc_offset, datetime_utc, offset_value, offset_type, censor_code, qualifier_code, lab_sample_code):
         if (data_value == None or local_datetime == None or utc_offset == None or
@@ -97,7 +96,6 @@ class ConsoleTools(object):
         if self._record_service:
             self._record_service.add_points(point_list)
             self.refresh_plot()
-            Publisher().sendMessage(("updateValues"), event=None)
 
     def add_points(self, point_list):
         for point in point_list:
@@ -113,25 +111,26 @@ class ConsoleTools(object):
         if self._record_service:
             self._record_service.add_points(point_list)
             self.refresh_plot()
-            Publisher().sendMessage(("updateValues"), event=None)
 
     def flag(self, qualifier_id):
         if self._record_service:
             self._record_service.flag(qualifier_id)
             self.refresh_plot()
-            Publisher.sendMessage(("updateValues"), event=None)
 
     def delete_points(self):
         if self._record_service:
             self._record_service.delete_points()
             self.refresh_plot()
-            Publisher.sendMessage(("updateValues"), event=None)
+
+    def interpolate(self):
+        if self._record_service:
+            self._record_service.interpolate()
+            self.refresh_plot()
 
     def restore(self):
         if self._record_service:
             self._record_service.restore()
             self.refresh_plot()
-            Publisher.sendMessage(("updateValues"), event=None)
 
     ###############
     # Create stuffs
@@ -151,3 +150,4 @@ class ConsoleTools(object):
     ###############
     def refresh_plot(self):
         Publisher.sendMessage(("changePlotSelection"), sellist=self._record_service.get_filter_list())
+        Publisher.sendMessage(("updateValues"), event=None)
