@@ -148,8 +148,9 @@ class frmAddPoint(wx.Dialog):
 
       self.grdDataValues.AutoSizeColumns()
 
-    def __init__(self, parent):
+    def __init__(self, parent, record_service):
       self.parent = parent
+      self.record_service = record_service
       self._init_ctrls(parent)
       self._init_table()
 
@@ -198,8 +199,7 @@ class frmAddPoint(wx.Dialog):
       num_cols = self.grdDataValues.GetNumberCols()
       datetime_format = "%m/%d/%Y %I:%M:%S %p"
       
-      record_service = self.parent.parent.getRecordService()
-      series = record_service.get_series()
+      series = self.record_service.get_series()
 
       # check if the final row is formatted correctly
       if not self.IsRowFilled(num_rows - 1):
@@ -228,7 +228,7 @@ class frmAddPoint(wx.Dialog):
 
         points.append(tuple(row))
 
-      record_service.add_points(points)
+      self.record_service.add_points(points)
       event.Skip()
       self.Close()
 

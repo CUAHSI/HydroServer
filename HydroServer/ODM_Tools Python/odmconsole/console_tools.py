@@ -127,6 +127,11 @@ class ConsoleTools(object):
             self._record_service.interpolate()
             self.refresh_plot()
 
+    def drift_correction(self, gap_width):
+        if self._record_service:
+            self._record_service.drift_correction(gap_width)
+            self.refresh_plot()
+
     def restore(self):
         if self._record_service:
             self._record_service.restore()
