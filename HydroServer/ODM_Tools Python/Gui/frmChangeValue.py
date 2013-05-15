@@ -92,6 +92,3 @@ class frmChangeValue(wx.Dialog):
       self.record_service.change_value(value, operator)
       Publisher.sendMessage(("updateValues"), event=event)
       self.Close()
-
-
-

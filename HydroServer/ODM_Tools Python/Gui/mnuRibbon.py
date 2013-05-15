@@ -315,7 +315,7 @@ class mnuRibbon(RB.RibbonBar):
         self.isLegendVisible = False;
 
     def OnLineDrift(self, event):
-        lin_drift = frmLinearDrift.frmLinearDrift(self)
+        lin_drift = frmLinearDrift.frmLinearDrift(self, self.parent.getRecordService())
         lin_drift.ShowModal()
         event.Skip()
 
@@ -358,7 +358,7 @@ class mnuRibbon(RB.RibbonBar):
 
 
     def OnEditAddPoint(self, event):
-        add_value=frmAddPoint.frmAddPoint(self)
+        add_value=frmAddPoint.frmAddPoint(self, self.parent.getRecordService())
         add_value.ShowModal()
         Publisher.sendMessage(("updateValues"), event=event)
         event.Skip()

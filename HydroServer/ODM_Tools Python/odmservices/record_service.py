@@ -74,6 +74,13 @@ class RecordService():
         if self._record:
             self._script("series.interpolate()", 'black')
 
+    def drift_correction(self, gap_width):
+        ret = self._edit_service.drift_correction(gap_width)
+        if self._record:
+            self._script("series.drift_correction(%s)" % (gap_width), 'black')
+
+        return ret
+
     def reset_filter(self):
         self._edit_service.reset_filter()
         if self._record:

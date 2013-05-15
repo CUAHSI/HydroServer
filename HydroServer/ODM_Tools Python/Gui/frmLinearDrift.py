@@ -1,6 +1,7 @@
 #Boa:Dialog:frmLinearDrift
 
 import wx
+from wx.lib.pubsub import pub as Publisher
 
 def create(parent):
     return frmLinearDrift(parent)
@@ -22,13 +23,13 @@ class frmLinearDrift(wx.Dialog):
               label=u'Final Gap Value:', name=u'lblFnlGap', parent=self,
               pos=wx.Point(16, 48), size=wx.Size(78, 13), style=0)
 
-        self.lblMessage = wx.StaticText(id=wxID_FRMLINEARDRIFTTXTMESSAGE,
+        self.lblMessage = wx.StaticText(id=wxID_FRMLINEARDRIFTLBLMESSAGE,
               label=u'Enter a negative value to move points down. \nEnter a positive value to move points up.',
               name=u'lblMessage', parent=self, pos=wx.Point(16, 8),
               size=wx.Size(220, 26), style=0)
 
         self.txtFinalGapValue = wx.TextCtrl(id=wxID_FRMLINEARDRIFTTXTFINALGAPVALUE,
-              name=u'txtFinalGapValue', parent=self, pos=wx.Point(96, 40),
+              name=u'txtFinalGapValue', parent=self, pos=wx.Point(100, 40),
               size=wx.Size(152, 21), style=0, value=u'')
 
         self.btnOK = wx.Button(id=wxID_FRMLINEARDRIFTBTNOK, label=u'OK',
@@ -43,13 +44,15 @@ class frmLinearDrift(wx.Dialog):
         self.btnCancel.Bind(wx.EVT_BUTTON, self.OnBtnCancelButton,
               id=wxID_FRMLINEARDRIFTBTNCANCEL)
 
-    def __init__(self, parent):
+    def __init__(self, parent, record_service):
+        self._record_service = record_service
         self._init_ctrls(parent)
 
     def OnBtnOKButton(self, event):
-        event.Skip()
+        self._record_service.drift_correction(float(self.txtFinalGapValue.GetValue()))
+        
+        Publisher.sendMessage(("updateValues"), event=event)
         self.Close()
-        self.Destroy()
 
     def OnBtnCancelButton(self, event):
         event.Skip()

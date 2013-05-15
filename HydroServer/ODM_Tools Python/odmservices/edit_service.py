@@ -294,8 +294,35 @@ class EditService():
         self._populate_series()
         self._filter_list = tmp_filter_list
 
-    def drift_correction(self):
-        pass
+    def drift_correction(self, gap_width):
+        tmp_filter_list = self._filter_list
+        groups = self.get_selection_groups()
+
+        # only perform a drift correction if there's a single group
+        if len(groups) == 1:
+            group = groups[0]
+            first_index = group[0]
+            last_index  = group[-1]
+            first_point = self._series_points[first_index]
+            last_point = self._series_points[last_index]
+            x_l = (last_point[2] - first_point[2]).total_seconds()
+
+            update_list = []
+            for i in group:
+                point = self._series_points[i]
+                x_i = (point[2] - first_point[2]).total_seconds()
+                # y_n = y_0 + G(x_i / x_l)
+                new_val = point[1] + gap_width * (x_i / x_l)
+                update_list.append((new_val, point[0]))
+            query = "UPDATE DataValuesEdit SET DataValue = ? WHERE ValueID = ?"
+            self._cursor.executemany(query, update_list)
+
+            self._populate_series()
+            self._filter_list = tmp_filter_list
+            
+            return True
+        else:
+            return False
 
     def get_selection_groups(self):
         length = len(self._series_points)
@@ -331,8 +358,13 @@ class EditService():
         self._connection.rollback()
         self._populate_series()
 
-    def save(self):
+    def save(self, var_id=None, method_id=None, qcl_id=None):
         # Save to sqlite memory DB, not real DB
+
+        # These can change when saving a series
+        # VariableID
+        # MethodID
+        # QualityControlLevelID     (cannot be saved as a zero)
         self._connection.commit()
 
     def write_to_db(self):
