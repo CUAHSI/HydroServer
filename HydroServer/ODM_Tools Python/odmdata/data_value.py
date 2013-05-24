@@ -38,6 +38,7 @@ class DataValue(Base):
 	source 				  = relationship(Source)
 	quality_control_level = relationship(QualityControlLevel)
 
+
 	def __repr__(self):
 		return "<DataValue('%s', '%s')>" % (self.data_value, self.local_date_time)
 

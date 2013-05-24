@@ -36,6 +36,15 @@ class Series(Base):
 	end_date_time_utc		   = Column('EndDateTimeUTC', DateTime)
 	value_count				   = Column('ValueCount', Integer)
 
+	data_values = relationship("DataValue",
+		primaryjoin="and_(DataValue.site_id == Series.site_id, "
+			"DataValue.variable_id == Series.variable_id, "
+			"DataValue.method_id == Series.method_id, "
+			"DataValue.source_id == Series.source_id, "
+			"DataValue.quality_control_level_id == Series.quality_control_level_id)",
+		foreign_keys="[DataValue.site_id, DataValue.variable_id, DataValue.method_id, DataValue.source_id, DataValue.quality_control_level_id]",
+		backref="series")
+
 
 	# TODO add all to repr
 	def __repr__(self):
