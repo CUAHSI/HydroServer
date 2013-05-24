@@ -36,7 +36,8 @@ class EditService():
 
         if self._connection == None:
             series_service = SeriesService(connection_string, False)
-            DataValues = series_service.get_data_values_by_series_id(series_id)
+            series = series_service.get_series_by_id(series_id)
+            DataValues = series.get_data_values_tuples()
             self._connection = sqlite3.connect(":memory:", detect_types= sqlite3.PARSE_DECLTYPES)
             tmpCursor = self._connection.cursor()
             self.init_table(tmpCursor)

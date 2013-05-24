@@ -57,8 +57,8 @@ class memoryDatabase(object):
         return [(x[0],i) for (i,x) in enumerate(self.cursor.description)]
 
     def getDataValuesforGraph(self, seriesID, strNoDataValue, strStartDate, strEndDate):
-
-        DataValues = self.dbservice.get_data_values_by_series_id(seriesID)  
+        series = self.dbservice.get_series_by_id(seriesID)
+        DataValues = series.get_data_values_tuples()
 
         #clear any previous queries from table
         self.cursor.execute("DELETE FROM DataValues")
@@ -112,7 +112,9 @@ class memoryDatabase(object):
 
     def initEditValues(self, seriesID):
         if not self.editLoaded:
-            self.DataValuesEdit = self.dbservice.get_data_values_by_series_id(seriesID)         
+            series = self.dbservice.get_series_by_id(seriesID)
+            self.DataValuesEdit = series.get_data_values_tuples()
+
             self.cursor.executemany("INSERT INTO DataValuesEdit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.DataValuesEdit)
             self.conn.commit()
             self.editLoaded = True
@@ -120,7 +122,7 @@ class memoryDatabase(object):
 
 
     def initSC(self):
-        self.SeriesCatalog =self.dbservice.get_series_test()
+        self.SeriesCatalog =self.dbservice.get_all_series_tuples()
         self.cursor.executemany("INSERT INTO SeriesCatalog VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", self.SeriesCatalog)
         self.cursor.execute("ALTER TABLE SeriesCatalog ADD COLUMN isSelected INTEGER ")
         

@@ -66,6 +66,16 @@ class Series(Base):
 				self.quality_control_level_id, self.quality_control_level_code, self.begin_date_time, 
 				self.end_date_time, self.begin_date_time_utc, self.end_date_time_utc, self.value_count	]
 
+	def get_data_values_tuples(self):
+		dvs = []
+		for dv in self.data_values:
+			dvs.append(
+				(dv.id, dv.data_value, dv.value_accuracy, dv.local_date_time, dv.utc_offset, dv.date_time_utc,
+				dv.site_id, dv.variable_id, dv.offset_value, dv.offset_type_id, dv.censor_code,
+				dv.qualifier_id, dv.method_id, dv.source_id, dv.sample_id, dv.derived_from_id,
+				dv.quality_control_level_id)
+			)
+		return dvs
 
 	def getValue(self, element):
 		if element == 'SeriesID':
