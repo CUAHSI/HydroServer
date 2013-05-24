@@ -58,6 +58,3 @@ class frmLinearDrift(wx.Dialog):
         event.Skip()
         self.Close()
         self.Destroy()
-
-
-
