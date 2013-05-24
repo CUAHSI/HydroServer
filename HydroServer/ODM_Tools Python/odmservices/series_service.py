@@ -79,42 +79,22 @@ class SeriesService():
 	def get_series_by_id(self, series_id):
 		return self._edit_session.query(Series).filter_by(id=series_id).order_by(Series.id).one()
 
-	def get_series_test(self):
-		return self._edit_session.query(Series.id, Series.site_id, Series.site_code, Series.site_name, Series.variable_id, Series.variable_code,
-									Series.variable_name, Series.speciation, Series.variable_units_id, Series.variable_units_name, Series.sample_medium,
-									Series.value_type, Series.time_support, Series.time_units_id, Series.time_units_name, Series.data_type, Series.general_category,
-									Series.method_id, Series.method_description, Series.source_id, Series.organization, Series.source_description,
-									Series.citation, Series.quality_control_level_id, Series.quality_control_level_code, Series.begin_date_time, 
-									Series.end_date_time, Series.begin_date_time_utc, Series.end_date_time_utc, Series.value_count
-								).order_by(Series.id).all()
+	def get_all_series(self):       
+		return self._edit_session.query(Series).all()
+
+	def get_all_series_tuples(self):
+		return self._edit_session.query(
+			Series.id, Series.site_id, Series.site_code, Series.site_name, Series.variable_id, Series.variable_code,
+			Series.variable_name, Series.speciation, Series.variable_units_id, Series.variable_units_name, Series.sample_medium,
+			Series.value_type, Series.time_support, Series.time_units_id, Series.time_units_name, Series.data_type, Series.general_category,
+			Series.method_id, Series.method_description, Series.source_id, Series.organization, Series.source_description,
+			Series.citation, Series.quality_control_level_id, Series.quality_control_level_code, Series.begin_date_time, 
+			Series.end_date_time, Series.begin_date_time_utc, Series.end_date_time_utc, Series.value_count
+		).order_by(Series.id).all()
 
 	def get_series_from_filter(self):
 		# Pass in probably a Series object, match it against the database
 		pass
-
-	
-	def get_data_values_by_series_id(self, series_id):
-		return self.get_data_values_by_series_test(self.get_series_by_id(series_id))#.order_by(DataValue.local_date_time).all()
-
-	# DataValues by Series	
-	def get_data_values_by_series(self, series):
-		return self._edit_session.query(DataValue).filter_by(
-								variable_id=series.variable_id, 
-								site_id=series.site_id,
-								method_id=series.method_id,
-								source_id=series.source_id,
-								quality_control_level_id=series.quality_control_level_id).order_by(DataValue.local_date_time).all()
-
-	def get_data_values_by_series_test(self, series):
-		return self._edit_session.query(DataValue.id, DataValue.data_value, DataValue.value_accuracy, DataValue.local_date_time,  DataValue.utc_offset,DataValue.date_time_utc,
-							   DataValue.site_id, DataValue.variable_id, DataValue.offset_value, DataValue.offset_type_id, DataValue.censor_code,
-							   DataValue.qualifier_id, DataValue.method_id, DataValue.source_id, DataValue.sample_id, DataValue.derived_from_id,
-							   DataValue.quality_control_level_id).filter_by(
-								variable_id=series.variable_id, 
-								site_id=series.site_id,
-								method_id=series.method_id,
-								source_id=series.source_id,
-								quality_control_level_id=series.quality_control_level_id).order_by(DataValue.local_date_time).all()
 
 	def get_data_value_by_id(self, id):
 		try:
@@ -203,8 +183,7 @@ class SeriesService():
 		self._edit_session.commit()
 
 	def delete_series(self, series):
-		data_values = self.get_data_values_by_series(series)
-		self.delete_dvs(data_values)
+		self.delete_dvs(series.data_values)
 
 		delete_series = self._edit_session.merge(series)
 		self._edit_session.delete(delete_series)
