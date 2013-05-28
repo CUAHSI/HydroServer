@@ -361,12 +361,33 @@ class EditService():
         self._populate_series()
 
     def save(self, var_id=None, method_id=None, qcl_id=None):
-        # Save to sqlite memory DB, not real DB
-
         # These can change when saving a series
         # VariableID
         # MethodID
         # QualityControlLevelID     (cannot be saved as a zero)
+
+        dvs = []
+        self._cursor.execute("DELETE FROM DataValues")
+        self._cursor.execute("SELECT * FROM DataValuesEdit ORDER BY LocalDateTime")
+        results = self._cursor.fetchall()
+
+        query = "INSERT INTO DataValues (ValueID, DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, "
+        query += "OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID) "
+        query += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        self._cursor.executemany(query, results)
+
+        if var_id:
+            self._cursor.execute("UPDATE DataValues SET VariableID = %s" % (var_id))
+        if method_id:
+            self._cursor.execute("UPDATE DataValues SET MethodID = %s" % (method_id))
+        if qcl_id:
+            # get qcl and check that the code is not zero
+            qcl = self._series_service.get_qcl(qcl_id)
+            if qcl.code > 0:
+                self._cursor.execute("UPDATE DataValues SET QualityControlLevelID = %s" % (qcl_id))
+            else:
+                raise ValueError("Quality Control Level cannot be zero")
+
         self._connection.commit()
 
     def write_to_db(self):

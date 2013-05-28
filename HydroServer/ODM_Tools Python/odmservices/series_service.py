@@ -104,9 +104,9 @@ class SeriesService():
 		return result
 
 	# Quality Control Level methods
-	def get_qcl_definition(self, qcl_id):
+	def get_qcl(self, qcl_id):
 		try:
-			result = self._edit_session.query(QualityControlLevel.definition).filter_by(id=qcl_id).one()
+			result = self._edit_session.query(QualityControlLevel).filter_by(id=qcl_id).one()
 		except:
 			result = None
 		return result
