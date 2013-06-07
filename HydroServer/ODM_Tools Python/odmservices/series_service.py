@@ -31,6 +31,9 @@ class SeriesService():
 
 		return result
 
+	def get_site(self, site_id):
+		return self._edit_session.query(Site).filter_by(id=site_id).one()
+
 	# Variables methods
 	def get_variables(self, site_code = ""):	# covers NoDV, VarUnits, TimeUnits
 		result = None
@@ -77,7 +80,11 @@ class SeriesService():
 		return result
 	
 	def get_series_by_id(self, series_id):
-		return self._edit_session.query(Series).filter_by(id=series_id).order_by(Series.id).one()
+		try:
+			result = self._edit_session.query(Series).filter_by(id=series_id).order_by(Series.id).one()
+		except:
+			result = None
+		return result
 
 	def get_all_series(self):       
 		return self._edit_session.query(Series).all()

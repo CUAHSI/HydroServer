@@ -8,6 +8,7 @@ from qualifier import Qualifier
 from method import Method
 from source import Source
 from quality_control_level import QualityControlLevel
+from offset_type import OffsetType
 
 class DataValue(Base):
 	__tablename__ = 'DataValues'
@@ -21,7 +22,7 @@ class DataValue(Base):
 	site_id		 	    	 = Column('SiteID', Integer, ForeignKey('Sites.SiteID'), nullable=False)
 	variable_id			   	 = Column('VariableID', Integer, ForeignKey('Variables.VariableID'), nullable=False)
 	offset_value	    	 = Column('OffsetValue', Float)
-	offset_type_id			 = Column('OffsetTypeID', Integer)
+	offset_type_id			 = Column('OffsetTypeID', Integer, ForeignKey('OffsetTypes.OffsetTypeID'))
 	censor_code		    	 = Column('CensorCode', String)
 	qualifier_id	    	 = Column('QualifierID', Integer, ForeignKey('Qualifiers.QualifierID'))
 	method_id		    	 = Column('MethodID', Integer, ForeignKey('Methods.MethodID'), nullable=False)
@@ -37,6 +38,7 @@ class DataValue(Base):
 	method 				  = relationship(Method)
 	source 				  = relationship(Source)
 	quality_control_level = relationship(QualityControlLevel)
+	offset_type			  = relationship(OffsetType)
 
 
 	def __repr__(self):
