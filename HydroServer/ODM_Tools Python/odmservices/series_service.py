@@ -103,6 +103,20 @@ class SeriesService():
 		# Pass in probably a Series object, match it against the database
 		pass
 
+	def save_new_series(self, series, data_values):
+		pass
+
+	def update_series(self, series):
+		pass
+
+	def series_exists(self, site_id, var_id, method_id, source_id, qcl_id):
+		try:
+			result = self._edit_session.query(Series).filter_by(site_id=site_id, variable_id=var_id, method_id=method_id, source_id=source_id, quality_control_level_id=qcl_id).one()
+			return True
+		except:
+			return False
+
+
 	def get_data_value_by_id(self, id):
 		try:
 			result = self._edit_session.query(DataValue).filter_by(id=id).one()
