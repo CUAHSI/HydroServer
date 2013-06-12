@@ -390,9 +390,53 @@ class EditService():
 
         self._connection.commit()
 
-    def write_to_db(self):
-        # Save to real DB
-        pass
+    def write_to_db(self, var_id=None, method_id=None, qcl_id=None):
+        dvs = []
+        self._cursor.execute("SELECT * FROM DataValuesEdit ORDER BY LocalDateTime")
+        results = self._cursor.fetchall()
+
+        # ValueID, DataValue, ValueAccuracy, LocalDateTime, UTCOffset, DateTimeUTC, SiteID, VariableID, 
+        # OffsetValue, OffsetTypeID, CensorCode, QualifierID, MethodID, SourceID, SampleID, DerivedFromID, QualityControlLevelID
+        for row in results:
+            dv = DataValue()
+
+            if row[0]:
+                dv.id = row[0]
+            dv.data_value               = row[1]
+            dv.value_accuracy           = row[2]
+            dv.local_date_time          = row[3]
+            dv.utc_offset               = row[4]
+            dv.date_time_utc            = row[5]
+            dv.site_id                  = row[6]
+            if var_id == None:
+                dv.variable_id = row[7]
+            else:
+                dv.variable_id = var_id
+            dv.offset_value             = row[8]
+            dv.offset_type_id           = row[9]
+            dv.censor_code              = row[10]
+            dv.qualifier_id             = row[11]
+            if method_id == None:
+                dv.method_id = row[12]
+            else:
+                dv.method_id = method_id
+            dv.source_id                = row[13]
+            dv.sample_id                = row[14]
+            dv.derived_from_id          = row[15]
+            if qcl_id == None:
+                dv.quality_control_level_id = row[16]
+            else:
+                dv.quality_control_level_id = qcl_id
+
+            # make sure the qcl is not zero
+            qcl = self._series_service.get_qcl(dv.quality_control_level_id)
+            if qcl.code <= 0:
+                raise ValueError("Quality Control Level cannot be zero")
+
+            dvs.add(dv)
+
+        series = self._series_service.get_series_by_id(self._series_id)
+        series.data_values = dvs
 
     def reconcile_dates(self, parent_series_id):
         # append new data to this series
