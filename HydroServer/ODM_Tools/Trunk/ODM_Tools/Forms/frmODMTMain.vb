@@ -10925,7 +10925,7 @@ Public Class frmODMTools
                 '2. Create the datatable row, format, and add data
                 tempRow = m_EditData.NewRow
                 db_MaxValID = GetMaxValIDFromDB()
-                db_MaxValID = m_EditData.Compute("MAX(" & db_fld_ValID & ")", "")
+                m_MaxValID = m_EditData.Compute("MAX(" & db_fld_ValID & ")", "")
                 If db_MaxValID > m_MaxValID Then
                     tempRow.Item(db_fld_ValID) = db_MaxValID + 1
                 Else
@@ -10984,7 +10984,10 @@ Public Class frmODMTools
                 While dgvEditTable.SelectedRows.Count > 0
                     dgvEditTable.SelectedRows(0).Selected = False
                 End While
-                m_EditSelPtIndexes.Clear()
+                If Not m_EditSelPtIndexes Is Nothing Then
+                    m_EditSelPtIndexes.Clear()
+                End If
+
 
                 '7. Select new point
                 m_EditSelPtIndexes.Add(loc)

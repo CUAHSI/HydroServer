@@ -153,7 +153,7 @@ Public Class ucCVMerge
                     If dgvWeb.Columns.Count > i Then
                         dgvLocal.Columns(i).Width = dgvWeb.Columns(i).Width
                         If dgvLocal.Columns(i).Name.Contains("ID") Then
-                            dgvLocal.Columns(i).Visible = False
+                            'dgvLocal.Columns(i).Visible = False
                         End If
                     End If
                 Next i
@@ -291,7 +291,10 @@ Public Class ucCVMerge
                     End If
                 Next currWRow
                 'Changes and Additions
+                Dim i As Integer = 0
                 For Each currWRow As DataRow In WebTable.Rows
+                    Console.WriteLine("row " & i.ToString() & " " & currWRow.Item(0))
+                    i = i + 1
                     If (currWRow.RowState <> DataRowState.Deleted) AndAlso (currWRow.RowError <> match) Then
                         Dim srsidQuery, isGeoQuery, notesQuery As String
                         If (currWRow.Item(db_fld_SRSRSID).ToString = "") OrElse (currWRow.Item(db_fld_SRSRSID).ToString = "NULL") Then
@@ -328,6 +331,7 @@ Public Class ucCVMerge
                                     fndRows(0).Item(db_fld_SRSRSName) = currWRow.Item(db_fld_SRSRSName)
                                     changes = True
                                 Else
+
                                     fndRows = LocalTable.Select(db_fld_SRSRSName & " = '" & FormatForDB(currWRow.Item(db_fld_SRSRSName).ToString) & "' AND " & isGeoQuery & " AND " & notesQuery)
                                     If (fndRows.Length = 1) AndAlso (matches(LocalTable.Rows.IndexOf(fndRows(0))) = False) Then
                                         matches(LocalTable.Rows.IndexOf(fndRows(0))) = True
@@ -347,7 +351,7 @@ Public Class ucCVMerge
                                         Else
                                             newRow.Item(db_fld_SRIsGeo) = CBool(currWRow.Item(db_fld_SRIsGeo))
                                         End If
-                                        If (currWRow.Item(db_fld_SRNotes) = "").ToString OrElse (currWRow.Item(db_fld_SRNotes).ToString = "NULL") Then
+                                        If (currWRow.Item(db_fld_SRNotes) Is DBNull.Value OrElse currWRow.Item(db_fld_SRNotes) = "").ToString OrElse (currWRow.Item(db_fld_SRNotes).ToString = "NULL") Then
                                             newRow.Item(db_fld_SRNotes) = DBNull.Value
                                         Else
                                             newRow.Item(db_fld_SRNotes) = currWRow.Item(db_fld_SRNotes).ToString
