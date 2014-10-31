@@ -116,4 +116,16 @@ Module Common
 
 #End Region
 
+    Public Function getConfigDir() As String
+
+        Dim tempdir As String
+        Dim g_Config_Dir As String
+        tempdir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
+        Dim section As String() = Split(tempdir, "Configuration", , CompareMethod.Text)
+        g_Config_Dir = section(0) & "StreamingDataLoader\1.1.3.2\"
+        IO.Directory.CreateDirectory(g_Config_Dir)
+        Return g_Config_Dir
+
+    End Function
+
 End Module

@@ -106,8 +106,8 @@ Public Class clsConnectionSettings
     ''' <remarks></remarks>
     Public Function IncrementTimeout() As Boolean
 
-        If Timeout <= 30 Then
-            m_Timeout = m_Timeout + 1
+        If Timeout <= 450 Then
+            m_Timeout = m_Timeout + 100
             SetConnectionString()
             Return True
         Else
