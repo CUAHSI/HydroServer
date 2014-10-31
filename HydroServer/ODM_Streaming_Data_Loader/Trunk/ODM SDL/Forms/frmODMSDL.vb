@@ -41,7 +41,7 @@ Public Class frmODMSDL
             Dim section As String()
             'tempdir = section(0) '& section(1) & "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
             section = Split(tempdir, "ODMSDL", , CompareMethod.Text)
-            g_Config_Dir = section(0) & "StreamingDataLoader\1.1.3.1\"
+            g_Config_Dir = section(0) & "StreamingDataLoader\1.1.3.2\"
             IO.Directory.CreateDirectory(g_Config_Dir)
             'g_EXE_Dir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
             'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)
@@ -179,17 +179,24 @@ Public Class frmODMSDL
                                     fileNode.Item(config_File_Last).InnerText = Now
                                     settings = New clsConnectionSettings(fileNode.Item(config_File_Server).InnerText, fileNode.Item(config_File_DB).InnerText, 10, False, fileNode.Item(config_File_User).InnerText, Decrypt(fileNode.Item(config_File_Password).InnerText))
                                     If TestDBConnection(settings) Then
-                                        Dim dataValues As DataTable = OpenTable("DataValues", "SELECT * FROM " & db_tbl_DataValues & " WHERE " & db_fld_ValID & " < 0", settings)
+                                        Dim dataValues As DataTable = OpenTable("DataValues", "SELECT * FROM " & db_tbl_DataValues & " WHERE 1=0", settings)
                                         'dataValues.Columns(db_fld_ValDateTime).DataType = System.Type.GetType("System.DateTime")
                                         dt = (fileNode.Item(config_File_DT).InnerText <> "")
                                         utcdt = (fileNode.Item(config_File_UTCDT).InnerText <> "")
                                         utcOff = (fileNode.Item(config_File_UTCOff).InnerText <> "")
                                         DST = fileNode.Item(config_File_DST).InnerText
-
+                                        Dim site As Integer
+                                        Dim variable As Integer
+                                        Dim source As Integer
+                                        Dim method As Integer
+                                        Dim qcl As Integer
 
                                         For y = 0 To (fileNode.ChildNodes.Count - 1)
                                             Try
                                                 mapNode = fileNode.ChildNodes(y)
+
+                                                
+
                                                 If (mapNode.Name = config_File_Map) Then
                                                     If Not (file Is Nothing) Then
                                                         If utcdt Then
@@ -230,7 +237,15 @@ Public Class frmODMSDL
                                                         End If
 
                                                         Dim RowsAdded As Integer = 0
-                                                        Dim seriesID As Integer = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
+
+                                                        site = mapNode.Item(config_Map_Site).InnerText
+                                                        variable = mapNode.Item(config_Map_Var).InnerText
+                                                        method = mapNode.Item(config_Map_Method).InnerText
+                                                        source = mapNode.Item(config_Map_Source).InnerText
+                                                        qcl = mapNode.Item(config_Map_QCLevel).InnerText
+
+                                                        Dim seriesID As Integer = IsSeries(site, variable, method, source, qcl, settings)
+                                                        
                                                         If (seriesID >= 0) Then
                                                             LogUpdate(vbTab & vbTab & "Loading Data For Series #" & seriesID & "...")
                                                         Else
@@ -330,7 +345,9 @@ Public Class frmODMSDL
 
                                         If (dataValues.Rows.Count > 0) Then
                                             LogUpdate(vbTab & "Updating File #" & fileNode.Attributes(config_File_ID).Value & ".")
-                                            If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues, settings) Then
+                                            Dim where As String = " WHERE SiteID = " & site & " AND VariableID = " & variable & " AND MethodID = " & method & " AND SourceID = " & source & " AND QualityControlLevelID = " & qcl
+                                            'If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
+                                            If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
                                                 LogUpdate(vbTab & "Rows Added to Database: " & dataValues.Rows.Count & ".")
                                             End If
                                         Else
@@ -523,12 +540,19 @@ Public Class frmODMSDL
                                     fileNode.Item(config_File_Last).InnerText = Now
                                     settings = New clsConnectionSettings(fileNode.Item(config_File_Server).InnerText, fileNode.Item(config_File_DB).InnerText, 10, False, fileNode.Item(config_File_User).InnerText, Decrypt(fileNode.Item(config_File_Password).InnerText))
                                     If TestDBConnection(settings) Then
-                                        Dim dataValues As DataTable = OpenTable("DataValues", "SELECT * FROM " & db_tbl_DataValues & " WHERE " & db_fld_ValID & " < 0", settings)
+                                        Dim dataValues As DataTable = OpenTable("DataValues", "SELECT * FROM " & db_tbl_DataValues & " WHERE 1 = 0", settings)
 
                                         dt = (fileNode.Item(config_File_DT).InnerText <> "")
                                         utcdt = (fileNode.Item(config_File_UTCDT).InnerText <> "")
                                         utcOff = (fileNode.Item(config_File_UTCOff).InnerText <> "")
                                         DST = fileNode.Item(config_File_DST).InnerText
+
+                                        Dim site As Integer
+                                        Dim variable As Integer
+                                        Dim source As Integer
+                                        Dim method As Integer
+                                        Dim qcl As Integer
+
 
                                         For y = 0 To (fileNode.ChildNodes.Count - 1)
                                             Try
@@ -556,8 +580,14 @@ Public Class frmODMSDL
 
 
                                                         Dim RowsAdded As Integer = 0
+                                                        site = mapNode.Item(config_Map_Site).InnerText
+                                                        variable = mapNode.Item(config_Map_Var).InnerText
+                                                        method = mapNode.Item(config_Map_Method).InnerText
+                                                        source = mapNode.Item(config_Map_Source).InnerText
+                                                        qcl = mapNode.Item(config_Map_QCLevel).InnerText
 
-                                                        Dim seriesID As Integer = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
+                                                        Dim seriesID As Integer = IsSeries(site, variable, method, source, qcl, settings)
+
 
                                                         If (seriesID >= 0) Then
                                                             LogUpdate(vbTab & vbTab & "Loading Data For Series #" & seriesID & "...")
@@ -584,7 +614,7 @@ Public Class frmODMSDL
                                                                     If IsNumeric(file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText)) Then
                                                                         tempRow.Item(db_fld_ValValue) = file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText)
                                                                     Else
-                                                                        tempRow.Item(db_fld_ValValue) = GetNoDataValue(mapNode.Item(config_Map_Var).InnerText, settings)
+                                                                        tempRow.Item(db_fld_ValValue) = GetNoDataValue(variable, settings)
                                                                         ErrorLog(vbTab & vbTab & "Row: " & (z + fileNode.Item(config_File_DataRow).InnerText) & vbCrLf & "Column: " & mapNode.Item(config_Map_Val).InnerText & vbCrLf & "Has a value of '" & file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText) & "'." & vbCrLf & "Value of " & tempRow.Item(db_fld_ValValue) & " will be used instead.")
                                                                     End If
 
@@ -607,8 +637,8 @@ Public Class frmODMSDL
                                                                     tempRow.Item(db_fld_ValUTCDateTime) = tempdate.getUTCDT
 
 
-                                                                    tempRow.Item(db_fld_ValSiteID) = Val(mapNode.Item(config_Map_Site).InnerText)
-                                                                    tempRow.Item(db_fld_ValVarID) = Val(mapNode.Item(config_Map_Var).InnerText)
+                                                                    tempRow.Item(db_fld_ValSiteID) = Val(site)
+                                                                    tempRow.Item(db_fld_ValVarID) = Val(variable)
                                                                     If (mapNode.Item(config_Map_OT).InnerText = "") Or (mapNode.Item(config_Map_OT).InnerText = db_expr_None) Then
                                                                         tempRow.Item(db_fld_ValOffsetTypeID) = DBNull.Value
                                                                     Else
@@ -616,9 +646,9 @@ Public Class frmODMSDL
                                                                         tempRow.Item(db_fld_ValOffsetValue) = Val(mapNode.Item(config_Map_OffsetValue).InnerText)
                                                                     End If
                                                                     tempRow.Item(db_fld_ValCensorCode) = "nc"
-                                                                    tempRow.Item(db_fld_ValMethodID) = Val(mapNode.Item(config_Map_Method).InnerText)
-                                                                    tempRow.Item(db_fld_ValSourceID) = Val(mapNode.Item(config_Map_Source).InnerText)
-                                                                    tempRow.Item(db_fld_ValQCLevel) = Val(mapNode.Item(config_Map_QCLevel).InnerText)
+                                                                    tempRow.Item(db_fld_ValMethodID) = Val(method)
+                                                                    tempRow.Item(db_fld_ValSourceID) = Val(source)
+                                                                    tempRow.Item(db_fld_ValQCLevel) = Val(qcl)
                                                                     dataValues.Rows.Add(tempRow)
                                                                     'TestLog(tempRow.Item(db_fld_ValValue))
                                                                     RowsAdded += 1
@@ -656,7 +686,9 @@ Public Class frmODMSDL
 
                                         If (dataValues.Rows.Count > 0) Then
                                             LogUpdate(vbTab & "Updating File #" & fileNode.Attributes(config_File_ID).Value & ".")
-                                            If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues, settings) Then
+
+                                            Dim where As String = " WHERE SiteID = " & site & " AND VariableID = " & variable & " AND MethodID = " & method & " AND SourceID = " & source & " AND QualityControlLevelID = " & qcl
+                                            If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
                                                 LogUpdate(vbTab & "Rows Added to Database: " & dataValues.Rows.Count & ".")
                                             End If
                                         Else

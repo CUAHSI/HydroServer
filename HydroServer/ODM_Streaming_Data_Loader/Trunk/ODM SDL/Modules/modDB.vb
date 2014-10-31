@@ -608,11 +608,15 @@ Module modDB
             Dim first As DateTime
             Dim table As DataTable
             Dim sql As String
-            sql = "SELECT MIN(LocalDateTime) AS MinDT" & _
-            " FROM DataValues" & _
-            " GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
-            " HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+            'sql = "SELECT MIN(LocalDateTime) AS MinDT" & _
+            '" FROM DataValues" & _
+            '" GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
+            '" HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
 
+            sql = "SELECT TOP 1 LocalDateTime AS MinDT" & _
+            " FROM DataValues" & _
+            " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
+            " ORDER BY LocalDateTime"
             table = OpenTableDate("FirstDate", sql, e_settings)
             If (Not (table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
                 If (table.Rows(0).Item("Date") Is DBNull.Value) Then
@@ -648,10 +652,16 @@ Module modDB
             Dim first As DateTime
             Dim table As DataTable
             Dim sql As String
-            sql = "SELECT MIN(DateTimeUTC) AS MinDT" & _
+            'sql = "SELECT MIN(DateTimeUTC) AS MinDT" & _
+            '" FROM DataValues" & _
+            '" WHERE (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+            '" GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
+
+            sql = "SELECT TOP 1 DateTimeUTC AS MinDT" & _
             " FROM DataValues" & _
-            " GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
-            " HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+            " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
+            " ORDER BY DateTimeUTC"
+
 
             table = OpenTableDate("FirstUTCDate", sql, e_settings)
             If (Not (table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
@@ -688,10 +698,14 @@ Module modDB
             Dim last As DateTime
             Dim table As DataTable
             Dim sql As String
-            sql = "SELECT MAX(LocalDateTime) AS MaxDT" & _
+            'sql = "SELECT MAX(LocalDateTime) AS MaxDT" & _
+            '" FROM DataValues" & _
+            '" GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
+            '" HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+            sql = "SELECT TOP 1 LocalDateTime AS MaxDT" & _
             " FROM DataValues" & _
-            " GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
-            " HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+            " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
+            " ORDER BY LocalDateTime DESC"
 
 
             table = OpenTableDate("LastDate", sql, e_settings)
@@ -729,10 +743,16 @@ Module modDB
             Dim last As DateTime
             Dim table As DataTable
             Dim sql As String
-            sql = "SELECT MAX(DateTimeUTC) AS MaxDT" & _
+            'sql = "SELECT MAX(DateTimeUTC) AS MaxDT" & _
+            '" FROM DataValues" & _
+            '" GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
+            '" HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+
+            sql = "SELECT TOP 1 DateTimeUTC AS MaxDT" & _
             " FROM DataValues" & _
-            " GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
-            " HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+            " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
+            " ORDER BY DateTimeUTC DESC"
+            'SELECT Top 1 LocalDateTime From DataValues ORDER BY LocalDateTime DESC
 
             table = OpenTableDate("LastUTCDate", sql, e_settings)
             If (Not (table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
@@ -771,8 +791,8 @@ Module modDB
             Dim sql As String
             sql = "SELECT COUNT(" & db_fld_ValID & ") AS " & db_expr_Count & _
             " FROM " & db_tbl_DataValues & _
-            " GROUP BY " & db_fld_ValSiteID & ", " & db_fld_ValVarID & ", " & db_fld_ValMethodID & ", " & db_fld_ValSourceID & ", " & db_fld_ValQCLevel & _
-            " HAVING (" & db_fld_ValSiteID & " = " & siteID & ") AND (" & db_fld_ValVarID & " = " & variableID & ") AND (" & db_fld_ValMethodID & " = " & MethodID & ") AND (" & db_fld_ValSourceID & " = " & SourceID & ") AND (" & db_fld_ValQCLevel & " = " & QualityControlLevelID & ")"
+            " WHERE (" & db_fld_ValSiteID & " = " & siteID & ") AND (" & db_fld_ValVarID & " = " & variableID & ") AND (" & db_fld_ValMethodID & " = " & MethodID & ") AND (" & db_fld_ValSourceID & " = " & SourceID & ") AND (" & db_fld_ValQCLevel & " = " & QualityControlLevelID & ")"
+            '" GROUP BY " & db_fld_ValSiteID & ", " & db_fld_ValVarID & ", " & db_fld_ValMethodID & ", " & db_fld_ValSourceID & ", " & db_fld_ValQCLevel & _
 
             table = OpenTable("DataCount", sql, e_settings)
             If Not ((table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
@@ -803,8 +823,10 @@ Module modDB
             Dim intValID
             Dim table As DataTable
             Dim sql As String
-            sql = "SELECT MAX(" & db_fld_ValID & ") AS " & db_expr_Count & _
-            " FROM " & db_tbl_DataValues
+            sql = "SELECT TOP 1 " & db_fld_ValID & " AS " & db_expr_Count & _
+            " FROM " & db_tbl_DataValues & " ORDER BY " & db_fld_ValID & " DESC"
+
+
 
             table = OpenTable("LastValueID", sql, e_settings)
             If Not ((table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
@@ -1072,7 +1094,7 @@ Module modDB
         Dim commandBuilder As System.Data.SqlClient.SqlCommandBuilder 'CommandBuilder -> creates the insert function for updating the database
         Try
             'crate the updateAdapter,commandBuilder
-            query = "SELECT * FROM " & db_tbl_DataValues
+            
             updateAdapter = New System.Data.SqlClient.SqlDataAdapter(query, e_settings.ConnectionString)
             commandBuilder = New System.Data.SqlClient.SqlCommandBuilder(updateAdapter)
 

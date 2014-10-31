@@ -69,7 +69,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\Installer.msi"
+        "OutputFilename" = "8:Debug\\ODMSDL_Installer_1.1.3.2.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -101,7 +101,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Installer.msi"
+        "OutputFilename" = "8:Release\\ODMSDL_Installer_1.1.3.2.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -304,7 +304,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ODM SDL 1.1.3.1"
         "ProductCode" = "8:{F74EC279-BE8F-4370-A02F-7070FA4C3404}"
-        "PackageCode" = "8:{DC791134-4357-4EF2-AD7D-135A2E9AFBE9}"
+        "PackageCode" = "8:{227E1C8C-CF71-4E32-94D2-1EF679A311F2}"
         "UpgradeCode" = "8:{6B08017E-AD38-42B0-B00D-4687FFE19E00}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -425,7 +425,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_34B60CC20B8D4B3CABE5435C3E8BBCE1"
             {
-            "Name" = "8:Setup ODM SDL 1.1.3.1"
+            "Name" = "8:Setup ODM SDL 1.1.3.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -439,7 +439,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_36532C5F686C46B3A271FD547F456B4C"
             {
-            "Name" = "8:Run ODM SDL 1.1.3.1"
+            "Name" = "8:Run ODM SDL 1.1.3.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -453,7 +453,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B896CC68B4864EF5AC2C9E1B9CE1EC63"
             {
-            "Name" = "8:ODM SDL 1.1.3 Config Wizard"
+            "Name" = "8:ODM SDL 1.1.3.2 Config Wizard"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -467,7 +467,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C97F4FA16B3D42158BDB2E6ED56AFF98"
             {
-            "Name" = "8:ODM SDL 1.1.3 Execute"
+            "Name" = "8:ODM SDL 1.1.3.2 Execute"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
