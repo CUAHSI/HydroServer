@@ -1163,6 +1163,34 @@ ConfigurationWizard
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.btnAdd">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.btnEdit">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.btnEditCopy">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.btnRefresh">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.btnRemove">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.btnRun">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:ODMSDLConfigWiz.My.Resources.Resources.ODM_SDL_About_Image">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="T:ODMSDLConfigWiz.My.Resources.Resources">
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.

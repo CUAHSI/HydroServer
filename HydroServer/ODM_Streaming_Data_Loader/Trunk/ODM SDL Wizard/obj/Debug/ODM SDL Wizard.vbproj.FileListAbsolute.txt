@@ -147,7 +147,6 @@ D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\obj\Debug\
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Debug\Configuration Wizard.exe
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Debug\Configuration Wizard.pdb
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Debug\Configuration Wizard.xml
-D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\obj\Debug\ResolveAssemblyReference.cache
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.ucSelectRow.resources
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmNewQCL.resources
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\obj\Debug\ODMSDLConfigWiz.frmAbout.resources

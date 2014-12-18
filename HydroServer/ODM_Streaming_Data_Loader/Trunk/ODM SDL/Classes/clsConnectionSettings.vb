@@ -82,6 +82,7 @@ Public Class clsConnectionSettings
         SetConnectionString()
         If Not (m_ConnStr = "") Then
             Dim testConn As New SqlClient.SqlConnection(m_ConnStr)
+            'testConn.ConnectionTimeout = 200
             testConn.Open()
             'Create an sql command that accesses all tables and a field within the series catalog table
             Dim sql1 As String = "SELECT MAX(VersionNumber) as CurrentVersion FROM ODMVersion"

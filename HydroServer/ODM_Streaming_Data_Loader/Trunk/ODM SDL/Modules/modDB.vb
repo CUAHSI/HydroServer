@@ -373,7 +373,7 @@ Module modDB
                         If TestDBConnection(e_DBSettings) Then
                             Return True
                         Else
-                            ErrorLog("Database Connection Timeout Expired.")
+                            ErrorLog("Database Connection Timeout Expired. modDB line 376")
                             Return False
                         End If
                     End If
@@ -535,7 +535,7 @@ Module modDB
                 If e_settings.IncrementTimeout() Then
                     table = OpenTable(tableName, SqlQuery, e_settings)
                 Else
-                    ErrorLog("Database Connection Timeout Expired.")
+                    ErrorLog("Database Connection Timeout Expired. modDB line 538")
                 End If
             Else
                 ErrorLog("An Error Occured Retrieving Information from the Database.", ex)
@@ -564,7 +564,9 @@ Module modDB
             Rows = table.NewRow()
 
             Using connection As New SqlConnection(e_settings.ConnectionString)
+                'connection.ConnectionTimeout = 200
                 Using command As New SqlCommand(SqlQuery, connection)
+                    command.CommandTimeout = 200
                     connection.Open() 'connect to the Database
                     Using reader As SqlDataReader = command.ExecuteReader() 'the dataReader to fill the table
                         While reader.Read()
@@ -583,7 +585,7 @@ Module modDB
                 If e_settings.IncrementTimeout() Then
                     table = OpenTable(tableName, SqlQuery, e_settings)
                 Else
-                    ErrorLog("Database Connection Timeout Expired.")
+                    ErrorLog("Database Connection Timeout Expired.modDB line 586")
                 End If
             Else
                 ErrorLog("An Error Occured Retrieving Information from the Database.", ex)
@@ -1117,7 +1119,7 @@ Module modDB
                 If e_settings.IncrementTimeout() Then
                     Return UpdateTable(dataTable, query, e_settings)
                 Else
-                    ErrorLog("Database Connection Timeout Expired.")
+                    ErrorLog("Database Connection Timeout Expired. modDb line 1120")
                 End If
             ElseIf (LCase(ex.Message).Contains("unique key")) Then
 
@@ -1132,6 +1134,19 @@ Module modDB
         End Try
         'errors occurred, return false
         Return False
+    End Function
+
+    Public Function UpdateDVs(ByVal dataTable As System.Data.DataTable, ByVal e_settings As clsConnectionSettings) As Boolean
+        Dim bc As New SqlBulkCopy(e_settings.ConnectionString)
+        bc.BatchSize = 1000
+        bc.DestinationTableName = "DataValues"
+        Try
+            bc.WriteToServer(dataTable)
+            Return True
+        Catch ex As Exception
+            ErrorLog("An Error Occured While adding DataValues.", ex)
+            Return False
+        End Try
     End Function
 
     Public Function PrecisionError(ByVal table As DataTable, ByVal cmd As clsConnectionSettings) As Boolean

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ODM SDL", "..\ODM SDL\ODM SDL.vbproj", "{89EE560F-714E-4064-92F8-B358D4BE979F}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ODM SDL Wizard", "ODM SDL Wizard.vbproj", "{F276D70C-74C2-4B46-A3A8-278D764739BA}"
