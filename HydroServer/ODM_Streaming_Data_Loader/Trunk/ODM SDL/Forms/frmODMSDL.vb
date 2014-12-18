@@ -345,9 +345,10 @@ Public Class frmODMSDL
 
                                         If (dataValues.Rows.Count > 0) Then
                                             LogUpdate(vbTab & "Updating File #" & fileNode.Attributes(config_File_ID).Value & ".")
-                                            Dim where As String = " WHERE SiteID = " & site & " AND VariableID = " & variable & " AND MethodID = " & method & " AND SourceID = " & source & " AND QualityControlLevelID = " & qcl
+                                            'Dim where As String = " WHERE SiteID = " & site & " AND VariableID = " & variable & " AND MethodID = " & method & " AND SourceID = " & source & " AND QualityControlLevelID = " & qcl
+
                                             'If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
-                                            If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
+                                            If UpdateDVs(dataValues, settings) Then
                                                 LogUpdate(vbTab & "Rows Added to Database: " & dataValues.Rows.Count & ".")
                                             End If
                                         Else
@@ -687,8 +688,9 @@ Public Class frmODMSDL
                                         If (dataValues.Rows.Count > 0) Then
                                             LogUpdate(vbTab & "Updating File #" & fileNode.Attributes(config_File_ID).Value & ".")
 
-                                            Dim where As String = " WHERE SiteID = " & site & " AND VariableID = " & variable & " AND MethodID = " & method & " AND SourceID = " & source & " AND QualityControlLevelID = " & qcl
-                                            If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
+                                            'Dim where As String = " WHERE SiteID = " & site & " AND VariableID = " & variable & " AND MethodID = " & method & " AND SourceID = " & source & " AND QualityControlLevelID = " & qcl
+                                            'If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
+                                            If UpdateDVs(dataValues, settings) Then
                                                 LogUpdate(vbTab & "Rows Added to Database: " & dataValues.Rows.Count & ".")
                                             End If
                                         Else
