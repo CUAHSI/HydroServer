@@ -45,7 +45,7 @@ Module modDB
     'DataValues
     Public Const db_tbl_DataValues As String = "DataValues" 'Table Name
     Public Const db_fld_ValID As String = "ValueID" 'M Integer: Primary Key ->Unique ID for each Values entry
-    Public Const db_fld_ValValue As String = "DataValue" 'M Double -> The numeric value.  Holds the CategoryID for categorical data
+    Public Const db_fld_ValValue As String = "DataValue" 'M Double -> The numeric value.  Holds the CategoryID for categorical data.2
     Public Const db_fld_ValAccuracyStdDev As String = "ValueAccuracy" 'O Double -> Estimated standard deviation
     Public Const db_fld_ValDateTime As String = "LocalDateTime" 'M Local date and time of the measurement
     Public Const db_fld_ValUTCOffset As String = "UTCOffset" 'M Offset in hours from UTC time
@@ -373,7 +373,7 @@ Module modDB
                         If TestDBConnection(e_DBSettings) Then
                             Return True
                         Else
-                            ErrorLog("Database Connection Timeout Expired. modDB line 376")
+                            ErrorLog("Database Connection Timeout Expired. ODM Version(modDB line 376)")
                             Return False
                         End If
                     End If
@@ -519,9 +519,16 @@ Module modDB
         'create a flow table
         Dim table As New System.Data.DataTable(tableName) 'the table of data to return
         Dim dataAdapter As SqlClient.SqlDataAdapter 'the dataAdapter to fill the table
+        Dim command As New SqlCommand
+        Dim connection As New SqlConnection
         Try
+            connection = New SqlConnection(e_settings.ConnectionString)
+            command = New SqlCommand(SqlQuery, connection)
+            command.CommandTimeout = 500
             'connect to the Database
-            dataAdapter = New SqlClient.SqlDataAdapter(SqlQuery, e_settings.ConnectionString)
+            'dataAdapter = New SqlClient.SqlDataAdapter(SqlQuery, e_settings.ConnectionString)
+            dataAdapter = New SqlClient.SqlDataAdapter(command)
+
 
             'get the table from the database
             dataAdapter.Fill(table)
@@ -535,7 +542,7 @@ Module modDB
                 If e_settings.IncrementTimeout() Then
                     table = OpenTable(tableName, SqlQuery, e_settings)
                 Else
-                    ErrorLog("Database Connection Timeout Expired. modDB line 538")
+                    ErrorLog("Database Connection Timeout Expired. OpenTable (modDB line 545)")
                 End If
             Else
                 ErrorLog("An Error Occured Retrieving Information from the Database.", ex)
@@ -544,6 +551,7 @@ Module modDB
 
         Return Nothing
     End Function
+
     Public Function OpenTableDate(ByVal tableName As String, ByVal SqlQuery As String, ByRef e_settings As clsConnectionSettings) As DataTable
         'Returns a dataTable of the query data.
         'Inputs:  tablename -> name of the table
@@ -566,7 +574,7 @@ Module modDB
             Using connection As New SqlConnection(e_settings.ConnectionString)
                 'connection.ConnectionTimeout = 200
                 Using command As New SqlCommand(SqlQuery, connection)
-                    command.CommandTimeout = 200
+                    command.CommandTimeout = 500
                     connection.Open() 'connect to the Database
                     Using reader As SqlDataReader = command.ExecuteReader() 'the dataReader to fill the table
                         While reader.Read()
@@ -585,7 +593,7 @@ Module modDB
                 If e_settings.IncrementTimeout() Then
                     table = OpenTable(tableName, SqlQuery, e_settings)
                 Else
-                    ErrorLog("Database Connection Timeout Expired.modDB line 586")
+                    ErrorLog("Database Connection Timeout Expired. Get Max Date of series, From DataValues Table (modDB line 595)")
                 End If
             Else
                 ErrorLog("An Error Occured Retrieving Information from the Database.", ex)
@@ -1094,10 +1102,20 @@ Module modDB
     Public Function UpdateTable(ByVal dataTable As System.Data.DataTable, ByVal query As String, ByVal e_settings As clsConnectionSettings) As Boolean
         Dim updateAdapter As System.Data.SqlClient.SqlDataAdapter 'updateAdapter -> finds out if anything has been changed and marks the rows that need to be added -> used by the command builder
         Dim commandBuilder As System.Data.SqlClient.SqlCommandBuilder 'CommandBuilder -> creates the insert function for updating the database
+        Dim connection As SqlConnection
+        Dim command As SqlCommand
         Try
+
+            'connect to the Database
+            connection = New SqlConnection(e_settings.ConnectionString)
+            command = New SqlCommand(query, connection)
+            command.CommandTimeout = 500
+
+
             'crate the updateAdapter,commandBuilder
-            
-            updateAdapter = New System.Data.SqlClient.SqlDataAdapter(query, e_settings.ConnectionString)
+
+            'updateAdapter = New System.Data.SqlClient.SqlDataAdapter(query, e_settings.ConnectionString)
+            updateAdapter = New SqlClient.SqlDataAdapter(command)
             commandBuilder = New System.Data.SqlClient.SqlCommandBuilder(updateAdapter)
 
             'update the database
