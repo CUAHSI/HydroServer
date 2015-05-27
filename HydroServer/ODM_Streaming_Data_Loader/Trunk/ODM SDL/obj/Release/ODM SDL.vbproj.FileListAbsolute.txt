@@ -74,3 +74,7 @@ D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Releas
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.exe
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.pdb
 D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.xml
+D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.exe.manifest
+D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL Wizard\bin\Release\ODMSDL.application
+D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.exe.manifest
+D:\DEV\ODM\HydroServer\ODM_Streaming_Data_Loader\Trunk\ODM SDL\obj\Release\ODMSDL.application
