@@ -41,7 +41,7 @@ Public Class frmODMSDL
             Dim section As String()
             'tempdir = section(0) '& section(1) & "\" & section(2) & "\" & section(3) & "\" & section(4) & "\" & section(5)
             section = Split(tempdir, "ODMSDL", , CompareMethod.Text)
-            g_Config_Dir = section(0) & "StreamingDataLoader\1.1.3.3\"
+            g_Config_Dir = section(0) & "StreamingDataLoader\1.1.3.4\"
             IO.Directory.CreateDirectory(g_Config_Dir)
             'g_EXE_Dir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
             'Dim config As System.Configuration.Configuration = TryCast(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None), Configuration)
@@ -96,7 +96,7 @@ Public Class frmODMSDL
             Dim period As TimeSpan
             Dim offset, update As DateTime
             Dim monthyearPeriod As Integer
-            Dim valueID As Integer
+            'Dim valueID As Integer
             Dim valueIDOffset As Integer = 0
             Dim delimiter As String = ","
 
@@ -253,7 +253,7 @@ Public Class frmODMSDL
                                                         End If
 
 
-                                                        valueID = GetLastValueID(settings) + 1
+                                                        'valueID = GetLastValueID(settings) + 1
                                                         Dim LastDT As New clsUTCDT()
                                                         For z = 0 To (file.Rows.Count - 1)
                                                             Try
@@ -268,7 +268,7 @@ Public Class frmODMSDL
                                                                     (Date.Parse(file.Rows(z).Item(fileNode.Item(config_File_DT).InnerText)) < first)) Then
 
                                                                     tempRow = dataValues.NewRow
-                                                                    tempRow.Item(db_fld_ValID) = valueID + valueIDOffset
+                                                                    'tempRow.Item(db_fld_ValID) = valueID + valueIDOffset
                                                                     valueIDOffset += 1
                                                                     If IsNumeric(file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText)) Then
                                                                         tempRow.Item(db_fld_ValValue) = file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText)
@@ -461,7 +461,7 @@ Public Class frmODMSDL
             Dim period As TimeSpan
             Dim offset As DateTime
             Dim monthyearPeriod As Integer
-            Dim valueID As Integer
+            'Dim valueID As Integer
             Dim valueIDOffset As Integer = 0
             Dim delimiter As String = ","
 
@@ -596,7 +596,7 @@ Public Class frmODMSDL
                                                             LogUpdate(vbTab & vbTab & "Loading Data For New Series...")
                                                         End If
 
-                                                        valueID = GetLastValueID(settings) + 1
+                                                        'valueID = GetLastValueID(settings) + 1
                                                         Dim LastDT As New clsUTCDT()
                                                         For z = 0 To (file.Rows.Count - 1)
                                                             Try
@@ -610,7 +610,7 @@ Public Class frmODMSDL
                                                                 (CDate(file.Rows(z).Item(fileNode.Item(config_File_DT).InnerText)) < first)) Then
 
                                                                     tempRow = dataValues.NewRow
-                                                                    tempRow.Item(db_fld_ValID) = valueID + valueIDOffset
+                                                                    'tempRow.Item(db_fld_ValID) = valueID + valueIDOffset
                                                                     valueIDOffset += 1
                                                                     If IsNumeric(file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText)) Then
                                                                         tempRow.Item(db_fld_ValValue) = file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText)
