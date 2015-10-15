@@ -4,7 +4,7 @@
   <description asmv2:iconFile="run.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="ODMSDL" version="1.2.1.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="ODMSDL" version="1.2.1.1" language="neutral" processorArchitecture="msil" />
     <commandLine file="ODMSDL.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -49,13 +49,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ODMSDL.exe" size="85504">
-      <assemblyIdentity name="ODMSDL" version="1.2.1.0" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="ODMSDL" version="1.2.1.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>nGgsV6OmXPiBLZV4mzoMSlpDOzY=</dsig:DigestValue>
+        <dsig:DigestValue>xcFdJTDQYzuRQl56m4sZWO4FDhs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
