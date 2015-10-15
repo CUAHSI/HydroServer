@@ -405,7 +405,7 @@ Module modDB
     ''' <param name="qcLevelID">The QualityControlLevelID of the given Data Series</param>
     ''' <param name="e_settings">the connetion settings to the database</param>
     ''' <remarks></remarks>
-    Public Sub CreateNewSeries(ByVal siteID As Integer, ByVal varID As Integer, ByVal methodID As Integer, ByVal sourceID As Integer, ByVal qcLevelID As Integer, ByVal e_settings As clsConnectionSettings, ByVal dateval As clsUTCDT)
+    Public Sub CreateNewSeries(ByVal siteID As Integer, ByVal varID As Integer, ByVal methodID As Integer, ByVal sourceID As Integer, ByVal qcLevelID As Integer, ByVal e_settings As clsConnectionSettings, ByVal First As clsUTCDT, ByVal Last As clsUTCDT)
         Try
             Dim sql As String
             Dim siteInfo As DataRow = GetSiteInfo(siteID, e_settings)
@@ -415,11 +415,12 @@ Module modDB
             Dim varunitsInfo As DataRow = GetUnitInfo(variableInfo.Item(db_fld_VarUnitsID), e_settings)
             Dim timeunitsInfo As DataRow = GetUnitInfo(variableInfo.Item(db_fld_VarTimeUnitsID), e_settings)
             Dim qclevelInfo As DataRow = GetQCLevelInfo(qcLevelID, e_settings)
-            Dim BeginDT As DateTime = GetFirstDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
-            Dim EndDT As DateTime = dateval.getLocalDT'GetLastDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
-            Dim BeginUtcDT As DateTime = GetFirstUTCDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
-            Dim EndUtcDT As DateTime = dateval.getUTCDT 'GetLastUTCDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+            Dim BeginDT As DateTime = First.getLocalDT 'GetFirstDateDV(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+            Dim EndDT As DateTime = Last.getLocalDT 'GetLastDateDV(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+            Dim BeginUtcDT As DateTime = First.getUTCDT'GetFirstUTCDateDV(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+            Dim EndUtcDT As DateTime = Last.getUTCDT 'GetLastUTCDateDV(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
             Dim ValueCount As Integer = GetDataCount(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+
             sql = ""
             sql = "INSERT INTO " & db_tbl_SeriesCatalog & _
             " (" & db_fld_SCSiteID & ", " & db_fld_SCSiteCode & ", " & _
@@ -645,6 +646,38 @@ Module modDB
             Return Date.MinValue
         End Try
     End Function
+    Public Function GetFirstDateDV(ByVal siteID As Integer, ByVal variableID As Integer, ByVal MethodID As Integer, ByVal SourceID As Integer, ByVal QualityControlLevelID As Integer, ByVal e_settings As clsConnectionSettings) As DateTime
+        Try
+            Dim first As DateTime
+            Dim table As DataTable
+            Dim sql As String
+            'sql = "SELECT MIN(LocalDateTime) AS MinDT" & _
+            '" FROM DataValues" & _
+            '" GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
+            '" HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+
+            sql = "SELECT TOP 1 LocalDateTime AS MinDT" & _
+            " FROM DataValues" & _
+            " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
+            " ORDER BY LocalDateTime"
+            table = OpenTableDate("FirstDate", sql, e_settings)
+            If (Not (table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
+                If (table.Rows(0).Item("Date") Is DBNull.Value) Then
+                    first = Date.MinValue
+                Else
+                    first = table.Rows(0).Item("Date")
+                    'Date.TryParse(table.Rows(0).Item("MinDT"), first)
+                End If
+            Else
+                first = Date.MinValue
+            End If
+
+            Return first
+        Catch ex As Exception
+            ErrorLog("An Error Occured Retrieving the Minimum Date/Time Value from the Database.", ex)
+            Return Date.MinValue
+        End Try
+    End Function
 
     ''' <summary>
     ''' Retrieves the Minimum/First UTC DateTime value for the series specified by the parameters
@@ -671,6 +704,40 @@ Module modDB
             " FROM SeriesCatalog" & _
             " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
             " ORDER BY BeginDateTimeUTC"
+
+
+            table = OpenTableDate("FirstUTCDate", sql, e_settings)
+            If (Not (table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
+                If (table.Rows(0).Item("Date") Is DBNull.Value) Then
+                    first = Date.MinValue
+                Else
+                    first = table.Rows(0).Item("Date")
+                    'Date.TryParse(table.Rows(0).Item("MinDT"), first)
+                End If
+            Else
+                first = Date.MinValue
+            End If
+
+            Return first
+        Catch ex As Exception
+            ErrorLog("An Error Occured Retrieving the Minimum UTC Date/Time Value from the Database.", ex)
+            Return Date.MinValue
+        End Try
+    End Function
+    Public Function GetFirstUTCDateDV(ByVal siteID As Integer, ByVal variableID As Integer, ByVal MethodID As Integer, ByVal SourceID As Integer, ByVal QualityControlLevelID As Integer, ByVal e_settings As clsConnectionSettings) As DateTime
+        Try
+            Dim first As DateTime
+            Dim table As DataTable
+            Dim sql As String
+            'sql = "SELECT MIN(DateTimeUTC) AS MinDT" & _
+            '" FROM DataValues" & _
+            '" WHERE (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+            '" GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
+
+            sql = "SELECT TOP 1 DateTimeUTC AS MinDT" & _
+            " FROM DataValues" & _
+            " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
+            " ORDER BY DateTimeUTC"
 
 
             table = OpenTableDate("FirstUTCDate", sql, e_settings)
@@ -737,6 +804,40 @@ Module modDB
         End Try
     End Function
 
+    Public Function GetLastDateDV(ByVal siteID As Integer, ByVal variableID As Integer, ByVal MethodID As Integer, ByVal SourceID As Integer, ByVal QualityControlLevelID As Integer, ByVal e_settings As clsConnectionSettings) As DateTime
+        Try
+            Dim last As DateTime
+            Dim table As DataTable
+            Dim sql As String
+            'sql = "SELECT MAX(LocalDateTime) AS MaxDT" & _
+            '" FROM DataValues" & _
+            '" GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
+            '" HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+            sql = "SELECT TOP 1 LocalDateTime AS MaxDT" & _
+            " FROM DataValues" & _
+            " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
+            " ORDER BY LocalDateTime"
+
+
+            table = OpenTableDate("LastDate", sql, e_settings)
+            If (Not (table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
+                If (table.Rows(0).Item("Date") Is DBNull.Value) Then
+                    last = Date.MinValue
+                Else
+                    last = table.Rows(0).Item("Date")
+                    'Date.TryParse(table.Rows(0).Item("MaxDT"), last)
+                End If
+            Else
+                last = Date.MinValue
+            End If
+
+            Return last
+        Catch ex As Exception
+            ErrorLog("An Error Occured Retrieving the Maximum Date/Time Value from the Database.", ex)
+            Return Date.MinValue
+        End Try
+    End Function
+
     ''' <summary>
     ''' Retrieves the Maximum/Last UTC DateTime value for the series specified by the parameters
     ''' </summary>
@@ -762,6 +863,41 @@ Module modDB
             " FROM SeriesCatalog" & _
             " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
             " ORDER BY EndDateTimeUTC"
+            'SELECT Top 1 LocalDateTime From DataValues ORDER BY LocalDateTime DESC
+
+            table = OpenTableDate("LastUTCDate", sql, e_settings)
+            If (Not (table Is Nothing)) AndAlso (table.Rows.Count > 0) Then
+                If (table.Rows(0).Item("Date") Is DBNull.Value) Then
+                    last = Date.MinValue
+                Else
+                    last = table.Rows(0).Item("Date")
+                    'Date.TryParse(table.Rows(0).Item("MaxDT"), last)
+                End If
+            Else
+                last = Date.MinValue
+            End If
+
+            Return last
+        Catch ex As Exception
+            ErrorLog("An Error Occured Retrieving the Maximum UTC Date/Time Value from the Database.", ex)
+            Return Date.MinValue
+        End Try
+    End Function
+
+    Public Function GetLastUTCDateDV(ByVal siteID As Integer, ByVal variableID As Integer, ByVal MethodID As Integer, ByVal SourceID As Integer, ByVal QualityControlLevelID As Integer, ByVal e_settings As clsConnectionSettings) As DateTime
+        Try
+            Dim last As DateTime
+            Dim table As DataTable
+            Dim sql As String
+            'sql = "SELECT MAX(DateTimeUTC) AS MaxDT" & _
+            '" FROM DataValues" & _
+            '" GROUP BY SiteID, VariableID, MethodID, SourceID, QualityControlLevelID" & _
+            '" HAVING (SiteID = " & siteID & ") AND (VariableID = " & variableID & ") AND (MethodID = " & MethodID & ") AND (SourceID = " & SourceID & ") AND (QualityControlLevelID = " & QualityControlLevelID & ")"
+
+            sql = "SELECT TOP 1 DateTimeUTC AS MaxDT" & _
+            " FROM DataValues" & _
+            " WHERE SiteID = " & siteID & " AND VariableID = " & variableID & " AND MethodID = " & MethodID & " AND SourceID = " & SourceID & " AND QualityControlLevelID = " & QualityControlLevelID & _
+            " ORDER BY DateTimeUTC"
             'SELECT Top 1 LocalDateTime From DataValues ORDER BY LocalDateTime DESC
 
             table = OpenTableDate("LastUTCDate", sql, e_settings)
@@ -1203,18 +1339,18 @@ Module modDB
     ''' <param name="qcLevelID">The QualityControlLevelID of the Data Series in the Series Catalog to update</param>
     ''' <param name="e_settings">The Connection Settings to the database</param>
     ''' <remarks></remarks>
-    Public Sub UpdateSeriesCatalog(ByVal siteID As Integer, ByVal varID As Integer, ByVal methodID As Integer, ByVal sourceID As Integer, ByVal qcLevelID As Integer, ByVal e_settings As clsConnectionSettings, ByVal dateval As clsUTCDT)
+    Public Sub UpdateSeriesCatalog(ByVal siteID As Integer, ByVal varID As Integer, ByVal methodID As Integer, ByVal sourceID As Integer, ByVal qcLevelID As Integer, ByVal e_settings As clsConnectionSettings, ByVal FirstDT As clsUTCDT, ByVal EndDT As clsUTCDT)
         Try
             Dim sql As String
             Dim first, last As DateTime
             Dim firstUTC, lastUTC As DateTime
             Dim dataCount As Integer
-            first = GetFirstDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
-            last = dateval.getLocalDT 'getDate(seriesID 'GetLastDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
-            firstUTC = GetFirstUTCDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
-            lastUTC = dateval.getUTCDT
-            'GetLastUTCDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+            first = FirstDT.getLocalDT
+            last = EndDT.getLocalDT 'getDate(seriesID 'GetLastDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+            firstUTC = FirstDT.getUTCDT ' GetFirstUTCDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+            lastUTC = EndDT.getUTCDT 'GetLastUTCDate(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
             dataCount = GetDataCount(siteID, varID, methodID, sourceID, qcLevelID, e_settings)
+            'System.Console.WriteLine(first & "-" & last)
 
             sql = "UPDATE " & db_tbl_SeriesCatalog & _
             " SET " & db_fld_SCBeginDT & " = " & "@first" & ", " & db_fld_SCEndDT & " = " & "@last" & ", " & db_fld_SCBeginDTUTC & " = " & "@firstUTC" & ", " & db_fld_SCEndDTUTC & " = " & "@lastUTC" & ", " & db_fld_SCValueCount & " = '" & dataCount & "'" & _

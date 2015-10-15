@@ -322,7 +322,7 @@ ODMSDL
 	<param name="e_DBSettings">the connetion settings to the database</param>
 	<returns>True if the program was able to establish a conneciton to the database</returns>
 	<remarks></remarks>
-</member><member name="M:ODMSDL.modDB.CreateNewSeries(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,ODMSDL.clsConnectionSettings,ODMSDL.clsUTCDT)">
+</member><member name="M:ODMSDL.modDB.CreateNewSeries(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,ODMSDL.clsConnectionSettings,ODMSDL.clsUTCDT,ODMSDL.clsUTCDT)">
 	<summary>
  Creates a new record in the Series Catalog Table with the given information
  </summary>
@@ -490,7 +490,7 @@ ODMSDL
 	<param name="e_settings">the connectionString to the database</param>
 	<returns>Returns True if no errors occurred</returns>
 	<remarks></remarks>
-</member><member name="M:ODMSDL.modDB.UpdateSeriesCatalog(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,ODMSDL.clsConnectionSettings,ODMSDL.clsUTCDT)">
+</member><member name="M:ODMSDL.modDB.UpdateSeriesCatalog(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,ODMSDL.clsConnectionSettings,ODMSDL.clsUTCDT,ODMSDL.clsUTCDT)">
 	<summary>
  Updates the series catalog for the series described by the parameters.
  </summary>
