@@ -149,6 +149,22 @@ Public Class clsUTCDT
         m_isDatabaseSOI = True
         m_IntervalLength = New TimeSpan
     End Sub
+    Public Sub New(ByVal e_LocalDT As DateTime, ByVal e_TimeZone As Integer)
+        ''m_LocalDT = e_LocalDT
+        ''m_UTCDT = e_LocalDT
+        ''m_UTCOffset = 0
+        Dim temp As DateTime
+        temp = Date.Parse(e_LocalDT)
+
+        m_LocalDT = DateTime.SpecifyKind(temp, DateTimeKind.Local)
+
+        CalcUTCDT(New clsUTCDT, e_TimeZone)
+        m_UseDST = False
+        m_isDST = True
+        m_isFileSOI = True
+        m_isDatabaseSOI = True
+        m_IntervalLength = New TimeSpan
+    End Sub
 
 #End Region
 

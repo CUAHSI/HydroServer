@@ -23,7 +23,6 @@ Public Class frmODMSDL
     ''' </summary>
     ''' <remarks></remarks>
     Private m_SpecificFiles As Boolean = False
-    Private dates As New Dictionary(Of Integer, clsUTCDT)
 
 
     ''' <summary>
@@ -180,6 +179,8 @@ Public Class frmODMSDL
                                     fileNode.Item(config_File_Last).InnerText = Now
                                     settings = New clsConnectionSettings(fileNode.Item(config_File_Server).InnerText, fileNode.Item(config_File_DB).InnerText, 10, False, fileNode.Item(config_File_User).InnerText, Decrypt(fileNode.Item(config_File_Password).InnerText))
                                     If TestDBConnection(settings) Then
+
+                                        'create a table with the structure of the DataValues table 
                                         Dim dataValues As DataTable = OpenTable("DataValues", "SELECT * FROM " & db_tbl_DataValues & " WHERE 1=0", settings)
                                         'dataValues.Columns(db_fld_ValDateTime).DataType = System.Type.GetType("System.DateTime")
                                         dt = (fileNode.Item(config_File_DT).InnerText <> "")
@@ -255,7 +256,22 @@ Public Class frmODMSDL
 
 
                                                         'valueID = GetLastValueID(settings) + 1
-                                                        Dim LastDT As New clsUTCDT()
+                                                        Dim tempUTCOff As Integer = Val(fileNode.Item(config_File_UTCOff).InnerText)
+                                                        Dim LastDT As New clsUTCDT(last, tempUTCOff)
+                                                        Dim FirstDT As New clsUTCDT
+
+                                                        If seriesID > 0 Then
+                                                            FirstDT = New clsUTCDT(first, tempUTCOff)
+                                                        Else
+                                                            If (Not dt) Then
+                                                                FirstDT = New clsUTCDT(file.Rows(0).Item(fileNode.Item(config_File_UTCDT).InnerText).ToString, DST, CBool(mapNode.Item(config_Map_FileBOR).InnerText), CBool(mapNode.Item(config_Map_DatabaseBOR).InnerText), mapNode.Item(config_Map_PeriodOfRecord).InnerText)
+
+                                                            ElseIf (Not utcdt) Then
+
+                                                                FirstDT = New clsUTCDT(file.Rows(0).Item(fileNode.Item(config_File_DT).InnerText).ToString, tempUTCOff, DST, LastDT, CBool(mapNode.Item(config_Map_FileBOR).InnerText), CBool(mapNode.Item(config_Map_DatabaseBOR).InnerText), mapNode.Item(config_Map_PeriodOfRecord).InnerText)
+                                                            End If
+                                                        End If
+
                                                         For z = 0 To (file.Rows.Count - 1)
                                                             Try
 
@@ -275,14 +291,15 @@ Public Class frmODMSDL
                                                                         tempRow.Item(db_fld_ValValue) = file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText)
                                                                     Else
                                                                         tempRow.Item(db_fld_ValValue) = GetNoDataValue(mapNode.Item(config_Map_Var).InnerText, settings)
-                                                                        ErrorLog(vbTab & vbTab & "Row: " & (z + fileNode.Item(config_File_DataRow).InnerText) & vbCrLf & "Column: " & mapNode.Item(config_Map_Val).InnerText & vbCrLf & "Has a value of '" & file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText) & "'." & vbCrLf & "Value of " & tempRow.Item(db_fld_ValValue) & " will be used instead.")
+                                                                        'comment out line to reduce size of log file
+                                                                        'ErrorLog(vbTab & vbTab & "Row: " & (z + fileNode.Item(config_File_DataRow).InnerText) & vbCrLf & "Column: " & mapNode.Item(config_Map_Val).InnerText & vbCrLf & "Has a value of '" & file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText) & "'." & vbCrLf & "Value of " & tempRow.Item(db_fld_ValValue) & " will be used instead.")
                                                                     End If
                                                                     Dim tempdate As clsUTCDT
                                                                     If (Not dt) Then
                                                                         tempdate = New clsUTCDT(file.Rows(z).Item(fileNode.Item(config_File_UTCDT).InnerXml).ToString, DST, CBool(mapNode.Item(config_Map_FileBOR).InnerText), CBool(mapNode.Item(config_Map_DatabaseBOR).InnerText), mapNode.Item(config_Map_PeriodOfRecord).InnerText)
                                                                         LastDT = tempdate
                                                                     ElseIf (Not utcdt) Then
-                                                                        Dim tempUTCOff As Integer = Val(fileNode.Item(config_File_UTCOff).InnerText)
+                                                                        ''Dim tempUTCOff As Integer = Val(fileNode.Item(config_File_UTCOff).InnerText)
                                                                         tempdate = New clsUTCDT((file.Rows(z).Item(fileNode.Item(config_File_DT).InnerText).ToString), tempUTCOff, DST, LastDT, CBool(mapNode.Item(config_Map_FileBOR).InnerText), CBool(mapNode.Item(config_Map_DatabaseBOR).InnerText), mapNode.Item(config_Map_PeriodOfRecord).InnerText)
                                                                         LastDT = tempdate
                                                                     Else
@@ -316,6 +333,7 @@ Public Class frmODMSDL
 
                                                                 End If
                                                             Catch ex As Exception
+
                                                                 If ex.Message.Contains("Object reference not set to an instance of an object") Then
                                                                     ErrorLog("XML Element Missing", ex)
                                                                 Else
@@ -324,18 +342,49 @@ Public Class frmODMSDL
                                                                 Me.Close()
                                                             End Try
                                                         Next z
-                                                        dates.Add(seriesID, LastDT)
+
                                                         If RowsAdded > 0 Then
                                                             If (seriesID >= 0) Then
-                                                                LogUpdate(vbTab & vbTab & "Rows to Add to Series #" & seriesID & ": " & RowsAdded & ".")
+                                                                LogUpdate(vbTab & vbTab & vbTab & "Rows to Add to Series #" & seriesID & ": " & RowsAdded & ".")
                                                             Else
-                                                                LogUpdate(vbTab & vbTab & "Rows to Add to New Series: " & RowsAdded & ".")
+                                                                LogUpdate(vbTab & vbTab & vbTab & "Rows to Add to New Series: " & RowsAdded & ".")
                                                             End If
                                                         Else
-                                                            LogUpdate(vbTab & vbTab & "No Rows to Add to Series.")
+                                                            LogUpdate(vbTab & vbTab & vbTab & "No Rows to Add to Series.")
+
                                                         End If
+
+
+
+                                                        
+                                                        'TODO:  Check to make sure Datavalues were actually saved before updating the seriescatalog table (SR 10-13-15)
+                                                        If (dataValues.Rows.Count > 0) Then
+                                                            'LogUpdate(vbTab & "Updating File #" & fileNode.Attributes(config_File_ID).Value & ".")
+                                                            
+                                                            If UpdateDVs(dataValues, settings) Then
+                                                                'LogUpdate(vbTab & "Rows Added to Database: " & dataValues.Rows.Count & ".")
+                                                                If (seriesID >= 0) Then
+
+                                                                    UpdateSeriesCatalog(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, FirstDT, LastDT)
+                                                                    If seriesID > 0 Then
+                                                                        LogUpdate(vbTab & vbTab & "Updated Series Catalog Table for Series #" & seriesID)
+                                                                    End If
+                                                                Else
+                                                                    CreateNewSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, FirstDT, LastDT)
+                                                                    seriesID = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
+
+                                                                    If seriesID > 0 Then
+                                                                        LogUpdate(vbTab & vbTab & "Series # " & seriesID & " added to series catalog table.")
+                                                                    End If
+                                                                End If
+                                                            End If
+                                                            'Else
+                                                            '    LogUpdate(vbTab & "File Is Current.  No Data Added.")
+                                                        End If
+                                                        dataValues.Rows.Clear()
                                                     End If
                                                 End If
+
                                             Catch ex As Exception
                                                 If ex.Message.Contains("Object reference not set to an instance of an object") Then
                                                     ErrorLog("XML Element Missing", ex)
@@ -345,25 +394,11 @@ Public Class frmODMSDL
                                                 Me.Close()
                                             End Try
                                         Next y
-
-                                        If (dataValues.Rows.Count > 0) Then
-                                            LogUpdate(vbTab & "Updating File #" & fileNode.Attributes(config_File_ID).Value & ".")
-                                            'Dim where As String = " WHERE SiteID = " & site & " AND VariableID = " & variable & " AND MethodID = " & method & " AND SourceID = " & source & " AND QualityControlLevelID = " & qcl
-
-                                            'If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
-                                            If UpdateDVs(dataValues, settings) Then
-                                                LogUpdate(vbTab & "Rows Added to Database: " & dataValues.Rows.Count & ".")
-                                            End If
-                                        Else
-                                            LogUpdate(vbTab & "File Is Current.  No Data Added.")
-                                        End If
-                                        dataValues.Rows.Clear()
                                     End If
                                 End If
                             End If
                             file = Nothing
                         End If
-
                     Catch ex As Exception
                         If ex.Message.Contains("Object reference not set to an instance of an object") Then
                             ErrorLog("XML Element Missing", ex)
@@ -375,58 +410,63 @@ Public Class frmODMSDL
                     End Try
                 Next x
 
-                LogUpdate("Updating Series Catalog Tables...")
-                For x = 0 To (root.ChildNodes.Count - 1)
-                    Try
-                        fileNode = root.ChildNodes(x)
-                        If (fileNode.Name = config_root_File) Then
-                            settings = New clsConnectionSettings(fileNode.Item(config_File_Server).InnerText, fileNode.Item(config_File_DB).InnerText, 10, False, fileNode.Item(config_File_User).InnerText, Decrypt(fileNode.Item(config_File_Password).InnerText))
-                            If TestDBConnection(settings) Then
-                                For y = 0 To (fileNode.ChildNodes.Count - 1)
-                                    Try
-                                        mapNode = fileNode.ChildNodes(y)
-                                        If (mapNode.Name = config_File_Map) Then
-                                            Dim seriesID As Integer = -1
+                'LogUpdate("updating series catalog tables...")
+                'For x = 0 To (root.ChildNodes.Count - 1)
+                '    Try
+                '        fileNode = root.ChildNodes(x)
+                '        If (fileNode.Name = config_root_File) Then
+                '            settings = New clsConnectionSettings(fileNode.Item(config_File_Server).InnerText, fileNode.Item(config_File_DB).InnerText, 10, False, fileNode.Item(config_File_User).InnerText, Decrypt(fileNode.Item(config_File_Password).InnerText))
+                '            If TestDBConnection(settings) Then
+                '                For y = 0 To (fileNode.ChildNodes.Count - 1)
+                '                    Try
+                '                        mapNode = fileNode.ChildNodes(y)
+                '                        If (mapNode.Name = config_File_Map) Then
+                '                            Dim seriesid As Integer = -1
 
-                                            seriesID = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
+                '                            seriesid = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
 
-                                            If (seriesID >= 0) Then
-                                                UpdateSeriesCatalog(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, getDate(seriesID))
-                                                If seriesID > 0 Then
-                                                    LogUpdate("Updated Series Catalog Table for Series #" & seriesID)
-                                                End If
-                                            Else
-                                                CreateNewSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, getDate(seriesID))
+                '                            If (seriesid >= 0) Then
+                '                                UpdateSeriesCatalog(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, getDate(seriesid))
+                '                                If seriesid > 0 Then
+                '                                    LogUpdate("updated series catalog table for series #" & seriesid)
+                '                                End If
+                '                            Else
+                '                                CreateNewSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
 
-                                                seriesID = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
+                '                                seriesid = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
 
-                                                If seriesID > 0 Then
-                                                    LogUpdate("Series # " & seriesID & " added to series catalog table.")
-                                                End If
-                                            End If
-                                        End If
-                                    Catch ex As Exception
-                                        If ex.Message.Contains("Object reference not set to an instance of an object") Then
-                                            ErrorLog("XML Element Missing", ex)
-                                        Else
-                                            ErrorLog("Error Running Update", ex)
-                                        End If
-                                        Me.Close()
-                                    End Try
-                                Next y
-                            End If
-                        End If
-                    Catch ex As Exception
-                        If ex.Message.Contains("Object reference not set to an instance of an object") Then
-                            ErrorLog("XML Element Missing", ex)
-                        Else
-                            ErrorLog("Error Running Update", ex)
-                        End If
-                        Me.Close()
-                    End Try
-                    dates.Clear()
-                Next x
-                LogUpdate("Series Catalog Tables Updated.")
+                '                                If seriesid > 0 Then
+                '                                    LogUpdate("series # " & seriesid & " added to series catalog table.")
+                '                                End If
+                '                            End If
+                '                        End If
+                '                    Catch ex As Exception
+                '                        If ex.Message.Contains("object reference not set to an instance of an object") Then
+                '                            ErrorLog("xml element missing", ex)
+                '                        Else
+                '                            ErrorLog("error running update", ex)
+                '                        End If
+                '                        Me.Close()
+                '                    End Try
+                '                Next y
+                '                
+
+                '            End If
+                '        End If
+                '    Catch ex As Exception
+                '        If ex.Message.Contains("object reference not set to an instance of an object") Then
+                '            ErrorLog("xml element missing", ex)
+                '        Else
+                '            ErrorLog("error running update", ex)
+                '        End If
+                '        Me.Close()
+                '    End Try
+
+                'Next x
+                'LogUpdate("series catalog tables updated.")
+
+
+
 
                 xmlDoc.Save(g_Config_Dir & "\Config.xml")
 
@@ -483,6 +523,8 @@ Public Class frmODMSDL
                     Try
                         fileNode = root.ChildNodes(x)
                         If (fileNode.Name = config_root_File) Then
+
+
                             Dim fnd As Boolean = False
 
                             For i = 0 To (IDs.Length - 1)
@@ -606,8 +648,25 @@ Public Class frmODMSDL
                                                         End If
 
                                                         'valueID = GetLastValueID(settings) + 1
-                                                        Dim LastDT As New clsUTCDT()
+
+                                                        Dim tempUTCOff As Integer = Val(fileNode.Item(config_File_UTCOff).InnerText)
+                                                        Dim LastDT As New clsUTCDT(last, tempUTCOff)
+                                                        Dim FirstDT As New clsUTCDT
+
+                                                        If seriesID > 0 Then
+                                                            FirstDT = New clsUTCDT(first, tempUTCOff)
+                                                        Else
+                                                            If (Not dt) Then
+                                                                FirstDT = New clsUTCDT(file.Rows(0).Item(fileNode.Item(config_File_UTCDT).InnerText).ToString, DST, CBool(mapNode.Item(config_Map_FileBOR).InnerText), CBool(mapNode.Item(config_Map_DatabaseBOR).InnerText), mapNode.Item(config_Map_PeriodOfRecord).InnerText)
+
+                                                            ElseIf (Not utcdt) Then
+
+                                                                FirstDT = New clsUTCDT(file.Rows(0).Item(fileNode.Item(config_File_DT).InnerText).ToString, tempUTCOff, DST, LastDT, CBool(mapNode.Item(config_Map_FileBOR).InnerText), CBool(mapNode.Item(config_Map_DatabaseBOR).InnerText), mapNode.Item(config_Map_PeriodOfRecord).InnerText)
+                                                            End If
+                                                        End If
+
                                                         For z = 0 To (file.Rows.Count - 1)
+
                                                             Try
                                                                 If (utcdt AndAlso _
                                                                 (CDate(file.Rows(z).Item(fileNode.Item(config_File_UTCDT).InnerText)) > last)) OrElse _
@@ -625,7 +684,8 @@ Public Class frmODMSDL
                                                                         tempRow.Item(db_fld_ValValue) = file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText)
                                                                     Else
                                                                         tempRow.Item(db_fld_ValValue) = GetNoDataValue(variable, settings)
-                                                                        ErrorLog(vbTab & vbTab & "Row: " & (z + fileNode.Item(config_File_DataRow).InnerText) & vbCrLf & "Column: " & mapNode.Item(config_Map_Val).InnerText & vbCrLf & "Has a value of '" & file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText) & "'." & vbCrLf & "Value of " & tempRow.Item(db_fld_ValValue) & " will be used instead.")
+                                                                        'comment out to help minimize the size of the log files
+                                                                        'ErrorLog(vbTab & vbTab & "Row: " & (z + fileNode.Item(config_File_DataRow).InnerText) & vbCrLf & "Column: " & mapNode.Item(config_Map_Val).InnerText & vbCrLf & "Has a value of '" & file.Rows(z).Item(mapNode.Item(config_Map_Val).InnerText) & "'." & vbCrLf & "Value of " & tempRow.Item(db_fld_ValValue) & " will be used instead.")
                                                                     End If
 
                                                                     Dim tempdate As clsUTCDT
@@ -633,7 +693,7 @@ Public Class frmODMSDL
                                                                         tempdate = New clsUTCDT(file.Rows(z).Item(fileNode.Item(config_File_UTCDT).InnerText).ToString, DST, CBool(mapNode.Item(config_Map_FileBOR).InnerText), CBool(mapNode.Item(config_Map_DatabaseBOR).InnerText), mapNode.Item(config_Map_PeriodOfRecord).InnerText)
                                                                         LastDT = tempdate
                                                                     ElseIf (Not utcdt) Then
-                                                                        Dim tempUTCOff As Integer = Val(fileNode.Item(config_File_UTCOff).InnerText)
+                                                                        ''Dim tempUTCOff As Integer = Val(fileNode.Item(config_File_UTCOff).InnerText)
                                                                         tempdate = New clsUTCDT(file.Rows(z).Item(fileNode.Item(config_File_DT).InnerText).ToString, tempUTCOff, DST, LastDT, CBool(mapNode.Item(config_Map_FileBOR).InnerText), CBool(mapNode.Item(config_Map_DatabaseBOR).InnerText), mapNode.Item(config_Map_PeriodOfRecord).InnerText)
                                                                         LastDT = tempdate
                                                                     Else
@@ -662,7 +722,7 @@ Public Class frmODMSDL
                                                                     dataValues.Rows.Add(tempRow)
                                                                     'TestLog(tempRow.Item(db_fld_ValValue))
                                                                     RowsAdded += 1
-                                                                    dates.Add(seriesID, tempdate)
+
 
                                                                 End If
                                                             Catch ex As Exception
@@ -670,6 +730,7 @@ Public Class frmODMSDL
                                                                     ErrorLog("XML Element Missing", ex)
                                                                 Else
                                                                     ErrorLog("Error Running Update", ex)
+                                                                    LastDT = Nothing
                                                                 End If
                                                                 Me.Close()
                                                             End Try
@@ -677,15 +738,38 @@ Public Class frmODMSDL
 
                                                         If RowsAdded > 0 Then
                                                             If (seriesID >= 0) Then
-                                                                LogUpdate(vbTab & vbTab & "Rows to Add to Series #" & seriesID & ": " & RowsAdded & ".")
+                                                                LogUpdate(vbTab & vbTab & vbTab & "Rows to Add to Series #" & seriesID & ": " & RowsAdded & ".")
                                                             Else
-                                                                LogUpdate(vbTab & vbTab & "Rows to Add to New Series: " & RowsAdded & ".")
+                                                                LogUpdate(vbTab & vbTab & vbTab & "Rows to Add to New Series: " & RowsAdded & ".")
                                                             End If
                                                         Else
-                                                            LogUpdate(vbTab & vbTab & "No Rows to Add to Series.")
+                                                            LogUpdate(vbTab & vbTab & vbTab & "No Rows to Add to Series.")
+                                                            LastDT = Nothing
                                                         End If
+
+
+                                                        'TODO:  Check to make sure Datavalues were actually saved before updating the seriescatalog table (SR 10-13-15)
+                                                        If (dataValues.Rows.Count > 0) Then
+                                                            If UpdateDVs(dataValues, settings) Then
+                                                                If (seriesID >= 0) Then
+                                                                    UpdateSeriesCatalog(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, FirstDT, LastDT)
+                                                                    If seriesID > 0 Then
+                                                                        LogUpdate(vbTab & vbTab & "Updated Series Catalog Table for Series #" & seriesID)
+                                                                    End If
+                                                                Else
+                                                                    CreateNewSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, FirstDT, LastDT)
+                                                                    seriesID = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
+
+                                                                    If seriesID > 0 Then
+                                                                        LogUpdate(vbTab & vbTab & "Series # " & seriesID & " added to series catalog table.")
+                                                                    End If
+                                                                End If
+                                                            End If
+                                                        End If
+                                                        dataValues.Rows.Clear()
                                                     End If
                                                 End If
+
                                             Catch ex As Exception
                                                 If ex.Message.Contains("Object reference not set to an instance of an object") Then
                                                     ErrorLog("XML Element Missing", ex)
@@ -695,25 +779,11 @@ Public Class frmODMSDL
                                                 Me.Close()
                                             End Try
                                         Next y
-
-                                        If (dataValues.Rows.Count > 0) Then
-                                            LogUpdate(vbTab & "Updating File #" & fileNode.Attributes(config_File_ID).Value & ".")
-
-                                            'Dim where As String = " WHERE SiteID = " & site & " AND VariableID = " & variable & " AND MethodID = " & method & " AND SourceID = " & source & " AND QualityControlLevelID = " & qcl
-                                            'If UpdateTable(dataValues, "SELECT * FROM " & db_tbl_DataValues & where, settings) Then
-                                            If UpdateDVs(dataValues, settings) Then
-                                                LogUpdate(vbTab & "Rows Added to Database: " & dataValues.Rows.Count & ".")
-                                            End If
-                                        Else
-                                            LogUpdate(vbTab & "File Is Current.  No Data Added.")
-                                        End If
-                                        dataValues.Rows.Clear()
                                     End If
                                 End If
                             End If
-
-                            file = Nothing
                         End If
+
 
                     Catch ex As Exception
                         If ex.Message.Contains("Object reference not set to an instance of an object") Then
@@ -722,70 +792,11 @@ Public Class frmODMSDL
                             ErrorLog("Error Running Update", ex)
                         End If
                         Me.Close()
-
                     End Try
+
+
                 Next x
-
-
-                LogUpdate("Updating Series Catalog Table...")
-                For x = 0 To (root.ChildNodes.Count - 1)
-                    Try
-                        fileNode = root.ChildNodes(x)
-                        If (fileNode.Name = config_root_File) Then
-                            Dim fnd As Boolean = False
-                            For i = 0 To (IDs.Length - 1)
-                                If IDs(i) = fileNode.Attributes(config_File_ID).Value Then
-                                    fnd = True
-                                    Exit For
-                                End If
-                            Next i
-                            If fnd Then
-                                settings = New clsConnectionSettings(fileNode.Item(config_File_Server).InnerText, fileNode.Item(config_File_DB).InnerText, 10, False, fileNode.Item(config_File_User).InnerText, Decrypt(fileNode.Item(config_File_Password).InnerText))
-                                For y = 0 To (fileNode.ChildNodes.Count - 1)
-                                    Try
-                                        mapNode = fileNode.ChildNodes(y)
-                                        If (mapNode.Name = config_File_Map) Then
-                                            Dim seriesID As Integer = -1
-
-                                            seriesID = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
-
-                                            If (seriesID >= 0) Then
-                                                UpdateSeriesCatalog(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, getDate(seriesID))
-                                                If seriesID > 0 Then
-                                                    LogUpdate("Updated Series Catalog Table for Series #" & seriesID)
-                                                End If
-                                            Else
-                                                CreateNewSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings, getDate(seriesID))
-
-                                                seriesID = IsSeries(mapNode.Item(config_Map_Site).InnerText, mapNode.Item(config_Map_Var).InnerText, mapNode.Item(config_Map_Method).InnerText, mapNode.Item(config_Map_Source).InnerText, mapNode.Item(config_Map_QCLevel).InnerText, settings)
-
-                                                If seriesID > 0 Then
-                                                    LogUpdate("Series # " & seriesID & " added to series catalog table.")
-                                                End If
-                                            End If
-                                        End If
-                                    Catch ex As Exception
-                                        If ex.Message.Contains("Object reference not set to an instance of an object") Then
-                                            ErrorLog("XML Element Missing", ex)
-                                        Else
-                                            ErrorLog("Error Running Update", ex)
-                                        End If
-                                        Me.Close()
-                                    End Try
-                                Next y
-                            End If
-                        End If
-                    Catch ex As Exception
-                        If ex.Message.Contains("Object reference not set to an instance of an object") Then
-                            ErrorLog("XML Element Missing", ex)
-                        Else
-                            ErrorLog("Error Running Update", ex)
-                        End If
-                        Me.Close()
-                    End Try
-                    dates.Clear()
-                Next x
-                LogUpdate("Series Catalog Table Updated.")
+                'LogUpdate("Series Catalog Table Updated.")
 
                 xmlDoc.Save(g_Config_Dir & "\Config.xml")
 
@@ -806,9 +817,6 @@ Public Class frmODMSDL
         tbIcon.Visible = False
     End Sub
 
-    Public Function getDate(ByVal seriesID As Integer) As clsUTCDT
-        
-        Return dates.Item(seriesID)
-    End Function
+    
 
 End Class
