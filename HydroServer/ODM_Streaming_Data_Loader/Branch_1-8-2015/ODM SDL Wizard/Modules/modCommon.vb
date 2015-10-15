@@ -122,7 +122,7 @@ Module Common
         Dim g_Config_Dir As String
         tempdir = System.IO.Path.GetDirectoryName(System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)
         Dim section As String() = Split(tempdir, "Configuration", , CompareMethod.Text)
-        g_Config_Dir = section(0) & "StreamingDataLoader\1.2.1\"
+        g_Config_Dir = section(0) & "StreamingDataLoader\1.2.1.1\"
         IO.Directory.CreateDirectory(g_Config_Dir)
         Return g_Config_Dir
 
