@@ -1,0 +1,19 @@
+# ODM Tools
+![](ODMTools1_1.1_ODMToolsScreenShot.jpg)
+The ODM Tools application was created to allow administrators and users of ODM to visualize, manage, manipulate, edit, and export data that have been imported to their local instance of the ODM. The ODM Tools application is organized into three general areas: 1) query and export; 2) visualize; and 3) edit. The Query and export functionality allows users to find the data that they are interested in and export it to a simple format that can be used with a variety of analysis software. The Visualize functionality allows users to quickly plot and summarize data using a variety of plot types and descriptive statistics. The Edit capability of ODM Tools was designed to provide users with a simple set of tools that they can use to edit existing data series and to create new data series from existing data series.
+
+The ODM Tools application has several advantages. First, ODM Tools protects the security and consistency of a work group HIS ODM database because it provides users with a set of automated tools for performing many of the most common database transactions. Second, ODM Tools allows users to export data from their ODM instance with an accompanying metadata file. This allows users to work with local copies of data series exported from their ODM database while preserving the provenance of the data via the metadata file. ODM Tools also provides a mechanism by which users can interact with the ODM database without having to learn the complexities of its relational structure. Last, for more advanced users, the source code of the ODM Tools application provides an example of how applications can be built on top of the CUAHIS HIS ODM.
+
+## Watch ODM Tools in action:
+* [Query and Export](http://his.cuahsi.org/images/QueryAndExport.avi)
+* [Visualize](http://his.cuahsi.org/images/Visualize.avi)
+
+The following downloads are available for ODM Tools. Please consult the software manual for instructions on how to install and use ODM Tools. 
+* [ODM Tools Design Specifications Document](ODMTools1_1.1_ODM_Tools_Design_Specifications.pdf )
+
+|| Installation File || Version || Release Date || Notes || Software Manual || Source Code ||
+| [ODM Tools ](ODMTools1_1.1_ODM_Tools_1_0_setup.exe) | 1.0 | April 24, 2007 | The first release of ODM Tools (Version 1.0) was produced by Utah State University under contract with CUAHSI. It is provided here for archival purposes. It is compatible with ODM Version 1.0.  | | [ODM Tools 1.0 ](ODMTools1_1.1_ODM_Tools_Source_1_0.zip) |
+|[ ODM Tools](ODMTools1_1.1_ODM_Tools_1_0_2_setup.exe) | 1.0.2 | October 25, 2007 | This version contains fixes for several issues identified in Version 1.0 and 1.0.1. In addition, the source code, manual, and installation contain references to the Berkeley Software Distribution (BSD) licence under which all of the CUAHSI HIS software is being released. Version 1.0.2 of ODM Tools is compatible with ODM Version 1.0. | [ODM Tools 1.0.2](ODMTools1_1.1_ODM_Tools_1_0_2_Software_Manual.pdf) | [ODM Tools 1.0.2 ](ODMTools1_1.1_ODM_Tools_Source_1_0_2.zip ) |
+| [ODM Tools ](ODMTools1_1.1_ODM_Tools_1_0_3_setup.exe) | 1.0.3 | July 10, 2009 | This version is compatible with ODM Version 1.0.  It provides updated references to the ODM Version 1.0 controlled vocabularies.  This version is not compatible with ODM Version 1.1. | | |
+| [ODM Tools ](ODMTools1_1.1_ODM_Tools_1_1_setup.exe) | 1.1 | July 8, 2008 | ODM Tools 1.1 is only compatible with ODM Version 1.1. | [ODM Tools 1.1 ](ODMTools1_1.1_ODMTools_1_1_Software_Manual.zip) | |
+| [ODM Tools ](ODMTools1_1.1_ODM_Tools_1_1_1_setup.exe) | 1.1.1 | July 10, 2009 | ODM Tools 1.1.1 is only compatible with ODM Version 1.1. This version fixes a bug in the ODM controlled vocabulary update tools. | | [ODM Tools 1.1.1 ](ODMTools1_1.1_ODM_Tools_1.1.1.zip ) |
