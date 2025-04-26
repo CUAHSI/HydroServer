@@ -1,6 +1,8 @@
 # CUAHSI HydroServer
 
-This repostitory contains the legacy code for the CUAHSI HydroServer software stack. HydroServer was originally hosted in Microsoft's CodePlex system, but was moved here when Codeplex was shut down.
+This repostitory contains the legacy code for the CUAHSI HydroServer software stack originally developed by the CUAHSI Hydrologic Information System (HIS Project). HydroServer development was originally hosted in Microsoft's CodePlex system, but was moved here when Codeplex was shut down.
+
+**NOTE**: To access more recent HydroServer development, visit https://github.com/hydroserver2
 
 # Summary
 
